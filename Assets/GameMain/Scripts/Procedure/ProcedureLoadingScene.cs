@@ -42,18 +42,18 @@ namespace ETLG
                 
             // 添加一个事件，用于防止星系地图场景被销毁，星系地图应该只有在回到主菜单、退出游戏等情况下才会销毁
             // 后面可以改成一个比较通用的事件，NotDestroySceneEventArgs,从而防止任何指定场景被销毁。
-            GameEntry.Event.Subscribe(NotDestroyMapEventArgs.EventId, OnNotDestroyMap);
+            //GameEntry.Event.Subscribe(NotDestroyMapEventArgs.EventId, OnNotDestroyMap);
 
             // 卸载所有场景，除了指定不要销毁的场景，目前只有大地图
             string[] loadedSceneAssetNames = GameEntry.Scene.GetLoadedSceneAssetNames();
             for (int i = 0; i < loadedSceneAssetNames.Length; i++)
             {
-                if (notDestoryMap)
+              /*  if (notDestoryMap)
                 {
                     // 此处判断是否是星系地图，是就保留，判断条件需要再改
                     if (loadedSceneAssetNames[i].Equals("Map"))
-                    continue;
-                }
+                        continue;
+                }*/
                 GameEntry.Scene.UnloadScene(loadedSceneAssetNames[i]);
             }
 
@@ -101,7 +101,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(LoadSceneUpdateEventArgs.EventId, OnLoadSceneUpdate);
             GameEntry.Event.Unsubscribe(LoadSceneDependencyAssetEventArgs.EventId, OnLoadSceneDependencyAsset);
 
-            GameEntry.Event.Unsubscribe(NotDestroyMapEventArgs.EventId, OnNotDestroyMap);
+            //GameEntry.Event.Unsubscribe(NotDestroyMapEventArgs.EventId, OnNotDestroyMap);
 
         }
 
@@ -158,7 +158,7 @@ namespace ETLG
             Log.Info("Load scene '{0}' update, progress '{1}'.", ne.SceneAssetName, ne.Progress.ToString("P2"));
         }
 
-        private void OnNotDestroyMap(object sender, GameEventArgs e)
+/*        private void OnNotDestroyMap(object sender, GameEventArgs e)
         {
             NotDestroyMapEventArgs ne = (NotDestroyMapEventArgs)e;
             if (ne.UserData != this)
@@ -170,6 +170,6 @@ namespace ETLG
 
             Log.Info("Scene Map won't be destroied.");
         }
-
+*/
     }
 }

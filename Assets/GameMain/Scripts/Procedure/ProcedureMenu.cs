@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ETLG.Data;
 using GameFramework.Event;
 using GameFramework.Localization;
 using GameFramework.Procedure;
@@ -30,7 +31,6 @@ namespace ETLG
             // 必须设置这个才可以切换场景
             this.procedureOwner = procedureOwner;
 
-            Log.Debug("流程中尝试打开菜单");
             GameEntry.UI.OpenUIForm(EnumUIForm.UIMainMenuForm);
             //GameEntry.UI.OpenDownloadForm();
             GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ETLG.Data;
 using GameFramework.Event;
 using GameFramework.Localization;
 using GameFramework.Procedure;
@@ -13,7 +14,8 @@ namespace ETLG
     {
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
-        
+
+
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -33,8 +35,10 @@ namespace ETLG
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
-            // 大概UI
+            // 打开UI
+            Log.Debug("打开选择飞船界面");
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
+
 
         }
 

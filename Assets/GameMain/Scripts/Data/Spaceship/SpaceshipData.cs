@@ -30,6 +30,15 @@ namespace ETLG.Data
             }
         }
 
+        // 获取本地化文件里对应的描述信息
+        public string Description
+        {
+            get
+            {
+                return GameEntry.Localization.GetString(dRSpaceship.NameId + "Description");
+            }
+        }
+
         public string Type
         {
             get
