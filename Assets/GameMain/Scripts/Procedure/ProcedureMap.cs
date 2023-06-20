@@ -10,7 +10,7 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 
 namespace ETLG
 {
-    public class ProcedureNewGame : ProcedureBase
+    public class ProcedureMap : ProcedureBase
     {
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
@@ -23,7 +23,7 @@ namespace ETLG
 
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
-            Log.Debug("进入 ProcedureNewGame 流程");
+            Log.Debug("进入 ProcedureMap 流程");
             base.OnEnter(procedureOwner);
 
             // 订阅事件
@@ -36,9 +36,8 @@ namespace ETLG
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
             // 打开UI
-            Log.Debug("打开选择飞船界面");
-            GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
-
+            Log.Debug("此处应打开 Map 场景界面");
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
 
         }
 
@@ -66,12 +65,15 @@ namespace ETLG
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
+
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
         {
             base.OnDestroy(procedureOwner);
         }
+
+
 
         private void OnChangeScene(object sender, GameEventArgs e)
         {

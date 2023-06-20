@@ -25,11 +25,15 @@ namespace ETLG
             Log.Debug("进入 ProcedureMenu");
             base.OnEnter(procedureOwner);
 
-            GameEntry.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
+            //GameEntry.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
             // 必须设置这个才可以切换场景
             this.procedureOwner = procedureOwner;
+
+            // 一定要设置为flase，否则会重新进入切换场景脚本
+            this.changeScene = false;
+
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UIMainMenuForm);
             //GameEntry.UI.OpenDownloadForm();
@@ -53,10 +57,11 @@ namespace ETLG
         {
             base.OnLeave(procedureOwner, isShutdown);
 
+            // GameEntry.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
+            GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+
             GameEntry.Sound.StopMusic();
 
-            GameEntry.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
-            GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
@@ -64,14 +69,14 @@ namespace ETLG
             base.OnDestroy(procedureOwner);
         }
 
-        private void OnOpenUIFormSuccess(object sender, GameEventArgs e)
+     /*   private void OnOpenUIFormSuccess(object sender, GameEventArgs e)
         {
             OpenUIFormSuccessEventArgs ne = (OpenUIFormSuccessEventArgs)e;
             if (ne.UserData != this)
             {
                 return;
             }
-        }
+        }*/
         private void OnChangeScene(object sender, GameEventArgs e)
         {
             ChangeSceneEventArgs ne = (ChangeSceneEventArgs)e;

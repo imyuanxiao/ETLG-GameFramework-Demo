@@ -1,29 +1,36 @@
-﻿using System.Collections;
+﻿using ETLG.Data;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class UIMainMenuForm : UGuiFormEx
+    public class UIMapForm : UGuiFormEx
     {
-        public Button newGameButton;
-        public Button optionButton;
-        public Button quitButton;
+        public Button menuButton;
+        public Button selectButton;
 
+
+
+        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
-            newGameButton.onClick.AddListener(OnNewGameButtonClick);
-            optionButton.onClick.AddListener(OnOptionButtonClick);
-            quitButton.onClick.AddListener(OnQuitButtonClick);
+            // 绑定按钮点击事件
+            menuButton.onClick.AddListener(OnMenuButtonClick);
+            selectButton.onClick.AddListener(OnSelectButtonClick);
+
+ 
+
         }
 
         protected override void OnOpen(object userData)
         {
-
             base.OnOpen(userData);
 
         }
@@ -33,7 +40,7 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
         }
 
-        private void OnNewGameButtonClick()
+        private void OnSelectButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
@@ -42,17 +49,14 @@ namespace ETLG
 
         }
 
-        private void OnOptionButtonClick()
+        private void OnMenuButtonClick()
         {
-            Log.Debug("进入设置菜单");
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIOptionsForm);
-        }
+            Log.Debug("返回主菜菜单");
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
-        private void OnQuitButtonClick()
-        {
+            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
 
-            UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit);
         }
 
     }

@@ -13,7 +13,7 @@ namespace ETLG
     public class ProcedureLoadingScene : ProcedureBase
     {
         private bool loadSceneCompleted = false;
-        private bool notDestoryMap = false;
+        //private bool notDestoryMap = false;
 
         private SceneData sceneData = null;
 
