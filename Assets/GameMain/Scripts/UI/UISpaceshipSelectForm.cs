@@ -29,6 +29,13 @@ namespace ETLG
         // 当前展示飞船的ID
         private int currentIndex = (int)EnumEntity.InterstellarExplorer;
 
+        // 当前显示的实体模型
+        private Dictionary<int, EntitySpaceshipSelect> dicEntitySpaceshipSelect;
+
+        // 实体加载器
+        private EntityLoader entityLoader;
+
+
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
@@ -43,7 +50,13 @@ namespace ETLG
             // 获取数据管理器
             dataSpaceship = GameEntry.Data.GetData<DataSpaceship>();
 
+
+            dicEntitySpaceshipSelect = new Dictionary<int, EntitySpaceshipSelect>();
+
+            entityLoader = EntityLoader.Create(this);
+
             ShowSpaceshipSelect();
+
 
         }
 
@@ -69,18 +82,26 @@ namespace ETLG
 
         private void OnLeftButtonClick()
         {
+
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
+            // 隐藏出现的实体
+           // HideAllEnemyEntity();
+
+            // 改变飞船编号
             currentIndex--;
             if(currentIndex < (int)EnumEntity.InterstellarExplorer)
             {
                 currentIndex = (int)EnumEntity.Guardian;
             }
+
+            // 用新飞船编号展示UI和模型
             ShowSpaceshipSelect();
         }
         private void OnRightButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+
 
             currentIndex++;
             if (currentIndex > (int)EnumEntity.Guardian)
@@ -104,6 +125,9 @@ namespace ETLG
         public void ShowSpaceshipSelect()
         {
 
+            HideAllEnemyEntity();
+
+
             // 通过数据管理器的方法初始化当前飞船信息
             currentSpaceshipData = dataSpaceship.GetSpaceshipData(currentIndex);
 
@@ -117,9 +141,34 @@ namespace ETLG
             s_name.text = currentSpaceshipData.NameId;
             s_description.text = currentSpaceshipData.Description;
 
+            ShowNewSpaceshipSelect();
 
         }
 
+        public void ShowNewSpaceshipSelect()
+        {
+
+            // 新模型
+            entityLoader.ShowEntity(currentSpaceshipData.EntityId, TypeUtility.GetEntityType(currentSpaceshipData.Type),
+                (entity) =>
+                {
+                    dicEntitySpaceshipSelect.Add(entity.Id, (EntitySpaceshipSelect)entity.Logic);
+                },
+                EntityDataSpaceshipSelect.Create(
+                    currentSpaceshipData));
+
+        }
+
+        // 隐藏模型
+        private void HideAllEnemyEntity()
+        {
+            foreach (var item in dicEntitySpaceshipSelect.Values)
+            {
+                entityLoader.HideEntity(item.Entity);
+            }
+
+            dicEntitySpaceshipSelect.Clear();
+        }
 
 
     }

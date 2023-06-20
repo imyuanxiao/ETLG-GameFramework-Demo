@@ -16,6 +16,7 @@ namespace ETLG.Data
         private IDataTable<DRSpaceship> dtSpaceship;
         private Dictionary<int, SpaceshipData> dicSpaceshipData;
 
+
         protected override void OnInit()
         {
 
@@ -57,6 +58,36 @@ namespace ETLG.Data
 
             return null;
         }
+/*
+        public Tower CreateTower(int towerId, int level = 0)
+        {
+            if (!dicTowerData.ContainsKey(towerId))
+            {
+                Log.Error("Can not find tower data id '{0}'.", towerId);
+                return null;
+            }
+
+            int serialId = GenrateSerialId();
+            Tower tower = Tower.Create(dicTowerData[towerId], serialId, level);
+            dicTower.Add(serialId, tower);
+
+            return tower;
+        }
+
+        public void DestroyTower(int serialId)
+        {
+            if (!dicTower.ContainsKey(serialId))
+            {
+                Log.Error("Can not find tower serialId '{0}'.", serialId);
+                return;
+            }
+
+            ReferencePool.Release(dicTower[serialId]);
+            dicTower.Remove(serialId);
+        }*/
+
+
+
 
         public SpaceshipData[] GetAllSpaceshipData()
         {
