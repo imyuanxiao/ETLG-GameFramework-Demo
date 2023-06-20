@@ -1,0 +1,8 @@
+﻿#	声音资源配置表					
+#	Id		Name	AssetId	SoundGroupId	SoundPlayParamId
+#	int		string	int	int	int
+#	声音编号	策划备注	物体名字	资源ID名称	声音组名称	声音播放参数
+	10001	游戏背景音乐	GameBGM	10001	1001	1001
+	10002	主菜单背景音乐	MenuBGM	10002	1001	1001
+	30007	ui_sound_back	ui_sound_back	30007	1002	1002
+	30008	ui_sound_forward	ui_sound_forward	30008	1002	1002
