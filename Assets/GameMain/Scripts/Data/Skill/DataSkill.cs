@@ -8,7 +8,7 @@ using GameFramework;
 
 namespace ETLG.Data
 {
-    
+
     public sealed class DataSkill : DataBase
     {
 
@@ -25,7 +25,7 @@ namespace ETLG.Data
 
         // 如果涉及到重复的实体，可以用这个属性，技能这里没涉及，注释掉了
         // private int serialId = 0;
-        
+
         protected override void OnInit()
         {
 
@@ -114,7 +114,7 @@ namespace ETLG.Data
 
             return dicSkillData[id];
         }
-        
+
         public SkillData[] GetAllSkillData()
         {
             int index = 0;

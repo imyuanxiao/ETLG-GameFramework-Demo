@@ -1,7 +1,7 @@
 ﻿
 namespace ETLG.Data
 {
-  public sealed class SkillData
+    public sealed class SkillData
     {
         private DRSkill dRSkill;
         private DRSkillLevel[] dRSkillLevels;
@@ -13,7 +13,7 @@ namespace ETLG.Data
                 return dRSkill.Id;
             }
         }
-        
+
         public string NameId
         {
             get
@@ -86,7 +86,7 @@ namespace ETLG.Data
                 return dRSkill.NeedExtraCondition;
             }
         }
-        
+
         // 构造方法
         public SkillData(DRSkill dRSkill, DRSkillLevel[] dRSkillLevels)
         {
@@ -112,4 +112,3 @@ namespace ETLG.Data
     }
 
 }
-

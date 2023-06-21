@@ -101,32 +101,32 @@ namespace ETLG.Data
             {
                 return dRSpaceship.Agility;
             }
-        }        
-        
+        }
+
         public float Speed
         {
             get
             {
                 return dRSpaceship.Speed;
             }
-        }        
-        
+        }
+
         public float Dogde
         {
             get
             {
                 return dRSpaceship.Dogde;
             }
-        }       
-        
+        }
+
         public float Detection
         {
             get
             {
                 return dRSpaceship.Detection;
             }
-        }        
-        
+        }
+
         public int Capacity
         {
             get
@@ -143,7 +143,7 @@ namespace ETLG.Data
             }
         }
 
-        
+
         public SpaceshipData(DRSpaceship dRSpaceship, SkillData[] skillDatas)
         {
             this.dRSpaceship = dRSpaceship;
@@ -166,5 +166,4 @@ namespace ETLG.Data
 
     }
 }
-
 
