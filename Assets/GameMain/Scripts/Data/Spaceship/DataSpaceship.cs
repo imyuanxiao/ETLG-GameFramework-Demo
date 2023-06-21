@@ -14,7 +14,7 @@ namespace ETLG.Data
 
         // DRSpaceship 是每一行数据
         private IDataTable<DRSpaceship> dtSpaceship;
-        
+
         private Dictionary<int, SpaceshipData> dicSpaceshipData;
 
         // 需要从技能数据管理类获取技能数据
@@ -48,7 +48,7 @@ namespace ETLG.Data
             // 所有飞船数据，此处后续应该加上获取飞船固有技能、飞船固有发射物等逻辑
             DRSpaceship[] dRSpaceships = dtSpaceship.GetAllDataRows();
 
-           foreach (var drSpaceship in dRSpaceships)
+            foreach (var drSpaceship in dRSpaceships)
             {
 
                 SkillData[] dataSkills = new SkillData[drSpaceship.Skills.Length];

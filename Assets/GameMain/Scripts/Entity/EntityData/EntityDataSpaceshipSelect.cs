@@ -6,6 +6,7 @@ using ETLG.Data;
 namespace ETLG
 {
     [Serializable]
+
     public class EntityDataSpaceshipSelect : EntityData
     {
         public SpaceshipData SpaceshipData

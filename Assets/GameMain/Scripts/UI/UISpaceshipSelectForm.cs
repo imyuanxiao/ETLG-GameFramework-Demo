@@ -60,8 +60,7 @@ namespace ETLG
             dicEntitySpaceshipSelect = new Dictionary<int, EntitySpaceshipSelect>();
             // 初始化实体加载类
             entityLoader = EntityLoader.Create(this);
-            // 调用显示飞船方法
-            ShowSpaceshipSelect();
+
 
 
         }
@@ -69,6 +68,12 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            currentIndex = (int)EnumEntity.InterstellarExplorer;
+
+            // 调用显示飞船方法
+            ShowSpaceshipSelect();
+
 
         }
 
@@ -83,6 +88,9 @@ namespace ETLG
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+
+            HideAllEnemyEntity();
+
 
         }
 
@@ -121,6 +129,8 @@ namespace ETLG
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
+
+            HideAllEnemyEntity();
 
         }
 
