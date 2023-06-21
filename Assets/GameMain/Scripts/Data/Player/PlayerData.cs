@@ -25,6 +25,7 @@ namespace ETLG.Data
         public PlayerData (SpaceshipData spaceshipData)
         {
             this.initialSpaceship = spaceshipData;
+            this.calculatedSpaceship = spaceshipData;
         }
 
 

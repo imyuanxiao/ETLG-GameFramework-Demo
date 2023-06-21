@@ -34,13 +34,13 @@ namespace ETLG.Data
 
         }
 
-        // Íæ¼ÒÑ¡Ôñ³õÊ¼·É´¬ºó£¬¸ù¾Ýµ±Ç°Ñ¡ÔñµÄ·É´¬£¬ÐÂ½¨Íæ¼ÒÐÅÏ¢
+        // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ê¼ï¿½É´ï¿½ï¿½ó£¬¸ï¿½ï¿½Ýµï¿½Ç°Ñ¡ï¿½ï¿½Ä·É´ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         public void NewGame(SpaceshipData spaceshipData)
         {
             playerData = new PlayerData(spaceshipData);
         }
 
-        // ¼ÌÐøÓÎÏ·£¬¶ÁÈ¡±¾µØÎÄ¼þ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
         public void ContinueGame()
         {
             LoadPlayerData();
@@ -49,10 +49,10 @@ namespace ETLG.Data
 
         public void SavePlayerData(PlayerData playerData)
         {
-/*            // ÐòÁÐ»¯Íæ¼ÒÐÅÏ¢Îª JSON ¸ñÊ½
+/*            // ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Îª JSON ï¿½ï¿½Ê½
             string json = Utility.Json.ToJson(playerInfo);
 
-            // ½«ÐòÁÐ»¯ºóµÄÍæ¼ÒÐÅÏ¢±£´æµ½´æµµÎÄ¼þ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½æµ½ï¿½æµµï¿½Ä¼ï¿½
             File.WriteAllBytes("PlayerInfo.dat", Utility.Converter.GetBytes(json));
 */
 
@@ -61,16 +61,20 @@ namespace ETLG.Data
         public PlayerData LoadPlayerData()
         {
 
-/*            // ´Ó´æµµÎÄ¼þ¶ÁÈ¡Íæ¼ÒÐÅÏ¢
+/*            // ï¿½Ó´æµµï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             byte[] data = File.ReadAllBytes("PlayerInfo.dat");
 
-            // ½«¶ÁÈ¡µ½µÄÊý¾Ý·´ÐòÁÐ»¯ÎªÍæ¼ÒÐÅÏ¢¶ÔÏó
+            // ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½Ð»ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
             string json = Utility.Converter.GetString(data);
             PlayerInfo playerInfo = Utility.Json.FromJson<PlayerInfo>(json);
 */
             return null;
         }
 
+        public PlayerData GetPlayerData()
+        {
+            return playerData;
+        }
 
     }
 }

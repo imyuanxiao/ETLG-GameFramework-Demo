@@ -86,6 +86,9 @@ namespace ETLG
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
+            // Start a new game and use selected spaceship to construct player data
+            GameEntry.Data.GetData<DataPlayer>().NewGame(currentSpaceshipData);
+
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
 

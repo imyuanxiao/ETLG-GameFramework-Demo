@@ -26,9 +26,10 @@ namespace ETLG
 
             entityLoader = EntityLoader.Create(this);
 
-            SpaceshipData spaceshipData = GameEntry.Data.GetData<DataSpaceship>().GetSpaceshipData((int)EnumEntity.InterstellarExplorer);
-            
-            entityLoader.ShowEntity<EntitySpaceshipSelect>(EnumEntity.InterstellarExplorer, onShowSuccess, EntityDataSpaceshipSelect.Create(spaceshipData));
+            // get player data
+            PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
+            // show player spaceship entity
+            entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -50,7 +51,6 @@ namespace ETLG
         private void onShowSuccess(Entity entity)
         {
             spaceShipEntity = entity;
-            Debug.Log("Entity Id: " + entity.Id);
         }
     }
 }

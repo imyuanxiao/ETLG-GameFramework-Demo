@@ -19,6 +19,7 @@ namespace ETLG
         public static EntityDataSpaceship Create(PlayerData playerData, object userData = null)
         {
             EntityDataSpaceship entityData = ReferencePool.Acquire<EntityDataSpaceship>();
+            entityData.SpaceshipData = playerData.calculatedSpaceship;
             setPosition(entityData);
             return entityData;
         }
