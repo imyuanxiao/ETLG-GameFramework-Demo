@@ -69,12 +69,15 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            currentIndex = (int)EnumEntity.InterstellarExplorer;
+            ShowSpaceshipSelect();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+
+            HideAllEnemyEntity();
         }
 
         private void OnStartButtonClick()

@@ -52,6 +52,12 @@ namespace ETLG
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
             }
 
+            // switch to battle scene and battle procedure (for test purpose only)
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+            }
+
         }
 
 

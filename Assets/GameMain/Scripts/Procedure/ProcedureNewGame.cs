@@ -64,6 +64,8 @@ namespace ETLG
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
+            
+
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
