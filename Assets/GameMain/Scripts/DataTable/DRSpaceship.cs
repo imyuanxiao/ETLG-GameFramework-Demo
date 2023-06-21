@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-19 23:32:58.676
+// 生成时间：2023-06-21 14:53:38.329
 //------------------------------------------------------------
 
 using GameFramework;
@@ -19,7 +19,7 @@ using UnityGameFramework.Runtime;
 namespace ETLG
 {
     /// <summary>
-    /// 飞船属性配置表。
+    /// 飞船属性配置表，配置编号需要和Entity的保持一直。
     /// </summary>
     public class DRSpaceship : DataRowBase
     {
@@ -156,7 +156,7 @@ namespace ETLG
         /// <summary>
         /// 获取初始技能。
         /// </summary>
-        public int Skill
+        public int[] Skills
         {
             get;
             private set;
@@ -196,7 +196,7 @@ namespace ETLG
             Dogde = float.Parse(columnStrings[index++]);
             Detection = float.Parse(columnStrings[index++]);
             Capacity = int.Parse(columnStrings[index++]);
-            Skill = int.Parse(columnStrings[index++]);
+                Skills = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             ProjectileId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
@@ -223,7 +223,7 @@ namespace ETLG
                     Dogde = binaryReader.ReadSingle();
                     Detection = binaryReader.ReadSingle();
                     Capacity = binaryReader.Read7BitEncodedInt32();
-                    Skill = binaryReader.Read7BitEncodedInt32();
+                        Skills = binaryReader.ReadInt32Array();
                     ProjectileId = binaryReader.Read7BitEncodedInt32();
                 }
             }

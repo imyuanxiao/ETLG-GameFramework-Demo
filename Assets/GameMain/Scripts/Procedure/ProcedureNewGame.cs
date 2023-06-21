@@ -39,9 +39,7 @@ namespace ETLG
             Log.Debug("打开选择飞船界面");
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
 
-
         }
-
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {

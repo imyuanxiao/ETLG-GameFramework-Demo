@@ -14,7 +14,11 @@ namespace ETLG.Data
 
         // DRSpaceship 是每一行数据
         private IDataTable<DRSpaceship> dtSpaceship;
+        
         private Dictionary<int, SpaceshipData> dicSpaceshipData;
+
+        // 需要从技能数据管理类获取技能数据
+        private DataSkill dataSkill;
 
 
         protected override void OnInit()
@@ -31,6 +35,9 @@ namespace ETLG.Data
         // 加载阶段加载所有数据行
         protected override void OnLoad()
         {
+            // 初始化技能数据管理类
+            dataSkill = GameEntry.Data.GetData<DataSkill>();
+
             dtSpaceship = GameEntry.DataTable.GetDataTable<DRSpaceship>();
             if (dtSpaceship == null)
                 throw new System.Exception("Can not get data table Spaceship");
@@ -43,7 +50,21 @@ namespace ETLG.Data
 
            foreach (var drSpaceship in dRSpaceships)
             {
-                SpaceshipData spaceshipData = new SpaceshipData(drSpaceship);
+
+                SkillData[] dataSkills = new SkillData[drSpaceship.Skills.Length];
+
+                for (int i = 0; i < drSpaceship.Skills.Length; i++)
+                {
+                    SkillData skillData = dataSkill.GetSkillData(drSpaceship.Skills[i]);
+                    if (skillData == null)
+                    {
+                        throw new System.Exception(string.Format("Can not find skill id '{0}' in DataTable Skill.", drSpaceship.Skills[i]));
+                    }
+
+                    dataSkills[i] = skillData;
+                }
+
+                SpaceshipData spaceshipData = new SpaceshipData(drSpaceship, dataSkills);
                 dicSpaceshipData.Add(drSpaceship.Id, spaceshipData);
             }
 
@@ -58,36 +79,6 @@ namespace ETLG.Data
 
             return null;
         }
-/*
-        public Tower CreateTower(int towerId, int level = 0)
-        {
-            if (!dicTowerData.ContainsKey(towerId))
-            {
-                Log.Error("Can not find tower data id '{0}'.", towerId);
-                return null;
-            }
-
-            int serialId = GenrateSerialId();
-            Tower tower = Tower.Create(dicTowerData[towerId], serialId, level);
-            dicTower.Add(serialId, tower);
-
-            return tower;
-        }
-
-        public void DestroyTower(int serialId)
-        {
-            if (!dicTower.ContainsKey(serialId))
-            {
-                Log.Error("Can not find tower serialId '{0}'.", serialId);
-                return;
-            }
-
-            ReferencePool.Release(dicTower[serialId]);
-            dicTower.Remove(serialId);
-        }*/
-
-
-
 
         public SpaceshipData[] GetAllSpaceshipData()
         {
