@@ -5,6 +5,10 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - bulletPrefab: {fileID: 6655426501389060699, guid: a52e9d098af84ec40b607a51bbf8cab9, type: 3}
+  - missilePrefab: {fileID: 4361546411781682957, guid: d9b34689be1d02746a4c6f93c40d7fe6, type: 3}
+  - laserPrefab: {fileID: 705219915143632237, guid: 7137a8c1669ee6d4f8b67b1d8bb28839, type: 3}
+  - IonBeam: {fileID: 897816100439319094, guid: fba3f06cbccfd354ba30e50658392daa, type: 3}
+  - Railgun: {fileID: 7390059508560212517, guid: 5f0699274a9887e448baa59003c1e1e8, type: 3}
   - bulletSpawnPosition: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

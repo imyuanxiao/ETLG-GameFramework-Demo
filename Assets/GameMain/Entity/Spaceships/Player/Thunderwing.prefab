@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6655426501389060699, guid: a52e9d098af84ec40b607a51bbf8cab9, type: 3}
+  missilePrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
+  IonBeam: {fileID: 0}
+  Railgun: {fileID: 0}
   bulletSpawnPosition: {fileID: 3341742089681992307}
 --- !u!54 &-1797413372265565281
 Rigidbody:

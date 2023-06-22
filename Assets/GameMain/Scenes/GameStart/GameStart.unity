@@ -188,6 +188,8 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataSpaceship
   - enable: 1
     dataTypeName: ETLG.Data.DataPlayer
+  - enable: 1
+    dataTypeName: ETLG.Data.DataProjectile
 --- !u!1 &477424328
 GameObject:
   m_ObjectHideFlags: 0

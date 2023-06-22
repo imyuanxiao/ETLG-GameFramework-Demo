@@ -9,6 +9,11 @@ namespace ETLG
     public class SpaceshipAttack : MonoBehaviour
     {
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject missilePrefab;
+        [SerializeField] private GameObject laserPrefab;
+        [SerializeField] private GameObject IonBeam;
+        [SerializeField] private GameObject Railgun;
+
         [SerializeField] private Transform bulletSpawnPosition;
 
         private SpaceshipController controller;
