@@ -24,6 +24,9 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
+            string battleType = procedureOwner.GetData<VarString>("BattleType");
+            Debug.Log(battleType);
+
             entityLoader = EntityLoader.Create(this);
 
             // get player data
@@ -35,6 +38,7 @@ namespace ETLG
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+            
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)

@@ -52,9 +52,23 @@ namespace ETLG
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
             }
 
-            // switch to battle scene and battle procedure (for test purpose only)
+            // Switch to battle scene and battle procedure (for test purpose only)
+            //   1. switch to basic battle
             if (Input.GetKeyDown(KeyCode.C))
             {
+                procedureOwner.SetData<VarString>("BattleType", "BasicBattle");
+                GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+            }
+            //  2. switch to intermidate battle (mini boss battle)
+            else if (Input.GetKeyDown(KeyCode.V))
+            {
+                procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
+                GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+            }
+            //  3. switch to final boss battle
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                procedureOwner.SetData<VarString>("BattleType", "FinalBattle");
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
 
