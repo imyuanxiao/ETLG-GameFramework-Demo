@@ -25,7 +25,6 @@ namespace ETLG
             base.OnEnter(procedureOwner);
 
             string battleType = procedureOwner.GetData<VarString>("BattleType");
-            Debug.Log(battleType);
 
             entityLoader = EntityLoader.Create(this);
 
@@ -33,6 +32,8 @@ namespace ETLG
             PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
+
+            BattleManager.Instance.SpawnBasicEnemies();
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)

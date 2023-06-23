@@ -9,6 +9,9 @@ namespace ETLG
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private float destoryTime = 2;
+        [SerializeField] private Vector3 flyingDirection;
+
+        public int damage;
 
         private Rigidbody rb;
         private ProjectileData bulletData;
@@ -21,13 +24,13 @@ namespace ETLG
         private void OnEnable() 
         {
             bulletData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Bullet);
-            Debug.Log(bulletData.ProjectileType);
+            // damage = (int) bulletData.Damage;
             StartCoroutine(ReturnToPoolAfterTime());
         }
 
         private void Update() 
         {
-            rb.velocity = Vector3.forward * bulletData.Speed * Time.deltaTime * 1000;
+            rb.velocity = flyingDirection * bulletData.Speed * Time.deltaTime * 1000;
         }
 
 
