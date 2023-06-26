@@ -42,12 +42,15 @@ namespace ETLG
             {
                 GetComponent<SpaceshipMovement>().enabled = true;
                 GetComponent<SpaceshipAttack>().enabled = true;
+                GetComponent<PlayerHealth>().enabled = true;
             }
             else
             {
                 GetComponent<SpaceshipMovement>().enabled = false;
                 GetComponent<SpaceshipAttack>().enabled = false;
+                GetComponent<PlayerHealth>().enabled = false;
             }
+            
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
             fireInput = Input.GetMouseButtonDown(0);

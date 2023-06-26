@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -3458995680207347772}
   - component: {fileID: -2244427268146377104}
   - component: {fileID: 2170016336017009192}
+  - component: {fileID: 5165708541086601247}
   m_Layer: 7
   m_Name: Thunderwing
   m_TagString: Untagged
@@ -136,6 +137,20 @@ MonoBehaviour:
   IonBeam: {fileID: 0}
   Railgun: {fileID: 0}
   bulletSpawnPosition: {fileID: 3341742089681992307}
+--- !u!114 &5165708541086601247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445617114783920199}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d5d3775251054186e40ad6fead06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  MaxShield: 0
 --- !u!1 &8307621361791615233
 GameObject:
   m_ObjectHideFlags: 0

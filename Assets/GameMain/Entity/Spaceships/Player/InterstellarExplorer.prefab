@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 366030245335613980}
   - component: {fileID: 691012191693143921}
   - component: {fileID: -6450207003181350035}
+  - component: {fileID: -5309865174787812415}
   m_Layer: 7
   m_Name: InterstellarExplorer
   m_TagString: Untagged
@@ -167,6 +168,20 @@ MonoBehaviour:
   IonBeam: {fileID: 0}
   Railgun: {fileID: 0}
   bulletSpawnPosition: {fileID: 1587402014749857766}
+--- !u!114 &-5309865174787812415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222514285410902841}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d5d3775251054186e40ad6fead06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  MaxShield: 0
 --- !u!1001 &1943944961453316999
 PrefabInstance:
   m_ObjectHideFlags: 0

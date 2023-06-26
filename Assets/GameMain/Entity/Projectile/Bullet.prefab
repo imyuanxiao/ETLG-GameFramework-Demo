@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4473171999827770254}
   - component: {fileID: 787994460342416313}
   - component: {fileID: 4912410186163427657}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7f42f217c6b28be4d9be08b7f06f3b0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 1666589906259172212}
   - component: {fileID: -7997500129985355794}
   - component: {fileID: 4912833611538280823}
-  - component: {fileID: -8339471517056858361}
-  m_Layer: 0
+  - component: {fileID: 8699362077100044905}
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8339471517056858361
+--- !u!114 &8699362077100044905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,9 +156,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6655426501389060699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 526cb6e195071a64ba43becb5e00f8e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 54af4e28bcce35b4c9766217516bf6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryTime: 2
   flyingDirection: {x: 0, y: 0, z: 1}
-  damage: 4
+  damage: 0

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3837963103866998453}
   - component: {fileID: 2632649300570158615}
   - component: {fileID: -7020566472012469605}
+  - component: {fileID: 4132447693472120086}
   m_Layer: 7
   m_Name: Guardian
   m_TagString: Untagged
@@ -136,6 +137,20 @@ MonoBehaviour:
   IonBeam: {fileID: 0}
   Railgun: {fileID: 0}
   bulletSpawnPosition: {fileID: 5230702684450065288}
+--- !u!114 &4132447693472120086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600888903741044687}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d5d3775251054186e40ad6fead06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 0
+  MaxShield: 0
 --- !u!1 &7105302204338113270
 GameObject:
   m_ObjectHideFlags: 0

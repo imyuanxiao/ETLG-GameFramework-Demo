@@ -33,6 +33,7 @@ namespace ETLG
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
 
+            // BattleManager.Instance.SetEnemiesData();
             BattleManager.Instance.SpawnBasicEnemies();
         }
 
