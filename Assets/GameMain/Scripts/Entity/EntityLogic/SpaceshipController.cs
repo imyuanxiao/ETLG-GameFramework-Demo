@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameFramework;
+using GameFramework.Event;
+using System;
 
 namespace ETLG
 {
@@ -35,22 +37,32 @@ namespace ETLG
             }
         }
 
-        private void Update() 
+        private void Awake() 
         {
-            // Only enable Spaceship movement and attack component in Procedure Battle
-            if (GameEntry.Procedure.CurrentProcedure is ProcedureBattle)
-            {
-                GetComponent<SpaceshipMovement>().enabled = true;
-                GetComponent<SpaceshipAttack>().enabled = true;
-                GetComponent<PlayerHealth>().enabled = true;
-            }
-            else
-            {
-                GetComponent<SpaceshipMovement>().enabled = false;
-                GetComponent<SpaceshipAttack>().enabled = false;
-                GetComponent<PlayerHealth>().enabled = false;
-            }
-            
+            GameEntry.Event.Subscribe(ActiveBattleComponentEventArgs.EventId, OnActiveBattleComponent);
+            GameEntry.Event.Subscribe(DeactiveBattleComponentEventArgs.EventId, OnDeactiveBattleComponent);
+        }
+
+        private void OnDeactiveBattleComponent(object sender, GameEventArgs e)
+        {
+            DeactiveBattleComponentEventArgs ne = (DeactiveBattleComponentEventArgs) e;
+
+            GetComponent<SpaceshipMovement>().enabled = false;
+            GetComponent<SpaceshipAttack>().enabled = false;
+            GetComponent<PlayerHealth>().enabled = false;
+        }
+
+        private void OnActiveBattleComponent(object sender, GameEventArgs e)
+        {
+            ActiveBattleComponentEventArgs ne = (ActiveBattleComponentEventArgs) e;
+
+            GetComponent<SpaceshipMovement>().enabled = true;
+            GetComponent<SpaceshipAttack>().enabled = true;
+            GetComponent<PlayerHealth>().enabled = true;
+        }
+
+        private void Update() 
+        {            
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
             fireInput = Input.GetMouseButtonDown(0);
