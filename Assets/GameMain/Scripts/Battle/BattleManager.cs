@@ -6,27 +6,35 @@ namespace ETLG
 {
     public class BattleManager : Singleton<BattleManager>
     {
-        [SerializeField] private GameObject basicEnemyPrefab;
+        [SerializeField] private GameObject[] basicEnemyPrefab;
         [SerializeField] private Transform[] basicEnemySpawnPositions;
-
         public float enemySpawnRate;
+
+        private IEnumerator spawnBasicEnemiesCoroutine;
+
+        protected override void Awake() 
+        {
+            base.Awake();
+            spawnBasicEnemiesCoroutine = SpawnBasicEnemiesRoutine();
+        }
 
         private void SpawnBasicEnemy()
         {
             int spawnPosIdx = Random.Range(0, basicEnemySpawnPositions.Length);
-            ObjectPoolManager.SpawnObject(basicEnemyPrefab, basicEnemySpawnPositions[spawnPosIdx].position, 
+            int spawnEnemyIdx = Random.Range(0, basicEnemyPrefab.Length);
+            ObjectPoolManager.SpawnObject(basicEnemyPrefab[spawnEnemyIdx], basicEnemySpawnPositions[spawnPosIdx].position, 
                                                             basicEnemySpawnPositions[spawnPosIdx].rotation, 
                                                             ObjectPoolManager.PoolType.GameObject);
         }
 
         public void SpawnBasicEnemies()
         {
-            StartCoroutine(SpawnBasicEnemiesRoutine());
+            StartCoroutine(spawnBasicEnemiesCoroutine);
         }
 
         public void StopSpawnBasicEnemies()
         {
-            StopCoroutine(SpawnBasicEnemiesRoutine());
+            StopCoroutine(spawnBasicEnemiesCoroutine);
         }
 
         private IEnumerator SpawnBasicEnemiesRoutine()

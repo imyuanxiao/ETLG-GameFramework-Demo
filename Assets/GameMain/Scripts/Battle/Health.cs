@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameFramework.Event;
 using UnityEngine;
 
 namespace ETLG
@@ -21,20 +23,25 @@ namespace ETLG
 
         private void OnTriggerEnter(Collider other) 
         {
-            // if (other.gameObject.CompareTag(targetBulletType))
-            // {
-                TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
-                ObjectPoolManager.ReturnObjectToPool(other.gameObject);
-            // }
+            TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
+            ObjectPoolManager.ReturnObjectToPool(other.gameObject); 
         }
 
         protected abstract void OnDead();
 
-        private void Update() 
+        protected IEnumerator CheckDeath()
         {
-            if (IsDead())
+            while (true) 
             {
-                OnDead();
+                if (!IsDead())
+                {
+                    yield return null;
+                }
+                else 
+                {
+                    OnDead();
+                    yield break;
+                }
             }
         }
     }

@@ -5,10 +5,12 @@ using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 using GameFramework.Procedure;
 using ETLG.Data;
+using GameFramework.Event;
+using System;
 
 namespace ETLG
 {
-    public class ProcedureBasicBattle : ProcedureBase
+    public class ProcedureBasicBattle : ProcedureBase //, IBattleLostObserver
     {
         private EntityLoader entityLoader;
         private Entity spaceShipEntity;
@@ -21,6 +23,8 @@ namespace ETLG
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
             base.OnEnter(procedureOwner);
+
+            GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
 
             entityLoader = EntityLoader.Create(this);
 
@@ -35,6 +39,13 @@ namespace ETLG
             BattleManager.Instance.SpawnBasicEnemies();
         }
 
+        private void OnPlayerDead(object sender, GameEventArgs e)
+        {
+            PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
+            Debug.Log("ProcedureBasicBattle: Player Dead");
+            BattleManager.Instance.StopSpawnBasicEnemies();
+        }
+
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
@@ -43,9 +54,10 @@ namespace ETLG
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
         {
             base.OnLeave(procedureOwner, isShutdown);
-
+            
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
+            GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
