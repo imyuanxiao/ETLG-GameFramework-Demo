@@ -15,7 +15,8 @@ namespace ETLG
             
             flyingDirection = new Vector3(0, 0, 1);
             bulletData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Bullet);
-            damage = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Firepower;
+            damage = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Firepower
+                            + (int) bulletData.Damage;
         }
 
         private void Update() 

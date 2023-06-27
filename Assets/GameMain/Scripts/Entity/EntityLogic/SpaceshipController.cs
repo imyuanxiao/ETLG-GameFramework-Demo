@@ -37,10 +37,23 @@ namespace ETLG
             }
         }
 
-        private void Awake() 
+        private void OnEnable() 
         {
             GameEntry.Event.Subscribe(ActiveBattleComponentEventArgs.EventId, OnActiveBattleComponent);
             GameEntry.Event.Subscribe(DeactiveBattleComponentEventArgs.EventId, OnDeactiveBattleComponent);
+            GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
+        }
+
+        private void OnBasicBattleWin(object sender, GameEventArgs e)
+        {
+            GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
+        }
+
+        private void OnPlayerDead(object sender, GameEventArgs e)
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
         }
 
         private void OnDeactiveBattleComponent(object sender, GameEventArgs e)
@@ -66,6 +79,14 @@ namespace ETLG
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
             fireInput = Input.GetMouseButtonDown(0);
+        }
+
+        private void OnDisable() 
+        {
+            GameEntry.Event.Unsubscribe(ActiveBattleComponentEventArgs.EventId, OnActiveBattleComponent);
+            GameEntry.Event.Unsubscribe(DeactiveBattleComponentEventArgs.EventId, OnDeactiveBattleComponent);
+            GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Unsubscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
         }
     }
 }

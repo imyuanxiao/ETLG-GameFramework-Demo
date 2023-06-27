@@ -10,10 +10,13 @@ using System;
 
 namespace ETLG
 {
-    public class ProcedureBasicBattle : ProcedureBase //, IBattleLostObserver
+    public class ProcedureBasicBattle : ProcedureBase
     {
         private EntityLoader entityLoader;
         private Entity spaceShipEntity;
+        private ProcedureOwner procedureOwner;
+        private bool changeScene = false;
+        private bool isWinning = false;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -23,8 +26,13 @@ namespace ETLG
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
             base.OnEnter(procedureOwner);
+            this.procedureOwner = procedureOwner;
+            this.changeScene = false;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
+            GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
 
             entityLoader = EntityLoader.Create(this);
 
@@ -39,16 +47,53 @@ namespace ETLG
             BattleManager.Instance.SpawnBasicEnemies();
         }
 
+        private void OnBasicBattleWin(object sender, GameEventArgs e)
+        {
+            BasicBattleWinEventArgs ne = (BasicBattleWinEventArgs) e;
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin);
+            Debug.Log("Enemy Killed: " + ne.BasicEnemyKilled + " | Enemy Passed: " + ne.BasicEnemyPassed);
+        }
+
+        private void OnGamePause(object sender, GameEventArgs e)
+        {
+            GamePauseEventArgs ne = (GamePauseEventArgs) e;
+            GameEntry.UI.OpenUIForm(ne.UIPauseId);
+            // Time.timeScale = 0;
+        }
+
+        private void OnChangeScene(object sender, GameEventArgs e)
+        {
+            ChangeSceneEventArgs ne = (ChangeSceneEventArgs)e;
+            if (ne == null)
+                return;
+
+            changeScene = true;
+            procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
+        }
+
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
             PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
             Debug.Log("ProcedureBasicBattle: Player Dead");
             BattleManager.Instance.StopSpawnBasicEnemies();
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBasicBattleLost);
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameEntry.Event.Fire(this, GamePauseEventArgs.Create(EnumUIForm.UIPausePanelForm));
+            }
+
+            if (changeScene)
+            {
+                ChangeState<ProcedureLoadingScene>(procedureOwner);
+            }
+
+            CheckWinning();
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
@@ -57,7 +102,11 @@ namespace ETLG
             
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
+            entityLoader.Clear();
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Unsubscribe(GamePauseEventArgs.EventId, OnGamePause);
+            GameEntry.Event.Unsubscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
@@ -68,6 +117,19 @@ namespace ETLG
         private void onShowSuccess(Entity entity)
         {
             spaceShipEntity = entity;
+        }
+
+        private void CheckWinning()
+        {
+            if (isWinning) { return; }
+            int basicEnemyKilled = BattleManager.Instance.basicEnemyKilled;
+            int basicEnemyPassed = BattleManager.Instance.basicEnemyPassed;
+
+            if (basicEnemyKilled + basicEnemyPassed >= BattleManager.Instance.basicEnemyNum)
+            {
+                isWinning = true;
+                GameEntry.Event.Fire(this, BasicBattleWinEventArgs.Create(basicEnemyKilled, basicEnemyPassed));
+            }
         }
     }
 }

@@ -23,6 +23,11 @@ namespace ETLG
 
             string battleType = procedureOwner.GetData<VarString>("BattleType");
 
+            if (battleType == "IntermidateBattle")
+            {
+                BattleManager.Instance.bossType = procedureOwner.GetData<VarString>("BossType");
+            }
+
             switch (battleType)
             {
                 case "BasicBattle":

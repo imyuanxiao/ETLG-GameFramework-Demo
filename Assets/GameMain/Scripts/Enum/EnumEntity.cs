@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-27 15:31:10.159
+// 生成时间：2023-06-28 16:50:42.524
 //------------------------------------------------------------
 
 namespace ETLG
@@ -55,5 +55,40 @@ namespace ETLG
         /// 电磁炮
         /// </summary>
         Railgun = 1009,
+
+        /// <summary>
+        /// 人工智能Boss
+        /// </summary>
+        ArtificialIntelligenceBoss = 1100,
+
+        /// <summary>
+        /// 数据科学Boss
+        /// </summary>
+        DataScienceBoss = 1101,
+
+        /// <summary>
+        /// 物联网Boss
+        /// </summary>
+        InternetofThingsBoss = 1102,
+
+        /// <summary>
+        /// 网络安全Boss
+        /// </summary>
+        CybersecurityBoss = 1103,
+
+        /// <summary>
+        /// 云计算Boss
+        /// </summary>
+        CloudComputingBoss = 1104,
+
+        /// <summary>
+        /// 区块链Boss
+        /// </summary>
+        BlockchainBoss = 1105,
+
+        /// <summary>
+        /// 最终Boss
+        /// </summary>
+        FinalBoss = 1106,
     }
 }

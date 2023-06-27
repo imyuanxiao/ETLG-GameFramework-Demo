@@ -74,6 +74,7 @@ namespace ETLG
         {
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
+            BattleManager.Instance.basicEnemyKilled++;
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 

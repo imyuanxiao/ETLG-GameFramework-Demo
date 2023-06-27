@@ -6,9 +6,17 @@ namespace ETLG
 {
     public class BattleManager : Singleton<BattleManager>
     {
+        [Header("Basic Battle Settings")]
         [SerializeField] private GameObject[] basicEnemyPrefab;
         [SerializeField] private Transform[] basicEnemySpawnPositions;
+        [SerializeField] public Transform basicEnemyPassPosition;
         public float enemySpawnRate;
+        public int basicEnemyNum;
+        [HideInInspector] public int basicEnemyCnt = 0;
+        [HideInInspector] public int basicEnemyKilled = 0;
+        [HideInInspector] public int basicEnemyPassed = 0;
+
+        [HideInInspector] public string bossType;
 
         private IEnumerator spawnBasicEnemiesCoroutine;
 
@@ -18,13 +26,21 @@ namespace ETLG
             spawnBasicEnemiesCoroutine = SpawnBasicEnemiesRoutine();
         }
 
+
         private void SpawnBasicEnemy()
         {
+            if (basicEnemyCnt >= basicEnemyNum)
+            {
+                StopSpawnBasicEnemies();
+                return;
+            }
+
             int spawnPosIdx = Random.Range(0, basicEnemySpawnPositions.Length);
             int spawnEnemyIdx = Random.Range(0, basicEnemyPrefab.Length);
             ObjectPoolManager.SpawnObject(basicEnemyPrefab[spawnEnemyIdx], basicEnemySpawnPositions[spawnPosIdx].position, 
                                                             basicEnemySpawnPositions[spawnPosIdx].rotation, 
                                                             ObjectPoolManager.PoolType.GameObject);
+            basicEnemyCnt++;
         }
 
         public void SpawnBasicEnemies()

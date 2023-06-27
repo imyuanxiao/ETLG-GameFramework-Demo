@@ -22,6 +22,8 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
+            Debug.Log(BattleManager.Instance.bossType);
+
             entityLoader = EntityLoader.Create(this);
 
             // get player data
@@ -30,6 +32,9 @@ namespace ETLG
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
 
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
+
+            BossEnemyData bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
+            Debug.Log(bossEnemyData.NameId);
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)

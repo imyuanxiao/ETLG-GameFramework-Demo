@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,20 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+
+            retryButton.onClick.AddListener(OnRetryButtonClick);
+            leaveButton.onClick.AddListener(OnLeaveButtonClick);
+        }
+
+        private void OnLeaveButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+        }
+
+        private void OnRetryButtonClick()
+        {
+            
         }
 
         protected override void OnOpen(object userData)

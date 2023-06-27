@@ -29,7 +29,6 @@ namespace ETLG
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
             PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIBasicBattleLost);
             Debug.Log("Player Health: Player Dead");
         }
 

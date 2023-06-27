@@ -7,9 +7,10 @@ namespace ETLG
 {
     public class EnemyProjectile : Projectile
     {
-        protected virtual void OnEnable() 
+        protected override void OnEnable() 
         {
-            destoryTime = 2f;
+            base.OnEnable();
+            destoryTime = 4f;
             StartCoroutine(ReturnToPoolAfterTime());
         }
     }

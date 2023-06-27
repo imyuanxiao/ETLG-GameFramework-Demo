@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameFramework.Event;
 using UnityEngine;
 
 namespace ETLG
@@ -17,6 +19,22 @@ namespace ETLG
             rb = GetComponent<Rigidbody>();
         }
 
+        protected virtual void OnEnable() 
+        {
+            GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
+        }
+
+        private void OnGamePause(object sender, GameEventArgs e)
+        {
+
+        }
+
+        private void OnPlayerDead(object sender, GameEventArgs e)
+        {
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
+        }
+
         protected IEnumerator ReturnToPoolAfterTime()
         {
             float elapsedTime = 0f;
@@ -30,7 +48,9 @@ namespace ETLG
 
         private void OnDisable() 
         {
-            StopAllCoroutines();    
+            StopAllCoroutines();
+            GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Unsubscribe(GamePauseEventArgs.EventId, OnGamePause);
         }
     }
 }

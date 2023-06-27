@@ -63,6 +63,7 @@ namespace ETLG
             else if (Input.GetKeyDown(KeyCode.V))
             {
                 procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
+                procedureOwner.SetData<VarString>("BossType", "CloudComputing");
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
             //  3. switch to final boss battle
