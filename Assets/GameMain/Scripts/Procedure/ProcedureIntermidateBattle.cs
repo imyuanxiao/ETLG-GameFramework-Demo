@@ -5,6 +5,7 @@ using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 using GameFramework.Procedure;
 using ETLG.Data;
+using System;
 
 namespace ETLG
 {
@@ -12,6 +13,8 @@ namespace ETLG
     {
         private EntityLoader entityLoader;
         private Entity spaceShipEntity;
+        private BossEnemyData bossEnemyData;
+        private Entity bossEnemyEntity;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -22,7 +25,7 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
-            Debug.Log(BattleManager.Instance.bossType);
+            // Debug.Log(BattleManager.Instance.bossType);
 
             entityLoader = EntityLoader.Create(this);
 
@@ -33,8 +36,14 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
-            BossEnemyData bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
-            Debug.Log(bossEnemyData.NameId);
+            bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
+            entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+            // Debug.Log(bossEnemyData.NameId);
+        }
+
+        private void onBossEnemyShowSuccess(Entity entity)
+        {
+            bossEnemyEntity = entity;
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -48,6 +57,7 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
+            entityLoader.HideEntity(bossEnemyEntity);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)

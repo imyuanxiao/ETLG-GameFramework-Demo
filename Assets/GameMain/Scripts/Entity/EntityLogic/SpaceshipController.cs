@@ -47,6 +47,7 @@ namespace ETLG
 
         private void OnBasicBattleWin(object sender, GameEventArgs e)
         {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
         }
 
