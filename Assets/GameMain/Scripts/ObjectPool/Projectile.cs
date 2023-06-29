@@ -8,9 +8,9 @@ namespace ETLG
 {
     public class Projectile : MonoBehaviour
     {
-        protected float destoryTime;
-        protected float flyingSpeed;
-        protected Vector3 flyingDirection;
+        [HideInInspector] public float destoryTime;
+        [HideInInspector] public float flyingSpeed;
+        [HideInInspector] public Vector3 flyingDirection;
         [HideInInspector] public int damage;
         protected Rigidbody rb;
 

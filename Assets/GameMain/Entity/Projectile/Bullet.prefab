@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1666589906259172212}
   - component: {fileID: -7997500129985355794}
   - component: {fileID: 4912833611538280823}
-  - component: {fileID: 8699362077100044905}
+  - component: {fileID: -7062085607906383796}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: PlayerBullet
@@ -147,7 +147,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8699362077100044905
+--- !u!114 &-7062085607906383796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,8 +156,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6655426501389060699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54af4e28bcce35b4c9766217516bf6b1, type: 3}
+  m_Script: {fileID: 11500000, guid: e3d1fb395b6bfd243b6512923a306ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingDirection: {x: 0, y: 0, z: 1}
+  destoryTime: 0
+  flyingSpeed: 0
+  flyingDirection: {x: 0, y: 0, z: 0}
   damage: 0
