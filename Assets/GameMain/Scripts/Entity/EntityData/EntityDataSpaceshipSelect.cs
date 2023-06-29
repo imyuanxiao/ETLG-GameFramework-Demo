@@ -31,8 +31,8 @@ namespace ETLG
 
         public static void setPosition(EntityDataSpaceshipSelect entityData)
         {
-            entityData.Position = new Vector3(2.5f, 0.5f, 1f);
-            entityData.Rotation = Quaternion.Euler(15f, -200f, 340f);
+            entityData.Position = new Vector3(4f, 1f, 15f);
+            entityData.Rotation = Quaternion.Euler(20f, 160f, -10f);
         }
 
         

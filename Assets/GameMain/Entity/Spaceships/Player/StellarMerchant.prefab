@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -8934747092550341618}
   - component: {fileID: 5030789800911902425}
   - component: {fileID: 1814137076653636789}
+  - component: {fileID: 7013546630513895291}
   m_Layer: 7
   m_Name: StellarMerchant
   m_TagString: Untagged
@@ -151,6 +152,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   MaxShield: 0
+--- !u!114 &7013546630513895291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189744169063454343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34adab66c98df345a64d92454d94319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2717143109869149165
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +349,18 @@ PrefabInstance:
     - target: {fileID: 2653768246684197907, guid: e489cd6b082a27b40aad96d4fc6971ba, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653768246684197907, guid: e489cd6b082a27b40aad96d4fc6971ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653768246684197907, guid: e489cd6b082a27b40aad96d4fc6971ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653768246684197907, guid: e489cd6b082a27b40aad96d4fc6971ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2653768246684197907, guid: e489cd6b082a27b40aad96d4fc6971ba, type: 3}
       propertyPath: m_LocalPosition.x
