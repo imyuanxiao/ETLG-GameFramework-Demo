@@ -32,7 +32,7 @@ namespace ETLG
         public static void setPosition(EntityDataSpaceshipSelect entityData)
         {
             entityData.Position = new Vector3(4f, 1f, 15f);
-            entityData.Rotation = Quaternion.Euler(10f, 160f, 4f);
+            entityData.Rotation = Quaternion.Euler(20f, 160f, -10f);
         }
 
         

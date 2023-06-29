@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -2244427268146377104}
   - component: {fileID: 2170016336017009192}
   - component: {fileID: 5165708541086601247}
+  - component: {fileID: 3597804067467014409}
   m_Layer: 7
   m_Name: Thunderwing
   m_TagString: Untagged
@@ -151,6 +152,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   MaxShield: 0
+--- !u!114 &3597804067467014409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445617114783920199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34adab66c98df345a64d92454d94319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8307621361791615233
 GameObject:
   m_ObjectHideFlags: 0

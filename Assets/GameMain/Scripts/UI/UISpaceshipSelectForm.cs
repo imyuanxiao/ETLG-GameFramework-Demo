@@ -12,18 +12,55 @@ namespace ETLG
     public class UISpaceshipSelectForm : UGuiFormEx
     {
 
+
         // 需要挂在后添加的按钮和文本等对象
         public Button startButton;
         public Button leftButton;
         public Button rightButton;
         public Button returnButton;
 
+        // name and description
         public TextMeshProUGUI s_name = null;
         public TextMeshProUGUI s_description = null;
 
+        // type and size
+        public TextMeshProUGUI s_type = null;
+        public TextMeshProUGUI s_size = null;
+
+        // initial attrs
+        public TextMeshProUGUI s_energy = null;
+        public TextMeshProUGUI s_durability = null;
+        public TextMeshProUGUI s_shields = null;
+        public TextMeshProUGUI s_firepower = null;
+        public TextMeshProUGUI s_fireRate = null;
+        public TextMeshProUGUI s_agility = null;
+        public TextMeshProUGUI s_speed = null;
+        public TextMeshProUGUI s_dogde = null;
+        public TextMeshProUGUI s_detection = null;
+        public TextMeshProUGUI s_capacity = null;
+
+        
+        private float valueBarMaxWidth = 150;
+        private float maxAttrValue = 300;
+
+        public GameObject s_energy_valueBar = null;
+        public GameObject s_durability_valueBar = null;
+        public GameObject s_shields_valueBar = null;
+        public GameObject s_firepower_valueBar = null;
+        public GameObject s_agility_valueBar = null;
+        public GameObject s_speed_valueBar = null;
+        public GameObject s_detection_valueBar = null;
+        public GameObject s_capacity_valueBar = null;
+
+
+
+        // initial skills
         public TextMeshProUGUI s_skill1 = null;
         public TextMeshProUGUI s_skill2 = null;
         public TextMeshProUGUI s_skill3 = null;
+
+
+
 
 
         // 需要通过数据管理器获取数据
@@ -157,6 +194,30 @@ namespace ETLG
             s_name.text = currentSpaceshipData.NameId;
             s_description.text = currentSpaceshipData.Description;
 
+            s_type.text = currentSpaceshipData.SType;
+            s_size.text = currentSpaceshipData.SSize;
+
+            s_energy.text = currentSpaceshipData.Energy.ToString();
+            s_durability.text = currentSpaceshipData.Durability.ToString();
+            s_shields.text = currentSpaceshipData.Shields.ToString();
+            s_firepower.text = currentSpaceshipData.Firepower.ToString();
+            s_fireRate.text = currentSpaceshipData.FireRate.ToString();
+            s_agility.text = currentSpaceshipData.Agility.ToString();
+            s_speed.text = currentSpaceshipData.Speed.ToString();
+            s_detection.text = currentSpaceshipData.Detection.ToString();
+            s_capacity.text = currentSpaceshipData.Capacity.ToString();
+            s_dogde.text = currentSpaceshipData.Dogde.ToString();
+
+
+            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
+            SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
+            SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
+            SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
+            SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
+            SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
+            SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
+            SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
+
             s_skill1.text = currentSpaceshipData.GetSkillData(0).NameId;
             s_skill2.text = currentSpaceshipData.GetSkillData(1).NameId;
             s_skill3.text = currentSpaceshipData.GetSkillData(2).NameId;
@@ -164,6 +225,18 @@ namespace ETLG
             ShowNewSpaceshipSelect();
 
         }
+
+        public void SetWidth(GameObject targetObject, float newWidth)
+        {
+            // 获取目标对象的 RectTransform 组件
+            RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
+
+            // 修改 sizeDelta 属性的 x 值来改变宽度
+            Vector2 newSizeDelta = rectTransform.sizeDelta;
+            newSizeDelta.x = newWidth;
+            rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
+        }
+
 
         public void ShowNewSpaceshipSelect()
         {

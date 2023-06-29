@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-28 16:50:26.916
+// 生成时间：2023-06-29 13:56:17.241
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,9 +46,27 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取飞船类型。
+        /// 获取飞船脚本。
         /// </summary>
         public string Type
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取飞船类型。
+        /// </summary>
+        public string SType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取飞船大小。
+        /// </summary>
+        public string SSize
         {
             get;
             private set;
@@ -185,6 +203,8 @@ namespace ETLG
             index++;
             NameId = columnStrings[index++];
             Type = columnStrings[index++];
+            SType = columnStrings[index++];
+            SSize = columnStrings[index++];
             EntityId = int.Parse(columnStrings[index++]);
             Energy = float.Parse(columnStrings[index++]);
             Durability = float.Parse(columnStrings[index++]);
@@ -212,6 +232,8 @@ namespace ETLG
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     NameId = binaryReader.ReadString();
                     Type = binaryReader.ReadString();
+                    SType = binaryReader.ReadString();
+                    SSize = binaryReader.ReadString();
                     EntityId = binaryReader.Read7BitEncodedInt32();
                     Energy = binaryReader.ReadSingle();
                     Durability = binaryReader.ReadSingle();

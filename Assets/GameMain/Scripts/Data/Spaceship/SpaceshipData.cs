@@ -49,6 +49,22 @@ namespace ETLG.Data
             }
         }
 
+        public string SType
+        {
+            get
+            {
+                return dRSpaceship.SType;
+            }
+        }
+
+        public string SSize
+        {
+            get
+            {
+                return dRSpaceship.SSize;
+            }
+        }
+
         public int EntityId
         {
             get
