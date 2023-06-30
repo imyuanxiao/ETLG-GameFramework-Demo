@@ -20,22 +20,29 @@ namespace ETLG
             SpaceshipData = null;
         }
 
-        public static EntityDataSpaceshipSelect Create(SpaceshipData spaceshipData, object userData = null)
+        public static EntityDataSpaceshipSelect Create(SpaceshipData spaceshipData, bool checkScene)
         {
             EntityDataSpaceshipSelect entityData = ReferencePool.Acquire<EntityDataSpaceshipSelect>();
             entityData.SpaceshipData = spaceshipData;
-            setPosition(entityData);
+            setPosition(entityData, checkScene);
             return entityData;
         }
 
-
-        public static void setPosition(EntityDataSpaceshipSelect entityData)
+        public static void setPosition(EntityDataSpaceshipSelect entityData, bool checkScene)
         {
-            entityData.Position = new Vector3(4f, 1f, 15f);
-            entityData.Rotation = Quaternion.Euler(20f, 160f, -10f);
+            if (!checkScene)
+            {
+                entityData.Position = new Vector3(4f, 1f, 15f);
+                entityData.Rotation = Quaternion.Euler(20f, 160f, -10f);
+            }
+            else
+            {
+                entityData.Position = new Vector3(0.5f, 0f, 15f);
+                entityData.Rotation = Quaternion.Euler(18f, 140f, 0f);
+            }
+
         }
 
-        
         public override void Clear()
         {
             base.Clear();

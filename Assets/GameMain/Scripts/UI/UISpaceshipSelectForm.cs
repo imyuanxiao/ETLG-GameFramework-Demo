@@ -116,7 +116,7 @@ namespace ETLG
         {
             base.OnClose(isShutdown, userData);
 
-            HideAllEnemyEntity();
+            HideNewSpaceshipSelect();
         }
 
         private void OnStartButtonClick()
@@ -129,7 +129,7 @@ namespace ETLG
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
 
-            HideAllEnemyEntity();
+            HideNewSpaceshipSelect();
 
 
         }
@@ -170,7 +170,7 @@ namespace ETLG
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
 
-            HideAllEnemyEntity();
+            HideNewSpaceshipSelect();
 
         }
 
@@ -178,7 +178,7 @@ namespace ETLG
         public void ShowSpaceshipSelect()
         {
 
-            HideAllEnemyEntity();
+            HideNewSpaceshipSelect();
 
 
             // 通过数据管理器的方法初始化当前飞船信息
@@ -248,13 +248,12 @@ namespace ETLG
                     // 回调函数，将EntityDataSpaceshipSelect.Create方法生成的对象加到dicEntitySpaceshipSelect中，如果不需要回调函数，可以不填写
                     dicEntitySpaceshipSelect.Add(entity.Id, (EntitySpaceshipSelect)entity.Logic);
                 },
-                EntityDataSpaceshipSelect.Create(
-                    currentSpaceshipData));
+                EntityDataSpaceshipSelect.Create(currentSpaceshipData,false));
 
         }
 
         // 隐藏模型，这个方法会隐藏字典里所有的模型
-        private void HideAllEnemyEntity()
+        private void HideNewSpaceshipSelect()
         {
             foreach (var item in dicEntitySpaceshipSelect.Values)
             {

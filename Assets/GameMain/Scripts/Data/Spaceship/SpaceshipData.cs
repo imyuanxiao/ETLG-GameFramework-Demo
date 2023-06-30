@@ -4,6 +4,7 @@ using UnityEngine;
 using GameFramework.Data;
 using GameFramework.DataTable;
 using UnityGameFramework.Runtime;
+using System;
 
 namespace ETLG.Data
 {
@@ -158,7 +159,6 @@ namespace ETLG.Data
                 return dRSpaceship.ProjectileId;
             }
         }
-
 
         public SpaceshipData(DRSpaceship dRSpaceship, SkillData[] skillDatas)
         {

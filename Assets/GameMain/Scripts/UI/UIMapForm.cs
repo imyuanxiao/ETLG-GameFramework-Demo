@@ -12,7 +12,8 @@ namespace ETLG
     public class UIMapForm : UGuiFormEx
     {
         public Button menuButton;
-        public Button selectButton;
+        public Button playerMenuButton;
+        public Button selectSpaceshipButton;
 
 
 
@@ -23,9 +24,9 @@ namespace ETLG
 
             // 绑定按钮点击事件
             menuButton.onClick.AddListener(OnMenuButtonClick);
-            selectButton.onClick.AddListener(OnSelectButtonClick);
+            playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
+            selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
 
- 
 
         }
 
@@ -40,7 +41,15 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
         }
 
-        private void OnSelectButtonClick()
+        private void OnPlayerMenuButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
+
+        }
+
+        private void OnSelectSpaceshipButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 

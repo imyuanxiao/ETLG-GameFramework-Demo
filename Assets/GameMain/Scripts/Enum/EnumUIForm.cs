@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-28 16:50:42.521
+// 生成时间：2023-06-30 07:45:59.414
 //------------------------------------------------------------
 
 namespace ETLG
@@ -50,6 +50,16 @@ namespace ETLG
         /// 下载速度界面
         /// </summary>
         UIDownloadForm = 1010,
+
+        /// <summary>
+        /// 飞船信息
+        /// </summary>
+        UISpaceshipCheckForm = 1011,
+
+        /// <summary>
+        /// 技能树
+        /// </summary>
+        UISkillTreeForm = 1012,
 
         /// <summary>
         /// 随机战斗死亡界面

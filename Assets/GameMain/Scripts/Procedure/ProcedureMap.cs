@@ -73,6 +73,8 @@ namespace ETLG
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
 
+
+
         }
 
 
