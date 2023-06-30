@@ -55,9 +55,7 @@ namespace ETLG.Data
                 dicNPCData.Add(dRNPC.Id, new NPCData(dRNPC, quests));
 
             }
-
-            dicNPCData = new Dictionary<int, NPCData>();
-
+            
         }
 
         protected override void OnUnload()

@@ -14,7 +14,9 @@ namespace ETLG
         public Button menuButton;
         public Button playerMenuButton;
         public Button selectSpaceshipButton;
-        public Button planetSceneButton;
+        public Button planetLandingPointButton;
+
+        public Button planetInfoButton;
 
 
 
@@ -27,7 +29,8 @@ namespace ETLG
             menuButton.onClick.AddListener(OnMenuButtonClick);
             playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
             selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
-            planetSceneButton.onClick.AddListener(OnPlanetSceneButtonClick);
+            planetLandingPointButton.onClick.AddListener(OnPlanetLandingPointButtonClick);
+            planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);
 
         }
 
@@ -69,14 +72,28 @@ namespace ETLG
 
         }
 
-        private void OnPlanetSceneButtonClick()
+        private void OnPlanetLandingPointButtonClick()
         {
-            Log.Debug("调出星球场景UI");
+            Log.Debug("调出星球登录点UI");
 
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-            GameEntry.Event.Fire(this, PlanetSceneClickEventArgs.Create());
+            GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
+
+        }
+
+        private void OnPlanetInfoButtonClick()
+        {
+            Log.Debug("调出星球信息UI");
+
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+
+            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
+            // 需要传入鼠标点击的星球的ID
+            GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(101));
+
+
 
         }
 

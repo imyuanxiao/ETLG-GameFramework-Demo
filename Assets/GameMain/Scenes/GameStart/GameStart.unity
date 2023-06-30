@@ -196,6 +196,10 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataQuest
   - enable: 1
     dataTypeName: ETLG.Data.DataNPC
+  - enable: 1
+    dataTypeName: ETLG.Data.DataLandingPoint
+  - enable: 1
+    dataTypeName: ETLG.Data.DataPlanet
 --- !u!1 &477424328
 GameObject:
   m_ObjectHideFlags: 0

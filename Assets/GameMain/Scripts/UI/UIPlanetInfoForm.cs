@@ -9,12 +9,16 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class UIPlanetSceneForm : UGuiFormEx
+    public class UIPlanetInfoForm : UGuiFormEx
     {
 
-        public Button npcTalkButton;
-        public Button closeButton;
-       
+        public TextMeshProUGUI p_title = null;
+
+        public TextMeshProUGUI p_name = null;
+        public TextMeshProUGUI p_type = null;
+        public TextMeshProUGUI p_description = null;
+
+        public Button closeButton = null;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -22,13 +26,21 @@ namespace ETLG
             base.OnInit(userData);
 
             // 绑定按钮点击事件
-            npcTalkButton.onClick.AddListener(OnNPCButtonClick);
             closeButton.onClick.AddListener(OnCloseButtonClick);
+
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            PlanetData currentPlanetData = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData();
+
+            p_title.text = currentPlanetData.Name;
+
+            p_name.text = currentPlanetData.Name;
+            p_type.text = currentPlanetData.Type;
+            p_description.text = currentPlanetData.Description; 
 
         }
 
@@ -38,23 +50,11 @@ namespace ETLG
 
         }
 
-        private void OnNPCButtonClick()
-        {
-
-            GameEntry.Event.Fire(this, NPCDialogOpenEventArgs.Create(Constant.Event.NPC_TALK));
-
-            // 存入当前点击NPC信息（通过ID）到DataNPC数据管理脚本
-
-
-        }
-
 
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-
             this.Close();
-
         }
     }
 }

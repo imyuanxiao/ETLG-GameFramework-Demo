@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-30 17:47:36.037
+// 生成时间：2023-06-30 22:01:36.549
 //------------------------------------------------------------
 
 namespace ETLG
@@ -62,9 +62,9 @@ namespace ETLG
         UISkillTreeForm = 1012,
 
         /// <summary>
-        /// 星球场景
+        /// 星球登录点
         /// </summary>
-        UIPlanetSceneForm = 1013,
+        UIPlanetLandingPointForm = 1013,
 
         /// <summary>
         /// NPC对话

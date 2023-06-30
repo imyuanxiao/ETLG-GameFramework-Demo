@@ -6,11 +6,11 @@ using GameFramework;
 
 namespace ETLG
 {
-    public class PlanetSceneClickEventArgs : GameEventArgs
+    public class PlanetLandingPointEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(PlanetSceneClickEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(PlanetLandingPointEventArgs).GetHashCode();
 
-        public PlanetSceneClickEventArgs()
+        public PlanetLandingPointEventArgs()
         {
         }
 
@@ -34,10 +34,10 @@ namespace ETLG
             private set;
         }
 
-        public static PlanetSceneClickEventArgs Create()
+        public static PlanetLandingPointEventArgs Create()
         {
-            PlanetSceneClickEventArgs planetSceneClickEventArgs = ReferencePool.Acquire<PlanetSceneClickEventArgs>();
-            return planetSceneClickEventArgs;
+            PlanetLandingPointEventArgs planetLandingPointEventArgs = ReferencePool.Acquire<PlanetLandingPointEventArgs>();
+            return planetLandingPointEventArgs;
         }
 
         public override void Clear()

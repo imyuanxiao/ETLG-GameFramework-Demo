@@ -22,6 +22,14 @@ namespace ETLG.Data
             }
         }
 
+        public string Avatar
+        {
+            get
+            {
+                return dRNPC.Avatar;
+            }
+        }
+
         public string Type
         {
             get
@@ -37,16 +45,7 @@ namespace ETLG.Data
                 return dRNPC.Description;
             }
         }
-
-        public int PlanetId
-        {
-            get
-            {
-                return dRNPC.PlanetId;
-            }
-        }
-
-
+        
         public int[] Quests
         {
             get

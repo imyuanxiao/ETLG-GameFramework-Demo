@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-30 17:47:33.429
+// 生成时间：2023-06-30 22:02:44.174
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,6 +46,15 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取头像。
+        /// </summary>
+        public string Avatar
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取NPC类型。
         /// </summary>
         public string Type
@@ -58,15 +67,6 @@ namespace ETLG
         /// 获取描述。
         /// </summary>
         public string Description
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取星球ID。
-        /// </summary>
-        public int PlanetId
         {
             get;
             private set;
@@ -94,9 +94,9 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Name = columnStrings[index++];
+            Avatar = columnStrings[index++];
             Type = columnStrings[index++];
             Description = columnStrings[index++];
-            PlanetId = int.Parse(columnStrings[index++]);
                 Quests = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
@@ -111,9 +111,9 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
+                    Avatar = binaryReader.ReadString();
                     Type = binaryReader.ReadString();
                     Description = binaryReader.ReadString();
-                    PlanetId = binaryReader.Read7BitEncodedInt32();
                         Quests = binaryReader.ReadInt32Array();
                 }
             }

@@ -27,8 +27,10 @@ namespace ETLG
 
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            GameEntry.Event.Subscribe(PlanetSceneClickEventArgs.EventId, OnPlanetSceneClick);
+            GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Subscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+
+            GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
 
             this.procedureOwner = procedureOwner;
@@ -86,8 +88,10 @@ namespace ETLG
 
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            GameEntry.Event.Unsubscribe(PlanetSceneClickEventArgs.EventId, OnPlanetSceneClick);
+            GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Unsubscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+
+            GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
 
             // 停止音乐
@@ -113,16 +117,16 @@ namespace ETLG
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
 
-        private void OnPlanetSceneClick(object sender, GameEventArgs e)
+        private void OnPlanetLandingPointClick(object sender, GameEventArgs e)
         {
 
-            PlanetSceneClickEventArgs ne = (PlanetSceneClickEventArgs)e;
+            PlanetLandingPointEventArgs ne = (PlanetLandingPointEventArgs)e;
             if (ne == null)
                 return;
 
             
             // 打开 planetScene UI
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetSceneForm);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
 
         }
         private void OnNPCDialogOpen(object sender, GameEventArgs e)
@@ -139,6 +143,23 @@ namespace ETLG
             }
 
         }
+
+        private void OnPlanetInfo(object sender, GameEventArgs e)
+        {
+
+            PlanetInfoEventArgs ne = (PlanetInfoEventArgs)e;
+            if (ne == null)
+                return;
+
+            // 获取事件里的planetID，将 DataPlanet 里的 currentPlanet 设置为该ID的星球
+
+            GameEntry.Data.GetData<DataPlanet>().currentPlanetID = ne.PlanetId;
+
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetInfoForm);
+
+
+        }
+
 
 
     }
