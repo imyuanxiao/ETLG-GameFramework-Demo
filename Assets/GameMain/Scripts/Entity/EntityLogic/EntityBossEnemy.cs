@@ -20,8 +20,6 @@ namespace ETLG
             base.OnShow(userData);
 
             this.data = ((EntityDataBossEnemy) userData).BossEnemyData;
-
-            Debug.Log("OnShow " + data.NameId);
         }
     }
 }

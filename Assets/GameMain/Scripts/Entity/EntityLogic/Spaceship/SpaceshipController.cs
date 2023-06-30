@@ -43,6 +43,14 @@ namespace ETLG
             GameEntry.Event.Subscribe(DeactiveBattleComponentEventArgs.EventId, OnDeactiveBattleComponent);
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
+            GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
+        }
+
+        private void OnBattleWin(object sender, GameEventArgs e)
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
+            Debug.Log("SpaceshipController: Battle Win");
         }
 
         private void OnBasicBattleWin(object sender, GameEventArgs e)
@@ -88,6 +96,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(DeactiveBattleComponentEventArgs.EventId, OnDeactiveBattleComponent);
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Unsubscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
+            GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
         }
     }
 }

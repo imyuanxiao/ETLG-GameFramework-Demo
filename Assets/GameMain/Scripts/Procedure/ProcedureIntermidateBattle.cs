@@ -6,6 +6,7 @@ using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedure
 using GameFramework.Procedure;
 using ETLG.Data;
 using System;
+using GameFramework.Event;
 
 namespace ETLG
 {
@@ -25,6 +26,10 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
+            GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
+            GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+
             // Debug.Log(BattleManager.Instance.bossType);
 
             entityLoader = EntityLoader.Create(this);
@@ -39,6 +44,22 @@ namespace ETLG
             bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
             entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
             // Debug.Log(bossEnemyData.NameId);
+        }
+
+        private void OnChangeScene(object sender, GameEventArgs e)
+        {
+            ChangeSceneEventArgs ne = (ChangeSceneEventArgs) e;
+        }
+
+        private void OnBattleWin(object sender, GameEventArgs e)
+        {
+            BattleWinEventArgs ne = (BattleWinEventArgs) e;
+            entityLoader.HideEntity(bossEnemyEntity);
+        }
+
+        private void OnPlayerDead(object sender, GameEventArgs e)
+        {
+            PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
         }
 
         private void onBossEnemyShowSuccess(Entity entity)
@@ -58,6 +79,10 @@ namespace ETLG
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
             entityLoader.HideEntity(bossEnemyEntity);
+
+            GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
+            GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
+            GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)

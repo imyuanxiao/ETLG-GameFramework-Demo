@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ETLG.Data;
 
 namespace ETLG
 {
-    public class EnemyProjectile : Projectile
+    public class Bullet : Projectile
     {
         protected override void OnEnable() 
         {
             base.OnEnable();
             destoryTime = 4f;
             StartCoroutine(ReturnToPoolAfterTime());
+        }
+
+        private void Update() 
+        {
+            rb.velocity = flyingDirection * flyingSpeed * Time.deltaTime;
         }
     }
 }

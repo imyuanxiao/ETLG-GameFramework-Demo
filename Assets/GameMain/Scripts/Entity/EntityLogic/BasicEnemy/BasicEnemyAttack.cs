@@ -54,14 +54,23 @@ namespace ETLG
                 }
                 else
                 {
-                    ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, 
+                    GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, 
                                                                 bulletSpawnPosition.rotation, 
                                                                 ObjectPoolManager.PoolType.GameObject);
+                    InitBasicEnemyBullet(bullet.GetComponent<Bullet>());
                     elapsedTime = 0f;
                 }
                 yield return null;
             }
         }
+
+        private void InitBasicEnemyBullet(Bullet bullet)
+        {
+            bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Durability * 0.1);
+            bullet.flyingDirection = new Vector3(0, 0, -1);
+            bullet.flyingSpeed = 1000;
+        }
+
 
         private void OnDisable() 
         {

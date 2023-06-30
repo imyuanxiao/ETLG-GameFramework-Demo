@@ -27,8 +27,8 @@ namespace ETLG
 
         private static void setPosition(EntityDataBossEnemy entityData)
         {
-            entityData.Position = new Vector3(0f, 0f, 60f);
-            entityData.Rotation = Quaternion.Euler(0f, 0f, 0f);
+            entityData.Position = new Vector3(0f, 0f, 40f);
+            entityData.Rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         public override void Clear()
