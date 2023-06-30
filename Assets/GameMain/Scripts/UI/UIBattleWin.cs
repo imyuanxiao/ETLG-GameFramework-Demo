@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using ETLG.Data;
 
 namespace ETLG
 {
@@ -29,6 +30,10 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            // PlayerData data = (PlayerData) userData;
+            
+            // Debug.Log("UIBattleWin - OnOpen : " + data.calculatedSpaceship.Description);
         }
     }
 }
