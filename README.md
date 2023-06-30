@@ -75,13 +75,25 @@
 
 切换场景需要在相关Procedure中进行。假设我们当前场景为NewScene，当前Procedure为ProcedureNew，我们想切换到SecondScene。
 
-1. 打开```GameMain/Procedure/ProcedureNew.cs```脚本，为其添加成员变量```private bool changeScene```
-2. 在```OnEnter()```方法中，设置```changeScene = false```。**（很重要）**
+1. 打开```GameMain/Procedure/ProcedureNew.cs```脚本，为其添加以下成员变量
+   ```
+   private bool changeScene;
+   private ProcedureOwner procedureOwner;
+   ```
+2. 在```OnEnter()```方法中，设置
+   ```
+   changeScene = false;  // 很重要
+   this.procedureOwner = procedureOwner;
+   ```
 3. 在```OnEnter()```方法中，订阅切换场景事件
    ```
    GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
    ```
-4. 在```ProcedureNew.cs```中实现事件处理方法```OnChangeScene```
+4. 在```OnLeave()```方法中，取消订阅切换场景事件
+   ```
+   GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+   ```
+5. 在```ProcedureNew.cs```中实现事件处理方法```OnChangeScene```
    ```
    private void OnChangeScene(object sender, GameEventArgs e)
    {
@@ -93,7 +105,7 @@
        procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
    }
    ```
-5. 在```OnUpdate()```方法中，添加以下代码
+6. 在```OnUpdate()```方法中，添加以下代码
    ```
    if (changeScene)
    {
@@ -114,7 +126,7 @@
    ```
 3. 实现该事件处理函数
    ```
-   private void OnContinueBtnClick()
+   private void OnBtnClick()
    {
        GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.SecondScene")));
    }
@@ -261,3 +273,86 @@ int field1 = newData.Field1;
 string field2 = newData.Field2;
 ```
 其中，```Id```为New.txt文件中Id列的值，可以通过Id取出不同行的数据。
+
+## 7. 如何将数据传入UI
+
+假设我们希望将New.txt中的某一行数据展示到UINew中，如何将相关数据传递给UI？
+
+这里假设我们要传入的数据为NewData类型的newData。
+
+（虽然我们可以直接在UINew所挂载的脚本中用```GameEntry.Data.GetData<DataNew>().GetNewData(Id)```获取数据，但这里为了演示，采取另一种方式，这种方式适合将无法被全局获取的数据传入UI）。
+
+1. 打开UINew界面，并同时传入newData
+   ```
+   GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin, newData);
+   ```
+2. 打开UINew所挂载的脚本，在```OnOpen()```方法中添加
+   ```
+   NewData newData = (NewData) userData;
+   int field1 = newData.Field1;
+   string field2 = newData.Field2;
+   ```
+   注意需要先将```object```类型的```userData```强制转换为```NewData```类型。
+
+由此我们在将数据newData传递到了UINew所挂载的脚本中，可以在该脚本中使用相关数据，并把它们展示到UI上。
+
+## 8. 如何新建Event
+
+假设我们要新建事件```NewEvent```，且希望该事件接收一个```int```类型的参数```eventParam```
+
+1. 在```GameMain/Scripts/Event```文件夹下新建脚本```NewEventArgs.cs```
+2. 打开该脚本，首先修改其为如下
+   ```
+   namespace ETLG
+   {
+      public class NewEventArgs : GameEventArgs
+      {
+         public static readonly int EventId = typeof(NewEventArgs).GetHashCode();
+
+         public override int Id { get { return EventId; } }
+
+         public int EventParam { get; private set; }
+
+         public static NewEventArgs Create(int eventParam)
+         {
+            NewEventArgs e = ReferencePool.Acquire<NewEventArgs>();
+            e.EventParam = eventParam;
+            return e;
+         }
+
+         public override void Clear()
+         {
+            EventParam = 0;
+         }
+      }
+   }
+   ```
+3. 现在可以在任何需要的地方订阅该事件，订阅事件方法如下
+   ```
+   GameEntry.Event.Subscribe(NewEventArgs.EventId, OnNewEvent);
+   ```
+   注意，所有的事件订阅方法都一定要对应一个取消订阅的方法
+   ```
+   GameEntry.Event.Unsubscribe(NewEventArgs.EventId, OnNewEvent);
+   ```
+   比如，在某个Procedure的OnEnter()方法内订阅的事件，一定要在该Procedure的OnLeave()方法中取消订阅
+4. 实现事件处理函数```OnNewEvent```
+   ```
+   private void OnChangeScene(object sender, GameEventArgs e)
+   {
+      NewEventArgs ne = (NewEventArgs) e;
+      if (ne == null)
+         return;
+      
+      // 获取事件触发时被传入的参数
+      int eventParam = ne.EventParam;
+      // 事件触发时需要执行的代码   
+      // ...   
+   }
+   ```
+   一个事件可以有多个事件处理函数，当事件被触发时，所有订阅了该事件的函数都会被执行。
+5. 在新建完事件以及订阅了相关的事件处理函数后，可以在需要的地方触发该事件
+   ```
+   int eventParam = ??? // 触发事件时需要传入的参数
+   GameEntry.Event.Fire(this, NewEventArgs.Create(eventParam));
+   ```

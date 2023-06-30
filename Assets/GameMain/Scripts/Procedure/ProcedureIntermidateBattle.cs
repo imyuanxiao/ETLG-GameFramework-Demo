@@ -16,6 +16,8 @@ namespace ETLG
         private Entity spaceShipEntity;
         private BossEnemyData bossEnemyData;
         private Entity bossEnemyEntity;
+        private bool changeScene;
+        private ProcedureOwner procedureOwner;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -25,6 +27,9 @@ namespace ETLG
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
             base.OnEnter(procedureOwner);
+            
+            changeScene = false;
+            this.procedureOwner = procedureOwner;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
@@ -49,11 +54,18 @@ namespace ETLG
         private void OnChangeScene(object sender, GameEventArgs e)
         {
             ChangeSceneEventArgs ne = (ChangeSceneEventArgs) e;
+            if (ne == null)
+                return;
+
+            changeScene = true;
+            procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
 
         private void OnBattleWin(object sender, GameEventArgs e)
         {
             BattleWinEventArgs ne = (BattleWinEventArgs) e;
+            // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
             entityLoader.HideEntity(bossEnemyEntity);
         }
 
@@ -70,6 +82,11 @@ namespace ETLG
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+
+            if (changeScene)
+            {
+                ChangeState<ProcedureLoadingScene>(procedureOwner);
+            }
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
@@ -78,7 +95,7 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
-            entityLoader.HideEntity(bossEnemyEntity);
+            // entityLoader.HideEntity(bossEnemyEntity);
 
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
