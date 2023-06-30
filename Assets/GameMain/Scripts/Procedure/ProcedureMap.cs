@@ -15,7 +15,6 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
-
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -28,7 +27,10 @@ namespace ETLG
 
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            
+            GameEntry.Event.Subscribe(PlanetSceneClickEventArgs.EventId, OnPlanetSceneClick);
+            GameEntry.Event.Subscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
 
@@ -84,6 +86,9 @@ namespace ETLG
 
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Unsubscribe(PlanetSceneClickEventArgs.EventId, OnPlanetSceneClick);
+            GameEntry.Event.Unsubscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -107,6 +112,34 @@ namespace ETLG
             changeScene = true;
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
+
+        private void OnPlanetSceneClick(object sender, GameEventArgs e)
+        {
+
+            PlanetSceneClickEventArgs ne = (PlanetSceneClickEventArgs)e;
+            if (ne == null)
+                return;
+
+            
+            // 打开 planetScene UI
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetSceneForm);
+
+        }
+        private void OnNPCDialogOpen(object sender, GameEventArgs e)
+        {
+
+            NPCDialogOpenEventArgs ne = (NPCDialogOpenEventArgs)e;
+            if (ne == null)
+                return;
+
+            // 根据 Type值打开不同 UI
+            if(ne.Type == Constant.Event.NPC_TALK)
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+            }
+
+        }
+
 
     }
 }

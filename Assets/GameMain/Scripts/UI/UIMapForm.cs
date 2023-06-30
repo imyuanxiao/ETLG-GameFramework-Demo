@@ -14,6 +14,7 @@ namespace ETLG
         public Button menuButton;
         public Button playerMenuButton;
         public Button selectSpaceshipButton;
+        public Button planetSceneButton;
 
 
 
@@ -26,7 +27,7 @@ namespace ETLG
             menuButton.onClick.AddListener(OnMenuButtonClick);
             playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
             selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
-
+            planetSceneButton.onClick.AddListener(OnPlanetSceneButtonClick);
 
         }
 
@@ -65,6 +66,17 @@ namespace ETLG
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
+
+        }
+
+        private void OnPlanetSceneButtonClick()
+        {
+            Log.Debug("调出星球场景UI");
+
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+
+            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
+            GameEntry.Event.Fire(this, PlanetSceneClickEventArgs.Create());
 
         }
 

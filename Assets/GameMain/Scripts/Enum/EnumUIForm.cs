@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-30 07:45:59.414
+// 生成时间：2023-06-30 17:47:36.037
 //------------------------------------------------------------
 
 namespace ETLG
@@ -60,6 +60,16 @@ namespace ETLG
         /// 技能树
         /// </summary>
         UISkillTreeForm = 1012,
+
+        /// <summary>
+        /// 星球场景
+        /// </summary>
+        UIPlanetSceneForm = 1013,
+
+        /// <summary>
+        /// NPC对话
+        /// </summary>
+        UINPCDialogForm = 1014,
 
         /// <summary>
         /// 随机战斗死亡界面

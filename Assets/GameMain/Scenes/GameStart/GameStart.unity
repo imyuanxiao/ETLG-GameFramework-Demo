@@ -192,6 +192,10 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataProjectile
   - enable: 1
     dataTypeName: ETLG.Data.DataBossEnemy
+  - enable: 1
+    dataTypeName: ETLG.Data.DataQuest
+  - enable: 1
+    dataTypeName: ETLG.Data.DataNPC
 --- !u!1 &477424328
 GameObject:
   m_ObjectHideFlags: 0

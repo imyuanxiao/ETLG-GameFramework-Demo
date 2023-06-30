@@ -3,10 +3,12 @@
 #	int		string	int
 #	配置编号	策划备注	UI组名字	深度
 	1001	主菜单	MainMenu	1
-	1002	星系地图界面	UIMapInfoForm	1
+	1002	星系地图界面	UIMapInfoForm	7
 	1003	星球信息界面	UIPlanetInfoForm	2
 	1004	暂停界面	PausePanel	3
 	1005	游戏结束	GameOver	4
 	1008	下载速度界面	DownloadForm	7
 	1011	飞船信息	UISpaceshipCheckForm	5
 	1012	技能树	UISkillTreeForm	5
+	1013	星球场景	UIPlanetSceneForm	6
+	1014	NPC对话	UINPCDialogForm	1
