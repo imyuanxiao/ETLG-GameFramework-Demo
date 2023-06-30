@@ -127,7 +127,7 @@
 
 假设我们想新建UI，名为```UINew```
 
-1. 将做好的UI prefab - ```UINew.prefab```保存到```GameMain/UI/UIForms```下
+1. 将做好的UI prefab - ```UINew.prefab```保存到```GameMain/UI/UIForms```下，确保其挂载了一个继承于```UGuiFormEx```的脚本。
 2. 打开```GameMain/DataTables/AssetsPath.txt```，在```#UI```下，接着已经配置好的UI条目，加上一条
    ```
    1030	新界面	Assets/GameMain/UI/UIForms/UINew.prefab	0
