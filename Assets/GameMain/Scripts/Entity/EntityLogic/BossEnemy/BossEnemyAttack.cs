@@ -1,158 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameFramework.Fsm;
 
 namespace ETLG
 {
     public class BossEnemyAttack : MonoBehaviour
     {
-        [SerializeField] private GameObject bulletPrefab;
-        [SerializeField] private Transform middleBulletSpawnPosition;
-        [SerializeField] private Transform[] bulletSpawnPositions;
-        private float verticalFireRate;
-        private float fanFireRate;
-        private int fanBulletNum;
-        private int fanFireRound;
-        private float fanBulletAngel;
-        private float spiralFireRate;
+        [SerializeField] public GameObject bulletPrefab;
+        [SerializeField] public Transform middleBulletSpawnPosition;
+        [SerializeField] public Transform[] bulletSpawnPositions;
+        public Rigidbody rb;
+        private IFsm<BossEnemyAttack> m_Fsm = null;
+
+        [Header("Vertical Fire Settings")]
+        [SerializeField] public float verticalFireRate = 1.5f;
+        [SerializeField] public int verticalFireRound = 5;
+
+        [Header("Fan Fire Settings")]
+        [SerializeField] public float fanFireRate = 2f;
+        [SerializeField] public int fanBulletNum = 9;
+        [SerializeField] public int fanFireRound = 5;
+        [SerializeField] public float fanBulletAngle = 20f;
+
+        [Header("Spiral Fire Settings")]
+        [SerializeField] public float spiralFireRate = 0.2f;
+        [SerializeField] public int spiralBulletNum = 9;
+        [SerializeField] public int spiralBulletRound = 5;
+        [SerializeField] public float spiralBulletAngle = 20f;
+
+        private void Awake() 
+        {
+            rb = GetComponent<Rigidbody>();
+        }
 
         private void OnEnable() 
         {
-            verticalFireRate = 1.5f;
-            fanFireRate = 2f;
-            fanBulletNum = 9;
-            fanFireRound = 5;
-            fanBulletAngel = 20f;
-            spiralFireRate = 0.2f;
-            // VerticalFire();
-            // FanFire();
-            // SpiralFire();
-            StartCoroutine(Fire());
-        }
-
-        private IEnumerator Fire() 
-        {
-            yield return VerticalFireCoroutine();
-            yield return new WaitForSeconds(3f);
-            yield return FanFireCoroutine();
-            yield return new WaitForSeconds(3f);
-            yield return SpiralFireCoroutine();
-        }
-
-        private void VerticalFire()
-        {
-            StartCoroutine(VerticalFireCoroutine());
-        }
-
-        private void FanFire()
-        {
-            StartCoroutine(FanFireCoroutine());
-        }
-
-        private void SpiralFire()
-        {
-            StartCoroutine(SpiralFireCoroutine());
-        }
-
-        private IEnumerator VerticalFireCoroutine()
-        {
-            int bulletNum = 20;
-            float elapsedTime = 0;
-
-            while (bulletNum > 0)
-            {
-                if (elapsedTime < verticalFireRate)
-                {
-                    elapsedTime += Time.deltaTime;
-                }
-                else
-                {
-                    foreach (var spawnPoint in bulletSpawnPositions)
-                    {
-                        GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
-                                                                ObjectPoolManager.PoolType.GameObject);
-                        InitBossEnemyBullet(bullet.GetComponent<Bullet>(), new Vector3(0, 0, -1));
-                        bulletNum--;
-                    }
-                    elapsedTime = 0f;
-                }
-                yield return null;
-            }
-        }
-
-        private IEnumerator FanFireCoroutine()
-        {
-            int bulletNum = fanBulletNum * fanFireRound;
-            float elapsedTime = 0;
-
-            while (bulletNum > 0)
-            {
-                if (elapsedTime < fanFireRate)
-                {
-                    elapsedTime += Time.deltaTime;
-                }
-                else
-                {
-                    Transform spawnPoint = middleBulletSpawnPosition;
-                    for (int i=0; i < fanBulletNum; i++)
-                    {
-                        float angle = 180f - fanBulletAngel * (int)(fanBulletNum / 2) + fanBulletAngel * i;
-                        GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
-                                                                ObjectPoolManager.PoolType.GameObject);
-                        bulletNum--;
-                        bullet.transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, transform.eulerAngles.z);
-                        InitBossEnemyBullet(bullet.GetComponent<Bullet>(), bullet.transform.forward);
-                    }
-                    
-                    elapsedTime = 0f;
-                }
-                yield return null;
-            }
-        }
-
-        private IEnumerator SpiralFireCoroutine()
-        {
-            int bulletNum = 40;
-            float elapsedTime = 0;
-            int i = 0;
-            bool changeDirection = false;
-
-            while (bulletNum > 0)
-            {
-                if (elapsedTime < spiralFireRate)
-                {
-                    elapsedTime += Time.deltaTime;
-                }
-                else 
-                {
-                    Transform spawnPoint = middleBulletSpawnPosition;
-                    float angle = 180f - fanBulletAngel * (int)(fanBulletNum / 2) + fanBulletAngel * i;
-                    GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
-                                                                ObjectPoolManager.PoolType.GameObject);
-                    bulletNum--;
-                    bullet.transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, transform.eulerAngles.z);
-                    InitBossEnemyBullet(bullet.GetComponent<Bullet>(), bullet.transform.forward);
-                    elapsedTime = 0f;
-                    if (i == fanBulletNum) { changeDirection = true; }
-                    if (i == 0) { changeDirection = false; }
-
-                    if (changeDirection) { i--; }
-                    else { i++; }
-                }
-                yield return null;
-            }
-        }
-
-        private void InitBossEnemyBullet(Bullet bullet, Vector3 direction)
-        {
-            bullet.damage = 20;
-            bullet.flyingDirection = direction;
-            bullet.flyingSpeed = 1000;
+            m_Fsm = GameEntry.Fsm.CreateFsm("BossEnemyAttackFsm", this, 
+                new VerticalFire(GetComponent<BossEnemyAttack>()),  //(verticalFireRate, verticalFireRound, bulletPrefab, bulletSpawnPositions), 
+                new FanFire(GetComponent<BossEnemyAttack>()), // (fanFireRate, fanFireRound, fanBulletNum, fanBulletAngle, bulletPrefab, middleBulletSpawnPosition), 
+                new SpiralFire(GetComponent<BossEnemyAttack>()));
+            m_Fsm.Start<VerticalFire>();
         }
 
         private void OnDisable() 
         {
-            StopAllCoroutines();    
+            StopAllCoroutines();
+            GameEntry.Fsm.DestroyFsm<BossEnemyAttack>("BossEnemyAttackFsm");
         }
     }
 }

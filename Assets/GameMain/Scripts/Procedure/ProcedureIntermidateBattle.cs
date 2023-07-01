@@ -42,7 +42,7 @@ namespace ETLG
             // get player data
             PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             // show player spaceship entity
-            entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
+            entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowPlayerSuccess, EntityDataSpaceship.Create(playerData));
 
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
@@ -77,6 +77,7 @@ namespace ETLG
         private void onBossEnemyShowSuccess(Entity entity)
         {
             bossEnemyEntity = entity;
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBossEnemyHealth, entity.GetComponent<Health>());
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -107,9 +108,10 @@ namespace ETLG
             base.OnDestroy(procedureOwner);
         }
 
-        private void onShowSuccess(Entity entity)
+        private void onShowPlayerSuccess(Entity entity)
         {
             spaceShipEntity = entity;
+            // GameEntry.UI.OpenUIForm(EnumUIForm.UIBossEnemyHealth, entity.GetComponent<Health>());
         }
     }
 }
