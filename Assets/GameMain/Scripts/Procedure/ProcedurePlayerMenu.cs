@@ -15,6 +15,7 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
+        private int? skillInfoUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -30,6 +31,8 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(SkillTreeEventArgs.EventId, OnSkillTree);
             GameEntry.Event.Subscribe(SpaceshipCheckEventArgs.EventId, OnSpaceshipCheck);
+            GameEntry.Event.Subscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
+            GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
@@ -63,6 +66,8 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(SkillTreeEventArgs.EventId, OnSkillTree);
             GameEntry.Event.Unsubscribe(SpaceshipCheckEventArgs.EventId, OnSpaceshipCheck);
+            GameEntry.Event.Unsubscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
+            GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -94,6 +99,8 @@ namespace ETLG
 
             GameEntry.UI.CloseAllLoadedUIForms();
 
+            skillInfoUIID = null;
+
             GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeForm);
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
@@ -107,7 +114,34 @@ namespace ETLG
                 return;
 
             GameEntry.UI.CloseAllLoadedUIForms();
+            skillInfoUIID = null;
+
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
+        }
+
+        private void OnSkillInfoOpen(object sender, GameEventArgs e)
+        {
+            SkillInfoOpenEventArgs ne = (SkillInfoOpenEventArgs)e;
+            if (ne == null)
+                return;
+            Log.Debug("打开SkillInfoForm");
+            skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
+
+        }
+
+        private void OnSkillInfoClose(object sender, GameEventArgs e)
+        {
+            SkillInfoCloseEventArgs ne = (SkillInfoCloseEventArgs)e;
+            if (ne == null)
+                return;
+
+            if(skillInfoUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)skillInfoUIID);
+            }
+
+            skillInfoUIID = null;
+
         }
 
     }

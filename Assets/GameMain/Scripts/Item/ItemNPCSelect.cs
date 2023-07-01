@@ -10,7 +10,7 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemNPCSelectButton : ItemLogicEx
+    public class ItemNPCSelect : ItemLogicEx
     {
 
         public TextMeshProUGUI npc_name = null;

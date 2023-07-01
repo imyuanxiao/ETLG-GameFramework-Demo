@@ -52,13 +52,13 @@ namespace ETLG
 
             foreach (var npcData in npcDatas)
             {
-                ShowItem<ItemNPCSelectButton>(EnumItem.NPCSelectButton, (item) =>
+                ShowItem<ItemNPCSelect>(EnumItem.NPCSelect, (item) =>
                 {
                     item.transform.SetParent(NPCsContainer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + (i++) * offset; // 根据偏移量计算新的位置
-                    item.GetComponent<ItemNPCSelectButton>().SetNPCData(npcData);
+                    item.GetComponent<ItemNPCSelect>().SetNPCData(npcData);
                 });
             }
         }

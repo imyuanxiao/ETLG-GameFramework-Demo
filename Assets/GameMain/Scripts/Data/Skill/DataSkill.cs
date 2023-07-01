@@ -26,6 +26,7 @@ namespace ETLG.Data
         // 根据层数对技能分类
         private Dictionary<int, List<SkillData>> dicSkillDataLayers;
 
+        public int currentSkillID;
 
         protected override void OnInit()
         {
@@ -123,6 +124,17 @@ namespace ETLG.Data
         }
 
 
+        public SkillData GetCurrentShowSkillData()
+        {
+            if (!dicSkillData.ContainsKey(currentSkillID))
+            {
+                Log.Error("Can not find skill data id '{0}'.", currentSkillID);
+                return null;
+            }
+
+            return dicSkillData[currentSkillID];
+        }
+
         public SkillData GetSkillData(int id)
         {
             if (!dicSkillData.ContainsKey(id))
@@ -133,6 +145,8 @@ namespace ETLG.Data
 
             return dicSkillData[id];
         }
+
+
 
         public SkillData[] GetAllSkillData()
         {
