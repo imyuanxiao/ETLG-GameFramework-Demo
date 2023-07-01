@@ -14,19 +14,18 @@ namespace ETLG.Data
             }
         }
 
-        public string NameId
+        public string Name
         {
             get
             {
-                return dRSkill.NameId;
+                return dRSkill.Name;
             }
         }
-
-        public string Icon
+        public int[] Location
         {
             get
             {
-                return dRSkill.Icon;
+                return dRSkill.Location;
             }
         }
 
@@ -54,11 +53,20 @@ namespace ETLG.Data
             }
         }
 
+        public int ActiveState
+        {
+            get
+            {
+                return dRSkill.ActiveState; 
+            }
+        }
+
+
         public int CurrentLevel
         {
             get
             {
-                return dRSkill.Level;
+                return dRSkill.CurrentLevel;
             }
         }
 

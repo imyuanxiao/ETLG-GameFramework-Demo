@@ -1,7 +1,7 @@
 ﻿#	界面配置表						
 #	Id		Name	UIGroupId	AssetId	AllowMultiInstance	PauseCoveredUIForm
 #	int		string	int	int	bool	bool
-#	界面编号	策划备注	界面名字	界面组Id	资源Id	是否允许多个界面实例	是否暂停被其覆盖的界面
+#	配置编号	策划备注	界面名字	界面组Id	资源Id	是否允许多个界面实例	是否暂停被其覆盖的界面
 	1001	主菜单	UIMainMenuForm	1001	1001	FALSE	TRUE
 	1002	设置	UIOptionsForm	1001	1002	FALSE	TRUE
 	1003	飞船选择	UISpaceshipSelectForm	1001	1003	FALSE	TRUE
@@ -14,5 +14,6 @@
 	1012	技能树	UISkillTreeForm	1011	1012	FALSE	TRUE
 	1013	星球登录点	UIPlanetLandingPointForm	1003	1013	FALSE	FALSE
 	1014	NPC对话	UINPCDialogForm	1003	1014	FALSE	FALSE
+	1015	技能树地图	UISkillTreeMap	1008	1015	FALSE	FALSE
 	1020	随机战斗死亡界面	UIBasicBattleLost	1005	1020	FALSE	TRUE
 	1021	战斗胜利画面	UIBattleWin	1005	1021	FALSE	TRUE

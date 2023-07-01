@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-01 11:47:45.803
+// 生成时间：2023-07-01 16:39:55.893
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,36 +46,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取升级消耗金币。
+        /// 获取升级消耗资源（ID，数量）。
         /// </summary>
-        public int Coins
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取升级消耗资源1。
-        /// </summary>
-        public int Resource1
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取升级消耗资源2。
-        /// </summary>
-        public int Resource2
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取升级消耗资源3。
-        /// </summary>
-        public int Resource3
+        public int[] UpgradeConsumables
         {
             get;
             private set;
@@ -94,10 +67,7 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Energy = float.Parse(columnStrings[index++]);
-            Coins = int.Parse(columnStrings[index++]);
-            Resource1 = int.Parse(columnStrings[index++]);
-            Resource2 = int.Parse(columnStrings[index++]);
-            Resource3 = int.Parse(columnStrings[index++]);
+                UpgradeConsumables = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -111,10 +81,7 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Energy = binaryReader.ReadSingle();
-                    Coins = binaryReader.Read7BitEncodedInt32();
-                    Resource1 = binaryReader.Read7BitEncodedInt32();
-                    Resource2 = binaryReader.Read7BitEncodedInt32();
-                    Resource3 = binaryReader.Read7BitEncodedInt32();
+                        UpgradeConsumables = binaryReader.ReadInt32Array();
                 }
             }
 
@@ -122,47 +89,9 @@ namespace ETLG
             return true;
         }
 
-        private KeyValuePair<int, int>[] m_Resource = null;
-
-        public int ResourceCount
-        {
-            get
-            {
-                return m_Resource.Length;
-            }
-        }
-
-        public int GetResource(int id)
-        {
-            foreach (KeyValuePair<int, int> i in m_Resource)
-            {
-                if (i.Key == id)
-                {
-                    return i.Value;
-                }
-            }
-
-            throw new GameFrameworkException(Utility.Text.Format("GetResource with invalid id '{0}'.", id.ToString()));
-        }
-
-        public int GetResourceAt(int index)
-        {
-            if (index < 0 || index >= m_Resource.Length)
-            {
-                throw new GameFrameworkException(Utility.Text.Format("GetResourceAt with invalid index '{0}'.", index.ToString()));
-            }
-
-            return m_Resource[index].Value;
-        }
-
         private void GeneratePropertyArray()
         {
-            m_Resource = new KeyValuePair<int, int>[]
-            {
-                new KeyValuePair<int, int>(1, Resource1),
-                new KeyValuePair<int, int>(2, Resource2),
-                new KeyValuePair<int, int>(3, Resource3),
-            };
+
         }
     }
 }

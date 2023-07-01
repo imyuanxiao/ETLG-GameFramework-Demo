@@ -91,8 +91,13 @@ namespace ETLG
             SkillTreeEventArgs ne = (SkillTreeEventArgs)e;
             if (ne == null)
                 return;
+
             GameEntry.UI.CloseAllLoadedUIForms();
+
             GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeForm);
+
+            GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
+
         }
 
         private void OnSpaceshipCheck(object sender, GameEventArgs e)
@@ -100,6 +105,7 @@ namespace ETLG
             SpaceshipCheckEventArgs ne = (SpaceshipCheckEventArgs)e;
             if (ne == null)
                 return;
+
             GameEntry.UI.CloseAllLoadedUIForms();
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
         }

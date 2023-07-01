@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-01 11:47:45.800
+// 生成时间：2023-07-01 16:39:55.890
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,7 +37,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取技能名字ID。
+        /// 获取枚举名字。
         /// </summary>
         public string NameId
         {
@@ -46,9 +46,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取图标名称。
+        /// 获取名字。
         /// </summary>
-        public string Icon
+        public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取技能面板坐标（层数，位置）。
+        /// </summary>
+        public int[] Location
         {
             get;
             private set;
@@ -82,9 +91,18 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取激活状态（0-未激活，1-可激活，2-已激活）。
+        /// </summary>
+        public int ActiveState
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取当前等级。
         /// </summary>
-        public int Level
+        public int CurrentLevel
         {
             get;
             private set;
@@ -130,11 +148,13 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             NameId = columnStrings[index++];
-            Icon = columnStrings[index++];
+            Name = columnStrings[index++];
+                Location = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             Domain = columnStrings[index++];
             IsActiveSkill = bool.Parse(columnStrings[index++]);
             IsCombatSkill = bool.Parse(columnStrings[index++]);
-            Level = int.Parse(columnStrings[index++]);
+            ActiveState = int.Parse(columnStrings[index++]);
+            CurrentLevel = int.Parse(columnStrings[index++]);
                 Levels = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             UnlockPoints = int.Parse(columnStrings[index++]);
             NeedExtraCondition = bool.Parse(columnStrings[index++]);
@@ -151,11 +171,13 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     NameId = binaryReader.ReadString();
-                    Icon = binaryReader.ReadString();
+                    Name = binaryReader.ReadString();
+                        Location = binaryReader.ReadInt32Array();
                     Domain = binaryReader.ReadString();
                     IsActiveSkill = binaryReader.ReadBoolean();
                     IsCombatSkill = binaryReader.ReadBoolean();
-                    Level = binaryReader.Read7BitEncodedInt32();
+                    ActiveState = binaryReader.Read7BitEncodedInt32();
+                    CurrentLevel = binaryReader.Read7BitEncodedInt32();
                         Levels = binaryReader.ReadInt32Array();
                     UnlockPoints = binaryReader.Read7BitEncodedInt32();
                     NeedExtraCondition = binaryReader.ReadBoolean();

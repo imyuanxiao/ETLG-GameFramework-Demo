@@ -17,14 +17,15 @@ namespace ETLG.Data
         // 技能等级行数据读取脚本
         private IDataTable<DRSkillLevel> dtSkillLevel;
 
-        // 技能行数据载体脚本
+        // 技能行数据载体脚本，通过ID获取技能信息
         private Dictionary<int, SkillData> dicSkillData;
 
         // 技能等级行数据载体脚本，这里名字叫 xxData 只是为了和上面统一，实际里面并没有存 SkillLevelData，因为暂时没必要多写一个xxData脚本
         private Dictionary<int, DRSkillLevel> dicSkillLevelData;
 
-        // 如果涉及到重复的实体，可以用这个属性，技能这里没涉及，注释掉了
-        // private int serialId = 0;
+        // 根据层数对技能分类
+        private Dictionary<int, List<SkillData>> dicSkillDataLayers;
+
 
         protected override void OnInit()
         {
@@ -41,6 +42,13 @@ namespace ETLG.Data
         // 对预加载数据进行进一步处理
         protected override void OnLoad()
         {
+
+            // 初始化每层技能列表
+            dicSkillDataLayers = new Dictionary<int, List<SkillData>>();
+            for (int i = 0; i < 6; i++)
+            {
+                dicSkillDataLayers[i] = new List<SkillData>();
+            }
 
             // 获取预加载的 Skill.txt 里的数据
             dtSkill = GameEntry.DataTable.GetDataTable<DRSkill>();
@@ -94,14 +102,25 @@ namespace ETLG.Data
 
                 SkillData skillData = new SkillData(drSkill, tmpDRSkillLevels);
                 dicSkillData.Add(drSkill.Id, skillData);
+
+                // 把技能加到对应层数的列表中
+                dicSkillDataLayers[drSkill.Location[0]].Add(skillData);
+
             }
 
         }
 
-        /*   private int GenrateSerialId()
-           {
-               return ++serialId;
-           }*/
+        // 获取技能层的所有技能数据
+        public List<SkillData> GetSkillDataLayer(int layer)
+        {
+            if (!dicSkillDataLayers.ContainsKey(layer))
+            {
+                Log.Error("Can not find skill data layer id '{0}'.", layer);
+                return null;
+            }
+
+            return dicSkillDataLayers[layer];
+        }
 
 
         public SkillData GetSkillData(int id)

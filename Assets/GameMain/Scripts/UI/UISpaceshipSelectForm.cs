@@ -218,9 +218,9 @@ namespace ETLG
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
-            s_skill1.text = currentSpaceshipData.GetSkillData(0).NameId;
-            s_skill2.text = currentSpaceshipData.GetSkillData(1).NameId;
-            s_skill3.text = currentSpaceshipData.GetSkillData(2).NameId;
+            s_skill1.text = currentSpaceshipData.GetSkillData(0).Name;
+            s_skill2.text = currentSpaceshipData.GetSkillData(1).Name;
+            s_skill3.text = currentSpaceshipData.GetSkillData(2).Name;
 
             ShowNewSpaceshipSelect();
 

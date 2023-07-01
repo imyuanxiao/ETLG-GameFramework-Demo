@@ -65,5 +65,15 @@ namespace ETLG
         {
             return Utility.Text.Format("Assets/GameMain/UI/UISounds/{0}.wav", assetName);
         }
+
+        // 通过技能ID和技能状态获取对应的图标
+        public static string GetSkillIcon(string skillId, string state)
+        {
+            string iconName = skillId + state;
+           // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
+            return Utility.Text.Format("Skills/{0}", iconName);
+        }
+
+
     }
 }
