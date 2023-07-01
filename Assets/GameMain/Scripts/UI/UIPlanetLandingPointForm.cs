@@ -1,18 +1,21 @@
 ﻿using ETLG.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ETLG
 {
     public class UIPlanetLandingPointForm : UGuiFormEx
     {
 
-        public Button npcTalkButton;
+        public Transform NPCsContainer;
+
         public Button closeButton;
        
 
@@ -22,14 +25,17 @@ namespace ETLG
             base.OnInit(userData);
 
             // 绑定按钮点击事件
-            npcTalkButton.onClick.AddListener(OnNPCButtonClick);
             closeButton.onClick.AddListener(OnCloseButtonClick);
+
+
+
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
 
+            ShowNPCSelectionButtonItems();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -38,16 +44,26 @@ namespace ETLG
 
         }
 
-        private void OnNPCButtonClick()
+        private void ShowNPCSelectionButtonItems()
         {
 
-            GameEntry.Event.Fire(this, NPCDialogOpenEventArgs.Create(Constant.Event.NPC_TALK));
+            NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
+            Vector3 offset = new Vector3(0f, -50f, 0f); // 偏移量
 
-            // 存入当前点击NPC信息（通过ID）到DataNPC数据管理脚本
+            int i = 0;
 
-
+            foreach (var npcData in npcDatas)
+            {
+                ShowItem<ItemNPCSelectButton>(EnumItem.NPCSelectButton, (item) =>
+                {
+                    item.transform.SetParent(NPCsContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + (i++) * offset; // 根据偏移量计算新的位置
+                    item.GetComponent<ItemNPCSelectButton>().SetNPCData(npcData);
+                });
+            }
         }
-
 
         private void OnCloseButtonClick()
         {

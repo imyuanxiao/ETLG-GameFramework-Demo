@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-06-30 22:01:36.553
+// 生成时间：2023-07-01 11:47:49.143
 //------------------------------------------------------------
 
 namespace ETLG
@@ -14,11 +14,16 @@ namespace ETLG
         /// <summary>
         /// 技能升级按钮
         /// </summary>
-        SkillUpButton = 1001,
+        SkillInfoButton = 1001,
 
         /// <summary>
         /// 配件升级按钮
         /// </summary>
-        EquipUpButton = 1002,
+        EquipInfoButton = 1002,
+
+        /// <summary>
+        /// NPC选择
+        /// </summary>
+        NPCSelectButton = 1003,
     }
 }

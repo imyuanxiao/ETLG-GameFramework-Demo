@@ -13,20 +13,27 @@ namespace ETLG
     {
 
         public Button closeButton;
-       
 
-        // 初始化菜单数据
+        public TextMeshProUGUI npc_name = null;
+        public TextMeshProUGUI npc_description = null;
+
+        private NPCData npcData;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
-            // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
+
+            npc_name.text = npcData.Name;
+            npc_description.text = npcData.Description;
 
         }
 
