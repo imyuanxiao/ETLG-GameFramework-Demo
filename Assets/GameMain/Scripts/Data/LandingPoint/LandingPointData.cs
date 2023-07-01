@@ -4,7 +4,7 @@ namespace ETLG.Data
     public sealed class LandingpointData
     {
         private DRLandingPoint dRLandingPoint;
-        private NPCData[] npcs;
+        public NPCData[] npcs;
         
         public int Id
         {
@@ -37,6 +37,8 @@ namespace ETLG.Data
             this.dRLandingPoint = dRLandingPoint;
             this.npcs = npcs;
         }
+
+        
 
     }
 
