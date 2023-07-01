@@ -31,6 +31,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Subscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+            GameEntry.Event.Subscribe(NPCDialogCloseEventArgs.EventId, OnNPCDialogClose);
 
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
@@ -93,7 +94,12 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Unsubscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
 
+            GameEntry.Event.Unsubscribe(NPCDialogCloseEventArgs.EventId, OnNPCDialogClose);
+
+
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
+
+
 
 
             // 停止音乐
@@ -149,6 +155,17 @@ namespace ETLG
 
                 currentNPCDialogUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
             }
+
+        }
+
+        private void OnNPCDialogClose(object sender, GameEventArgs e)
+        {
+
+            NPCDialogCloseEventArgs ne = (NPCDialogCloseEventArgs)e;
+            if (ne == null)
+                return;
+
+            currentNPCDialogUIID = null;
 
         }
 

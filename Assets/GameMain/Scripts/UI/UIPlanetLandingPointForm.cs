@@ -27,8 +27,6 @@ namespace ETLG
             // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
 
-
-
         }
 
         protected override void OnOpen(object userData)
