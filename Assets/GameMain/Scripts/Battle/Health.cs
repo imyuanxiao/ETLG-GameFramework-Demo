@@ -9,10 +9,10 @@ namespace ETLG
     public abstract class Health : MonoBehaviour, IDamageable
     {
         [HideInInspector] public int MaxHealth;
-        protected int CurrentHealth;
+        [HideInInspector] public int CurrentHealth;
 
         [HideInInspector] public int MaxShield;
-        protected int CurrentShield;
+        [HideInInspector] public int CurrentShield;
 
         public bool IsDead()
         {
