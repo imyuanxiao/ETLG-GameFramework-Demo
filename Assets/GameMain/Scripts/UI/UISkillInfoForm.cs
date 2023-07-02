@@ -18,7 +18,7 @@ namespace ETLG
         private SkillData skillData;
 
         public RawImage skillIcon;
-        public TextMeshProUGUI Name = null;
+        public TextMeshProUGUI SkillName = null;
         public TextMeshProUGUI Domain = null;
         public TextMeshProUGUI IsActiveSkill;
         public TextMeshProUGUI IsCombatSkill;
@@ -43,7 +43,7 @@ namespace ETLG
             skillData = GameEntry.Data.GetData<DataSkill>().GetCurrentShowSkillData();
             UIContainer.position = GameEntry.Data.GetData<DataSkill>().skillInfoPosition;
 
-            Name.text = skillData.Name;
+            SkillName.text = skillData.Name;
             Domain.text = skillData.Domain;
             IsActiveSkill.text = skillData.IsActiveSkill ? "Active" : "Passive";
             IsCombatSkill.text = skillData.IsCombatSkill ? "Combat" : "Explore";

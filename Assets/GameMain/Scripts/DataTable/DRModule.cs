@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-02 20:00:50.377
+// 生成时间：2023-07-02 20:00:50.363
 //------------------------------------------------------------
 
 using GameFramework;
@@ -19,9 +19,9 @@ using UnityGameFramework.Runtime;
 namespace ETLG
 {
     /// <summary>
-    /// 任务配置表。
+    /// 道具配置表。
     /// </summary>
-    public class DRQuest : DataRowBase
+    public class DRModule : DataRowBase
     {
         private int m_Id = 0;
 
@@ -37,36 +37,36 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取描述。
+        /// 获取道具ID。
         /// </summary>
-        public string Description
+        public int ArtifactID
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取前置任务ID。
+        /// 获取模块功能。
         /// </summary>
-        public int PreQuestID
+        public string Classification
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取后置任务ID。
+        /// 获取属性。
         /// </summary>
-        public int ProQuestID
+        public string Attribute
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取货币奖励。
+        /// 获取效果。
         /// </summary>
-        public int Money
+        public int Effect
         {
             get;
             private set;
@@ -84,10 +84,10 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Description = columnStrings[index++];
-            PreQuestID = int.Parse(columnStrings[index++]);
-            ProQuestID = int.Parse(columnStrings[index++]);
-            Money = int.Parse(columnStrings[index++]);
+            ArtifactID = int.Parse(columnStrings[index++]);
+            Classification = columnStrings[index++];
+            Attribute = columnStrings[index++];
+            Effect = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -100,10 +100,10 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Description = binaryReader.ReadString();
-                    PreQuestID = binaryReader.Read7BitEncodedInt32();
-                    ProQuestID = binaryReader.Read7BitEncodedInt32();
-                    Money = binaryReader.Read7BitEncodedInt32();
+                    ArtifactID = binaryReader.Read7BitEncodedInt32();
+                    Classification = binaryReader.ReadString();
+                    Attribute = binaryReader.ReadString();
+                    Effect = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

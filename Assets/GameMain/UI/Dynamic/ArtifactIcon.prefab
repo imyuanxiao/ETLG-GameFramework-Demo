@@ -83,9 +83,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5350509902426962785}
   - component: {fileID: 5392875950851482610}
-  - component: {fileID: 92339955422678890}
   m_Layer: 5
-  m_Name: SkillIcon
+  m_Name: ArtifactIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,17 +155,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &92339955422678890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147204563429847656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1e75a181a3c5646b1e707141db245f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8980572513236846533}
-  iconButton: {fileID: 5392875950851482610}

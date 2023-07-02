@@ -1,0 +1,19 @@
+﻿#	道具配置表					
+#	Id		ArtifactID	Classification	Attribute	Effect
+#	int		int	string	string	int
+#	配置编号	策划备注	道具ID	模块功能	属性	效果
+	1001	火力模块	3001	Attack	Firepower	10
+	1002	伤害增幅器	3002	Attack	Firepower	20
+	1003	瞄准计算机	3003	Attack	FireRate	30
+	1004	导弹发射器	3004	Attack	FireRate	40
+	2001	防御系统升级	3005	Defense	Durability	50
+	2002	护盾发生器	3006	Defense	Shields	60
+	2003	装甲镀层	3007	Defense	Durability	70
+	2004	维修无人机舱	3008	Defense	Shields	80
+	2005	能量护盾投影仪	3009	Defense	Shields	90
+	3001	速度助推器	3010	PowerDrive	Agility	100
+	3002	推进器增强	3011	PowerDrive	Speed	110
+	3003	传感器阵列	3012	PowerDrive	Dogde	120
+	4001	存储扩展单元	3013	Support	Capacity	130
+	4002	能源电容器	3014	Support	Energy	140
+	4003	隐形装置	3015	Support	Detection	150

@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-02 20:00:50.377
+// 生成时间：2023-07-02 20:00:50.315
 //------------------------------------------------------------
 
 using GameFramework;
@@ -19,9 +19,9 @@ using UnityGameFramework.Runtime;
 namespace ETLG
 {
     /// <summary>
-    /// 任务配置表。
+    /// 道具配置表（贴图直接根据ID获取）。
     /// </summary>
-    public class DRQuest : DataRowBase
+    public class DRArtifact : DataRowBase
     {
         private int m_Id = 0;
 
@@ -37,36 +37,45 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取描述。
+        /// 获取道具名字。
         /// </summary>
-        public string Description
+        public string Name
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取前置任务ID。
+        /// 获取道具类型。
         /// </summary>
-        public int PreQuestID
+        public string Type
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取后置任务ID。
+        /// 获取是否可交易。
         /// </summary>
-        public int ProQuestID
+        public bool Tradeable
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取货币奖励。
+        /// 获取交易价值。
         /// </summary>
-        public int Money
+        public int Value
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取道具上限。
+        /// </summary>
+        public int MaxNumber
         {
             get;
             private set;
@@ -84,10 +93,11 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Description = columnStrings[index++];
-            PreQuestID = int.Parse(columnStrings[index++]);
-            ProQuestID = int.Parse(columnStrings[index++]);
-            Money = int.Parse(columnStrings[index++]);
+            Name = columnStrings[index++];
+            Type = columnStrings[index++];
+            Tradeable = bool.Parse(columnStrings[index++]);
+            Value = int.Parse(columnStrings[index++]);
+            MaxNumber = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -100,10 +110,11 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Description = binaryReader.ReadString();
-                    PreQuestID = binaryReader.Read7BitEncodedInt32();
-                    ProQuestID = binaryReader.Read7BitEncodedInt32();
-                    Money = binaryReader.Read7BitEncodedInt32();
+                    Name = binaryReader.ReadString();
+                    Type = binaryReader.ReadString();
+                    Tradeable = binaryReader.ReadBoolean();
+                    Value = binaryReader.Read7BitEncodedInt32();
+                    MaxNumber = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

@@ -1,0 +1,35 @@
+﻿#	道具配置表（贴图直接根据ID获取）						
+#	Id		Name	Type	Tradeable	Value	MaxNumber
+#	int		string	string	bool	int	int
+#	配置编号	策划备注	道具名字	道具类型	是否可交易	交易价值	道具上限
+#通用资源							
+	1001	星币	StarCoin	Common	TRUE	0	999999999
+	1002	知识点	KnowledgePoint	Common	FALSE		9999
+	1003	稀有矿石	RareOre	Common	TRUE	100	9999
+	1004	高纯度金属	HighPurityMetal	Common	TRUE	200	9999
+#能源补充（在脚本根据ID判断每单位可补充多少能源）							
+	1005	液态甲烷	LiquidMethane	Energy	TRUE	300	9999
+	1006	等离子燃料	PlasmaFuel	Energy	TRUE	400	9999
+#特殊道具							
+	2001	知识碎片（云计算）	KnowledgeFragments(CloudComputing)	Special	FALSE	0	1
+	2002	知识碎片（人工智能）	KnowledgeFragments(AI)	Special	FALSE	0	1
+	2003	知识碎片（区块链）	KnowledgeFragments(Blockchain)	Special	FALSE	0	1
+	2004	知识碎片（网络安全）	KnowledgeFragments(Cybersecurity)	Special	FALSE	0	1
+	2005	知识碎片（数据科学）	KnowledgeFragments(DataScience)	Special	FALSE	0	1
+	2006	知识碎片（物联网）	KnowledgeFragments(IoT)	Special	FALSE	0	1
+#飞船模块							
+	3001	火力模块	Firepower Module	Module	FALSE	0	1
+	3002	伤害增幅器	Damage Amplifier	Module	FALSE	0	1
+	3003	瞄准计算机	Targeting Computer	Module	FALSE	0	1
+	3004	导弹发射器	Missile Launcher	Module	FALSE	0	1
+	3005	防御系统升级	Defense System Upgrade	Module	FALSE	0	1
+	3006	护盾发生器	Shield Generator	Module	FALSE	0	1
+	3007	装甲镀层	Armor Plating	Module	FALSE	0	1
+	3008	维修无人机舱	Repair Drone Bay	Module	FALSE	0	1
+	3009	能量护盾投影仪	Energy Shield Projector	Module	FALSE	0	1
+	3010	速度助推器	Velocity Booster	Module	FALSE	0	1
+	3011	推进器增强	Thruster Enhancement	Module	FALSE	0	1
+	3012	传感器阵列	Sensor Array	Module	FALSE	0	1
+	3013	存储扩展单元	Storage Expansion Unit	Module	FALSE	0	1
+	3014	能源电容器	Energy Capacitor	Module	FALSE	0	1
+	3015	隐形装置	Cloaking Device	Module	FALSE	0	1
