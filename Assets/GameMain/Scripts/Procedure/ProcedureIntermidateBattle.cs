@@ -72,6 +72,8 @@ namespace ETLG
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
             PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBasicBattleLost);
+            entityLoader.HideEntity(bossEnemyEntity);
         }
 
         private void onBossEnemyShowSuccess(Entity entity)

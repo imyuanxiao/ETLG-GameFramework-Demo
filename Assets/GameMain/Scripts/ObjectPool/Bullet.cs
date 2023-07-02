@@ -10,12 +10,17 @@ namespace ETLG
         {
             base.OnEnable();
             destoryTime = 4f;
-            StartCoroutine(ReturnToPoolAfterTime());
+            // StartCoroutine(ReturnToPoolAfterTime());
         }
 
         private void Update() 
         {
             rb.velocity = flyingDirection * flyingSpeed * Time.deltaTime;
+            if (IsOffScreen())
+            {
+                Debug.Log("Off Screen!!!!");
+                ObjectPoolManager.ReturnObjectToPool(gameObject);
+            }
         }
     }
 }

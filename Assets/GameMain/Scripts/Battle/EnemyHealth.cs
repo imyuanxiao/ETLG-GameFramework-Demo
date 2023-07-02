@@ -35,7 +35,7 @@ namespace ETLG
 
             StartCoroutine(CheckDeath());    
 
-            Debug.Log("Enemy Max Health: " + MaxHealth + " / " + GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Firepower + " | " + "Enemy Max Shield: " + MaxShield);
+            // Debug.Log("Enemy Max Health: " + MaxHealth + " / " + GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Firepower + " | " + "Enemy Max Shield: " + MaxShield);
         }
 
 
@@ -67,7 +67,7 @@ namespace ETLG
             {
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
             }
-            Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
+            // Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
         }
 
         protected override void OnDead()

@@ -23,8 +23,9 @@ namespace ETLG
 
         private void OnTriggerEnter(Collider other) 
         {
+            GameObject bulletPrefab = other.gameObject;
             TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
-            ObjectPoolManager.ReturnObjectToPool(other.gameObject); 
+            ObjectPoolManager.ReturnObjectToPool(bulletPrefab); 
         }
 
         protected abstract void OnDead();

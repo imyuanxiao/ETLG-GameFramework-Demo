@@ -6,6 +6,12 @@ namespace ETLG
 {
     public class BattleManager : Singleton<BattleManager>
     {
+        [Header("Battle Boundary")]
+        public Transform leftBoundary;
+        public Transform rightBoundary;
+        public Transform upBoundary;
+        public Transform bottomBoundary;
+        
         [Header("Basic Battle Settings")]
         [SerializeField] private GameObject[] basicEnemyPrefab;
         [SerializeField] private Transform[] basicEnemySpawnPositions;

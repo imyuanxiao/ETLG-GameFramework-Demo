@@ -7,17 +7,19 @@ namespace ETLG
 {
     public class ObjectPoolManager : MonoBehaviour
     {
-        public static List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>();
+        public static List<PooledObjectInfo> ObjectPools;
 
         private GameObject _objectPoolEmptyHolder;
         private static GameObject _particleSystemsEmpty;
         private static GameObject _gameObjectsEmpty;
+        private static GameObject _testEmpty;
 
-        public enum PoolType { ParticleSystem, GameObject, None }
+        public enum PoolType { ParticleSystem, GameObject, Test, None }
         public static PoolType PoolingType;
 
         private void Awake() 
         {
+            ObjectPools = new List<PooledObjectInfo>();
             SetupEmpties();    
         }
 
@@ -27,9 +29,11 @@ namespace ETLG
 
             _particleSystemsEmpty = new GameObject("Particle Effects");
             _gameObjectsEmpty = new GameObject("GameObjects");
+            _testEmpty = new GameObject("Test");
 
             _particleSystemsEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
             _gameObjectsEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+            _testEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
         }
 
         public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
@@ -95,11 +99,22 @@ namespace ETLG
                     return _particleSystemsEmpty;
                 case PoolType.GameObject:
                     return _gameObjectsEmpty;
+                case PoolType.Test:
+                    return _testEmpty;
                 case PoolType.None:
                     return null;
                 default:
                     return null;
             }
+        }
+
+        private void OnDisable() 
+        {
+            ObjectPools.Clear();
+            Destroy(_particleSystemsEmpty);
+            Destroy(_gameObjectsEmpty);
+            Destroy(_testEmpty);
+            Destroy(_objectPoolEmptyHolder);
         }
     }
 

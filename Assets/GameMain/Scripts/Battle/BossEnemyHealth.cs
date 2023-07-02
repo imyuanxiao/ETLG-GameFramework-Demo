@@ -18,7 +18,7 @@ namespace ETLG
         {
             InitBossEnemy();
             StartCoroutine(CheckDeath()); 
-            Debug.Log("Boss Enemy Max Health: " + MaxHealth + " | Max Shield: " + MaxShield);
+            // Debug.Log("Boss Enemy Max Health: " + MaxHealth + " | Max Shield: " + MaxShield);
         }
 
         private void InitBossEnemy()
@@ -39,7 +39,7 @@ namespace ETLG
             {
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
             }
-            Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
+            // Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
 
         }
 

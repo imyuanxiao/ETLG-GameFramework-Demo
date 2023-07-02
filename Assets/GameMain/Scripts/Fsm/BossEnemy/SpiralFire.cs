@@ -8,6 +8,7 @@ namespace ETLG
     public class SpiralFire : FsmState<BossEnemyAttack>
     {
         private BossEnemyAttack bossEnemyAttack;
+        private GameObject bulletPrefab;
         private float fireRate;
         private int bulletNum;
         private int bulletRound;
@@ -27,6 +28,7 @@ namespace ETLG
             this.bulletRound = bossEnemyAttack.spiralBulletRound;
             this.bulletAngle = bossEnemyAttack.spiralBulletAngle;
             this.totalBulletNum = this.bulletNum * this.bulletRound;
+            this.bulletPrefab = bossEnemyAttack.bulletPrefab;
         }
 
         protected override void OnInit(IFsm<BossEnemyAttack> fsm)
@@ -51,7 +53,7 @@ namespace ETLG
                 elapsedTime = 0;
                 Transform spawnPoint = bossEnemyAttack.middleBulletSpawnPosition;
                 float angle = 180f - bulletAngle * (int)(bulletNum / 2) + bulletAngle * bulletCnt;
-                GameObject bullet = ObjectPoolManager.SpawnObject(bossEnemyAttack.bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
+                GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
                                                                 ObjectPoolManager.PoolType.GameObject);
                 totalBulletNum--;
                 bullet.transform.eulerAngles = new Vector3(0, angle, 0);

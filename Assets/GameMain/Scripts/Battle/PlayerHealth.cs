@@ -44,7 +44,7 @@ namespace ETLG
 
         public override void TakeDamage(int damage)
         {
-            Debug.Log("Player's being hit");
+            // Debug.Log("Player's being hit");
             if (CurrentHealth <= 0)
             {
                 return;
@@ -59,7 +59,7 @@ namespace ETLG
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
                 GameEntry.Event.Fire(this, PlayerHealthChangeEventArgs.Create(CurrentHealth));
             }
-            Debug.Log("Player CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
+            // Debug.Log("Player CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
             // playerData.CalculateStats();
         }
 
