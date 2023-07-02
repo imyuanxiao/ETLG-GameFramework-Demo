@@ -68,7 +68,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + skillData.Location[1] * offset; // 根据偏移量计算新的位置
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(skillData);
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(skillData, 5);
                 });
             }
         }

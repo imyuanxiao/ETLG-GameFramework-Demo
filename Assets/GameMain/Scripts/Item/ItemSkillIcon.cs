@@ -20,6 +20,8 @@ namespace ETLG
 
         public Button iconButton;
 
+        private int sceneID;
+
 
         protected override void OnInit(object userData)
         {
@@ -44,30 +46,30 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
-          /*  GameEntry.Data.GetData<DataSkill>().currentSkillID = this.skillData.Id;
-
-            GameEntry.Event.Fire(this, SkillInfoOpenEventArgs.Create());*/
+            // TODO 显示当前技能所需的升级资源和确认按钮
 
         }
 
         private void OnIconPointerEnter()
         {
-            Debug.Log("Mouse entered iconButton");
+
+            // 获得挂载对象的位置
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
+
 
             GameEntry.Data.GetData<DataSkill>().currentSkillID = this.skillData.Id;
+            GameEntry.Data.GetData<DataSkill>().skillInfoPosition = newPosition;
 
-            // 显示技能信息UI
+            // 显示skill info ui 的事件，传入UI应该显示的位置
             GameEntry.Event.Fire(this, SkillInfoOpenEventArgs.Create());
 
         }
 
         private void OnIconPointerExit()
         {
-            Debug.Log("Mouse exited iconButton");
-
             // 关闭技能信息UI
             GameEntry.Event.Fire(this, SkillInfoCloseEventArgs.Create());
-
 
         }
 
@@ -78,12 +80,24 @@ namespace ETLG
 
         }
 
-        public void SetSkillData(SkillData skillData)
+        public void SetSkillData(SkillData skillData, int sceneID)
         {
             this.skillData = skillData;
 
-            string state = skillData.ActiveState.ToString();
-            string texturePath = AssetUtility.GetSkillIcon(skillData.Id.ToString(), state);
+            string texturePath = "";
+
+            // 根据场景ID，展示不同icon
+            this.sceneID = sceneID;
+            // 3 == 新建游戏
+            if (sceneID == 3)
+            {
+                texturePath = AssetUtility.GetSkillIcon(skillData.Id.ToString(), "2");
+            }
+            // 5 == 玩家菜单
+            if (sceneID == 5)
+            {
+                texturePath = AssetUtility.GetSkillIcon(skillData.Id.ToString(), skillData.ActiveState.ToString());
+            }
 
             // 根据当前技能ID 和 激活状态 获取图标
             Texture texture = Resources.Load<Texture>(texturePath);
@@ -102,6 +116,8 @@ namespace ETLG
 
         protected override void OnHide(bool isShutdown, object userData)
         {
+            //inSelectScene = false;
+
             base.OnHide(isShutdown, userData);
 
         }

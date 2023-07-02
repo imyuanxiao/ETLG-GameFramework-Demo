@@ -55,10 +55,7 @@ namespace ETLG
 
 
         // initial skills
-        public TextMeshProUGUI s_skill1 = null;
-        public TextMeshProUGUI s_skill2 = null;
-        public TextMeshProUGUI s_skill3 = null;
-
+        public Transform skillContainer = null;
 
 
 
@@ -218,12 +215,34 @@ namespace ETLG
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
-            s_skill1.text = currentSpaceshipData.GetSkillData(0).Name;
-            s_skill2.text = currentSpaceshipData.GetSkillData(1).Name;
-            s_skill3.text = currentSpaceshipData.GetSkillData(2).Name;
-
             ShowNewSpaceshipSelect();
 
+            ShowSkillIconByLayer(skillContainer);
+
+        }
+
+        private void ShowSkillIconByLayer(Transform container)
+        {
+
+
+            SkillData[] skillDatas = currentSpaceshipData.GetSkillDatas();
+
+            Vector3 offset = new Vector3(150f, 0f, 0f); // 偏移量
+
+            int i = 0;
+
+            foreach (var skillData in skillDatas)
+            {
+
+                ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
+                {
+                    item.transform.SetParent(container, false);
+                    item.transform.localScale = Vector3.one * 0.5f;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + (i++) * offset; // 根据偏移量计算新的位置
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(skillData, 3);
+                });
+            }
         }
 
         public void SetWidth(GameObject targetObject, float newWidth)

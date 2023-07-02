@@ -167,6 +167,12 @@ namespace ETLG.Data
         }
 
         // 获取飞船初始技能信息
+
+        public SkillData[] GetSkillDatas()
+        {
+            return skillDatas;
+        }
+
         public SkillData GetSkillData(int num)
         {
             if (skillDatas == null || num > GetMaxNum())

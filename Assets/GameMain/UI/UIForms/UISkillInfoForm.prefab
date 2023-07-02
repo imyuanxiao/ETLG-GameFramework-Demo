@@ -3444,8 +3444,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5f60e03074f3849b5fa1032a147853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: {fileID: 3380290030487385365}
-  domainValue: {fileID: 7679327339353243153}
+  UIContainer: {fileID: 7462447576448434227}
+  skillIcon: {fileID: 8289291813669279644}
+  Name: {fileID: 3380290030487385365}
+  Domain: {fileID: 7679327339353243153}
+  IsActiveSkill: {fileID: 1227607961403698517}
+  IsCombatSkill: {fileID: 4113517854691854367}
+  SkillDescription: {fileID: 7584746484884589865}
+  CurrentLevel: {fileID: 6930239341383046383}
+  CurrentLevelDescription: {fileID: 7584746484884589865}
+  NextLevelDescription: {fileID: 1045904007195809144}
 --- !u!1 &8530549506428846263
 GameObject:
   m_ObjectHideFlags: 0

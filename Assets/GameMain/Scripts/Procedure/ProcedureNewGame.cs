@@ -15,6 +15,7 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
+        private int? skillInfoUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -28,9 +29,13 @@ namespace ETLG
 
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            
+
+            GameEntry.Event.Subscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
+            GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
+            this.skillInfoUIID = null;
 
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
@@ -61,10 +66,12 @@ namespace ETLG
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
+            GameEntry.Event.Unsubscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
+            GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
+
+
             // 停止音乐
             GameEntry.Sound.StopMusic();
-
-            
 
         }
 
@@ -82,6 +89,32 @@ namespace ETLG
             changeScene = true;
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
+
+        private void OnSkillInfoOpen(object sender, GameEventArgs e)
+        {
+            SkillInfoOpenEventArgs ne = (SkillInfoOpenEventArgs)e;
+            if (ne == null)
+                return;
+
+            skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
+
+        }
+
+        private void OnSkillInfoClose(object sender, GameEventArgs e)
+        {
+            SkillInfoCloseEventArgs ne = (SkillInfoCloseEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (skillInfoUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)skillInfoUIID);
+            }
+
+            skillInfoUIID = null;
+
+        }
+
 
     }
 }

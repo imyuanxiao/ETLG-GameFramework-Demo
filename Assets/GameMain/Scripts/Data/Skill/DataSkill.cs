@@ -26,7 +26,11 @@ namespace ETLG.Data
         // 根据层数对技能分类
         private Dictionary<int, List<SkillData>> dicSkillDataLayers;
 
+        // 当前展示技能ID
         public int currentSkillID;
+
+        // 当前展示skillInfo的UI位置
+        public Vector3 skillInfoPosition { get; set; }
 
         protected override void OnInit()
         {
