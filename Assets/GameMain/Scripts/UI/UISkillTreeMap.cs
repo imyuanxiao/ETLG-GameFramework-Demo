@@ -49,8 +49,7 @@ namespace ETLG
 
         }
 
-
-
+        
         private void ShowSkillIconByLayer(Transform layer, int num)
         {
             List<SkillData> skillDatas = GameEntry.Data.GetData<DataSkill>().GetSkillDataLayer(num);

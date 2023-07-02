@@ -74,6 +74,13 @@ namespace ETLG
             return Utility.Text.Format("Skills/{0}", iconName);
         }
 
+        public static string GetArtifactIcon(string iconName)
+        {
+
+           // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
+            return Utility.Text.Format("Artifacts/{0}", iconName);
+        }
+
 
     }
 }

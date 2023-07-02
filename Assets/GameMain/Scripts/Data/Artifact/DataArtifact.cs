@@ -21,6 +21,8 @@ namespace ETLG.Data
         // 数据键值对载体，通过ID获取道具信息
         private Dictionary<int, ArtifactDataBase> dicArtifactData;
 
+        public Vector3 artifactInfoPosition;
+        public int currentArtifactID;
         protected override void OnInit()
         {
 
@@ -64,9 +66,9 @@ namespace ETLG.Data
 
             foreach (var dRModule in dRModules)
             {
-                if (dicArtifactData.ContainsKey(dRModule.Id))
+                if (dicArtifactData.ContainsKey(dRModule.ArtifactID))
                 {
-                    throw new System.Exception(string.Format("Data module id '{0}' duplicate.", dRModule.Id));
+                    throw new System.Exception(string.Format("Data module id '{0}' duplicate.", dRModule.ArtifactID));
                 }
 
                 dicArtifactData.Add(dRModule.ArtifactID, new ArtifactModuleData(dicArtifactBaseData[dRModule.ArtifactID], dRModule));

@@ -15,9 +15,7 @@ namespace ETLG
         public Button skillTreeButton;
 
         // 需要挂载后添加的按钮和文本等对象
-        public Button applyButton;
         public Button returnButton;
-        public Button resetButton;
 
         // name and description
         public TextMeshProUGUI s_name = null;
@@ -50,14 +48,7 @@ namespace ETLG
         public GameObject s_detection_valueBar = null;
         public GameObject s_capacity_valueBar = null;
 
-
-
-        // initial skills
-/*        public TextMeshProUGUI s_skill1 = null;
-        public TextMeshProUGUI s_skill2 = null;
-        public TextMeshProUGUI s_skill3 = null;
-
-*/
+        public Transform artifactContainer = null;
 
         // 需要通过玩家数据管理器获取当前飞船数据
         private DataPlayer dataPlayer = null;
@@ -79,9 +70,7 @@ namespace ETLG
             // 绑定按钮点击事件
             skillTreeButton.onClick.AddListener(OnSkillTreeButtonClick);
 
-            applyButton.onClick.AddListener(OnApplyButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
-            resetButton.onClick.AddListener(OnResetButtonClick);
 
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData < DataPlayer>();
@@ -97,6 +86,9 @@ namespace ETLG
 
             // 调用显示飞船方法
             ShowSpaceshipSelect();
+
+            // 调用显示道具方法
+            ShowArtifactIcons(artifactContainer);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -131,13 +123,70 @@ namespace ETLG
 
         }
 
-        private void OnResetButtonClick()
+
+
+        private void ShowArtifactIcons(Transform container)
         {
-            Log.Debug("Reset spaceship data");
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
-            // reset spaceship data，此处等实现clone方法后再完善
+            // 此处应该加载玩家拥有的道具信息，目前手动添加一些道具
+            DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            List<ArtifactDataBase> playersArtifacts = new List<ArtifactDataBase>();
+            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
+            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
 
+            /*
+                        List<ArtifactDataBase> artifactDataBases = new List<ArtifactDataBase>();
+
+                        foreach(ArtifactDataBase playersArtifact in playersArtifacts)
+                        {
+                            artifactDataBases.Add(playersArtifact);
+                        }
+            */
+            // 四个一行，每个向右偏移 150f，每行向下偏移150f
+
+
+            /*         int line = 0;
+                     int index = 0;
+
+                     foreach (var playersArtifact in playersArtifacts)
+                     {
+                         Vector3 offset = new Vector3((i % 4) * 150f, (i / 4) * (-150f), 0f);
+
+                         ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                         {
+                             item.transform.SetParent(artifactContainer, false);
+                             item.transform.localScale = Vector3.one;
+                             item.transform.eulerAngles = Vector3.zero;
+                             item.transform.localPosition = Vector3.zero + ;
+                             item.GetComponent<ItemArtifactIcon>().SetArtifactData(playersArtifact, false);
+                         });
+
+                     }*/
+
+
+            for (int i = 0; i < playersArtifacts.Count; i++)
+            {
+                ArtifactDataBase artifactData = playersArtifacts[i];
+
+                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-100f), 0f);
+
+                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                {
+                    item.transform.SetParent(artifactContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + offset;
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(artifactData, false);
+                });
+
+            }
         }
 
 

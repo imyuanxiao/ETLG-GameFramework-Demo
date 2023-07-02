@@ -4,10 +4,10 @@
 #	配置编号	策划备注	道具名字	道具类型	是否可交易	交易价值	道具上限
 #通用资源							
 	1001	星币	StarCoin	Common	TRUE	0	999999999
-	1002	知识点	KnowledgePoint	Common	FALSE		9999
+	1002	知识点	KnowledgePoint	Common	FALSE	0	9999
 	1003	稀有矿石	RareOre	Common	TRUE	100	9999
 	1004	高纯度金属	HighPurityMetal	Common	TRUE	200	9999
-#能源补充（在脚本根据ID判断每单位可补充多少能源）							
+#能源补充							
 	1005	液态甲烷	LiquidMethane	Energy	TRUE	300	9999
 	1006	等离子燃料	PlasmaFuel	Energy	TRUE	400	9999
 #特殊道具							
