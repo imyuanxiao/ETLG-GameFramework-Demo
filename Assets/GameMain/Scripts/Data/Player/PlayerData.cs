@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Rendering;
+using UnityEngine;
 
 namespace ETLG.Data
 {
@@ -15,6 +16,9 @@ namespace ETLG.Data
         // Spaceship attributes increased by skills, etc. (for display and calculation)
         public PlayerCalculatedSpaceshipData playerCalculatedSpaceshipData { get; set; }
 
+        // Player position
+        public Vector3 position { get; set; }
+
         // To be deleted
         public SpaceshipData calculatedSpaceship { get; set; }
 
@@ -26,12 +30,12 @@ namespace ETLG.Data
 
         // Player Artifact Data, get artifacts by type
 
-        private Dictionary<int, PlayerArtifactData> playerArtifacts;
+        private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
 
         private DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
         // Player Skill Data
-        public Dictionary<int, PlayerSkillData> playerSkills { get; set; }
+        private Dictionary<int, PlayerSkillData> playerSkills = new Dictionary<int, PlayerSkillData>();
         private DataSkill dataSkill = GameEntry.Data.GetData<DataSkill>();
 
 
@@ -43,6 +47,8 @@ namespace ETLG.Data
 
             // To be deleted
             this.calculatedSpaceship = spaceshipData;
+
+            addMockArtifactData();
 
         }
 
@@ -86,6 +92,7 @@ namespace ETLG.Data
         {
             if (type.Equals("all"))
             {
+
                 return playerArtifacts.Values.ToList();
             }
 
@@ -136,7 +143,29 @@ namespace ETLG.Data
             return targetList;
         }
 
+        private void addMockArtifactData()
+        {
+            DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+
+            addArtifact(3001, 1);
+            addArtifact(3002, 1);
+            addArtifact(3003, 1);
+            addArtifact(1005, 100);
+            addArtifact(1006, 200);
+            addArtifact(2001, 1);
+            addArtifact(2002, 1);
+            addArtifact(2003, 1);
+            addArtifact(2004, 1);
+            addArtifact(2005, 1);
+            addArtifact(2006, 1);
+
+
+        }
+
     }
+
+
+
 
 }
 

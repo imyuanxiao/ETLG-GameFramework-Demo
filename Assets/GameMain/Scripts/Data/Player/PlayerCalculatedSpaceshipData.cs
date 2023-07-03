@@ -10,6 +10,7 @@ namespace ETLG.Data
 {
     public class PlayerCalculatedSpaceshipData
     {
+
         public float Energy { get; set; }
         public float Durability { get; set; }
         public float Shields { get; set; }
@@ -21,7 +22,9 @@ namespace ETLG.Data
         public float Detection { get; set; }
         public int Capacity { get; set; }
 
-        public PlayerCalculatedSpaceshipData(SpaceshipData spaceshipData) { 
+
+        public PlayerCalculatedSpaceshipData(SpaceshipData spaceshipData) {
+
             Energy = spaceshipData.Energy;
             Durability = spaceshipData.Durability;
             Shields = spaceshipData.Shields;

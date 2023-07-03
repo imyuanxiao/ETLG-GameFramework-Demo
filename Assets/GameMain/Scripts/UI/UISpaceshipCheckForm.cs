@@ -12,9 +12,8 @@ namespace ETLG
     public class UISpaceshipCheckForm : UGuiFormEx
     {
 
+        // buttons
         public Button skillTreeButton;
-
-        // 需要挂载后添加的按钮和文本等对象
         public Button returnButton;
 
         // name and description
@@ -50,11 +49,12 @@ namespace ETLG
 
         public Transform artifactContainer = null;
 
-        // 需要通过玩家数据管理器获取当前飞船数据
-        private DataPlayer dataPlayer = null;
+        // data manager
+        private DataPlayer dataPlayer;
+        private DataArtifact dataArtifact;
 
-        // 当前展示的飞船信息
-        private SpaceshipData currentSpaceshipData = null;
+        // 
+        private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
 
         private EntitySpaceshipSelect showSpaceshipEntity = null;
 
@@ -74,9 +74,12 @@ namespace ETLG
 
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData < DataPlayer>();
+            dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
-            // 初始化实体加载类
             entityLoader = EntityLoader.Create(this);
+
+            currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
+
 
         }
 
@@ -84,10 +87,8 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
-            // 调用显示飞船方法
             ShowSpaceshipSelect();
 
-            // 调用显示道具方法
             ShowArtifactIcons(artifactContainer);
         }
 
@@ -128,54 +129,18 @@ namespace ETLG
         private void ShowArtifactIcons(Transform container)
         {
 
-            // 此处应该加载玩家拥有的道具信息，目前手动添加一些道具
-            DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
-            List<ArtifactDataBase> playersArtifacts = new List<ArtifactDataBase>();
-            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(1001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3001));
-            playersArtifacts.Add(dataArtifact.GetArtifactData(3003));
 
-            /*
-                        List<ArtifactDataBase> artifactDataBases = new List<ArtifactDataBase>();
+            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType("all");
 
-                        foreach(ArtifactDataBase playersArtifact in playersArtifacts)
-                        {
-                            artifactDataBases.Add(playersArtifact);
-                        }
-            */
-            // 四个一行，每个向右偏移 150f，每行向下偏移150f
-
-
-            /*         int line = 0;
-                     int index = 0;
-
-                     foreach (var playersArtifact in playersArtifacts)
-                     {
-                         Vector3 offset = new Vector3((i % 4) * 150f, (i / 4) * (-150f), 0f);
-
-                         ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
-                         {
-                             item.transform.SetParent(artifactContainer, false);
-                             item.transform.localScale = Vector3.one;
-                             item.transform.eulerAngles = Vector3.zero;
-                             item.transform.localPosition = Vector3.zero + ;
-                             item.GetComponent<ItemArtifactIcon>().SetArtifactData(playersArtifact, false);
-                         });
-
-                     }*/
-
-
-            for (int i = 0; i < playersArtifacts.Count; i++)
+            for (int i = 0; i < playerArtifacts.Count; i++)
             {
-                ArtifactDataBase artifactData = playersArtifacts[i];
+                //ArtifactDataBase artifactData = dataArtifact.GetArtifactData(playersArtifacts[i].Id);
 
-                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-100f), 0f);
+                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
+
+                // int artifactNumber = playersArtifacts[i].Number;
+
+                PlayerArtifactData playerArtifact = playerArtifacts[i];
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
@@ -183,7 +148,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(artifactData, false);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact);
                 });
 
             }
@@ -193,7 +158,6 @@ namespace ETLG
         public void ShowSpaceshipSelect()
         {
             // 获取经过计算的飞船属性，此处应该复制，而不是直接引用
-            currentSpaceshipData = dataPlayer.GetPlayerData().calculatedSpaceship;
 
             if (currentSpaceshipData == null)
             {
@@ -201,11 +165,9 @@ namespace ETLG
                 return;
             }
 
-            // 修改UI显示值
-            s_name.text = currentSpaceshipData.NameId;
-
-            s_type.text = currentSpaceshipData.SType;
-            s_size.text = currentSpaceshipData.SSize;
+            s_name.text = dataPlayer.GetPlayerData().initialSpaceship.NameId;
+            s_type.text = dataPlayer.GetPlayerData().initialSpaceship.SType;
+            s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();
@@ -252,12 +214,12 @@ namespace ETLG
         {
 
             // 显示模型
-            entityLoader.ShowEntity(currentSpaceshipData.EntityId, TypeUtility.GetEntityType(currentSpaceshipData.Type),
+            entityLoader.ShowEntity(dataPlayer.GetPlayerData().initialSpaceship.EntityId, TypeUtility.GetEntityType(dataPlayer.GetPlayerData().initialSpaceship.Type),
                 (entity) =>
                 {
                     showSpaceshipEntity = (EntitySpaceshipSelect)entity.Logic;
                 },
-                EntityDataSpaceshipSelect.Create(currentSpaceshipData, true));
+                EntityDataSpaceshipSelect.Create(dataPlayer.GetPlayerData().initialSpaceship, true));
 
         }
 
