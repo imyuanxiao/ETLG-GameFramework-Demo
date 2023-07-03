@@ -76,6 +76,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             skillData = null;
+            playerSkillData = null;
             base.OnClose(isShutdown, userData);
 
         }

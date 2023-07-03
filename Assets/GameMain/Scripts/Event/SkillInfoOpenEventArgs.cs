@@ -22,8 +22,6 @@ namespace ETLG
             }
         }
 
-        public Vector3 Location { get; set; }
-
         public static SkillInfoOpenEventArgs Create()
         {
             SkillInfoOpenEventArgs skillInfoOpenEventArgs = ReferencePool.Acquire<SkillInfoOpenEventArgs>();

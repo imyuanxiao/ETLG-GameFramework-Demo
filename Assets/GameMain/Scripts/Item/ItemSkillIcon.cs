@@ -58,7 +58,6 @@ namespace ETLG
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
 
-
             dataSkill.currentPlayerSkillData = this.playerSkillData;
 
             dataSkill.skillInfoPosition = newPosition;

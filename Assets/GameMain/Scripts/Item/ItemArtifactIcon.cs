@@ -14,9 +14,9 @@ namespace ETLG
     public class ItemArtifactIcon : ItemLogicEx
     {
 
-        //private ArtifactDataBase artifactData;
+        public DataArtifact dataArtifact;
 
-        private PlayerArtifactData playerArtifact;//
+        private PlayerArtifactData playerArtifact;
 
         public RawImage artifactIcon;
 
@@ -29,6 +29,8 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+
+            dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
 
@@ -55,31 +57,21 @@ namespace ETLG
 
         private void OnIconPointerEnter()
         {
-            /*if (isEmpty)
-            {
-                return;
-            }*/
             // 获得挂载对象的位置
-/*            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            Vector3 newPosition = itemPosition + new Vector3(-50f, 0f, 0f);
 
-            GameEntry.Data.GetData<DataArtifact>().currentArtifactID = this.artifactData.Id;
-            GameEntry.Data.GetData<DataArtifact>().artifactInfoPosition = newPosition;
-*/
-            // 显示skill info ui 的事件，传入UI应该显示的位置
-            // GameEntry.Event.Fire(this, ArtifactInfoOpenEventArgs.Create());
+            dataArtifact.currentPlayerArtifactData = this.playerArtifact;
+            dataArtifact.artifactInfoPosition = newPosition;
+
+            GameEntry.Event.Fire(this, ArtifactInfoOpenEventArgs.Create());
 
         }
 
         private void OnIconPointerExit()
         {
-/*            if (isEmpty)
-            {
-                return;
-            }*/
 
-            // 关闭技能信息UI
-            //GameEntry.Event.Fire(this,  ArtifactInfoCloseEventArgs.Create());
+            GameEntry.Event.Fire(this, ArtifactInfoCloseEventArgs.Create());
 
         }
 
@@ -116,39 +108,6 @@ namespace ETLG
             }
 
         }
-
-        /*  public void SetArtifactData(ArtifactDataBase artifactData, int number,  bool isEmpty)
-          {
-              this.artifactData = artifactData;
-
-              this.artifactNumber.text = number.ToString();
-
-              this.isEmpty = isEmpty;
-
-              if (isEmpty)
-              {
-                  return;
-              }
-
-              string texturePath = AssetUtility.GetArtifactIcon(artifactData.Id.ToString());
-              Texture texture = Resources.Load<Texture>(texturePath);
-
-              if(texture == null)
-              {
-                  texturePath = AssetUtility.GetArtifactIcon("iconLost");
-                  texture = Resources.Load<Texture>(texturePath);
-              }
-
-              if (texture != null)
-              {
-                  artifactIcon.texture = texture;
-              }
-              else
-              {
-                  Debug.LogError("Failed to load texture: " + texturePath);
-              }
-
-          }*/
 
         protected override void OnHide(bool isShutdown, object userData)
         {
