@@ -504,11 +504,11 @@ RectTransform:
   m_Father: {fileID: 5350509902426962785}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 0}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &2122238194119425810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,8 +560,9 @@ GameObject:
   - component: {fileID: 5350509902426962785}
   - component: {fileID: 8472472458041209909}
   - component: {fileID: -3033843147712121295}
+  - component: {fileID: -8037504606967117577}
   m_Layer: 5
-  m_Name: UIPopUpExplainForm
+  m_Name: UITipForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,6 +633,21 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &-8037504606967117577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147204563429847656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815983429810ae04f889281d0cb297b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIContainer: {fileID: 3098375279866239429}
+  TipTitle: {fileID: 7327409304931195087}
+  TipContent: {fileID: 5259547868990221249}
 --- !u!1 &8497451646550913197
 GameObject:
   m_ObjectHideFlags: 0

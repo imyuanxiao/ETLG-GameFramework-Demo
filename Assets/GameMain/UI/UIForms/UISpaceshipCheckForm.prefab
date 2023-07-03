@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2961468585230891481}
+  - component: {fileID: 3372147029200954139}
   m_Layer: 5
   m_Name: Durability
   m_TagString: Untagged
@@ -38,8 +39,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &3372147029200954139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723616491841944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Durability
 --- !u!1 &31864827693135171
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4512166466315062152}
+  - component: {fileID: 5004349888472824437}
   m_Layer: 5
   m_Name: Detection
   m_TagString: Untagged
@@ -286,8 +301,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -240}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5004349888472824437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116968957226316996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Detection
 --- !u!1 &206452537655416793
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5379136752937408115}
+  - component: {fileID: 668824588119868882}
   m_Layer: 5
   m_Name: Speed
   m_TagString: Untagged
@@ -534,8 +563,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &668824588119868882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411434355809092014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Speed
 --- !u!1 &417827110241412991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,6 +5342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 146790129889727226}
+  - component: {fileID: 4649902727780189184}
   m_Layer: 5
   m_Name: Type
   m_TagString: Untagged
@@ -5328,8 +5371,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 150, y: 22}
+  m_SizeDelta: {x: 200, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &4649902727780189184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4684072301133404200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Spaceship Type
 --- !u!1 &4721175170955494133
 GameObject:
   m_ObjectHideFlags: 0
@@ -5951,6 +6007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413873972449693088}
+  - component: {fileID: 5365882322490697963}
   m_Layer: 5
   m_Name: Capacity
   m_TagString: Untagged
@@ -5980,8 +6037,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -280}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5365882322490697963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5375341704165432092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Capacity
 --- !u!1 &5456405396305361778
 GameObject:
   m_ObjectHideFlags: 0
@@ -6416,6 +6486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7817635870675742501}
+  - component: {fileID: 8234623786610888541}
   m_Layer: 5
   m_Name: Size
   m_TagString: Untagged
@@ -6444,8 +6515,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -80}
-  m_SizeDelta: {x: 150, y: 22}
+  m_SizeDelta: {x: 200, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &8234623786610888541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924913586138889652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Spaceship Size
 --- !u!1 &5925579089521923767
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,7 +6875,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 22}
+  m_SizeDelta: {x: 300, y: 22}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6063300841410022515
 GameObject:
@@ -6986,6 +7070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4773186625123230131}
+  - component: {fileID: 1799830179819110806}
   m_Layer: 5
   m_Name: FireRate
   m_TagString: Untagged
@@ -7014,8 +7099,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -320}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1799830179819110806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223891459315543184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: FireRate
 --- !u!1 &6225048296013598519
 GameObject:
   m_ObjectHideFlags: 0
@@ -7676,6 +7774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8414748882204281902}
+  - component: {fileID: 6616758710466545924}
   m_Layer: 5
   m_Name: Dogde
   m_TagString: Untagged
@@ -7704,8 +7803,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -360}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &6616758710466545924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756898995682170447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Dogde
 --- !u!1 &6760992148408955456
 GameObject:
   m_ObjectHideFlags: 0
@@ -8058,6 +8170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5241517693603774730}
+  - component: {fileID: 4344818880279185931}
   m_Layer: 5
   m_Name: Energy
   m_TagString: Untagged
@@ -8087,8 +8200,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &4344818880279185931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078582981696437364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Energy
 --- !u!1 &7166272204364566048
 GameObject:
   m_ObjectHideFlags: 0
@@ -8441,6 +8567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5002023883331560725}
+  - component: {fileID: 6917983335779586060}
   m_Layer: 5
   m_Name: Agility
   m_TagString: Untagged
@@ -8470,8 +8597,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -160}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &6917983335779586060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283989440773328227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Agility
 --- !u!1 &7285266947321675561
 GameObject:
   m_ObjectHideFlags: 0
@@ -8481,6 +8621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5910983328900500030}
+  - component: {fileID: 4461798654412394578}
   m_Layer: 5
   m_Name: Firepower
   m_TagString: Untagged
@@ -8510,8 +8651,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -80}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &4461798654412394578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285266947321675561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Firepower
 --- !u!1 &7355564619867243316
 GameObject:
   m_ObjectHideFlags: 0
@@ -9821,7 +9975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0007412222}
+  m_AnchoredPosition: {x: 0, y: 0.00013444654}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8912300080111933671
@@ -9906,6 +10060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4700555015933441600}
+  - component: {fileID: 1661307378936250460}
   m_Layer: 5
   m_Name: Shields
   m_TagString: Untagged
@@ -9935,8 +10090,21 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 230, y: 22}
+  m_SizeDelta: {x: 400, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1661307378936250460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094599546907056704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Shields
 --- !u!1 &9134814188855742547
 GameObject:
   m_ObjectHideFlags: 0

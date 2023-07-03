@@ -19,6 +19,9 @@ namespace ETLG
 
         private int? artifactInfoUIID;
 
+        private DataPlayer dataPlayer;
+        private int? tipUIID;
+
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -38,8 +41,17 @@ namespace ETLG
             GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
             GameEntry.Event.Subscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
 
+            GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
+            GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
+
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+
+            skillInfoUIID = null;
+            artifactInfoUIID = null;
+            tipUIID = null;
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
@@ -71,6 +83,14 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
             GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
+
+            GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
+            GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
+
+
+            skillInfoUIID = null;
+            artifactInfoUIID = null;
+            tipUIID = null;
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -163,6 +183,34 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
             }
             artifactInfoUIID = null;
+        }
+
+        private void OnTipOpen(object sender, GameEventArgs e)
+        {
+            TipOpenEventArgs ne = (TipOpenEventArgs)e;
+            if (ne == null)
+                return;
+
+            dataPlayer.tipUiPosition = ne.position;
+            dataPlayer.tipTitle = ne.tipTitle;
+
+            tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+
+        }
+
+        private void OnTipClose(object sender, GameEventArgs e)
+        {
+            TipCloseEventArgs ne = (TipCloseEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (tipUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)tipUIID);
+            }
+
+            tipUIID = null;
+
         }
 
 
