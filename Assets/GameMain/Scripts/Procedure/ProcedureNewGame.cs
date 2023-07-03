@@ -13,11 +13,11 @@ namespace ETLG
     public class ProcedureNewGame : ProcedureBase
     {
 
-        private DataPlayer dataPlayer;
 
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
+        private DataPlayer dataPlayer;
         private int? skillInfoUIID;
         private int? tipUIID;
 

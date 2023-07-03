@@ -16,6 +16,12 @@ namespace ETLG
         public Button skillTreeButton;
         public Button returnButton;
 
+        public Button allButton;
+        public Button moduleButton;
+        public Button specialButton;
+        public Button tradeButton;
+        public Button othersButton;
+
         // name and description
         public TextMeshProUGUI s_name = null;
 
@@ -66,8 +72,14 @@ namespace ETLG
 
             // 绑定按钮点击事件
             skillTreeButton.onClick.AddListener(OnSkillTreeButtonClick);
-
             returnButton.onClick.AddListener(OnReturnButtonClick);
+
+            allButton.onClick.AddListener(OnPackageAllButtonClick);
+            moduleButton.onClick.AddListener(OnPackageModuleButtonClick);
+            specialButton.onClick.AddListener(OnPackageSpecialButtonClick);
+            tradeButton.onClick.AddListener(OnPackageTradeButtonClick);
+            othersButton.onClick.AddListener(OnPackageOthersButtonClick);
+
 
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData < DataPlayer>();
@@ -84,7 +96,7 @@ namespace ETLG
 
             ShowSpaceshipSelect();
 
-            ShowArtifactIcons(artifactContainer);
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_ALL);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -101,13 +113,6 @@ namespace ETLG
 
         }
 
-        private void OnApplyButtonClick()
-        {
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-
-            // save new spaceship to player data
-            
-        }
 
         private void OnReturnButtonClick()
         {
@@ -120,12 +125,10 @@ namespace ETLG
         }
 
 
-
-        private void ShowArtifactIcons(Transform container)
+        private void ShowArtifactIcons(Transform container, string type)
         {
 
-
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType("all");
+            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType(type);
 
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
@@ -146,10 +149,8 @@ namespace ETLG
             }
         }
 
-
         public void ShowSpaceshipSelect()
         {
-            // 获取经过计算的飞船属性，此处应该复制，而不是直接引用
 
             if (currentSpaceshipData == null)
             {
@@ -180,11 +181,6 @@ namespace ETLG
             SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
-
-/*
-            s_skill1.text = currentSpaceshipData.GetSkillData(0).NameId;
-            s_skill2.text = currentSpaceshipData.GetSkillData(1).NameId;
-            s_skill3.text = currentSpaceshipData.GetSkillData(2).NameId;*/
 
             ShowSpaceship();
 
@@ -222,6 +218,57 @@ namespace ETLG
             {
                 entityLoader.HideEntity(showSpaceshipEntity.Entity);
             }
+        }
+
+        public void OnPackageAllButtonClick()
+        {
+            moduleButton.interactable = true;
+            specialButton.interactable = true;
+            tradeButton.interactable = true;
+            othersButton.interactable = true;
+            HideAllItem();
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_ALL);
+
+        }
+
+        public void OnPackageModuleButtonClick()
+        {
+            allButton.interactable = true;
+            specialButton.interactable = true;
+            tradeButton.interactable = true;
+            othersButton.interactable = true;
+            HideAllItem();
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_MODULE);
+        }
+
+        public void OnPackageSpecialButtonClick()
+        {
+            allButton.interactable = true;
+            moduleButton.interactable = true;
+            tradeButton.interactable = true;
+            othersButton.interactable = true;
+            HideAllItem();
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_SPECIAL);
+        }
+
+        public void OnPackageTradeButtonClick()
+        {
+            allButton.interactable = true;
+            moduleButton.interactable = true;
+            specialButton.interactable = true;
+            othersButton.interactable = true;
+            HideAllItem();
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_TRADE);
+        }
+
+        public void OnPackageOthersButtonClick()
+        {
+            allButton.interactable = true;
+            moduleButton.interactable = true;
+            specialButton.interactable = true;
+            tradeButton.interactable = true;
+            HideAllItem();
+            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_OTHERS);
         }
 
     }
