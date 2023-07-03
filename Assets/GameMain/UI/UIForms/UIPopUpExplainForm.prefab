@@ -560,7 +560,6 @@ GameObject:
   - component: {fileID: 5350509902426962785}
   - component: {fileID: 8472472458041209909}
   - component: {fileID: -3033843147712121295}
-  - component: {fileID: 8332614195616626118}
   m_Layer: 5
   m_Name: UIPopUpExplainForm
   m_TagString: Untagged
@@ -633,20 +632,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &8332614195616626118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147204563429847656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5f60e03074f3849b5fa1032a147853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: {fileID: 7327409304931195087}
-  domainValue: {fileID: 0}
 --- !u!1 &8497451646550913197
 GameObject:
   m_ObjectHideFlags: 0
