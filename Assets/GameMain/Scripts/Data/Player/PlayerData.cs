@@ -19,11 +19,11 @@ namespace ETLG.Data
         // Player position
         public Vector3 position { get; set; }
 
-        // StarCoins
-        public int starCoins;
+        // Money
+        public int money { get; set; }
 
         // KnowlegdePoints
-        public int knowledgePoints;
+        public int knowledgePoints { get; set; }
 
         // Player Artifact Data, get artifacts by type
 
@@ -78,7 +78,7 @@ namespace ETLG.Data
             // if number <= 0, remove from playerArtifacts
             playerArtifacts[id].Number -= number;
 
-            this.starCoins += value;
+            this.money += value;
 
             if (playerArtifacts[id].Number <= 0)
             {

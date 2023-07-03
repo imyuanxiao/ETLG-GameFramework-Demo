@@ -11,7 +11,7 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemSkillIcon : ItemLogicEx
+    public class ItemSkillIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
 
         private DataSkill dataSkill;
@@ -32,17 +32,6 @@ namespace ETLG
 
             EventTrigger trigger = iconButton.gameObject.AddComponent<EventTrigger>();
 
-            // 添加鼠标进入事件监听器
-            EventTrigger.Entry enterEntry = new EventTrigger.Entry();
-            enterEntry.eventID = EventTriggerType.PointerEnter;
-            enterEntry.callback.AddListener((data) => { OnIconPointerEnter(); });
-            trigger.triggers.Add(enterEntry);
-
-            // 添加鼠标移出事件监听器
-            EventTrigger.Entry exitEntry = new EventTrigger.Entry();
-            exitEntry.eventID = EventTriggerType.PointerExit;
-            exitEntry.callback.AddListener((data) => { OnIconPointerExit(); });
-            trigger.triggers.Add(exitEntry);
         }
 
         private void OnIconButtonClick()
@@ -51,9 +40,8 @@ namespace ETLG
 
         }
 
-        private void OnIconPointerEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
-
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
@@ -67,13 +55,10 @@ namespace ETLG
 
         }
 
-        private void OnIconPointerExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
-            // 关闭技能信息UI
             GameEntry.Event.Fire(this, SkillInfoCloseEventArgs.Create());
-
         }
-
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {

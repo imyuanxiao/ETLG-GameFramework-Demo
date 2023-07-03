@@ -22,6 +22,7 @@ namespace ETLG
         public Button tradeButton;
         public Button othersButton;
 
+
         // name and description
         public TextMeshProUGUI s_name = null;
 
@@ -52,6 +53,8 @@ namespace ETLG
         public GameObject s_speed_valueBar = null;
         public GameObject s_detection_valueBar = null;
         public GameObject s_capacity_valueBar = null;
+
+        public TextMeshProUGUI playerMoney = null;
 
         public Transform artifactContainer = null;
 
@@ -139,11 +142,11 @@ namespace ETLG
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
-                    item.transform.SetParent(artifactContainer, false);
+                    item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, null);
                 });
 
             }
@@ -161,6 +164,8 @@ namespace ETLG
             s_name.text = dataPlayer.GetPlayerData().initialSpaceship.NameId;
             s_type.text = dataPlayer.GetPlayerData().initialSpaceship.SType;
             s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
+
+            playerMoney.text = dataPlayer.GetPlayerData().money.ToString();
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();

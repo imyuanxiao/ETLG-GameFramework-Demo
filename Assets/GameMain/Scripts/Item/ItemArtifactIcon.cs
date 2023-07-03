@@ -11,7 +11,7 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemArtifactIcon : ItemLogicEx
+    public class ItemArtifactIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
 
         public DataArtifact dataArtifact;
@@ -24,7 +24,7 @@ namespace ETLG
 
         public TextMeshProUGUI artifactNumber;
 
-        //public bool isEmpty;
+        public NPCData npcData;
 
         protected override void OnInit(object userData)
         {
@@ -36,26 +36,19 @@ namespace ETLG
 
             EventTrigger trigger = iconButton.gameObject.AddComponent<EventTrigger>();
 
-            // 添加鼠标进入事件监听器
-            EventTrigger.Entry enterEntry = new EventTrigger.Entry();
-            enterEntry.eventID = EventTriggerType.PointerEnter;
-            enterEntry.callback.AddListener((data) => { OnIconPointerEnter(); });
-            trigger.triggers.Add(enterEntry);
-
-            // 添加鼠标移出事件监听器
-            EventTrigger.Entry exitEntry = new EventTrigger.Entry();
-            exitEntry.eventID = EventTriggerType.PointerExit;
-            exitEntry.callback.AddListener((data) => { OnIconPointerExit(); });
-            trigger.triggers.Add(exitEntry);
         }
 
         private void OnIconButtonClick()
         {
-            // TODO 显示当前技能所需的升级资源和确认按钮
+            if(npcData != null)
+            {
+                Log.Debug("trading with NPC");
+            }
+            
 
         }
 
-        private void OnIconPointerEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
@@ -68,11 +61,9 @@ namespace ETLG
 
         }
 
-        private void OnIconPointerExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
-
             GameEntry.Event.Fire(this, ArtifactInfoCloseEventArgs.Create());
-
         }
 
 
@@ -82,9 +73,11 @@ namespace ETLG
 
         }
 
-        public void SetArtifactData(PlayerArtifactData playerArtifact)
+
+        public void SetArtifactData(PlayerArtifactData playerArtifact, NPCData npcData)
         {
             this.playerArtifact = playerArtifact;
+            this.npcData = npcData;
 
             this.artifactNumber.text = playerArtifact.Number.ToString();
 
@@ -94,25 +87,17 @@ namespace ETLG
 
             if (texture == null)
             {
-                texturePath = AssetUtility.GetArtifactIcon("iconLost");
+                texturePath = AssetUtility.GetArtifactIcon(Constant.Type.ICON_LOST);
                 texture = Resources.Load<Texture>(texturePath);
             }
 
-            if (texture != null)
-            {
-                artifactIcon.texture = texture;
-            }
-            else
-            {
-                Debug.LogError("Failed to load texture: " + texturePath);
-            }
+            artifactIcon.texture = texture;
 
         }
 
+
         protected override void OnHide(bool isShutdown, object userData)
         {
-            //inSelectScene = false;
-
             base.OnHide(isShutdown, userData);
 
         }

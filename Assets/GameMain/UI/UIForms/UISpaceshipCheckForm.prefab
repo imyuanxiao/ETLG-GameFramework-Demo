@@ -4549,7 +4549,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4017735722046027037}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99779445
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6158,6 +6158,7 @@ MonoBehaviour:
   s_speed_valueBar: {fileID: 6123752502267583100}
   s_detection_valueBar: {fileID: 1076615811492847084}
   s_capacity_valueBar: {fileID: 1552142102777629250}
+  playerMoney: {fileID: 8367997518888935061}
   artifactContainer: {fileID: 4819325326570609687}
 --- !u!1 &5090997863339204061
 GameObject:
@@ -10335,7 +10336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.13472702}
+  m_AnchoredPosition: {x: 0, y: 0.00015429224}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6883769787555121867
@@ -10383,7 +10384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6832661236953691091}
   m_Layer: 5
-  m_Name: StarCoin
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
