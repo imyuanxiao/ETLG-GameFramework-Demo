@@ -66,7 +66,7 @@ namespace ETLG
 
         private void InitBasicEnemyBullet(Bullet bullet)
         {
-            bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Durability * 0.1);
+            bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
             bullet.flyingDirection = new Vector3(0, 0, -1);
             bullet.flyingSpeed = 1000;
         }

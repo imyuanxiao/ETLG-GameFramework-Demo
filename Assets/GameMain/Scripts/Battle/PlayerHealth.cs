@@ -18,10 +18,15 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlayerHealthChangeEventArgs.EventId, OnPlayerHealthChange);
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
 
-            MaxHealth = (int) playerData.initialSpaceship.Durability;
-            CurrentHealth = (int) playerData.calculatedSpaceship.Durability;
-            MaxShield = (int) playerData.initialSpaceship.Shields;
-            CurrentShield = (int) playerData.calculatedSpaceship.Shields;
+            // MaxHealth = (int) playerData.initialSpaceship.Durability;
+            // CurrentHealth = (int) playerData.calculatedSpaceship.Durability;
+            // MaxShield = (int) playerData.initialSpaceship.Shields;
+            // CurrentShield = (int) playerData.calculatedSpaceship.Shields;
+
+            MaxHealth = (int) playerData.playerCalculatedSpaceshipData.Durability;
+            MaxShield = (int) playerData.playerCalculatedSpaceshipData.Shields;
+            CurrentHealth = MaxHealth;
+            CurrentShield = MaxShield;
 
             // StartCoroutine(CheckDeath());
         }

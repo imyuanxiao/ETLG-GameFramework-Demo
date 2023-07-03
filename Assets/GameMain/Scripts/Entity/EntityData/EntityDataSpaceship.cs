@@ -9,7 +9,13 @@ namespace ETLG
 
     public class EntityDataSpaceship : EntityData
     {
-        public SpaceshipData SpaceshipData
+        // public SpaceshipData SpaceshipData
+        // {
+        //     get;
+        //     private set;
+        // }
+
+        public PlayerData PlayerData 
         {
             get;
             private set;
@@ -19,7 +25,8 @@ namespace ETLG
         public static EntityDataSpaceship Create(PlayerData playerData, object userData = null)
         {
             EntityDataSpaceship entityData = ReferencePool.Acquire<EntityDataSpaceship>();
-            entityData.SpaceshipData = playerData.calculatedSpaceship;
+            // entityData.SpaceshipData = playerData.calculatedSpaceship;
+            entityData.PlayerData = playerData;
             setPosition(entityData);
             return entityData;
         }
@@ -35,7 +42,8 @@ namespace ETLG
         public override void Clear()
         {
             base.Clear();
-            SpaceshipData = null;
+            // SpaceshipData = null;
+            PlayerData = null;
         }
     }
 }

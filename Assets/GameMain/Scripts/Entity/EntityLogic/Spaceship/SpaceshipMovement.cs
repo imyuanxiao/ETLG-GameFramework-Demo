@@ -24,7 +24,8 @@ namespace ETLG
 
         private void FixedUpdate() 
         {
-            float speed = entitySpaceship.EntityDataSpaceship.SpaceshipData.Agility;
+            // float speed = entitySpaceship.EntityDataSpaceship.SpaceshipData.Agility;
+            float speed = entitySpaceship.EntityDataSpaceship.PlayerData.playerCalculatedSpaceshipData.Agility;
             rb.velocity = new Vector3(controller.HorizontalInput, 0, controller.VerticalInput).normalized * speed;
         }
     }

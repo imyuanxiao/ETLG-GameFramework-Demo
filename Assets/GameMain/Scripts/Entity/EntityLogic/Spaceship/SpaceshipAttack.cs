@@ -35,7 +35,8 @@ namespace ETLG
         private void InitPlayerBullet(Bullet bullet)
         {
             ProjectileData bulletData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Bullet);
-            SpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship;
+            // SpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship;
+            PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
 
             bullet.damage = (int) spaceshipData.Firepower + (int) bulletData.Damage;
             bullet.flyingDirection = new Vector3(0, 0, 1);
@@ -45,13 +46,13 @@ namespace ETLG
         private void InitPlayerMissile()
         {
             ProjectileData missileData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Missile);
-            SpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship;
+            PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
         }
 
         private void InitPlayerIonBeam()
         {
             ProjectileData ionBeamData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.IonBeam);
-            SpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship;
+            PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
         }
     }
 }
