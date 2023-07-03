@@ -12,20 +12,26 @@ namespace ETLG
 {
     public class ProcedureNewGame : ProcedureBase
     {
+
+        private DataPlayer dataPlayer;
+
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
         private int? skillInfoUIID;
+        private int? tipUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
+
         }
 
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
-            Log.Debug("进入 ProcedureNewGame 流程");
             base.OnEnter(procedureOwner);
+
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
@@ -33,15 +39,18 @@ namespace ETLG
             GameEntry.Event.Subscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
             GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
+            GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
+            GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
-            this.skillInfoUIID = null;
 
-            // 播放BGM
+            this.skillInfoUIID = null;
+            this.tipUIID = null;
+
+
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
-            // 打开UI
-            Log.Debug("打开选择飞船界面");
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
 
         }
@@ -63,15 +72,18 @@ namespace ETLG
         {
             base.OnLeave(procedureOwner, isShutdown);
 
-            // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
             GameEntry.Event.Unsubscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
             GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
+            GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
+            GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
 
-            // 停止音乐
             GameEntry.Sound.StopMusic();
+
+            this.skillInfoUIID = null;
+            this.tipUIID = null;
 
         }
 
@@ -112,6 +124,34 @@ namespace ETLG
             }
 
             skillInfoUIID = null;
+
+        }
+
+        private void OnTipOpen(object sender, GameEventArgs e)
+        {
+            TipOpenEventArgs ne = (TipOpenEventArgs)e;
+            if (ne == null)
+                return;
+
+            dataPlayer.tipUiPosition = ne.position;
+            dataPlayer.tipTitle = ne.tipTitle;
+
+            tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+
+        }
+
+        private void OnTipClose(object sender, GameEventArgs e)
+        {
+            TipCloseEventArgs ne = (TipCloseEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (tipUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)tipUIID);
+            }
+
+            tipUIID = null;
 
         }
 

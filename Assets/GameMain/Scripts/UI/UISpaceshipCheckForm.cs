@@ -49,11 +49,8 @@ namespace ETLG
 
         public Transform artifactContainer = null;
 
-        // data manager
         private DataPlayer dataPlayer;
-        private DataArtifact dataArtifact;
 
-        // 
         private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
 
         private EntitySpaceshipSelect showSpaceshipEntity = null;
@@ -74,12 +71,10 @@ namespace ETLG
 
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData < DataPlayer>();
-            dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
             entityLoader = EntityLoader.Create(this);
 
             currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
-
 
         }
 
@@ -134,11 +129,8 @@ namespace ETLG
 
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
-                //ArtifactDataBase artifactData = dataArtifact.GetArtifactData(playersArtifacts[i].Id);
 
                 Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
-
-                // int artifactNumber = playersArtifacts[i].Number;
 
                 PlayerArtifactData playerArtifact = playerArtifacts[i];
 

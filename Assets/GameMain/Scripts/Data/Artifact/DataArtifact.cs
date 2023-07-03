@@ -22,7 +22,9 @@ namespace ETLG.Data
         private Dictionary<int, ArtifactDataBase> dicArtifactData;
 
         public Vector3 artifactInfoPosition;
-        public int currentArtifactID;
+
+        public PlayerArtifactData currentPlayerArtifactData;
+
         protected override void OnInit()
         {
 
@@ -108,6 +110,16 @@ namespace ETLG.Data
                 return null;
             }
             return dicArtifactData[id];
+        }
+
+        public ArtifactDataBase GetCurrentShowArtifactData()
+        {
+            if (!dicArtifactData.ContainsKey(currentPlayerArtifactData.Id))
+            {
+                Log.Error("Can not find artifact data id '{0}'.", currentPlayerArtifactData.Id);
+                return null;
+            }
+            return dicArtifactData[currentPlayerArtifactData.Id];
         }
 
     }

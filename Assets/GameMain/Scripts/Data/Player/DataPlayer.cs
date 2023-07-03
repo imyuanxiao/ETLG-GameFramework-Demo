@@ -11,6 +11,9 @@ namespace ETLG.Data
     {
         private PlayerData playerData;
 
+        public Vector3 tipUiPosition { get ; set; }
+        public string tipTitle { get ; set; }
+
         protected override void OnInit()
         {
 

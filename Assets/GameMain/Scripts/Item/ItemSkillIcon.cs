@@ -14,18 +14,19 @@ namespace ETLG
     public class ItemSkillIcon : ItemLogicEx
     {
 
-        private SkillData skillData;
+        private DataSkill dataSkill;
+
+        private PlayerSkillData playerSkillData;
 
         public RawImage skillIcon;
 
         public Button iconButton;
 
-        private int sceneID;
-
-
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+
+            dataSkill = GameEntry.Data.GetData<DataSkill>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
 
@@ -57,9 +58,9 @@ namespace ETLG
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
 
+            dataSkill.currentPlayerSkillData = this.playerSkillData;
 
-            GameEntry.Data.GetData<DataSkill>().currentSkillID = this.skillData.Id;
-            GameEntry.Data.GetData<DataSkill>().skillInfoPosition = newPosition;
+            dataSkill.skillInfoPosition = newPosition;
 
             // 显示skill info ui 的事件，传入UI应该显示的位置
             GameEntry.Event.Fire(this, SkillInfoOpenEventArgs.Create());
@@ -80,38 +81,20 @@ namespace ETLG
 
         }
 
-        public void SetSkillData(SkillData skillData, int sceneID)
+        public void SetSkillData(PlayerSkillData playerSkillData)
         {
-            this.skillData = skillData;
+            this.playerSkillData = playerSkillData;
 
-            string texturePath = "";
-
-            // 根据场景ID，展示不同icon
-            this.sceneID = sceneID;
-            // 3 == 新建游戏
-            if (sceneID == 3)
-            {
-                texturePath = AssetUtility.GetSkillIcon(skillData.Id.ToString(), "2");
-            }
-            // 5 == 玩家菜单
-            if (sceneID == 5)
-            {
-                texturePath = AssetUtility.GetSkillIcon(skillData.Id.ToString(), skillData.ActiveState.ToString());
-            }
-
-            // 根据当前技能ID 和 激活状态 获取图标
+            string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString(), playerSkillData.ActiveState.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
-
             if (texture != null)
             {
-                // 将加载的纹理赋值给Raw Image的纹理
                 skillIcon.texture = texture;
             }
             else
             {
                 Debug.LogError("Failed to load texture: " + texturePath);
             }
-
         }
 
         protected override void OnHide(bool isShutdown, object userData)

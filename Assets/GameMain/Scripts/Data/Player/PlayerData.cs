@@ -19,9 +19,6 @@ namespace ETLG.Data
         // Player position
         public Vector3 position { get; set; }
 
-        // To be deleted
-        public SpaceshipData calculatedSpaceship { get; set; }
-
         // StarCoins
         public int starCoins;
 
@@ -45,20 +42,22 @@ namespace ETLG.Data
             this.initialSpaceship = spaceshipData;
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
 
-            // To be deleted
-            this.calculatedSpaceship = spaceshipData;
+            // add initial skills
+            foreach(var id in spaceshipData.SkillIds)
+            {
+                addSkill(id, 1);
+            }
 
+            // add mock artifacts
             addMockArtifactData();
 
         }
 
-        // 每次技能、buff、被攻击等，就应该计算需要显示的飞船属性，可以分成好几个方法
-        public void CalculateStats()
+        // Call this method everytime skills change or initialSpaceship changes
+        public void UpdatePlayerCalculatedSpaceshipData()
         {
-            // 计算过程
+            
 
-            // 此处应该是等于计算后的飞船数据，需要修改
-            calculatedSpaceship = initialSpaceship;
         }
 
         public void addArtifact(int id, int number)
@@ -113,17 +112,39 @@ namespace ETLG.Data
             return playerArtifacts[id];
         }
 
-        public void setSkill(int id, int level)
+        public void addSkill(int id, int level)
         {
             if (!playerSkills.ContainsKey(id))
             {
                 playerSkills.Add(id, new PlayerSkillData(dataSkill.GetSkillData(id)));
             }
-            playerSkills[id].level = level;
+            if(level == 0)
+            {
+                playerSkills[id].setActiveState(1);
+            }
+            else
+            {
+                playerSkills[id].setActiveState(2);
+                playerSkills[id].Level = level;
+            }
         }
 
+        public PlayerSkillData getSkillById(int Id)
+        {
+            if (!playerSkills.ContainsKey(Id))
+            {
+                return new PlayerSkillData(Id, Constant.Type.SKILL_LOCKED, 0);
+            }
+            return playerSkills[Id];
+        }
+
+  
         public List<PlayerSkillData> getSkillsByType(string type)
         {
+            if (type.Equals("all"))
+            {
+                return playerSkills.Values.ToList();
+            }
 
             List<PlayerSkillData> targetList = new List<PlayerSkillData>();
             foreach (var playerSkill in playerSkills.Values)

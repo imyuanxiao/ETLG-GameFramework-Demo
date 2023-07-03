@@ -187,8 +187,6 @@ MonoBehaviour:
   - enable: 1
     dataTypeName: ETLG.Data.DataSpaceship
   - enable: 1
-    dataTypeName: ETLG.Data.DataPlayer
-  - enable: 1
     dataTypeName: ETLG.Data.DataProjectile
   - enable: 1
     dataTypeName: ETLG.Data.DataBossEnemy
@@ -202,6 +200,8 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataPlanet
   - enable: 1
     dataTypeName: ETLG.Data.DataArtifact
+  - enable: 1
+    dataTypeName: ETLG.Data.DataPlayer
 --- !u!1 &477424328
 GameObject:
   m_ObjectHideFlags: 0
