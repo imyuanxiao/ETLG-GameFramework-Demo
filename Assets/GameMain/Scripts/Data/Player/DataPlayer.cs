@@ -34,40 +34,34 @@ namespace ETLG.Data
 
         }
 
-        // ���ѡ���ʼ�ɴ��󣬸��ݵ�ǰѡ��ķɴ����½������Ϣ
+        // new player
         public void NewGame(SpaceshipData spaceshipData)
         {
             playerData = new PlayerData(spaceshipData);
         }
 
-        // ������Ϸ����ȡ�����ļ�
         public void ContinueGame()
         {
             LoadPlayerData();
         }
 
-
+        // save player to local
         public void SavePlayerData(PlayerData playerData)
         {
-/*            // ���л������ϢΪ JSON ��ʽ
-            string json = Utility.Json.ToJson(playerInfo);
+/*            string json = Utility.Json.ToJson(playerInfo);
 
-            // �����л���������Ϣ���浽�浵�ļ�
-            File.WriteAllBytes("PlayerInfo.dat", Utility.Converter.GetBytes(json));
-*/
+            File.WriteAllBytes("PlayerInfo.dat", Utility.Converter.GetBytes(json));*/
 
         }
 
         public PlayerData LoadPlayerData()
         {
 
-/*            // �Ӵ浵�ļ���ȡ�����Ϣ
-            byte[] data = File.ReadAllBytes("PlayerInfo.dat");
+/*            byte[] data = File.ReadAllBytes("PlayerInfo.dat");
 
-            // ����ȡ�������ݷ����л�Ϊ�����Ϣ����
             string json = Utility.Converter.GetString(data);
-            PlayerInfo playerInfo = Utility.Json.FromJson<PlayerInfo>(json);
-*/
+            PlayerInfo playerInfo = Utility.Json.FromJson<PlayerInfo>(json);*/
+
             return null;
         }
 

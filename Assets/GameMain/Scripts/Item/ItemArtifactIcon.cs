@@ -14,13 +14,17 @@ namespace ETLG
     public class ItemArtifactIcon : ItemLogicEx
     {
 
-        private ArtifactDataBase artifactData;
+        //private ArtifactDataBase artifactData;
+
+        private PlayerArtifactData playerArtifact;//
 
         public RawImage artifactIcon;
 
         public Button iconButton;
 
-        public bool isEmpty;
+        public TextMeshProUGUI artifactNumber;
+
+        //public bool isEmpty;
 
         protected override void OnInit(object userData)
         {
@@ -51,10 +55,10 @@ namespace ETLG
 
         private void OnIconPointerEnter()
         {
-            if (isEmpty)
+            /*if (isEmpty)
             {
                 return;
-            }
+            }*/
             // 获得挂载对象的位置
 /*            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
@@ -69,10 +73,10 @@ namespace ETLG
 
         private void OnIconPointerExit()
         {
-            if (isEmpty)
+/*            if (isEmpty)
             {
                 return;
-            }
+            }*/
 
             // 关闭技能信息UI
             //GameEntry.Event.Fire(this,  ArtifactInfoCloseEventArgs.Create());
@@ -86,19 +90,21 @@ namespace ETLG
 
         }
 
-        public void SetArtifactData(ArtifactDataBase artifactData, bool isEmpty)
+        public void SetArtifactData(PlayerArtifactData playerArtifact)
         {
-            this.artifactData = artifactData;
+            this.playerArtifact = playerArtifact;
 
-            this.isEmpty = isEmpty;
+            this.artifactNumber.text = playerArtifact.Number.ToString();
 
-            if (isEmpty)
-            {
-                return;
-            }
+            string texturePath = AssetUtility.GetArtifactIcon(playerArtifact.Id.ToString());
 
-            string texturePath = AssetUtility.GetArtifactIcon(artifactData.Id.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
+
+            if (texture == null)
+            {
+                texturePath = AssetUtility.GetArtifactIcon("iconLost");
+                texture = Resources.Load<Texture>(texturePath);
+            }
 
             if (texture != null)
             {
@@ -110,6 +116,39 @@ namespace ETLG
             }
 
         }
+
+        /*  public void SetArtifactData(ArtifactDataBase artifactData, int number,  bool isEmpty)
+          {
+              this.artifactData = artifactData;
+
+              this.artifactNumber.text = number.ToString();
+
+              this.isEmpty = isEmpty;
+
+              if (isEmpty)
+              {
+                  return;
+              }
+
+              string texturePath = AssetUtility.GetArtifactIcon(artifactData.Id.ToString());
+              Texture texture = Resources.Load<Texture>(texturePath);
+
+              if(texture == null)
+              {
+                  texturePath = AssetUtility.GetArtifactIcon("iconLost");
+                  texture = Resources.Load<Texture>(texturePath);
+              }
+
+              if (texture != null)
+              {
+                  artifactIcon.texture = texture;
+              }
+              else
+              {
+                  Debug.LogError("Failed to load texture: " + texturePath);
+              }
+
+          }*/
 
         protected override void OnHide(bool isShutdown, object userData)
         {
