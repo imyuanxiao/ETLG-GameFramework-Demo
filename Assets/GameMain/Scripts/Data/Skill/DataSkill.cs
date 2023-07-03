@@ -27,7 +27,8 @@ namespace ETLG.Data
         private Dictionary<int, List<SkillData>> dicSkillDataLayers;
 
         // 当前展示技能ID
-        public int currentSkillID;
+        //public int currentSkillID;
+        public PlayerSkillData currentPlayerSkillData;
 
         // 当前展示skillInfo的UI位置
         public Vector3 skillInfoPosition { get; set; }
@@ -130,13 +131,12 @@ namespace ETLG.Data
 
         public SkillData GetCurrentShowSkillData()
         {
-            if (!dicSkillData.ContainsKey(currentSkillID))
+            if (!dicSkillData.ContainsKey(currentPlayerSkillData.Id))
             {
-                Log.Error("Can not find skill data id '{0}'.", currentSkillID);
+                Log.Error("Can not find skill data id '{0}'.", currentPlayerSkillData.Id);
                 return null;
             }
-
-            return dicSkillData[currentSkillID];
+            return dicSkillData[currentPlayerSkillData.Id];
         }
 
         public SkillData GetSkillData(int id)

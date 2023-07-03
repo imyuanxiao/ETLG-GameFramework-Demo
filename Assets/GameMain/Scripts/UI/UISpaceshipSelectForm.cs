@@ -225,22 +225,27 @@ namespace ETLG
         {
 
 
-            SkillData[] skillDatas = currentSpaceshipData.GetSkillDatas();
+            List<PlayerSkillData> tmpPlayerSkillsData = new List<PlayerSkillData>();
+            foreach (var skillId in currentSpaceshipData.SkillIds)
+            {
+                tmpPlayerSkillsData.Add(new PlayerSkillData(skillId, Constant.Type.SKILL_UPGRADED, 1));
+            }
+
+            //SkillData[] skillDatas = currentSpaceshipData.GetSkillDatas();
 
             Vector3 offset = new Vector3(150f, 0f, 0f); // 偏移量
 
             int i = 0;
 
-            foreach (var skillData in skillDatas)
+            foreach (var tmpPlayerSkill in tmpPlayerSkillsData)
             {
-
                 ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one * 0.5f;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + (i++) * offset; // 根据偏移量计算新的位置
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(skillData, 3);
+                    item.transform.localPosition = Vector3.zero + (i++) * offset;
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(tmpPlayerSkill);
                 });
             }
         }

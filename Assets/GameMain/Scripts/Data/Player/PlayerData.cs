@@ -42,7 +42,13 @@ namespace ETLG.Data
             this.initialSpaceship = spaceshipData;
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
 
+            // add initial skills
+            foreach(var id in spaceshipData.SkillIds)
+            {
+                addSkill(id, 1);
+            }
 
+            // add mock artifacts
             addMockArtifactData();
 
         }
@@ -106,17 +112,39 @@ namespace ETLG.Data
             return playerArtifacts[id];
         }
 
-        public void setSkill(int id, int level)
+        public void addSkill(int id, int level)
         {
             if (!playerSkills.ContainsKey(id))
             {
                 playerSkills.Add(id, new PlayerSkillData(dataSkill.GetSkillData(id)));
             }
-            playerSkills[id].level = level;
+            if(level == 0)
+            {
+                playerSkills[id].setActiveState(1);
+            }
+            else
+            {
+                playerSkills[id].setActiveState(2);
+                playerSkills[id].Level = level;
+            }
         }
 
+        public PlayerSkillData getSkillById(int Id)
+        {
+            if (!playerSkills.ContainsKey(Id))
+            {
+                return new PlayerSkillData(Id, Constant.Type.SKILL_LOCKED, 0);
+            }
+            return playerSkills[Id];
+        }
+
+  
         public List<PlayerSkillData> getSkillsByType(string type)
         {
+            if (type.Equals("all"))
+            {
+                return playerSkills.Values.ToList();
+            }
 
             List<PlayerSkillData> targetList = new List<PlayerSkillData>();
             foreach (var playerSkill in playerSkills.Values)

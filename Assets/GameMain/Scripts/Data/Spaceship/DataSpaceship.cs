@@ -17,8 +17,7 @@ namespace ETLG.Data
 
         private Dictionary<int, SpaceshipData> dicSpaceshipData;
 
-        // 需要从技能数据管理类获取技能数据
-        private DataSkill dataSkill;
+        //private DataSkill dataSkill;
 
 
         protected override void OnInit()
@@ -36,7 +35,7 @@ namespace ETLG.Data
         protected override void OnLoad()
         {
             // 初始化技能数据管理类
-            dataSkill = GameEntry.Data.GetData<DataSkill>();
+            //dataSkill = GameEntry.Data.GetData<DataSkill>();
 
             dtSpaceship = GameEntry.DataTable.GetDataTable<DRSpaceship>();
             if (dtSpaceship == null)
@@ -51,7 +50,7 @@ namespace ETLG.Data
             foreach (var drSpaceship in dRSpaceships)
             {
 
-                SkillData[] dataSkills = new SkillData[drSpaceship.Skills.Length];
+              /*  SkillData[] dataSkills = new SkillData[drSpaceship.Skills.Length];
 
                 for (int i = 0; i < drSpaceship.Skills.Length; i++)
                 {
@@ -62,9 +61,10 @@ namespace ETLG.Data
                     }
 
                     dataSkills[i] = skillData;
-                }
+                }*/
 
-                SpaceshipData spaceshipData = new SpaceshipData(drSpaceship, dataSkills);
+                //SpaceshipData spaceshipData = new SpaceshipData(drSpaceship, dataSkills);
+                SpaceshipData spaceshipData = new SpaceshipData(drSpaceship);
                 dicSpaceshipData.Add(drSpaceship.Id, spaceshipData);
             }
 

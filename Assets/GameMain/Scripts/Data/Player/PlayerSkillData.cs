@@ -9,7 +9,8 @@ namespace ETLG.Data
     {
 
         public int Id { get; set; }
-        public int level { get; set; }
+        public int Level { get; set; }
+        public int ActiveState { get; set; }
         public bool IsActiveSkill { get; set; }
         public bool IsCombatSkill { get; set; }
 
@@ -20,6 +21,18 @@ namespace ETLG.Data
             this.IsActiveSkill = skillData.IsCombatSkill;
         }
 
+        public PlayerSkillData(int Id, int ActiveState, int Level)
+        {
+            this.Id = Id;
+            this.ActiveState = ActiveState;
+            this.Level = Level;
+        }
+
+        // 0 locked 1 unlocked 2 level != 0
+        public void setActiveState(int state)
+        {
+            this.ActiveState = state; 
+        }
 
     }
 

@@ -12,7 +12,7 @@ namespace ETLG.Data
     {
         private DRSpaceship dRSpaceship;
 
-        private SkillData[] skillDatas;
+        //private SkillData[] skillDatas;
 
 
         // 获取ID
@@ -152,23 +152,38 @@ namespace ETLG.Data
             }
         }
 
-        public int ProjectileId
+        public int[] SkillIds
         {
             get
             {
-                return dRSpaceship.ProjectileId;
+                return dRSpaceship.Skills;
             }
         }
 
-        public SpaceshipData(DRSpaceship dRSpaceship, SkillData[] skillDatas)
+        /*        public int ProjectileId
+                {
+                    get
+                    {
+                        return dRSpaceship.ProjectileId;
+                    }
+                }*/
+
+
+
+        public SpaceshipData(DRSpaceship dRSpaceship)
+        {
+            this.dRSpaceship = dRSpaceship;
+        }
+
+ /*       public SpaceshipData(DRSpaceship dRSpaceship, SkillData[] skillDatas)
         {
             this.dRSpaceship = dRSpaceship;
             this.skillDatas = skillDatas;
-        }
+        }*/
 
         // 获取飞船初始技能信息
 
-        public SkillData[] GetSkillDatas()
+/*        public SkillData[] GetSkillDatas()
         {
             return skillDatas;
         }
@@ -185,7 +200,7 @@ namespace ETLG.Data
         {
             return skillDatas == null ? 0 : skillDatas.Length - 1;
         }
-
+*/
     }
 }
 
