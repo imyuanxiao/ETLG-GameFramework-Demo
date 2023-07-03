@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameFramework;
+using GameFramework.Fsm;
 using ETLG.Data;
 
 namespace ETLG
@@ -17,10 +18,19 @@ namespace ETLG
         [SerializeField] private Transform bulletSpawnPosition;
 
         private SpaceshipController controller;
+        private IFsm<SpaceshipAttack> m_Fsm = null;
 
         private void Awake() 
         {
             controller = GetComponent<SpaceshipController>();
+        }
+
+        private void OnEnable() 
+        {
+            m_Fsm = GameEntry.Fsm.CreateFsm("PlayerSpaceshipBattleSkill", this, new DefaultSkill(), 
+                                                                                new CloudComputing(), 
+                                                                                new ElectronicWarfare());
+            m_Fsm.Start<DefaultSkill>();
         }
 
         private void Update() 
@@ -35,7 +45,6 @@ namespace ETLG
         private void InitPlayerBullet(Bullet bullet)
         {
             ProjectileData bulletData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Bullet);
-            // SpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship;
             PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
 
             bullet.damage = (int) spaceshipData.Firepower + (int) bulletData.Damage;
@@ -53,6 +62,10 @@ namespace ETLG
         {
             ProjectileData ionBeamData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.IonBeam);
             PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+        }
+
+        private void OnDisable() {
+            GameEntry.Fsm.DestroyFsm<SpaceshipAttack>("PlayerSpaceshipBattleSkill");
         }
     }
 }

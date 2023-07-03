@@ -36,6 +36,10 @@ namespace ETLG
             {
                 fireRate = 2f;
             }
+            else if (controller.basicEnemyType == BasicEnemyType.AI)
+            {
+                // TODO
+            }
             else 
             {
                 Log.Error("No Basic Enemy of type [" + controller.basicEnemyType.ToString() + "]");
@@ -66,7 +70,9 @@ namespace ETLG
 
         private void InitBasicEnemyBullet(Bullet bullet)
         {
-            bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
+            // bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
+            // bullet.damage = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyAttackBase;
+            bullet.damage = BattleManager.Instance.basicEnemyAttackBase;
             bullet.flyingDirection = new Vector3(0, 0, -1);
             bullet.flyingSpeed = 1000;
         }

@@ -43,6 +43,13 @@ namespace ETLG
             m_Fsm.Start<VerticalFire>();
         }
 
+        public void InitBossEnemyBullet(Bullet bullet, Vector3 direction)
+        {
+            bullet.damage = 20; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
+            bullet.flyingDirection = direction;
+            bullet.flyingSpeed = 1000;
+        }
+
         private void OnDisable() 
         {
             StopAllCoroutines();

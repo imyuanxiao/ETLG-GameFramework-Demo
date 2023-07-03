@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
+using TMPro;
+using ETLG.Data;
 
 namespace ETLG
 {
-    public class UIHealthBar : UGuiFormEx
+    public class UIBattleInfo : UGuiFormEx
     {
+        public TextMeshProUGUI healthValue;
+        public TextMeshProUGUI shieldValue;
         public Image currentHealthImage;
         public Image currentShieldImage;
+        public TextMeshProUGUI nameLabel;
+        public TextMeshProUGUI attack;
+        public TextMeshProUGUI defense;
+        public Image[] skills;
         private Health health;
         private int maxHealth;
         private int currentHealth;
@@ -30,20 +38,30 @@ namespace ETLG
             {
                 Log.Error("Not valid health data");
             }
-            maxShield = 1;
+
+            nameLabel.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.NameId;
+            attack.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower.ToString();
+            defense.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Shields.ToString();
+            int skillNum =  GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getSkillsByType("combat").Count;
+            Debug.Log("Skill Count: " + skillNum);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
+            attack.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower.ToString();
+            defense.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Shields.ToString();
+
+            healthValue.text = health.CurrentHealth + " / " + health.MaxHealth;
+            shieldValue.text = health.CurrentShield + " / " + health.MaxShield;
+
             maxHealth = health.MaxHealth;
             currentHealth = health.CurrentHealth;
+            currentHealthImage.fillAmount = (float) currentHealth / maxHealth;
 
             maxShield = health.MaxShield;
             currentShield = health.CurrentShield;
-
-            currentHealthImage.fillAmount = (float) currentHealth / maxHealth;
             currentShieldImage.fillAmount = (float) currentShield / maxShield;
         }
 

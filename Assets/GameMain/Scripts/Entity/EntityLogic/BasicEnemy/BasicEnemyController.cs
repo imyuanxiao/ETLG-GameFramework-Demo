@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ETLG
 {
-    public enum BasicEnemyType {BasicEnemy1, BasicEnemy2, BasicEnemy3} 
+    public enum BasicEnemyType {BasicEnemy1, BasicEnemy2, BasicEnemy3, AI} 
     public class BasicEnemyController : MonoBehaviour
     {
         public BasicEnemyType basicEnemyType;

@@ -51,7 +51,7 @@ namespace ETLG
                 {
                     GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
                                                                 ObjectPoolManager.PoolType.GameObject);
-                    InitBossEnemyBullet(bullet.GetComponent<Bullet>(), new Vector3(0, 0, -1));
+                    bossEnemyAttack.InitBossEnemyBullet(bullet.GetComponent<Bullet>(), new Vector3(0, 0, -1));
                     bulletCnt++;
                 }
             }
@@ -71,13 +71,6 @@ namespace ETLG
         protected override void OnDestroy(IFsm<BossEnemyAttack> fsm)
         {
             base.OnDestroy(fsm);
-        }
-
-        private void InitBossEnemyBullet(Bullet bullet, Vector3 direction)
-        {
-            bullet.damage = 20; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
-            bullet.flyingDirection = direction;
-            bullet.flyingSpeed = 1000;
         }
     }
 }

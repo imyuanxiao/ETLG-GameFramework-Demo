@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameFramework;
+using UnityGameFramework.Runtime;
+using ETLG.Data;
 
 namespace ETLG
 {
@@ -23,6 +26,12 @@ namespace ETLG
         [HideInInspector] public int basicEnemyPassed = 0;
 
         [HideInInspector] public string bossType;
+        [HideInInspector] public Entity bossEnemyEntity;
+        [HideInInspector] public int basicEnemyAttackBase; // = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
+        [HideInInspector] public int basicEnemyHealthBase; // = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
+
+        [Header("AI Spaceships")]
+        public Transform[] AISpaceshipSpawnPoints;
 
         private IEnumerator spawnBasicEnemiesCoroutine;
 
@@ -30,6 +39,8 @@ namespace ETLG
         {
             base.Awake();
             spawnBasicEnemiesCoroutine = SpawnBasicEnemiesRoutine();
+            basicEnemyAttackBase = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
+            basicEnemyHealthBase = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
         }
 
 

@@ -37,7 +37,7 @@ namespace ETLG
                 return;
             }
 
-            m_Fsm = GameEntry.Fsm.CreateFsm("SpaceshipFsm", this, new ElectronicWarfare(), new FireWall(), new Medicalsupport());
+            // m_Fsm = GameEntry.Fsm.CreateFsm("SpaceshipFsm", this, new ElectronicWarfare(), new FireWall(), new Medicalsupport());
 
             // Debug.Log(EntityDataSpaceship.SpaceshipData.EntityId);
             // Debug.Log(EntityDataSpaceship.SpaceshipData.Firepower);
@@ -47,7 +47,7 @@ namespace ETLG
         protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
-            GameEntry.Fsm.DestroyFsm<EntitySpaceship>("SpaceshipFsm");
+            // GameEntry.Fsm.DestroyFsm<EntitySpaceship>("SpaceshipFsm");
             m_Fsm = null;
         }
     }

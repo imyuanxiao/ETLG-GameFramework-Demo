@@ -46,9 +46,25 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
-            bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
-            entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+            LoadBossEnemy();
+            // bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
+            // entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
             // Debug.Log(bossEnemyData.NameId);
+        }
+
+        private void LoadBossEnemy()
+        {
+            switch (this.procedureOwner.GetData<VarString>("BossType"))
+            {
+                case "CloudComputing":
+                    bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
+                    entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+                    break;
+                case "Cybersecurity":
+                    bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CybersecurityBoss);
+                    entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+                    break;
+            }
         }
 
         private void OnChangeScene(object sender, GameEventArgs e)
@@ -79,6 +95,7 @@ namespace ETLG
         private void onBossEnemyShowSuccess(Entity entity)
         {
             bossEnemyEntity = entity;
+            BattleManager.Instance.bossEnemyEntity = entity;
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBossEnemyHealth, entity.GetComponent<Health>());
         }
 
@@ -113,7 +130,7 @@ namespace ETLG
         private void onShowPlayerSuccess(Entity entity)
         {
             spaceShipEntity = entity;
-            // GameEntry.UI.OpenUIForm(EnumUIForm.UIBossEnemyHealth, entity.GetComponent<Health>());
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleInfo, entity.GetComponent<Health>());
         }
     }
 }
