@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameFramework.Fsm;
+using GameFramework.Event;
 
 namespace ETLG
 {
@@ -18,6 +19,8 @@ namespace ETLG
         private int bulletCnt = 0;
         private bool changeDirection = false;
         private int totalBulletNum;
+
+        private bool changeToCriticalHit = false;
 
 
         public SpiralFire(BossEnemyAttack bossEnemyAttack)
@@ -39,6 +42,17 @@ namespace ETLG
         protected override void OnEnter(IFsm<BossEnemyAttack> fsm)
         {
             base.OnEnter(fsm);
+            changeToCriticalHit = false;
+            // listen for critical hit event
+            GameEntry.Event.Subscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
+        }
+
+        private void OnCriticalHit(object sender, GameEventArgs e)
+        {
+            EnemyCriticalHitEventArgs ne = (EnemyCriticalHitEventArgs) e;
+            if (ne == null)
+                return;
+            changeToCriticalHit = true;
         }
 
         protected override void OnUpdate(IFsm<BossEnemyAttack> fsm, float elapseSeconds, float realElapseSeconds)
@@ -69,11 +83,17 @@ namespace ETLG
             {
                 ChangeState<VerticalFire>(fsm);
             }
+
+            if (changeToCriticalHit)
+            {
+                ChangeState<CriticalHit>(fsm);
+            }
         }
 
         protected override void OnLeave(IFsm<BossEnemyAttack> fsm, bool isShutdown)
         {
             base.OnLeave(fsm, isShutdown);
+            GameEntry.Event.Unsubscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
             elapsedTime = 0;
             bulletCnt = 0;
             this.totalBulletNum = this.bulletNum * this.bulletRound;

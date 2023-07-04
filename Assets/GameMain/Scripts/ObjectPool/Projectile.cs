@@ -52,26 +52,6 @@ namespace ETLG
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 
-        // private void Update() 
-        // {
-        //     if (transform.position.x < BattleManager.Instance.leftBoundary.position.x)
-        //     {
-        //         ObjectPoolManager.ReturnObjectToPool(gameObject);
-        //     }
-        //     else if (transform.position.x > BattleManager.Instance.rightBoundary.position.x)
-        //     {
-        //         ObjectPoolManager.ReturnObjectToPool(gameObject);
-        //     }
-        //     else if (transform.position.z < BattleManager.Instance.bottomBoundary.position.z)
-        //     {
-        //         ObjectPoolManager.ReturnObjectToPool(gameObject);
-        //     }
-        //     else if (transform.position.z > BattleManager.Instance.upBoundary.position.z)
-        //     {
-        //         ObjectPoolManager.ReturnObjectToPool(gameObject);
-        //     }
-        // }
-
         protected bool IsOffScreen()
         {
             if (transform.position.x < BattleManager.Instance.leftBoundary.position.x)

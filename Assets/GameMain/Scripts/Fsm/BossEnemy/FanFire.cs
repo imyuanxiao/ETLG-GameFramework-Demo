@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameFramework.Fsm;
 using ETLG.Data;
+using GameFramework.Event;
+using System;
 
 namespace ETLG
 {
@@ -18,6 +20,8 @@ namespace ETLG
 
         private float elapsedTime = 0;
         private int fireRoundCnt = 0;
+
+        private bool changeToCriticalHit = false;
 
         public FanFire(BossEnemyAttack bossEnemyAttack)
         {
@@ -40,6 +44,18 @@ namespace ETLG
         protected override void OnEnter(IFsm<BossEnemyAttack> fsm)
         {
             base.OnEnter(fsm);
+            changeToCriticalHit = false;
+            // listen for critical hit event
+            GameEntry.Event.Subscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
+        }
+
+        // if next attack is critical hit, then change to CriticalHit State
+        private void OnCriticalHit(object sender, GameEventArgs e)
+        {
+            EnemyCriticalHitEventArgs ne = (EnemyCriticalHitEventArgs) e;
+            if (ne == null)
+                return;
+            changeToCriticalHit = true;
         }
 
         protected override void OnUpdate(IFsm<BossEnemyAttack> fsm, float elapseSeconds, float realElapseSeconds)
@@ -67,11 +83,19 @@ namespace ETLG
             {
                 ChangeState<SpiralFire>(fsm);
             }
+
+            if (changeToCriticalHit)
+            {
+                ChangeState<CriticalHit>(fsm);
+            }
         }
 
         protected override void OnLeave(IFsm<BossEnemyAttack> fsm, bool isShutdown)
         {
             base.OnLeave(fsm, isShutdown);
+
+            GameEntry.Event.Unsubscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
+
             fireRoundCnt = 0;
             elapsedTime = 0;
         }
