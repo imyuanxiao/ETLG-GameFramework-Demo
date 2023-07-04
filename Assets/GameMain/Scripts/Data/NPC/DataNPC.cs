@@ -15,7 +15,7 @@ namespace ETLG.Data
         // NPC数据键值对载体，通过ID获取NPC信息
         private Dictionary<int, NPCData> dicNPCData;
 
-        public int currentNPC;
+        public int currentNPCId { get; set; }
 
         protected override void OnInit()
         {
@@ -84,13 +84,13 @@ namespace ETLG.Data
 
         public NPCData GetCurrentNPCData()
         {
-            if (!dicNPCData.ContainsKey(currentNPC))
+            if (!dicNPCData.ContainsKey(currentNPCId))
             {
-                Log.Error("Can not find NPC data id '{0}'.", currentNPC);
+                Log.Error("Can not find NPC data id '{0}'.", currentNPCId);
                 return null;
             }
 
-            return dicNPCData[currentNPC];
+            return dicNPCData[currentNPCId];
         }
 
 

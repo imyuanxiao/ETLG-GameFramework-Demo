@@ -15,7 +15,7 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
-        private int? currentNPCDialogUIID;
+        private int? currentNPCUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -30,8 +30,9 @@ namespace ETLG
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
-            GameEntry.Event.Subscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
-            GameEntry.Event.Subscribe(NPCDialogCloseEventArgs.EventId, OnNPCDialogClose);
+
+            GameEntry.Event.Subscribe(NPCUIOpenEventArgs.EventId, OnNPCUIOpen);
+            GameEntry.Event.Subscribe(NPCUICloseEventArgs.EventId, OnNPCUIClose);
 
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
@@ -93,9 +94,9 @@ namespace ETLG
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
-            GameEntry.Event.Unsubscribe(NPCDialogOpenEventArgs.EventId, OnNPCDialogOpen);
+            GameEntry.Event.Unsubscribe(NPCUIOpenEventArgs.EventId, OnNPCUIOpen);
 
-            GameEntry.Event.Unsubscribe(NPCDialogCloseEventArgs.EventId, OnNPCDialogClose);
+            GameEntry.Event.Unsubscribe(NPCUICloseEventArgs.EventId, OnNPCUIClose);
 
 
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
@@ -138,35 +139,43 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
 
         }
-        private void OnNPCDialogOpen(object sender, GameEventArgs e)
+        private void OnNPCUIOpen(object sender, GameEventArgs e)
         {
 
-            NPCDialogOpenEventArgs ne = (NPCDialogOpenEventArgs)e;
+            NPCUIOpenEventArgs ne = (NPCUIOpenEventArgs)e;
             if (ne == null)
                 return;
 
-            // 根据 Type值打开不同 UI
-            if(ne.Type == Constant.Event.NPC_TALK)
+            if (currentNPCUIID != null)
             {
-                //需要关闭之前打开的UI
-                if(currentNPCDialogUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)currentNPCDialogUIID);
-                }
+                GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+            }
 
-                currentNPCDialogUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+            if (ne.Type == Constant.Type.NPC_UI_TALK)
+            {
+                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+            }
+
+            else if (ne.Type == Constant.Type.NPC_UI_TRADE)
+            {
+                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
             }
 
         }
 
-        private void OnNPCDialogClose(object sender, GameEventArgs e)
+        private void OnNPCUIClose(object sender, GameEventArgs e)
         {
 
-            NPCDialogCloseEventArgs ne = (NPCDialogCloseEventArgs)e;
+            NPCUICloseEventArgs ne = (NPCUICloseEventArgs)e;
             if (ne == null)
                 return;
 
-            currentNPCDialogUIID = null;
+            if (currentNPCUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+            }
+
+            currentNPCUIID = null;
 
         }
 

@@ -47,7 +47,7 @@ namespace ETLG
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCDialogCloseEventArgs.Create());
+            GameEntry.Event.Fire(this, NPCUICloseEventArgs.Create());
             this.Close();
 
         }

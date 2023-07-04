@@ -44,7 +44,6 @@ namespace ETLG
             npc_name.text = npcData.Name;
             npc_money.text = npcData.Description;
 
-
             ShowPlayerArtifactIcons(PlayerContainer, Constant.Type.ARTIFACT_TRADE);
 
         }
@@ -57,10 +56,12 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
-    /*        GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCDialogCloseEventArgs.Create());
-            this.Close();*/
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            GameEntry.Event.Fire(this, NPCUICloseEventArgs.Create());
+            this.Close();
+
         }
+
 
         private void ShowPlayerArtifactIcons(Transform container, int type)
         {

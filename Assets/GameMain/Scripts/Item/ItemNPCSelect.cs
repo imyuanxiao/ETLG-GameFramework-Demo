@@ -19,12 +19,15 @@ namespace ETLG
 
         public Button tradeButton;
 
+        private DataNPC dataNPC;
         private NPCData npcData;
 
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+
+            dataNPC = GameEntry.Data.GetData<DataNPC>();
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -57,22 +60,18 @@ namespace ETLG
         public void OnTalkButtonClick()
         {
 
-            GameEntry.Data.GetData<DataNPC>().currentNPC = npcData.Id;
+            dataNPC.currentNPCId = npcData.Id;
 
-            // 点击事件
-            Log.Debug("点击对话按钮");
-            GameEntry.Event.Fire(this, NPCDialogOpenEventArgs.Create(Constant.Event.NPC_TALK));
+            GameEntry.Event.Fire(this, NPCUIOpenEventArgs.Create(Constant.Type.NPC_UI_TALK));
 
         }
 
         public void OnTradeButtonClick()
         {
 
-            GameEntry.Data.GetData<DataNPC>().currentNPC = npcData.Id;
+            dataNPC.currentNPCId = npcData.Id;
 
-            // 点击事件
-            Log.Debug("点击交易按钮");
-            GameEntry.Event.Fire(this, NPCDialogOpenEventArgs.Create(Constant.Event.NPC_TRADE));
+            GameEntry.Event.Fire(this, NPCUIOpenEventArgs.Create(Constant.Type.NPC_UI_TRADE));
 
         }
 
