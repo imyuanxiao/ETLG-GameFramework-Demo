@@ -146,7 +146,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, null);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.ARTIFACT_ICON_DEFAULT);
                 });
 
             }

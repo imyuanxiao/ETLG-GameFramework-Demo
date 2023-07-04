@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-04 12:05:55.934
+// 生成时间：2023-07-04 14:31:17.795
 //------------------------------------------------------------
 
 using GameFramework;
@@ -64,9 +64,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取描述。
+        /// 获取初始金钱。
         /// </summary>
-        public string Description
+        public int Money
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取初始道具(道具ID,数量)。
+        /// </summary>
+        public int[] Artifacts
         {
             get;
             private set;
@@ -96,7 +105,8 @@ namespace ETLG
             Name = columnStrings[index++];
             Avatar = columnStrings[index++];
             Type = columnStrings[index++];
-            Description = columnStrings[index++];
+            Money = int.Parse(columnStrings[index++]);
+                Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
                 Quests = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
@@ -113,7 +123,8 @@ namespace ETLG
                     Name = binaryReader.ReadString();
                     Avatar = binaryReader.ReadString();
                     Type = binaryReader.ReadString();
-                    Description = binaryReader.ReadString();
+                    Money = binaryReader.Read7BitEncodedInt32();
+                        Artifacts = binaryReader.ReadInt32Array();
                         Quests = binaryReader.ReadInt32Array();
                 }
             }

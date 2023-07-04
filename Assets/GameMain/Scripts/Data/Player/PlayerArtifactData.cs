@@ -18,6 +18,13 @@ namespace ETLG.Data
             this.Type = artifactDataBase.Type;
         }
 
+        public PlayerArtifactData(ArtifactDataBase artifactDataBase, int Number)
+        {
+            this.Id = artifactDataBase.Id;
+            this.Type = artifactDataBase.Type;
+            this.Number = Number;
+        }
+
     }
 
 }

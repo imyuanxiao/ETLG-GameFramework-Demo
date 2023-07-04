@@ -16,6 +16,7 @@ namespace ETLG
         private bool changeScene = false;
 
         private int? currentNPCUIID;
+        private int? artifactInfoUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -36,9 +37,17 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
+            GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
+            GameEntry.Event.Subscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
+
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
+
+            currentNPCUIID = null;
+            artifactInfoUIID = null;
+
+
 
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
@@ -106,8 +115,11 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
+            GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
+            GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
 
-
+            artifactInfoUIID = null;
+            currentNPCUIID = null;
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -198,6 +210,27 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetInfoForm);
 
 
+        }
+
+        private void OnArtifactInfoOpen(object sender, GameEventArgs e)
+        {
+            ArtifactInfoOpenEventArgs ne = (ArtifactInfoOpenEventArgs)e;
+            if (ne == null)
+                return;
+            artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
+
+        }
+
+        private void OnArtifactInfoClose(object sender, GameEventArgs e)
+        {
+            ArtifactInfoCloseEventArgs ne = (ArtifactInfoCloseEventArgs)e;
+            if (ne == null)
+                return;
+            if (artifactInfoUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
+            }
+            artifactInfoUIID = null;
         }
 
 

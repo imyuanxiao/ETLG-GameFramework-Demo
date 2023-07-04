@@ -41,23 +41,24 @@ namespace ETLG.Data
 
             foreach (var dRNPC in dRNPCs)
             {
-                QuestData[] quests = new QuestData[dRNPC.Quests.Length];
+                /*        QuestData[] quests = new QuestData[dRNPC.Quests.Length];
 
-                for(int i = 0; i < dRNPC.Quests.Length; i++)
-                {
-                    QuestData questData = dataQuest.GetQuestData(dRNPC.Quests[i]);
+                        for(int i = 0; i < dRNPC.Quests.Length; i++)
+                        {
+                            QuestData questData = dataQuest.GetQuestData(dRNPC.Quests[i]);
 
-                    if (questData == null)
-                    {
-                        throw new System.Exception(string.Format("Can not find quest id '{0}' in DataTable Quest.", dRNPC.Quests[i]));
-                    }
-                    quests[i] = questData;
-                }
+                            if (questData == null)
+                            {
+                                throw new System.Exception(string.Format("Can not find quest id '{0}' in DataTable Quest.", dRNPC.Quests[i]));
+                            }
+                            quests[i] = questData;
+                        }
 
-                dicNPCData.Add(dRNPC.Id, new NPCData(dRNPC, quests));
+                        dicNPCData.Add(dRNPC.Id, new NPCData(dRNPC, quests));*/
+                dicNPCData.Add(dRNPC.Id, new NPCData(dRNPC)); 
 
             }
-            
+
         }
 
         protected override void OnUnload()

@@ -4,7 +4,7 @@ namespace ETLG.Data
     public sealed class NPCData
     {
         private DRNPC dRNPC;
-        private QuestData[] quests;
+       // private QuestData[] quests;
         
         public int Id
         {
@@ -38,14 +38,22 @@ namespace ETLG.Data
             }
         }
 
-        public string Description
+        public int Money
         {
             get
             {
-                return dRNPC.Description;
+                return dRNPC.Money;
             }
         }
-        
+
+        public int[] Artifacts
+        {
+            get
+            {
+                return dRNPC.Artifacts;
+            }
+        }
+
         public int[] Quests
         {
             get
@@ -54,13 +62,16 @@ namespace ETLG.Data
             }
         }
 
-
         // 构造方法
-        public NPCData(DRNPC dRNPC, QuestData[] quests)
+        public NPCData(DRNPC dRNPC)
+        {
+            this.dRNPC = dRNPC;
+        }
+/*        public NPCData(DRNPC dRNPC, QuestData[] quests)
         {
             this.dRNPC = dRNPC;
             this.quests = quests;
-        }
+        }*/
 
     }
 

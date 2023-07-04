@@ -24,7 +24,8 @@ namespace ETLG
 
         public TextMeshProUGUI artifactNumber;
 
-        public NPCData npcData;
+        public int Type { get; private set; }
+
 
         protected override void OnInit(object userData)
         {
@@ -40,11 +41,17 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
-            if(npcData != null)
+
+            if (Type == Constant.Type.TRADE_PLAYER_NPC)
             {
-                Log.Debug("trading with NPC");
+                Log.Debug("trade Player to NPC");
             }
-            
+
+            if (Type == Constant.Type.TRADE_NPC_PLAYER)
+            {
+                Log.Debug("trade NPC to Player");
+            }
+
 
         }
 
@@ -52,7 +59,16 @@ namespace ETLG
         {
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 newPosition = itemPosition + new Vector3(-50f, 0f, 0f);
+
+            // artifactInfo new position
+            Vector3 offset = new Vector3(-10f, 0f, 0f);
+
+            if(Type == Constant.Type.TRADE_NPC_PLAYER)
+            {
+                offset = new Vector3(400f, -130f, 0f);
+            }
+
+            Vector3 newPosition = itemPosition + offset;
 
             dataArtifact.currentPlayerArtifactData = this.playerArtifact;
             dataArtifact.artifactInfoPosition = newPosition;
@@ -73,11 +89,11 @@ namespace ETLG
 
         }
 
-
-        public void SetArtifactData(PlayerArtifactData playerArtifact, NPCData npcData)
+        public void SetArtifactData(PlayerArtifactData playerArtifact, int Type)
         {
             this.playerArtifact = playerArtifact;
-            this.npcData = npcData;
+
+            this.Type = Type;
 
             this.artifactNumber.text = playerArtifact.Number.ToString();
 

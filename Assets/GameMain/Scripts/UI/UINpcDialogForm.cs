@@ -33,7 +33,7 @@ namespace ETLG
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
-            npc_description.text = npcData.Description;
+            npc_description.text = "To be added in Localization";
 
         }
 
