@@ -32,6 +32,7 @@ namespace ETLG.Data
 
         // 当前展示skillInfo的UI位置
         public Vector3 skillInfoPosition { get; set; }
+        public bool hideSkillInfoBottomPart { get; set; }
 
         protected override void OnInit()
         {

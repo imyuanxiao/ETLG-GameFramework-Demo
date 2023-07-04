@@ -8,11 +8,22 @@
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
 
+
+
+
             public const string ICON_LOST = "iconLost";
 
+            // artifact icon type
             public const int ARTIFACT_ICON_DEFAULT = 1;
             public const int TRADE_NPC_PLAYER = 2;
             public const int TRADE_PLAYER_NPC = 3;
+
+            // skill icon type
+            public const int SKILL_ICON_DEFAULT = 1;
+            public const int SKILL_ICON_SELECT_SPACESHIP = 2;
+            public const int SKILL_SKILL_TREE_MAP_UP = 3;
+            public const int SKILL_SKILL_TREE_MAP_DOWN = 4;
+
 
             public const int NPC_UI_TALK = 1;
             public const int NPC_UI_TRADE = 2;

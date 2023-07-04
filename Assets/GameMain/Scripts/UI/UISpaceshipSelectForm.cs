@@ -245,7 +245,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one * 0.5f;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + (i++) * offset;
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(tmpPlayerSkill);
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(tmpPlayerSkill, Constant.Type.SKILL_ICON_SELECT_SPACESHIP);
                 });
             }
         }

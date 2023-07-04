@@ -30,7 +30,9 @@ namespace ETLG
         public TextMeshProUGUI CurrentLevelDescription;
         public TextMeshProUGUI NextLevelDescription;
 
+        public GameObject bottomPart;
 
+        public bool hideBottomPart { get; set; }
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -44,11 +46,12 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-            skillData = dataSkill.GetCurrentShowSkillData();
 
+            skillData = dataSkill.GetCurrentShowSkillData();
             playerSkillData = dataSkill.currentPlayerSkillData;
 
             UIContainer.position = dataSkill.skillInfoPosition;
+            hideBottomPart = dataSkill.hideSkillInfoBottomPart;
 
             SkillName.text = skillData.Name;
             Domain.text = skillData.Domain;
@@ -56,11 +59,9 @@ namespace ETLG
             IsCombatSkill.text = skillData.IsCombatSkill ? "Combat" : "Explore";
 
             CurrentLevel.text = playerSkillData.Level.ToString();
+            CurrentLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>3 </color> %, increase energy cap by <color=#FF00FF> 3 </color> %.";
 
             SkillDescription.text = skillData.Name + "To be added";
-            CurrentLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>3 </color> %, increase energy cap by <color=#FF00FF> 3 </color> %.";
-            NextLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>5 </color> %, increase energy cap by <color=#FF00FF> 5 </color> %.";
-
 
             // set skill icon            
             Texture texture = Resources.Load<Texture>(AssetUtility.GetSkillIcon(skillData.Id.ToString(), playerSkillData.ActiveState.ToString()));
@@ -69,7 +70,16 @@ namespace ETLG
                 skillIcon.texture = texture;
             }
 
+            if (hideBottomPart)
+            {
+                bottomPart.SetActive(false);
+            }
+            else
+            {
+                bottomPart.SetActive(true);
+                NextLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>5 </color> %, increase energy cap by <color=#FF00FF> 5 </color> %.";
 
+            }
 
         }
 

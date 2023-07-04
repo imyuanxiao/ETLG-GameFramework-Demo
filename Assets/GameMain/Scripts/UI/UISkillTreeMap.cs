@@ -46,14 +46,14 @@ namespace ETLG
 
         private void ShowSkillIconItems()
         {
-            ShowSkillIconByLayer(layer1, 1);
-            ShowSkillIconByLayer(layer2, 2);
-            ShowSkillIconByLayer(layer3, 3);
-            ShowSkillIconByLayer(layer4, 4);
+            ShowSkillIconByLayer(layer1, 1, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
+            ShowSkillIconByLayer(layer2, 2, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
+            ShowSkillIconByLayer(layer3, 3, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
+            ShowSkillIconByLayer(layer4, 4, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
 
         }
 
-        private void ShowSkillIconByLayer(Transform layer, int num)
+        private void ShowSkillIconByLayer(Transform layer, int num, int position)
         {
 
             List<SkillData> skillDatas = dataSkill.GetSkillDataLayer(num);
@@ -70,7 +70,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + skillData.Location[1] * offset;
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(playerSkillData);
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(playerSkillData, position);
                 });
             }
         }

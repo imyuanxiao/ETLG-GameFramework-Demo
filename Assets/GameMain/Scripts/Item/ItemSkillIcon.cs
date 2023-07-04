@@ -22,6 +22,8 @@ namespace ETLG
 
         public Button iconButton;
 
+        public int Type { get; private set; }
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -36,7 +38,11 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
-            // TODO 显示当前技能所需的升级资源和确认按钮
+
+            if (Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
+            {
+                return;
+            }
 
         }
 
@@ -44,11 +50,20 @@ namespace ETLG
         {
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 newPosition = itemPosition + new Vector3(100f, 0f, 0f);
+            Vector3 offset = new Vector3(100f, 0f, 0f);
+
+            if (Type == Constant.Type.SKILL_SKILL_TREE_MAP_UP)
+            {
+                offset = new Vector3(100f, -500f, 0f);
+            }
+
+            Vector3 newPosition = itemPosition + offset;
 
             dataSkill.currentPlayerSkillData = this.playerSkillData;
 
             dataSkill.skillInfoPosition = newPosition;
+
+            dataSkill.hideSkillInfoBottomPart = Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP ? true : false;
 
             // 显示skill info ui 的事件，传入UI应该显示的位置
             GameEntry.Event.Fire(this, SkillInfoOpenEventArgs.Create());
@@ -66,9 +81,11 @@ namespace ETLG
 
         }
 
-        public void SetSkillData(PlayerSkillData playerSkillData)
+        public void SetSkillData(PlayerSkillData playerSkillData, int Type)
         {
             this.playerSkillData = playerSkillData;
+
+            this.Type = Type;
 
             string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString(), playerSkillData.ActiveState.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
