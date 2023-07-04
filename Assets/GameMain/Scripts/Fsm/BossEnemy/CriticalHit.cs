@@ -43,7 +43,24 @@ namespace ETLG
             GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, laserSpawnPos.position, laserSpawnPos.rotation, ObjectPoolManager.PoolType.GameObject);
             laser.transform.LookAt(target.transform);
             bossEnemyAttack.InitBossEnemyLaser(laser.GetComponent<Laser>(), laser.transform.forward);
-            ChangeState<VerticalFire>(fsm);
+            // ChangeState<VerticalFire>(fsm);
+            ReturnToState(fsm);
+        }
+
+        private void ReturnToState(IFsm<BossEnemyAttack> fsm)
+        {
+            switch (fsm.GetData<VarString>("returnState"))
+            {
+                case "FanFire":
+                    ChangeState<FanFire>(fsm);
+                    break;
+                case "SpiralFire":
+                    ChangeState<SpiralFire>(fsm);
+                    break;
+                case "VerticalFire":
+                    ChangeState<VerticalFire>(fsm);
+                    break;
+            }
         }
 
         protected override void OnLeave(IFsm<BossEnemyAttack> fsm, bool isShutdown)

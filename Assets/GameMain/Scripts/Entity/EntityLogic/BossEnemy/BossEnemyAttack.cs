@@ -42,7 +42,8 @@ namespace ETLG
                 new VerticalFire(GetComponent<BossEnemyAttack>()),  //(verticalFireRate, verticalFireRound, bulletPrefab, bulletSpawnPositions), 
                 new FanFire(GetComponent<BossEnemyAttack>()), // (fanFireRate, fanFireRound, fanBulletNum, fanBulletAngle, bulletPrefab, middleBulletSpawnPosition), 
                 new SpiralFire(GetComponent<BossEnemyAttack>()),
-                new CriticalHit(GetComponent<BossEnemyAttack>()));
+                new CriticalHit(GetComponent<BossEnemyAttack>()),
+                new EnemyRespawn(GetComponent<BossEnemyHealth>()));
             m_Fsm.Start<VerticalFire>();
         }
 

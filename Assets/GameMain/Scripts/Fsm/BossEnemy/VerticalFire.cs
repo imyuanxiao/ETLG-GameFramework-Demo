@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameFramework.Fsm;
 using GameFramework.Event;
+using UnityGameFramework.Runtime;
+using System;
 
 namespace ETLG
 {
@@ -18,6 +20,7 @@ namespace ETLG
         private BossEnemyAttack bossEnemyAttack;
 
         private bool changeToCriticalHit = false;
+        private bool changeToEnemyRespawn = false;
 
         public VerticalFire(BossEnemyAttack bossEnemyAttack)
         {
@@ -36,9 +39,23 @@ namespace ETLG
         protected override void OnEnter(IFsm<BossEnemyAttack> fsm)
         {
             base.OnEnter(fsm);
+
             changeToCriticalHit = false;
+            changeToEnemyRespawn = false;
+
             // listen for critical hit event
             GameEntry.Event.Subscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
+            GameEntry.Event.Subscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
+        }
+
+        private void OnEnemyRespawn(object sender, GameEventArgs e)
+        {
+            EnemyRespawnEventArgs ne = (EnemyRespawnEventArgs) e;
+            if (ne == null)
+            {
+                Log.Error("Invalid Event : EnemyRespawnEventArgs");
+            }
+            changeToEnemyRespawn = true;
         }
 
         private void OnCriticalHit(object sender, GameEventArgs e)
@@ -72,9 +89,25 @@ namespace ETLG
             {
                 ChangeState<FanFire>(fsm);
             }
+
+            // if (changeToCriticalHit)
+            // {
+            //     fsm.SetData<VarString>("returnState", "FanFire");
+            //     ChangeState<CriticalHit>(fsm);
+            // }
+            ChangeToSkillState(fsm);
+        }
+
+        private void ChangeToSkillState(IFsm<BossEnemyAttack> fsm)
+        {
             if (changeToCriticalHit)
             {
+                fsm.SetData<VarString>("returnState", "FanFire");
                 ChangeState<CriticalHit>(fsm);
+            }
+            else if (changeToEnemyRespawn)
+            {
+                ChangeState<EnemyRespawn>(fsm);
             }
         }
 
@@ -82,6 +115,7 @@ namespace ETLG
         {
             base.OnLeave(fsm, isShutdown);
             GameEntry.Event.Unsubscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
+            GameEntry.Event.Unsubscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
             elapsedTime = 0;
             bulletCnt = 0;
         }

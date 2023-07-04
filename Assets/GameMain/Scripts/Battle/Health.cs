@@ -30,7 +30,7 @@ namespace ETLG
 
         protected abstract void OnDead();
 
-        protected IEnumerator CheckDeath()
+        public IEnumerator CheckDeath()
         {
             while (true) 
             {

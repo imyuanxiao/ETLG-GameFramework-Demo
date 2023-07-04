@@ -45,7 +45,17 @@ namespace ETLG
 
         protected override void OnDead()
         {
-            GameEntry.Event.Fire(this, BattleWinEventArgs.Create(controller.bossEnemyType));
+            // if the current enemy can respawn
+            // if (GetComponent<Respawn>() != null)
+            // {
+            //     Debug.Log("Respawn!!!");
+            //     GameEntry.Event.Fire(this, EnemyRespawnEventArgs.Create(this));
+            // }
+            // otherwise, player wins the battle 
+            if (GetComponent<Respawn>() == null)
+            {
+                GameEntry.Event.Fire(this, BattleWinEventArgs.Create(controller.bossEnemyType));
+            }
         }
 
         private void OnDisable() 
