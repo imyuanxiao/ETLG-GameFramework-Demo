@@ -10,14 +10,14 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class UISkillInfoForm : UGuiFormEx
+    public class UISkillUpgradeForm : UGuiFormEx
     {
 
         public DataSkill dataSkill;
         private SkillData skillData;
-        public PlayerSkillData playerSkillData;
 
         public Transform UIContainer;
+        public Transform CostsContainer;
 
         public RawImage skillIcon;
         public TextMeshProUGUI SkillName = null;
@@ -26,13 +26,8 @@ namespace ETLG
         public TextMeshProUGUI IsCombatSkill;
         public TextMeshProUGUI SkillDescription;
 
-        public TextMeshProUGUI CurrentLevel;
-        public TextMeshProUGUI CurrentLevelDescription;
-        public TextMeshProUGUI NextLevelDescription;
-
-        public GameObject bottomPart;
-
-        public bool hideBottomPart { get; set; }
+        public Button CancelButton;
+        public Button OkButton;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -48,40 +43,21 @@ namespace ETLG
             base.OnOpen(userData);
 
             skillData = dataSkill.GetCurrentShowSkillData();
-            playerSkillData = dataSkill.currentPlayerSkillData;
 
             UIContainer.position = dataSkill.skillInfoPosition;
-            hideBottomPart = dataSkill.hideSkillInfoBottomPart;
 
             SkillName.text = skillData.Name;
             Domain.text = skillData.Domain;
             IsActiveSkill.text = skillData.IsActiveSkill ? "Active" : "Passive";
             IsCombatSkill.text = skillData.IsCombatSkill ? "Combat" : "Explore";
 
-            CurrentLevel.text = playerSkillData.Level.ToString();
-            CurrentLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>3 </color> %, increase energy cap by <color=#FF00FF> 3 </color> %.";
-
             SkillDescription.text = skillData.Name + "To be added";
 
             // set skill icon            
-            string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString());
-            Texture texture = Resources.Load<Texture>(texturePath);
-            if (texture == null)
+            Texture texture = Resources.Load<Texture>(AssetUtility.GetSkillIcon(skillData.Id.ToString(), "2"));
+            if (texture != null)
             {
-                texturePath = AssetUtility.GetIconMissing();
-                texture = Resources.Load<Texture>(texturePath);
-            }
-            skillIcon.texture = texture;
-
-            if (hideBottomPart)
-            {
-                bottomPart.SetActive(false);
-            }
-            else
-            {
-                bottomPart.SetActive(true);
-                NextLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>5 </color> %, increase energy cap by <color=#FF00FF> 5 </color> %.";
-
+                skillIcon.texture = texture;
             }
 
         }
@@ -89,7 +65,6 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             skillData = null;
-            playerSkillData = null;
             base.OnClose(isShutdown, userData);
 
         }

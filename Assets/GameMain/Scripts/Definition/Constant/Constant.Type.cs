@@ -7,10 +7,7 @@
             public const int SKILL_LOCKED = 0;
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
-
-
-
-
+            
             public const string ICON_LOST = "iconLost";
 
             // artifact icon type

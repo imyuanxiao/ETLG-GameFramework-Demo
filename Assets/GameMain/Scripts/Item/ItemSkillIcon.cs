@@ -1,9 +1,4 @@
 using ETLG.Data;
-using GameFramework.Resource;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +14,7 @@ namespace ETLG
         private PlayerSkillData playerSkillData;
 
         public RawImage skillIcon;
+        public RawImage bgColorImage;
 
         public Button iconButton;
 
@@ -87,16 +83,31 @@ namespace ETLG
 
             this.Type = Type;
 
-            string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString(), playerSkillData.ActiveState.ToString());
+            string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
-            if (texture != null)
+            if (texture == null)
             {
-                skillIcon.texture = texture;
+                texturePath = AssetUtility.GetIconMissing();
+                texture = Resources.Load<Texture>(texturePath);
             }
-            else
+            skillIcon.texture = texture;
+
+            Color iconColor = Color.white;
+            Color bgColor = Color.white;
+            ColorUtility.TryParseHtmlString("#57595b", out bgColor);
+
+            // change icon style according to playerSkillData.ActivateState
+            if (Constant.Type.SKILL_LOCKED == playerSkillData.ActiveState)
             {
-                Debug.LogError("Failed to load texture: " + texturePath);
+                iconColor = Color.black;
             }
+            else if (Constant.Type.SKILL_UPGRADED == playerSkillData.ActiveState)
+            {
+                ColorUtility.TryParseHtmlString("#4fa6b0", out bgColor);
+            }
+            skillIcon.color = iconColor;
+            bgColorImage.color = bgColor;
+
         }
 
         protected override void OnHide(bool isShutdown, object userData)
