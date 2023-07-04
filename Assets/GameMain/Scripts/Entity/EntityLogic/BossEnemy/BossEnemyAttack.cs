@@ -7,7 +7,9 @@ namespace ETLG
 {
     public class BossEnemyAttack : MonoBehaviour
     {
+        [Header("Projectile Settings")]
         [SerializeField] public GameObject bulletPrefab;
+        [SerializeField] public GameObject laserPrefab;
         [SerializeField] public Transform middleBulletSpawnPosition;
         [SerializeField] public Transform[] bulletSpawnPositions;
         public Rigidbody rb;
@@ -39,7 +41,8 @@ namespace ETLG
             m_Fsm = GameEntry.Fsm.CreateFsm("BossEnemyAttackFsm", this, 
                 new VerticalFire(GetComponent<BossEnemyAttack>()),  //(verticalFireRate, verticalFireRound, bulletPrefab, bulletSpawnPositions), 
                 new FanFire(GetComponent<BossEnemyAttack>()), // (fanFireRate, fanFireRound, fanBulletNum, fanBulletAngle, bulletPrefab, middleBulletSpawnPosition), 
-                new SpiralFire(GetComponent<BossEnemyAttack>()));
+                new SpiralFire(GetComponent<BossEnemyAttack>()),
+                new CriticalHit(GetComponent<BossEnemyAttack>()));
             m_Fsm.Start<VerticalFire>();
         }
 
@@ -48,6 +51,13 @@ namespace ETLG
             bullet.damage = 20; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
             bullet.flyingDirection = direction;
             bullet.flyingSpeed = 1000;
+        }
+
+        public void InitBossEnemyLaser(Laser laser, Vector3 direction)
+        {
+            laser.damage = 200;
+            laser.flyingDirection = direction;
+            laser.flyingSpeed = 4000;
         }
 
         private void OnDisable() 

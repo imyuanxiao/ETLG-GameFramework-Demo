@@ -223,7 +223,6 @@ GameObject:
   - component: {fileID: 5489253909082526992}
   - component: {fileID: 7174589122913585113}
   - component: {fileID: 6185555781753154349}
-  - component: {fileID: 1378593022037596223}
   m_Layer: 6
   m_Name: CybersecurityBoss
   m_TagString: Untagged
@@ -319,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 958959261349634582, guid: e89f1a1e3737cc24f8d7191d840db9f8, type: 3}
+  laserPrefab: {fileID: 1182979019511835346, guid: e6f217899cc5f7348848586e42149d51, type: 3}
   middleBulletSpawnPosition: {fileID: 3753988721648296467}
   bulletSpawnPositions:
   - {fileID: 3758576740156189517}
@@ -366,27 +366,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: 500
   coolDown: 3
---- !u!114 &1378593022037596223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6826751387520525254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 227963c3e81c78d4fb80be699ff51b99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AISpaceshipPrefab: {fileID: 1185807684688036512, guid: b688b13901f462a4c9aad8323d26aaf8, type: 3}
-  AISpaceshipSpawnPosition:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  AISpaceshipNum: 3
-  AISpaceshipHealth: 200
-  AISpaceshipAttack: 10
-  coolDown: 5
 --- !u!1 &9131743869726905006
 GameObject:
   m_ObjectHideFlags: 0
