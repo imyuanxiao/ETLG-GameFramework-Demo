@@ -18,6 +18,9 @@ namespace ETLG
         private int? currentNPCUIID;
         private int? artifactInfoUIID;
 
+        private RaycastHit hitInfo;  // store the information of the object that the ray hitted
+        private PlanetBase currentlyFocusedPlanet = null;
+
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -43,6 +46,7 @@ namespace ETLG
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
+            this.currentlyFocusedPlanet = null;    
 
             currentNPCUIID = null;
             artifactInfoUIID = null;
@@ -54,7 +58,7 @@ namespace ETLG
 
             // 打开UI
             Log.Debug("此处应打开 Map 场景界面");
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+            // GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
 
         }
 
@@ -63,6 +67,20 @@ namespace ETLG
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
+            MouseControl();
+            
+            // Open UI Map Info (for testing purpose only)
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
+                }
+                else
+                {
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+                }
+            }
 
             if (changeScene)
             {
@@ -95,11 +113,43 @@ namespace ETLG
                 procedureOwner.SetData<VarString>("BattleType", "FinalBattle");
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
-
-
-
         }
 
+        private void MouseControl() {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // store the returned value into hitInfo
+            Physics.Raycast(ray, out hitInfo);
+
+            // if left mouse button is clicked and the object that the ray has hit has collider
+            if (Input.GetMouseButtonDown(0) && hitInfo.collider != null) 
+            {
+                // if clicked on a planet
+                if (hitInfo.collider.gameObject.CompareTag("Planet") && currentlyFocusedPlanet == null) 
+                {
+                    currentlyFocusedPlanet = hitInfo.collider.gameObject.GetComponent<PlanetBase>();
+                    GameEntry.Data.GetData<DataPlanet>().currentPlanetID = currentlyFocusedPlanet.PlanetId;
+
+                    GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));
+                    GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
+                }
+                if (hitInfo.collider.gameObject.CompareTag("LandingPoint") && currentlyFocusedPlanet != null)
+                {
+                    LandingPoint currentlyClickedLandingPoint = hitInfo.collider.gameObject.GetComponent<LandingPoint>();
+                    GameEntry.Data.GetData<DataLandingPoint>().currentLandingPointID = currentlyClickedLandingPoint.landingPointId;
+                    GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
+                } 
+            }
+
+            // if right clicked
+            if (Input.GetMouseButtonDown(1)) 
+            {
+                if (currentlyFocusedPlanet != null)
+                {
+                    GameEntry.Event.Fire(this, UnFocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));
+                    currentlyFocusedPlanet = null;
+                }
+            }
+        }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
         {
@@ -120,6 +170,7 @@ namespace ETLG
 
             artifactInfoUIID = null;
             currentNPCUIID = null;
+            currentlyFocusedPlanet = null;    
 
             // 停止音乐
             GameEntry.Sound.StopMusic();

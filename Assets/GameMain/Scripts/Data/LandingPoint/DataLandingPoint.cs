@@ -15,7 +15,7 @@ namespace ETLG.Data
         // 数据键值对载体，通过ID获取登陆点信息
         private Dictionary<int, LandingpointData> dicLandingPointData;
 
-        private int currentLandingPointID;
+        public int currentLandingPointID;
 
         protected override void OnInit()
         {
@@ -86,7 +86,7 @@ namespace ETLG.Data
         {
             //为测试，这里直接 赋值 101，应该是动态变化的
 
-            currentLandingPointID = 101;
+            // currentLandingPointID = 101;
 
             if (!dicLandingPointData.ContainsKey(currentLandingPointID))
             {
