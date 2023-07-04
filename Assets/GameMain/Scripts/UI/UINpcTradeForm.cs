@@ -20,10 +20,12 @@ namespace ETLG
         public TextMeshProUGUI npc_name = null;
         public TextMeshProUGUI npc_money = null;
 
+        public TextMeshProUGUI player_money = null;
+
+
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
 
-        private NPCData npcData;
 
         protected override void OnInit(object userData)
         {
@@ -39,19 +41,22 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
-            npcData = dataNPC.GetCurrentNPCData();
+            npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
-            npc_name.text = npcData.Name;
-            npc_money.text = npcData.Description;
+            // need method Update()
+            npc_money.text = dataPlayer.GetPlayerData().getNpcDataById(dataNPC.currentNPCId).Money.ToString();
+
+            player_money.text = dataPlayer.GetPlayerData().money.ToString();
 
             ShowPlayerArtifactIcons(PlayerContainer, Constant.Type.ARTIFACT_TRADE);
-
+            ShowNPCArtifactIcons(NpcContainer);
         }
+
+
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
-
         }
 
         private void OnCloseButtonClick()
@@ -81,13 +86,35 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, null);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.TRADE_PLAYER_NPC);
                 });
 
             }
         }
 
+        private void ShowNPCArtifactIcons(Transform container)
+        {
 
+            List<PlayerArtifactData> npcArtifacts = dataPlayer.GetPlayerData().getNpcArtifacts(dataNPC.currentNPCId);
+
+            for (int i = 0; i < npcArtifacts.Count; i++)
+            {
+
+                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
+
+                PlayerArtifactData playerArtifact = npcArtifacts[i];
+
+                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                {
+                    item.transform.SetParent(container, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + offset;
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.TRADE_NPC_PLAYER);
+                });
+
+            }
+        }
 
     }
 }

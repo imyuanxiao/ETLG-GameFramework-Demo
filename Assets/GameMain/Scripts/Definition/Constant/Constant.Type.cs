@@ -10,6 +10,10 @@
 
             public const string ICON_LOST = "iconLost";
 
+            public const int ARTIFACT_ICON_DEFAULT = 1;
+            public const int TRADE_NPC_PLAYER = 2;
+            public const int TRADE_PLAYER_NPC = 3;
+
             public const int NPC_UI_TALK = 1;
             public const int NPC_UI_TRADE = 2;
 
@@ -17,7 +21,6 @@
             public const int MODULE_TYPE_DEFENSE = 2;
             public const int MODULE_TYPE_POWERDRIVE = 3;
             public const int MODULE_TYPE_SUPPORT = 4;
-
 
             public const int ATTR_Durability = 1;
             public const int ATTR_Shields = 2;

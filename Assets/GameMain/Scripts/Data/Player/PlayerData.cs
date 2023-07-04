@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Rendering;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 namespace ETLG.Data
 {
@@ -26,14 +27,16 @@ namespace ETLG.Data
         public int knowledgePoints { get; set; }
 
         // Player Artifact Data, get artifacts by type
-
         private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
-
         private DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
         // Player Skill Data
         private Dictionary<int, PlayerSkillData> playerSkills = new Dictionary<int, PlayerSkillData>();
         private DataSkill dataSkill = GameEntry.Data.GetData<DataSkill>();
+
+        //Player NPC Data
+        private Dictionary<int, PlayerNPCData> playerNPCs = new Dictionary<int, PlayerNPCData>();
+        private DataNPC dataNPC = GameEntry.Data.GetData<DataNPC>();
 
 
         //构造函数，新建玩家数据
@@ -42,8 +45,10 @@ namespace ETLG.Data
             this.initialSpaceship = spaceshipData;
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
 
+            this.money = 9527;
+
             // add initial skills
-            foreach(var id in spaceshipData.SkillIds)
+            foreach (var id in spaceshipData.SkillIds)
             {
                 addSkill(id, 1);
             }
@@ -105,6 +110,42 @@ namespace ETLG.Data
             return targetList;
         }
 
+        public PlayerNPCData getNpcDataById(int NpcId)
+        {
+            if (!playerNPCs.ContainsKey(NpcId))
+            {
+                playerNPCs.Add(NpcId, new PlayerNPCData(dataNPC.GetNPCData(NpcId)));
+            }
+
+            return playerNPCs[NpcId];
+
+        }
+
+        public List<PlayerArtifactData> getNpcArtifacts(int NpcId)
+        {
+
+            if (!playerNPCs.ContainsKey(NpcId))
+            {
+                playerNPCs.Add(NpcId, new PlayerNPCData(dataNPC.GetNPCData(NpcId)));
+            }
+
+            PlayerNPCData npcData = playerNPCs[NpcId];
+
+            int[] ArtifactIds = npcData.Artifacts;
+
+            List<PlayerArtifactData> targetList = new List<PlayerArtifactData>();
+
+            for (int i = 0; i < ArtifactIds.Length; i += 2)
+            {
+                PlayerArtifactData artifactData = new PlayerArtifactData(dataArtifact.GetArtifactData(ArtifactIds[i]), ArtifactIds[i+1]);
+                targetList.Add(artifactData);
+
+            }
+
+            return targetList;
+        }
+
+
 
         public PlayerArtifactData getArtifactDataById(int id)
         {
@@ -137,7 +178,6 @@ namespace ETLG.Data
             return playerSkills[Id];
         }
 
-        
         public List<PlayerSkillData> getSkillsByType(string type)
         {
             if (type.Equals("all"))
@@ -163,6 +203,9 @@ namespace ETLG.Data
             return targetList;
         }
 
+
+        
+
         private void addMockArtifactData()
         {
             DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
@@ -178,7 +221,6 @@ namespace ETLG.Data
             addArtifact(2004, 1);
             addArtifact(2005, 1);
             addArtifact(2006, 1);
-
 
         }
 
