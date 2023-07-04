@@ -33,7 +33,7 @@ namespace ETLG
             if (!checkScene)
             {
                 entityData.Position = new Vector3(4f, 1f, 15f);
-                entityData.Rotation = Quaternion.Euler(20f, 160f, -10f);
+                entityData.Rotation = Quaternion.Euler(20f, 160f, 0f);
             }
             else
             {

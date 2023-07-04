@@ -9,7 +9,8 @@ namespace ETLG
     public class UIMainMenuForm : UGuiFormEx
     {
         public Button newGameButton;
-        public Button optionButton;
+        public Button loadButton;
+        public Button settingsButton;
         public Button quitButton;
 
         protected override void OnInit(object userData)
@@ -17,7 +18,8 @@ namespace ETLG
             base.OnInit(userData);
 
             newGameButton.onClick.AddListener(OnNewGameButtonClick);
-            optionButton.onClick.AddListener(OnOptionButtonClick);
+            loadButton.onClick.AddListener(OnLoadGameButtonClick);
+            settingsButton.onClick.AddListener(OnSettingsButtonClick);
             quitButton.onClick.AddListener(OnQuitButtonClick);
         }
 
@@ -42,9 +44,16 @@ namespace ETLG
 
         }
 
-        private void OnOptionButtonClick()
+        private void OnLoadGameButtonClick()
         {
-            Log.Debug("进入设置菜单");
+            Log.Debug("Load game");
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+
+        }
+
+        private void OnSettingsButtonClick()
+        {
+            Log.Debug("Settings");
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             GameEntry.UI.OpenUIForm(EnumUIForm.UIOptionsForm);
         }
