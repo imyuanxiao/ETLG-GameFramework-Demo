@@ -31,6 +31,8 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            info1.text = "Reward";
+            info2.text = "Reward";
             // PlayerData data = (PlayerData) userData;
             
             // Debug.Log("UIBattleWin - OnOpen : " + data.calculatedSpaceship.Description);
