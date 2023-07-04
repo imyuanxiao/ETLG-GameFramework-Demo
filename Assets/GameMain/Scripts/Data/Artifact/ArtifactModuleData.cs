@@ -4,8 +4,8 @@ namespace ETLG.Data
     public sealed class ArtifactModuleData : ArtifactDataBase
     {
 
-        public string Classification { get; set; }
-        public string Attribute { get; set; }
+        public int Classification { get; set; }
+        public int Attribute { get; set; }
         public int Effect { get; set; }
 
         public ArtifactModuleData(DRArtifact dRArtifact, DRModule dRModule)

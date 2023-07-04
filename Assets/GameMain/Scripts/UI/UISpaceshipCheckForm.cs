@@ -128,7 +128,7 @@ namespace ETLG
         }
 
 
-        private void ShowArtifactIcons(Transform container, string type)
+        private void ShowArtifactIcons(Transform container, int type)
         {
 
             List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType(type);

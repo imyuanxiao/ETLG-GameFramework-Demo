@@ -49,7 +49,7 @@ namespace ETLG
             UIContainer.position = dataArtifact.artifactInfoPosition;
 
             ArtifactName.text = artifactDataBase.Name;
-            ArtifactType.text = artifactDataBase.Type;
+            ArtifactType.text = GameEntry.Localization.GetString(Constant.Type.ARTIFACT_TYPE + artifactDataBase.Type);
             ArtifactTradeable.text = artifactDataBase.Tradeable ? "Tradeable" : "Untradeable";
             ArtifactValue.text = artifactDataBase.Value.ToString();
 

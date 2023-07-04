@@ -87,11 +87,10 @@ namespace ETLG.Data
 
         }
 
-        public List<PlayerArtifactData> getArtifactsByType(string type)
+        public List<PlayerArtifactData> getArtifactsByType(int type)
         {
             if (type.Equals(Constant.Type.ARTIFACT_ALL))
             {
-
                 return playerArtifacts.Values.ToList();
             }
 
@@ -138,7 +137,7 @@ namespace ETLG.Data
             return playerSkills[Id];
         }
 
-  
+        
         public List<PlayerSkillData> getSkillsByType(string type)
         {
             if (type.Equals("all"))

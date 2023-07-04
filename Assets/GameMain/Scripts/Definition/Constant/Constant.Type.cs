@@ -10,12 +10,31 @@
 
             public const string ICON_LOST = "iconLost";
 
+            public const int MODULE_TYPE_ATTACK = 1;
+            public const int MODULE_TYPE_DEFENSE = 2;
+            public const int MODULE_TYPE_POWERDRIVE = 3;
+            public const int MODULE_TYPE_SUPPORT = 4;
 
-            public const string ARTIFACT_ALL = "All";
-            public const string ARTIFACT_TRADE = "Trade";
-            public const string ARTIFACT_MODULE = "Module";
-            public const string ARTIFACT_SPECIAL = "Special";
-            public const string ARTIFACT_OTHERS = "Others";
+
+            public const int ATTR_Durability = 1;
+            public const int ATTR_Shields = 2;
+            public const int ATTR_Firepower = 3;
+            public const int ATTR_Energy = 4;
+            public const int ATTR_Agility = 5;
+            public const int ATTR_Speed = 6;
+            public const int ATTR_Detection = 7;
+            public const int ATTR_Capacity = 8;
+            public const int ATTR_Firerate = 9;
+            public const int ATTR_Dogde = 10;
+
+
+            public const string ARTIFACT_TYPE = "ARTIFACT_TYPE_";
+
+            public const int ARTIFACT_ALL = 0;
+            public const int ARTIFACT_TRADE = 1;
+            public const int ARTIFACT_MODULE = 3;
+            public const int ARTIFACT_SPECIAL = 2;
+            public const int ARTIFACT_OTHERS = 4;
 
 
 

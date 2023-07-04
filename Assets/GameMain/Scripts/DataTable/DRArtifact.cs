@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-03 18:47:30.311
+// 生成时间：2023-07-04 12:05:55.898
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,9 +46,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取道具类型。
+        /// 获取道具类型(1-Trade,2-Special, 3-Module)。
         /// </summary>
-        public string Type
+        public int Type
         {
             get;
             private set;
@@ -94,7 +94,7 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Name = columnStrings[index++];
-            Type = columnStrings[index++];
+            Type = int.Parse(columnStrings[index++]);
             Tradeable = bool.Parse(columnStrings[index++]);
             Value = int.Parse(columnStrings[index++]);
             MaxNumber = int.Parse(columnStrings[index++]);
@@ -111,7 +111,7 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
-                    Type = binaryReader.ReadString();
+                    Type = binaryReader.Read7BitEncodedInt32();
                     Tradeable = binaryReader.ReadBoolean();
                     Value = binaryReader.Read7BitEncodedInt32();
                     MaxNumber = binaryReader.Read7BitEncodedInt32();
