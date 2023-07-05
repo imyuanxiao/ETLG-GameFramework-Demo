@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: -558747049728317995}
   - component: {fileID: 3369229968438724378}
   - component: {fileID: 5595358086787554065}
+  - component: {fileID: -3807651697790493730}
   m_Layer: 6
   m_Name: IoTBoss
   m_TagString: Untagged
@@ -175,6 +176,19 @@ MonoBehaviour:
   CurrentHealth: 0
   MaxShield: 0
   CurrentShield: 0
+--- !u!114 &-3807651697790493730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737177568157907143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bec5c43ad6585545a0e2380af63a80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 3
 --- !u!1 &2972012254276604222
 GameObject:
   m_ObjectHideFlags: 0

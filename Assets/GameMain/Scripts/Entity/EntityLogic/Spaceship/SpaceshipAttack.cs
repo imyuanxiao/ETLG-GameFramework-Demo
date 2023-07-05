@@ -29,7 +29,8 @@ namespace ETLG
         {
             m_Fsm = GameEntry.Fsm.CreateFsm("PlayerSpaceshipBattleSkill", this, new DefaultSkill(), 
                                                                                 new CloudComputing(), 
-                                                                                new ElectronicWarfare());
+                                                                                new ElectronicWarfare(),
+                                                                                new Medicalsupport(GetComponent<PlayerHealth>()));
             m_Fsm.Start<DefaultSkill>();
         }
 
