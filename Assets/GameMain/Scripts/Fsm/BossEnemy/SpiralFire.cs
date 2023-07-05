@@ -24,6 +24,7 @@ namespace ETLG
 
         private bool changeToCriticalHit = false;
         private bool changeToEnemyRespawn = false;
+        private bool changeToInstantMove = false;
 
         public SpiralFire(BossEnemyAttack bossEnemyAttack)
         {
@@ -47,10 +48,20 @@ namespace ETLG
 
             changeToCriticalHit = false;
             changeToEnemyRespawn = false;
+            changeToInstantMove = false;
 
             // listen for critical hit event
             GameEntry.Event.Subscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
             GameEntry.Event.Subscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
+            GameEntry.Event.Subscribe(EnemyInstantMoveEventArgs.EventId, OnInstantMove);
+        }
+
+        private void OnInstantMove(object sender, GameEventArgs e)
+        {
+            EnemyInstantMoveEventArgs ne = (EnemyInstantMoveEventArgs) e;
+            if (ne == null)
+                return;
+            changeToInstantMove = true;
         }
 
         private void OnEnemyRespawn(object sender, GameEventArgs e)
@@ -100,11 +111,6 @@ namespace ETLG
                 ChangeState<VerticalFire>(fsm);
             }
 
-            // if (changeToCriticalHit)
-            // {
-            //     fsm.SetData<VarString>("returnState", "VerticalFire");
-            //     ChangeState<CriticalHit>(fsm);
-            // }
             ChangeToSkillState(fsm);
         }
 
@@ -119,6 +125,11 @@ namespace ETLG
             {
                 ChangeState<EnemyRespawn>(fsm);
             }
+            else if (changeToInstantMove)
+            {
+                fsm.SetData<VarString>("returnState", "VerticalFire");
+                ChangeState<InstantMove>(fsm);
+            }
         }
 
         protected override void OnLeave(IFsm<BossEnemyAttack> fsm, bool isShutdown)
@@ -126,6 +137,7 @@ namespace ETLG
             base.OnLeave(fsm, isShutdown);
             GameEntry.Event.Unsubscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
             GameEntry.Event.Unsubscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
+            GameEntry.Event.Unsubscribe(EnemyInstantMoveEventArgs.EventId, OnInstantMove);
             elapsedTime = 0;
             bulletCnt = 0;
             this.totalBulletNum = this.bulletNum * this.bulletRound;

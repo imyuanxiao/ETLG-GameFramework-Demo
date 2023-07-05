@@ -35,6 +35,9 @@ namespace ETLG
 
         private IEnumerator spawnBasicEnemiesCoroutine;
 
+        [Header("Instant Move Settings")]
+        public Transform[] instantMovePoints;
+
         protected override void Awake() 
         {
             base.Awake();

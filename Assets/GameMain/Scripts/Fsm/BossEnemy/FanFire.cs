@@ -24,6 +24,7 @@ namespace ETLG
 
         private bool changeToCriticalHit = false;
         private bool changeToEnemyRespawn = false;
+        private bool changeToInstantMove = false;
 
         public FanFire(BossEnemyAttack bossEnemyAttack)
         {
@@ -49,10 +50,20 @@ namespace ETLG
 
             changeToCriticalHit = false;
             changeToEnemyRespawn = false;
+            changeToInstantMove = false;
 
             // listen for critical hit event
             GameEntry.Event.Subscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
             GameEntry.Event.Subscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
+            GameEntry.Event.Subscribe(EnemyInstantMoveEventArgs.EventId, OnInstantMove);
+        }
+
+        private void OnInstantMove(object sender, GameEventArgs e)
+        {
+            EnemyInstantMoveEventArgs ne = (EnemyInstantMoveEventArgs) e;
+            if (ne == null)
+                return;
+            changeToInstantMove = true;
         }
 
         // if next attack is critical hit, then change to CriticalHit State
@@ -100,11 +111,6 @@ namespace ETLG
                 ChangeState<SpiralFire>(fsm);
             }
 
-            // if (changeToCriticalHit)
-            // {
-            //     fsm.SetData<VarString>("returnState", "SpiralFire");
-            //     ChangeState<CriticalHit>(fsm);
-            // }
             ChangeToSkillState(fsm);
         }
 
@@ -119,6 +125,11 @@ namespace ETLG
             {
                 ChangeState<EnemyRespawn>(fsm);
             }
+            else if (changeToInstantMove)
+            {
+                fsm.SetData<VarString>("returnState", "SpiralFire");
+                ChangeState<InstantMove>(fsm);
+            }
         }
 
         protected override void OnLeave(IFsm<BossEnemyAttack> fsm, bool isShutdown)
@@ -127,6 +138,7 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(EnemyCriticalHitEventArgs.EventId, OnCriticalHit);
             GameEntry.Event.Unsubscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
+            GameEntry.Event.Unsubscribe(EnemyInstantMoveEventArgs.EventId, OnInstantMove);
             fireRoundCnt = 0;
             elapsedTime = 0;
         }
