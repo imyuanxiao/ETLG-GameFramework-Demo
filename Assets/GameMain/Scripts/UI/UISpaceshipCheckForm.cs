@@ -30,23 +30,25 @@ namespace ETLG
         public TextMeshProUGUI s_size = null;
 
         // initial attrs
-        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
         public TextMeshProUGUI s_firepower = null;
-        public TextMeshProUGUI s_fireRate = null;
+        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_agility = null;
         public TextMeshProUGUI s_speed = null;
-        public TextMeshProUGUI s_dogde = null;
+
         public TextMeshProUGUI s_detection = null;
         public TextMeshProUGUI s_capacity = null;
-        
-        private readonly float valueBarMaxWidth = 230;
+
+        public TextMeshProUGUI s_fireRate = null;
+        public TextMeshProUGUI s_dogde = null;
+
+        private readonly float valueBarMaxWidth = 180;
         private readonly float maxAttrValue = 300;
 
-        public GameObject s_energy_valueBar = null;
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
+        public GameObject s_energy_valueBar = null;
         public GameObject s_firepower_valueBar = null;
         public GameObject s_agility_valueBar = null;
         public GameObject s_speed_valueBar = null;
