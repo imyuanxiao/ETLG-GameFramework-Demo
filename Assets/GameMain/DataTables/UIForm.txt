@@ -3,7 +3,7 @@
 #	int		string	int	int	bool	bool
 #	配置编号	策划备注	界面名字	界面组Id	资源Id	是否允许多个界面实例	是否暂停被其覆盖的界面
 	1001	主菜单	UIMainMenuForm	1001	1001	FALSE	TRUE
-	1002	设置	UIOptionsForm	1001	1002	FALSE	TRUE
+	1002	设置	UISettingsForm	1001	1002	FALSE	TRUE
 	1003	飞船选择	UISpaceshipSelectForm	1001	1003	FALSE	TRUE
 	1004	星系地图界面	UIMapInfoForm	1002	1004	FALSE	FALSE
 	1005	星球信息界面	UIPlanetInfoForm	1003	1005	FALSE	FALSE
@@ -24,3 +24,4 @@
 	1022	Boss血条界面	UIBossEnemyHealth	1020	1022	FALSE	FALSE
 	1023	战斗信息界面	UIBattleInfo	1020	1023	FALSE	FALSE
 	1024	NPC交易界面	UINPCTradeForm	1003	1024	FALSE	FALSE
+	1025	读取游戏界面	UILoadGameForm	1001	1025	FALSE	FALSE

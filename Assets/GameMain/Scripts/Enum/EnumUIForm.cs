@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-03 23:56:12.025
+// 生成时间：2023-07-05 11:31:59.512
 //------------------------------------------------------------
 
 namespace ETLG
@@ -19,7 +19,7 @@ namespace ETLG
         /// <summary>
         /// 设置
         /// </summary>
-        UIOptionsForm = 1002,
+        UISettingsForm = 1002,
 
         /// <summary>
         /// 飞船选择
@@ -120,5 +120,10 @@ namespace ETLG
         /// NPC交易界面
         /// </summary>
         UINPCTradeForm = 1024,
+
+        /// <summary>
+        /// 读取游戏界面
+        /// </summary>
+        UILoadGameForm = 1025,
     }
 }
