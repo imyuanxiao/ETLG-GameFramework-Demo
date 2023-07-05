@@ -9,8 +9,6 @@ namespace ETLG
 {
     public class CameraController : MonoBehaviour
     {
-        // public CinemachineVirtualCamera virtualCamera;
-        // public Camera camera;
         public float moveSpeed;
         public Transform cameraBounds;
 
@@ -32,9 +30,6 @@ namespace ETLG
             rightBoundary = cameraBounds.position.x + cameraBounds.localScale.x / 2f;
             upBoundary = cameraBounds.position.z + cameraBounds.localScale.z / 2f;
             bottomBoundary = cameraBounds.position.z - cameraBounds.localScale.z / 2f;
-            // Register callback to mouse click event
-            // MouseManager.Instance.OnLeftMouseClicked += FocusOnPlanet;
-            // MouseManager.Instance.OnRightMouseClicked += ResetCamera;
         }
 
         private void OnEnable() 
@@ -129,9 +124,6 @@ namespace ETLG
         // move the camera to focus point of the clicked planet
         private void FocusOnPlanet(Transform target) {
             if (isFocused) { return; }
-            // assign currently focused planet
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().focusedPlanet = target.parent.gameObject;
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().focusedPlanetType = target.parent.gameObject.GetComponent<BasePlanet>().planetType;
             panoramicPosition = transform.position;
             panoramicRotation = transform.rotation;
             ZoomIn(target);
@@ -141,10 +133,6 @@ namespace ETLG
         private void ResetCamera() {
             if (!isFocused) { return; }
             // set focused planet to null
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().isFocused = false;
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().focusedPlanet.GetComponent<BasePlanet>().isFocused = false;
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().focusedPlanetType = PLANET_TYPE.NULL;
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().focusedPlanet = null;
             ZoomOut();
             focusedPlanet = null;
         }
@@ -178,8 +166,6 @@ namespace ETLG
             transform.rotation = target.rotation;
             
             isFocused = true;
-            // GameEntry.Entity.GetEntity(100).GetComponent<DataManager>().isFocused = true;
-            // target.parent.gameObject.GetComponent<BasePlanet>().isFocused = true;
         }
 
         // move the camera smoothly to target position
