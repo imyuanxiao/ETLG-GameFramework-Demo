@@ -46,16 +46,17 @@ namespace ETLG
 
         private void OnLoadGameButtonClick()
         {
-            Log.Debug("Load game");
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UILoadGameForm);
+            Close();
 
         }
 
         private void OnSettingsButtonClick()
         {
-            Log.Debug("Settings");
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIOptionsForm);
+            Close();
+            GameEntry.UI.OpenUIForm(EnumUIForm.UISettingsForm);
         }
 
         private void OnQuitButtonClick()
