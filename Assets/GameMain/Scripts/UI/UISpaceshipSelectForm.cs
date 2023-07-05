@@ -28,37 +28,34 @@ namespace ETLG
         public TextMeshProUGUI s_size = null;
 
         // initial attrs
-        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
         public TextMeshProUGUI s_firepower = null;
-        public TextMeshProUGUI s_fireRate = null;
+        public TextMeshProUGUI s_energy = null;
+
         public TextMeshProUGUI s_agility = null;
         public TextMeshProUGUI s_speed = null;
-        public TextMeshProUGUI s_dogde = null;
         public TextMeshProUGUI s_detection = null;
         public TextMeshProUGUI s_capacity = null;
 
-        
+        public TextMeshProUGUI s_fireRate = null;
+        public TextMeshProUGUI s_dogde = null;
+
+
         private float valueBarMaxWidth = 150;
         private float maxAttrValue = 300;
 
-        public GameObject s_energy_valueBar = null;
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
         public GameObject s_firepower_valueBar = null;
+        public GameObject s_energy_valueBar = null;
         public GameObject s_agility_valueBar = null;
         public GameObject s_speed_valueBar = null;
         public GameObject s_detection_valueBar = null;
         public GameObject s_capacity_valueBar = null;
 
-
-
         // initial skills
         public Transform skillContainer = null;
-
-
-
 
         // 需要通过数据管理器获取数据
         private DataSpaceship dataSpaceship = null;
@@ -75,6 +72,7 @@ namespace ETLG
         // 实体加载器
         private EntityLoader entityLoader;
 
+        private bool refreshUI = false;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -95,7 +93,7 @@ namespace ETLG
             // 初始化实体加载类
             entityLoader = EntityLoader.Create(this);
 
-
+            currentIndex = (int)EnumEntity.InterstellarExplorer;
 
         }
 
@@ -103,10 +101,20 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
-            currentIndex = (int)EnumEntity.InterstellarExplorer;
+            // ShowSpaceshipSelect();
 
-            // 调用显示飞船方法
-            ShowSpaceshipSelect();
+            refreshUI = true;
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (refreshUI)
+            {
+                Log.Debug("Refresh");
+                ShowSpaceshipSelect();
+                refreshUI = false;
+            }
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -126,8 +134,7 @@ namespace ETLG
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
 
-            HideNewSpaceshipSelect();
-
+            Close();
 
         }
 
@@ -143,8 +150,9 @@ namespace ETLG
                 currentIndex = (int)EnumEntity.Guardian;
             }
 
-            // 用新飞船编号展示UI和模型
-            ShowSpaceshipSelect();
+            refreshUI = true;
+
+
         }
         private void OnRightButtonClick()
         {
@@ -156,7 +164,8 @@ namespace ETLG
             {
                 currentIndex = (int)EnumEntity.InterstellarExplorer;
             }
-            ShowSpaceshipSelect();
+            refreshUI = true;
+
         }
 
         private void OnReturnButtonClick()
@@ -167,7 +176,7 @@ namespace ETLG
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
 
-            HideNewSpaceshipSelect();
+            Close();
 
         }
 
@@ -176,7 +185,6 @@ namespace ETLG
         {
 
             HideNewSpaceshipSelect();
-
 
             // 通过数据管理器的方法初始化当前飞船信息
             currentSpaceshipData = dataSpaceship.GetSpaceshipData(currentIndex);
@@ -194,17 +202,20 @@ namespace ETLG
             s_type.text = currentSpaceshipData.SType;
             s_size.text = currentSpaceshipData.SSize;
 
-            s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();
             s_shields.text = currentSpaceshipData.Shields.ToString();
+
             s_firepower.text = currentSpaceshipData.Firepower.ToString();
-            s_fireRate.text = currentSpaceshipData.FireRate.ToString();
+            s_energy.text = currentSpaceshipData.Energy.ToString();
+
             s_agility.text = currentSpaceshipData.Agility.ToString();
             s_speed.text = currentSpaceshipData.Speed.ToString();
+
             s_detection.text = currentSpaceshipData.Detection.ToString();
             s_capacity.text = currentSpaceshipData.Capacity.ToString();
-            s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
+            s_fireRate.text = currentSpaceshipData.FireRate.ToString();
+            s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
             SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);

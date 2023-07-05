@@ -42,6 +42,9 @@ namespace ETLG
             GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
 
+            GameEntry.Event.Subscribe(SpaceshipChangeEventArgs.EventId, OnSpaceshipChange);
+
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
 
@@ -79,6 +82,9 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
+
+            GameEntry.Event.Unsubscribe(SpaceshipChangeEventArgs.EventId, OnSpaceshipChange);
+
 
             GameEntry.Sound.StopMusic();
 
@@ -152,6 +158,16 @@ namespace ETLG
             }
 
             tipUIID = null;
+
+        }
+
+        private void OnSpaceshipChange(object sender, GameEventArgs e)
+        {
+            SpaceshipChangeEventArgs ne = (SpaceshipChangeEventArgs)e;
+            if (ne == null)
+                return;
+
+            GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
 
         }
 
