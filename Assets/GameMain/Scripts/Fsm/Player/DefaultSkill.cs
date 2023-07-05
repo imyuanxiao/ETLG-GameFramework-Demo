@@ -33,6 +33,10 @@ namespace ETLG
             {
                 ChangeState<Medicalsupport>(fsm);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ChangeState<FireWall>(fsm);
+            }
         }
 
         protected override void OnLeave(IFsm<SpaceshipAttack> fsm, bool isShutdown)

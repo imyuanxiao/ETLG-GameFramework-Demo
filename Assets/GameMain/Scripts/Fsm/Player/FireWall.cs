@@ -5,29 +5,60 @@ using GameFramework.Fsm;
 
 namespace ETLG
 {
-    public class FireWall : FsmState<EntitySpaceship>
+    public class FireWall : FsmState<SpaceshipAttack>
     {
-        protected override void OnInit(IFsm<EntitySpaceship> fsm)
+        private PlayerHealth health;
+        private float recoverRate = 0.01f;
+        private int recoveryAmount = 50;
+        private int recoveryCnt = 0;
+        private float timeElapsed = 0;
+
+        public FireWall(PlayerHealth health)
+        {
+            this.health = health;
+        }
+
+        protected override void OnInit(IFsm<SpaceshipAttack> fsm)
         {
             base.OnInit(fsm);
         }
 
-        protected override void OnEnter(IFsm<EntitySpaceship> fsm)
+        protected override void OnEnter(IFsm<SpaceshipAttack> fsm)
         {
             base.OnEnter(fsm);
+            this.timeElapsed = 0f;
+            this.recoveryCnt = 0;
         }
 
-        protected override void OnUpdate(IFsm<EntitySpaceship> fsm, float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(IFsm<SpaceshipAttack> fsm, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(fsm, elapseSeconds, realElapseSeconds);
+
+            if (health.CurrentShield < health.MaxShield && recoveryCnt < recoveryAmount)
+            {
+                if (timeElapsed < recoverRate)
+                {
+                    timeElapsed += elapseSeconds;
+                }
+                else
+                {
+                    health.CurrentShield = Mathf.Min(health.MaxShield, health.CurrentShield + 5);
+                    timeElapsed = 0f;
+                    recoveryCnt += 5;
+                }
+            }
+            if (recoveryCnt >= recoveryAmount || health.CurrentShield >= health.MaxShield)
+            {
+                ChangeState<DefaultSkill>(fsm);
+            }
         }
 
-        protected override void OnLeave(IFsm<EntitySpaceship> fsm, bool isShutdown)
+        protected override void OnLeave(IFsm<SpaceshipAttack> fsm, bool isShutdown)
         {
             base.OnLeave(fsm, isShutdown);
         }
 
-        protected override void OnDestroy(IFsm<EntitySpaceship> fsm)
+        protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)
         {
             base.OnDestroy(fsm);
         }

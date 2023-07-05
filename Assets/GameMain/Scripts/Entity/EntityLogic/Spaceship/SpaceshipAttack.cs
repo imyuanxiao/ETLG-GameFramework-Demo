@@ -30,7 +30,8 @@ namespace ETLG
             m_Fsm = GameEntry.Fsm.CreateFsm("PlayerSpaceshipBattleSkill", this, new DefaultSkill(), 
                                                                                 new CloudComputing(), 
                                                                                 new ElectronicWarfare(),
-                                                                                new Medicalsupport(GetComponent<PlayerHealth>()));
+                                                                                new Medicalsupport(GetComponent<PlayerHealth>()),
+                                                                                new FireWall(GetComponent<PlayerHealth>()));
             m_Fsm.Start<DefaultSkill>();
         }
 
@@ -40,6 +41,11 @@ namespace ETLG
             {
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                InitPlayerMissile(missile.GetComponent<Missile>());
             }
         }
 
@@ -53,10 +59,14 @@ namespace ETLG
             bullet.flyingSpeed = bulletData.Speed * 1000;
         }
 
-        private void InitPlayerMissile()
+        private void InitPlayerMissile(Missile missile)
         {
             ProjectileData missileData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Missile);
             PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+            
+            missile.damage = (int) spaceshipData.Firepower + (int) missileData.Damage;
+            missile.flyingDirection = missile.transform.forward;
+            missile.flyingSpeed = missileData.Speed;
         }
 
         private void InitPlayerIonBeam()

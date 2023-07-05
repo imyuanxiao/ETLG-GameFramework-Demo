@@ -8,7 +8,7 @@ namespace ETLG
     public class Medicalsupport : FsmState<SpaceshipAttack>
     {
         private PlayerHealth health;
-        private float recoverRate = 0.1f;
+        private float recoverRate = 0.01f;
         private int recoveryAmount = 50;
         private int recoveryCnt = 0;
         private float timeElapsed = 0;
@@ -42,6 +42,7 @@ namespace ETLG
                 else
                 {
                     health.CurrentHealth = Mathf.Min(health.MaxHealth, health.CurrentHealth + 5);
+                    timeElapsed = 0f;
                     recoveryCnt += 5;
                 }
             }
