@@ -34,8 +34,7 @@ namespace ETLG
 
             // subscribe events
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            GameEntry.Event.Subscribe(SkillTreeEventArgs.EventId, OnSkillTree);
-            GameEntry.Event.Subscribe(SpaceshipCheckEventArgs.EventId, OnSpaceshipCheck);
+            
             GameEntry.Event.Subscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
             GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
@@ -43,6 +42,9 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
+
+            GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
+
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
@@ -56,6 +58,7 @@ namespace ETLG
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
+
 
         }
 
@@ -77,8 +80,7 @@ namespace ETLG
 
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            GameEntry.Event.Unsubscribe(SkillTreeEventArgs.EventId, OnSkillTree);
-            GameEntry.Event.Unsubscribe(SpaceshipCheckEventArgs.EventId, OnSpaceshipCheck);
+
             GameEntry.Event.Unsubscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
             GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
@@ -87,6 +89,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
 
+            GameEntry.Event.Unsubscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
 
             skillInfoUIID = null;
             artifactInfoUIID = null;
@@ -114,33 +117,20 @@ namespace ETLG
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
 
-        private void OnSkillTree(object sender, GameEventArgs e)
+
+        private void OnChangePlayerMenu(object sender, GameEventArgs e)
         {
-            SkillTreeEventArgs ne = (SkillTreeEventArgs)e;
+            ChangePlayerMenuEventArgs ne = (ChangePlayerMenuEventArgs)e;
             if (ne == null)
                 return;
 
+            dataPlayer.currentSelectedPlayerMenu = ne.UIFormID;
+
             GameEntry.UI.CloseAllLoadedUIForms();
-
-            skillInfoUIID = null;
-
-            GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeForm);
-
-            GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
+            GameEntry.UI.OpenUIForm(ne.UIFormID);
 
         }
 
-        private void OnSpaceshipCheck(object sender, GameEventArgs e)
-        {
-            SpaceshipCheckEventArgs ne = (SpaceshipCheckEventArgs)e;
-            if (ne == null)
-                return;
-
-            GameEntry.UI.CloseAllLoadedUIForms();
-            skillInfoUIID = null;
-
-            GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
-        }
 
         private void OnSkillInfoOpen(object sender, GameEventArgs e)
         {

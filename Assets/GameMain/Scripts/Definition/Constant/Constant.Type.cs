@@ -4,10 +4,20 @@
     {
         public static class Type
         {
+            // player menu title
+            public const int PLAYERMENU_SPACESHIP = 1011;
+            public const int PLAYERMENU_SKILL = 1012;
+            public const int PLAYERMENU_MISSION = 2;
+            public const int PLAYERMENU_ACHIEVEMENT = 3;
+            public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
+            public const int PLAYERMENU_LEADERBOARD = 5;
+
             public const int SKILL_LOCKED = 0;
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
             
+
+
             public const string ICON_LOST = "iconLost";
 
             // artifact icon type

@@ -12,7 +12,6 @@ namespace ETLG
     public class UISkillTreeForm : UGuiFormEx
     {
 
-        public Button spaceshipCheckButton;
         public Button resetButton;
         public Button returnButton;
 
@@ -20,9 +19,6 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
-            // 绑定按钮点击事件
-            spaceshipCheckButton.onClick.AddListener(OnSpaceshipButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
             resetButton.onClick.AddListener(OnResetButtonClick);
         }
@@ -30,6 +26,8 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             // 打开SkillTreeMap
             //skillTreeMapUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
@@ -39,23 +37,8 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-    /*        // 关闭SkillTreeMap
-            if (skillTreeMapUIID != null)
-            {
-                GameEntry.UI.CloseUIForm((int)EnumUIForm.UISkillTreeMap);
-            }
-
-            skillTreeMapUIID = null;*/
-
             base.OnClose(isShutdown, userData);
 
-
-        }
-
-        private void OnSpaceshipButtonClick()
-        {
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            GameEntry.Event.Fire(this, SpaceshipCheckEventArgs.Create());
 
         }
 

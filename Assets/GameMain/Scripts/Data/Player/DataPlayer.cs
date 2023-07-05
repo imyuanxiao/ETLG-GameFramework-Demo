@@ -14,9 +14,11 @@ namespace ETLG.Data
         public Vector3 tipUiPosition { get ; set; }
         public string tipTitle { get ; set; }
 
+        public int currentSelectedPlayerMenu { get; set; }
+
         protected override void OnInit()
         {
-
+            currentSelectedPlayerMenu = Constant.Type.PLAYERMENU_SPACESHIP;
         }
 
         protected override void OnPreload()

@@ -13,7 +13,6 @@ namespace ETLG
     {
 
         // buttons
-        public Button skillTreeButton;
         public Button returnButton;
 
         public Button allButton;
@@ -67,6 +66,8 @@ namespace ETLG
         // 实体加载器
         private EntityLoader entityLoader;
 
+        private int selectedArtifactType;
+        private bool refreshUI;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -74,7 +75,6 @@ namespace ETLG
             base.OnInit(userData);
 
             // 绑定按钮点击事件
-            skillTreeButton.onClick.AddListener(OnSkillTreeButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
 
             allButton.onClick.AddListener(OnPackageAllButtonClick);
@@ -97,9 +97,28 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+
             ShowSpaceshipSelect();
 
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_ALL);
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_ALL;
+
+
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+            if (refreshUI)
+            {
+                HideAllItem();
+                ShowArtifactIcons(artifactContainer, selectedArtifactType);
+                refreshUI = false;
+            }
+
+
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -108,14 +127,6 @@ namespace ETLG
 
             HideSpaceship();
         }
-
-        private void OnSkillTreeButtonClick()
-        {
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            GameEntry.Event.Fire(this, SkillTreeEventArgs.Create());
-
-        }
-
 
         private void OnReturnButtonClick()
         {
@@ -227,54 +238,63 @@ namespace ETLG
 
         public void OnPackageAllButtonClick()
         {
-            moduleButton.interactable = true;
-            specialButton.interactable = true;
-            tradeButton.interactable = true;
-            othersButton.interactable = true;
-            HideAllItem();
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_ALL);
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_ALL;
+            ResetAllButtons();
+            allButton.Select();
 
         }
 
         public void OnPackageModuleButtonClick()
         {
-            allButton.interactable = true;
-            specialButton.interactable = true;
-            tradeButton.interactable = true;
-            othersButton.interactable = true;
-            HideAllItem();
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_MODULE);
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_MODULE;
+
+            ResetAllButtons();
+            moduleButton.Select();
         }
 
         public void OnPackageSpecialButtonClick()
         {
-            allButton.interactable = true;
-            moduleButton.interactable = true;
-            tradeButton.interactable = true;
-            othersButton.interactable = true;
-            HideAllItem();
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_SPECIAL);
+  
+
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_SPECIAL;
+
+            ResetAllButtons();
+            specialButton.Select();
         }
 
         public void OnPackageTradeButtonClick()
         {
-            allButton.interactable = true;
-            moduleButton.interactable = true;
-            specialButton.interactable = true;
-            othersButton.interactable = true;
-            HideAllItem();
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_TRADE);
+       
+
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_TRADE;
+
+            ResetAllButtons();
+            tradeButton.Select();
         }
 
         public void OnPackageOthersButtonClick()
+        {
+
+
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_OTHERS;
+            ResetAllButtons();
+            othersButton.Select();
+        }
+
+        public void ResetAllButtons()
         {
             allButton.interactable = true;
             moduleButton.interactable = true;
             specialButton.interactable = true;
             tradeButton.interactable = true;
-            HideAllItem();
-            ShowArtifactIcons(artifactContainer, Constant.Type.ARTIFACT_OTHERS);
+            othersButton.interactable = true;
         }
+
 
     }
 }

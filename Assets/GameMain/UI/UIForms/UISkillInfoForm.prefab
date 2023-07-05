@@ -1233,6 +1233,7 @@ GameObject:
   - component: {fileID: 8993532247197807053}
   - component: {fileID: 8199832002398844375}
   - component: {fileID: 9159111321873716623}
+  - component: {fileID: 3728591153425959625}
   m_Layer: 5
   m_Name: LevelInfo
   m_TagString: Untagged
@@ -1258,8 +1259,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2, y: 0}
+  m_SizeDelta: {x: 396, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8993532247197807053
 MonoBehaviour:
@@ -1322,6 +1323,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2311223640353189117}
   m_CullTransparentMesh: 1
+--- !u!114 &3728591153425959625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311223640353189117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &2389839965479483827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,6 +1912,7 @@ GameObject:
   - component: {fileID: 6001394175115744025}
   - component: {fileID: 3250951051959592136}
   - component: {fileID: 8073209374797471652}
+  - component: {fileID: 7452734784008699450}
   m_Layer: 5
   m_Name: NextLevelInfo
   m_TagString: Untagged
@@ -1923,7 +1939,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 396, y: 65.35}
+  m_SizeDelta: {x: 396, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6001394175115744025
 MonoBehaviour:
@@ -1986,6 +2002,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4143540848325225704}
   m_CullTransparentMesh: 1
+--- !u!114 &7452734784008699450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143540848325225704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &4346112600213025880
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
             ResetTransform();
             ShowSkillIconItems();
 

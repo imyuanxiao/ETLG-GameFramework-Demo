@@ -19,7 +19,7 @@ namespace ETLG.Data
 
         protected override void OnInit()
         {
-
+            currentNPCId = Constant.Type.PLAYERMENU_SPACESHIP;
         }
 
         protected override void OnPreload()
