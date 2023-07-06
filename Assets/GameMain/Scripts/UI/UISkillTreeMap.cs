@@ -47,10 +47,10 @@ namespace ETLG
 
         private void ShowSkillIconItems()
         {
-            ShowSkillIconByLayer(layer1, 1, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
-            ShowSkillIconByLayer(layer2, 2, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
-            ShowSkillIconByLayer(layer3, 3, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
-            ShowSkillIconByLayer(layer4, 4, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
+            ShowSkillIconByLayer(layer1, 1, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer2, 2, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer3, 3, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer4, 4, Constant.Type.SKILL_SKILL_TREE_MAP);
 
         }
 
@@ -59,7 +59,9 @@ namespace ETLG
 
             List<SkillData> skillDatas = dataSkill.GetSkillDataLayer(num);
 
-            Vector3 offset = new Vector3(270f, 0f, 0f); // 偏移量
+            Vector3 firstposition = new Vector3(400f, 0f, 0f); // 偏移量
+
+            Vector3 offset = new Vector3(200f, 0f, 0f); // 偏移量
 
             foreach (var skillData in skillDatas)
             {
@@ -70,7 +72,7 @@ namespace ETLG
                     item.transform.SetParent(layer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + skillData.Location[1] * offset;
+                    item.transform.localPosition = Vector3.zero + firstposition + skillData.Location[1] * offset;
                     item.GetComponent<ItemSkillIcon>().SetSkillData(playerSkillData, position);
                 });
             }

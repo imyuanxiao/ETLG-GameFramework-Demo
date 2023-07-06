@@ -65,6 +65,29 @@ namespace ETLG.Data
 
         }
 
+        public float GetSpaceshipScore()
+        {
+            float sum = 0;
+            sum += playerCalculatedSpaceshipData.Durability;
+            sum += playerCalculatedSpaceshipData.Shields;
+            sum += playerCalculatedSpaceshipData.Energy;
+            sum += playerCalculatedSpaceshipData.Firepower;
+            sum += playerCalculatedSpaceshipData.Energy;
+            sum += playerCalculatedSpaceshipData.Agility;
+            sum += playerCalculatedSpaceshipData.Speed;
+            sum += playerCalculatedSpaceshipData.Detection;
+            sum += playerCalculatedSpaceshipData.Capacity;
+            sum += playerCalculatedSpaceshipData.FireRate * 100;
+            sum += playerCalculatedSpaceshipData.Dogde * 100;
+            return sum;
+        }
+
+        public float GetPlayerScore()
+        {
+
+            return GetSpaceshipScore();
+        }
+
         public void addArtifact(int id, int number)
         {
             if(!playerArtifacts.ContainsKey(id))

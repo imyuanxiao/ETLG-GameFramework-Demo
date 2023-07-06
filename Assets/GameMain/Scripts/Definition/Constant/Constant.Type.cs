@@ -12,6 +12,11 @@
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
             public const int PLAYERMENU_LEADERBOARD = 5;
 
+            // tip info position
+            public const int TIP_INFO_POSITION_DEFAULT = 0;
+            public const int TIP_INFO_POSITION_LEFT = 1;
+
+
             public const int SKILL_LOCKED = 0;
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
@@ -28,8 +33,7 @@
             // skill icon type
             public const int SKILL_ICON_DEFAULT = 1;
             public const int SKILL_ICON_SELECT_SPACESHIP = 2;
-            public const int SKILL_SKILL_TREE_MAP_UP = 3;
-            public const int SKILL_SKILL_TREE_MAP_DOWN = 4;
+            public const int SKILL_SKILL_TREE_MAP = 3;
 
 
             public const int NPC_UI_TALK = 1;
