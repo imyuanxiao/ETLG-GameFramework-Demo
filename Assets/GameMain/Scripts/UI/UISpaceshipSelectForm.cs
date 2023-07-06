@@ -133,7 +133,6 @@ namespace ETLG
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
-
             Close();
 
         }

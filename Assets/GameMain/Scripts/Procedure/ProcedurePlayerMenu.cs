@@ -19,6 +19,8 @@ namespace ETLG
 
         private int? artifactInfoUIID;
 
+        private int? achievementUIID;
+
         private DataPlayer dataPlayer;
         private int? tipUIID;
 
@@ -42,7 +44,8 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
-
+            GameEntry.Event.Subscribe(AchievementUIOpenEventArgs.EventId, OnAchievementOpen);
+            GameEntry.Event.Subscribe(AchievementUICloseEventArgs.EventId, OnAchievementClose);
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
 
 
@@ -85,7 +88,8 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
             GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
-
+            GameEntry.Event.Unsubscribe(AchievementUIOpenEventArgs.EventId, OnAchievementClose);
+            GameEntry.Event.Unsubscribe(AchievementUICloseEventArgs.EventId, OnAchievementClose);
             GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
             GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
 
@@ -150,6 +154,27 @@ namespace ETLG
             if(skillInfoUIID != null)
             {
                 GameEntry.UI.CloseUIForm((int)skillInfoUIID);
+            }
+            skillInfoUIID = null;
+        }
+        private void OnAchievementOpen(object sender, GameEventArgs e)
+        {
+            AchievementUIOpenEventArgs ne = (AchievementUIOpenEventArgs)e;
+            if (ne == null)
+                return;
+            achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementForm);
+
+        }
+
+        private void OnAchievementClose(object sender, GameEventArgs e)
+        {
+            AchievementUIOpenEventArgs ne = (AchievementUIOpenEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (achievementUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)achievementUIID);
             }
             skillInfoUIID = null;
         }
