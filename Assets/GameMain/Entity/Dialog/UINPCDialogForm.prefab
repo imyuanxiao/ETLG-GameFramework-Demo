@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: c929ecc1cba8e4b43ac5484014b04ce3, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6f66830ef81951b49ab06234869aa04d, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -672,7 +672,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3586447606962706726}
   - component: {fileID: 6461270119261347336}
-  - component: {fileID: 6671226136568896885}
+  - component: {fileID: 8735750285014561973}
+  - component: {fileID: 6635305314814964636}
   m_Layer: 5
   m_Name: ButtonContent
   m_TagString: Untagged
@@ -714,7 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &6671226136568896885
+--- !u!114 &8735750285014561973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,7 +724,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2968222501902964741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 160
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &6635305314814964636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968222501902964741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -731,15 +752,13 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &2970158020614645073
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: de93994b93ccbfb479a916d9ea17df18, type: 3}
+  m_Texture: {fileID: 2800000, guid: 5c0de103a02428a449940269bf6abaaa, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1268,8 +1287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b26dfeeabce3d428bef260fa9d289e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogModulePrefab: {fileID: 4353108771914833441, guid: 80a6da65192c3e542a07520dcfbaae02, type: 3}
-  playerButtonPrefab: {fileID: 8335911349086156544, guid: 02bcc5af03680c749aafc78ff8e8b7e6, type: 3}
+  dialogModulePrefab: {fileID: 4353108771914833441, guid: 7c6f6ba42ee20034d88ee7669ff317c0, type: 3}
+  playerButtonPrefab: {fileID: 8335911349086156544, guid: fa5c8374933faf041923550d8c9e42b9, type: 3}
   dialogScrollContent: {fileID: 2121077983914037593}
   buttonScrollContent: {fileID: 3586447606962706726}
   closeButton: {fileID: 2070262824398312310}
