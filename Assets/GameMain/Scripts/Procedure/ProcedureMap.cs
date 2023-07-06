@@ -98,9 +98,9 @@ namespace ETLG
             else if (Input.GetKeyDown(KeyCode.V))
             {
                 procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
-                procedureOwner.SetData<VarString>("BossType", "CloudComputing");
+                // procedureOwner.SetData<VarString>("BossType", "CloudComputing");
                 // procedureOwner.SetData<VarString>("BossType", "Cybersecurity");
-                // procedureOwner.SetData<VarString>("BossType", "AI");
+                procedureOwner.SetData<VarString>("BossType", "AI");
                 // procedureOwner.SetData<VarString>("BossType", "DataScience");
                 // procedureOwner.SetData<VarString>("BossType", "Blockchain");
                 // procedureOwner.SetData<VarString>("BossType", "IoT");

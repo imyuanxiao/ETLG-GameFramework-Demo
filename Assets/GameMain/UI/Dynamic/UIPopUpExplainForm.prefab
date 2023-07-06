@@ -553,8 +553,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5f60e03074f3849b5fa1032a147853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: {fileID: 7327409304931195087}
-  domainValue: {fileID: 0}
+  UIContainer: {fileID: 0}
+  skillIcon: {fileID: 0}
+  SkillName: {fileID: 0}
+  Domain: {fileID: 0}
+  IsActiveSkill: {fileID: 0}
+  IsCombatSkill: {fileID: 0}
+  SkillDescription: {fileID: 0}
+  CurrentLevel: {fileID: 0}
+  CurrentLevelDescription: {fileID: 0}
+  NextLevelDescription: {fileID: 0}
+  bottomPart: {fileID: 0}
 --- !u!1 &8497451646550913197
 GameObject:
   m_ObjectHideFlags: 0
