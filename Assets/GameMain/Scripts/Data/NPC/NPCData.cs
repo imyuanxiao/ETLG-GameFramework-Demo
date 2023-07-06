@@ -61,6 +61,21 @@ namespace ETLG.Data
                 return dRNPC.Quests;
             }
         }
+        public string Description
+        {
+            get
+            {
+                return dRNPC.Description;
+            }
+        }
+
+        public string XMLSource
+        {
+            get
+            {
+                return dRNPC.XMLSource;
+            }
+        }
 
         // 构造方法
         public NPCData(DRNPC dRNPC)

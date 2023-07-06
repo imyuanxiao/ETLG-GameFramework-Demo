@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 1185807684688036573}
   - component: {fileID: 1185807684688036572}
   - component: {fileID: -3094305154920387354}
+  - component: {fileID: 260511854551137291}
   m_Layer: 6
   m_Name: AISpaceship
   m_TagString: Untagged
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2352654c3cb9efa49be48f97e4f3ca88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicEnemyType: 0
+  basicEnemyType: 3
 --- !u!114 &1185807684688036572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,3 +225,15 @@ MonoBehaviour:
   CurrentHealth: 0
   MaxShield: 0
   CurrentShield: 0
+--- !u!114 &260511854551137291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185807684688036512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d556e4493a7d7c640bb317be7c6acc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -19,23 +19,12 @@ namespace ETLG
 
         private void OnEnable() 
         {
-            // if current procedure is basic battle procedure
             InitBasicBattleEnemy();
-
-            // if current procedure is intermidate battle procedure
-            // MaxHealth = ;
-            // MaxShield = ;
-
-            // if current procedure is final battle procedure
-            // MaxHealth = ;
-            // MaxShield = ;
 
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
 
             StartCoroutine(CheckDeath());    
-
-            // Debug.Log("Enemy Max Health: " + MaxHealth + " / " + GameEntry.Data.GetData<DataPlayer>().GetPlayerData().calculatedSpaceship.Firepower + " | " + "Enemy Max Shield: " + MaxShield);
         }
 
 
@@ -57,7 +46,8 @@ namespace ETLG
             }
             else if (controller.basicEnemyType == BasicEnemyType.AI)
             {
-                // TODO
+                MaxHealth = BattleManager.Instance.basicEnemyHealthBase;
+                MaxShield = 0;
             }
             else 
             {
@@ -75,14 +65,21 @@ namespace ETLG
             {
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
             }
-            // Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
         }
 
         protected override void OnDead()
         {
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
-            BattleManager.Instance.basicEnemyKilled++;
+
+            if (controller.basicEnemyType == BasicEnemyType.AI)
+            {
+                GameEntry.Event.Fire(this, AISpaceshipDestroyedEventArgs.Create());
+            }
+            else
+            {
+                BattleManager.Instance.basicEnemyKilled++;
+            }
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 

@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: -2003494376209966738}
   - component: {fileID: 7218456976821327207}
   - component: {fileID: 786547152382100268}
+  - component: {fileID: -3276819258256438887}
   - component: {fileID: -9215799245313677555}
   m_Layer: 6
   m_Name: AIBoss
@@ -383,6 +384,18 @@ MonoBehaviour:
   CurrentHealth: 0
   MaxShield: 0
   CurrentShield: 0
+--- !u!114 &-3276819258256438887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8416943314760193538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df9c148b8055454f97dc39c6404a80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-9215799245313677555
 MonoBehaviour:
   m_ObjectHideFlags: 0

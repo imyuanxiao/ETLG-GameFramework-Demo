@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-04 14:31:17.795
+// 生成时间：2023-07-06 19:49:10.634
 //------------------------------------------------------------
 
 using GameFramework;
@@ -64,6 +64,15 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取描述。
+        /// </summary>
+        public string Description
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取初始金钱。
         /// </summary>
         public int Money
@@ -90,6 +99,15 @@ namespace ETLG
             private set;
         }
 
+        /// <summary>
+        /// 获取对话文本路径。
+        /// </summary>
+        public string XMLSource
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -105,9 +123,11 @@ namespace ETLG
             Name = columnStrings[index++];
             Avatar = columnStrings[index++];
             Type = columnStrings[index++];
+            Description = columnStrings[index++];
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
                 Quests = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+            XMLSource = columnStrings[index++];
 
             GeneratePropertyArray();
             return true;
@@ -123,9 +143,11 @@ namespace ETLG
                     Name = binaryReader.ReadString();
                     Avatar = binaryReader.ReadString();
                     Type = binaryReader.ReadString();
+                    Description = binaryReader.ReadString();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();
                         Quests = binaryReader.ReadInt32Array();
+                    XMLSource = binaryReader.ReadString();
                 }
             }
 
