@@ -42,10 +42,29 @@ namespace ETLG
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
             }
+            // fire missile
             if (Input.GetKeyDown(KeyCode.E))
             {
-                GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
-                InitPlayerMissile(missile.GetComponent<Missile>());
+                Transform target = null;
+                // GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle)
+                {
+                    target = BattleManager.Instance.bossEnemyEntity.gameObject.transform;
+                    if (target != null)
+                    {
+                        GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                        InitPlayerMissile(missile.GetComponent<Missile>(), target);
+                    }
+                }
+                if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+                {
+                    target = FindObjectOfType<BasicEnemyController>()?.gameObject.transform;
+                    if (target != null)
+                    {
+                        GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                        InitPlayerMissile(missile.GetComponent<Missile>(), target);
+                    }
+                }
             }
         }
 
@@ -59,14 +78,15 @@ namespace ETLG
             bullet.flyingSpeed = bulletData.Speed * 1000;
         }
 
-        private void InitPlayerMissile(Missile missile)
+        private void InitPlayerMissile(Missile missile, Transform target)
         {
             ProjectileData missileData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int)EnumEntity.Missile);
             PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
             
+            missile.target = target;
             missile.damage = (int) spaceshipData.Firepower + (int) missileData.Damage;
             missile.flyingDirection = missile.transform.forward;
-            missile.flyingSpeed = missileData.Speed;
+            missile.flyingSpeed = missileData.Speed * 160;
         }
 
         private void InitPlayerIonBeam()

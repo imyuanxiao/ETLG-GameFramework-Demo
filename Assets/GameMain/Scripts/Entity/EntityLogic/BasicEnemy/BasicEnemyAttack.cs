@@ -38,7 +38,7 @@ namespace ETLG
             }
             else if (controller.basicEnemyType == BasicEnemyType.AI)
             {
-                // TODO
+                fireRate = 1.5f;
             }
             else 
             {

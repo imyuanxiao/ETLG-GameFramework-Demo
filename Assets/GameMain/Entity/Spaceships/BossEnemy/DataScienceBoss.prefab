@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5012609825338526169}
   - component: {fileID: -2398046818572779320}
   - component: {fileID: -5750827387578425434}
+  - component: {fileID: 1885146887555697216}
   m_Layer: 6
   m_Name: DataScienceBoss
   m_TagString: Untagged
@@ -158,6 +159,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 5
+--- !u!114 &1885146887555697216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059372051886584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df9c148b8055454f97dc39c6404a80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4107204247412191552
 GameObject:
   m_ObjectHideFlags: 0

@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 5489253909082526992}
   - component: {fileID: 7174589122913585113}
   - component: {fileID: 6185555781753154349}
+  - component: {fileID: -2803677973739931012}
   m_Layer: 6
   m_Name: CybersecurityBoss
   m_TagString: Untagged
@@ -366,6 +367,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: 500
   coolDown: 3
+--- !u!114 &-2803677973739931012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826751387520525254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df9c148b8055454f97dc39c6404a80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9131743869726905006
 GameObject:
   m_ObjectHideFlags: 0

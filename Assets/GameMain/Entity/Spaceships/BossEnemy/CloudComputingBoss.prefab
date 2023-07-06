@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5049333318731442084}
   - component: {fileID: -3481495327639856223}
   - component: {fileID: -6207794684522947679}
+  - component: {fileID: -278082733305707001}
   m_Layer: 6
   m_Name: CloudComputingBoss
   m_TagString: Untagged
@@ -191,6 +192,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoverAmount: 10
   recoverRate: 0.2
+--- !u!114 &-278082733305707001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422264948437301950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df9c148b8055454f97dc39c6404a80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2411937149821722810
 GameObject:
   m_ObjectHideFlags: 0
