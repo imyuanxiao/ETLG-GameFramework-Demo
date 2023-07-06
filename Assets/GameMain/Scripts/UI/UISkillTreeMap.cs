@@ -47,10 +47,10 @@ namespace ETLG
 
         private void ShowSkillIconItems()
         {
-            ShowSkillIconByLayer(layer1, 1, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
-            ShowSkillIconByLayer(layer2, 2, Constant.Type.SKILL_SKILL_TREE_MAP_DOWN);
-            ShowSkillIconByLayer(layer3, 3, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
-            ShowSkillIconByLayer(layer4, 4, Constant.Type.SKILL_SKILL_TREE_MAP_UP);
+            ShowSkillIconByLayer(layer1, 1, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer2, 2, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer3, 3, Constant.Type.SKILL_SKILL_TREE_MAP);
+            ShowSkillIconByLayer(layer4, 4, Constant.Type.SKILL_SKILL_TREE_MAP);
 
         }
 

@@ -47,13 +47,18 @@ namespace ETLG
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 offset = new Vector3(100f, 0f, 0f);
+            Vector3 newPosition = itemPosition + offset;
 
-            if (Type == Constant.Type.SKILL_SKILL_TREE_MAP_UP)
+            if (Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
             {
-                offset = new Vector3(100f, -500f, 0f);
+                newPosition = new Vector3(660f, 190f, 0f);
             }
 
-            Vector3 newPosition = itemPosition + offset;
+            if (Type == Constant.Type.SKILL_SKILL_TREE_MAP)
+            {
+                newPosition = new Vector3(50f, 120f, 0f);
+            }
+
 
             dataSkill.currentPlayerSkillData = this.playerSkillData;
 

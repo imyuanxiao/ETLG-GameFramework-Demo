@@ -1924,14 +1924,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.654902, g: 0.68235296, b: 0.7254902, a: 1}
+  m_Color: {r: 0.39871833, g: 0.990566, b: 0.88716584, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8a5d7f422672d76488e4c2d94e4c02b1, type: 3}
+  m_Texture: {fileID: 2800000, guid: 97ab7db092fdff749ba0e8d8e7083086, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2744,6 +2744,42 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: 5}
   m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &3477146123102944547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5072850864577519488}
+  m_Layer: 0
+  m_Name: SkillInfoContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5072850864577519488
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477146123102944547}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.2765968}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6255630742703807835}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 660, y: 190}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &3484412209380516635
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,6 +4201,7 @@ RectTransform:
   - {fileID: 3942002916015598864}
   - {fileID: 501271159417683672}
   - {fileID: 5470638590564015638}
+  - {fileID: 5072850864577519488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5519,14 +5556,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.654902, g: 0.68235296, b: 0.7254902, a: 1}
+  m_Color: {r: 0.9891364, g: 1, b: 0.10062885, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 5df67c20ea171f14ab64ce7b94601a57, type: 3}
+  m_Texture: {fileID: 2800000, guid: d2fa79e20195ae8489a660514ddc07a8, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
