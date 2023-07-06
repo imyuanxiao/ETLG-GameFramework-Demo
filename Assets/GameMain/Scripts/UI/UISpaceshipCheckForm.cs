@@ -91,13 +91,14 @@ namespace ETLG
 
             entityLoader = EntityLoader.Create(this);
 
-            currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 

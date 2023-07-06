@@ -32,7 +32,9 @@ public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDown
             Vector2 mouseDelta = currentMousePosition - previousMousePosition;
             previousMousePosition = currentMousePosition;
 
-            rectTransform.anchoredPosition += mouseDelta;
+            rectTransform.anchoredPosition += new Vector2(0f, mouseDelta.y);
+
+//            rectTransform.anchoredPosition += mouseDelta;
         }
     }
 

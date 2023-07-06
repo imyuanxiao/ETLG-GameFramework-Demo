@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Speed
+  position: 0
 --- !u!1 &308625344217556802
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Durability
+  position: 0
 --- !u!1 &424484865680430004
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Spaceship Type
+  position: 0
 --- !u!1 &773893480983213841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Energy
+  position: 0
 --- !u!1 &866316445577961081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2377,7 @@ GameObject:
   - component: {fileID: 4667564752412295089}
   - component: {fileID: 625679280708510361}
   m_Layer: 5
-  m_Name: PointsValue
+  m_Name: ScoreValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4372,6 +4376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Shields
+  position: 0
 --- !u!1 &3361391120533496889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4842,6 +4847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Firepower
+  position: 0
 --- !u!1 &3726712600281914135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5259,6 +5265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Dogde
+  position: 0
 --- !u!1 &4036499333049740542
 GameObject:
   m_ObjectHideFlags: 0
@@ -5632,6 +5639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Agility
+  position: 0
 --- !u!1 &4341144468673295302
 GameObject:
   m_ObjectHideFlags: 0
@@ -6775,6 +6783,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetButton: {fileID: 208358383911821828}
   returnButton: {fileID: 2070262824398312310}
+  s_durability: {fileID: 1722730968385717937}
+  s_shields: {fileID: 4302086080119418768}
+  s_firepower: {fileID: 2931898645817606729}
+  s_energy: {fileID: 2506726528112345558}
+  s_agility: {fileID: 8009183297101317889}
+  s_speed: {fileID: 3909330981665833053}
+  s_detection: {fileID: 3102325449108753786}
+  s_capacity: {fileID: 699834700945324934}
+  s_fireRate: {fileID: 4452369488901864633}
+  s_dogde: {fileID: 3359169936799727990}
+  s_durability_valueBar: {fileID: 648835135652551340}
+  s_shields_valueBar: {fileID: 5730239970188544949}
+  s_energy_valueBar: {fileID: 6935965397184843132}
+  s_firepower_valueBar: {fileID: 8380543226705834310}
+  s_agility_valueBar: {fileID: 3089515152687118751}
+  s_speed_valueBar: {fileID: 1850028565222338041}
+  s_detection_valueBar: {fileID: 1697631578727614402}
+  s_capacity_valueBar: {fileID: 6369139353193881997}
+  playerKnowledgePoints: {fileID: 5560976451013537317}
+  playerScore: {fileID: 625679280708510361}
 --- !u!1 &5079502331118973998
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,6 +7299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Spaceship Type
+  position: 0
 --- !u!1 &5222929765384002202
 GameObject:
   m_ObjectHideFlags: 0
@@ -8115,6 +8144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: FireRate
+  position: 0
 --- !u!1 &5436183753878368238
 GameObject:
   m_ObjectHideFlags: 0
@@ -9958,6 +9988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Detection
+  position: 0
 --- !u!1 &8102191879523118578
 GameObject:
   m_ObjectHideFlags: 0
@@ -10478,6 +10509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Capacity
+  position: 0
 --- !u!1 &8380543226705834310
 GameObject:
   m_ObjectHideFlags: 0

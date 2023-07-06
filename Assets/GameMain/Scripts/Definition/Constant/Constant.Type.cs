@@ -12,6 +12,11 @@
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
             public const int PLAYERMENU_LEADERBOARD = 5;
 
+            // tip info position
+            public const int TIP_INFO_POSITION_DEFAULT = 0;
+            public const int TIP_INFO_POSITION_LEFT = 1;
+
+
             public const int SKILL_LOCKED = 0;
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
