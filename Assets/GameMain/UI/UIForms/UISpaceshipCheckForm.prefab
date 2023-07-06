@@ -804,6 +804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Shields
+  position: 0
 --- !u!1 &861108114300732196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2556,6 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Durability
+  position: 0
 --- !u!1 &2056164017677690702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4280,6 +4282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Agility
+  position: 0
 --- !u!1 &3472177814182407946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5362,6 +5365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Capacity
+  position: 0
 --- !u!1 &4199501972879385706
 GameObject:
   m_ObjectHideFlags: 0
@@ -7234,6 +7238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: FireRate
+  position: 0
 --- !u!1 &5820064723290157424
 GameObject:
   m_ObjectHideFlags: 0
@@ -7288,6 +7293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Firepower
+  position: 0
 --- !u!1 &5893823137418571621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7745,6 +7751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Energy
+  position: 0
 --- !u!1 &6892201580241987391
 GameObject:
   m_ObjectHideFlags: 0
@@ -8117,6 +8124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Dogde
+  position: 0
 --- !u!1 &7367110320258765639
 GameObject:
   m_ObjectHideFlags: 0
@@ -8170,6 +8178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Spaceship Size
+  position: 0
 --- !u!1 &7474539977280834586
 GameObject:
   m_ObjectHideFlags: 0
@@ -8882,6 +8891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Detection
+  position: 0
 --- !u!1 &7949551469493967231
 GameObject:
   m_ObjectHideFlags: 0
@@ -8936,6 +8946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Speed
+  position: 0
 --- !u!1 &8093832541742394471
 GameObject:
   m_ObjectHideFlags: 0
@@ -9209,6 +9220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Spaceship Type
+  position: 0
 --- !u!1 &8305969073198842556
 GameObject:
   m_ObjectHideFlags: 0
@@ -9850,7 +9862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000032424927}
+  m_AnchoredPosition: {x: 0, y: 0.00002861023}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6883769787555121867

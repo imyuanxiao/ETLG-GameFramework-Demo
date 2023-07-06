@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
@@ -10,6 +11,8 @@ namespace ETLG
     {
         public Image currentHealthImage;
         public Image currentShieldImage;
+        public TextMeshProUGUI healthValue;
+        public TextMeshProUGUI shieldValue;
         private Health health;
         private int maxHealth;
         private int currentHealth;
@@ -45,6 +48,9 @@ namespace ETLG
 
             currentHealthImage.fillAmount = (float) currentHealth / maxHealth;
             currentShieldImage.fillAmount = (float) currentShield / maxShield;
+
+            healthValue.text = health.CurrentHealth + " / " + health.MaxHealth;
+            shieldValue.text = health.CurrentShield + " / " + health.MaxShield;
         }
 
         protected override void OnClose(bool isShutdown, object userData)
