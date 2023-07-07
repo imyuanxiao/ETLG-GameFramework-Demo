@@ -18,7 +18,7 @@ namespace ETLG.Data
         {
             get
             {
-                return dRSkill.Name;
+                return dRSkill.NameId;
             }
         }
         public int[] Location
@@ -58,15 +58,6 @@ namespace ETLG.Data
             get
             {
                 return dRSkill.ActiveState; 
-            }
-        }
-
-
-        public int CurrentLevel
-        {
-            get
-            {
-                return dRSkill.CurrentLevel;
             }
         }
 

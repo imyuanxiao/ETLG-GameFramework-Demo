@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-06 19:49:22.178
+// 生成时间：2023-07-07 11:41:22.507
 //------------------------------------------------------------
 
 namespace ETLG
@@ -22,93 +22,93 @@ namespace ETLG
         MedicalSupport = 102,
 
         /// <summary>
-        /// 能源优化
+        /// 自动化容器编排
         /// </summary>
-        EnergyOptimization = 201,
+        AutomatedContainerOrchestration = 201,
 
         /// <summary>
-        /// 弹性部署
+        /// 多云架构
         /// </summary>
-        ElasticDeployment = 202,
+        MultiCloudArchitecture = 202,
 
         /// <summary>
         /// 能源充能
         /// </summary>
-        EnergyRecharge = 203,
+        EnergyBoost = 203,
 
         /// <summary>
-        /// 目标识别
+        /// 神经网络增幅
         /// </summary>
-        Targeting = 301,
-
-        /// <summary>
-        /// 智能导航
-        /// </summary>
-        IntelligentNavigation = 302,
+        NeuralNetworkAmplification = 301,
 
         /// <summary>
         /// 智能感知
         /// </summary>
-        IntelligentPerception = 303,
+        IntelligentPerception = 302,
 
         /// <summary>
-        /// 防火墙
+        /// 超智系统
         /// </summary>
-        Firewall = 401,
+        SuperIntelligentSystem = 303,
+
+        /// <summary>
+        /// 量子加密
+        /// </summary>
+        QuantumEncryption = 401,
+
+        /// <summary>
+        /// 自适应智能防御
+        /// </summary>
+        AdaptiveIntelligentDefense = 402,
 
         /// <summary>
         /// 电子战
         /// </summary>
-        ElectronicWarfare = 402,
+        ElectronicWarfare = 403,
 
         /// <summary>
-        /// 入侵检测
+        /// 智能数据挖掘
         /// </summary>
-        IntrusionDetection = 403,
+        IntelligentDataMining = 501,
 
         /// <summary>
-        /// 数据分析
+        /// 全息数据可视化
         /// </summary>
-        DataAnalysis = 501,
+        HolographicDataVisualization = 502,
 
         /// <summary>
-        /// 快速开采
+        /// 感知智能决策
         /// </summary>
-        RapidMining = 502,
+        PerceptiveIntelligentDecision = 503,
 
         /// <summary>
-        /// 实时数据分析
+        /// 分布式智能合约
         /// </summary>
-        RealtimeDataAnalysis = 503,
+        DistributedSmartContract = 601,
 
         /// <summary>
-        /// 区块链交易
+        /// 跨链互操作性
         /// </summary>
-        BlockchainTransactions = 601,
+        CrossChainInteroperability = 602,
 
         /// <summary>
-        /// 智能合约
+        /// 去中心化
         /// </summary>
-        SmartContracts = 602,
+        Decentralization = 603,
 
         /// <summary>
-        /// 去中心化数据存储
+        /// 感应阵列
         /// </summary>
-        DecentralizedDataStorage = 603,
+        SensorArray = 701,
 
         /// <summary>
-        /// 环境感知
+        /// 边缘计算
         /// </summary>
-        EnvironmentaLAwareness = 701,
+        EdgeComputing = 702,
 
         /// <summary>
-        /// 远程控制
+        /// 智能链接
         /// </summary>
-        RemoteOperation = 702,
-
-        /// <summary>
-        /// 实时通信
-        /// </summary>
-        RealtimeCommunication = 703,
+        IntelligentLinkage = 703,
     }
 }
