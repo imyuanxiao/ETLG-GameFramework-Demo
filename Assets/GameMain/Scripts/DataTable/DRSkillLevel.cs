@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-06 22:43:18.291
+// 生成时间：2023-07-07 11:53:19.693
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,9 +46,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取升级消耗资源（ID，数量）。
+        /// 获取升级消耗资源（ID,数量）。
         /// </summary>
         public int[] UpgradeConsumables
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取属性(1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIRERATE;10-DOGDE)。
+        /// </summary>
+        public int[] Attribute
         {
             get;
             private set;
@@ -68,6 +77,7 @@ namespace ETLG
             index++;
             Energy = float.Parse(columnStrings[index++]);
                 UpgradeConsumables = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+                Attribute = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -82,6 +92,7 @@ namespace ETLG
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Energy = binaryReader.ReadSingle();
                         UpgradeConsumables = binaryReader.ReadInt32Array();
+                        Attribute = binaryReader.ReadInt32Array();
                 }
             }
 

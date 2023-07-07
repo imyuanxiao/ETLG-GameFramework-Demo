@@ -10,6 +10,26 @@
 #能源补充							
 	1005	液态甲烷	LiquidMethane	1	TRUE	300	9999
 	1006	等离子燃料	PlasmaFuel	1	TRUE	400	9999
+#技能升级素材							
+	1101	通用升级单元	Universal Upgrade Unit	1	TRUE	100	9999
+	1201	带宽资源	Bandwidth Resource	1	TRUE	100	9999
+	1202	云服务器	Cloud Server	1	TRUE	200	9999
+	1203	虚拟机实例	Virtual Machine Instance	1	TRUE	300	9999
+	1301	数据集	Data Set	1	TRUE	100	9999
+	1302	GPU单元	GPU Unit	1	TRUE	200	9999
+	1303	AI处理器	AI Processor	1	TRUE	300	9999
+	1401	区块链节点	Blockchain Node	1	TRUE	100	9999
+	1402	安全令牌	Security Token	1	TRUE	200	9999
+	1403	加密货币	Cryptocurrency	1	TRUE	300	9999
+	1501	入侵防御单元	Intrusion Prevention Unit	1	TRUE	100	9999
+	1502	安全漏洞扫描器	Security Vulnerability Scanner	1	TRUE	200	9999
+	1503	加密算法	Encryption Algorithm	1	TRUE	300	9999
+	1601	数据源	Data Source	1	TRUE	100	9999
+	1602	统计单元	Statistical Unit	1	TRUE	300	9999
+	1603	数据可视化单元	Data Visualization Unit	1	TRUE	200	9999
+	1701	传感器设备	Sensor Devices	1	TRUE	100	9999
+	1702	边缘设备	Edge Processing Unit	1	TRUE	300	9999
+	1703	物联网平台许可证	IoT Platform License	1	TRUE	200	9999
 #特殊道具							
 	2001	知识碎片（云计算）	KnowledgeFragments(CloudComputing)	2	FALSE	0	1
 	2002	知识碎片（人工智能）	KnowledgeFragments(AI)	2	FALSE	0	1

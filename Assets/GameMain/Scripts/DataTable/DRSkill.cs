@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-06 22:43:18.275
+// 生成时间：2023-07-07 11:53:19.689
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,15 +46,6 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取名字。
-        /// </summary>
-        public string Name
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 获取技能面板坐标（层数，位置）。
         /// </summary>
         public int[] Location
@@ -64,7 +55,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取分类。
+        /// 获取分类(0-Common, 1-Cloud,2-AI,3-Cyber,4-Data,5-Blockchain,6-IOT。
         /// </summary>
         public string Domain
         {
@@ -91,18 +82,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取激活状态（0-未激活，1-可激活，2-已激活）。
+        /// 获取激活状态（0-未解锁，1-已解锁，2-已升级）。
         /// </summary>
         public int ActiveState
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取当前等级。
-        /// </summary>
-        public int CurrentLevel
         {
             get;
             private set;
@@ -148,13 +130,11 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             NameId = columnStrings[index++];
-            Name = columnStrings[index++];
                 Location = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             Domain = columnStrings[index++];
             IsActiveSkill = bool.Parse(columnStrings[index++]);
             IsCombatSkill = bool.Parse(columnStrings[index++]);
             ActiveState = int.Parse(columnStrings[index++]);
-            CurrentLevel = int.Parse(columnStrings[index++]);
                 Levels = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             UnlockPoints = int.Parse(columnStrings[index++]);
             NeedExtraCondition = bool.Parse(columnStrings[index++]);
@@ -171,13 +151,11 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     NameId = binaryReader.ReadString();
-                    Name = binaryReader.ReadString();
                         Location = binaryReader.ReadInt32Array();
                     Domain = binaryReader.ReadString();
                     IsActiveSkill = binaryReader.ReadBoolean();
                     IsCombatSkill = binaryReader.ReadBoolean();
                     ActiveState = binaryReader.Read7BitEncodedInt32();
-                    CurrentLevel = binaryReader.Read7BitEncodedInt32();
                         Levels = binaryReader.ReadInt32Array();
                     UnlockPoints = binaryReader.Read7BitEncodedInt32();
                     NeedExtraCondition = binaryReader.ReadBoolean();
