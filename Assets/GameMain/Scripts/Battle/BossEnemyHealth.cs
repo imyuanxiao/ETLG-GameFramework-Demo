@@ -18,7 +18,6 @@ namespace ETLG
         {
             InitBossEnemy();
             StartCoroutine(CheckDeath()); 
-            // Debug.Log("Boss Enemy Max Health: " + MaxHealth + " | Max Shield: " + MaxShield);
         }
 
         private void InitBossEnemy()
@@ -39,20 +38,16 @@ namespace ETLG
             {
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
             }
-            // Debug.Log("Enemy CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
-
         }
 
         protected override void OnDead()
         {
-            // if the current enemy can respawn
-            // if (GetComponent<Respawn>() != null)
-            // {
-            //     Debug.Log("Respawn!!!");
-            //     GameEntry.Event.Fire(this, EnemyRespawnEventArgs.Create(this));
-            // }
-            // otherwise, player wins the battle 
-            if (GetComponent<Respawn>() == null)
+            if (controller.bossEnemyType == EnumEntity.FinalBoss)
+            {
+                GetComponent<FinalBossSkill>().stage = 2;
+            }
+
+            if (GetComponent<Respawn>() == null || !GetComponent<Respawn>().isActiveAndEnabled)
             {
                 GameEntry.Event.Fire(this, BattleWinEventArgs.Create(controller.bossEnemyType));
             }
