@@ -8,7 +8,7 @@
             public const int PLAYERMENU_SPACESHIP = 1011;
             public const int PLAYERMENU_SKILL = 1012;
             public const int PLAYERMENU_MISSION = 2;
-            public const int PLAYERMENU_ACHIEVEMENT = 3;
+            public const int PLAYERMENU_ACHIEVEMENT = 1027;
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
             public const int PLAYERMENU_LEADERBOARD = 5;
 
@@ -64,7 +64,20 @@
             public const int ARTIFACT_SPECIAL = 2;
             public const int ARTIFACT_OTHERS = 4;
 
+            //achievement type
+            public const int ACHV_QUIZ = 101;
+            public const int ACHV_KNOWLEDGE_BASE = 102;
+            public const int ACHV_INTERSTELLAR = 103;
+            public const int ACHV_SPACESHIP = 104;
+            public const int ACHV_RESOURCE = 105;
+            public const int ACHV_BATTLE = 106;
+            public const int ACHV_ACHIEVEMENT = 107;
+            public const int ACHV_LOGIN = 108;
+            public const int ACHV_LEADERSHIP = 109;
+            public const int ACHV_HIDDEN = 110;
 
+            public const string LOCKED_TREASURE_CHEST = "locked_treasure_chest";
+            public const string UNLOCKED_TREASURE_CHEST = "unlocked_treasure_chest";
 
         }
     }

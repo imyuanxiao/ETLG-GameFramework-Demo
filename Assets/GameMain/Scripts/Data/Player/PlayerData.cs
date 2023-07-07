@@ -38,6 +38,9 @@ namespace ETLG.Data
         private Dictionary<int, PlayerNPCData> playerNPCs = new Dictionary<int, PlayerNPCData>();
         private DataNPC dataNPC = GameEntry.Data.GetData<DataNPC>();
 
+        //Player Achievement Data
+        private Dictionary<int, List<PlayerAchievementData>> playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
+        private DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
         //构造函数，新建玩家数据
         public PlayerData (SpaceshipData spaceshipData)
@@ -55,7 +58,7 @@ namespace ETLG.Data
 
             // add mock artifacts
             addMockArtifactData();
-
+            initPlayerAchievementData();
         }
 
         // Call this method everytime skills change or initialSpaceship changes
@@ -247,10 +250,48 @@ namespace ETLG.Data
 
         }
 
+    
+
+    private void initPlayerAchievementData()
+    {
+        AchievementData[] dataAchievements = dataAchievement.GetAllNewData();
+        PlayerAchievementData[] playerAchievementDatas = new PlayerAchievementData[dataAchievements.Length];
+        //初始化PlayerAchievement
+        int index = 0;
+        foreach (AchievementData data in dataAchievements)
+        {
+            playerAchievementDatas[index++] = new PlayerAchievementData(data);
+        }
+        //将Player的成就信息按成就类型分类
+        foreach (PlayerAchievementData data in playerAchievementDatas)
+        {
+            if (!playerAchievements.ContainsKey(data.TypeId))
+            {
+                playerAchievements.Add(data.TypeId, getPlayerAchievementDataListById(playerAchievementDatas, data.TypeId));
+            }
+        }
     }
+    private List<PlayerAchievementData> getPlayerAchievementDataListById(PlayerAchievementData[] playerAchievementDatas, int typeId)
+    {
+        List<PlayerAchievementData> results = new List<PlayerAchievementData>();
+        foreach (PlayerAchievementData data in playerAchievementDatas)
+        {
+            if (data.TypeId == typeId)
+            {
+                results.Add(data);
+            }
+        }
+        return results;
+    }
+    public Dictionary<int, List<PlayerAchievementData>> getPlayerAchievements()
+    {
+        return this.playerAchievements;
+    }
+    public void updatePlayerAchievementData()
+    {
 
-
-
+    }
+    }
 
 }
 

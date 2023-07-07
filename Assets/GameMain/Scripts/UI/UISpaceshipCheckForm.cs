@@ -150,7 +150,8 @@ namespace ETLG
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
 
-                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
+                Vector3 offset = new Vector3((i % 2) * 100f, (i / 2) * -150f, 0f);
+
 
                 PlayerArtifactData playerArtifact = playerArtifacts[i];
 
