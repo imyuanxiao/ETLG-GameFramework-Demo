@@ -1,5 +1,6 @@
 ﻿using ETLG.Data;
 using GameFramework.Event;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,7 +33,11 @@ namespace ETLG
 
         public GameObject bottomPart;
 
+        public Transform costsContainer;
+
         public bool hideBottomPart { get; set; }
+
+        public bool refresh;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -43,10 +48,26 @@ namespace ETLG
 
         }
 
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+            if (refresh)
+            {
+                showContent();
+                refresh = false;
+            }
+        }
+
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
 
+            refresh = true;
+        }
+
+        public void showContent()
+        {
             skillData = dataSkill.GetCurrentShowSkillData();
             playerSkillData = dataSkill.currentPlayerSkillData;
 
@@ -57,11 +78,16 @@ namespace ETLG
             Domain.text = skillData.Domain;
             IsActiveSkill.text = skillData.IsActiveSkill ? "Active" : "Passive";
             IsCombatSkill.text = skillData.IsCombatSkill ? "Combat" : "Explore";
+            SkillDescription.text = skillData.GetSkillDescription();
 
-            CurrentLevel.text = playerSkillData.Level.ToString();
-            CurrentLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>3 </color> %, increase energy cap by <color=#FF00FF> 3 </color> %.";
+            int currentLevel = playerSkillData.Level;
 
-            SkillDescription.text = skillData.Name + "To be added";
+            bool isMaxLevel = currentLevel - 1 >= skillData.GetMaxLevelIndex();
+            string max = isMaxLevel ? " (Max)" : "";
+
+            CurrentLevel.text = playerSkillData.Level.ToString() + max;
+            CurrentLevelDescription.text = skillData.GetLevelEffectByLevel(currentLevel);
+
 
             // set skill icon            
             string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString());
@@ -73,27 +99,55 @@ namespace ETLG
             }
             skillIcon.texture = texture;
 
-            if (hideBottomPart)
+            if (hideBottomPart || isMaxLevel)
             {
                 bottomPart.SetActive(false);
             }
             else
             {
                 bottomPart.SetActive(true);
-                NextLevelDescription.text = skillData.Name + "To be added. Reduce active skill energy consumption by <color=#FF00FF>5 </color> %, increase energy cap by <color=#FF00FF> 5 </color> %.";
-
+                NextLevelDescription.text = skillData.GetLevelEffectByLevel(currentLevel + 1);
+                ShowCosts(costsContainer, skillData.GetLevelCosts(currentLevel + 1));
             }
-
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             skillData = null;
             playerSkillData = null;
+            SkillDescription.text = null;
+            CurrentLevelDescription.text = null;
+            NextLevelDescription.text = null;
+
             base.OnClose(isShutdown, userData);
 
         }
- 
+
+        private void ShowCosts(Transform container, int[] costs)
+        {
+
+            // 展示内容需要 玩家有该道具数，需要道具数，
+
+            for(int i = 0; i < costs.Length; i += 2)
+            {
+                int artifactId = costs[i];
+                int hasNum = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getArtifactNumById(artifactId);
+                int needNum = costs[i + 1];
+
+                ShowItem<ItemCostResBar>(EnumItem.CostResBar, (item) =>
+                {
+                    item.transform.SetParent(container, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero;
+                    item.GetComponent<ItemCostResBar>().SetCostResData(artifactId, hasNum, needNum);
+                });
+
+            }
+        }
+
+
+
 
     }
 }

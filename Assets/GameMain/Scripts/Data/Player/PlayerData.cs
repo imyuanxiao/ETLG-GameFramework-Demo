@@ -171,10 +171,24 @@ namespace ETLG.Data
             return targetList;
         }
 
+        public int getArtifactNumById(int id)
+        {
+
+            if (!playerArtifacts.ContainsKey(id))
+            {
+                return 0;
+            }
+            return playerArtifacts[id].Number;
+        }
 
 
         public PlayerArtifactData getArtifactDataById(int id)
         {
+
+            if (!playerArtifacts.ContainsKey(id))
+            {
+                return null;
+            }
             return playerArtifacts[id];
         }
 

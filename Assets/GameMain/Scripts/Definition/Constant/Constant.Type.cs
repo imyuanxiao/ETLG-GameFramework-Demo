@@ -16,12 +16,19 @@
             public const int TIP_INFO_POSITION_DEFAULT = 0;
             public const int TIP_INFO_POSITION_LEFT = 1;
 
-
+            // skill activate state
             public const int SKILL_LOCKED = 0;
             public const int SKILL_UNLOCKED = 1;
             public const int SKILL_UPGRADED = 2;
-            
 
+            // skill domain
+            public const int DOMAIN_COMMON = 0;
+            public const int DOMAIN_CLOUD_COMPUTING = 1;
+            public const int DOMAIN_ARTIFICIAL_INTELLIGENCE = 2;
+            public const int DOMAIN_CYBERSECURITY = 3;
+            public const int DOMAIN_DATA_SCIENCE = 4;
+            public const int DOMAIN_BLOCKCHAIN = 5;
+            public const int DOMAIN_IoT = 6;
 
             public const string ICON_LOST = "iconLost";
 
