@@ -20,7 +20,6 @@ namespace ETLG
 
         public Transform UIContainer;
 
-        //public RawImage ArtifactIcon;
         public TextMeshProUGUI ArtifactName = null;
         public TextMeshProUGUI ArtifactType = null;
         public TextMeshProUGUI ArtifactTradeable = null;
@@ -48,19 +47,14 @@ namespace ETLG
 
             UIContainer.position = dataArtifact.artifactInfoPosition;
 
-            ArtifactName.text = artifactDataBase.Name;
+            ArtifactName.text = artifactDataBase.NameID;
             ArtifactType.text = GameEntry.Localization.GetString(Constant.Type.ARTIFACT_TYPE + artifactDataBase.Type);
             ArtifactTradeable.text = artifactDataBase.Tradeable ? "Tradeable" : "Untradeable";
             ArtifactValue.text = artifactDataBase.Value.ToString();
 
             ArtifactNumber.text = playerArtifactData.Number.ToString();
-            ArtifactDescription.text = artifactDataBase.Name + "To be added";
+            ArtifactDescription.text = artifactDataBase.Description;
 
-            /*          Texture texture = Resources.Load<Texture>(AssetUtility.GetArtifactIcon(artifactDataBase.Id.ToString()));
-                      if (texture != null)
-                      {
-                          ArtifactIcon.texture = texture;
-                      }*/
 
             base.OnOpen(userData);
 

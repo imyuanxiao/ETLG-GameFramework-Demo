@@ -33,7 +33,7 @@ namespace ETLG
 
             UIContainer.position = dataPlayer.tipUiPosition;
             TipTitle.text = dataPlayer.tipTitle;
-            TipContent.text = GameEntry.Localization.GetString("TipContent" + dataPlayer.tipTitle); 
+            TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle); 
 
         }
 

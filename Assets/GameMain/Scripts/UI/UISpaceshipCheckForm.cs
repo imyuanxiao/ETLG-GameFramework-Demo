@@ -56,6 +56,7 @@ namespace ETLG
         public GameObject s_capacity_valueBar = null;
 
         public TextMeshProUGUI playerMoney = null;
+        public TextMeshProUGUI playerScore = null;
 
         public Transform artifactContainer = null;
 
@@ -186,6 +187,7 @@ namespace ETLG
             s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
 
             playerMoney.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
+            playerScore.text = dataPlayer.GetPlayerData().GetPlayerScore().ToString();
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();

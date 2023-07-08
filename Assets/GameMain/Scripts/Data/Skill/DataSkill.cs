@@ -26,6 +26,10 @@ namespace ETLG.Data
         // 根据层数对技能分类
         private Dictionary<int, List<SkillData>> dicSkillDataContainers;
 
+        public int skillCount { get; private set; }
+
+        public int levelCount { get; private set; }
+
         // 当前展示技能ID
         public int currentSkillID { get; set; }
 
@@ -38,7 +42,8 @@ namespace ETLG.Data
 
         protected override void OnInit()
         {
-
+            skillCount = 0;
+            levelCount = 0;
         }
 
         // 预加载数据配置表
@@ -90,6 +95,8 @@ namespace ETLG.Data
             // 获取预加载的所有 Skill 数据行数据
             DRSkill[] drSkills = dtSkill.GetAllDataRows();
 
+            skillCount = drSkills.Length;
+
             // 新建技能表（id为键，技能数据为值），把 DRSkill 和 DRSkillLevel 数据都存到 SkillData里
             dicSkillData = new Dictionary<int, SkillData>();
 
@@ -98,6 +105,8 @@ namespace ETLG.Data
             {
 
                 DRSkillLevel[] tmpDRSkillLevels = new DRSkillLevel[drSkill.Levels.Length];
+
+                this.levelCount += drSkill.Levels.Length;
 
                 for (int i = 0; i < drSkill.Levels.Length; i++)
                 {
@@ -116,6 +125,7 @@ namespace ETLG.Data
                 dicSkillDataContainers[drSkill.Location[0]].Add(skillData);
 
             }
+
 
         }
 

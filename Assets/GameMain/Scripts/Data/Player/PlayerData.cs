@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 using Unity.VisualScripting;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace ETLG.Data
 {
@@ -179,7 +180,19 @@ namespace ETLG.Data
                 playerArtifacts.Add(id, new PlayerArtifactData(dataArtifact.GetArtifactData(id)));
             }
             playerArtifacts[id].Number += number;
+        }
 
+        public void DeleteArtifact(int id, int number)
+        {
+            if(!playerArtifacts.ContainsKey(id))
+            {
+                return;
+            }
+            playerArtifacts[id].Number -= number;
+            if (playerArtifacts[id].Number <= 0)
+            {
+                playerArtifacts.Remove(id);
+            }
         }
 
         public void SellArtifact(int id, int number)
@@ -188,15 +201,9 @@ namespace ETLG.Data
             int value = dataArtifact.GetArtifactData(id).Value;
 
             // if number <= 0, remove from playerArtifacts
-            playerArtifacts[id].Number -= number;
+            playerArtifacts[(int)EnumArtifact.Money].Number += number * value;
 
-            playerArtifacts[(int)EnumArtifact.Money].Number += number;
-
-            if (playerArtifacts[id].Number <= 0)
-            {
-                playerArtifacts.Remove(id);
-            }
-
+            DeleteArtifact(id, number);
         }
 
         public List<PlayerArtifactData> GetArtifactsByType(int type)
@@ -386,11 +393,25 @@ namespace ETLG.Data
 
         public void ResetSkills()
         {
+
             // reset calculated spaceship
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(initialSpaceship);
 
-            // reset all knowledge points
+            // reset all costs consumed
+            PlayerSkillData[] playerSkillDatas =  playerSkills.Values.ToArray();
 
+            foreach (var playerSkillData in playerSkillDatas)
+            {
+                int skillId = playerSkillData.Id;
+
+                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkillData.Level);
+
+                for(int i = 0; i < costs.Length; i += 2)
+                {
+                    AddArtifact(costs[i], costs[i + 1]);
+                }
+
+            }
 
             // clear skills;
             playerSkills = new Dictionary<int, PlayerSkillData>();
@@ -400,13 +421,44 @@ namespace ETLG.Data
                 AddSkill(id, 1);
             }
 
+            // consume costs
+
+            playerSkillDatas = playerSkills.Values.ToArray();
+
+            foreach (var playerSkillData in playerSkillDatas)
+            {
+                int skillId = playerSkillData.Id;
+
+                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkillData.Level);
+
+                for (int i = 0; i < costs.Length; i += 2)
+                {
+                    DeleteArtifact(costs[i], costs[i + 1]);
+                }
+
+            }
+
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
+            GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
         }
 
+        
+        public int GetUnlockedSkillsNum()
+        {
+            return playerSkills.Count;
+        }
 
-
+        public int GetUnlockedLevelsNum()
+        {
+            int result = 0;
+            foreach(var skill in playerSkills.Values.ToArray())
+            {
+                result += skill.Level;
+            }
+            return result;
+        }
 
         private void AddMockData()
         {
@@ -433,7 +485,6 @@ namespace ETLG.Data
             AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
            
         }
-
 
 
         private void initPlayerAchievementData()

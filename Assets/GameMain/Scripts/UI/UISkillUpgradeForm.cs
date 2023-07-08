@@ -33,7 +33,6 @@ namespace ETLG
             UpgradeButton.onClick.AddListener(OnUpgradeButtonClick);
 
 
-
         }
 
 

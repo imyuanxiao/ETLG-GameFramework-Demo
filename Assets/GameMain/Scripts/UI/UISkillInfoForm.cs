@@ -93,7 +93,7 @@ namespace ETLG
             Domain.text = skillData.Domain;
             Activeness.text = skillData.Activeness;
             Functionality.text = skillData.Functionality;
-            SkillDescription.text = skillData.GetSkillDescription();
+            SkillDescription.text = skillData.Description;
 
             int currentLevel = playerSkillData.Level;
 

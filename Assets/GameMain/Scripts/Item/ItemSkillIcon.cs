@@ -52,7 +52,7 @@ namespace ETLG
         {
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 offset = new Vector3(-200f, -150f, 0f);
+            Vector3 offset = new Vector3(-180f, -120f, 0f);
             Vector3 newPosition = itemPosition + offset;
 
             dataSkill.skillUpgradeInfoPosition = newPosition;

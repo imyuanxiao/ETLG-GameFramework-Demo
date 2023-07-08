@@ -18,6 +18,7 @@ namespace ETLG
         public Button resetButton;
         public Button returnButton;
 
+
         // initial attrs
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
@@ -44,7 +45,15 @@ namespace ETLG
         public TextMeshProUGUI playerKnowledgePoints = null;
         public TextMeshProUGUI playerScore = null;
 
+        public TextMeshProUGUI totalSkillsNum = null;
+        public TextMeshProUGUI totalLevelsNum = null;
+        public TextMeshProUGUI unlockedSkillsNum = null;
+        public TextMeshProUGUI upgradedLevelsNum = null;
+
+
         private DataPlayer dataPlayer;
+        private DataSkill dataSkill;
+
         
         private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
 
@@ -58,6 +67,7 @@ namespace ETLG
             resetButton.onClick.AddListener(OnResetButtonClick);
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataSkill = GameEntry.Data.GetData<DataSkill>();
         }
 
         protected override void OnOpen(object userData)
@@ -134,6 +144,12 @@ namespace ETLG
             s_detection.text = currentSpaceshipData.Detection.ToString();
             s_capacity.text = currentSpaceshipData.Capacity.ToString();
             s_dogde.text = currentSpaceshipData.Dogde.ToString();
+
+
+            totalSkillsNum.text = "/" + dataSkill.skillCount.ToString();
+            totalLevelsNum.text = "/" + dataSkill.levelCount.ToString();
+            unlockedSkillsNum.text = dataPlayer.GetPlayerData().GetUnlockedSkillsNum().ToString();
+            upgradedLevelsNum.text = dataPlayer.GetPlayerData().GetUnlockedLevelsNum().ToString();
 
             SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);

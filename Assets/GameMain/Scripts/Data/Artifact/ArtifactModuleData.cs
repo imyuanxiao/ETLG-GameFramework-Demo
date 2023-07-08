@@ -12,7 +12,9 @@ namespace ETLG.Data
         {
             // Artifact 的基本属性
             Id = dRArtifact.Id;
-            Name = dRArtifact.NameID;
+            Name = GameEntry.Localization.GetString(Constant.Key.PRE_ARTIFACT + dRArtifact.NameID);
+            Description = GameEntry.Localization.GetString(Constant.Key.PRE_ARTIFACT + dRArtifact.NameID + Constant.Key.POST_DESC);
+            NameID = dRArtifact.NameID;
             Type = dRArtifact.Type;
             Tradeable = dRArtifact.Tradeable;
             Value = dRArtifact.Value;
@@ -22,6 +24,8 @@ namespace ETLG.Data
             Classification = dRModule.Classification;
             Attribute = dRModule.Attribute;
             Effect = dRModule.Effect;
+
+
 
         }
 

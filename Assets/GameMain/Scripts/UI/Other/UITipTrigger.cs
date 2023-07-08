@@ -31,8 +31,6 @@ public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData eventData)
     {
         GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-
-       // GameEntry.Event.Fire(this, TipCloseEventArgs.Create());
     }
 
 

@@ -1,4 +1,6 @@
 ﻿
+using Unity.VisualScripting;
+
 namespace ETLG.Data
 {
     public sealed class SkillData
@@ -18,6 +20,23 @@ namespace ETLG.Data
         {
             get
             {
+                return GameEntry.Localization.GetString(Constant.Key.PRE_SKILL + this.NameID);
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return GameEntry.Localization.GetString(Constant.Key.PRE_SKILL + this.NameID + Constant.Key.POST_DESC);
+            }
+        }
+
+
+        public string NameID
+        {
+            get
+            {
                 return dRSkill.NameId;
             }
         }
@@ -34,25 +53,7 @@ namespace ETLG.Data
 
             get
             {
-                switch (dRSkill.Domain)
-                {
-                    case Constant.Type.DOMAIN_COMMON:
-                        return "Common";
-                    case Constant.Type.DOMAIN_CLOUD_COMPUTING:
-                        return "Cloud Computing";
-                    case Constant.Type.DOMAIN_ARTIFICIAL_INTELLIGENCE:
-                        return "AI";
-                    case Constant.Type.DOMAIN_CYBERSECURITY:
-                        return "Cybersecurity";
-                    case Constant.Type.DOMAIN_DATA_SCIENCE:
-                        return "Data Science";
-                    case Constant.Type.DOMAIN_BLOCKCHAIN:
-                        return "Blockchain";
-                    case Constant.Type.DOMAIN_IoT:
-                        return "IoT";
-                    default:
-                        return "Unknown";
-                }
+                return GameEntry.Localization.GetString(Constant.Key.PRE_DOMAIN + dRSkill.Domain);
             }
         }
 
@@ -141,11 +142,7 @@ namespace ETLG.Data
             return dRSkillLevels[level];
         }
 
-        public string GetSkillDescription()
-        {
-            return GameEntry.Localization.GetString(Constant.Key.SKILL_DESC + Name);
-        }
-
+ 
         public int[] GetLevelCosts(int level)
         {
             level--;
@@ -171,7 +168,7 @@ namespace ETLG.Data
             // no arrtibutes, sepcial desc in Localization
             if (attrs.Length <= 1)
             {
-                return GameEntry.Localization.GetString(Constant.Key.SKILL_LEVEL_DESC + level);
+                return GameEntry.Localization.GetString(Constant.Key.PRE_SKILL + this.NameID + Constant.Key.POST_SKILL_LEVEL + level);
             }
 
             string result = "Add: ";
@@ -220,6 +217,29 @@ namespace ETLG.Data
         public int GetMaxLevelIndex()
         {
             return dRSkillLevels == null ? 0 : dRSkillLevels.Length - 1;
+        }
+
+
+        public int[] GetAllLevelsCosts(int level)
+        {
+            int[] result = null;
+            for(int i = level; i >= 1; i--)
+            {
+                int[] costs = GetSkillLevelData(i).Costs;
+                if(result == null)
+                {
+                    result = (int[])costs.Clone();
+                }
+                else
+                {
+                    for(int j = 1; j < costs.Length; j += 2)
+                    {
+                        result[j] += costs[j];
+                    }
+                }
+            }
+            return result;
+
         }
 
     }
