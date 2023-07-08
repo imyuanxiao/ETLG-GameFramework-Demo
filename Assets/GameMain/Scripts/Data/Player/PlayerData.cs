@@ -311,6 +311,11 @@ namespace ETLG.Data
 
         public void EquipCurrentModule()
         {
+
+            // before modules change
+            UpdateAttrsByAllModules(Constant.Type.SUB);
+
+            // change modules
             ArtifactModuleData moduleData = dataArtifact.GetCurrentShowModuleData();
 
             if(moduleData.Classification == Constant.Type.MODULE_TYPE_SUPPORT)
@@ -327,11 +332,27 @@ namespace ETLG.Data
 
             dataArtifact.lockCurrentModuleID = false;
 
+            // after modules change
+            UpdateAttrsByAllModules(Constant.Type.ADD);
+
             GameEntry.Event.Fire(this, EquippedModuleChangesEventArgs.Create());
 
         }
 
+        public void UpdateAttrsByAllModules(int Type)
+        {
 
+            foreach (var moduleId in equippedModules)
+            {
+                if (moduleId != 0 && dataArtifact.GetModuleData(moduleId) != null)
+                {
+                    int[] attrs = dataArtifact.GetModuleData(moduleId).Attributes;
+                    UpdateAttributes(attrs, Type);
+                }
+
+            }
+
+        }
 
 
         public PlayerNPCData GetNpcDataById(int NpcId)
@@ -462,10 +483,12 @@ namespace ETLG.Data
             }
 
             // before level up
-
             UpdateAttrsByAllSkills(Constant.Type.SUB);
-            // after level up
+
+            // change skills
             playerSkills[dataSkill.currentSkillID].Level++;
+
+            // after level up
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             dataSkill.lockCurrentSkillID = false;
