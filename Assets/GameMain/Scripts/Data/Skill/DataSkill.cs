@@ -27,14 +27,14 @@ namespace ETLG.Data
         private Dictionary<int, List<SkillData>> dicSkillDataLayers;
 
         // 当前展示技能ID
-        //public int currentSkillID;
-        //public PlayerSkillData currentPlayerSkillData;
         public int currentSkillID { get; set; }
-
 
         // 当前展示skillInfo的UI位置
         public Vector3 skillInfoPosition { get; set; }
         public bool hideSkillInfoBottomPart { get; set; }
+        public Vector3 skillUpgradeInfoPosition { get; set; }
+
+        public bool CanUpgradeCurrentSkill { get; set; }
 
         protected override void OnInit()
         {
@@ -131,16 +131,6 @@ namespace ETLG.Data
             return dicSkillDataLayers[layer];
         }
 
-
-        /*        public SkillData GetCurrentShowSkillData()
-                {
-                    if (!dicSkillData.ContainsKey(currentPlayerSkillData.Id))
-                    {
-                        Log.Error("Can not find skill data id '{0}'.", currentPlayerSkillData.Id);
-                        return null;
-                    }
-                    return dicSkillData[currentPlayerSkillData.Id];
-                }*/
         public SkillData GetCurrentShowSkillData()
         {
             if (!dicSkillData.ContainsKey(currentSkillID))

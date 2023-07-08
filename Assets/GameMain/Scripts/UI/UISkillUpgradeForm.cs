@@ -14,33 +14,14 @@ namespace ETLG
     {
 
         public DataSkill dataSkill;
-       // private SkillData skillData;
-
         public DataPlayer dataPlayer;
 
-        //public PlayerSkillData playerSkillData;
-
         public Transform UIContainer;
-        public Transform CostsContainer;
-
-        public RawImage skillIcon;
-        public TextMeshProUGUI SkillName = null;
-        public TextMeshProUGUI Domain = null;
-        public TextMeshProUGUI Activeness;
-        public TextMeshProUGUI Functionality;
-        public TextMeshProUGUI SkillDescription;
-
+        public TextMeshProUGUI Title = null;
         public Button CancelButton;
         public Button UpgradeButton;
-
-        public GameObject CostsContainerObj;
-        public GameObject TipsContainerObj;
-
-        public bool hideBottomPart { get; set; }
-
         public bool refresh;
 
-        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -80,61 +61,15 @@ namespace ETLG
 
         public void showContent()
         {
-            SkillData skillData = dataSkill.GetCurrentShowSkillData();
-            
-            UIContainer.position = dataSkill.skillInfoPosition;
+            UIContainer.position = dataSkill.skillUpgradeInfoPosition;
 
-            SkillName.text = skillData.Name;
-            Domain.text = skillData.Domain;
+            bool isMaxLevel = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID).Level - 1 >= dataSkill.GetCurrentShowSkillData().GetMaxLevelIndex();
+            UpgradeButton.interactable = !isMaxLevel && dataSkill.CanUpgradeCurrentSkill;
 
-            Activeness.text = skillData.Activeness;
-            Functionality.text = skillData.Functionality;
+            string title = dataSkill.CanUpgradeCurrentSkill ? "Upgrade skill" : "Lack of upgrade materials.";
 
-            SkillDescription.text = skillData.GetSkillDescription();
+            Title.text = isMaxLevel ? "Cannot be upgraded any more." : title;
 
-            bool isMaxLevel = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID).Level - 1 >= skillData.GetMaxLevelIndex();
-
-            // set skill icon            
-            Texture texture = Resources.Load<Texture>(AssetUtility.GetSkillIcon(skillData.Id.ToString(), "2"));
-            if (texture != null)
-            {
-                skillIcon.texture = texture;
-            }
-
-            if (hideBottomPart || isMaxLevel)
-            {
-                UpgradeButton.interactable = false;
-                CostsContainerObj.SetActive(false);
-                TipsContainerObj.SetActive(true);
-            }
-            else
-            {
-                UpgradeButton.interactable = true;
-                CostsContainerObj.SetActive(true);
-                TipsContainerObj.SetActive(false);
-                ShowCosts(CostsContainer, skillData.GetLevelCosts(
-                    dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID).Level + 1)
-                );
-            }
-
-        }
-
-
-        private void ShowCosts(Transform container, int[] costs)
-        {
-            for (int i = 0; i < costs.Length; i += 2) {
-                int artifactId = costs[i];
-                int hasNum = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getArtifactNumById(artifactId);
-                int needNum = costs[i + 1];
-                ShowItem<ItemCostResBar>(EnumItem.CostResBar, (item) =>
-                {
-                    item.transform.SetParent(container, false);
-                    item.transform.localScale = Vector3.one;
-                    item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero;
-                    item.GetComponent<ItemCostResBar>().SetCostResData(artifactId, hasNum, needNum);
-                });
-            }
         }
 
         public void OnCancelButtonClick()

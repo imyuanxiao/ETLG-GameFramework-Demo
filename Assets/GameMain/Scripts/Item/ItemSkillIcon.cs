@@ -12,7 +12,6 @@ namespace ETLG
         private DataSkill dataSkill;
         private DataPlayer dataPlayer;
 
-        //private PlayerSkillData playerSkillData;
         private int currentSkillID;
 
         public RawImage skillIcon;
@@ -30,8 +29,6 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
-
-            //EventTrigger trigger = iconButton.gameObject.AddComponent<EventTrigger>();
 
         }
 
@@ -54,8 +51,10 @@ namespace ETLG
         {
             // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 offset = new Vector3(100f, 0f, 0f);
+            Vector3 offset = new Vector3(-200f, -150f, 0f);
             Vector3 newPosition = itemPosition + offset;
+
+            dataSkill.skillUpgradeInfoPosition = newPosition;
 
             if (Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
             {
@@ -66,9 +65,6 @@ namespace ETLG
             {
                 newPosition = new Vector3(50f, 120f, 0f);
             }
-
-
-            //dataSkill.currentPlayerSkillData = this.playerSkillData;
 
             dataSkill.currentSkillID = this.currentSkillID;
 
@@ -93,8 +89,6 @@ namespace ETLG
 
         public void SetSkillData(int SkillId, int Type)
         {
-            //this.playerSkillData = playerSkillData;
-
             this.Type = Type;
 
             this.currentSkillID = SkillId;
@@ -111,8 +105,6 @@ namespace ETLG
             Color iconColor = Color.white;
             Color bgColor = Color.white;
             ColorUtility.TryParseHtmlString("#57595b", out bgColor);
-
-            // change icon style according to playerSkillData.ActivateState
 
             if(Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
             {
@@ -137,8 +129,6 @@ namespace ETLG
 
         protected override void OnHide(bool isShutdown, object userData)
         {
-            //inSelectScene = false;
-
             base.OnHide(isShutdown, userData);
 
         }

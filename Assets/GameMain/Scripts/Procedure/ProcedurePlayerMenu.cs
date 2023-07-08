@@ -38,13 +38,9 @@ namespace ETLG
             
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
-
-            //GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
             GameEntry.Event.Subscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
-
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
-            //GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
 
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
 
@@ -87,19 +83,11 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Unsubscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
-            //GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
             GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
             GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
-
             GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
-            //GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
-
             GameEntry.Event.Unsubscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
-/*
-            skillInfoUIID = null;
-            artifactInfoUIID = null;
-            tipUIID = null;
-*/
+
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
@@ -149,7 +137,7 @@ namespace ETLG
                 skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
             }
 
-            if (ne.Type == Constant.Type.UI_CLOSE)
+            if (ne.Type == Constant.Type.UI_CLOSE && skillUpgradeInfoUIID == null)
             {
                 if (skillInfoUIID != null)
                 {
@@ -157,7 +145,6 @@ namespace ETLG
                 }
                 skillInfoUIID = null;
             }
-            //skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
         }
 
         private void OnSkillUpgradeInfoUIChange(object sender, GameEventArgs e)
@@ -176,23 +163,15 @@ namespace ETLG
                     GameEntry.UI.CloseUIForm((int)skillUpgradeInfoUIID);
                 }
                 skillUpgradeInfoUIID = null;
-            }
-            //skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
-        }
 
-        /*    private void OnSkillInfoClose(object sender, GameEventArgs e)
-            {
-                SkillInfoCloseEventArgs ne = (SkillInfoCloseEventArgs)e;
-                if (ne == null)
-                    return;
-
-                if(skillInfoUIID != null)
+                if (skillInfoUIID != null)
                 {
                     GameEntry.UI.CloseUIForm((int)skillInfoUIID);
                 }
                 skillInfoUIID = null;
             }
-     */
+        }
+
         private void OnArtifactInfoOpen(object sender, GameEventArgs e)
         {
             ArtifactInfoOpenEventArgs ne = (ArtifactInfoOpenEventArgs)e;
@@ -237,22 +216,6 @@ namespace ETLG
             }
 
         }
-
-        /*      private void OnTipClose(object sender, GameEventArgs e)
-              {
-                  TipCloseEventArgs ne = (TipCloseEventArgs)e;
-                  if (ne == null)
-                      return;
-
-                  if (tipUIID != null)
-                  {
-                      GameEntry.UI.CloseUIForm((int)tipUIID);
-                  }
-
-                  tipUIID = null;
-
-              }*/
-
 
     }
 }

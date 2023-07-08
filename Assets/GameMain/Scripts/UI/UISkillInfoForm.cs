@@ -36,7 +36,7 @@ namespace ETLG
 
         public GameObject bottomPart;
 
-        public Transform costsContainer;
+        public Transform CostsContainer;
 
         public bool hideBottomPart { get; set; }
 
@@ -73,8 +73,6 @@ namespace ETLG
         public void showContent()
         {
             SkillData skillData = dataSkill.GetCurrentShowSkillData();
-            // playerSkillData = dataSkill.currentPlayerSkillData;
-
 
             PlayerSkillData playerSkillData = null;
             
@@ -123,17 +121,12 @@ namespace ETLG
             {
                 bottomPart.SetActive(true);
                 NextLevelDescription.text = skillData.GetLevelEffectByLevel(currentLevel + 1);
-                ShowCosts(costsContainer, skillData.GetLevelCosts(currentLevel + 1));
+                ShowCosts(CostsContainer, skillData.GetLevelCosts(currentLevel + 1));
             }
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            //skillData = null;
-           // playerSkillData = null;
-            SkillDescription.text = null;
-            CurrentLevelDescription.text = null;
-            NextLevelDescription.text = null;
 
             base.OnClose(isShutdown, userData);
 
@@ -141,14 +134,17 @@ namespace ETLG
 
         private void ShowCosts(Transform container, int[] costs)
         {
+            dataSkill.CanUpgradeCurrentSkill = true;
 
-            // 展示内容需要 玩家有该道具数，需要道具数，
-
-            for(int i = 0; i < costs.Length; i += 2)
+            for (int i = 0; i < costs.Length; i += 2)
             {
                 int artifactId = costs[i];
                 int hasNum = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getArtifactNumById(artifactId);
                 int needNum = costs[i + 1];
+
+                if (hasNum < needNum) {
+                    dataSkill.CanUpgradeCurrentSkill = false;
+                }
 
                 ShowItem<ItemCostResBar>(EnumItem.CostResBar, (item) =>
                 {
