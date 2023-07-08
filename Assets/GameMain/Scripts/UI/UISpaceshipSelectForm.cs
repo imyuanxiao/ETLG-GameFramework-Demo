@@ -43,7 +43,6 @@ namespace ETLG
 
 
         private float valueBarMaxWidth = 150;
-        private float maxAttrValue = 300;
 
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
@@ -263,13 +262,16 @@ namespace ETLG
 
         public void SetWidth(GameObject targetObject, float newWidth)
         {
+            newWidth = newWidth * valueBarMaxWidth / Constant.Type.ATTR_MAX_VALUE;
+
             // 获取目标对象的 RectTransform 组件
             RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
 
             // 修改 sizeDelta 属性的 x 值来改变宽度
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             newSizeDelta.x = newWidth;
-            rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
+
+            rectTransform.sizeDelta = newSizeDelta;
         }
 
 

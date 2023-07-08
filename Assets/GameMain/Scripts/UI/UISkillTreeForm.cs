@@ -31,7 +31,6 @@ namespace ETLG
         public TextMeshProUGUI s_dogde = null;
 
         private readonly float valueBarMaxWidth = 180;
-        private readonly float maxAttrValue = 300;
 
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
@@ -109,7 +108,7 @@ namespace ETLG
 
             // reset skill data，此处等实现clone方法后再完善
 
-            dataPlayer.GetPlayerData().ResetSkillTree();
+            dataPlayer.GetPlayerData().ResetSkills();
         }
 
         public void ShowContent()
@@ -150,11 +149,13 @@ namespace ETLG
 
         public void SetWidth(GameObject targetObject, float newWidth)
         {
+            newWidth = newWidth * valueBarMaxWidth / Constant.Type.ATTR_MAX_VALUE;
+
             RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
 
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             newSizeDelta.x = newWidth;
-            rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
+            rectTransform.sizeDelta = newSizeDelta;
         }
 
         public void OnSkillUpgraded(object sender, GameEventArgs e)

@@ -45,7 +45,6 @@ namespace ETLG
         public TextMeshProUGUI s_dogde = null;
 
         private readonly float valueBarMaxWidth = 180;
-        private readonly float maxAttrValue = 300;
 
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
@@ -199,10 +198,10 @@ namespace ETLG
             s_capacity.text = currentSpaceshipData.Capacity.ToString();
             s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
-            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
             SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
             SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
+            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
             SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
@@ -214,13 +213,15 @@ namespace ETLG
 
         public void SetWidth(GameObject targetObject, float newWidth)
         {
+            newWidth = newWidth * valueBarMaxWidth / Constant.Type.ATTR_MAX_VALUE;
+
             // 获取目标对象的 RectTransform 组件
             RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
 
             // 修改 sizeDelta 属性的 x 值来改变宽度
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             newSizeDelta.x = newWidth;
-            rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
+            rectTransform.sizeDelta = newSizeDelta;
         }
 
 

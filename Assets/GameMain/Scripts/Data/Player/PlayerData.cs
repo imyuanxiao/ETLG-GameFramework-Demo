@@ -46,7 +46,10 @@ namespace ETLG.Data
             foreach (var id in spaceshipData.SkillIds)
             {
                 AddSkill(id, 1);
+
             }
+
+            UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             // add money and skill points
             playerArtifacts.Add((int)EnumArtifact.Money, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.Money)));
@@ -58,45 +61,93 @@ namespace ETLG.Data
         }
 
         // Call this method everytime skills change or initialSpaceship changes
-        public void UpdateCalculatedSpaceshipAttribute(int Attr, float Change)
+        public void UpdateAttributeByType(int AttrType, float Change)
         {
-            switch (Attr)
+
+            float newValue = 0;
+
+            // get old value
+            switch (AttrType)
             {
                 case Constant.Type.ATTR_Durability:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Durability;
                     break;
                 case Constant.Type.ATTR_Shields:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Shields;
                     break;
                 case Constant.Type.ATTR_Firepower:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Firepower;
                     break;
                 case Constant.Type.ATTR_Energy:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Energy;
                     break;
                 case Constant.Type.ATTR_Agility:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Agility;
                     break;
                 case Constant.Type.ATTR_Speed:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Speed;
                     break;
                 case Constant.Type.ATTR_Detection:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Detection;
                     break;
                 case Constant.Type.ATTR_Capacity:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Capacity;
                     break;
                 case Constant.Type.ATTR_Firerate:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.FireRate;
                     break;
                 case Constant.Type.ATTR_Dogde:
-                    playerCalculatedSpaceshipData.Durability += Change;
+                    newValue = playerCalculatedSpaceshipData.Dogde;
+                    break;
+            }
+
+            newValue += Change;
+
+            if (newValue >= Constant.Type.ATTR_MAX_VALUE)
+            {
+                newValue = Constant.Type.ATTR_MAX_VALUE;
+            }
+            if (newValue <= 0)
+            {
+                newValue = 0;
+            }
+
+            // set new value
+            switch (AttrType)
+            {
+                case Constant.Type.ATTR_Durability:
+                    playerCalculatedSpaceshipData.Durability = newValue;
+                    break;
+                case Constant.Type.ATTR_Shields:
+                    playerCalculatedSpaceshipData.Shields = newValue;
+                    break;
+                case Constant.Type.ATTR_Firepower:
+                    playerCalculatedSpaceshipData.Firepower = newValue;
+                    break;
+                case Constant.Type.ATTR_Energy:
+                    playerCalculatedSpaceshipData.Energy = newValue;
+                    break;
+                case Constant.Type.ATTR_Agility:
+                    playerCalculatedSpaceshipData.Agility = newValue;
+                    break;
+                case Constant.Type.ATTR_Speed:
+                    playerCalculatedSpaceshipData.Speed = newValue;
+                    break;
+                case Constant.Type.ATTR_Detection:
+                    playerCalculatedSpaceshipData.Detection = newValue;
+                    break;
+                case Constant.Type.ATTR_Capacity:
+                    playerCalculatedSpaceshipData.Capacity = newValue;
+                    break;
+                case Constant.Type.ATTR_Firerate:
+                    playerCalculatedSpaceshipData.FireRate = newValue;
+                    break;
+                case Constant.Type.ATTR_Dogde:
+                    playerCalculatedSpaceshipData.Dogde += newValue;
                     break;
             }
 
         }
-
-
 
         public float GetSpaceshipScore()
         {
@@ -273,6 +324,21 @@ namespace ETLG.Data
             return targetList;
         }
 
+        public void UpdateAttrsByAllSkills(int Type)
+        {
+            PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();
+            foreach (var playerSkill in playerSkillDatas)
+            {
+                int skillId = playerSkill.Id;
+                int currentLevel = playerSkill.Level;
+
+                SkillData skillData = dataSkill.GetSkillData(skillId);
+                int[] attrs = skillData.GetSkillLevelData(currentLevel).Attributes;
+                UpdateAttributes(attrs, Type);
+            }
+
+        }
+
         public void UpgradeCurrentSkill()
         {
             int currentLevel = playerSkills[dataSkill.currentSkillID].Level;
@@ -286,16 +352,12 @@ namespace ETLG.Data
                 playerArtifacts[costIds[i]].Number -= costIds[i + 1];
             }
 
-            playerSkills[dataSkill.currentSkillID].Level++;
+            // before level up
 
-            // update sapceship attributes
-            int[] oldAttrs = skillData.GetSkillLevelData(currentLevel).Attributes;
-            if(oldAttrs.Length >= 2)
-            {
-                UpdateAttributes(oldAttrs, Constant.Type.SUB);
-                int[] newAttrs = skillData.GetSkillLevelData(currentLevel + 1).Attributes;
-                UpdateAttributes(newAttrs, Constant.Type.SUB);
-            }
+            UpdateAttrsByAllSkills(Constant.Type.SUB);
+            // after level up
+            playerSkills[dataSkill.currentSkillID].Level++;
+            UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
@@ -303,7 +365,12 @@ namespace ETLG.Data
 
         private void UpdateAttributes(int[] AttrIDs, int Type)
         {
-            for (int i = 0; i < AttrIDs.Length; i += 2)
+            if (AttrIDs.Length <= 1)
+            {
+                return;
+            }
+
+                for (int i = 0; i < AttrIDs.Length; i += 2)
             {
                 int AttrID = AttrIDs[i];
                 int Change = AttrIDs[i + 1];
@@ -311,18 +378,34 @@ namespace ETLG.Data
                 {
                     Change = -Change;
                 }
-                UpdateCalculatedSpaceshipAttribute(AttrID, Change);
+                UpdateAttributeByType(AttrID, Change);
             }
         }
 
 
 
-        public void ResetSkillTree()
+        public void ResetSkills()
         {
+            // reset calculated spaceship
+            this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(initialSpaceship);
 
+            // reset all knowledge points
+
+
+            // clear skills;
+            playerSkills = new Dictionary<int, PlayerSkillData>();
+
+            foreach (var id in initialSpaceship.SkillIds)
+            {
+                AddSkill(id, 1);
+            }
+
+            UpdateAttrsByAllSkills(Constant.Type.ADD);
 
 
         }
+
+
 
 
         private void AddMockData()
