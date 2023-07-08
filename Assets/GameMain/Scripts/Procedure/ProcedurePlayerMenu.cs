@@ -18,6 +18,9 @@ namespace ETLG
         private int? skillInfoUIID;
         private int? skillUpgradeInfoUIID;
         private int? artifactInfoUIID;
+        private int? moduleInfoUIID;
+        private int? moduleEquipInfoUIID;
+
         private int? achievementUIID;
 
         private DataPlayer dataPlayer;
@@ -38,6 +41,10 @@ namespace ETLG
             
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
+
+            GameEntry.Event.Subscribe(ModuleInfoUIChangeEventArgs.EventId, OnModuleInfoUIChange);
+            GameEntry.Event.Subscribe(ModuleEquipUIchangeEventArgs.EventId, OnModuleEquipUIChange);
+
             GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
 
@@ -79,12 +86,14 @@ namespace ETLG
 
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-
             GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Unsubscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
             GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
             GameEntry.Event.Unsubscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
+
+            GameEntry.Event.Unsubscribe(ModuleInfoUIChangeEventArgs.EventId, OnModuleInfoUIChange);
+            GameEntry.Event.Unsubscribe(ModuleEquipUIchangeEventArgs.EventId, OnModuleEquipUIChange);
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -221,10 +230,63 @@ namespace ETLG
                 }
                 tipUIID = null;
             }
-
-
-
         }
+
+
+
+        private void OnModuleInfoUIChange(object sender, GameEventArgs e)
+        {
+            ModuleInfoUIChangeEventArgs ne = (ModuleInfoUIChangeEventArgs)e;
+            if (ne == null)
+                return;
+
+
+            if (ne.Type == Constant.Type.UI_OPEN && moduleEquipInfoUIID == null)
+            {
+                moduleInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleInfoForm);
+            }
+
+            if (ne.Type == Constant.Type.UI_CLOSE && moduleEquipInfoUIID == null)
+            {
+                if (moduleInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
+                }
+                moduleInfoUIID = null;
+            }
+        }
+
+        private void OnModuleEquipUIChange(object sender, GameEventArgs e)
+        {
+            ModuleEquipUIchangeEventArgs ne = (ModuleEquipUIchangeEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                if (moduleEquipInfoUIID != null)
+                {
+                    return;
+                }
+
+                moduleEquipInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleEquipForm);
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (moduleEquipInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)moduleEquipInfoUIID);
+                }
+                moduleEquipInfoUIID = null;
+
+                if (moduleInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
+                }
+                moduleInfoUIID = null;
+            }
+        }
+
 
 
 

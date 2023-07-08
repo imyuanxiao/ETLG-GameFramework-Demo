@@ -39,6 +39,7 @@
             public const int DOMAIN_BLOCKCHAIN = 5;
             public const int DOMAIN_IoT = 6;
 
+
             public const string ICON_LOST = "iconLost";
 
             // artifact icon type
@@ -76,7 +77,6 @@
 
             public const int ARTIFACT_ALL = 0;
             public const int ARTIFACT_TRADE = 1;
-            public const int ARTIFACT_MODULE = 3;
             public const int ARTIFACT_SPECIAL = 2;
             public const int ARTIFACT_OTHERS = 4;
 

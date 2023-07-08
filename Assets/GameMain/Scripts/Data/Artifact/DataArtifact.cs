@@ -139,13 +139,20 @@ namespace ETLG.Data
 
         public ArtifactDataBase GetCurrentShowArtifactData()
         {
-            if (!dicArtifactData.ContainsKey(CurrentArtifactID))
+            return GetArtifactData(CurrentArtifactID);
+    /*        if (!dicArtifactData.ContainsKey(CurrentArtifactID))
             {
                 Log.Error("Can not find artifact data id '{0}'.", CurrentArtifactID);
                 return null;
             }
-            return dicArtifactData[CurrentArtifactID];
+            return dicArtifactData[CurrentArtifactID];*/
         }
+
+        public ArtifactModuleData GetCurrentShowModuleData()
+        {
+            return GetModuleData(CurrentModuleID);
+        }
+
 
     }
 }

@@ -83,10 +83,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5350509902426962785}
   - component: {fileID: 5392875950851482610}
-  - component: {fileID: 1842293718664171566}
   - component: {fileID: 8733534053124138021}
   - component: {fileID: 8265064020099033035}
   - component: {fileID: 8007888245210580434}
+  - component: {fileID: 1099363121200900315}
   m_Layer: 5
   m_Name: ModuleIcon
   m_TagString: Untagged
@@ -159,22 +159,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1842293718664171566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147204563429847656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5d50f3c5f112a9448a8b0670ece895e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentArtifactID: 0
-  artifactIcon: {fileID: 8980572513236846533}
-  iconButton: {fileID: 5392875950851482610}
-  artifactNumber: {fileID: 0}
 --- !u!222 &8733534053124138021
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -225,3 +209,18 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
+--- !u!114 &1099363121200900315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147204563429847656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a294b3e9f1969c34bac5e59477d2b035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentModuleID: 0
+  artifactIcon: {fileID: 8980572513236846533}
+  iconButton: {fileID: 5392875950851482610}

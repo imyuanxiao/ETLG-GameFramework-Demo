@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 383702102189230306}
   - component: {fileID: 3780153643261067807}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: Equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -995,6 +995,7 @@ GameObject:
   - component: {fileID: 5350509902426962785}
   - component: {fileID: 8472472458041209909}
   - component: {fileID: -3033843147712121295}
+  - component: {fileID: 364606906928619596}
   m_Layer: 5
   m_Name: UIModuleEquipForm
   m_TagString: Untagged
@@ -1067,6 +1068,23 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &364606906928619596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147204563429847656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6473571793da49bd0ff9fcb2dee79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIContainer: {fileID: 7462447576448434227}
+  Title: {fileID: 2568927106102051361}
+  CancelButton: {fileID: 8666787480192989794}
+  EquipButton: {fileID: 3780153643261067807}
+  refresh: 0
 --- !u!1 &9183479604118640256
 GameObject:
   m_ObjectHideFlags: 0

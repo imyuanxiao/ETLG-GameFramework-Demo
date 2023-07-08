@@ -22,10 +22,6 @@ namespace ETLG
 
         public Button iconButton;
 
-        public TextMeshProUGUI artifactNumber;
-
-        public int Type { get; private set; }
-
 
         protected override void OnInit(object userData)
         {
@@ -39,8 +35,8 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
-                Log.Debug("show equip button");
-        
+            GameEntry.Event.Fire(this, ModuleEquipUIchangeEventArgs.Create(Constant.Type.UI_OPEN));
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -69,12 +65,9 @@ namespace ETLG
 
         }
 
-        public void SetModuleData(int ModuleID, int NUm, int Type)
+        public void SetModuleData(int ModuleID)
         {
             this.CurrentModuleID = ModuleID;
-
-            this.Type = Type;
-
 
             string texturePath = AssetUtility.GetArtifactIcon(ModuleID.ToString());
 

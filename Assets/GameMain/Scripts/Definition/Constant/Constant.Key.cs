@@ -10,6 +10,9 @@
             public const string PRE_ARTIFACT = "Artifact_";
             public const string PRE_SKILL = "Skill_";
 
+            public const string PRE_MODULE_EFFECT = "Module_Effect_";
+
+
             public const string POST_SKILL_LEVEL = "_Level_";
 
             public const string PRE_TIP = "Tip_";

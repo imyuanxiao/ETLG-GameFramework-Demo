@@ -1,8 +1,10 @@
 ﻿using ETLG.Data;
 using GameFramework.Event;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +15,22 @@ namespace ETLG
     public class UISpaceshipCheckForm : UGuiFormEx
     {
 
-        // buttons
         public Button returnButton;
 
-        public Button allButton;
-        public Button moduleButton;
-        public Button specialButton;
-        public Button tradeButton;
-        public Button othersButton;
+        // packages buttons
 
+        public Button packageAllButton;
+        public Button packageTradeButton;
+        public Button packageSpecialButton;
+        public Button packageOthersButton;
+
+        // module buttons
+        public Button moduleAllButton;
+        public Button moduleWeaponButton;
+        public Button moduleAttackButton;
+        public Button moduleDefenseButton;
+        public Button modulePowerdriveButton;
+        public Button moduleSupportButton;
 
         // name and description
         public TextMeshProUGUI s_name = null;
@@ -60,6 +69,8 @@ namespace ETLG
 
         public Transform artifactContainer = null;
 
+        public Transform moduleContainer = null;
+
         private DataPlayer dataPlayer;
 
         private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
@@ -70,23 +81,35 @@ namespace ETLG
         private EntityLoader entityLoader;
 
         private int selectedArtifactType;
+        private int selectedModuleType;
+
         private bool refreshAll;
         private bool refreshUI;
 
+        private Button currentSelectedButton;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
+            currentSelectedButton = null;
+
             // 绑定按钮点击事件
             returnButton.onClick.AddListener(OnReturnButtonClick);
 
-            allButton.onClick.AddListener(OnPackageAllButtonClick);
-            moduleButton.onClick.AddListener(OnPackageModuleButtonClick);
-            specialButton.onClick.AddListener(OnPackageSpecialButtonClick);
-            tradeButton.onClick.AddListener(OnPackageTradeButtonClick);
-            othersButton.onClick.AddListener(OnPackageOthersButtonClick);
+            packageAllButton.onClick.AddListener(OnPackageAllButtonClick);
+            packageTradeButton.onClick.AddListener(OnPackageTradeButtonClick);
+            packageSpecialButton.onClick.AddListener(OnPackageSpecialButtonClick);
+            packageOthersButton.onClick.AddListener(OnPackageOthersButtonClick);
+
+            moduleAllButton.onClick.AddListener(OnModuleAllButtonClick);
+            moduleWeaponButton.onClick.AddListener(OnModuleWeaponButtonClick);
+            moduleAttackButton.onClick.AddListener(OnModuleAttackButtonClick);
+            moduleDefenseButton.onClick.AddListener(OnModuleDefenseButtonClick);
+            modulePowerdriveButton.onClick.AddListener(OnModulePowerdriveButtonClick);
+            moduleSupportButton.onClick.AddListener(OnModuleSupportButtonClick);
+
 
 
             // 获取玩家数据管理器
@@ -106,7 +129,9 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             refreshAll = true;
+
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
+            selectedModuleType = Constant.Type.ARTIFACT_ALL;
 
         }
 
@@ -126,7 +151,7 @@ namespace ETLG
                 refreshUI = false;
             }
 
-
+            ResetAllButtons();
 
         }
 
@@ -185,34 +210,21 @@ namespace ETLG
         {
             List<int> playerModuleIDs = dataPlayer.GetPlayerData().GetModulesByType(Type);
 
-
-            
-
-            /*int i = 0;
-
-            foreach (KeyValuePair<int, int> kvp in playerArtifacts)
+            for(int i = 0; i <  playerModuleIDs.Count; i++)
             {
-                int ArtifactID = kvp.Key;
-                int Num = kvp.Value;
+                int ModuleID = playerModuleIDs[i];
+                Vector3 offset = new Vector3((i % 4) * 90f + 10f, (i / 4) * -90f - 10f, 0f);
 
-                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * -150f, 0f);
-                i++;
-
-                if (ArtifactID == (int)EnumArtifact.Money)
-                {
-                    continue;
-                }
-
-                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                ShowItem<ItemModuleIcon>(EnumItem.ModuleIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.ARTIFACT_ICON_DEFAULT);
+                    item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID);
                 });
+            }
 
-            }*/
         }
 
 
@@ -253,6 +265,7 @@ namespace ETLG
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
             ShowArtifactIcons(artifactContainer, selectedArtifactType);
+            ShowModuleIcons(moduleContainer, selectedModuleType);
 
         }
 
@@ -296,29 +309,8 @@ namespace ETLG
         {
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
-            ResetAllButtons();
-            allButton.Select();
+            currentSelectedButton = packageAllButton;
 
-        }
-
-        public void OnPackageModuleButtonClick()
-        {
-            refreshUI = true;
-            selectedArtifactType = Constant.Type.ARTIFACT_MODULE;
-
-            ResetAllButtons();
-            moduleButton.Select();
-        }
-
-        public void OnPackageSpecialButtonClick()
-        {
-
-
-            refreshUI = true;
-            selectedArtifactType = Constant.Type.ARTIFACT_SPECIAL;
-
-            ResetAllButtons();
-            specialButton.Select();
         }
 
         public void OnPackageTradeButtonClick()
@@ -328,31 +320,83 @@ namespace ETLG
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_TRADE;
 
-            ResetAllButtons();
-            tradeButton.Select();
+            currentSelectedButton = packageTradeButton;
         }
+
+        public void OnPackageSpecialButtonClick()
+        {
+            refreshUI = true;
+            selectedArtifactType = Constant.Type.ARTIFACT_SPECIAL;
+            currentSelectedButton = packageSpecialButton;
+        }
+
 
         public void OnPackageOthersButtonClick()
         {
-
-
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_OTHERS;
-            ResetAllButtons();
-            othersButton.Select();
+            currentSelectedButton = packageOthersButton;
         }
 
         public void ResetAllButtons()
         {
-            allButton.interactable = true;
-            moduleButton.interactable = true;
-            specialButton.interactable = true;
-            tradeButton.interactable = true;
-            othersButton.interactable = true;
+            packageAllButton.interactable = true;
+            packageTradeButton.interactable = true;
+            packageSpecialButton.interactable = true;
+            packageOthersButton.interactable = true;
+            moduleAllButton.interactable = true;
+            moduleWeaponButton.interactable = true;
+            moduleAttackButton.interactable = true;
+            moduleDefenseButton.interactable = true;
+            modulePowerdriveButton.interactable = true;
+            moduleSupportButton.interactable = true;
+
+            if(currentSelectedButton != null){
+                currentSelectedButton.Select();
+            }
         }
 
-        
+        public void OnModuleAllButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_ALL;
+            currentSelectedButton = moduleAllButton;
+        }
+        public void OnModuleWeaponButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_WEAPON;
+            currentSelectedButton = moduleWeaponButton;
+        }
 
+
+        public void OnModuleAttackButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_ATTACK;
+            currentSelectedButton = moduleAttackButton;
+        }
+
+        public void OnModuleDefenseButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_DEFENSE;
+            currentSelectedButton = moduleDefenseButton;
+        }
+
+        public void OnModulePowerdriveButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_POWERDRIVE;
+            currentSelectedButton = modulePowerdriveButton;
+        }
+        public void OnModuleSupportButtonClick()
+        {
+            refreshUI = true;
+            selectedModuleType = Constant.Type.MODULE_TYPE_SUPPORT;
+            currentSelectedButton = moduleSupportButton;
+        }
+        
     }
 }
 
