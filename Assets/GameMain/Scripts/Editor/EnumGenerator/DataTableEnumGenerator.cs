@@ -20,7 +20,8 @@ namespace ETLG
             "Entity",
             "Item",
             "Sound",
-            "Skill"
+            "Skill",
+            "Artifact"
         };
 
         [MenuItem("Tools/Generate DataTable Enum", false, 3)]

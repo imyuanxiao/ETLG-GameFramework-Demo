@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-07 19:19:35.079
+// 生成时间：2023-07-08 08:09:57.445
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,9 +37,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取道具名字。
+        /// 获取道具枚举ID。
         /// </summary>
-        public string Name
+        public string NameID
         {
             get;
             private set;
@@ -93,7 +93,7 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Name = columnStrings[index++];
+            NameID = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
             Tradeable = bool.Parse(columnStrings[index++]);
             Value = int.Parse(columnStrings[index++]);
@@ -110,7 +110,7 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Name = binaryReader.ReadString();
+                    NameID = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                     Tradeable = binaryReader.ReadBoolean();
                     Value = binaryReader.Read7BitEncodedInt32();

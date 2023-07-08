@@ -180,7 +180,7 @@ namespace ETLG
             s_type.text = dataPlayer.GetPlayerData().initialSpaceship.SType;
             s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
 
-            playerMoney.text = dataPlayer.GetPlayerData().money.ToString();
+            playerMoney.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.Money).ToString();
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();

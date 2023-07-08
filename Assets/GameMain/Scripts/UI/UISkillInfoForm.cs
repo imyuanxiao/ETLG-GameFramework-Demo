@@ -50,6 +50,7 @@ namespace ETLG
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -66,13 +67,13 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            GameEntry.Event.Subscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
             refresh = true;
         }
 
         public void showContent()
         {
-            SkillData skillData = dataSkill.GetCurrentShowSkillData();
+            SkillData skillData = dataSkill.GetCurrentSkillData();
 
             PlayerSkillData playerSkillData = null;
             
@@ -129,11 +130,14 @@ namespace ETLG
         {
 
             base.OnClose(isShutdown, userData);
-
+            GameEntry.Event.Unsubscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
         }
 
         private void ShowCosts(Transform container, int[] costs)
         {
+
+            HideAllItem();
+
             dataSkill.CanUpgradeCurrentSkill = true;
 
             for (int i = 0; i < costs.Length; i += 2)
@@ -157,7 +161,13 @@ namespace ETLG
 
             }
         }
-
+        public void OnSkillUpgraded(object sender, GameEventArgs e)
+        {
+            SkillUpgradedEventArgs ne = (SkillUpgradedEventArgs)e;
+            if (ne == null)
+                return;
+            refresh = true;
+        }
 
 
 

@@ -12,7 +12,7 @@ namespace ETLG.Data
         {
             // Artifact 的基本属性
             Id = dRArtifact.Id;
-            Name = dRArtifact.Name;
+            Name = dRArtifact.NameID;
             Type = dRArtifact.Type;
             Tradeable = dRArtifact.Tradeable;
             Value = dRArtifact.Value;

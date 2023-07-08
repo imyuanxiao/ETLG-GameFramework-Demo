@@ -32,12 +32,15 @@ namespace ETLG
             CancelButton.onClick.AddListener(OnCancelButtonClick);
             UpgradeButton.onClick.AddListener(OnUpgradeButtonClick);
 
+
+
         }
 
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Event.Subscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
 
             refresh = true;
 
@@ -46,6 +49,8 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+
+            GameEntry.Event.Unsubscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
 
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -63,7 +68,7 @@ namespace ETLG
         {
             UIContainer.position = dataSkill.skillUpgradeInfoPosition;
 
-            bool isMaxLevel = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID).Level - 1 >= dataSkill.GetCurrentShowSkillData().GetMaxLevelIndex();
+            bool isMaxLevel = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID).Level - 1 >= dataSkill.GetCurrentSkillData().GetMaxLevelIndex();
             UpgradeButton.interactable = !isMaxLevel && dataSkill.CanUpgradeCurrentSkill;
 
             string title = dataSkill.CanUpgradeCurrentSkill ? "Upgrade skill" : "Lack of upgrade materials.";
@@ -79,7 +84,15 @@ namespace ETLG
 
         public void OnUpgradeButtonClick()
         {
-            Log.Debug("click upgrade");
+            dataPlayer.GetPlayerData().UpgradeCurrentSkill();
+        }
+
+        public void OnSkillUpgraded(object sender, GameEventArgs e)
+        {
+            SkillUpgradedEventArgs ne = (SkillUpgradedEventArgs)e;
+            if (ne == null)
+                return;
+            refresh = true;
         }
 
     }

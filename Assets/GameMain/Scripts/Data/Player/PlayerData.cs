@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.Rendering;
 using UnityEngine;
 using UnityEngine.Networking.Types;
+using Unity.VisualScripting;
 
 namespace ETLG.Data
 {
@@ -19,12 +20,6 @@ namespace ETLG.Data
 
         // Player position
         public Vector3 position { get; set; }
-
-        // Money
-        public int money { get; set; }
-
-        // KnowlegdePoints
-        public int knowledgePoints { get; set; }
 
         // Player Artifact Data, get artifacts by type
         private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
@@ -42,22 +37,23 @@ namespace ETLG.Data
         private Dictionary<int, List<PlayerAchievementData>> playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
         private DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
-        //构造函数，新建玩家数据
         public PlayerData (SpaceshipData spaceshipData)
         {
             this.initialSpaceship = spaceshipData;
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
-
-            this.money = 9527;
-
+            
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
             {
                 addSkill(id, 1);
             }
 
+            // add money and skill points
+            playerArtifacts.Add((int)EnumArtifact.Money, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.Money)));
+            playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.KnowledgePoint)));
+
             // add mock artifacts
-            addMockArtifactData();
+            addMockData();
             initPlayerAchievementData();
         }
 
@@ -109,7 +105,7 @@ namespace ETLG.Data
             // if number <= 0, remove from playerArtifacts
             playerArtifacts[id].Number -= number;
 
-            this.money += value;
+            playerArtifacts[(int)EnumArtifact.Money].Number += number;
 
             if (playerArtifacts[id].Number <= 0)
             {
@@ -243,69 +239,94 @@ namespace ETLG.Data
             return targetList;
         }
 
-
-        
-
-        private void addMockArtifactData()
+        public void UpgradeCurrentSkill()
         {
-            DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            int currentLevel = playerSkills[dataSkill.currentSkillID].Level;
 
-            addArtifact(3001, 1);
-            addArtifact(3002, 1);
-            addArtifact(3003, 1);
-            addArtifact(1005, 100);
-            addArtifact(1006, 200);
-            addArtifact(2001, 1);
-            addArtifact(2002, 1);
-            addArtifact(2003, 1);
-            addArtifact(2004, 1);
-            addArtifact(2005, 1);
-            addArtifact(2006, 1);
+            int[] costIds = dataSkill.GetCurrentSkillData().GetLevelCosts(currentLevel + 1);
 
-        }
-
-    
-
-    private void initPlayerAchievementData()
-    {
-        AchievementData[] dataAchievements = dataAchievement.GetAllNewData();
-        PlayerAchievementData[] playerAchievementDatas = new PlayerAchievementData[dataAchievements.Length];
-        //初始化PlayerAchievement
-        int index = 0;
-        foreach (AchievementData data in dataAchievements)
-        {
-            playerAchievementDatas[index++] = new PlayerAchievementData(data);
-        }
-        //将Player的成就信息按成就类型分类
-        foreach (PlayerAchievementData data in playerAchievementDatas)
-        {
-            if (!playerAchievements.ContainsKey(data.TypeId))
+            for (int i = 0; i < costIds.Length; i += 2)
             {
-                playerAchievements.Add(data.TypeId, getPlayerAchievementDataListById(playerAchievementDatas, data.TypeId));
+                playerArtifacts[costIds[i]].Number -= costIds[i + 1];
+            }
+
+            playerSkills[dataSkill.currentSkillID].Level++;
+
+            GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
+
+        }
+
+
+
+
+        private void addMockData()
+        {
+
+
+            playerArtifacts[(int)EnumArtifact.Money].Number += 123450;
+            playerArtifacts[(int)EnumArtifact.KnowledgePoint].Number += 150;
+
+
+            addArtifact((int)EnumArtifact.UniversalUpgradeUnit, 240);
+            addArtifact((int)EnumArtifact.CloudServer, 340);
+            addArtifact((int)EnumArtifact.DataSet, 278);
+            addArtifact((int)EnumArtifact.GPUUnit, 638);
+
+            addArtifact((int)EnumArtifact.FirepowerModule, 1);
+            addArtifact((int)EnumArtifact.DamageAmplifier, 1);
+            addArtifact((int)EnumArtifact.TargetingComputer, 1);
+
+            addArtifact((int)EnumArtifact.PlasmaFuel, 100);
+            addArtifact((int)EnumArtifact.LiquidMethane, 200);
+
+            addArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
+            addArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);
+            addArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
+           
+        }
+
+
+
+        private void initPlayerAchievementData()
+        {
+            AchievementData[] dataAchievements = dataAchievement.GetAllNewData();
+            PlayerAchievementData[] playerAchievementDatas = new PlayerAchievementData[dataAchievements.Length];
+            //初始化PlayerAchievement
+            int index = 0;
+            foreach (AchievementData data in dataAchievements)
+            {
+                playerAchievementDatas[index++] = new PlayerAchievementData(data);
+            }
+            //将Player的成就信息按成就类型分类
+            foreach (PlayerAchievementData data in playerAchievementDatas)
+            {
+                if (!playerAchievements.ContainsKey(data.TypeId))
+                {
+                    playerAchievements.Add(data.TypeId, getPlayerAchievementDataListById(playerAchievementDatas, data.TypeId));
+                }
             }
         }
-    }
-    private List<PlayerAchievementData> getPlayerAchievementDataListById(PlayerAchievementData[] playerAchievementDatas, int typeId)
-    {
-        List<PlayerAchievementData> results = new List<PlayerAchievementData>();
-        foreach (PlayerAchievementData data in playerAchievementDatas)
+        private List<PlayerAchievementData> getPlayerAchievementDataListById(PlayerAchievementData[] playerAchievementDatas, int typeId)
         {
-            if (data.TypeId == typeId)
+            List<PlayerAchievementData> results = new List<PlayerAchievementData>();
+            foreach (PlayerAchievementData data in playerAchievementDatas)
             {
-                results.Add(data);
+                if (data.TypeId == typeId)
+                {
+                    results.Add(data);
+                }
             }
+            return results;
         }
-        return results;
-    }
-    public Dictionary<int, List<PlayerAchievementData>> getPlayerAchievements()
-    {
-        return this.playerAchievements;
-    }
-    public void updatePlayerAchievementData()
-    {
+        public Dictionary<int, List<PlayerAchievementData>> getPlayerAchievements()
+        {
+            return this.playerAchievements;
+        }
+        public void updatePlayerAchievementData()
+        {
 
-    }
-    }
+        }
+        }
 
 }
 

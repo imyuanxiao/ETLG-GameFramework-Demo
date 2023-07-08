@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,25 +19,35 @@ namespace ETLG
         public Transform layer4;
 
         private DataSkill dataSkill;
-        //private DataPlayer dataPlayer;
 
-        // 初始化菜单数据
+        private bool refresh;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
             dataSkill = GameEntry.Data.GetData<DataSkill>();
-          //  dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            GameEntry.Event.Subscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
+
 
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
             ResetTransform();
-            ShowSkillIconItems();
+            refresh = true;
 
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+            if(refresh)
+            {
+                ShowSkillIconItems();
+                refresh = false;
+            }
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -57,7 +68,7 @@ namespace ETLG
         private void ShowSkillIconByLayer(Transform layer, int num, int Type)
         {
 
-            List<SkillData> skillDatas = dataSkill.GetSkillDataLayer(num);
+            List<SkillData> skillDatas = dataSkill.GetSkillDataByContainerIndex(num);
 
             Vector3 firstposition = new Vector3(400f, 0f, 0f); // 偏移量
 
@@ -83,7 +94,13 @@ namespace ETLG
             container.localPosition = Vector3.zero;
         }
 
-
+        public void OnSkillUpgraded(object sender, GameEventArgs e)
+        {
+            SkillUpgradedEventArgs ne = (SkillUpgradedEventArgs)e;
+            if (ne == null)
+                return;
+            refresh = true;
+        }
 
     }
 }

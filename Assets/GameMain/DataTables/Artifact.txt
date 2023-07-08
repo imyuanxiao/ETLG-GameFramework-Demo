@@ -1,55 +1,44 @@
 ﻿#	道具配置表（贴图直接根据ID获取）						
-#	Id		Name	Type	Tradeable	Value	MaxNumber
+#	Id		NameID	Type	Tradeable	Value	MaxNumber
 #	int		string	int	bool	int	int
-#	配置编号	策划备注	道具名字	道具类型(1-Trade,2-Special, 3-Module)	是否可交易	交易价值	道具上限
-#通用资源							
-	1001	星币	StarCoin	-1	TRUE	0	999999999
+#	配置编号	策划备注	道具枚举ID	道具类型(1-Trade,2-Special, 3-Module)	是否可交易	交易价值	道具上限
+	1001	货币	Money	-1	TRUE	0	999999999
 	1002	知识点	KnowledgePoint	-1	FALSE	0	9999
 	1003	稀有矿石	RareOre	1	TRUE	100	9999
 	1004	高纯度金属	HighPurityMetal	1	TRUE	200	9999
-#能源补充							
 	1005	液态甲烷	LiquidMethane	1	TRUE	300	9999
 	1006	等离子燃料	PlasmaFuel	1	TRUE	400	9999
-#技能升级素材							
-	1101	通用升级单元	Universal Upgrade Unit	1	TRUE	100	9999
-	1201	带宽资源	Bandwidth Resource	1	TRUE	100	9999
-	1202	云服务器	Cloud Server	1	TRUE	200	9999
-	1203	虚拟机实例	Virtual Machine Instance	1	TRUE	300	9999
-	1301	数据集	Data Set	1	TRUE	100	9999
-	1302	GPU单元	GPU Unit	1	TRUE	200	9999
-	1303	AI处理器	AI Processor	1	TRUE	300	9999
-	1401	区块链节点	Blockchain Node	1	TRUE	100	9999
-	1402	安全令牌	Security Token	1	TRUE	200	9999
-	1403	加密货币	Cryptocurrency	1	TRUE	300	9999
-	1501	入侵防御单元	Intrusion Prevention Unit	1	TRUE	100	9999
-	1502	安全漏洞扫描器	Security Vulnerability Scanner	1	TRUE	200	9999
-	1503	加密算法	Encryption Algorithm	1	TRUE	300	9999
-	1601	数据源	Data Source	1	TRUE	100	9999
-	1602	统计单元	Statistical Unit	1	TRUE	300	9999
-	1603	数据可视化单元	Data Visualization Unit	1	TRUE	200	9999
-	1701	传感器设备	Sensor Devices	1	TRUE	100	9999
-	1702	边缘设备	Edge Processing Unit	1	TRUE	300	9999
-	1703	物联网平台许可证	IoT Platform License	1	TRUE	200	9999
-#特殊道具							
-	2001	知识碎片（云计算）	KnowledgeFragments(CloudComputing)	2	FALSE	0	1
-	2002	知识碎片（人工智能）	KnowledgeFragments(AI)	2	FALSE	0	1
-	2003	知识碎片（区块链）	KnowledgeFragments(Blockchain)	2	FALSE	0	1
-	2004	知识碎片（网络安全）	KnowledgeFragments(Cybersecurity)	2	FALSE	0	1
-	2005	知识碎片（数据科学）	KnowledgeFragments(DataScience)	2	FALSE	0	1
-	2006	知识碎片（物联网）	KnowledgeFragments(IoT)	2	FALSE	0	1
-#飞船模块							
-	3001	火力模块	Firepower Module	3	FALSE	0	1
-	3002	伤害增幅器	Damage Amplifier	3	FALSE	0	1
-	3003	瞄准计算机	Targeting Computer	3	FALSE	0	1
-	3004	导弹发射器	Missile Launcher	3	FALSE	0	1
-	3005	防御系统升级	Defense System Upgrade	3	FALSE	0	1
-	3006	护盾发生器	Shield Generator	3	FALSE	0	1
-	3007	装甲镀层	Armor Plating	3	FALSE	0	1
-	3008	维修无人机舱	Repair Drone Bay	3	FALSE	0	1
-	3009	能量护盾投影仪	Energy Shield Projector	3	FALSE	0	1
-	3010	速度助推器	Velocity Booster	3	FALSE	0	1
-	3011	推进器增强	Thruster Enhancement	3	FALSE	0	1
-	3012	传感器阵列	Sensor Array	3	FALSE	0	1
-	3013	存储扩展单元	Storage Expansion Unit	3	FALSE	0	1
-	3014	能源电容器	Energy Capacitor	3	FALSE	0	1
-	3015	隐形装置	Cloaking Device	3	FALSE	0	1
+	1101	通用升级单元	UniversalUpgradeUnit	1	TRUE	100	9999
+	1201	带宽资源	BandwidthResource	1	TRUE	100	9999
+	1202	云服务器	CloudServer	1	TRUE	200	9999
+	1301	数据集	DataSet	1	TRUE	100	9999
+	1302	GPU单元	GPUUnit	1	TRUE	200	9999
+	1401	区块链节点	BlockchainNode	1	TRUE	100	9999
+	1402	安全令牌	SecurityToken	1	TRUE	200	9999
+	1501	入侵防御单元	IntrusionPreventionUnit	1	TRUE	100	9999
+	1502	安全漏洞扫描器	SecurityVulnerabilityScanner	1	TRUE	200	9999
+	1601	数据源	DataSource	1	TRUE	100	9999
+	1602	统计单元	StatisticalUnit	1	TRUE	300	9999
+	1701	传感器设备	SensorDevices	1	TRUE	100	9999
+	1702	边缘设备	EdgeProcessingUnit	1	TRUE	300	9999
+	2001	知识碎片（云计算）	KnowledgeFragments_CloudComputing	2	FALSE	0	1
+	2002	知识碎片（人工智能）	KnowledgeFragments_AI	2	FALSE	0	1
+	2003	知识碎片（区块链）	KnowledgeFragments_Blockchain	2	FALSE	0	1
+	2004	知识碎片（网络安全）	KnowledgeFragments_Cybersecurity	2	FALSE	0	1
+	2005	知识碎片（数据科学）	KnowledgeFragments_DataScience	2	FALSE	0	1
+	2006	知识碎片（物联网）	KnowledgeFragments_IoT	2	FALSE	0	1
+	3001	火力模块	FirepowerModule	3	FALSE	0	1
+	3002	伤害增幅器	DamageAmplifier	3	FALSE	0	1
+	3003	瞄准计算机	TargetingComputer	3	FALSE	0	1
+	3004	导弹发射器	MissileLauncher	3	FALSE	0	1
+	3005	防御系统升级	DefenseSystemUpgrade	3	FALSE	0	1
+	3006	护盾发生器	ShieldGenerator	3	FALSE	0	1
+	3007	装甲镀层	ArmorPlating	3	FALSE	0	1
+	3008	维修无人机舱	RepairDroneBay	3	FALSE	0	1
+	3009	能量护盾投影仪	EnergyShieldProjector	3	FALSE	0	1
+	3010	速度助推器	VelocityBooster	3	FALSE	0	1
+	3011	推进器增强	ThrusterEnhancement	3	FALSE	0	1
+	3012	传感器阵列	SensorArray	3	FALSE	0	1
+	3013	存储扩展单元	StorageExpansioUnit	3	FALSE	0	1
+	3014	能源电容器	EnergyCapacitor	3	FALSE	0	1
+	3015	隐形装置	CloakingDevice	3	FALSE	0	1

@@ -107,7 +107,7 @@ namespace ETLG
                 return;
             }
 
-            playerKnowledgePoints.text = dataPlayer.GetPlayerData().knowledgePoints.ToString();
+            playerKnowledgePoints.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.KnowledgePoint).ToString();
 
             playerScore.text = dataPlayer.GetPlayerData().GetPlayerScore().ToString();
 

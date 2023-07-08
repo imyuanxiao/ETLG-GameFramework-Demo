@@ -152,8 +152,17 @@ namespace ETLG
             SkillUpgradeInfoUIChangeEventArgs ne = (SkillUpgradeInfoUIChangeEventArgs)e;
             if (ne == null)
                 return;
+
+
+            
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
+                if (skillUpgradeInfoUIID != null)
+                {
+                    return;
+                }
+
                 skillUpgradeInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillUpgradeInfoForm);
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
@@ -215,7 +224,11 @@ namespace ETLG
                 tipUIID = null;
             }
 
+
+
         }
+
+
 
     }
 }

@@ -24,7 +24,7 @@ namespace ETLG.Data
         private Dictionary<int, DRSkillLevel> dicSkillLevelData;
 
         // 根据层数对技能分类
-        private Dictionary<int, List<SkillData>> dicSkillDataLayers;
+        private Dictionary<int, List<SkillData>> dicSkillDataContainers;
 
         // 当前展示技能ID
         public int currentSkillID { get; set; }
@@ -53,10 +53,10 @@ namespace ETLG.Data
         {
 
             // 初始化每层技能列表
-            dicSkillDataLayers = new Dictionary<int, List<SkillData>>();
+            dicSkillDataContainers = new Dictionary<int, List<SkillData>>();
             for (int i = 0; i < 6; i++)
             {
-                dicSkillDataLayers[i] = new List<SkillData>();
+                dicSkillDataContainers[i] = new List<SkillData>();
             }
 
             // 获取预加载的 Skill.txt 里的数据
@@ -113,25 +113,25 @@ namespace ETLG.Data
                 dicSkillData.Add(drSkill.Id, skillData);
 
                 // 把技能加到对应层数的列表中
-                dicSkillDataLayers[drSkill.Location[0]].Add(skillData);
+                dicSkillDataContainers[drSkill.Location[0]].Add(skillData);
 
             }
 
         }
 
         // 获取技能层的所有技能数据
-        public List<SkillData> GetSkillDataLayer(int layer)
+        public List<SkillData> GetSkillDataByContainerIndex(int index)
         {
-            if (!dicSkillDataLayers.ContainsKey(layer))
+            if (!dicSkillDataContainers.ContainsKey(index))
             {
-                Log.Error("Can not find skill data layer id '{0}'.", layer);
+                Log.Error("Can not find skill data container index '{0}'.", index);
                 return null;
             }
 
-            return dicSkillDataLayers[layer];
+            return dicSkillDataContainers[index];
         }
 
-        public SkillData GetCurrentShowSkillData()
+        public SkillData GetCurrentSkillData()
         {
             if (!dicSkillData.ContainsKey(currentSkillID))
             {
@@ -140,7 +140,6 @@ namespace ETLG.Data
             }
             return dicSkillData[currentSkillID];
         }
-
 
         public SkillData GetSkillData(int id)
         {
@@ -152,8 +151,6 @@ namespace ETLG.Data
 
             return dicSkillData[id];
         }
-
-
 
         public SkillData[] GetAllSkillData()
         {

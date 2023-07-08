@@ -148,6 +148,7 @@ namespace ETLG.Data
 
         public int[] GetLevelCosts(int level)
         {
+            level--;
             return dRSkillLevels[level].Costs;
         }
 

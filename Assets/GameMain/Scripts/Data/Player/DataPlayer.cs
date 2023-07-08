@@ -18,7 +18,9 @@ namespace ETLG.Data
 
         protected override void OnInit()
         {
-            currentSelectedPlayerMenu = Constant.Type.PLAYERMENU_SPACESHIP;
+
+    
+               currentSelectedPlayerMenu = Constant.Type.PLAYERMENU_SPACESHIP;
         }
 
         protected override void OnPreload()
@@ -74,6 +76,7 @@ namespace ETLG.Data
         {
             return playerData;
         }
+
 
     }
 }

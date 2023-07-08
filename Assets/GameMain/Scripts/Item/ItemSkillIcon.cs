@@ -1,4 +1,5 @@
 using ETLG.Data;
+using GameFramework.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ namespace ETLG
 
         public Button iconButton;
 
+        public bool refresh;
         public int Type { get; private set; }
 
         protected override void OnInit(object userData)
@@ -30,12 +32,11 @@ namespace ETLG
 
             iconButton.onClick.AddListener(OnIconButtonClick);
 
+
         }
 
         private void OnIconButtonClick()
         {
-            Log.Debug("click {0} ", Type);
-
 
             if (Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
             {

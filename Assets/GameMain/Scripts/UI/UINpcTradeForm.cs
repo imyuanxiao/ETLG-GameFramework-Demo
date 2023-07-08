@@ -26,6 +26,7 @@ namespace ETLG
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
 
+        private bool refresh;
 
         protected override void OnInit(object userData)
         {
@@ -41,18 +42,31 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            refresh = true;
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (refresh)
+            {
+                showContent();
+                refresh = false;
+            }
+        }
+
+        private void showContent()
+        {
             npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
             // need method Update()
             npc_money.text = dataPlayer.GetPlayerData().getNpcDataById(dataNPC.currentNPCId).Money.ToString();
 
-            player_money.text = dataPlayer.GetPlayerData().money.ToString();
+            player_money.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.Money).ToString();
 
             ShowPlayerArtifactIcons(PlayerContainer, Constant.Type.ARTIFACT_TRADE);
             ShowNPCArtifactIcons(NpcContainer);
         }
-
-
 
         protected override void OnClose(bool isShutdown, object userData)
         {
