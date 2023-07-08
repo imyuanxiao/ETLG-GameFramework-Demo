@@ -650,6 +650,21 @@ namespace ETLG.Data
         {
             return this.playerAchievements;
         }
+        public int getUnlockedAchievementCount()
+        {
+            int result = 0;
+            foreach( List<PlayerAchievementData> playerAchievement in playerAchievements.Values)
+            {
+                foreach(PlayerAchievementData playerAchievementData in playerAchievement)
+                {
+                    if (playerAchievementData.IsUnlocked)
+                    {
+                        result++;
+                    }
+                }
+            }
+            return result;
+        }
         public void updatePlayerAchievementData()
         {
 

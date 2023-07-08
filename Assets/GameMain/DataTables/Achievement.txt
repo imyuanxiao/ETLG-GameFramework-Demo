@@ -1,11 +1,94 @@
 #	成就配置表						
-#	Id		Name	TypeId	ConditionId	Points	Count
+#	Id		Name	TypeId	ConditionId	Count	Points
 #	int		string	int	int	int[]	int[]
-#	配置编号	策划备注	成就名称	成就类型Id	解锁条件Id	成就点数	解锁条件
+#	配置编号	策划备注	成就名称	成就类型Id	解锁条件Id	解锁条件	成就点数
 #答题							
-	1001	知识就是力量	Knowledge is Power (I)	101	1001	"""5,10,15,20,25"""	"""1,10,50,100,200"""
-	1002	失败是成功之母（壹）	Failure is the Mother of Success (I)	101	1002	"""5,10,15,20,25"""	"""1,10,50,100,200"""
-	1003	挑战极限	Pushing the limits	101	1001	50	1
+	1001	知识就是力量	Knowledge is Power	101	1001	"""1,10,50,100,200"""	"""5,10,15,20,25"""
+	1002	失败是成功之母	Failure is the Mother of Success 	101	1002	"""1,10,50,100,200"""	"""5,10,15,20,25"""
+	1003	挑战极限	Pushing the limits	101	1007	1	50
+	1004	挑战极限	Pushing the limits	101	1007	1	10
+	1005	完美无缺（壹）	Flawless Performance	101	1004	"""1,10,50,100"""	"""5,10,15,20"""
+	1006	掌控全场（壹）	Masterful domination	101	1003	"""3,10,20,50"""	"""10,15,20,50"""
+	1007	失败是成功之母（壹）	Failure is the Mother of Success	101	1002	"""1,10,50,100,500"""	"""5,10,15,20,25"""
+	1008	时间不等人	Time Waits for No One	101	1006	1	10
+	1009	功亏一篑	"Close, but No Cigar"	101	1008	1	10
+#知识库							
+	2001	云端之翼	Wings of the Clouds	102	2001	1	5
+	2002	AI启蒙者	AI Enthusiast	102	2002	1	5
+	2003	安全卫士	Security Guardian	102	2003	1	5
+	2004	数据科学新秀	Rookie Data Scientist	102	2004	1	5
+	2005	加密世界	Encrypted World	102	2005	1	5
+	2006	物联网开拓者	IoT Pioneer	102	2006	1	5
+#星际							
+	3001	星际探索者（壹）	Interstellar Explorer (I)	103	3001	"""1,2,6"""	"""10,15,50"""
+	3002	向着Cloud Computing星际出发！	Setting sail towards the Cloud Computing galaxy!	103	3002	1	10
+	3003	向着AI星际出发！	Setting sail towards the AI galaxy!	103	3003	1	10
+	3004	向着Blockchain星际出发！	Setting sail towards the Blockchain galaxy!	103	3004	1	10
+	3005	向着Cybersecurity星际出发！	Setting sail towards the Cybersecurity galaxy!	103	3005	1	10
+	3006	向着Data Science星际出发！	Setting sail towards the Data Science galaxy!	103	3006	1	10
+	3007	向着IoT星际出发！	Setting sail towards the IoT galaxy!	103	3007	1	10
+	3008	Cloud Computing星际任务达人	Cloud Computing Interstellar Mission Master	103	3008	1000000	15
+	3009	AI星际任务达人	AI Interstellar Mission Master	103	3009	1000000	15
+	3010	Cybersecurity星际任务达人	Cybersecurity Interstellar Mission Master	103	3010	1000000	15
+	3011	Data Science星际任务达人	Data Science Interstellar Mission Master	103	3011	1000000	15
+	3012	Blockchain星际任务达人	Blockchain Interstellar Mission Master	103	3012	1000000	15
+	3013	IoT星际任务达人	IoT Interstellar Mission Master	103	3013	1000000	15
+#飞船							
+	4001	能量源泉	Source of Power	104	4001	1000000	15
+	4002	不朽之躯	Indestructible	104	4002	1000000	15
+	4003	坚不可摧	Unbreakable 	104	4003	1000000	15
+	4004	火力全开	Full Firepower	104	4004	1000000	15
+	4005	全场最快	Speed Demon	104	4005	1000000	15
+	4006	卓越感知	Exceptional Perception	104	4006	1000000	15
+	4007	无尽容量	Infinite Capacity	104	4007	1000000	15
+	4008	紧急维修	Emergency Repair	104	4008	1	15
+	4009	防护破碎	Shield Break	104	4009	1	2
 #通用资源							
-	5001	致富之路（壹）	Road to Riches (I)	105	5001	"""5,10,15,20,25"""	"""1,1000,50000,10000,2000000"""
-	5002	财大气粗（壹）	Big Spender (I)	105	5002	"""5,10,15,20"""	"""1000,50000,10000,2000000"""
+	5001	致富之路	Road to Riches 	105	5001	"""1000,5000,10000,20000"""	"""5,20,30,50"""
+	5002	财大气粗	Big Spender	105	5002	"""1000,5000,10000,20000"""	"""5,20,30,50"""
+	5003	碎片收集者	Fragment Collector 	105	5004	"""1,50,100,500"""	"""2,5,10,15"""
+	5004	知识追寻着	Seeker of Knowledge	105	5005	"""1,50,100,501"""	"""2,5,10,15"""
+	5005	采矿专家	Mining Expert 	105	5006	"""1,100,500,1000"""	"""2,5,10,15"""
+	5006	燃料探险家（壹）	Fuel Explorer	105	5007	"""1,100,500,1000"""	"""2,5,10,15"""
+	5007	资源开发者	Resource Developer	105	5008	1000000	10
+#战斗							
+	6001	初尝胜果	Taste of Victory	106	6001	1	5
+	6002	征服之路	Road to Conquest (I)	106	6001	"""100,500"""	"""10,20"""
+	6003	失败初体验	First Encounter with Failure	106	6002	1	5
+	6004	打不到我	Untouchable	106	6003	1	20
+	6005	死里逃生	Narrow Escape	106	6004	1	5
+#成就点数							
+	7001	里程碑	Milestone	107	7001	"""1,500,1000"""	"""1,10,20,50"""
+#登陆							
+	8001	坚持不懈	Perseverance 	108	8001	"""7,30,90,365"""	"""5,10,20,100"""
+#排行榜							
+	9001	巅峰成就	Peak Achievement	109	9001	1000000	10
+	9002	伟大之路	Path of Greatness	109	9001	50	20
+	9003	辉煌典范	Exemplary Excellence	109	9001	10	50
+	9004	星际掌舵者	Interstellar Helm	109	9002	1000000	10
+	9005	航行大师	Master Navigator	109	9002	50	20
+	9006	无敌之舰	Stellar Aviator	109	9002	10	50
+	9007	战争之王	Warlord	109	9003	1000000	10
+	9008	战斗巨兽	Battle Beast	109	9003	50	20
+	9009	战争之星	Star of Battle	109	9003	10	50
+#隐藏成就							
+	10001	也算…另一种成功吧	It's Still a Kind of Success	110	1005	1	5
+	10002	速度之王	King of Speed	110	1009	1	15
+	10003	快速失利	Rapid Defeat	110	1010	1	10
+	10004	真的勇士，敢于直面结束的时间	"True Warrior, Facing the End of Time"	110	1011	1	10
+	10005	巅峰征服者	Peak Conqueror	110	7001	1000000	70
+	10006	新星探索者	New Star Explorer	110	3014	1	10
+	10007	星际征服者	Interstellar Conqueror	110	3014	1000000	50
+	10008	富可敌国	Wealthy Beyond Measure	110	5001	50000	50
+	10009	散财童子	Spendthrift	110	5003	0	10
+	10010	绝世战神	Peerless War God	110	6001	1000	50
+	10011	打不死我的让我更强大	What Doesn't Kill Me Makes Me Stronger	110	6002	1000	50
+	10013	答题宗师	Quiz Master	110	1001	500	70
+	10014	不屈精神	Indomitable Spirit	110	1002	1000	50
+	10015	社交悍匪	Social Bandit	110	3015	1000000	20
+	10016	前路坎坷，少年仍需努力	"Rough Road Ahead, Keep Striving"	110	1012	10	10
+	10017	长久相伴	Long-lasting Companionship	110	8001	500	100
+	10018	璀璨荣耀	Glorious Glory	110	9001	1	70
+	10019	航天传奇	Astronaut Legend	110	9002	1	70
+	10020	无敌斗士	Invincible Fighter	110	9003	1	70
+	10021	喂——听到了吗？	Hey... Can You Hear Me?	110	10001	20	10

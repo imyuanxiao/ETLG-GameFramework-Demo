@@ -80,6 +80,19 @@ namespace ETLG.Data
             }
             return results;
         }
+        public int GetAchievementCount()
+        {
+            //只显示减去隐藏成就的数量
+            int result = 0;
+            foreach(AchievementData achievementData in dicAchievementData.Values)
+            {
+                if(achievementData.TypeId!=Constant.Type.ACHV_HIDDEN)
+                {
+                    result++;
+                }
+            }
+            return result;
+        }
     }
 }
 

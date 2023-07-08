@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 17:08:25.848
+// 生成时间：2023-07-08 21:54:40.465
 //------------------------------------------------------------
 
 using GameFramework;
@@ -64,18 +64,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取成就点数。
+        /// 获取解锁条件。
         /// </summary>
-        public int[] Points
+        public int[] Count
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取解锁条件。
+        /// 获取成就点数。
         /// </summary>
-        public int[] Count
+        public int[] Points
         {
             get;
             private set;
@@ -96,8 +96,8 @@ namespace ETLG
             Name = columnStrings[index++];
             TypeId = int.Parse(columnStrings[index++]);
             ConditionId = int.Parse(columnStrings[index++]);
-                Points = DataTableExtension.ParseInt32Array(columnStrings[index++]);
                 Count = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+                Points = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -113,8 +113,8 @@ namespace ETLG
                     Name = binaryReader.ReadString();
                     TypeId = binaryReader.Read7BitEncodedInt32();
                     ConditionId = binaryReader.Read7BitEncodedInt32();
-                        Points = binaryReader.ReadInt32Array();
                         Count = binaryReader.ReadInt32Array();
+                        Points = binaryReader.ReadInt32Array();
                 }
             }
 
