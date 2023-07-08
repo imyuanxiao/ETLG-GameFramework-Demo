@@ -4022,11 +4022,11 @@ RectTransform:
   m_Father: {fileID: 5306303884936336592}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 570, y: -40}
   m_SizeDelta: {x: 270, y: 180}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &1959109622615494722
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6919,6 +6919,7 @@ MonoBehaviour:
   playerScore: {fileID: 1249194345293095838}
   artifactContainer: {fileID: 4819325326570609687}
   moduleContainer: {fileID: 5370145269815381574}
+  equippedModuleContainer: {fileID: 2219107001557809925}
 --- !u!1 &5120922257896412133
 GameObject:
   m_ObjectHideFlags: 0
@@ -10398,7 +10399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00061936997}
+  m_AnchoredPosition: {x: 0, y: 0.0003322776}
   m_SizeDelta: {x: 540, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4061517717630679452
@@ -12059,7 +12060,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1735261484987625441}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

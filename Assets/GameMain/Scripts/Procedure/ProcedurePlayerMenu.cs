@@ -49,6 +49,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
 
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
+            GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
 
 
             this.procedureOwner = procedureOwner;
@@ -94,6 +95,9 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(ModuleInfoUIChangeEventArgs.EventId, OnModuleInfoUIChange);
             GameEntry.Event.Unsubscribe(ModuleEquipUIchangeEventArgs.EventId, OnModuleEquipUIChange);
+
+            GameEntry.Event.Unsubscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
+
 
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -159,9 +163,6 @@ namespace ETLG
             SkillUpgradeInfoUIChangeEventArgs ne = (SkillUpgradeInfoUIChangeEventArgs)e;
             if (ne == null)
                 return;
-
-
-            
 
             if (ne.Type == Constant.Type.UI_OPEN)
             {
@@ -287,6 +288,26 @@ namespace ETLG
             }
         }
 
+        public void OnEquippedModuleChanges(object sender, GameEventArgs e)
+        {
+            EquippedModuleChangesEventArgs ne = (EquippedModuleChangesEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (moduleEquipInfoUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)moduleEquipInfoUIID);
+            }
+            moduleEquipInfoUIID = null;
+
+            if (moduleInfoUIID != null)
+            {
+                GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
+            }
+            moduleInfoUIID = null;
+
+
+        }
 
 
 

@@ -42,7 +42,7 @@ namespace ETLG
             {
                 return;
             }
-
+            dataSkill.lockCurrentSkillID = true;
             GameEntry.Event.Fire(this, SkillUpgradeInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
 
 
@@ -55,7 +55,7 @@ namespace ETLG
             Vector3 offset = new Vector3(-180f, -120f, 0f);
             Vector3 newPosition = itemPosition + offset;
 
-            dataSkill.skillUpgradeInfoPosition = newPosition;
+            dataSkill.SetUpgradeInfoPosition(newPosition);
 
             if (Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP)
             {
@@ -67,7 +67,7 @@ namespace ETLG
                 newPosition = new Vector3(50f, 120f, 0f);
             }
 
-            dataSkill.currentSkillID = this.currentSkillID;
+            dataSkill.SetCurrentSkillID(this.currentSkillID);
 
             dataSkill.skillInfoPosition = newPosition;
 

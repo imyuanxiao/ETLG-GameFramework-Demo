@@ -31,12 +31,30 @@ namespace ETLG.Data
         public int levelCount { get; private set; }
 
         // 当前展示技能ID
-        public int currentSkillID { get; set; }
+        public int currentSkillID { get; private set; }
+
+        public bool lockCurrentSkillID { get; set; }
+
+        public void SetCurrentSkillID(int id)
+        {
+            if (!lockCurrentSkillID)
+            {
+                currentSkillID = id;
+            }
+        }
 
         // 当前展示skillInfo的UI位置
         public Vector3 skillInfoPosition { get; set; }
         public bool hideSkillInfoBottomPart { get; set; }
-        public Vector3 skillUpgradeInfoPosition { get; set; }
+        public Vector3 skillUpgradeInfoPosition { get; private set; }
+
+        public void SetUpgradeInfoPosition(Vector3 newPosition)
+        {
+            if (!lockCurrentSkillID)
+            {
+                skillUpgradeInfoPosition = newPosition;
+            }
+        }
 
         public bool CanUpgradeCurrentSkill { get; set; }
 

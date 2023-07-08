@@ -71,6 +71,8 @@ namespace ETLG
 
         public Transform moduleContainer = null;
 
+        public Transform equippedModuleContainer = null;
+
         private DataPlayer dataPlayer;
 
         private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
@@ -124,6 +126,9 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
+
+
             currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
@@ -132,6 +137,7 @@ namespace ETLG
 
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
             selectedModuleType = Constant.Type.ARTIFACT_ALL;
+
 
         }
 
@@ -158,6 +164,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
 
             HideSpaceship();
         }
@@ -227,6 +234,28 @@ namespace ETLG
 
         }
 
+        private void ShowEquipeedModuleIcons(Transform container)
+        {
+            List<int> playerEquippedModuleIDs = dataPlayer.GetPlayerData().GetEquippedModuleIdS();
+
+
+            for (int i = 0; i < playerEquippedModuleIDs.Count; i++)
+            {
+                int ModuleID = playerEquippedModuleIDs[i];
+                Vector3 offset = new Vector3((i % 3) * 90f + 10f, (i / 3) * -90f - 10f, 0f);
+
+                ShowItem<ItemModuleIcon>(EnumItem.ModuleIcon, (item) =>
+                {
+                    item.transform.SetParent(container, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + offset;
+                    item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID);
+                });
+            }
+
+        }
+
 
         public void ShowContent()
         {
@@ -264,8 +293,10 @@ namespace ETLG
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
+            HideAllItem();
             ShowArtifactIcons(artifactContainer, selectedArtifactType);
             ShowModuleIcons(moduleContainer, selectedModuleType);
+            ShowEquipeedModuleIcons(equippedModuleContainer);
 
         }
 
@@ -396,7 +427,17 @@ namespace ETLG
             selectedModuleType = Constant.Type.MODULE_TYPE_SUPPORT;
             currentSelectedButton = moduleSupportButton;
         }
-        
+
+        public void OnEquippedModuleChanges(object sender, GameEventArgs e)
+        {
+            EquippedModuleChangesEventArgs ne = (EquippedModuleChangesEventArgs)e;
+            if (ne == null)
+                return;
+
+            refreshUI = true;
+        }
+
+
     }
 }
 

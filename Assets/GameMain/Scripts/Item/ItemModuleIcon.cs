@@ -35,6 +35,7 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
+            dataArtifact.lockCurrentModuleID = true;
             GameEntry.Event.Fire(this, ModuleEquipUIchangeEventArgs.Create(Constant.Type.UI_OPEN));
 
         }
@@ -45,8 +46,7 @@ namespace ETLG
             Vector3 offset = new Vector3(-10f, 0f, 0f);
             Vector3 newPosition = itemPosition + offset;
 
-            dataArtifact.CurrentModuleID = CurrentModuleID;
-
+            dataArtifact.SetCurrentModuleID(CurrentModuleID);
             dataArtifact.artifactInfoPosition = newPosition;
 
             GameEntry.Event.Fire(this, ModuleInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));

@@ -78,6 +78,7 @@ namespace ETLG
 
         public void OnCancelButtonClick()
         {
+            dataSkill.lockCurrentSkillID = false;
             GameEntry.Event.Fire(this, SkillUpgradeInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 

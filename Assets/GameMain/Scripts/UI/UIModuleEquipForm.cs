@@ -64,19 +64,12 @@ namespace ETLG
         public void showContent()
         {
             UIContainer.position = dataArtifact.artifactInfoPosition;
-/*  
-            bool isMaxLevel = dataPlayer.GetPlayerData().GetSkillById(dataSkill.currentSkillID).Level - 1 >= dataSkill.GetCurrentSkillData().GetMaxLevelIndex();
-            EquipButton.interactable = !isMaxLevel && dataSkill.CanUpgradeCurrentSkill;
-
-            string title = dataSkill.CanUpgradeCurrentSkill ? "Upgrade skill" : "Lack of upgrade materials.";
-
-            Title.text = isMaxLevel ? "Cannot be upgraded any more." : title;*/
-
         }
 
         public void OnCancelButtonClick()
         {
-            GameEntry.Event.Fire(this, ModuleInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            dataArtifact.lockCurrentModuleID = false;
+            GameEntry.Event.Fire(this, ModuleEquipUIchangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
         public void OnEquipButtonClick()

@@ -1,4 +1,5 @@
-﻿#	Id		ArtifactID	Classification	Attributes
+﻿#	道具配置表				
+#	Id		ArtifactID	Classification	Attributes
 #	int		int	int	int[]
 #	配置编号	策划备注	道具ID	模块功能(1-weapon,2-ATTACK,3-DEFENSE,4-POWERDRIVE,5-SUPPORT)	属性(0-特殊,1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIREPOWER;10-DOGDE)
 	1001	防御系统升级	3001	3	"1,50"

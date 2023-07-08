@@ -21,13 +21,12 @@ namespace ETLG.Data
 
         // Player position
         public Vector3 position { get; set; }
-
-        // Player Artifact Data, get artifacts by type
-        //private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
-
-
+        
+        // player artifacts - ID, Number
         private Dictionary<int, int> playerArtifacts { get; set; }
         private List<int> playerModules { get; set; }
+
+        private int[] equippedModules { get; set; }
 
         private DataArtifact dataArtifact { get; set; }
 
@@ -63,6 +62,8 @@ namespace ETLG.Data
 
             playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
 
+            // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
+            equippedModules = new int[6];
 
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
@@ -274,46 +275,6 @@ namespace ETLG.Data
             return targetList;
         }
 
-     /*   public List<int> GetArtifactsByType(int Type)
-        {
-            if (Type.Equals(Constant.Type.ARTIFACT_ALL))
-            {
-                return playerArtifacts.Keys.ToList();
-            }
-
-            List<int> targetList = new List<int>();
-
-            foreach (var playerArtifact in playerArtifacts)
-            {
-                if(dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
-                {
-                    targetList.Add(playerArtifact.Key);
-                }
-            }
-            return targetList;
-        }*/
-
-
-        /*
-                public List<PlayerArtifactData> GetArtifactsByType(int type)
-                {
-                    if (type.Equals(Constant.Type.ARTIFACT_ALL))
-                    {
-                        return playerArtifacts.Values.ToList();
-                    }
-
-                    List< PlayerArtifactData> targetList = new List<PlayerArtifactData>(); 
-                    foreach (var playerArtifact in playerArtifacts.Values)
-                    {
-                        if (playerArtifact.Type.Equals(type))
-                        {
-                            targetList.Add(playerArtifact); 
-                        }
-                    }
-                    return targetList;
-                }
-        */
-
         public List<int> GetModulesByType(int Type)
         {
             if (Type.Equals(Constant.Type.MODULE_TYPE_ALL))
@@ -333,34 +294,46 @@ namespace ETLG.Data
             }
             return targetList;
         }
+
+        public List<int> GetEquippedModuleIdS()
+        {
+            List<int> result = new List<int>();
+            foreach(var id in equippedModules)
+            {
+                if(id != 0)
+                {
+                    result.Add(id);
+                }
+            }
+
+            return result;
+        }
+
         public void EquipCurrentModule()
         {
+            ArtifactModuleData moduleData = dataArtifact.GetCurrentShowModuleData();
+
+            if(moduleData.Classification == Constant.Type.MODULE_TYPE_SUPPORT)
+            {
+                if (equippedModules[5] != 0)
+                {
+                    equippedModules[4] = equippedModules[5];
+                }
+                equippedModules[5] = moduleData.Id;
+                return;
+            }
+
+            equippedModules[moduleData.Classification - 1] = moduleData.Id;
+
+            dataArtifact.lockCurrentModuleID = false;
+
+            GameEntry.Event.Fire(this, EquippedModuleChangesEventArgs.Create());
 
         }
 
 
 
-        /*        public List<PlayerArtifactData> GetModulesByType(int Type)
-                {
 
-                    List<PlayerArtifactData>  modules = GetArtifactsByType(Constant.Type.ARTIFACT_MODULE);
-
-                    if (Type == Constant.Type.MODULE_TYPE_ALL)
-                    {
-                        return modules;
-                    }
-
-                    List<PlayerArtifactData> targetList = new List<PlayerArtifactData>();
-                    foreach (var playerArtifact in playerArtifacts.Values)
-                    {
-                        if (playerArtifact.Type.Equals(Type))
-                        {
-                            targetList.Add(playerArtifact);
-                        }
-                    }
-                    return targetList;
-                }
-        */
         public PlayerNPCData GetNpcDataById(int NpcId)
         {
             if (!playerNPCs.ContainsKey(NpcId))
@@ -405,6 +378,8 @@ namespace ETLG.Data
             }
             return playerArtifacts[id];
         }
+
+
 
 
         public void AddSkill(int id, int level)
@@ -493,6 +468,7 @@ namespace ETLG.Data
             playerSkills[dataSkill.currentSkillID].Level++;
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
+            dataSkill.lockCurrentSkillID = false;
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
         }
@@ -571,7 +547,6 @@ namespace ETLG.Data
 
         }
 
-        
         public int GetUnlockedSkillsNum()
         {
             return playerSkills.Count;

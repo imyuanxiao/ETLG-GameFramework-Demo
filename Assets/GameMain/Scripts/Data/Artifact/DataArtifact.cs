@@ -29,7 +29,22 @@ namespace ETLG.Data
         //public PlayerArtifactData currentPlayerArtifactData;
 
         public int CurrentArtifactID { get; set; }
-        public int CurrentModuleID { get; set; }
+
+
+
+        public int CurrentModuleID { get; private set; }
+
+        public bool lockCurrentModuleID { get; set; }
+
+        public void SetCurrentModuleID(int currentModuleID)
+        {
+            if (!lockCurrentModuleID)
+            {
+                CurrentModuleID = currentModuleID;
+            }
+        }
+
+
 
         protected override void OnInit()
         {

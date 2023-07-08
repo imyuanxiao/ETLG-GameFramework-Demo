@@ -8,7 +8,7 @@ namespace ETLG
 {
     public class ModuleEquipUIchangeEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(SkillUpgradedEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(ModuleEquipUIchangeEventArgs).GetHashCode();
 
         public ModuleEquipUIchangeEventArgs()
         {
