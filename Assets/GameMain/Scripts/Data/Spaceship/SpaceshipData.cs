@@ -144,7 +144,7 @@ namespace ETLG.Data
             }
         }
 
-        public int Capacity
+        public float Capacity
         {
             get
             {

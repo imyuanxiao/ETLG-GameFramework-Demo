@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 08:09:57.506
+// 生成时间：2023-07-08 10:15:23.959
 //------------------------------------------------------------
 
 using GameFramework;
@@ -165,7 +165,7 @@ namespace ETLG
         /// <summary>
         /// 获取容量。
         /// </summary>
-        public int Capacity
+        public float Capacity
         {
             get;
             private set;
@@ -215,7 +215,7 @@ namespace ETLG
             Speed = float.Parse(columnStrings[index++]);
             Dogde = float.Parse(columnStrings[index++]);
             Detection = float.Parse(columnStrings[index++]);
-            Capacity = int.Parse(columnStrings[index++]);
+            Capacity = float.Parse(columnStrings[index++]);
                 Skills = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             ProjectileId = int.Parse(columnStrings[index++]);
 
@@ -244,7 +244,7 @@ namespace ETLG
                     Speed = binaryReader.ReadSingle();
                     Dogde = binaryReader.ReadSingle();
                     Detection = binaryReader.ReadSingle();
-                    Capacity = binaryReader.Read7BitEncodedInt32();
+                    Capacity = binaryReader.ReadSingle();
                         Skills = binaryReader.ReadInt32Array();
                     ProjectileId = binaryReader.Read7BitEncodedInt32();
                 }

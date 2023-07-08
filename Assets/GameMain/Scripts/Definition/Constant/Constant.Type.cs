@@ -58,6 +58,10 @@
             public const int MODULE_TYPE_POWERDRIVE = 3;
             public const int MODULE_TYPE_SUPPORT = 4;
 
+            // attributes
+
+            public const float ATTR_MAX_VALUE = 500;
+
             public const int ATTR_Durability = 1;
             public const int ATTR_Shields = 2;
             public const int ATTR_Firepower = 3;
@@ -92,6 +96,11 @@
 
             public const string LOCKED_TREASURE_CHEST = "locked_treasure_chest";
             public const string UNLOCKED_TREASURE_CHEST = "unlocked_treasure_chest";
+
+            // operation
+            public const int ADD = 1;
+            public const int SUB = 2;
+            public const int MUL = 2;
 
         }
     }

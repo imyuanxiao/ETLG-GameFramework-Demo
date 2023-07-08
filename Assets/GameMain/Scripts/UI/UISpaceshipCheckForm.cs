@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,7 +45,6 @@ namespace ETLG
         public TextMeshProUGUI s_dogde = null;
 
         private readonly float valueBarMaxWidth = 180;
-        private readonly float maxAttrValue = 300;
 
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
@@ -69,7 +69,9 @@ namespace ETLG
         private EntityLoader entityLoader;
 
         private int selectedArtifactType;
+        private bool refreshAll;
         private bool refreshUI;
+
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -102,11 +104,8 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
-            ShowSpaceshipSelect();
-
-            refreshUI = true;
+            refreshAll = true;
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
-
 
         }
 
@@ -114,12 +113,18 @@ namespace ETLG
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
-            if (refreshUI)
+            if (refreshAll)
             {
-                HideAllItem();
-                ShowArtifactIcons(artifactContainer, selectedArtifactType);
+                ShowSpaceship();
+            }
+
+            if (refreshAll || refreshUI)
+            {
+                ShowContent();
+                refreshAll = false;
                 refreshUI = false;
             }
+
 
 
         }
@@ -145,7 +150,7 @@ namespace ETLG
         private void ShowArtifactIcons(Transform container, int type)
         {
 
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType(type);
+            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(type);
 
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
@@ -167,7 +172,7 @@ namespace ETLG
             }
         }
 
-        public void ShowSpaceshipSelect()
+        public void ShowContent()
         {
 
             if (currentSpaceshipData == null)
@@ -180,7 +185,7 @@ namespace ETLG
             s_type.text = dataPlayer.GetPlayerData().initialSpaceship.SType;
             s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
 
-            playerMoney.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.Money).ToString();
+            playerMoney.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();
@@ -193,28 +198,30 @@ namespace ETLG
             s_capacity.text = currentSpaceshipData.Capacity.ToString();
             s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
-            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
             SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
             SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
+            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
             SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
-            ShowSpaceship();
+            ShowArtifactIcons(artifactContainer, selectedArtifactType);
 
         }
 
         public void SetWidth(GameObject targetObject, float newWidth)
         {
+            newWidth = newWidth * valueBarMaxWidth / Constant.Type.ATTR_MAX_VALUE;
+
             // 获取目标对象的 RectTransform 组件
             RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
 
             // 修改 sizeDelta 属性的 x 值来改变宽度
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             newSizeDelta.x = newWidth;
-            rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
+            rectTransform.sizeDelta = newSizeDelta;
         }
 
 
@@ -260,7 +267,7 @@ namespace ETLG
 
         public void OnPackageSpecialButtonClick()
         {
-  
+
 
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_SPECIAL;
@@ -271,7 +278,7 @@ namespace ETLG
 
         public void OnPackageTradeButtonClick()
         {
-       
+
 
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_TRADE;
@@ -299,6 +306,7 @@ namespace ETLG
             othersButton.interactable = true;
         }
 
+        
 
     }
 }

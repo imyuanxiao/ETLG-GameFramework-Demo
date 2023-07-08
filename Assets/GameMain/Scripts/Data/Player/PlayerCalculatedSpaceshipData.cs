@@ -20,7 +20,7 @@ namespace ETLG.Data
         public float Speed { get; set; }
         public float Dogde { get; set; }
         public float Detection { get; set; }
-        public int Capacity { get; set; }
+        public float Capacity { get; set; }
 
 
         public PlayerCalculatedSpaceshipData(SpaceshipData spaceshipData) {

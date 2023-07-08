@@ -83,7 +83,7 @@ namespace ETLG
             }
             else
             {
-                playerSkillData = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID);
+                playerSkillData = dataPlayer.GetPlayerData().GetSkillById(dataSkill.currentSkillID);
             }
 
             UIContainer.position = dataSkill.skillInfoPosition;
@@ -143,7 +143,7 @@ namespace ETLG
             for (int i = 0; i < costs.Length; i += 2)
             {
                 int artifactId = costs[i];
-                int hasNum = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getArtifactNumById(artifactId);
+                int hasNum = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactNumById(artifactId);
                 int needNum = costs[i + 1];
 
                 if (hasNum < needNum) {

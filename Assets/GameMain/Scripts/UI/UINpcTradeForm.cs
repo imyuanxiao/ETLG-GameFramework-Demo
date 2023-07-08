@@ -60,9 +60,9 @@ namespace ETLG
             npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
             // need method Update()
-            npc_money.text = dataPlayer.GetPlayerData().getNpcDataById(dataNPC.currentNPCId).Money.ToString();
+            npc_money.text = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money.ToString();
 
-            player_money.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.Money).ToString();
+            player_money.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
 
             ShowPlayerArtifactIcons(PlayerContainer, Constant.Type.ARTIFACT_TRADE);
             ShowNPCArtifactIcons(NpcContainer);
@@ -85,7 +85,7 @@ namespace ETLG
         private void ShowPlayerArtifactIcons(Transform container, int type)
         {
 
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType(type);
+            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(type);
 
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
@@ -109,7 +109,7 @@ namespace ETLG
         private void ShowNPCArtifactIcons(Transform container)
         {
 
-            List<PlayerArtifactData> npcArtifacts = dataPlayer.GetPlayerData().getNpcArtifacts(dataNPC.currentNPCId);
+            List<PlayerArtifactData> npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifacts(dataNPC.currentNPCId);
 
             for (int i = 0; i < npcArtifacts.Count; i++)
             {
