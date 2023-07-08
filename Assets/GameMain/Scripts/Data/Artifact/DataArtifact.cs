@@ -21,9 +21,15 @@ namespace ETLG.Data
         // 数据键值对载体，通过ID获取道具信息
         private Dictionary<int, ArtifactDataBase> dicArtifactData;
 
+        /*// 通过ID获取module信息
+        private Dictionary<int, ArtifactModuleData> dicModuleData;*/
+
         public Vector3 artifactInfoPosition;
 
-        public PlayerArtifactData currentPlayerArtifactData;
+        //public PlayerArtifactData currentPlayerArtifactData;
+
+        public int CurrentArtifactID { get; set; }
+        public int CurrentModuleID { get; set; }
 
         protected override void OnInit()
         {
@@ -46,6 +52,7 @@ namespace ETLG.Data
             if (dtArtifacts == null)
                 throw new System.Exception("Can not get data table Artifact");
             dicArtifactBaseData = new Dictionary<int, DRArtifact>();
+
             foreach (DRArtifact dArtifactBase in dRArtifactBases)
             {
                 if (dicArtifactBaseData.ContainsKey(dArtifactBase.Id))
@@ -64,6 +71,8 @@ namespace ETLG.Data
                 throw new System.Exception("Can not get data table Module");
 
             // 把所有 ArtifactModule 存到键值对数据结构中
+
+            //dicModuleData = new Dictionary<int, ArtifactModuleData>();
             dicArtifactData = new Dictionary<int, ArtifactDataBase>();
 
             foreach (var dRModule in dRModules)
@@ -72,17 +81,15 @@ namespace ETLG.Data
                 {
                     throw new System.Exception(string.Format("Data module id '{0}' duplicate.", dRModule.ArtifactID));
                 }
-
                 dicArtifactData.Add(dRModule.ArtifactID, new ArtifactModuleData(dicArtifactBaseData[dRModule.ArtifactID], dRModule));
                 // 用过Artifact里的Module类的数据可以移除
                 dicArtifactBaseData.Remove(dRModule.ArtifactID);
             }
 
-            // 其他有特殊属性的道具，比如能量之类的
+            // 非模块道具放
 
-
-
-            // 剩下没有特殊属性的道具
+            //dicArtifactData = new Dictionary<int, ArtifactDataBase>();
+            
             foreach (var dRArtifactBase in dicArtifactBaseData)
             {
                 dicArtifactData.Add(dRArtifactBase.Key, new ArtifactCommonData(dRArtifactBase.Value));
@@ -102,6 +109,24 @@ namespace ETLG.Data
 
         }
 
+        public ArtifactModuleData GetModuleData(int id)
+        {
+            if (!dicArtifactData.ContainsKey(id))
+            {
+                Log.Error("Can not find quest data id '{0}'.", id);
+                return null;
+            }
+
+            if (dicArtifactData[id] is ArtifactModuleData moduleData)
+            {
+                return moduleData;
+            }
+
+            Log.Error("Invalid quest data type for id '{0}'.", id);
+            return null;
+
+        }
+
         public ArtifactDataBase GetArtifactData(int id)
         {
             if (!dicArtifactData.ContainsKey(id))
@@ -114,12 +139,12 @@ namespace ETLG.Data
 
         public ArtifactDataBase GetCurrentShowArtifactData()
         {
-            if (!dicArtifactData.ContainsKey(currentPlayerArtifactData.Id))
+            if (!dicArtifactData.ContainsKey(CurrentArtifactID))
             {
-                Log.Error("Can not find artifact data id '{0}'.", currentPlayerArtifactData.Id);
+                Log.Error("Can not find artifact data id '{0}'.", CurrentArtifactID);
                 return null;
             }
-            return dicArtifactData[currentPlayerArtifactData.Id];
+            return dicArtifactData[CurrentArtifactID];
         }
 
     }

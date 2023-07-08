@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 08:16:55.179
+// 生成时间：2023-07-08 20:54:26.798
 //------------------------------------------------------------
 
 namespace ETLG
@@ -140,5 +140,15 @@ namespace ETLG
         /// 技能升级确认
         /// </summary>
         UISkillUpgradeInfoForm = 1028,
+
+        /// <summary>
+        /// 模组信息
+        /// </summary>
+        UIModuleInfoForm = 1029,
+
+        /// <summary>
+        /// 模组装备确认框
+        /// </summary>
+        UIModuleEquipForm = 1030,
     }
 }

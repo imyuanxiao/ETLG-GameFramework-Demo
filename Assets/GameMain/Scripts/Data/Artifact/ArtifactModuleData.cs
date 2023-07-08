@@ -5,8 +5,7 @@ namespace ETLG.Data
     {
 
         public int Classification { get; set; }
-        public int Attribute { get; set; }
-        public int Effect { get; set; }
+        public int[] Attributes { get; set; }
 
         public ArtifactModuleData(DRArtifact dRArtifact, DRModule dRModule)
         {
@@ -22,11 +21,7 @@ namespace ETLG.Data
 
             // Module 的属性
             Classification = dRModule.Classification;
-            Attribute = dRModule.Attribute;
-            Effect = dRModule.Effect;
-
-
-
+            Attributes = dRModule.Attributes;
         }
 
 

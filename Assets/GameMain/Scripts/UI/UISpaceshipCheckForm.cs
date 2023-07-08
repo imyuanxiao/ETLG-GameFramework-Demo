@@ -148,18 +148,26 @@ namespace ETLG
         }
 
 
-        private void ShowArtifactIcons(Transform container, int type)
+        private void ShowArtifactIcons(Transform container, int Type)
         {
 
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(type);
+            Dictionary<int, int> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Type);
 
-            for (int i = 0; i < playerArtifacts.Count; i++)
+            int i = 0;
+
+            foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
+                int ArtifactID = kvp.Key;
+                int Num = kvp.Value;
 
-                Vector3 offset = new Vector3((i % 2) * 100f, (i / 2) * -150f, 0f);
+                Vector3 offset = new Vector3((i % 4) * 90f + 15f, (i / 4) * (-110f) - 10f, 0f);
+                i++;
 
-
-                PlayerArtifactData playerArtifact = playerArtifacts[i];
+                if (ArtifactID == (int)EnumArtifact.Money || ArtifactID == (int)EnumArtifact.KnowledgePoint)
+                {
+                    i--;
+                    continue;
+                }
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
@@ -167,11 +175,46 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.ARTIFACT_ICON_DEFAULT);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.ARTIFACT_ICON_DEFAULT);
                 });
 
             }
         }
+
+        private void ShowModuleIcons(Transform container, int Type)
+        {
+            List<int> playerModuleIDs = dataPlayer.GetPlayerData().GetModulesByType(Type);
+
+
+            
+
+            /*int i = 0;
+
+            foreach (KeyValuePair<int, int> kvp in playerArtifacts)
+            {
+                int ArtifactID = kvp.Key;
+                int Num = kvp.Value;
+
+                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * -150f, 0f);
+                i++;
+
+                if (ArtifactID == (int)EnumArtifact.Money)
+                {
+                    continue;
+                }
+
+                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                {
+                    item.transform.SetParent(container, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero + offset;
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.ARTIFACT_ICON_DEFAULT);
+                });
+
+            }*/
+        }
+
 
         public void ShowContent()
         {

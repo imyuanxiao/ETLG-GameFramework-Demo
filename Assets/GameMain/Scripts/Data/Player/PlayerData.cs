@@ -23,26 +23,47 @@ namespace ETLG.Data
         public Vector3 position { get; set; }
 
         // Player Artifact Data, get artifacts by type
-        private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
-        private DataArtifact dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+        //private Dictionary<int, PlayerArtifactData> playerArtifacts = new Dictionary<int, PlayerArtifactData>();
+
+
+        private Dictionary<int, int> playerArtifacts { get; set; }
+        private List<int> playerModules { get; set; }
+
+        private DataArtifact dataArtifact { get; set; }
 
         // Player Skill Data
-        private Dictionary<int, PlayerSkillData> playerSkills = new Dictionary<int, PlayerSkillData>();
-        private DataSkill dataSkill = GameEntry.Data.GetData<DataSkill>();
+        private Dictionary<int, PlayerSkillData> playerSkills { get; set; }
+        private DataSkill dataSkill { get; set; }
 
         //Player NPC Data
-        private Dictionary<int, PlayerNPCData> playerNPCs = new Dictionary<int, PlayerNPCData>();
-        private DataNPC dataNPC = GameEntry.Data.GetData<DataNPC>();
+        private Dictionary<int, PlayerNPCData> playerNPCs { get; set; }
+        private DataNPC dataNPC { get; set; }
 
         //Player Achievement Data
-        private Dictionary<int, List<PlayerAchievementData>> playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
-        private DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+        private Dictionary<int, List<PlayerAchievementData>> playerAchievements { get; set; }
+        private DataAchievement dataAchievement { get; set; }
 
-        public PlayerData (SpaceshipData spaceshipData)
+    public PlayerData (SpaceshipData spaceshipData)
         {
-            this.initialSpaceship = spaceshipData;
-            this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
-            
+            initialSpaceship = spaceshipData;
+            playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
+
+            // initialize attrs
+            dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            dataSkill = GameEntry.Data.GetData<DataSkill>();
+            dataNPC = GameEntry.Data.GetData<DataNPC>();
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+
+            playerArtifacts = new Dictionary<int, int>(); // id + number
+            playerModules = new List<int>(); // 
+
+            playerSkills = new Dictionary<int, PlayerSkillData>();
+
+            playerNPCs = new Dictionary<int, PlayerNPCData>();
+
+            playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
+
+
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
             {
@@ -53,8 +74,8 @@ namespace ETLG.Data
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             // add money and skill points
-            playerArtifacts.Add((int)EnumArtifact.Money, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.Money)));
-            playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.KnowledgePoint)));
+            playerArtifacts.Add((int)EnumArtifact.Money, 0);
+            playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
 
             // add mock artifacts
             AddMockData();
@@ -175,21 +196,45 @@ namespace ETLG.Data
 
         public void AddArtifact(int id, int number)
         {
+            // module -> playerModules
+            if(dataArtifact.GetArtifactData(id) is ArtifactModuleData)
+            {
+                if(!playerModules.Contains(id))
+                {
+                    playerModules.Add(id);
+                }
+                return;
+            }
+
+            // artifacts -> playerArtifacts
             if(!playerArtifacts.ContainsKey(id))
             {
-                playerArtifacts.Add(id, new PlayerArtifactData(dataArtifact.GetArtifactData(id)));
+                playerArtifacts.Add(id, number);
             }
-            playerArtifacts[id].Number += number;
+
+            playerArtifacts[id] += number;
         }
 
         public void DeleteArtifact(int id, int number)
         {
-            if(!playerArtifacts.ContainsKey(id))
+            // module
+            if (dataArtifact.GetArtifactData(id) is ArtifactModuleData)
+            {
+                if (!playerModules.Contains(id))
+                {
+                    return;
+                }
+                playerModules.Remove(id);
+            }
+
+            // artifacts
+            if (!playerArtifacts.ContainsKey(id))
             {
                 return;
             }
-            playerArtifacts[id].Number -= number;
-            if (playerArtifacts[id].Number <= 0)
+
+            playerArtifacts[id] -= number;
+            if (playerArtifacts[id] <= 0)
             {
                 playerArtifacts.Remove(id);
             }
@@ -197,33 +242,125 @@ namespace ETLG.Data
 
         public void SellArtifact(int id, int number)
         {
+            if (!playerArtifacts.ContainsKey(id))
+            {
+                return;
+            }
             // get value from artifactDataBase
             int value = dataArtifact.GetArtifactData(id).Value;
 
             // if number <= 0, remove from playerArtifacts
-            playerArtifacts[(int)EnumArtifact.Money].Number += number * value;
+            playerArtifacts[(int)EnumArtifact.Money] += number * value;
 
             DeleteArtifact(id, number);
         }
 
-        public List<PlayerArtifactData> GetArtifactsByType(int type)
+        public Dictionary<int, int> GetArtifactsByType(int Type)
         {
-            if (type.Equals(Constant.Type.ARTIFACT_ALL))
+            if (Type.Equals(Constant.Type.ARTIFACT_ALL))
             {
-                return playerArtifacts.Values.ToList();
+                return playerArtifacts;
             }
 
-            List< PlayerArtifactData> targetList = new List<PlayerArtifactData>(); 
-            foreach (var playerArtifact in playerArtifacts.Values)
+            Dictionary<int, int> targetList = new Dictionary<int, int>();
+
+            foreach (var playerArtifact in playerArtifacts)
             {
-                if (playerArtifact.Type.Equals(type))
+                if (dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
                 {
-                    targetList.Add(playerArtifact); 
+                    targetList.Add(playerArtifact.Key, playerArtifact.Value);
                 }
             }
             return targetList;
         }
 
+     /*   public List<int> GetArtifactsByType(int Type)
+        {
+            if (Type.Equals(Constant.Type.ARTIFACT_ALL))
+            {
+                return playerArtifacts.Keys.ToList();
+            }
+
+            List<int> targetList = new List<int>();
+
+            foreach (var playerArtifact in playerArtifacts)
+            {
+                if(dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
+                {
+                    targetList.Add(playerArtifact.Key);
+                }
+            }
+            return targetList;
+        }*/
+
+
+        /*
+                public List<PlayerArtifactData> GetArtifactsByType(int type)
+                {
+                    if (type.Equals(Constant.Type.ARTIFACT_ALL))
+                    {
+                        return playerArtifacts.Values.ToList();
+                    }
+
+                    List< PlayerArtifactData> targetList = new List<PlayerArtifactData>(); 
+                    foreach (var playerArtifact in playerArtifacts.Values)
+                    {
+                        if (playerArtifact.Type.Equals(type))
+                        {
+                            targetList.Add(playerArtifact); 
+                        }
+                    }
+                    return targetList;
+                }
+        */
+
+        public List<int> GetModulesByType(int Type)
+        {
+            if (Type.Equals(Constant.Type.MODULE_TYPE_ALL))
+            {
+                return playerModules;
+            }
+
+            List<int> targetList = new List<int>();
+
+            foreach (var playerModule in playerModules)
+            {
+
+                if (dataArtifact.GetModuleData(playerModule).Classification == Type)
+                {
+                    targetList.Add(playerModule);
+                }
+            }
+            return targetList;
+        }
+        public void EquipCurrentModule()
+        {
+
+        }
+
+
+
+        /*        public List<PlayerArtifactData> GetModulesByType(int Type)
+                {
+
+                    List<PlayerArtifactData>  modules = GetArtifactsByType(Constant.Type.ARTIFACT_MODULE);
+
+                    if (Type == Constant.Type.MODULE_TYPE_ALL)
+                    {
+                        return modules;
+                    }
+
+                    List<PlayerArtifactData> targetList = new List<PlayerArtifactData>();
+                    foreach (var playerArtifact in playerArtifacts.Values)
+                    {
+                        if (playerArtifact.Type.Equals(Type))
+                        {
+                            targetList.Add(playerArtifact);
+                        }
+                    }
+                    return targetList;
+                }
+        */
         public PlayerNPCData GetNpcDataById(int NpcId)
         {
             if (!playerNPCs.ContainsKey(NpcId))
@@ -235,7 +372,7 @@ namespace ETLG.Data
 
         }
 
-        public List<PlayerArtifactData> GetNpcArtifacts(int NpcId)
+        public Dictionary<int, int> GetNpcArtifactsByNpcId(int NpcId)
         {
 
             if (!playerNPCs.ContainsKey(NpcId))
@@ -247,12 +384,12 @@ namespace ETLG.Data
 
             int[] ArtifactIds = npcData.Artifacts;
 
-            List<PlayerArtifactData> targetList = new List<PlayerArtifactData>();
+            // artifactId, Num
+            Dictionary<int, int> targetList = new Dictionary<int, int>();
 
             for (int i = 0; i < ArtifactIds.Length; i += 2)
             {
-                PlayerArtifactData artifactData = new PlayerArtifactData(dataArtifact.GetArtifactData(ArtifactIds[i]), ArtifactIds[i+1]);
-                targetList.Add(artifactData);
+                targetList.Add(ArtifactIds[i], ArtifactIds[i+1]);
 
             }
 
@@ -266,19 +403,9 @@ namespace ETLG.Data
             {
                 return 0;
             }
-            return playerArtifacts[id].Number;
-        }
-
-
-        public PlayerArtifactData GetArtifactDataById(int id)
-        {
-
-            if (!playerArtifacts.ContainsKey(id))
-            {
-                return null;
-            }
             return playerArtifacts[id];
         }
+
 
         public void AddSkill(int id, int level)
         {
@@ -356,7 +483,7 @@ namespace ETLG.Data
 
             for (int i = 0; i < costIds.Length; i += 2)
             {
-                playerArtifacts[costIds[i]].Number -= costIds[i + 1];
+                playerArtifacts[costIds[i]] -= costIds[i + 1];
             }
 
             // before level up
@@ -464,8 +591,8 @@ namespace ETLG.Data
         {
 
 
-            playerArtifacts[(int)EnumArtifact.Money].Number += 123450;
-            playerArtifacts[(int)EnumArtifact.KnowledgePoint].Number += 150;
+            playerArtifacts[(int)EnumArtifact.Money] += 99999;
+            playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
 
             AddArtifact((int)EnumArtifact.UniversalUpgradeUnit, 240);
@@ -475,7 +602,8 @@ namespace ETLG.Data
 
             AddArtifact((int)EnumArtifact.FirepowerModule, 1);
             AddArtifact((int)EnumArtifact.DamageAmplifier, 1);
-            AddArtifact((int)EnumArtifact.TargetingComputer, 1);
+            AddArtifact((int)EnumArtifact.MissileLauncher, 1);
+            AddArtifact((int)EnumArtifact.BeamEmitter, 1);
 
             AddArtifact((int)EnumArtifact.PlasmaFuel, 100);
             AddArtifact((int)EnumArtifact.LiquidMethane, 200);

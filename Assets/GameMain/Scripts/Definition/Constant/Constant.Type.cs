@@ -53,10 +53,7 @@
 
 
 
-            public const int MODULE_TYPE_ATTACK = 1;
-            public const int MODULE_TYPE_DEFENSE = 2;
-            public const int MODULE_TYPE_POWERDRIVE = 3;
-            public const int MODULE_TYPE_SUPPORT = 4;
+       
 
             // attributes
 
@@ -76,11 +73,20 @@
 
             public const string ARTIFACT_TYPE = "ARTIFACT_TYPE_";
 
+
             public const int ARTIFACT_ALL = 0;
             public const int ARTIFACT_TRADE = 1;
             public const int ARTIFACT_MODULE = 3;
             public const int ARTIFACT_SPECIAL = 2;
             public const int ARTIFACT_OTHERS = 4;
+
+            // module type
+            public const int MODULE_TYPE_ALL = 0;
+            public const int MODULE_TYPE_WEAPON = 1;
+            public const int MODULE_TYPE_ATTACK = 2;
+            public const int MODULE_TYPE_DEFENSE = 3;
+            public const int MODULE_TYPE_POWERDRIVE = 4;
+            public const int MODULE_TYPE_SUPPORT = 5;
 
             //achievement type
             public const int ACHV_QUIZ = 101;

@@ -16,7 +16,8 @@ namespace ETLG
 
         public DataArtifact dataArtifact;
 
-        private PlayerArtifactData playerArtifact;
+        public int CurrentArtifactID;
+
 
         public RawImage artifactIcon;
 
@@ -34,8 +35,6 @@ namespace ETLG
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
-
-            EventTrigger trigger = iconButton.gameObject.AddComponent<EventTrigger>();
 
         }
 
@@ -57,10 +56,8 @@ namespace ETLG
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
 
-            // artifactInfo new position
             Vector3 offset = new Vector3(-10f, 0f, 0f);
 
             if(Type == Constant.Type.TRADE_NPC_PLAYER)
@@ -70,7 +67,7 @@ namespace ETLG
 
             Vector3 newPosition = itemPosition + offset;
 
-            dataArtifact.currentPlayerArtifactData = this.playerArtifact;
+            dataArtifact.CurrentArtifactID = CurrentArtifactID;
             dataArtifact.artifactInfoPosition = newPosition;
 
             GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
@@ -89,15 +86,15 @@ namespace ETLG
 
         }
 
-        public void SetArtifactData(PlayerArtifactData playerArtifact, int Type)
+        public void SetArtifactData(int ArtifactID, int NUm, int Type)
         {
-            this.playerArtifact = playerArtifact;
+            this.CurrentArtifactID = ArtifactID;
 
             this.Type = Type;
 
-            this.artifactNumber.text = playerArtifact.Number.ToString();
+            this.artifactNumber.text = NUm.ToString();
 
-            string texturePath = AssetUtility.GetArtifactIcon(playerArtifact.Id.ToString());
+            string texturePath = AssetUtility.GetArtifactIcon(ArtifactID.ToString());
 
             Texture texture = Resources.Load<Texture>(texturePath);
 

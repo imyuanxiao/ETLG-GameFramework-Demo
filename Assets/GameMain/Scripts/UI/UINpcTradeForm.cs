@@ -82,17 +82,25 @@ namespace ETLG
         }
 
 
-        private void ShowPlayerArtifactIcons(Transform container, int type)
+        private void ShowPlayerArtifactIcons(Transform container, int Type)
         {
 
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(type);
+            Dictionary<int, int> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Type);
 
-            for (int i = 0; i < playerArtifacts.Count; i++)
+            int i = 0;
+
+            foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
+                int ArtifactID = kvp.Key;
+                int Num = kvp.Value;
 
                 Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
+                i++;
 
-                PlayerArtifactData playerArtifact = playerArtifacts[i];
+                if (ArtifactID == (int)EnumArtifact.Money)
+                {
+                    continue;
+                }
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
@@ -100,23 +108,32 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.TRADE_PLAYER_NPC);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_PLAYER_NPC);
                 });
 
             }
         }
 
+
         private void ShowNPCArtifactIcons(Transform container)
         {
+            Dictionary<int, int> npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
 
-            List<PlayerArtifactData> npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifacts(dataNPC.currentNPCId);
+            int i = 0;
 
-            for (int i = 0; i < npcArtifacts.Count; i++)
+            foreach (KeyValuePair<int, int> kvp in npcArtifacts)
             {
+                int ArtifactID = kvp.Key;
+                int Num = kvp.Value;
 
                 Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
 
-                PlayerArtifactData playerArtifact = npcArtifacts[i];
+                i++;
+
+                if (ArtifactID == (int)EnumArtifact.Money)
+                {
+                    continue;
+                }
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
@@ -124,7 +141,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(playerArtifact, Constant.Type.TRADE_NPC_PLAYER);
+                    item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_NPC_PLAYER);
                 });
 
             }

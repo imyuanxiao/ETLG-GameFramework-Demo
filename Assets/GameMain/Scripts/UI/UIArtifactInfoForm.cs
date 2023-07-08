@@ -14,9 +14,10 @@ namespace ETLG
     {
 
         public DataArtifact dataArtifact;
+        public DataPlayer dataPlayer;
+
         private ArtifactDataBase artifactDataBase;
 
-        public PlayerArtifactData playerArtifactData;
 
         public Transform UIContainer;
 
@@ -35,6 +36,7 @@ namespace ETLG
             base.OnInit(userData);
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
 
@@ -43,8 +45,6 @@ namespace ETLG
 
             artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
 
-            playerArtifactData = dataArtifact.currentPlayerArtifactData;
-
             UIContainer.position = dataArtifact.artifactInfoPosition;
 
             ArtifactName.text = artifactDataBase.NameID;
@@ -52,7 +52,7 @@ namespace ETLG
             ArtifactTradeable.text = artifactDataBase.Tradeable ? "Tradeable" : "Untradeable";
             ArtifactValue.text = artifactDataBase.Value.ToString();
 
-            ArtifactNumber.text = playerArtifactData.Number.ToString();
+            ArtifactNumber.text = dataPlayer.GetPlayerData().GetArtifactNumById(artifactDataBase.Id).ToString();
             ArtifactDescription.text = artifactDataBase.Description;
 
 
@@ -64,7 +64,6 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             artifactDataBase = null;
-            playerArtifactData = null;
             base.OnClose(isShutdown, userData);
 
         }

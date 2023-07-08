@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 08:16:55.190
+// 生成时间：2023-07-08 20:54:26.817
 //------------------------------------------------------------
 
 namespace ETLG
@@ -137,78 +137,88 @@ namespace ETLG
         KnowledgeFragments_IoT = 2006,
 
         /// <summary>
-        /// 火力模块
-        /// </summary>
-        FirepowerModule = 3001,
-
-        /// <summary>
-        /// 伤害增幅器
-        /// </summary>
-        DamageAmplifier = 3002,
-
-        /// <summary>
-        /// 瞄准计算机
-        /// </summary>
-        TargetingComputer = 3003,
-
-        /// <summary>
-        /// 导弹发射器
-        /// </summary>
-        MissileLauncher = 3004,
-
-        /// <summary>
         /// 防御系统升级
         /// </summary>
-        DefenseSystemUpgrade = 3005,
-
-        /// <summary>
-        /// 护盾发生器
-        /// </summary>
-        ShieldGenerator = 3006,
+        DefenseSystemUpgrade = 3001,
 
         /// <summary>
         /// 装甲镀层
         /// </summary>
-        ArmorPlating = 3007,
+        ArmorPlating = 3002,
 
         /// <summary>
         /// 维修无人机舱
         /// </summary>
-        RepairDroneBay = 3008,
+        RepairDroneBay = 3003,
 
         /// <summary>
         /// 能量护盾投影仪
         /// </summary>
-        EnergyShieldProjector = 3009,
+        EnergyShieldProjector = 3004,
 
         /// <summary>
-        /// 速度助推器
+        /// 护盾发生器
         /// </summary>
-        VelocityBooster = 3010,
+        ShieldGenerator = 3005,
 
         /// <summary>
-        /// 推进器增强
+        /// 火力模块
         /// </summary>
-        ThrusterEnhancement = 3011,
+        FirepowerModule = 3006,
 
         /// <summary>
-        /// 传感器阵列
+        /// 伤害增幅器
         /// </summary>
-        SensorArray = 3012,
-
-        /// <summary>
-        /// 存储扩展单元
-        /// </summary>
-        StorageExpansioUnit = 3013,
+        DamageAmplifier = 3007,
 
         /// <summary>
         /// 能源电容器
         /// </summary>
-        EnergyCapacitor = 3014,
+        EnergyCapacitor = 3008,
+
+        /// <summary>
+        /// 速度助推器
+        /// </summary>
+        VelocityBooster = 3009,
+
+        /// <summary>
+        /// 推进器增强
+        /// </summary>
+        ThrusterEnhancement = 3010,
 
         /// <summary>
         /// 隐形装置
         /// </summary>
-        CloakingDevice = 3015,
+        CloakingDevice = 3011,
+
+        /// <summary>
+        /// 存储扩展单元
+        /// </summary>
+        StorageExpansioUnit = 3012,
+
+        /// <summary>
+        /// 传感器阵列
+        /// </summary>
+        SensorArray = 3013,
+
+        /// <summary>
+        /// 导弹发射器
+        /// </summary>
+        MissileLauncher = 3014,
+
+        /// <summary>
+        /// 光束发射器
+        /// </summary>
+        BeamEmitter = 3015,
+
+        /// <summary>
+        /// 离子加速器
+        /// </summary>
+        IonAccelerator = 3016,
+
+        /// <summary>
+        /// 磁轨炮架
+        /// </summary>
+        RailgunMount = 3017,
     }
 }

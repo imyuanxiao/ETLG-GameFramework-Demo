@@ -77,7 +77,6 @@ namespace ETLG.Data
             return playerData;
         }
 
-
     }
 }
 

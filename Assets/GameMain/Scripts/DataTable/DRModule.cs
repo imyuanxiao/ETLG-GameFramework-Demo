@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 10:15:23.899
+// 生成时间：2023-07-08 17:08:25.897
 //------------------------------------------------------------
 
 using GameFramework;
@@ -55,18 +55,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取属性(1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIREPOWER;10-DOGDE)。
+        /// 获取属性(0-特殊,1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIREPOWER;10-DOGDE)。
         /// </summary>
-        public int Attribute
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取效果。
-        /// </summary>
-        public int Effect
+        public int[] Attributes
         {
             get;
             private set;
@@ -86,8 +77,7 @@ namespace ETLG
             index++;
             ArtifactID = int.Parse(columnStrings[index++]);
             Classification = int.Parse(columnStrings[index++]);
-            Attribute = int.Parse(columnStrings[index++]);
-            Effect = int.Parse(columnStrings[index++]);
+                Attributes = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -102,8 +92,7 @@ namespace ETLG
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     ArtifactID = binaryReader.Read7BitEncodedInt32();
                     Classification = binaryReader.Read7BitEncodedInt32();
-                    Attribute = binaryReader.Read7BitEncodedInt32();
-                    Effect = binaryReader.Read7BitEncodedInt32();
+                        Attributes = binaryReader.ReadInt32Array();
                 }
             }
 
