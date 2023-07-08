@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -48,6 +49,7 @@ namespace ETLG
         
         private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
 
+        private bool refreshLeftUI;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -62,29 +64,40 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Event.Subscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
+
             GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
+            refreshLeftUI = true;
 
-            ShowSpaceshipSelect();
+        }
 
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+            if (refreshLeftUI)
+            {
+                ShowContent();
+                refreshLeftUI = false; 
+            }
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(SkillUpgradedEventArgs.EventId, OnSkillUpgraded);
 
 
         }
 
         private void OnReturnButtonClick()
         {
-            Log.Debug("Return to Map");
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
 
         }
@@ -96,9 +109,10 @@ namespace ETLG
 
             // reset skill data，此处等实现clone方法后再完善
 
+            dataPlayer.GetPlayerData().ResetSkillTree();
         }
 
-        public void ShowSpaceshipSelect()
+        public void ShowContent()
         {
 
             if (currentSpaceshipData == null)
@@ -107,7 +121,7 @@ namespace ETLG
                 return;
             }
 
-            playerKnowledgePoints.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.KnowledgePoint).ToString();
+            playerKnowledgePoints.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.KnowledgePoint).ToString();
 
             playerScore.text = dataPlayer.GetPlayerData().GetPlayerScore().ToString();
 
@@ -142,6 +156,17 @@ namespace ETLG
             newSizeDelta.x = newWidth;
             rectTransform.sizeDelta = newSizeDelta * valueBarMaxWidth / maxAttrValue;
         }
+
+        public void OnSkillUpgraded(object sender, GameEventArgs e)
+        {
+            SkillUpgradedEventArgs ne = (SkillUpgradedEventArgs)e;
+            if (ne == null)
+                return;
+
+            refreshLeftUI = true;
+        }
+
+
     }
 }
 

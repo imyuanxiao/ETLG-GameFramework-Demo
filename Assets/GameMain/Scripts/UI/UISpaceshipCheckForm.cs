@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -69,7 +70,9 @@ namespace ETLG
         private EntityLoader entityLoader;
 
         private int selectedArtifactType;
+        private bool refreshAll;
         private bool refreshUI;
+
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -102,11 +105,8 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
-            ShowSpaceshipSelect();
-
-            refreshUI = true;
+            refreshAll = true;
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
-
 
         }
 
@@ -114,12 +114,18 @@ namespace ETLG
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
-            if (refreshUI)
+            if (refreshAll)
             {
-                HideAllItem();
-                ShowArtifactIcons(artifactContainer, selectedArtifactType);
+                ShowSpaceship();
+            }
+
+            if (refreshAll || refreshUI)
+            {
+                ShowContent();
+                refreshAll = false;
                 refreshUI = false;
             }
+
 
 
         }
@@ -145,7 +151,7 @@ namespace ETLG
         private void ShowArtifactIcons(Transform container, int type)
         {
 
-            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().getArtifactsByType(type);
+            List<PlayerArtifactData> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(type);
 
             for (int i = 0; i < playerArtifacts.Count; i++)
             {
@@ -167,7 +173,7 @@ namespace ETLG
             }
         }
 
-        public void ShowSpaceshipSelect()
+        public void ShowContent()
         {
 
             if (currentSpaceshipData == null)
@@ -180,7 +186,7 @@ namespace ETLG
             s_type.text = dataPlayer.GetPlayerData().initialSpaceship.SType;
             s_size.text = dataPlayer.GetPlayerData().initialSpaceship.SSize;
 
-            playerMoney.text = dataPlayer.GetPlayerData().getArtifactNumById((int)EnumArtifact.Money).ToString();
+            playerMoney.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
 
             s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();
@@ -202,7 +208,7 @@ namespace ETLG
             SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
             SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
 
-            ShowSpaceship();
+            ShowArtifactIcons(artifactContainer, selectedArtifactType);
 
         }
 
@@ -260,7 +266,7 @@ namespace ETLG
 
         public void OnPackageSpecialButtonClick()
         {
-  
+
 
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_SPECIAL;
@@ -271,7 +277,7 @@ namespace ETLG
 
         public void OnPackageTradeButtonClick()
         {
-       
+
 
             refreshUI = true;
             selectedArtifactType = Constant.Type.ARTIFACT_TRADE;
@@ -299,6 +305,7 @@ namespace ETLG
             othersButton.interactable = true;
         }
 
+        
 
     }
 }

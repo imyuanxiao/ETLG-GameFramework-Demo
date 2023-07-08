@@ -42,7 +42,7 @@ namespace ETLG
             nameLabel.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.NameId;
             attack.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower.ToString();
             defense.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Shields.ToString();
-            int skillNum =  GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getSkillsByType("combat").Count;
+            int skillNum =  GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillsByType("combat").Count;
             Debug.Log("Skill Count: " + skillNum);
         }
 

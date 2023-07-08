@@ -93,6 +93,11 @@
             public const string LOCKED_TREASURE_CHEST = "locked_treasure_chest";
             public const string UNLOCKED_TREASURE_CHEST = "unlocked_treasure_chest";
 
+            // operation
+            public const int ADD = 1;
+            public const int SUB = 2;
+            public const int MUL = 2;
+
         }
     }
 }

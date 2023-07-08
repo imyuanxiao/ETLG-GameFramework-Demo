@@ -113,7 +113,7 @@ namespace ETLG
             }
             else
             {
-                PlayerSkillData playerSkillData = dataPlayer.GetPlayerData().getSkillById(currentSkillID);
+                PlayerSkillData playerSkillData = dataPlayer.GetPlayerData().GetSkillById(currentSkillID);
                 if (Constant.Type.SKILL_LOCKED == playerSkillData.ActiveState)
                 {
                     iconColor = Color.black;

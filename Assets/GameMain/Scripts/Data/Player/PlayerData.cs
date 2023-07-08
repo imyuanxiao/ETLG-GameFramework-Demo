@@ -45,7 +45,7 @@ namespace ETLG.Data
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
             {
-                addSkill(id, 1);
+                AddSkill(id, 1);
             }
 
             // add money and skill points
@@ -53,16 +53,50 @@ namespace ETLG.Data
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, new PlayerArtifactData(dataArtifact.GetArtifactData((int)EnumArtifact.KnowledgePoint)));
 
             // add mock artifacts
-            addMockData();
+            AddMockData();
             initPlayerAchievementData();
         }
 
         // Call this method everytime skills change or initialSpaceship changes
-        public void UpdatePlayerCalculatedSpaceshipData()
+        public void UpdateCalculatedSpaceshipAttribute(int Attr, float Change)
         {
-            
+            switch (Attr)
+            {
+                case Constant.Type.ATTR_Durability:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Shields:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Firepower:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Energy:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Agility:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Speed:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Detection:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Capacity:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Firerate:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+                case Constant.Type.ATTR_Dogde:
+                    playerCalculatedSpaceshipData.Durability += Change;
+                    break;
+            }
 
         }
+
+
 
         public float GetSpaceshipScore()
         {
@@ -87,7 +121,7 @@ namespace ETLG.Data
             return GetSpaceshipScore();
         }
 
-        public void addArtifact(int id, int number)
+        public void AddArtifact(int id, int number)
         {
             if(!playerArtifacts.ContainsKey(id))
             {
@@ -97,7 +131,7 @@ namespace ETLG.Data
 
         }
 
-        public void sellArtifact(int id, int number)
+        public void SellArtifact(int id, int number)
         {
             // get value from artifactDataBase
             int value = dataArtifact.GetArtifactData(id).Value;
@@ -114,7 +148,7 @@ namespace ETLG.Data
 
         }
 
-        public List<PlayerArtifactData> getArtifactsByType(int type)
+        public List<PlayerArtifactData> GetArtifactsByType(int type)
         {
             if (type.Equals(Constant.Type.ARTIFACT_ALL))
             {
@@ -132,7 +166,7 @@ namespace ETLG.Data
             return targetList;
         }
 
-        public PlayerNPCData getNpcDataById(int NpcId)
+        public PlayerNPCData GetNpcDataById(int NpcId)
         {
             if (!playerNPCs.ContainsKey(NpcId))
             {
@@ -143,7 +177,7 @@ namespace ETLG.Data
 
         }
 
-        public List<PlayerArtifactData> getNpcArtifacts(int NpcId)
+        public List<PlayerArtifactData> GetNpcArtifacts(int NpcId)
         {
 
             if (!playerNPCs.ContainsKey(NpcId))
@@ -167,7 +201,7 @@ namespace ETLG.Data
             return targetList;
         }
 
-        public int getArtifactNumById(int id)
+        public int GetArtifactNumById(int id)
         {
 
             if (!playerArtifacts.ContainsKey(id))
@@ -178,7 +212,7 @@ namespace ETLG.Data
         }
 
 
-        public PlayerArtifactData getArtifactDataById(int id)
+        public PlayerArtifactData GetArtifactDataById(int id)
         {
 
             if (!playerArtifacts.ContainsKey(id))
@@ -188,7 +222,7 @@ namespace ETLG.Data
             return playerArtifacts[id];
         }
 
-        public void addSkill(int id, int level)
+        public void AddSkill(int id, int level)
         {
             if (!playerSkills.ContainsKey(id))
             {
@@ -205,7 +239,7 @@ namespace ETLG.Data
             }
         }
 
-        public PlayerSkillData getSkillById(int Id)
+        public PlayerSkillData GetSkillById(int Id)
         {
             if (!playerSkills.ContainsKey(Id))
             {
@@ -214,7 +248,7 @@ namespace ETLG.Data
             return playerSkills[Id];
         }
 
-        public List<PlayerSkillData> getSkillsByType(string type)
+        public List<PlayerSkillData> GetSkillsByType(string type)
         {
             if (type.Equals("all"))
             {
@@ -243,7 +277,9 @@ namespace ETLG.Data
         {
             int currentLevel = playerSkills[dataSkill.currentSkillID].Level;
 
-            int[] costIds = dataSkill.GetCurrentSkillData().GetLevelCosts(currentLevel + 1);
+            SkillData skillData = dataSkill.GetCurrentSkillData();
+
+            int[] costIds = skillData.GetLevelCosts(currentLevel + 1);
 
             for (int i = 0; i < costIds.Length; i += 2)
             {
@@ -252,14 +288,44 @@ namespace ETLG.Data
 
             playerSkills[dataSkill.currentSkillID].Level++;
 
+            // update sapceship attributes
+            int[] oldAttrs = skillData.GetSkillLevelData(currentLevel).Attributes;
+            if(oldAttrs.Length >= 2)
+            {
+                UpdateAttributes(oldAttrs, Constant.Type.SUB);
+                int[] newAttrs = skillData.GetSkillLevelData(currentLevel + 1).Attributes;
+                UpdateAttributes(newAttrs, Constant.Type.SUB);
+            }
+
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
         }
 
+        private void UpdateAttributes(int[] AttrIDs, int Type)
+        {
+            for (int i = 0; i < AttrIDs.Length; i += 2)
+            {
+                int AttrID = AttrIDs[i];
+                int Change = AttrIDs[i + 1];
+                if(Type == Constant.Type.SUB)
+                {
+                    Change = -Change;
+                }
+                UpdateCalculatedSpaceshipAttribute(AttrID, Change);
+            }
+        }
 
 
 
-        private void addMockData()
+        public void ResetSkillTree()
+        {
+
+
+
+        }
+
+
+        private void AddMockData()
         {
 
 
@@ -267,21 +333,21 @@ namespace ETLG.Data
             playerArtifacts[(int)EnumArtifact.KnowledgePoint].Number += 150;
 
 
-            addArtifact((int)EnumArtifact.UniversalUpgradeUnit, 240);
-            addArtifact((int)EnumArtifact.CloudServer, 340);
-            addArtifact((int)EnumArtifact.DataSet, 278);
-            addArtifact((int)EnumArtifact.GPUUnit, 638);
+            AddArtifact((int)EnumArtifact.UniversalUpgradeUnit, 240);
+            AddArtifact((int)EnumArtifact.CloudServer, 340);
+            AddArtifact((int)EnumArtifact.DataSet, 278);
+            AddArtifact((int)EnumArtifact.GPUUnit, 638);
 
-            addArtifact((int)EnumArtifact.FirepowerModule, 1);
-            addArtifact((int)EnumArtifact.DamageAmplifier, 1);
-            addArtifact((int)EnumArtifact.TargetingComputer, 1);
+            AddArtifact((int)EnumArtifact.FirepowerModule, 1);
+            AddArtifact((int)EnumArtifact.DamageAmplifier, 1);
+            AddArtifact((int)EnumArtifact.TargetingComputer, 1);
 
-            addArtifact((int)EnumArtifact.PlasmaFuel, 100);
-            addArtifact((int)EnumArtifact.LiquidMethane, 200);
+            AddArtifact((int)EnumArtifact.PlasmaFuel, 100);
+            AddArtifact((int)EnumArtifact.LiquidMethane, 200);
 
-            addArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
-            addArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);
-            addArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
+            AddArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
+            AddArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);
+            AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
            
         }
 
