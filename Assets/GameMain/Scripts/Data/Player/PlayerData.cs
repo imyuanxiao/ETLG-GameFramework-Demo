@@ -566,6 +566,8 @@ namespace ETLG.Data
 
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
+            UpdateAttrsByAllModules(Constant.Type.ADD);
+
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
         }

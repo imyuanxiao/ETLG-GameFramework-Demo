@@ -75,8 +75,6 @@ namespace ETLG
 
         private DataPlayer dataPlayer;
 
-        private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
-
         private EntitySpaceshipSelect showSpaceshipEntity = null;
 
         // 实体加载器
@@ -127,9 +125,6 @@ namespace ETLG
             base.OnOpen(userData);
 
             GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
-
-
-            currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
@@ -259,6 +254,8 @@ namespace ETLG
 
         public void ShowContent()
         {
+
+            PlayerCalculatedSpaceshipData currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             if (currentSpaceshipData == null)
             {

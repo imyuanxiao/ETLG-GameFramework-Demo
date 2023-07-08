@@ -54,9 +54,6 @@ namespace ETLG
         private DataPlayer dataPlayer;
         private DataSkill dataSkill;
 
-        
-        private PlayerCalculatedSpaceshipData currentSpaceshipData = null;
-
         private bool refreshLeftUI;
 
         // 初始化菜单数据
@@ -77,8 +74,6 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISkillTreeMap);
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
-
-            currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             refreshLeftUI = true;
 
@@ -123,6 +118,8 @@ namespace ETLG
 
         public void ShowContent()
         {
+
+            PlayerCalculatedSpaceshipData currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             if (currentSpaceshipData == null)
             {

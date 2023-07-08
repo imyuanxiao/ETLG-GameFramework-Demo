@@ -305,9 +305,9 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
             }
             moduleInfoUIID = null;
-
-
         }
+
+
 
 
 
