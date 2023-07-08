@@ -73,13 +73,13 @@ namespace ETLG
             dataArtifact.currentPlayerArtifactData = this.playerArtifact;
             dataArtifact.artifactInfoPosition = newPosition;
 
-            GameEntry.Event.Fire(this, ArtifactInfoOpenEventArgs.Create());
+            GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
 
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GameEntry.Event.Fire(this, ArtifactInfoCloseEventArgs.Create());
+            GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
 

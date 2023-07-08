@@ -114,8 +114,7 @@ namespace ETLG
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCUICloseEventArgs.Create());
-            this.Close();
+            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
         //页面最大化

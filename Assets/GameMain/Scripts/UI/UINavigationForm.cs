@@ -68,14 +68,20 @@ namespace ETLG
 
         private void SetButtonColors(int selectedButton)
         {
+            Log.Debug("selectedButton {0}",selectedButton);
+
+            int index = 0;
+            if (selectedButton == Constant.Type.PLAYERMENU_SKILL)
+            {
+                index = 1;
+            }
+            if (selectedButton == Constant.Type.PLAYERMENU_ACHIEVEMENT)
+            {
+                index = 3;
+            }
+
             foreach (var buttonImage in buttonImages)
             {
-                int index = 0;
-                if (selectedButton == Constant.Type.PLAYERMENU_SKILL)
-                {
-                    index = 1;
-                }
-
                 buttonImage.color = (buttonImage == buttonImages[index].GetComponent<RawImage>()) ? selectedColor : deselectedColor;
             }
         }

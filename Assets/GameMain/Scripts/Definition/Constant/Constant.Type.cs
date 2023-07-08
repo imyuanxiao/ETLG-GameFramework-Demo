@@ -9,6 +9,9 @@
             public const int UI_OPEN = 0;
             public const int UI_CLOSE = 1;
 
+            public const int NPC_UI_TALK_OPEN = 2;
+            public const int NPC_UI_TRADE_OPEN = 3;
+
 
             // player menu title
             public const int PLAYERMENU_SPACESHIP = 1011;
@@ -49,8 +52,6 @@
             public const int SKILL_SKILL_TREE_MAP = 3;
 
 
-            public const int NPC_UI_TALK = 1;
-            public const int NPC_UI_TRADE = 2;
 
             public const int MODULE_TYPE_ATTACK = 1;
             public const int MODULE_TYPE_DEFENSE = 2;

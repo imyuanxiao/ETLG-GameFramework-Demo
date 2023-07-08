@@ -35,14 +35,11 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
 
-            GameEntry.Event.Subscribe(NPCUIOpenEventArgs.EventId, OnNPCUIOpen);
-            GameEntry.Event.Subscribe(NPCUICloseEventArgs.EventId, OnNPCUIClose);
+            GameEntry.Event.Subscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
 
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
-            GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
-            GameEntry.Event.Subscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
-
+            GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
@@ -158,15 +155,11 @@ namespace ETLG
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
-            GameEntry.Event.Unsubscribe(NPCUIOpenEventArgs.EventId, OnNPCUIOpen);
-
-            GameEntry.Event.Unsubscribe(NPCUICloseEventArgs.EventId, OnNPCUIClose);
-
+            GameEntry.Event.Unsubscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
 
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
 
-            GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
-            GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
+            GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
 
             artifactInfoUIID = null;
             currentNPCUIID = null;
@@ -207,10 +200,10 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
 
         }
-        private void OnNPCUIOpen(object sender, GameEventArgs e)
+        private void OnNPCUIChange(object sender, GameEventArgs e)
         {
 
-            NPCUIOpenEventArgs ne = (NPCUIOpenEventArgs)e;
+            NPCUIChangeEventArgs ne = (NPCUIChangeEventArgs)e;
             if (ne == null)
                 return;
 
@@ -219,33 +212,27 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm((int)currentNPCUIID);
             }
 
-            if (ne.Type == Constant.Type.NPC_UI_TALK)
+            if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
             {
                 currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
             }
-
-            else if (ne.Type == Constant.Type.NPC_UI_TRADE)
+            else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)
             {
                 currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
             }
-
-        }
-
-        private void OnNPCUIClose(object sender, GameEventArgs e)
-        {
-
-            NPCUICloseEventArgs ne = (NPCUICloseEventArgs)e;
-            if (ne == null)
-                return;
-
-            if (currentNPCUIID != null)
+            else if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+                if (currentNPCUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+                }
+
+                currentNPCUIID = null;
             }
 
-            currentNPCUIID = null;
 
         }
+
 
         private void OnPlanetInfo(object sender, GameEventArgs e)
         {
@@ -263,27 +250,28 @@ namespace ETLG
 
         }
 
-        private void OnArtifactInfoOpen(object sender, GameEventArgs e)
+        private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
         {
-            ArtifactInfoOpenEventArgs ne = (ArtifactInfoOpenEventArgs)e;
+            ArtifactInfoUIChangeEventArgs ne = (ArtifactInfoUIChangeEventArgs)e;
             if (ne == null)
                 return;
-            artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
 
-        }
-
-        private void OnArtifactInfoClose(object sender, GameEventArgs e)
-        {
-            ArtifactInfoCloseEventArgs ne = (ArtifactInfoCloseEventArgs)e;
-            if (ne == null)
-                return;
-            if (artifactInfoUIID != null)
+            if(ne.Type == Constant.Type.UI_OPEN)
             {
-                GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
+                artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
-            artifactInfoUIID = null;
-        }
 
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (artifactInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
+                }
+                artifactInfoUIID = null;
+            }
+
+
+        }
 
 
     }

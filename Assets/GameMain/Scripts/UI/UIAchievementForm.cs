@@ -79,6 +79,9 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            // open navigationform UI
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -92,7 +95,7 @@ namespace ETLG
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
             // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-          //  GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
 
         }
 

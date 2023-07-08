@@ -62,7 +62,7 @@ namespace ETLG
 
             dataNPC.currentNPCId = npcData.Id;
 
-            GameEntry.Event.Fire(this, NPCUIOpenEventArgs.Create(Constant.Type.NPC_UI_TALK));
+            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_TALK_OPEN));
 
         }
 
@@ -71,7 +71,7 @@ namespace ETLG
 
             dataNPC.currentNPCId = npcData.Id;
 
-            GameEntry.Event.Fire(this, NPCUIOpenEventArgs.Create(Constant.Type.NPC_UI_TRADE));
+            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_TRADE_OPEN));
 
         }
 

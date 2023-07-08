@@ -38,8 +38,7 @@ namespace ETLG
             
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
-            GameEntry.Event.Subscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
-            GameEntry.Event.Subscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
+            GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
 
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
@@ -83,8 +82,7 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Unsubscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
-            GameEntry.Event.Unsubscribe(ArtifactInfoOpenEventArgs.EventId, OnArtifactInfoOpen);
-            GameEntry.Event.Unsubscribe(ArtifactInfoCloseEventArgs.EventId, OnArtifactInfoClose);
+            GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
             GameEntry.Event.Unsubscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
 
@@ -181,25 +179,25 @@ namespace ETLG
             }
         }
 
-        private void OnArtifactInfoOpen(object sender, GameEventArgs e)
+        private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
         {
-            ArtifactInfoOpenEventArgs ne = (ArtifactInfoOpenEventArgs)e;
+            ArtifactInfoUIChangeEventArgs ne = (ArtifactInfoUIChangeEventArgs)e;
             if (ne == null)
                 return;
-            artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
 
-        }
-
-        private void OnArtifactInfoClose(object sender, GameEventArgs e)
-        {
-            ArtifactInfoCloseEventArgs ne = (ArtifactInfoCloseEventArgs)e;
-            if (ne == null)
-                return;
-            if (artifactInfoUIID != null)
+            if(ne.Type == Constant.Type.UI_OPEN)
             {
-                GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
+                artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
-            artifactInfoUIID = null;
+            else if(ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (artifactInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
+                }
+                artifactInfoUIID = null;
+            }
+
         }
 
         private void OnTipUIChange(object sender, GameEventArgs e)

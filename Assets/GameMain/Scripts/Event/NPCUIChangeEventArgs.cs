@@ -6,11 +6,11 @@ using GameFramework;
 
 namespace ETLG
 {
-    public class NPCUIOpenEventArgs : GameEventArgs
+    public class NPCUIChangeEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(NPCUIOpenEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(NPCUIChangeEventArgs).GetHashCode();
 
-        public NPCUIOpenEventArgs()
+        public NPCUIChangeEventArgs()
         {
         }
 
@@ -28,9 +28,9 @@ namespace ETLG
             private set;
         }
 
-        public static NPCUIOpenEventArgs Create(int type)
+        public static NPCUIChangeEventArgs Create(int type)
         {
-            NPCUIOpenEventArgs e = ReferencePool.Acquire<NPCUIOpenEventArgs>();
+            NPCUIChangeEventArgs e = ReferencePool.Acquire<NPCUIChangeEventArgs>();
             e.Type = type;
             return e;
         }
