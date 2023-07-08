@@ -4,6 +4,12 @@
     {
         public static class Type
         {
+
+            // UI Type
+            public const int UI_OPEN = 0;
+            public const int UI_CLOSE = 1;
+
+
             // player menu title
             public const int PLAYERMENU_SPACESHIP = 1011;
             public const int PLAYERMENU_SKILL = 1012;

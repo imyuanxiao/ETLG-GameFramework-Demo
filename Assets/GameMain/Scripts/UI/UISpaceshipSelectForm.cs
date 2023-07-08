@@ -227,27 +227,28 @@ namespace ETLG
 
             ShowNewSpaceshipSelect();
 
-            ShowSkillIconByLayer(skillContainer);
+            ShowSkillIconInContainer(skillContainer);
 
         }
 
-        private void ShowSkillIconByLayer(Transform container)
+        private void ShowSkillIconInContainer(Transform container)
         {
 
 
-            List<PlayerSkillData> tmpPlayerSkillsData = new List<PlayerSkillData>();
+       /*     List<PlayerSkillData> tmpPlayerSkillsData = new List<PlayerSkillData>();
             foreach (var skillId in currentSpaceshipData.SkillIds)
             {
                 tmpPlayerSkillsData.Add(new PlayerSkillData(skillId, Constant.Type.SKILL_UPGRADED, 1));
             }
-
+*/
             //SkillData[] skillDatas = currentSpaceshipData.GetSkillDatas();
 
             Vector3 offset = new Vector3(150f, 0f, 0f); // 偏移量
 
             int i = 0;
 
-            foreach (var tmpPlayerSkill in tmpPlayerSkillsData)
+            //foreach (var tmpPlayerSkill in tmpPlayerSkillsData)
+            foreach (var SkillIds in currentSpaceshipData.SkillIds)
             {
                 ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
                 {
@@ -255,7 +256,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one * 0.5f;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + (i++) * offset;
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(tmpPlayerSkill, Constant.Type.SKILL_ICON_SELECT_SPACESHIP);
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(SkillIds, Constant.Type.SKILL_ICON_SELECT_SPACESHIP);
                 });
             }
         }

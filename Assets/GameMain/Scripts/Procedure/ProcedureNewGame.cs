@@ -36,11 +36,11 @@ namespace ETLG
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
-            GameEntry.Event.Subscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
-            GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
+            GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
+            //GameEntry.Event.Subscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
-            GameEntry.Event.Subscribe(TipOpenEventArgs.EventId, OnTipOpen);
-            GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
+            GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
+           // GameEntry.Event.Subscribe(TipCloseEventArgs.EventId, OnTipClose);
 
             GameEntry.Event.Subscribe(SpaceshipChangeEventArgs.EventId, OnSpaceshipChange);
 
@@ -77,14 +77,13 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
-            GameEntry.Event.Unsubscribe(SkillInfoOpenEventArgs.EventId, OnSkillInfoOpen);
-            GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
+            GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
+           // GameEntry.Event.Unsubscribe(SkillInfoCloseEventArgs.EventId, OnSkillInfoClose);
 
-            GameEntry.Event.Unsubscribe(TipOpenEventArgs.EventId, OnTipOpen);
-            GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
+            GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
+            //GameEntry.Event.Unsubscribe(TipCloseEventArgs.EventId, OnTipClose);
 
             GameEntry.Event.Unsubscribe(SpaceshipChangeEventArgs.EventId, OnSpaceshipChange);
-
 
             GameEntry.Sound.StopMusic();
 
@@ -108,17 +107,29 @@ namespace ETLG
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
         }
 
-        private void OnSkillInfoOpen(object sender, GameEventArgs e)
+        private void OnSkillInfoUIChange(object sender, GameEventArgs e)
         {
-            SkillInfoOpenEventArgs ne = (SkillInfoOpenEventArgs)e;
+            SkillInfoUIChangeEventArgs ne = (SkillInfoUIChangeEventArgs)e;
             if (ne == null)
                 return;
 
-            skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
+            if(ne.Type == Constant.Type.UI_OPEN)
+            {
+                skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (skillInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)skillInfoUIID);
+                }
+
+                skillInfoUIID = null;
+            }
 
         }
 
-        private void OnSkillInfoClose(object sender, GameEventArgs e)
+/*        private void OnSkillInfoClose(object sender, GameEventArgs e)
         {
             SkillInfoCloseEventArgs ne = (SkillInfoCloseEventArgs)e;
             if (ne == null)
@@ -131,21 +142,33 @@ namespace ETLG
 
             skillInfoUIID = null;
 
-        }
+        }*/
 
-        private void OnTipOpen(object sender, GameEventArgs e)
+        private void OnTipUIChange(object sender, GameEventArgs e)
         {
-            TipOpenEventArgs ne = (TipOpenEventArgs)e;
+            TipUIChangeEventArgs ne = (TipUIChangeEventArgs)e;
             if (ne == null)
                 return;
 
-            dataPlayer.tipUiPosition = ne.position;
-            dataPlayer.tipTitle = ne.tipTitle;
+            if(ne.Type == Constant.Type.UI_OPEN)
+            {
+                dataPlayer.tipUiPosition = ne.position;
+                dataPlayer.tipTitle = ne.tipTitle;
+                tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+            }
 
-            tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (tipUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)tipUIID);
+                }
+                tipUIID = null;
+            }
+
 
         }
-
+/*
         private void OnTipClose(object sender, GameEventArgs e)
         {
             TipCloseEventArgs ne = (TipCloseEventArgs)e;
@@ -159,7 +182,7 @@ namespace ETLG
 
             tipUIID = null;
 
-        }
+        }*/
 
         private void OnSpaceshipChange(object sender, GameEventArgs e)
         {

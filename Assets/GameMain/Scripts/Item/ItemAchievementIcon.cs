@@ -46,7 +46,7 @@ namespace ETLG
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GameEntry.Event.Fire(this, SkillInfoCloseEventArgs.Create());
+            //GameEntry.Event.Fire(this, SkillInfoCloseEventArgs.Create());
         }
         public void SetAchievementData(PlayerAchievementData playerAchievement,Transform container)
         {

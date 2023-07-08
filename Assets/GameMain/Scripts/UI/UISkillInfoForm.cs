@@ -15,16 +15,19 @@ namespace ETLG
     {
 
         public DataSkill dataSkill;
-        private SkillData skillData;
-        public PlayerSkillData playerSkillData;
+        //private SkillData skillData;
+
+        public DataPlayer dataPlayer;
+
+        //public PlayerSkillData playerSkillData;
 
         public Transform UIContainer;
 
         public RawImage skillIcon;
         public TextMeshProUGUI SkillName = null;
         public TextMeshProUGUI Domain = null;
-        public TextMeshProUGUI IsActiveSkill;
-        public TextMeshProUGUI IsCombatSkill;
+        public TextMeshProUGUI Activeness;
+        public TextMeshProUGUI Functionality;
         public TextMeshProUGUI SkillDescription;
 
         public TextMeshProUGUI CurrentLevel;
@@ -45,6 +48,7 @@ namespace ETLG
             base.OnInit(userData);
 
             dataSkill = GameEntry.Data.GetData<DataSkill>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
 
@@ -68,16 +72,28 @@ namespace ETLG
 
         public void showContent()
         {
-            skillData = dataSkill.GetCurrentShowSkillData();
-            playerSkillData = dataSkill.currentPlayerSkillData;
+            SkillData skillData = dataSkill.GetCurrentShowSkillData();
+            // playerSkillData = dataSkill.currentPlayerSkillData;
+
+
+            PlayerSkillData playerSkillData = null;
+            
+            if(dataPlayer.GetPlayerData() == null)
+            {
+                playerSkillData = new PlayerSkillData(dataSkill.currentSkillID, Constant.Type.SKILL_UPGRADED, 1);
+            }
+            else
+            {
+                playerSkillData = dataPlayer.GetPlayerData().getSkillById(dataSkill.currentSkillID);
+            }
 
             UIContainer.position = dataSkill.skillInfoPosition;
             hideBottomPart = dataSkill.hideSkillInfoBottomPart;
 
             SkillName.text = skillData.Name;
             Domain.text = skillData.Domain;
-            IsActiveSkill.text = skillData.IsActiveSkill ? "Active" : "Passive";
-            IsCombatSkill.text = skillData.IsCombatSkill ? "Combat" : "Explore";
+            Activeness.text = skillData.Activeness;
+            Functionality.text = skillData.Functionality;
             SkillDescription.text = skillData.GetSkillDescription();
 
             int currentLevel = playerSkillData.Level;
@@ -113,8 +129,8 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            skillData = null;
-            playerSkillData = null;
+            //skillData = null;
+           // playerSkillData = null;
             SkillDescription.text = null;
             CurrentLevelDescription.text = null;
             NextLevelDescription.text = null;

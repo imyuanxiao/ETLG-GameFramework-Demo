@@ -56,6 +56,8 @@ namespace ETLG.Data
             }
         }
 
+
+
         public bool IsActiveSkill
         {
             get
@@ -69,6 +71,22 @@ namespace ETLG.Data
             get
             {
                 return dRSkill.IsCombatSkill;
+            }
+        }
+
+        public string Activeness
+        {
+            get
+            {
+                return dRSkill.IsActiveSkill ? "Active" : "Passive";
+            }
+        }
+
+        public string Functionality
+        {
+            get
+            {
+                return dRSkill.IsCombatSkill ? "Combat" : "Explore";
             }
         }
 

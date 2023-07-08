@@ -18,7 +18,7 @@ namespace ETLG
         public Transform layer4;
 
         private DataSkill dataSkill;
-        private DataPlayer dataPlayer;
+        //private DataPlayer dataPlayer;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -26,7 +26,7 @@ namespace ETLG
             base.OnInit(userData);
 
             dataSkill = GameEntry.Data.GetData<DataSkill>();
-            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+          //  dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
 
@@ -54,7 +54,7 @@ namespace ETLG
 
         }
 
-        private void ShowSkillIconByLayer(Transform layer, int num, int position)
+        private void ShowSkillIconByLayer(Transform layer, int num, int Type)
         {
 
             List<SkillData> skillDatas = dataSkill.GetSkillDataLayer(num);
@@ -65,7 +65,7 @@ namespace ETLG
 
             foreach (var skillData in skillDatas)
             {
-                PlayerSkillData playerSkillData =  dataPlayer.GetPlayerData().getSkillById(skillData.Id);
+                //PlayerSkillData playerSkillData =  dataPlayer.GetPlayerData().getSkillById(skillData.Id);
 
                 ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
                 {
@@ -73,7 +73,7 @@ namespace ETLG
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + firstposition + skillData.Location[1] * offset;
-                    item.GetComponent<ItemSkillIcon>().SetSkillData(playerSkillData, position);
+                    item.GetComponent<ItemSkillIcon>().SetSkillData(skillData.Id, Type);
                 });
             }
         }

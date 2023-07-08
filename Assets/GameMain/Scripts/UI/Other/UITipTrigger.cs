@@ -24,13 +24,15 @@ public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             newPosition = itemPosition + new Vector3(-410f, -100f, 0f);
         }
 
-        GameEntry.Event.Fire(this, TipOpenEventArgs.Create(newPosition, tipTitle));
+        GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameEntry.Event.Fire(this, TipCloseEventArgs.Create());
+        GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+
+       // GameEntry.Event.Fire(this, TipCloseEventArgs.Create());
     }
 
 

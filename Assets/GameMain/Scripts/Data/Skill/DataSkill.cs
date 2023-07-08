@@ -28,7 +28,9 @@ namespace ETLG.Data
 
         // 当前展示技能ID
         //public int currentSkillID;
-        public PlayerSkillData currentPlayerSkillData;
+        //public PlayerSkillData currentPlayerSkillData;
+        public int currentSkillID { get; set; }
+
 
         // 当前展示skillInfo的UI位置
         public Vector3 skillInfoPosition { get; set; }
@@ -130,15 +132,25 @@ namespace ETLG.Data
         }
 
 
+        /*        public SkillData GetCurrentShowSkillData()
+                {
+                    if (!dicSkillData.ContainsKey(currentPlayerSkillData.Id))
+                    {
+                        Log.Error("Can not find skill data id '{0}'.", currentPlayerSkillData.Id);
+                        return null;
+                    }
+                    return dicSkillData[currentPlayerSkillData.Id];
+                }*/
         public SkillData GetCurrentShowSkillData()
         {
-            if (!dicSkillData.ContainsKey(currentPlayerSkillData.Id))
+            if (!dicSkillData.ContainsKey(currentSkillID))
             {
-                Log.Error("Can not find skill data id '{0}'.", currentPlayerSkillData.Id);
+                Log.Error("Can not find skill data id '{0}'.", currentSkillID);
                 return null;
             }
-            return dicSkillData[currentPlayerSkillData.Id];
+            return dicSkillData[currentSkillID];
         }
+
 
         public SkillData GetSkillData(int id)
         {

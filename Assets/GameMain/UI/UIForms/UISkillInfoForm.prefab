@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 6889060963410599567}
   - component: {fileID: 1227607961403698517}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Activeness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,7 +2008,7 @@ GameObject:
   - component: {fileID: 338508693067348453}
   - component: {fileID: 6473167336071765090}
   m_Layer: 5
-  m_Name: Scene
+  m_Name: Functionality
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2381,7 +2381,7 @@ GameObject:
   - component: {fileID: 1924908243101924574}
   - component: {fileID: 4113517854691854367}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Functionality
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2916,7 +2916,7 @@ GameObject:
   - component: {fileID: 9121145118854974135}
   - component: {fileID: 5455962380264739720}
   m_Layer: 5
-  m_Name: BottomPart
+  m_Name: NextLevelInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2997,7 +2997,7 @@ GameObject:
   - component: {fileID: 7621916144706787572}
   - component: {fileID: 7294793910705514861}
   m_Layer: 5
-  m_Name: Type
+  m_Name: Activeness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,8 +3268,8 @@ MonoBehaviour:
   skillIcon: {fileID: 8289291813669279644}
   SkillName: {fileID: 3380290030487385365}
   Domain: {fileID: 7679327339353243153}
-  IsActiveSkill: {fileID: 1227607961403698517}
-  IsCombatSkill: {fileID: 4113517854691854367}
+  Activeness: {fileID: 1227607961403698517}
+  Functionality: {fileID: 4113517854691854367}
   SkillDescription: {fileID: 5771513464023693490}
   CurrentLevel: {fileID: 6930239341383046383}
   CurrentLevelDescription: {fileID: 7584746484884589865}
