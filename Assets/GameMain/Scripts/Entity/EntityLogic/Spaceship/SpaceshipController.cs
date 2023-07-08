@@ -72,6 +72,7 @@ namespace ETLG
             GetComponent<SpaceshipMovement>().enabled = false;
             GetComponent<SpaceshipAttack>().enabled = false;
             GetComponent<PlayerHealth>().enabled = false;
+            GetComponent<SpaceshipSkill>().enabled = false;
         }
 
         private void OnActiveBattleComponent(object sender, GameEventArgs e)
@@ -81,6 +82,7 @@ namespace ETLG
             GetComponent<SpaceshipMovement>().enabled = true;
             GetComponent<SpaceshipAttack>().enabled = true;
             GetComponent<PlayerHealth>().enabled = true;
+            GetComponent<SpaceshipSkill>().enabled = true;
         }
 
         private void Update() 

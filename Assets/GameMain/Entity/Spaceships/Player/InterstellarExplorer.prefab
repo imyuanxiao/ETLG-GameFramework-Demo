@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: -6450207003181350035}
   - component: {fileID: -5309865174787812415}
   - component: {fileID: 2682800692091084935}
+  - component: {fileID: -971167982265802135}
   m_Layer: 7
   m_Name: InterstellarExplorer
   m_TagString: Player
@@ -195,6 +196,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a34adab66c98df345a64d92454d94319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-971167982265802135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222514285410902841}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22fb64de45672b74fb55ba1d8644de9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1943944961453316999

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameFramework.Fsm;
+using GameFramework.Event;
+using UnityGameFramework.Runtime;
+using System;
 
 namespace ETLG
 {
@@ -9,6 +12,7 @@ namespace ETLG
     {
         private float lastingTime;
         private float timeElapsed = 0f;
+        private bool changeToRespawnState;
 
         protected override void OnInit(IFsm<SpaceshipAttack> fsm)
         {
@@ -18,6 +22,10 @@ namespace ETLG
         protected override void OnEnter(IFsm<SpaceshipAttack> fsm)
         {
             base.OnEnter(fsm);
+
+            GameEntry.Event.Subscribe(PlayerRespawnEventArgs.EventId, OnPlayerRespawn);
+
+            changeToRespawnState = false;
             lastingTime = 5f;
             if (BattleManager.Instance.bossEnemyEntity != null)
             {
@@ -25,16 +33,30 @@ namespace ETLG
             }
         }
 
+        private void OnPlayerRespawn(object sender, GameEventArgs e)
+        {
+            PlayerRespawnEventArgs ne = (PlayerRespawnEventArgs) e;
+            if (ne == null)
+                Log.Error("Invalid event [PlayerRespawnEventArgs]");
+
+            changeToRespawnState = true;
+        }
+
         protected override void OnUpdate(IFsm<SpaceshipAttack> fsm, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(fsm, elapseSeconds, realElapseSeconds);
+
+            if (changeToRespawnState)
+            {
+                ChangeState<PlayerRespawn>(fsm);
+            }
+
             if (timeElapsed < lastingTime)
             {
                 timeElapsed += elapseSeconds;
             }
             else 
             {
-                Debug.Log("Skill Finished");
                 ChangeState<DefaultSkill>(fsm);
             }
         }
@@ -42,6 +64,9 @@ namespace ETLG
         protected override void OnLeave(IFsm<SpaceshipAttack> fsm, bool isShutdown)
         {
             base.OnLeave(fsm, isShutdown);
+
+            GameEntry.Event.Unsubscribe(PlayerRespawnEventArgs.EventId, OnPlayerRespawn);
+
             if (BattleManager.Instance.bossEnemyEntity != null)
             {
                 BattleManager.Instance.bossEnemyEntity.GetComponent<BossEnemyAttack>().enabled = true;

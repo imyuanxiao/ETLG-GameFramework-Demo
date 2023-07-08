@@ -31,7 +31,8 @@ namespace ETLG
                                                                                 new CloudComputing(), 
                                                                                 new ElectronicWarfare(),
                                                                                 new Medicalsupport(GetComponent<PlayerHealth>()),
-                                                                                new FireWall(GetComponent<PlayerHealth>()));
+                                                                                new FireWall(GetComponent<PlayerHealth>()),
+                                                                                new PlayerRespawn(GetComponent<PlayerHealth>()));
             m_Fsm.Start<DefaultSkill>();
         }
 

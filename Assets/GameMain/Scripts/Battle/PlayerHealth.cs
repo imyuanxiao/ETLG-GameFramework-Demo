@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ETLG.Data;
 using GameFramework.Event;
+using UnityGameFramework.Runtime;
 using System;
 
 namespace ETLG
@@ -18,17 +19,10 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlayerHealthChangeEventArgs.EventId, OnPlayerHealthChange);
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
 
-            // MaxHealth = (int) playerData.initialSpaceship.Durability;
-            // CurrentHealth = (int) playerData.calculatedSpaceship.Durability;
-            // MaxShield = (int) playerData.initialSpaceship.Shields;
-            // CurrentShield = (int) playerData.calculatedSpaceship.Shields;
-
             MaxHealth = (int) playerData.playerCalculatedSpaceshipData.Durability;
             MaxShield = (int) playerData.playerCalculatedSpaceshipData.Shields;
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
-
-            // StartCoroutine(CheckDeath());
         }
 
         private void OnPlayerDead(object sender, GameEventArgs e)
@@ -41,15 +35,27 @@ namespace ETLG
         {
             PlayerHealthChangeEventArgs ne = (PlayerHealthChangeEventArgs) e;
 
+            if (ne == null)
+                Log.Error("Invalid event [OnplayerHealthChangeEventArgs]");
+
             if (ne.CurrentHealth <= 0)
             {
-                GameEntry.Event.Fire(this, PlayerDeadEventArgs.Create());
+                // if player can respawn
+                if (GetComponent<SpaceshipSkill>().canRespawn && GetComponent<SpaceshipSkill>().respawnCnt < 1) 
+                {
+                    GetComponent<SpaceshipSkill>().respawnCnt++;
+                    GameEntry.Event.Fire(this, PlayerRespawnEventArgs.Create(this));
+                }
+                // if player can't respawn
+                else 
+                {
+                    GameEntry.Event.Fire(this, PlayerDeadEventArgs.Create());
+                }
             }
         }
 
         public override void TakeDamage(int damage)
         {
-            // Debug.Log("Player's being hit");
             if (CurrentHealth <= 0)
             {
                 return;
@@ -64,8 +70,6 @@ namespace ETLG
                 CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
                 GameEntry.Event.Fire(this, PlayerHealthChangeEventArgs.Create(CurrentHealth));
             }
-            // Debug.Log("Player CurrentShield: " + CurrentShield + " | " + "CurrentHealth: " + CurrentHealth);
-            // playerData.CalculateStats();
         }
 
 
