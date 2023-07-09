@@ -45,7 +45,6 @@ namespace ETLG
             {
                 Log.Error("Invalid event UnFocusOnPlanetEventArgs");
             }
-            ne.PlanetBase.isFocused = false;
             ResetCamera();
         }
 
@@ -57,7 +56,6 @@ namespace ETLG
                 Log.Error("Invalid event FocusOnPlanetEventArgs");
             }
             Transform focusPoint = ne.PlanetBase.focusPoint;
-            ne.PlanetBase.isFocused = true;
             FocusOnPlanet(focusPoint);
         }
 

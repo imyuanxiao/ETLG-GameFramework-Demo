@@ -7,12 +7,16 @@ namespace ETLG
         private bool isDragging = false;
         private Vector3 previousMousePosition;
         public Transform model;
-        public float rotationSpeed = 0.5f;
+        private float rotationSpeed = 0f;
 
         // private void Awake() 
         // {
         //     model = transform.GetChild(0);
         // }
+        private void OnEnable() 
+        {
+            this.rotationSpeed = 0.5f;
+        }
 
         private void OnMouseDown()
         {
@@ -41,6 +45,8 @@ namespace ETLG
 
         private void Update() {
             if (!GetComponent<PlanetBase>().isFocused) { return; }
+            if (!GetComponent<DragRotate>().enabled) { return; }
+
             if (Input.GetMouseButtonDown(0)) {
                 OnMouseDown();
             }
@@ -48,6 +54,11 @@ namespace ETLG
                 OnMouseUp();
             }
             OnMouseDrag();
+        }
+
+        private void OnDisable() 
+        {
+            this.rotationSpeed = 0f;    
         }
     }
 }
