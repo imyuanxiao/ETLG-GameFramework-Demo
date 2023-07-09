@@ -29,6 +29,7 @@ namespace ETLG
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
             base.OnEnter(procedureOwner);
+            this.procedureOwner = procedureOwner;
 
             this.changeToProcedureMap = false;
             this.currentNPCUIID = null;
