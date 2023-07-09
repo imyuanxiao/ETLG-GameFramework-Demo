@@ -65,6 +65,7 @@ namespace ETLG
             ActiveLandingPoint(false);
             GetComponent<DragRotate>().enabled = false;
             GameEntry.Event.Unsubscribe(FocusOnPlanetEventArgs.EventId, OnFocused);
+            GameEntry.Event.Unsubscribe(UnFocusOnPlanetEventArgs.EventId, OnUnFocused);
         }
     }
 }

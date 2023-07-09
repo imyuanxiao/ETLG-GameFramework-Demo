@@ -30,6 +30,8 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
+            this.procedureOwner = procedureOwner;
+            this.changeScene = false;
             this.changeToProcedureMap = false;
             this.currentNPCUIID = null;
             this.artifactInfoUIID = null;
