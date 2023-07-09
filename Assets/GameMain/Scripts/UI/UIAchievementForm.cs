@@ -39,7 +39,7 @@ namespace ETLG
    
         private Dictionary<int, List<PlayerAchievementData>> playerAchievementData;
         private DataPlayer dataPlayer;
-        DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+        DataAchievement dataAchievement;
         // 实体加载器
         private EntityLoader entityLoader;
 
@@ -50,6 +50,10 @@ namespace ETLG
         {
             base.OnInit(userData);
             // 获取玩家数据管理器
+
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+
+
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             entityLoader = EntityLoader.Create(this);
             //获取成就数据

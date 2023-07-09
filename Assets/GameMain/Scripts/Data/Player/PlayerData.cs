@@ -491,7 +491,7 @@ namespace ETLG.Data
             // after level up
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
-            dataSkill.lockCurrentSkillID = false;
+            //dataSkill.lockCurrentSkillID = false;
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
 
         }
