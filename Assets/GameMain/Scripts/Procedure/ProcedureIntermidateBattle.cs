@@ -47,9 +47,6 @@ namespace ETLG
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
             LoadBossEnemy();
-            // bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss);
-            // entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
-            // Debug.Log(bossEnemyData.NameId);
         }
 
         private void LoadBossEnemy()
@@ -80,10 +77,10 @@ namespace ETLG
                     bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.InternetofThingsBoss);
                     entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
                     break;
-                case "Final":
-                    bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.FinalBoss);
-                    entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
-                    break;
+                // case "Final":
+                //     bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.FinalBoss);
+                //     entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+                //     break;
                 default:
                     Log.Error("No boss of type: " + this.procedureOwner.GetData<VarString>("BossType"));
                     break;

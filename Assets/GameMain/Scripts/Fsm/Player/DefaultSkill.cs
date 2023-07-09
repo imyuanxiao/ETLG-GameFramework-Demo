@@ -63,6 +63,10 @@ namespace ETLG
             {
                 ChangeState<FireWall>(fsm);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                ChangeState<PlayerAIAssist>(fsm);
+            }
 
         }
 

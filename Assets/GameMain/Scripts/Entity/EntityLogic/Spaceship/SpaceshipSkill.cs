@@ -11,8 +11,12 @@ namespace ETLG
         [Header("Skills Info")]
         public List<SkillInfo> skills = new List<SkillInfo>();
 
+        // Respawn Settings
         [HideInInspector] public bool canRespawn = false;
         [HideInInspector] public int respawnCnt = 0;
+
+        // AIAssist Settings
+        public GameObject AISpaceshipPrefab;
 
         private void OnEnable() 
         {

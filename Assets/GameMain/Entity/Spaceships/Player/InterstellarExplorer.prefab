@@ -210,6 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22fb64de45672b74fb55ba1d8644de9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnCnt: 0
+  AISpaceshipPrefab: {fileID: 1291534650732609273, guid: ecb298e5216777846b80187fe411961d, type: 3}
+  AISpawnPoints: []
 --- !u!1001 &1943944961453316999
 PrefabInstance:
   m_ObjectHideFlags: 0

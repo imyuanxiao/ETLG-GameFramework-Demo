@@ -30,10 +30,13 @@ namespace ETLG
         [HideInInspector] public int basicEnemyAttackBase; // = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
         [HideInInspector] public int basicEnemyHealthBase; // = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
 
-        [Header("AI Spaceships")]
+        [Header("Enemy AI Spaceships")]
         public Transform[] AISpaceshipSpawnPoints;
 
         private IEnumerator spawnBasicEnemiesCoroutine;
+
+        [Header("Player AI Spaceships")]
+        public Transform[] PlayerAIShipSpawnPoints;
 
         [Header("Instant Move Settings")]
         public Transform[] instantMovePoints;

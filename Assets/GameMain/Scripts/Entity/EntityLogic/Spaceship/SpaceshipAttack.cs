@@ -32,7 +32,8 @@ namespace ETLG
                                                                                 new ElectronicWarfare(),
                                                                                 new Medicalsupport(GetComponent<PlayerHealth>()),
                                                                                 new FireWall(GetComponent<PlayerHealth>()),
-                                                                                new PlayerRespawn(GetComponent<PlayerHealth>()));
+                                                                                new PlayerRespawn(GetComponent<PlayerHealth>()),
+                                                                                new PlayerAIAssist(GetComponent<SpaceshipSkill>()));
             m_Fsm.Start<DefaultSkill>();
         }
 
@@ -47,8 +48,7 @@ namespace ETLG
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Transform target = null;
-                // GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
-                if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle)
+                if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle || GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
                 {
                     target = BattleManager.Instance.bossEnemyEntity.gameObject.transform;
                     if (target != null)
@@ -57,7 +57,7 @@ namespace ETLG
                         InitPlayerMissile(missile.GetComponent<Missile>(), target);
                     }
                 }
-                if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+                else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
                 {
                     target = FindObjectOfType<BasicEnemyController>()?.gameObject.transform;
                     if (target != null)
