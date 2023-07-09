@@ -1,4 +1,5 @@
 using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,23 +39,38 @@ namespace ETLG
    
         private Dictionary<int, List<PlayerAchievementData>> playerAchievementData;
         private DataPlayer dataPlayer;
-
+        DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
         // 实体加载器
         private EntityLoader entityLoader;
 
+        public bool refresh;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
-
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            DataAchievement dataAchievement = GameEntry.Data.GetData<DataAchievement>();
             entityLoader = EntityLoader.Create(this);
             //获取成就数据
             playerAchievementData = dataPlayer.GetPlayerData().getPlayerAchievements();
+            showContent();
+        }
+
+        protected override void OnOpen(object userData)
+        {
+            base.OnOpen(userData);
+            showContent();
+            // open navigationform UI
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+        }
+
+        protected override void OnClose(bool isShutdown, object userData)
+        {
+            base.OnClose(isShutdown, userData);
+        }
+        private void showContent()
+        {
             //加载成就名称
             s_name_1.text = "Quiz";
             s_name_2.text = "Resource";
@@ -111,24 +127,8 @@ namespace ETLG
                 {
                     showAchievements(content_10, pair.Value);
                 }
-                //...
             }
         }
-
-        protected override void OnOpen(object userData)
-        {
-            base.OnOpen(userData);
-
-            // open navigationform UI
-            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
-
-        }
-
-        protected override void OnClose(bool isShutdown, object userData)
-        {
-            base.OnClose(isShutdown, userData);
-        }
-
         private void showAchievements(Transform container, List<PlayerAchievementData> playerAchievementData)
         {
             for (int i = 0; i < playerAchievementData.Count; i++)
@@ -145,8 +145,6 @@ namespace ETLG
                     item.GetComponent<ItemAchievementIcon>().SetAchievementData(playerAchievement, container);
                 });
             }
-
-
         }
     }
 
