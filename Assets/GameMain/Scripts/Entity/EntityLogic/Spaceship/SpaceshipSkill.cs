@@ -26,8 +26,12 @@ namespace ETLG
 
         private void SetPlayerSkill()
         {
-            skills.Add(new SkillInfo(EnumSkill.ElectronicWarfare, KeyCode.Alpha2));
-            skills.Add(new SkillInfo(EnumSkill.MedicalSupport, KeyCode.Alpha3));
+            skills.Add(new SkillInfo(EnumSkill.EdgeComputing, KeyCode.Alpha1));   // CloudComputing
+            skills.Add(new SkillInfo(EnumSkill.ElectronicWarfare, KeyCode.Alpha2));  // ElectronicWarfare
+            skills.Add(new SkillInfo(EnumSkill.MedicalSupport, KeyCode.Alpha3));  // MedicalSupport
+            skills.Add(new SkillInfo(EnumSkill.EnergyBoost, KeyCode.Alpha4));  // FireWall
+            skills.Add(new SkillInfo(EnumSkill.AdaptiveIntelligentDefense, KeyCode.Alpha5));  // AIAssist
+
             // TODO : change its value accroding to skill data
             this.canRespawn = true;
             PrintSkillsInfo();
@@ -57,11 +61,11 @@ namespace ETLG
 
         public SkillInfo(EnumSkill skillEnumId, KeyCode keyCode)
         {
-            PlayerSkillData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillById((int) skillEnumId);  // getSkillById((int)skillEnumId);
-            this.isUnlocked = data.IsActiveSkill;
-            this.skillName = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).Name;
-            this.skillId = (int) skillEnumId;
-            this.keyCode = keyCode;
+            // PlayerSkillData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillById((int) skillEnumId);  // getSkillById((int)skillEnumId);
+            // this.isUnlocked = data.IsActiveSkill;
+            // this.skillName = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).Name;
+            // this.skillId = (int) skillEnumId;
+            // this.keyCode = keyCode;
         }
     }
 }

@@ -51,7 +51,8 @@ namespace ETLG.Data
         {
             get
             {
-                return dRPlanet.Description;
+                // return dRPlanet.Description;
+                return GameEntry.Localization.GetString(Name + " Description");
             }
         }
 

@@ -31,11 +31,27 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
-            info1.text = "Reward";
-            info2.text = "Reward";
-            // PlayerData data = (PlayerData) userData;
-            
-            // Debug.Log("UIBattleWin - OnOpen : " + data.calculatedSpaceship.Description);
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            {
+                Dictionary<string, int> data = (Dictionary<string, int>) userData;
+                info1.text = "Enemy Killed: " + data["Killed"] + " | Enemy Passed: " + data["Passed"];
+                info2.text = "You got " + data["Killed"] * 100 + " coins!";
+            }
+            else if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle)
+            {
+                info1.text = "You defeated " + BattleManager.Instance.bossType;
+                info2.text = "You got a knowledge fraction!";
+            }
+            else if (GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
+            {
+                info1.text = "You defeated final Boss !!!";
+                info2.text = "You can now restore your planet !!!";
+            }
+            else
+            {
+                info1.text = "Reward";
+                info2.text = "Reward";
+            }
         }
     }
 }

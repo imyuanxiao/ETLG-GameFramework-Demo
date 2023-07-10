@@ -37,6 +37,7 @@ namespace ETLG
             this.changeScene = false;
             this.changeToProcedurePlanet = false;
 
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIMapPlayerInfoForm);
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
         }
@@ -115,7 +116,6 @@ namespace ETLG
                     GameEntry.Data.GetData<DataPlanet>().currentPlanetID = planet.GetComponent<PlanetBase>().PlanetId;
 
                     GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(planet.GetComponent<PlanetBase>()));
-                    GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
                     changeToProcedurePlanet = true;
                 }
@@ -129,6 +129,10 @@ namespace ETLG
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
+            {
+                GameEntry.UI.GetUIForm(EnumUIForm.UIMapPlayerInfoForm).Close();
+            }
             // 停止音乐
             GameEntry.Sound.StopMusic();
         }

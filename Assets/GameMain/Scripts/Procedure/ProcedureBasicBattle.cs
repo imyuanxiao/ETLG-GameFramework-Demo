@@ -57,8 +57,11 @@ namespace ETLG
 
         private void OnBasicBattleWin(object sender, GameEventArgs e)
         {
+            Dictionary<string, int> result = new Dictionary<string, int>();
             BasicBattleWinEventArgs ne = (BasicBattleWinEventArgs) e;
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin);
+            result.Add("Killed", ne.BasicEnemyKilled);
+            result.Add("Passed", ne.BasicEnemyPassed);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin, result);
             Debug.Log("Enemy Killed: " + ne.BasicEnemyKilled + " | Enemy Passed: " + ne.BasicEnemyPassed);
         }
 

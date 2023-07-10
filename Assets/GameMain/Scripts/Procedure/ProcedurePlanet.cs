@@ -80,6 +80,7 @@ namespace ETLG
             if (currentNPCUIID != null)
             {
                 GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+                currentNPCUIID = null;
             }
 
             if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
