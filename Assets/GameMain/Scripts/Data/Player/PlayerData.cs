@@ -195,6 +195,34 @@ namespace ETLG.Data
             return GetSpaceshipScore();
         }
 
+
+        public float GetSpaceshipAttribute(int AttrType)
+        {
+            switch (AttrType)
+            {
+                case Constant.Type.ATTR_Durability:
+                    return playerCalculatedSpaceshipData.Durability;
+                case Constant.Type.ATTR_Shields:
+                    return playerCalculatedSpaceshipData.Shields;
+                case Constant.Type.ATTR_Firepower:
+                    return playerCalculatedSpaceshipData.Firepower;
+                case Constant.Type.ATTR_Energy:
+                    return playerCalculatedSpaceshipData.Energy;
+                case Constant.Type.ATTR_Agility:
+                    return playerCalculatedSpaceshipData.Agility;
+                case Constant.Type.ATTR_Speed:
+                    return playerCalculatedSpaceshipData.Speed;
+                case Constant.Type.ATTR_Detection:
+                    return playerCalculatedSpaceshipData.Detection;
+                case Constant.Type.ATTR_Capacity:
+                    return playerCalculatedSpaceshipData.Capacity;
+                case Constant.Type.ATTR_Firerate:
+                    return playerCalculatedSpaceshipData.FireRate;
+                case Constant.Type.ATTR_Dogde:
+                    return playerCalculatedSpaceshipData.Dogde;
+            }
+            return 0f;
+        }
         public void AddArtifact(int id, int number)
         {
             // module -> playerModules
