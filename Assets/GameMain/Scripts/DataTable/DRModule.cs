@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-08 21:54:40.486
+// 生成时间：2023-07-11 19:13:16.554
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,7 +46,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取模块功能(1-ATTACK,2-DEFENSE,3-POWERDRIVE,4-SUPPORT)。
+        /// 获取模块功能(1-weapon,2-ATTACK,3-DEFENSE,4-POWERDRIVE,5-SUPPORT)。
         /// </summary>
         public int Classification
         {

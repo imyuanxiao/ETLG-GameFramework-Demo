@@ -13,55 +13,73 @@ namespace ETLG
 {
     public class ItemAchievementIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
-        private DataAchievement dataAchievement;
-        private PlayerAchievementData playerAchievementData;
-        private int id;
+        private DataPlayer dataPlayer;
+        private AchievementData achievementData;
         public Image image;
         public Button achievementButton;
         public TextMeshProUGUI acheivementName = null;
         public TextMeshProUGUI progress = null;
+        public TextMeshProUGUI next_level = null;
         public Transform container;
+        public string tipTitle;
+        public int position = 0;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
-            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             EventTrigger trigger = achievementButton.gameObject.AddComponent<EventTrigger>();
 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // 获得挂载对象的位置
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-
-            // artifactInfo new position
-            Vector3 offset = new Vector3(100f, -150f, 0f);
-            Vector3 newPosition = itemPosition + offset;
-           // RectTransform containerRectTransform = container.GetComponent<RectTransform>();
-
-            GameEntry.Event.Fire(this, AchievementInfoUIEventArgs.Create());
-
+            Vector3 newPosition = itemPosition + new Vector3(0f, -130f, 0f);
+            if (acheivementName.text != null)
+            {
+                tipTitle = acheivementName.text;
+            }
+            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            //GameEntry.Event.Fire(this, SkillInfoCloseEventArgs.Create());
+            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
-        public void SetAchievementData(PlayerAchievementData playerAchievement,Transform container)
+        public void SetAchievementData(AchievementData achievementData, Transform container)
         {
-            this.id = playerAchievement.Id;
-            this.playerAchievementData = playerAchievement;
-            if (playerAchievement.IsUnlocked == true)
+            int id = achievementData.Id;
+            int type = achievementData.ConditionId;
+            this.achievementData = achievementData;
+            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
             {
                 Sprite sprite = Resources.Load<Sprite>(Constant.Type.UNLOCKED_TREASURE_CHEST);
                 this.image.sprite = sprite;
             }
-            int[] count = dataAchievement.GetDataById(playerAchievement.Id).Count;
-            this.acheivementName.text = dataAchievement.GetDataById(playerAchievement.Id).Name;
-            this.progress.text = playerAchievement.Progress.ToString()+ " / "+ count[playerAchievement.activeState];
+            this.acheivementName.text = achievementData.Name;
+           /* switch(type)
+            {
+
+            }
+           */
+            this.progress.text = "0";
+            this.next_level.text= GetNextLevel();
             this.container=container;
         }
+        private string GetNextLevel()
+        {
+            PlayerData playerData = dataPlayer.GetPlayerData();
+            Dictionary<int,int> playerAchievement = playerData.GetPlayerAchievement();
 
+            if (!playerAchievement.ContainsKey(achievementData.Id))
+            {
+                return achievementData.Count[0].ToString();
+            }
+
+            int level = playerAchievement[achievementData.Id];
+            int countIndex = (level < achievementData.Count.Length) ? level : level - 1;
+
+            return achievementData.Count[countIndex].ToString();
+        }
     }
 }

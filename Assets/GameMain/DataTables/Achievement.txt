@@ -6,12 +6,10 @@
 	1001	知识就是力量	Knowledge is Power	101	1001	"""1,10,50,100,200"""	"""5,10,15,20,25"""
 	1002	失败是成功之母	Failure is the Mother of Success 	101	1002	"""1,10,50,100,200"""	"""5,10,15,20,25"""
 	1003	挑战极限	Pushing the limits	101	1007	1	50
-	1004	挑战极限	Pushing the limits	101	1007	1	10
-	1005	完美无缺（壹）	Flawless Performance	101	1004	"""1,10,50,100"""	"""5,10,15,20"""
-	1006	掌控全场（壹）	Masterful domination	101	1003	"""3,10,20,50"""	"""10,15,20,50"""
-	1007	失败是成功之母（壹）	Failure is the Mother of Success	101	1002	"""1,10,50,100,500"""	"""5,10,15,20,25"""
-	1008	时间不等人	Time Waits for No One	101	1006	1	10
-	1009	功亏一篑	"Close, but No Cigar"	101	1008	1	10
+	1004	完美无缺	Flawless Performance	101	1004	"""1,10,50,100"""	"""5,10,15,20"""
+	1005	掌控全场	Masterful domination	101	1003	"""3,10,20,50"""	"""10,15,20,50"""
+	1006	时间不等人	Time Waits for No One	101	1006	1	10
+	1007	功亏一篑	"Close, but No Cigar"	101	1008	1	10
 #知识库							
 	2001	云端之翼	Wings of the Clouds	102	2001	1	5
 	2002	AI启蒙者	AI Enthusiast	102	2002	1	5
@@ -20,7 +18,7 @@
 	2005	加密世界	Encrypted World	102	2005	1	5
 	2006	物联网开拓者	IoT Pioneer	102	2006	1	5
 #星际							
-	3001	星际探索者（壹）	Interstellar Explorer (I)	103	3001	"""1,2,6"""	"""10,15,50"""
+	3001	星际探索者	Interstellar Explorer	103	3001	"""1,2,6"""	"""10,15,50"""
 	3002	向着Cloud Computing星际出发！	Setting sail towards the Cloud Computing galaxy!	103	3002	1	10
 	3003	向着AI星际出发！	Setting sail towards the AI galaxy!	103	3003	1	10
 	3004	向着Blockchain星际出发！	Setting sail towards the Blockchain galaxy!	103	3004	1	10
@@ -43,17 +41,20 @@
 	4007	无尽容量	Infinite Capacity	104	4007	1000000	15
 	4008	紧急维修	Emergency Repair	104	4008	1	15
 	4009	防护破碎	Shield Break	104	4009	1	2
+	4010	全面进阶	Master of Advancement	104	4010	1000000	30
+	4011	超凡飞行员	Exceptional Pilot	104	4011	1000000	15
+	4012	模块收藏家	Module Collector	104	4012	1000000	30
 #通用资源							
 	5001	致富之路	Road to Riches 	105	5001	"""1000,5000,10000,20000"""	"""5,20,30,50"""
 	5002	财大气粗	Big Spender	105	5002	"""1000,5000,10000,20000"""	"""5,20,30,50"""
 	5003	碎片收集者	Fragment Collector 	105	5004	"""1,50,100,500"""	"""2,5,10,15"""
 	5004	知识追寻着	Seeker of Knowledge	105	5005	"""1,50,100,501"""	"""2,5,10,15"""
 	5005	采矿专家	Mining Expert 	105	5006	"""1,100,500,1000"""	"""2,5,10,15"""
-	5006	燃料探险家（壹）	Fuel Explorer	105	5007	"""1,100,500,1000"""	"""2,5,10,15"""
+	5006	燃料探险家	Fuel Explorer	105	5007	"""1,100,500,1000"""	"""2,5,10,15"""
 	5007	资源开发者	Resource Developer	105	5008	1000000	10
 #战斗							
 	6001	初尝胜果	Taste of Victory	106	6001	1	5
-	6002	征服之路	Road to Conquest (I)	106	6001	"""100,500"""	"""10,20"""
+	6002	征服之路	Road to Conquest	106	6001	"""100,500"""	"""10,20"""
 	6003	失败初体验	First Encounter with Failure	106	6002	1	5
 	6004	打不到我	Untouchable	106	6003	1	20
 	6005	死里逃生	Narrow Escape	106	6004	1	5

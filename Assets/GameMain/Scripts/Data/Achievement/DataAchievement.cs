@@ -7,7 +7,7 @@ namespace ETLG.Data
     {
         private IDataTable<DRAchievement> dtAchievement;
         private Dictionary<int, AchievementData> dicAchievementData;
-  
+        public int cuurrentPopUpId { set; get; }
         protected override void OnInit()
         {
 

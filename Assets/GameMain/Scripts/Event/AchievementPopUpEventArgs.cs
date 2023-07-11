@@ -6,18 +6,18 @@ using GameFramework;
 
 namespace ETLG
 {
-    public class AchievementInfoUIEventArgs : GameEventArgs
+    public class AchievementPopUpEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(AchievementInfoUIEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(AchievementPopUpEventArgs).GetHashCode();
 
         public override int Id { get { return EventId; } }
-
+        public int achievementId { get; private set; }
         public int EventParam { get; private set; }
 
-        public static AchievementInfoUIEventArgs Create()
+        public static AchievementPopUpEventArgs Create(int Id)
         {
-            AchievementInfoUIEventArgs e = ReferencePool.Acquire<AchievementInfoUIEventArgs>();
-            
+            AchievementPopUpEventArgs e = ReferencePool.Acquire<AchievementPopUpEventArgs>();
+            e.achievementId = Id;
             return e;
         }
 

@@ -39,8 +39,8 @@ namespace ETLG.Data
         private DataNPC dataNPC { get; set; }
 
         //Player Achievement Data
-        private Dictionary<int, List<PlayerAchievementData>> playerAchievements { get; set; }
-        private DataAchievement dataAchievement { get; set; }
+        private Dictionary<int,int> playerAchievement { get; set; }
+  
 
     public PlayerData (SpaceshipData spaceshipData)
         {
@@ -51,7 +51,6 @@ namespace ETLG.Data
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
-            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
@@ -60,7 +59,7 @@ namespace ETLG.Data
 
             playerNPCs = new Dictionary<int, PlayerNPCData>();
 
-            playerAchievements = new Dictionary<int, List<PlayerAchievementData>>();
+            playerAchievement = new Dictionary<int, int>(); // id + level
 
             // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
             equippedModules = new int[6];
@@ -80,7 +79,7 @@ namespace ETLG.Data
 
             // add mock artifacts
             AddMockData();
-            initPlayerAchievementData();
+            //initPlayerAchievementData();
         }
 
         // Call this method everytime skills change or initialSpaceship changes
@@ -641,61 +640,24 @@ namespace ETLG.Data
             AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
            
         }
-
-
-        private void initPlayerAchievementData()
+        public Dictionary<int,int> GetPlayerAchievement()
         {
-            AchievementData[] dataAchievements = dataAchievement.GetAllNewData();
-            PlayerAchievementData[] playerAchievementDatas = new PlayerAchievementData[dataAchievements.Length];
-            //初始化PlayerAchievement
-            int index = 0;
-            foreach (AchievementData data in dataAchievements)
-            {
-                playerAchievementDatas[index++] = new PlayerAchievementData(data);
-            }
-            //将Player的成就信息按成就类型分类
-            foreach (PlayerAchievementData data in playerAchievementDatas)
-            {
-                if (!playerAchievements.ContainsKey(data.TypeId))
-                {
-                    playerAchievements.Add(data.TypeId, getPlayerAchievementDataListById(playerAchievementDatas, data.TypeId));
-                }
-            }
-        }
-        private List<PlayerAchievementData> getPlayerAchievementDataListById(PlayerAchievementData[] playerAchievementDatas, int typeId)
-        {
-            List<PlayerAchievementData> results = new List<PlayerAchievementData>();
-            foreach (PlayerAchievementData data in playerAchievementDatas)
-            {
-                if (data.TypeId == typeId)
-                {
-                    results.Add(data);
-                }
-            }
-            return results;
-        }
-        public Dictionary<int, List<PlayerAchievementData>> getPlayerAchievements()
-        {
-            return this.playerAchievements;
+            return this.playerAchievement;
         }
         public int getUnlockedAchievementCount()
         {
-            int result = 0;
-            foreach( List<PlayerAchievementData> playerAchievement in playerAchievements.Values)
-            {
-                foreach(PlayerAchievementData playerAchievementData in playerAchievement)
-                {
-                    if (playerAchievementData.IsUnlocked)
-                    {
-                        result++;
-                    }
-                }
-            }
-            return result;
+            return playerAchievement.Count;
         }
-        public void updatePlayerAchievementData()
+        public void updatePlayerAchievementData(int id,int level)
         {
-
+            if(playerAchievement.ContainsKey(id))
+            {
+                playerAchievement[id] = level;
+            }
+            else
+            {
+                playerAchievement.Add(id, level);
+            }
         }
         }
 
