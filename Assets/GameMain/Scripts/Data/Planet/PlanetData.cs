@@ -47,12 +47,22 @@ namespace ETLG.Data
             }
         }
 
+        // This will be shown on PlanetInfo UI
         public string Description
         {
             get
             {
                 // return dRPlanet.Description;
                 return GameEntry.Localization.GetString(Name + " Description");
+            }
+        }
+
+        // This will be shown on PlanetOverview UI
+        public string Overview 
+        {
+            get
+            {
+                return GameEntry.Localization.GetString(Name + " Overview");
             }
         }
 

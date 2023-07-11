@@ -30,6 +30,7 @@ namespace ETLG
 
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Subscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
 
             MapManager.Instance.focusedPlanet = null;
 
@@ -111,13 +112,21 @@ namespace ETLG
                 {
                     GameObject planet = hitInfo.collider.gameObject;
 
-                    MapManager.Instance.focusedPlanet = planet;
-                    planet.GetComponent<PlanetBase>().isFocused = true;
-                    GameEntry.Data.GetData<DataPlanet>().currentPlanetID = planet.GetComponent<PlanetBase>().PlanetId;
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlanetOverview))
+                    {
+                        Debug.Log("Has UI Form " + EnumUIForm.UIPlanetOverview);
+                        GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview).Close();
+                    }
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetOverview, planet.GetComponent<PlanetBase>());
+                    
 
-                    GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(planet.GetComponent<PlanetBase>()));
+                    // MapManager.Instance.focusedPlanet = planet;
+                    // planet.GetComponent<PlanetBase>().isFocused = true;
+                    // GameEntry.Data.GetData<DataPlanet>().currentPlanetID = planet.GetComponent<PlanetBase>().PlanetId;
 
-                    changeToProcedurePlanet = true;
+                    // GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(planet.GetComponent<PlanetBase>()));
+
+                    // changeToProcedurePlanet = true;
                 }
             }
         }
@@ -128,10 +137,15 @@ namespace ETLG
 
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Unsubscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
 
             if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
             {
                 GameEntry.UI.GetUIForm(EnumUIForm.UIMapPlayerInfoForm).Close();
+            }
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlanetOverview))
+            {
+                GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview);
             }
             // 停止音乐
             GameEntry.Sound.StopMusic();
@@ -152,6 +166,15 @@ namespace ETLG
 
             changeScene = true;
             procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, ne.SceneId);
+        }
+
+        private void OnFocusOnPlanet(object sender, GameEventArgs e) 
+        {
+            FocusOnPlanetEventArgs ne = (FocusOnPlanetEventArgs) e;
+            if (ne == null)
+                Log.Error("Invalid Event [FocusOnPlanetEventArgs]");
+
+            changeToProcedurePlanet = true;
         }
     }
 }
