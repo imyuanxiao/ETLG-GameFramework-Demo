@@ -61,11 +61,23 @@ namespace ETLG
 
         public SkillInfo(EnumSkill skillEnumId, KeyCode keyCode)
         {
-            // PlayerSkillData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillById((int) skillEnumId);  // getSkillById((int)skillEnumId);
-            // this.isUnlocked = data.IsActiveSkill;
-            // this.skillName = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).Name;
-            // this.skillId = (int) skillEnumId;
-            // this.keyCode = keyCode;
+            Dictionary<int, int> skills = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills();
+
+            if (skills == null) { return; }
+
+            this.keyCode = keyCode;
+            this.skillName = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).Name;
+            this.skillId = (int) skillEnumId;
+            this.skillEnumId = skillEnumId;
+
+            if (skills.ContainsKey((int)skillEnumId))
+            {
+                this.isUnlocked = true;
+            }
+            else 
+            {
+                this.isUnlocked = false;
+            }
         }
     }
 }

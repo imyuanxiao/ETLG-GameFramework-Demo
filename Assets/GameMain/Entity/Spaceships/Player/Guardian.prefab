@@ -135,9 +135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6655426501389060699, guid: a52e9d098af84ec40b607a51bbf8cab9, type: 3}
   missilePrefab: {fileID: 4361546411781682957, guid: d9b34689be1d02746a4c6f93c40d7fe6, type: 3}
-  laserPrefab: {fileID: 0}
-  IonBeam: {fileID: 0}
-  Railgun: {fileID: 0}
+  laserPrefab: {fileID: 6455808252264147316, guid: 1c367dc4b9d07db45a0f89a8e84c0078, type: 3}
+  ionBeamPrefab: {fileID: 0}
+  railgunPrefab: {fileID: 7390059508560212517, guid: 5f0699274a9887e448baa59003c1e1e8, type: 3}
   bulletSpawnPosition: {fileID: 5230702684450065288}
 --- !u!114 &4132447693472120086
 MonoBehaviour:
@@ -182,7 +182,6 @@ MonoBehaviour:
   canRespawn: 0
   respawnCnt: 0
   AISpaceshipPrefab: {fileID: 1291534650732609273, guid: ecb298e5216777846b80187fe411961d, type: 3}
-  AISpawnPoints: []
 --- !u!1 &7105302204338113270
 GameObject:
   m_ObjectHideFlags: 0

@@ -481,6 +481,13 @@ namespace ETLG.Data
             return targetList;
         }
 
+        public Dictionary<int, int> GetAllSkills()
+        {   
+            // TODO : Uncomment this line of code
+            // return this.playerSkills;
+            return null;
+        }
+
         public void UpdateAttrsByAllSkills(int Type)
         {
             PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();

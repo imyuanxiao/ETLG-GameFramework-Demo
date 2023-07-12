@@ -12,8 +12,8 @@ namespace ETLG
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject missilePrefab;
         [SerializeField] private GameObject laserPrefab;
-        [SerializeField] private GameObject IonBeam;
-        [SerializeField] private GameObject Railgun;
+        [SerializeField] private GameObject ionBeamPrefab;
+        [SerializeField] private GameObject railgunPrefab;
 
         [SerializeField] private Transform bulletSpawnPosition;
 
@@ -44,29 +44,77 @@ namespace ETLG
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
             }
-            // fire missile
+            // fire equiped weapon
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Transform target = null;
-                if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle || GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
+                FireMissile();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                FireLaser();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                FireRailgun();
+            }
+        }
+
+        private void FireMissile()
+        {
+            Transform target = null;
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle || GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
+            {
+                target = BattleManager.Instance.bossEnemyEntity.gameObject.transform;
+                if (target != null)
                 {
-                    target = BattleManager.Instance.bossEnemyEntity.gameObject.transform;
-                    if (target != null)
-                    {
-                        GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
-                        InitPlayerMissile(missile.GetComponent<Missile>(), target);
-                    }
-                }
-                else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
-                {
-                    target = FindObjectOfType<BasicEnemyController>()?.gameObject.transform;
-                    if (target != null)
-                    {
-                        GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
-                        InitPlayerMissile(missile.GetComponent<Missile>(), target);
-                    }
+                    GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    InitPlayerMissile(missile.GetComponent<Missile>(), target);
                 }
             }
+            else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            {
+                target = FindObjectOfType<BasicEnemyController>()?.gameObject.transform;
+                if (target != null)
+                {
+                    GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    InitPlayerMissile(missile.GetComponent<Missile>(), target);
+                }
+            }
+        }
+
+        private void FireLaser()
+        {
+            Transform target = null;
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle || GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
+            {
+                target = BattleManager.Instance.bossEnemyEntity.gameObject.transform;
+                if (target != null)
+                {
+                    GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    InitPlayerLaser(laser.GetComponent<Laser>(), target);
+                }
+            }
+            else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            {
+                target = FindObjectOfType<BasicEnemyController>()?.gameObject.transform;
+                if (target != null)
+                {
+                    GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    InitPlayerLaser(laser.GetComponent<Laser>(), target);
+                }
+            }
+        }
+
+        private void FireRailgun()
+        {
+            for (int i=0; i < 3; i++)
+            {
+                GameObject railgun = ObjectPoolManager.SpawnObject(railgunPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                
+                float angle = 360f - 10 * (3 / 2) + 10 * i;
+                railgun.transform.eulerAngles = new Vector3(0, angle, 0);
+                InitPlayerRailgun(railgun.GetComponent<Railgun>());
+            }   
         }
 
         private void InitPlayerBullet(Bullet bullet)
@@ -88,6 +136,27 @@ namespace ETLG
             missile.damage = (int) spaceshipData.Firepower + (int) missileData.Damage;
             missile.flyingDirection = missile.transform.forward;
             missile.flyingSpeed = missileData.Speed * 160;
+        }
+
+        private void InitPlayerLaser(Laser laser, Transform target)
+        {
+            ProjectileData laserData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int) EnumEntity.Laser);
+            PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+
+            laser.transform.LookAt(target);
+            laser.damage = (int) spaceshipData.Firepower + (int) laserData.Damage;
+            laser.flyingDirection = laser.transform.forward;
+            laser.flyingSpeed = 4000;
+        }
+
+        private void InitPlayerRailgun(Railgun railgun)
+        {
+            ProjectileData railgunData = GameEntry.Data.GetData<DataProjectile>().GetProjectileData((int) EnumEntity.Railgun);
+            PlayerCalculatedSpaceshipData spaceshipData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+        
+            railgun.damage = (int) spaceshipData.Firepower + (int) railgunData.Damage;
+            railgun.flyingDirection = railgun.transform.forward;
+            railgun.flyingSpeed = 4000;
         }
 
         private void InitPlayerIonBeam()
