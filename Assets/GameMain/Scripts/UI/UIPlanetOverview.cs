@@ -11,11 +11,13 @@ namespace ETLG
 {
     public class UIPlanetOverview : UGuiFormEx
     {
+        public Button challengeButton;
         public Button exploreButton;
         public Button cancelButton;
         public TextMeshProUGUI planetName;
         public TextMeshProUGUI planetType;
         public TextMeshProUGUI overview;
+        public Image progressBar;
         private PlanetBase currentPlanet = null;
 
         protected override void OnInit(object userData)
@@ -24,6 +26,13 @@ namespace ETLG
 
             exploreButton.onClick.AddListener(OnExploreButtonClicked);
             cancelButton.onClick.AddListener(OnCancelButtonClicked);
+            challengeButton.onClick.AddListener(OnChallengeButtonClicked);
+        }
+
+        private void OnChallengeButtonClicked()
+        {
+            string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId).Type;
+            GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("IntermidateBattle", planetType));
         }
 
         private void OnExploreButtonClicked()
@@ -56,6 +65,7 @@ namespace ETLG
             planetName.text = data.Name;
             planetType.text = data.Type;
             overview.text = data.Overview;
+            progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

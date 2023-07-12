@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ETLG.Data;
 using GameFramework.Event;
@@ -31,6 +32,7 @@ namespace ETLG
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
+            GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
 
             MapManager.Instance.focusedPlanet = null;
 
@@ -43,6 +45,17 @@ namespace ETLG
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
         }
 
+        private void OnEnterBattle(object sender, GameEventArgs e)
+        {
+            EnterBattleEventArgs ne = (EnterBattleEventArgs) e;
+            if (ne == null)
+                Log.Error("Invalid Event [EnterBattleEventArgs]");
+            
+            procedureOwner.SetData<VarString>("BattleType", ne.BattleType);
+            procedureOwner.SetData<VarString>("BossType", ne.BossType);
+            
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+        }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
@@ -83,9 +96,9 @@ namespace ETLG
             else if (Input.GetKeyDown(KeyCode.V))
             {
                 procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
-                procedureOwner.SetData<VarString>("BossType", "CloudComputing");
+                // procedureOwner.SetData<VarString>("BossType", "CloudComputing");
                 // procedureOwner.SetData<VarString>("BossType", "Cybersecurity");
-                // procedureOwner.SetData<VarString>("BossType", "AI");
+                procedureOwner.SetData<VarString>("BossType", "AI");
                 // procedureOwner.SetData<VarString>("BossType", "DataScience");
                 // procedureOwner.SetData<VarString>("BossType", "Blockchain");
                 // procedureOwner.SetData<VarString>("BossType", "IoT");
@@ -138,6 +151,7 @@ namespace ETLG
             // 取消订阅事件
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
+            GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
 
             if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
             {

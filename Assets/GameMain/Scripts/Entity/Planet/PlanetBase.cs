@@ -13,6 +13,7 @@ namespace ETLG
         public bool isFocused;
         public int PlanetId;
         public Transform focusPoint;
+        public GameObject UIPlanetTag;
         public GameObject[] landingPoints;
 
         private void OnEnable() 
@@ -36,6 +37,8 @@ namespace ETLG
             {
                 ActiveLandingPoint(false);
             }
+            if (UIPlanetTag != null)
+                UIPlanetTag.SetActive(true);
         }
 
         private void OnFocused(object sender, GameEventArgs e)
@@ -49,6 +52,8 @@ namespace ETLG
             {
                 ActiveLandingPoint(true);
             }
+            if (UIPlanetTag != null)
+                UIPlanetTag.SetActive(false);
         }
 
         private void ActiveLandingPoint(bool state)
