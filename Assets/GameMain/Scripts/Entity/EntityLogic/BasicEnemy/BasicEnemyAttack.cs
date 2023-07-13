@@ -62,6 +62,7 @@ namespace ETLG
                                                                 bulletSpawnPosition.rotation, 
                                                                 ObjectPoolManager.PoolType.GameObject);
                     InitBasicEnemyBullet(bullet.GetComponent<Bullet>());
+                    GameEntry.Sound.PlaySound(EnumSound.HandGun2);
                     elapsedTime = 0f;
                 }
                 yield return null;

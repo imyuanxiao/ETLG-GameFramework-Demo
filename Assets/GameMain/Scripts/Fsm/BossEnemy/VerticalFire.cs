@@ -93,6 +93,7 @@ namespace ETLG
                     GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, spawnPoint.position, spawnPoint.rotation, 
                                                                 ObjectPoolManager.PoolType.GameObject);
                     bossEnemyAttack.InitBossEnemyBullet(bullet.GetComponent<Bullet>(), new Vector3(0, 0, -1));
+                    GameEntry.Sound.PlaySound(EnumSound.HandGun2);
                     bulletCnt++;
                 }
             }

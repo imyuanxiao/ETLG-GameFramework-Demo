@@ -47,6 +47,8 @@ namespace ETLG
             GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
             LoadBossEnemy();
+
+            GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);
         }
 
         private void LoadBossEnemy()

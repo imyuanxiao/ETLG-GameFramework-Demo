@@ -43,7 +43,7 @@ namespace ETLG
             GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, laserSpawnPos.position, laserSpawnPos.rotation, ObjectPoolManager.PoolType.GameObject);
             laser.transform.LookAt(target.transform);
             bossEnemyAttack.InitBossEnemyLaser(laser.GetComponent<Laser>(), laser.transform.forward);
-            // ChangeState<VerticalFire>(fsm);
+            GameEntry.Sound.PlaySound(EnumSound.LaserGunSalve);
             ReturnToState(fsm);
         }
 

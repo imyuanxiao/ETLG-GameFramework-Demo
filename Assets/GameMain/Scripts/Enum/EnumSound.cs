@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-11 19:13:19.734
+// 生成时间：2023-07-13 12:02:27.575
 //------------------------------------------------------------
 
 namespace ETLG
@@ -30,5 +30,35 @@ namespace ETLG
         /// ui_sound_forward
         /// </summary>
         ui_sound_forward = 30008,
+
+        /// <summary>
+        /// BulletImpact14
+        /// </summary>
+        BulletImpact14 = 31000,
+
+        /// <summary>
+        /// Cannonimpact9
+        /// </summary>
+        Cannonimpact9 = 31001,
+
+        /// <summary>
+        /// Flaregun
+        /// </summary>
+        Flaregun = 31002,
+
+        /// <summary>
+        /// RailgunShot6
+        /// </summary>
+        RailgunShot6 = 31003,
+
+        /// <summary>
+        /// HandGun2
+        /// </summary>
+        HandGun2 = 31004,
+
+        /// <summary>
+        /// LaserGunSalve
+        /// </summary>
+        LaserGunSalve = 31005,
     }
 }

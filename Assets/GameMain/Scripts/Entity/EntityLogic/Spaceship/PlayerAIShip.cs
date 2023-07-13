@@ -68,6 +68,7 @@ namespace ETLG
             GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, missileSpawnPoint.position, gameObject.transform.rotation, ObjectPoolManager.PoolType.GameObject);
             SetMissileTarget();
             InitPlayerAIMissile(missile.GetComponent<Missile>(), target);
+            GameEntry.Sound.PlaySound(EnumSound.Flaregun);
         }
 
         private void InitPlayerAIMissile(Missile missile, Transform target)

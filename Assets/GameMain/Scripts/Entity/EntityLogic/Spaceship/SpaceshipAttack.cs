@@ -43,6 +43,7 @@ namespace ETLG
             {
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
+                GameEntry.Sound.PlaySound(EnumSound.BulletImpact14);
             }
             // fire equiped weapon
             if (Input.GetKeyDown(KeyCode.E))
@@ -69,6 +70,7 @@ namespace ETLG
                 {
                     GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                     InitPlayerMissile(missile.GetComponent<Missile>(), target);
+                    GameEntry.Sound.PlaySound(EnumSound.Flaregun);
                 }
             }
             else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
@@ -78,6 +80,7 @@ namespace ETLG
                 {
                     GameObject missile = ObjectPoolManager.SpawnObject(missilePrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                     InitPlayerMissile(missile.GetComponent<Missile>(), target);
+                    GameEntry.Sound.PlaySound(EnumSound.Flaregun);
                 }
             }
         }
@@ -92,6 +95,7 @@ namespace ETLG
                 {
                     GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                     InitPlayerLaser(laser.GetComponent<Laser>(), target);
+                    GameEntry.Sound.PlaySound(EnumSound.Flaregun);
                 }
             }
             else if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
@@ -101,6 +105,7 @@ namespace ETLG
                 {
                     GameObject laser = ObjectPoolManager.SpawnObject(laserPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                     InitPlayerLaser(laser.GetComponent<Laser>(), target);
+                    GameEntry.Sound.PlaySound(EnumSound.Flaregun);
                 }
             }
         }
@@ -114,6 +119,7 @@ namespace ETLG
                 float angle = 360f - 10 * (3 / 2) + 10 * i;
                 railgun.transform.eulerAngles = new Vector3(0, angle, 0);
                 InitPlayerRailgun(railgun.GetComponent<Railgun>());
+                GameEntry.Sound.PlaySound(EnumSound.RailgunShot6);
             }   
         }
 

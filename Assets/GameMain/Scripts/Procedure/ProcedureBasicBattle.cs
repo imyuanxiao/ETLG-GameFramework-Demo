@@ -53,6 +53,8 @@ namespace ETLG
 
             // BattleManager.Instance.SetEnemiesData();
             BattleManager.Instance.SpawnBasicEnemies();
+
+            GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);
         }
 
         private void OnBasicBattleWin(object sender, GameEventArgs e)

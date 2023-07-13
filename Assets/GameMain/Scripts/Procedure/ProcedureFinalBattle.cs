@@ -46,6 +46,8 @@ namespace ETLG
 
             bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.FinalBoss);
             entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
+        
+            GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);
         }
 
         private void onBossEnemyShowSuccess(Entity entity)

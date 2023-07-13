@@ -99,6 +99,7 @@ namespace ETLG
                 totalBulletNum--;
                 bullet.transform.eulerAngles = new Vector3(0, angle, 0);
                 bossEnemyAttack.InitBossEnemyBullet(bullet.GetComponent<Bullet>(), bullet.transform.forward);
+                GameEntry.Sound.PlaySound(EnumSound.HandGun2);
 
                 if (bulletCnt == bulletNum) { changeDirection = true; }
                 if (bulletCnt == 0) { changeDirection = false; }
