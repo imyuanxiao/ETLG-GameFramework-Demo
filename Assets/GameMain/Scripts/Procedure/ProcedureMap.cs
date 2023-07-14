@@ -46,6 +46,7 @@ namespace ETLG
         }
 
         // called when player clicked the challenge button on UIPlanetOverview
+        // or player clicked the explore button on UIPlanetOverview and trigger random battle
         private void OnEnterBattle(object sender, GameEventArgs e)
         {
             EnterBattleEventArgs ne = (EnterBattleEventArgs) e;

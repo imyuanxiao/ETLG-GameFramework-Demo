@@ -37,6 +37,17 @@ namespace ETLG
 
         private void OnExploreButtonClicked()
         {
+            // int enterBasicBattleProbablity = 3;
+            // determine if entering basic battle
+            // int r = UnityEngine.Random.Range(0, 10);
+            // if (r < enterBasicBattleProbablity)
+            // {
+            //     // Enter Basic Battle
+            //     GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", ""));
+            //     this.Close();
+            //     return;
+            // }
+
             MapManager.Instance.focusedPlanet = currentPlanet.gameObject;
             GameEntry.Data.GetData<DataPlanet>().currentPlanetID = currentPlanet.PlanetId;
             currentPlanet.isFocused = true;
