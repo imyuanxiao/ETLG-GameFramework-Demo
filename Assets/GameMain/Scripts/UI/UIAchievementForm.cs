@@ -51,7 +51,7 @@ namespace ETLG
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             entityLoader = EntityLoader.Create(this);
-
+            
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
         }
 
@@ -59,10 +59,13 @@ namespace ETLG
         {
             base.OnOpen(userData);
             Log.Debug("Open Achievement");
-            showContent();
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
-            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
+            if (!dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(5001))
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
+            }
+            showContent();
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {

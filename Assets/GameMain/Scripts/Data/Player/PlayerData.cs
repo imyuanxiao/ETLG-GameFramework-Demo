@@ -654,11 +654,18 @@ namespace ETLG.Data
         }
         public int GetUnlockedAchievementCount()
         {
-            return playerAchievement.Count;
+            int result = 0;
+            foreach(KeyValuePair<int,int> pair in playerAchievement)
+            {
+                if(dataAchievement.isMaxLevel(pair.Key,pair.Value))
+                {
+                    result++;
+                }
+            }
+            return result;
         }
         public int GetPlayerAchievementPoints()
         {
-            
             int result = 0;
             foreach(KeyValuePair<int,int> pair in playerAchievement)
             {
