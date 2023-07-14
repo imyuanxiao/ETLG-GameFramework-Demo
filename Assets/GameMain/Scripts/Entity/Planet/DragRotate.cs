@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ETLG
 {
@@ -20,6 +21,17 @@ namespace ETLG
 
         private void OnMouseDown()
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                // 检测是否被其他UI遮挡，被遮挡时不能drag
+                bool isRaycastOverUI = EventSystem.current.IsPointerOverGameObject();
+
+                if (isRaycastOverUI)
+                {
+                    return;
+                }
+            }
+
             isDragging = true;
             previousMousePosition = Input.mousePosition;
         }

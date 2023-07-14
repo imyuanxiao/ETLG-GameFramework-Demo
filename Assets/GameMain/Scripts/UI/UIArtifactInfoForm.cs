@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
@@ -28,12 +29,16 @@ namespace ETLG
         public TextMeshProUGUI ArtifactNumber = null;
         public TextMeshProUGUI ArtifactDescription = null;
 
+        private bool isHover = false;
+        private object userData;
+
 
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+            this.userData = userData;
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -58,7 +63,6 @@ namespace ETLG
 
             base.OnOpen(userData);
 
-
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -67,7 +71,33 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
 
         }
- 
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            isHover = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            isHover = false;
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+            if (isHover)
+            {
+                OnOpen(userData);
+                Debug.Log("hover了");
+            }
+            else
+            {
+                //OnClose(true,userData);
+                //GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            }
+        }
+
 
     }
 }

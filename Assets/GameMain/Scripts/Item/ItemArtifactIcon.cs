@@ -24,6 +24,10 @@ namespace ETLG
         public Button iconButton;
 
         public TextMeshProUGUI artifactNumber;
+        public int artifactNum;
+
+        public delegate void ItemClickedEventHandler(int artifactID, int num, int Type);
+        public event ItemClickedEventHandler OnItemClicked;
 
         public int Type { get; private set; }
 
@@ -40,29 +44,19 @@ namespace ETLG
 
         private void OnIconButtonClick()
         {
-
-            if (Type == Constant.Type.TRADE_PLAYER_NPC)
-            {
-                Log.Debug("trade Player to NPC");
-            }
-
-            if (Type == Constant.Type.TRADE_NPC_PLAYER)
-            {
-                Log.Debug("trade NPC to Player");
-            }
-
-
+            //实现交易，数据还没同步
+            OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
 
-            Vector3 offset = new Vector3(-10f, 0f, 0f);
+            Vector3 offset = new Vector3(0f, 0f, 0f);
 
-            if(Type == Constant.Type.TRADE_NPC_PLAYER)
+            if (Type == Constant.Type.TRADE_NPC_PLAYER)
             {
-                offset = new Vector3(400f, -130f, 0f);
+                offset = new Vector3(400f, -100f, 0f);
             }
 
             Vector3 newPosition = itemPosition + offset;
@@ -86,13 +80,14 @@ namespace ETLG
 
         }
 
-        public void SetArtifactData(int ArtifactID, int NUm, int Type)
+        public void SetArtifactData(int ArtifactID, int Num, int Type)
         {
             this.CurrentArtifactID = ArtifactID;
 
             this.Type = Type;
 
-            this.artifactNumber.text = NUm.ToString();
+            this.artifactNumber.text = Num.ToString();
+            this.artifactNum = Num;
 
             string texturePath = AssetUtility.GetArtifactIcon(ArtifactID.ToString());
 

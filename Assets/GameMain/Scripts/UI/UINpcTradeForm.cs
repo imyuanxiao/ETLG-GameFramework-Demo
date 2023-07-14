@@ -22,9 +22,14 @@ namespace ETLG
 
         public TextMeshProUGUI player_money = null;
 
+        private Dictionary<int, int> playerArtifacts;
+        private Dictionary<int, int> npcArtifacts;
+
 
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
+
+        private int tradeNum;
 
         private bool refresh;
 
@@ -34,6 +39,8 @@ namespace ETLG
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
 
             closeButton.onClick.AddListener(OnCloseButtonClick);
         }
@@ -50,6 +57,7 @@ namespace ETLG
             base.OnUpdate(elapseSeconds, realElapseSeconds);
             if (refresh)
             {
+                clearAllArtifacts();
                 showContent();
                 refresh = false;
             }
@@ -64,8 +72,8 @@ namespace ETLG
 
             player_money.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
 
-            ShowPlayerArtifactIcons(PlayerContainer, Constant.Type.ARTIFACT_TRADE);
-            ShowNPCArtifactIcons(NpcContainer);
+            ShowPlayerArtifactIcons();
+            ShowNPCArtifactIcons();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -82,20 +90,12 @@ namespace ETLG
         }
 
 
-        private void ShowPlayerArtifactIcons(Transform container, int Type)
+        private void ShowPlayerArtifactIcons()
         {
-
-            Dictionary<int, int> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Type);
-
-            int i = 0;
-
             foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
-
-                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
-                i++;
 
                 if (ArtifactID == (int)EnumArtifact.Money)
                 {
@@ -104,32 +104,53 @@ namespace ETLG
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
-                    item.transform.SetParent(container, false);
-                    item.transform.localScale = Vector3.one;
-                    item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + offset;
+                    item.transform.SetParent(PlayerContainer, false);
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_PLAYER_NPC);
+                    item.GetComponent<ItemArtifactIcon>().OnItemClicked += OnItemClickedFromIcon;
                 });
-
             }
         }
 
-
-        private void ShowNPCArtifactIcons(Transform container)
+        private void tradeArtifact(int artifactID, int tradeNum, int type)
         {
-            Dictionary<int, int> npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
+            if (type == Constant.Type.TRADE_NPC_PLAYER)
+            {
+                playerArtifacts.Add(artifactID, tradeNum);
+                npcArtifacts.Remove(artifactID);
+            }
+            else
+            {
+                npcArtifacts.Add(artifactID, tradeNum);
+                playerArtifacts.Remove(artifactID);
+            }
+        }
 
-            int i = 0;
+        private void OnItemClickedFromIcon(int artifactID, int num, int type)
+        {
+            refresh = true;
+            //改值
+            tradeNum = num;
+
+            //数量UI不能超过最大值
+            tradeArtifact(artifactID, tradeNum, type);
+
+
+        }
+
+        private void tradeArtifact(int type)
+        {
+
+        }
+
+        private void ShowNPCArtifactIcons()
+        {
+            
 
             foreach (KeyValuePair<int, int> kvp in npcArtifacts)
             {
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                Vector3 offset = new Vector3((i % 4) * 100f, (i / 4) * (-110f), 0f);
-
-                i++;
-
                 if (ArtifactID == (int)EnumArtifact.Money)
                 {
                     continue;
@@ -137,16 +158,25 @@ namespace ETLG
 
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
-                    item.transform.SetParent(container, false);
-                    item.transform.localScale = Vector3.one;
-                    item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + offset;
+                    item.transform.SetParent(NpcContainer, false);
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_NPC_PLAYER);
+                    item.GetComponent<ItemArtifactIcon>().OnItemClicked += OnItemClickedFromIcon;
                 });
-
             }
         }
+        private void clearAllArtifacts()
+        {
+            for (int i = NpcContainer.childCount - 1; i >= 0; i--)
+            {
+                Destroy(NpcContainer.GetChild(i).gameObject);
+            }
 
+            for (int i = PlayerContainer.childCount - 1; i >= 0; i--)
+            {
+                Destroy(PlayerContainer.GetChild(i).gameObject);
+            }
+
+        }
     }
 }
 
