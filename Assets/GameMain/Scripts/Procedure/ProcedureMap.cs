@@ -45,6 +45,7 @@ namespace ETLG
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
         }
 
+        // called when player clicked the challenge button on UIPlanetOverview
         private void OnEnterBattle(object sender, GameEventArgs e)
         {
             EnterBattleEventArgs ne = (EnterBattleEventArgs) e;
@@ -90,6 +91,7 @@ namespace ETLG
             if (Input.GetKeyDown(KeyCode.C))
             {
                 procedureOwner.SetData<VarString>("BattleType", "BasicBattle");
+                procedureOwner.SetData<VarString>("BossType", "");
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
             //  2. switch to intermidate battle (mini boss battle)
@@ -131,15 +133,6 @@ namespace ETLG
                         GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview).Close();
                     }
                     GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetOverview, planet.GetComponent<PlanetBase>());
-                    
-
-                    // MapManager.Instance.focusedPlanet = planet;
-                    // planet.GetComponent<PlanetBase>().isFocused = true;
-                    // GameEntry.Data.GetData<DataPlanet>().currentPlanetID = planet.GetComponent<PlanetBase>().PlanetId;
-
-                    // GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(planet.GetComponent<PlanetBase>()));
-
-                    // changeToProcedurePlanet = true;
                 }
             }
         }
@@ -159,7 +152,7 @@ namespace ETLG
             }
             if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlanetOverview))
             {
-                GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview);
+                GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview).Close();
             }
             // 停止音乐
             GameEntry.Sound.StopMusic();
