@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ETLG.Data;
 using GameFramework.Event;
+
 using GameFramework.Localization;
 using GameFramework.Procedure;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace ETLG
 
             // subscribe events
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-            
+
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
 
@@ -51,7 +52,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
             GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
 
-
+            GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId,OnAchievementPoPUp);
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
 
@@ -72,7 +73,7 @@ namespace ETLG
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-            
+
             if (changeScene)
             {
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
@@ -98,11 +99,11 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
 
-
+            GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
-            
+
 
         }
 
@@ -195,11 +196,11 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if(ne.Type == Constant.Type.UI_OPEN)
+            if (ne.Type == Constant.Type.UI_OPEN)
             {
                 artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
-            else if(ne.Type == Constant.Type.UI_CLOSE)
+            else if (ne.Type == Constant.Type.UI_CLOSE)
             {
                 if (artifactInfoUIID != null)
                 {
@@ -306,11 +307,24 @@ namespace ETLG
             }
             moduleInfoUIID = null;
         }
-
-
-
-
-
+        public void OnAchievementPoPUp(object sender, GameEventArgs e)
+        {
+            AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
+            if (ne == null)
+                return;
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (achievementUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)achievementUIID);
+                }
+                achievementUIID = null;
+            }
+        }
     }
 }
 

@@ -15,15 +15,23 @@ namespace ETLG
     {
         private DataAchievement dataAchievement;
         public TextMeshProUGUI acheivementName = null;
+        public Button closeButton = null;
+
+        public Vector3 UIPosition { get; set; }
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+            closeButton.onClick.AddListener(OncloseButtonClick);
         }
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
             acheivementName.text = dataAchievement.GetDataById(dataAchievement.cuurrentPopUpId).Name.ToString();
+        }
+        private void OncloseButtonClick()
+        {
+            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(Constant.Type.UI_CLOSE));
         }
     }
 }
