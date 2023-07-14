@@ -1,10 +1,8 @@
 using ETLG.Data;
 using GameFramework.Event;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 namespace ETLG
 {
@@ -21,7 +19,7 @@ namespace ETLG
         public TextMeshProUGUI s_name_8 = null;
         public TextMeshProUGUI s_name_9 = null;
         public TextMeshProUGUI s_name_10 = null;
-
+        public TextMeshProUGUI s_points = null;
         public TextMeshProUGUI s_unlockedNumber = null;
         public TextMeshProUGUI s_total = null;
         public Transform content_1 = null;
@@ -36,10 +34,9 @@ namespace ETLG
         public Transform content_10 = null;
 
         // initial attrs
-       // PlayerAchievementData[] playerAchievementDatas;
-       // private Dictionary<int, List<PlayerAchievementData>> playerAchievementData;
+
         private DataPlayer dataPlayer;
-        DataAchievement dataAchievement;
+        private DataAchievement dataAchievement;
         // 实体加载器
         private EntityLoader entityLoader;
 
@@ -54,7 +51,8 @@ namespace ETLG
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             entityLoader = EntityLoader.Create(this);
-            //获取成就数据
+
+            GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
         }
 
         protected override void OnOpen(object userData)
@@ -64,6 +62,7 @@ namespace ETLG
             showContent();
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -78,6 +77,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
         }
         private void showContent()
         {
@@ -93,76 +93,105 @@ namespace ETLG
             s_name_9.text = "Achievement";
             s_name_10.text = "Hidden";
 
-            s_unlockedNumber.text = dataPlayer.GetPlayerData().getUnlockedAchievementCount().ToString();
+            s_unlockedNumber.text = dataPlayer.GetPlayerData().GetUnlockedAchievementCount().ToString();
             s_total.text=dataAchievement.GetAchievementCount().ToString();
             AchievementData[] achievementDatas = dataAchievement.GetAllNewData();
+            Dictionary<int, int> playerAchievement = dataPlayer.GetPlayerData().GetPlayerAchievement();
+            s_points.text = dataPlayer.GetPlayerData().GetPlayerAchievementPoints().ToString();
+            //show locked achievements
             foreach (AchievementData data in achievementDatas)
             {
-                if (data.TypeId == Constant.Type.ACHV_QUIZ)
+                
+                if(playerAchievement.ContainsKey(data.Id) && dataAchievement.isMaxLevel(data.Id,playerAchievement[data.Id]))
                 {
-                    showAchievements(content_1, data);
+                    continue;
                 }
-                else if (data.TypeId == Constant.Type.ACHV_RESOURCE)
-                {
-                    showAchievements(content_2, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_KNOWLEDGE_BASE)
-                {
-                    showAchievements(content_3, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_INTERSTELLAR)
-                {
-                    showAchievements(content_4, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_BATTLE)
-                {
-                    showAchievements(content_5, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_SPACESHIP)
-                {
-                    showAchievements(content_6, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_LOGIN)
-                {
-                    showAchievements(content_7, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_LEADERSHIP)
-                {
-                    showAchievements(content_8, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_ACHIEVEMENT)
-                {
-                    showAchievements(content_9, data);
-                }
-                else if (data.TypeId == Constant.Type.ACHV_HIDDEN)
-                {
-                    showAchievements(content_10, data);
-                }
+                showAchievementByType(data);
             }
-        }
-        private void showAchievements(Transform container, AchievementData achievementData)
-        {
-            //不显示没有解锁的隐藏成就
-            if (achievementData.TypeId != Constant.Type.ACHV_HIDDEN && !dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(achievementData.Id))
+            //show unlocked achievements
+            foreach(KeyValuePair<int,int> achievement in playerAchievement)
             {
-                ShowItem<ItemAchievementIcon>(EnumItem.AchievementIcon, (item) =>
-                {
-                    item.transform.SetParent(container, false);
-                    item.GetComponent<ItemAchievementIcon>().SetAchievementData(achievementData, container);
-                });
+                if(!dataAchievement.isMaxLevel(achievement.Key, achievement.Value))
+                    {
+                    continue;
+                }
+                showAchievementByType(dataAchievement.GetDataById(achievement.Key));
             }
         }
-        public void updateAchievement()
+        private void showAchievementByType(AchievementData data)
         {
-           
+            switch (data.TypeId)
+            {
+                case Constant.Type.ACHV_QUIZ:
+                    showAchievements(content_1, data.Id);
+                    break;
+                case Constant.Type.ACHV_RESOURCE:
+                    showAchievements(content_2, data.Id);
+                    break;
+                case Constant.Type.ACHV_KNOWLEDGE_BASE:
+                    showAchievements(content_3, data.Id);
+                    break;
+                case Constant.Type.ACHV_INTERSTELLAR:
+                    showAchievements(content_4, data.Id);
+                    break;
+                case Constant.Type.ACHV_BATTLE:
+                    showAchievements(content_5, data.Id);
+                    break;
+                case Constant.Type.ACHV_SPACESHIP:
+                    showAchievements(content_6, data.Id);
+                    break;
+                case Constant.Type.ACHV_LOGIN:
+                    showAchievements(content_7, data.Id);
+                    break;
+                case Constant.Type.ACHV_LEADERSHIP:
+                    showAchievements(content_8, data.Id);
+                    break;
+                case Constant.Type.ACHV_ACHIEVEMENT:
+                    showAchievements(content_9, data.Id);
+                    break;
+                // 不显示没有解锁的隐藏成就
+                case Constant.Type.ACHV_HIDDEN when dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(data.Id):
+                    showAchievements(content_10, data.Id);
+                    break;
+                default:
+                    break;
+            }
+
         }
-       
+        private void showAchievements(Transform container,int id)
+        {
+            ShowItem<ItemAchievementIcon>(EnumItem.AchievementIcon, (item) =>
+            {
+                item.transform.SetParent(container, false);
+                item.GetComponent<ItemAchievementIcon>().SetAchievementData(id, container);
+            });
+        }
+        private void OnAchievementPoPUp(object sender, GameEventArgs e)
+        {
+            AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
+            if (ne == null)
+                return;
+            dataAchievement.cuurrentPopUpId = ne.achievementId;
+            dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, GetNextLevel(ne.achievementId, ne.count));
+        }
+        private int GetNextLevel(int Id,int count)
+        {
+            AchievementData achievementData = dataAchievement.GetDataById(Id);
+            if(dataAchievement==null)
+            {
+                return 0;
+            }
+            int[] Count = achievementData.Count;
+            for (int i=0;i< Count.Length;i++)
+            {
+               if(count< Count[i])
+                {
+                    return i;
+                }
+            }
+
+            return Count.Length-1;
+        }
+
     }
-
-
-
-
-
-
-
 }

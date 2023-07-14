@@ -40,9 +40,9 @@ namespace ETLG.Data
 
         //Player Achievement Data
         private Dictionary<int,int> playerAchievement { get; set; }
-  
-
-    public PlayerData (SpaceshipData spaceshipData)
+        private DataAchievement dataAchievement { get; set; }
+        
+        public PlayerData (SpaceshipData spaceshipData)
         {
             initialSpaceship = spaceshipData;
             playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
@@ -51,6 +51,7 @@ namespace ETLG.Data
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+            dataAchievement= GameEntry.Data.GetData<DataAchievement>();
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
@@ -651,11 +652,25 @@ namespace ETLG.Data
         {
             return this.playerAchievement;
         }
-        public int getUnlockedAchievementCount()
+        public int GetUnlockedAchievementCount()
         {
             return playerAchievement.Count;
         }
-        public void updatePlayerAchievementData(int id,int level)
+        public int GetPlayerAchievementPoints()
+        {
+            
+            int result = 0;
+            foreach(KeyValuePair<int,int> pair in playerAchievement)
+            {
+                AchievementData achievementData = dataAchievement.GetDataById(pair.Key);
+                for(int i=0;i<pair.Value;i++)
+                {
+                    result += achievementData.Points[i];
+                }
+            }
+            return result;
+        }
+        public void UpdatePlayerAchievementData(int id,int level)
         {
             if(playerAchievement.ContainsKey(id))
             {

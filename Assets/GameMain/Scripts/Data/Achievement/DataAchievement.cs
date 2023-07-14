@@ -93,6 +93,11 @@ namespace ETLG.Data
             }
             return result;
         }
+        public bool isMaxLevel(int id,int level)
+        {
+            AchievementData achievementData = GetDataById(id);
+            return level >= achievementData.Count.Length;
+        }
     }
 }
 

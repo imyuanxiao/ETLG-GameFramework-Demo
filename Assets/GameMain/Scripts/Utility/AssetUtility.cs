@@ -88,7 +88,12 @@ namespace ETLG
            // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
             return Utility.Text.Format("Artifacts/{0}", iconName);
         }
+        public static string GetUnLockAchievementIcon()
+        {
 
+            // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
+            return Utility.Text.Format("Achievement/{0}", "unlocked_treasure_chest");
+        }
 
     }
 }
