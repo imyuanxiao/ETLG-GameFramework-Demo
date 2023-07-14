@@ -97,11 +97,10 @@ namespace ETLG
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                if (ArtifactID == (int)EnumArtifact.Money)
+                if (ArtifactID == (int)EnumArtifact.Money|| Num == 0)
                 {
                     continue;
                 }
-
                 ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
                 {
                     item.transform.SetParent(PlayerContainer, false);
@@ -115,14 +114,43 @@ namespace ETLG
         {
             if (type == Constant.Type.TRADE_NPC_PLAYER)
             {
-                playerArtifacts.Add(artifactID, tradeNum);
-                npcArtifacts.Remove(artifactID);
+                if(!testArtifactExist(playerArtifacts, artifactID, tradeNum, Constant.Type.ADD))
+                {
+                    playerArtifacts.Add(artifactID, tradeNum);
+                }
+                testArtifactExist(npcArtifacts, artifactID, tradeNum, Constant.Type.SUB);
             }
             else
             {
-                npcArtifacts.Add(artifactID, tradeNum);
-                playerArtifacts.Remove(artifactID);
+                if (!testArtifactExist(npcArtifacts, artifactID, tradeNum, Constant.Type.ADD))
+                {
+                    npcArtifacts.Add(artifactID, tradeNum);
+                }
+                testArtifactExist(playerArtifacts, artifactID, tradeNum, Constant.Type.SUB);
             }
+        }
+
+        private bool testArtifactExist(Dictionary<int, int> artifacts, int artifactID, int tradeNum, int calculateType)
+        {
+            bool isExist = false;
+            foreach (KeyValuePair<int, int> kvp in artifacts)
+            {
+                if (kvp.Key == artifactID)
+                {
+                    int oldNum = kvp.Value;
+                    if (calculateType == Constant.Type.ADD)
+                    {
+                        artifacts[artifactID] = oldNum + tradeNum;
+                    }
+                    else
+                    {
+                        artifacts[artifactID] = oldNum - tradeNum;
+                    }
+                    isExist = true;
+                    return isExist;
+                }
+            }
+            return isExist;
         }
 
         private void OnItemClickedFromIcon(int artifactID, int num, int type)
@@ -137,21 +165,14 @@ namespace ETLG
 
         }
 
-        private void tradeArtifact(int type)
-        {
-
-        }
-
         private void ShowNPCArtifactIcons()
         {
-            
-
             foreach (KeyValuePair<int, int> kvp in npcArtifacts)
             {
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                if (ArtifactID == (int)EnumArtifact.Money)
+                if (ArtifactID == (int)EnumArtifact.Money|| Num == 0)
                 {
                     continue;
                 }
