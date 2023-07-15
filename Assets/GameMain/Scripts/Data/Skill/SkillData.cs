@@ -124,6 +124,14 @@ namespace ETLG.Data
             }
         }
 
+        public int UsageCount
+        {
+            get
+            {
+                return InitUsageCount(Id);
+            }
+        }
+
         // 构造方法
         public SkillData(DRSkill dRSkill, DRSkillLevel[] dRSkillLevels)
         {
@@ -238,6 +246,25 @@ namespace ETLG.Data
             }
             return result;
 
+        }
+
+        private int InitUsageCount(int id) 
+        {
+            switch (id)
+            {
+                case (int) EnumSkill.EdgeComputing:
+                    return 2;
+                case (int) EnumSkill.ElectronicWarfare:
+                    return 1;
+                case (int) EnumSkill.MedicalSupport:
+                    return 3;
+                case (int) EnumSkill.EnergyBoost:
+                    return 3;
+                case (int) EnumSkill.AdaptiveIntelligentDefense:
+                    return 1;
+                default:
+                    return 0;
+            }
         }
 
     }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 using TMPro;
 using ETLG.Data;
+using System;
 
 namespace ETLG
 {
@@ -17,7 +18,7 @@ namespace ETLG
         public TextMeshProUGUI nameLabel;
         public TextMeshProUGUI attack;
         public TextMeshProUGUI defense;
-        public Image[] skills;
+        public SkillUI[] skillsUI;
         private Health health;
         private int maxHealth;
         private int currentHealth;
@@ -69,5 +70,26 @@ namespace ETLG
         {
             base.OnClose(isShutdown, userData);
         }
+
+        public SkillUI GetSkillUIById(EnumSkill skillId)
+        {
+            foreach (var skillUI in this.skillsUI)
+            {
+                if (skillUI.skillId == skillId)
+                {
+                    return skillUI;
+                }
+            }
+            return null;
+        }
+    }
+
+    [Serializable]
+    public class SkillUI 
+    {
+        public EnumSkill skillId;
+        public TextMeshProUGUI usageCount;
+        public RawImage skillImage;
+        public Image skillMaskImage;
     }
 }

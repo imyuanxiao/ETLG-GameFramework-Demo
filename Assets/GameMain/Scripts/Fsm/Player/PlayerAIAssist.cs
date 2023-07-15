@@ -16,6 +16,8 @@ namespace ETLG
         private float timeElapsed;
         private SpaceshipSkill skill;
 
+        private UIBattleInfo uiBattleInfoForm;
+
         public PlayerAIAssist(SpaceshipSkill skill)
         {
             this.skill = skill;
@@ -44,6 +46,8 @@ namespace ETLG
                     skill.gameObject.transform.rotation, ObjectPoolManager.PoolType.GameObject);
                 obj.GetComponent<PlayerAIShip>().lastingTime = lastingTime;
             }
+
+            this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -58,6 +62,8 @@ namespace ETLG
         protected override void OnUpdate(IFsm<SpaceshipAttack> fsm, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(fsm, elapseSeconds, realElapseSeconds);
+
+            UpdateSkillUI(timeElapsed, lastingTime);
 
             if (changeToRespawnState)
             {
@@ -85,6 +91,12 @@ namespace ETLG
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)
         {
             base.OnDestroy(fsm);
+        }
+
+        private void UpdateSkillUI(float timeElapsed, float lastingTime)
+        {
+            SkillUI ui = this.uiBattleInfoForm.GetSkillUIById(EnumSkill.AdaptiveIntelligentDefense);
+            ui.skillMaskImage.fillAmount = 1 - timeElapsed / lastingTime;
         }
     }
 }

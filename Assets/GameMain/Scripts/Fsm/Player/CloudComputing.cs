@@ -18,6 +18,7 @@ namespace ETLG
         private float lastingTime;
         private float timeElapsed = 0f;
         private bool changeToRespawnState = false;
+        private UIBattleInfo uiBattleInfoForm = null;
 
         public CloudComputing()
         {
@@ -42,6 +43,8 @@ namespace ETLG
             skillAttack = (int) (originalAttack * boostScale);
             lastingTime = 5f;
             // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getSkillsByType("combat");
+
+            this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -66,6 +69,7 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower = (float) skillAttack;
                 timeElapsed += elapseSeconds;
+                UpdateSkillUI(timeElapsed, lastingTime);
             }
             else 
             {
@@ -84,11 +88,18 @@ namespace ETLG
             lastingTime = 5f;
             timeElapsed = 0f;
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower = originalAttack;
+            this.uiBattleInfoForm = null;
         }
 
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)
         {
             base.OnDestroy(fsm);
+        }
+
+        private void UpdateSkillUI(float timeElapsed, float lastingTime)
+        {
+            SkillUI ui = this.uiBattleInfoForm.GetSkillUIById(EnumSkill.EdgeComputing);
+            ui.skillMaskImage.fillAmount = 1 - timeElapsed / lastingTime;
         }
     }
 }

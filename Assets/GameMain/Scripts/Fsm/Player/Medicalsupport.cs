@@ -16,6 +16,7 @@ namespace ETLG
         private int recoveryCnt = 0;
         private float timeElapsed = 0;
         private bool changeToRespawnState;
+        private UIBattleInfo uiBattleInfoForm;
 
         public Medicalsupport(PlayerHealth health)
         {
@@ -36,6 +37,8 @@ namespace ETLG
             this.changeToRespawnState = false;
             this.timeElapsed = 0f;
             this.recoveryCnt = 0;
+
+            this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -50,6 +53,8 @@ namespace ETLG
         protected override void OnUpdate(IFsm<SpaceshipAttack> fsm, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(fsm, elapseSeconds, realElapseSeconds);
+
+            UpdateSkillUI(recoveryCnt, recoveryAmount);
 
             if (changeToRespawnState)
             {
@@ -88,6 +93,12 @@ namespace ETLG
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)
         {
             base.OnDestroy(fsm);
+        }
+
+        private void UpdateSkillUI(float timeElapsed, float lastingTime)
+        {
+            SkillUI ui = this.uiBattleInfoForm.GetSkillUIById(EnumSkill.MedicalSupport);
+            ui.skillMaskImage.fillAmount = 1 - timeElapsed / lastingTime;
         }
     }
 }

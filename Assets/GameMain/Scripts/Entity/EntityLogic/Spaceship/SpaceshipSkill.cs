@@ -37,6 +37,31 @@ namespace ETLG
             PrintSkillsInfo();
         }
 
+        public bool IsSkillReady(EnumSkill id) 
+        {
+            SkillInfo skillInfo = GetSkillInfoById(id);
+            return skillInfo.isUnlocked && skillInfo.usageCount > 0;
+        }
+
+        public SkillInfo GetSkillInfoById(EnumSkill id) 
+        {
+            Debug.Log("Target Id : " + id);
+            foreach (var skillInfo in skills)
+            {
+                Debug.Log("Current Id : " + skillInfo.skillEnumId);
+                if (skillInfo.skillEnumId == id) 
+                {
+                    return skillInfo;
+                }
+            }
+            return null;
+        }
+
+        public void ReduceUsageCount(EnumSkill id) 
+        {
+            GetSkillInfoById(id).usageCount--;
+        }
+
         private void PrintSkillsInfo()
         {
             foreach (var skillInfo in this.skills)
@@ -58,6 +83,7 @@ namespace ETLG
         public int skillId;
         public bool isUnlocked;
         public KeyCode keyCode;
+        public int usageCount;
 
         public SkillInfo(EnumSkill skillEnumId, KeyCode keyCode)
         {
@@ -69,6 +95,7 @@ namespace ETLG
             this.skillName = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).Name;
             this.skillId = (int) skillEnumId;
             this.skillEnumId = skillEnumId;
+            this.usageCount = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).UsageCount;
 
             if (skills.ContainsKey((int)skillEnumId))
             {
@@ -77,6 +104,34 @@ namespace ETLG
             else 
             {
                 this.isUnlocked = false;
+            }
+
+            // To be deleted
+            ForTestSkillOnly();
+        }
+
+        // To be deleted
+        private void ForTestSkillOnly()
+        {
+            switch (this.skillEnumId)
+            {
+                case EnumSkill.EdgeComputing:
+                    this.isUnlocked = true;
+                    break;
+                case EnumSkill.ElectronicWarfare:
+                    this.isUnlocked = true;
+                    break;
+                case EnumSkill.MedicalSupport:
+                    this.isUnlocked = true;
+                    break;
+                case EnumSkill.EnergyBoost:
+                    this.isUnlocked = true;
+                    break;
+                case EnumSkill.AdaptiveIntelligentDefense:
+                    this.isUnlocked = true;
+                    break;
+                default:
+                    break;
             }
         }
     }

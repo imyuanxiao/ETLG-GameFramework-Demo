@@ -474,9 +474,7 @@ namespace ETLG.Data
         
         public Dictionary<int, int> GetAllSkills()
         {   
-            // TODO : Uncomment this line of code
-            // return this.playerSkills;
-            return null;
+            return this.playerSkills;
         }
 
         public void UpdateAttrsByAllSkills(int Type)
