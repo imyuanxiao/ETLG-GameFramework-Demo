@@ -30,12 +30,16 @@ namespace ETLG.Data
 
         private DataArtifact dataArtifact { get; set; }
 
-        // Player Skill Data
-        private Dictionary<int, PlayerSkillData> playerSkills { get; set; }
+        // Player Skill - Skill ID, Skill Level,
+        // unexists = locked, level = 0 = unlocked, >= 1 = upgraded 
+        private Dictionary<int, int> playerSkills { get; set; }
+
         private DataSkill dataSkill { get; set; }
 
         //Player NPC Data
         private Dictionary<int, PlayerNPCData> playerNPCs { get; set; }
+
+
         private DataNPC dataNPC { get; set; }
 
         //Player Achievement Data
@@ -56,7 +60,7 @@ namespace ETLG.Data
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
 
-            playerSkills = new Dictionary<int, PlayerSkillData>();
+            playerSkills = new Dictionary<int, int>();
 
             playerNPCs = new Dictionary<int, PlayerNPCData>();
 
@@ -435,53 +439,39 @@ namespace ETLG.Data
         {
             if (!playerSkills.ContainsKey(id))
             {
-                playerSkills.Add(id, new PlayerSkillData(dataSkill.GetSkillData(id)));
+                playerSkills.Add(id, 0);
             }
-            if(level == 0)
-            {
-                playerSkills[id].setActiveState(1);
-            }
-            else
-            {
-                playerSkills[id].setActiveState(2);
-                playerSkills[id].Level = level;
-            }
+            playerSkills[id] = level;
         }
 
-        public PlayerSkillData GetSkillById(int Id)
+        public int GetSkillLevelById(int Id)
         {
             if (!playerSkills.ContainsKey(Id))
             {
-                return new PlayerSkillData(Id, Constant.Type.SKILL_LOCKED, 0);
+                return Constant.Type.SKILL_LOCKED;
             }
             return playerSkills[Id];
         }
 
-        public List<PlayerSkillData> GetSkillsByType(string type)
+        public List<int> GetSkillsByFunctionality(string Type)
         {
-            if (type.Equals("all"))
+     /*       if (Type.Equals(Constant.Type.SKILL_TYPE_ALL))
             {
-                return playerSkills.Values.ToList();
+                return playerSkills.Keys.ToList();
             }
-
-            List<PlayerSkillData> targetList = new List<PlayerSkillData>();
-            foreach (var playerSkill in playerSkills.Values)
+*/
+            List<int> targetIdList = new List<int>();
+            foreach (var skillId in playerSkills.Keys)
             {
-                if (playerSkill.IsActiveSkill)
+                SkillData skillData = dataSkill.GetSkillData(skillId);
+                if (Type.Equals(skillData.Functionality))
                 {
-                    if (type.Equals("combat") && playerSkill.IsCombatSkill)
-                    {
-                        targetList.Add(playerSkill);
-                    }
-                    if (type.Equals("explore") && !playerSkill.IsCombatSkill)
-                    {
-                        targetList.Add(playerSkill);
-                    }
+                    targetIdList.Add(skillId);
                 }
             }
-            return targetList;
+            return targetIdList;
         }
-
+        
         public Dictionary<int, int> GetAllSkills()
         {   
             // TODO : Uncomment this line of code
@@ -491,11 +481,12 @@ namespace ETLG.Data
 
         public void UpdateAttrsByAllSkills(int Type)
         {
-            PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();
-            foreach (var playerSkill in playerSkillDatas)
+           // PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();
+
+            foreach (var playerSkill in playerSkills)
             {
-                int skillId = playerSkill.Id;
-                int currentLevel = playerSkill.Level;
+                int skillId = playerSkill.Key;
+                int currentLevel = playerSkill.Value;
 
                 SkillData skillData = dataSkill.GetSkillData(skillId);
                 int[] attrs = skillData.GetSkillLevelData(currentLevel).Attributes;
@@ -506,7 +497,7 @@ namespace ETLG.Data
 
         public void UpgradeCurrentSkill()
         {
-            int currentLevel = playerSkills[dataSkill.currentSkillID].Level;
+            int currentLevel = playerSkills[dataSkill.currentSkillId];
 
             SkillData skillData = dataSkill.GetCurrentSkillData();
 
@@ -521,7 +512,7 @@ namespace ETLG.Data
             UpdateAttrsByAllSkills(Constant.Type.SUB);
 
             // change skills
-            playerSkills[dataSkill.currentSkillID].Level++;
+            playerSkills[dataSkill.currentSkillId]++;
 
             // after level up
             UpdateAttrsByAllSkills(Constant.Type.ADD);
@@ -559,13 +550,13 @@ namespace ETLG.Data
             this.playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(initialSpaceship);
 
             // reset all costs consumed
-            PlayerSkillData[] playerSkillDatas =  playerSkills.Values.ToArray();
+            //PlayerSkillData[] playerSkillDatas =  playerSkills.Values.ToArray();
 
-            foreach (var playerSkillData in playerSkillDatas)
+            foreach (var playerSkill in playerSkills)
             {
-                int skillId = playerSkillData.Id;
+                int skillId = playerSkill.Key;
 
-                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkillData.Level);
+                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkill.Value);
 
                 for(int i = 0; i < costs.Length; i += 2)
                 {
@@ -575,7 +566,7 @@ namespace ETLG.Data
             }
 
             // clear skills;
-            playerSkills = new Dictionary<int, PlayerSkillData>();
+            playerSkills.Clear();
 
             foreach (var id in initialSpaceship.SkillIds)
             {
@@ -584,13 +575,13 @@ namespace ETLG.Data
 
             // consume costs
 
-            playerSkillDatas = playerSkills.Values.ToArray();
+            //playerSkillDatas = playerSkills.Values.ToArray();
 
-            foreach (var playerSkillData in playerSkillDatas)
+            foreach (var playerSkill in playerSkills)
             {
-                int skillId = playerSkillData.Id;
+                int skillId = playerSkill.Key;
 
-                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkillData.Level);
+                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkill.Value);
 
                 for (int i = 0; i < costs.Length; i += 2)
                 {
@@ -615,9 +606,9 @@ namespace ETLG.Data
         public int GetUnlockedLevelsNum()
         {
             int result = 0;
-            foreach(var skill in playerSkills.Values.ToArray())
+            foreach(var skillLevel in playerSkills.Values)
             {
-                result += skill.Level;
+                result += skillLevel;
             }
             return result;
         }

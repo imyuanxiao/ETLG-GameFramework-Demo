@@ -79,7 +79,7 @@ namespace ETLG.Data
         {
             get
             {
-                return dRSkill.IsActiveSkill ? "Active" : "Passive";
+                return dRSkill.IsActiveSkill ? Constant.Type.SKILL_TYPE_ACTIVE_STR : Constant.Type.SKILL_TYPE_PASSIVE_STR;
             }
         }
 
@@ -87,7 +87,7 @@ namespace ETLG.Data
         {
             get
             {
-                return dRSkill.IsCombatSkill ? "Combat" : "Explore";
+                return dRSkill.IsCombatSkill ? Constant.Type.SKILL_TYPE_COMBAT_STR : Constant.Type.SKILL_TYPE_EXPLORE_STR;
             }
         }
 
@@ -134,19 +134,17 @@ namespace ETLG.Data
         // 获取对应等级的技能信息
         public DRSkillLevel GetSkillLevelData(int level)
         {
-            level--;
-
-            if (dRSkillLevels == null || level > GetMaxLevelIndex())
+            int index = level - 1;
+            if (dRSkillLevels == null || index < 0 || index > GetMaxLevelIndex())
                 return null;
-
-            return dRSkillLevels[level];
+            return dRSkillLevels[index];
         }
 
  
         public int[] GetLevelCosts(int level)
         {
-            level--;
-            return dRSkillLevels[level].Costs;
+            int index = level - 1;
+            return dRSkillLevels[index].Costs;
         }
 
         public string GetLevelEffectByLevel(int level)

@@ -113,12 +113,13 @@ namespace ETLG
             }
             else
             {
-                PlayerSkillData playerSkillData = dataPlayer.GetPlayerData().GetSkillById(currentSkillID);
-                if (Constant.Type.SKILL_LOCKED == playerSkillData.ActiveState)
+               int skillLevel = dataPlayer.GetPlayerData().GetSkillLevelById(currentSkillID);
+
+                if (skillLevel.Equals(Constant.Type.SKILL_LOCKED))
                 {
                     iconColor = Color.black;
                 }
-                else if (Constant.Type.SKILL_UPGRADED == playerSkillData.ActiveState)
+                else if (skillLevel >= 1)
                 {
                     ColorUtility.TryParseHtmlString("#4fa6b0", out bgColor);
                 }

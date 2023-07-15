@@ -67,7 +67,7 @@ namespace ETLG
         {
             UIContainer.position = dataSkill.skillUpgradeInfoPosition;
 
-            bool isMaxLevel = dataPlayer.GetPlayerData().GetSkillById(dataSkill.currentSkillID).Level - 1 >= dataSkill.GetCurrentSkillData().GetMaxLevelIndex();
+            bool isMaxLevel = dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId) - 1 >= dataSkill.GetCurrentSkillData().GetMaxLevelIndex();
             UpgradeButton.interactable = !isMaxLevel && dataSkill.CanUpgradeCurrentSkill;
 
             string title = dataSkill.CanUpgradeCurrentSkill ? "Upgrade skill" : "Lack of upgrade materials.";

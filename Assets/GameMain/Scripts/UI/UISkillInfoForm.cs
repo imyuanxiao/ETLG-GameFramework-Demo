@@ -75,15 +75,15 @@ namespace ETLG
         {
             SkillData skillData = dataSkill.GetCurrentSkillData();
 
-            PlayerSkillData playerSkillData = null;
+            int playerSkillLevel = -1;
             
             if(dataPlayer.GetPlayerData() == null)
             {
-                playerSkillData = new PlayerSkillData(dataSkill.currentSkillID, Constant.Type.SKILL_UPGRADED, 1);
+                playerSkillLevel = 1;
             }
             else
             {
-                playerSkillData = dataPlayer.GetPlayerData().GetSkillById(dataSkill.currentSkillID);
+                playerSkillLevel = dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId);
             }
 
             UIContainer.position = dataSkill.skillInfoPosition;
@@ -95,17 +95,17 @@ namespace ETLG
             Functionality.text = skillData.Functionality;
             SkillDescription.text = skillData.Description;
 
-            int currentLevel = playerSkillData.Level;
+            int currentLevel = playerSkillLevel;
 
             bool isMaxLevel = currentLevel - 1 >= skillData.GetMaxLevelIndex();
             string max = isMaxLevel ? " (Max)" : "";
 
-            CurrentLevel.text = playerSkillData.Level.ToString() + max;
+            CurrentLevel.text = currentLevel.ToString() + max;
             CurrentLevelDescription.text = skillData.GetLevelEffectByLevel(currentLevel);
 
 
             // set skill icon            
-            string texturePath = AssetUtility.GetSkillIcon(playerSkillData.Id.ToString());
+            string texturePath = AssetUtility.GetSkillIcon(dataSkill.currentSkillId.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
             if (texture == null)
             {

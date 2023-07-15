@@ -26,9 +26,24 @@
             public const int TIP_INFO_POSITION_LEFT = 1;
 
             // skill activate state
-            public const int SKILL_LOCKED = 0;
-            public const int SKILL_UNLOCKED = 1;
-            public const int SKILL_UPGRADED = 2;
+            public const int SKILL_LOCKED = -1;
+            public const int SKILL_UNLOCKED = 0;
+            public const int SKILL_UPGRADED = 1;
+
+            // skill type
+            public const int SKILL_TYPE_ALL = 0;
+            public const int SKILL_TYPE_COMBAT = 1;
+
+            public const int SKILL_TYPE_EXPLORE = 2;
+
+            public const string SKILL_TYPE_ALL_STR = "All";
+
+            public const string SKILL_TYPE_COMBAT_STR = "Combat";
+            public const string SKILL_TYPE_EXPLORE_STR = "Explore";
+
+            public const string SKILL_TYPE_ACTIVE_STR = "Active";
+            public const string SKILL_TYPE_PASSIVE_STR = "Passive";
+
 
             // skill domain
             public const int DOMAIN_COMMON = 0;
@@ -54,7 +69,6 @@
 
 
 
-       
 
             // attributes
 

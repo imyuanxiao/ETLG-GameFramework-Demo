@@ -31,7 +31,7 @@ namespace ETLG.Data
         public int levelCount { get; private set; }
 
         // 当前展示技能ID
-        public int currentSkillID { get; private set; }
+        public int currentSkillId { get; private set; }
 
         public bool lockCurrentSkillID { get; set; }
 
@@ -39,7 +39,7 @@ namespace ETLG.Data
         {
             if (!lockCurrentSkillID)
             {
-                currentSkillID = id;
+                currentSkillId = id;
             }
         }
 
@@ -161,12 +161,12 @@ namespace ETLG.Data
 
         public SkillData GetCurrentSkillData()
         {
-            if (!dicSkillData.ContainsKey(currentSkillID))
+            if (!dicSkillData.ContainsKey(currentSkillId))
             {
-                Log.Error("Can not find skill data id '{0}'.", currentSkillID);
+                Log.Error("Can not find skill data id '{0}'.", currentSkillId);
                 return null;
             }
-            return dicSkillData[currentSkillID];
+            return dicSkillData[currentSkillId];
         }
 
         public SkillData GetSkillData(int id)
