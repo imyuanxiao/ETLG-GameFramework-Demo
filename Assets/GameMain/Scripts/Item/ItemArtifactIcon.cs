@@ -40,37 +40,59 @@ namespace ETLG
 
             iconButton.onClick.AddListener(OnIconButtonClick);
 
+
         }
 
         private void OnIconButtonClick()
         {
-            //实现交易，数据还没同步
-            OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
+            if (Type != Constant.Type.ARTIFACT_ICON_DEFAULT)
+            {
+                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+                ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
+                artifactDataBase.isTrade = true;
+
+                OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
+
+            }
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+                Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
 
-            Vector3 offset = new Vector3(0f, 0f, 0f);
+                Vector3 offset = new Vector3(0f, 0f, 0f);
 
-            if (Type == Constant.Type.TRADE_NPC_PLAYER)
+                if (Type == Constant.Type.TRADE_NPC_PLAYER)
+                {
+                    offset = new Vector3(400f, -100f, 0f);
+                }
+
+                Vector3 newPosition = itemPosition + offset;
+
+                dataArtifact.CurrentArtifactID = CurrentArtifactID;
+                dataArtifact.artifactInfoPosition = newPosition;
+
+            if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                offset = new Vector3(400f, -100f, 0f);
+                GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
             }
-
-            Vector3 newPosition = itemPosition + offset;
-
-            dataArtifact.CurrentArtifactID = CurrentArtifactID;
-            dataArtifact.artifactInfoPosition = newPosition;
-
-            GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
-
+            else
+            {
+                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
+            {
+                GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            }
+            else
+            {
+                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            }
         }
 
 
@@ -107,6 +129,7 @@ namespace ETLG
         protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
+            HideAllItem();
 
         }
 

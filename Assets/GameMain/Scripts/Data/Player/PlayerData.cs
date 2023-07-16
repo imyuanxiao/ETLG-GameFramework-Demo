@@ -39,7 +39,6 @@ namespace ETLG.Data
         //Player NPC Data
         private Dictionary<int, PlayerNPCData> playerNPCs { get; set; }
 
-
         private DataNPC dataNPC { get; set; }
 
         //Player Achievement Data
@@ -248,6 +247,26 @@ namespace ETLG.Data
             playerArtifacts[id] += number;
         }
 
+        //update ALL artifacts after trading
+        public void updateArtifact(Dictionary<int,int> newPlayerArtifacts)
+        {
+            foreach (KeyValuePair<int, int> kvp in newPlayerArtifacts)
+            {
+                int id = kvp.Key;
+                int number = kvp.Value;
+
+                if (playerArtifacts.ContainsKey(id))
+                {
+                    playerArtifacts[id] = number;
+                }
+                else
+                {
+                    AddArtifact(id, number);
+                }
+            }
+
+        }
+
         public void DeleteArtifact(int id, int number)
         {
             // module
@@ -422,6 +441,21 @@ namespace ETLG.Data
             return targetList;
         }
 
+        public void setNpcArtifactsByNpcId(int NpcId, Dictionary<int, int> npcArtifacts)
+        {
+            int[] newNPCArtifacts = new int[npcArtifacts.Count*2];
+            int index = 0;
+
+            foreach (KeyValuePair<int,int> kvp in npcArtifacts)
+            {
+                newNPCArtifacts[index] = kvp.Key;
+                index++;
+                newNPCArtifacts[index] = kvp.Value;
+                index++;
+            }
+            playerNPCs[NpcId].Artifacts = newNPCArtifacts;
+        }
+
         public int GetArtifactNumById(int id)
         {
 
@@ -432,8 +466,14 @@ namespace ETLG.Data
             return playerArtifacts[id];
         }
 
-
-
+        public bool SetArtifactNumById(int id,int newValue)
+        {
+            if (playerArtifacts.ContainsKey(id))
+            {
+                playerArtifacts[id] = newValue;
+            }
+            return false;
+        }
 
         public void AddSkill(int id, int level)
         {
@@ -637,6 +677,7 @@ namespace ETLG.Data
             AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
            
         }
+
         public Dictionary<int,int> GetPlayerAchievement()
         {
             return this.playerAchievement;

@@ -47,6 +47,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(ModuleEquipUIchangeEventArgs.EventId, OnModuleEquipUIChange);
 
             GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+            
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
 
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
@@ -91,6 +92,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Unsubscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
             GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+           
             GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
             GameEntry.Event.Unsubscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
 

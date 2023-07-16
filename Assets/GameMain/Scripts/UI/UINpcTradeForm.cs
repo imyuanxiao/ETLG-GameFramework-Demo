@@ -11,7 +11,6 @@ namespace ETLG
 {
     public class UINpcTradeForm : UGuiFormEx
     {
-
         public Button closeButton;
 
         public Transform NpcContainer;
@@ -25,13 +24,27 @@ namespace ETLG
         private Dictionary<int, int> playerArtifacts;
         private Dictionary<int, int> npcArtifacts;
 
-
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
 
-        private int tradeNum;
-
         private bool refresh;
+
+        public delegate void TradeConditionEventHandler(int totalNum,int ownedMoney);
+        public static event TradeConditionEventHandler OnTradeConditionSent;
+
+        //可买卖数量
+        private int totalNum;
+        //输入的数量
+        private int tradeNum;
+        private int npcMoney;
+        private int playerMoney;
+        //总消费金额
+        private int totalPrice;
+        //道具数量上限
+        private int limitNum;
+        private int artifactID;
+        //交易买卖方类型
+        private int type;
 
         protected override void OnInit(object userData)
         {
@@ -49,7 +62,12 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            UIArtifactInfoTradeForm.OnTradeDataSent += HandleTradeData;
             refresh = true;
+
+            npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
+            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -57,38 +75,59 @@ namespace ETLG
             base.OnUpdate(elapseSeconds, realElapseSeconds);
             if (refresh)
             {
-                clearAllArtifacts();
+                HideAllItem();
                 showContent();
                 refresh = false;
             }
+        }
+
+        //触发trade按钮后交易，刷新item和money
+        private void HandleTradeData(int inputNum, int totalPrice)
+        {
+            refresh = true;
+            this.tradeNum = inputNum;
+            this.totalPrice = totalPrice;
+            tradeArtifact(artifactID, type);
         }
 
         private void showContent()
         {
             npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
-            // need method Update()
-            npc_money.text = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money.ToString();
-
-            player_money.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
+            npc_money.text = npcMoney.ToString();
+            player_money.text = playerMoney.ToString();
 
             ShowPlayerArtifactIcons();
             ShowNPCArtifactIcons();
         }
 
+        private void updatePlayerData()
+        {
+            //更新玩家数据
+            dataPlayer.GetPlayerData().updateArtifact(playerArtifacts);
+            dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
+
+
+            dataPlayer.GetPlayerData().setNpcArtifactsByNpcId(dataNPC.currentNPCId,npcArtifacts);
+            dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money = npcMoney;
+        }
+
         protected override void OnClose(bool isShutdown, object userData)
         {
+
             base.OnClose(isShutdown, userData);
+            UIArtifactInfoTradeForm.OnTradeDataSent -= HandleTradeData;
         }
 
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            updatePlayerData();
             this.Close();
 
         }
-
 
         private void ShowPlayerArtifactIcons()
         {
@@ -97,7 +136,7 @@ namespace ETLG
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                if (ArtifactID == (int)EnumArtifact.Money|| Num == 0)
+                if (ArtifactID == (int)EnumArtifact.Money || Num == 0)
                 {
                     continue;
                 }
@@ -110,27 +149,32 @@ namespace ETLG
             }
         }
 
-        private void tradeArtifact(int artifactID, int tradeNum, int type)
+        private void tradeArtifact(int artifactID, int type)
         {
             if (type == Constant.Type.TRADE_NPC_PLAYER)
             {
-                if(!testArtifactExist(playerArtifacts, artifactID, tradeNum, Constant.Type.ADD))
+                if (!testArtifactExist(playerArtifacts, artifactID, Constant.Type.ADD))
                 {
                     playerArtifacts.Add(artifactID, tradeNum);
                 }
-                testArtifactExist(npcArtifacts, artifactID, tradeNum, Constant.Type.SUB);
+                playerMoney -= totalPrice;
+                npcMoney += totalPrice;
+                testArtifactExist(npcArtifacts, artifactID, Constant.Type.SUB);
+                
             }
             else
             {
-                if (!testArtifactExist(npcArtifacts, artifactID, tradeNum, Constant.Type.ADD))
+                if (!testArtifactExist(npcArtifacts, artifactID, Constant.Type.ADD))
                 {
                     npcArtifacts.Add(artifactID, tradeNum);
                 }
-                testArtifactExist(playerArtifacts, artifactID, tradeNum, Constant.Type.SUB);
+                playerMoney += totalPrice;
+                npcMoney -= totalPrice;
+                testArtifactExist(playerArtifacts, artifactID, Constant.Type.SUB);
             }
         }
 
-        private bool testArtifactExist(Dictionary<int, int> artifacts, int artifactID, int tradeNum, int calculateType)
+        private bool testArtifactExist(Dictionary<int, int> artifacts, int artifactID, int calculateType)
         {
             bool isExist = false;
             foreach (KeyValuePair<int, int> kvp in artifacts)
@@ -138,14 +182,16 @@ namespace ETLG
                 if (kvp.Key == artifactID)
                 {
                     int oldNum = kvp.Value;
+                    int newNum;
                     if (calculateType == Constant.Type.ADD)
                     {
-                        artifacts[artifactID] = oldNum + tradeNum;
+                        newNum = oldNum + tradeNum;
                     }
                     else
                     {
-                        artifacts[artifactID] = oldNum - tradeNum;
+                        newNum = oldNum - tradeNum;
                     }
+                    artifacts[artifactID] = newNum;
                     isExist = true;
                     return isExist;
                 }
@@ -153,16 +199,21 @@ namespace ETLG
             return isExist;
         }
 
-        private void OnItemClickedFromIcon(int artifactID, int num, int type)
+        private void OnItemClickedFromIcon(int artifactID, int totalNum, int type)
         {
-            refresh = true;
-            //改值
-            tradeNum = num;
+            this.totalNum = totalNum;
+            this.artifactID = artifactID;
+            this.type = type;
 
-            //数量UI不能超过最大值
-            tradeArtifact(artifactID, tradeNum, type);
-
-
+            //npc买东西需要花钱吗？
+            if (type == Constant.Type.TRADE_NPC_PLAYER)
+            {
+                OnTradeConditionSent?.Invoke(totalNum,playerMoney);
+            }
+            else
+            {
+                OnTradeConditionSent?.Invoke(totalNum,npcMoney);
+            }
         }
 
         private void ShowNPCArtifactIcons()
@@ -172,7 +223,7 @@ namespace ETLG
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                if (ArtifactID == (int)EnumArtifact.Money|| Num == 0)
+                if (ArtifactID == (int)EnumArtifact.Money || Num == 0)
                 {
                     continue;
                 }
@@ -184,19 +235,6 @@ namespace ETLG
                     item.GetComponent<ItemArtifactIcon>().OnItemClicked += OnItemClickedFromIcon;
                 });
             }
-        }
-        private void clearAllArtifacts()
-        {
-            for (int i = NpcContainer.childCount - 1; i >= 0; i--)
-            {
-                Destroy(NpcContainer.GetChild(i).gameObject);
-            }
-
-            for (int i = PlayerContainer.childCount - 1; i >= 0; i--)
-            {
-                Destroy(PlayerContainer.GetChild(i).gameObject);
-            }
-
         }
     }
 }

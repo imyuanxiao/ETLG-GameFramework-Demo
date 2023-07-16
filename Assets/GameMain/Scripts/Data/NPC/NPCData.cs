@@ -5,6 +5,8 @@ namespace ETLG.Data
     {
         private DRNPC dRNPC;
        // private QuestData[] quests;
+
+        
         
         public int Id
         {

@@ -29,7 +29,6 @@ namespace ETLG
         public TextMeshProUGUI ArtifactNumber = null;
         public TextMeshProUGUI ArtifactDescription = null;
 
-        private bool isHover = false;
         private object userData;
 
 
@@ -71,34 +70,6 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
 
         }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            isHover = true;
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            isHover = false;
-        }
-
-        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
-        {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
-
-            if (isHover)
-            {
-                OnOpen(userData);
-                Debug.Log("hover了");
-            }
-            else
-            {
-                //OnClose(true,userData);
-                //GameEntry.Event.Fire(this, ArtifactInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-            }
-        }
-
-
     }
 }
 

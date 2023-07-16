@@ -19,6 +19,7 @@ namespace ETLG
         private RaycastHit hitInfo;
 
         private int? currentNPCUIID;
+        private int? artifactTradeInfoUIID;
         private int? artifactInfoUIID;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -35,13 +36,14 @@ namespace ETLG
             this.changeScene = false;
             this.changeToProcedureMap = false;
             this.currentNPCUIID = null;
-            this.artifactInfoUIID = null;
+            this.artifactTradeInfoUIID = null;
 
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
             GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Subscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
-            GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+            //GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+            GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
 
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
@@ -56,12 +58,11 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if(ne.Type == Constant.Type.UI_OPEN)
+            if (ne.Type == Constant.Type.UI_OPEN)
             {
                 artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
-
-            if (ne.Type == Constant.Type.UI_CLOSE)
+            else if (ne.Type == Constant.Type.UI_CLOSE)
             {
                 if (artifactInfoUIID != null)
                 {
@@ -69,6 +70,28 @@ namespace ETLG
                 }
                 artifactInfoUIID = null;
             }
+
+        }
+
+        private void OnArtifactInfoTradeUIChange(object sender, GameEventArgs e)
+        {
+            ArtifactInfoTradeUIChangeEventArgs ne = (ArtifactInfoTradeUIChangeEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                artifactTradeInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoTradeForm);
+            }
+            else if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (artifactTradeInfoUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)artifactTradeInfoUIID);
+                }
+                artifactTradeInfoUIID = null;
+            }
+
         }
 
         private void OnNPCUIChange(object sender, GameEventArgs e)
@@ -158,13 +181,14 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
             GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Unsubscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
-            GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+            //GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
+            GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
             MapManager.Instance.focusedPlanet = null;
 
-            artifactInfoUIID = null;
+            artifactTradeInfoUIID = null;
             currentNPCUIID = null;
 
             CloseUI();
