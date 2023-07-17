@@ -33,7 +33,7 @@ namespace ETLG
             skills.Add(new SkillInfo(EnumSkill.AdaptiveIntelligentDefense, KeyCode.Alpha5));  // AIAssist
 
             // TODO : change its value accroding to skill data
-            this.canRespawn = true;
+            this.canRespawn = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills().ContainsKey((int) EnumSkill.BlockchainResurgence);
             PrintSkillsInfo();
         }
 
@@ -96,18 +96,10 @@ namespace ETLG
             this.skillId = (int) skillEnumId;
             this.skillEnumId = skillEnumId;
             this.usageCount = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).UsageCount;
-
-            if (skills.ContainsKey((int)skillEnumId))
-            {
-                this.isUnlocked = true;
-            }
-            else 
-            {
-                this.isUnlocked = false;
-            }
+            this.isUnlocked = skills.ContainsKey((int) skillEnumId);
 
             // To be deleted
-            ForTestSkillOnly();
+            // ForTestSkillOnly();
         }
 
         // To be deleted

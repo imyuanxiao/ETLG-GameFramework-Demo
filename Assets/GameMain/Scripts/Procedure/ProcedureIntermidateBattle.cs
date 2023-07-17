@@ -101,6 +101,31 @@ namespace ETLG
             // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
             entityLoader.HideEntity(bossEnemyEntity);
+
+            // Unlock battle skills
+            switch (this.procedureOwner.GetData<VarString>("BossType"))
+            {
+                case "CloudComputing":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EdgeComputing, 0);
+                    break;
+                case "CyberSecurity":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.ElectronicWarfare, 0);
+                    break;
+                case "DataScience":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EnergyBoost, 0);
+                    break;
+                case "AI":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.AdaptiveIntelligentDefense, 0);
+                    break;
+                case "Blockchain":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.BlockchainResurgence, 0);
+                    break;
+                case "IoT":
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.MedicalSupport, 0);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnPlayerDead(object sender, GameEventArgs e)
