@@ -203,10 +203,12 @@
         "Tip_Cloaking Device": "This is tip for Cloaking Device",
 
         "Skill_AlienLinguistics": "Alien Linguistics",
-        "Skill_AlienLinguistics_Desc": "This is description for Alien Linguistics",
+        "Skill_AlienLinguistics_Desc": "Alien Linguistics is a skill that allows you to achieve barrier-free communication across various star systems.",
+        "Skill_AlienLinguistics_Level_1": "No special effect.",
 
         "Skill_MedicalSupport": "Medical Support",
-        "Skill_MedicalSupport_Desc": "This is description for Medical Support",
+        "Skill_MedicalSupport_Desc": "The Internet of Things (IoT) connects and empowers everyday objects with intelligence and interconnectivity. In your spaceship, the wonders of IoT bring to life the extraordinary skill known as \"Medical Support.\" Through this advanced capability, you can harness the power of interconnected devices to restore your spaceship's life force and continue your epic journey through the stars.",
+        "Skill_MedicalSupport_Level_1": "Restore <color=yellow> 50 </color> HP",
 
         "Skill_AutomatedContainerOrchestration": "Automated Container Orchestration",
         "Skill_AutomatedContainerOrchestration_Desc": "This is description for Automated Container Orchestration",
@@ -215,7 +217,8 @@
         "Skill_MultiCloudArchitecture_Desc": "This is description for Multi-Cloud Architecture",
 
         "Skill_EnergyBoost": "Energy Boost",
-        "Skill_EnergyBoost_Desc": "This is description for Energy Boost",
+        "Skill_EnergyBoost_Desc": "Data science is the art of extracting valuable insights and knowledge from vast volumes of information. In your spaceship, you wield the unparalleled skill known as \"Energy Boost\" By harnessing the prowess of data analytics, you can swiftly restore your spaceship's protective shields and pave the way to victory in interstellar battles.",
+        "Skill_EnergyBoost_Level_1": "Restore <color=yellow> 50 </color> points of shield durability",
 
         "Skill_NeuralNetworkAmplification": "Neural Network Amplification",
         "Skill_NeuralNetworkAmplification_Desc": "This is description for Neural Network Amplification",
@@ -230,10 +233,13 @@
         "Skill_QuantumEncryption_Desc": "This is description for Quantum Encryption",
 
         "Skill_AdaptiveIntelligentDefense": "Adaptive Intelligent Defense",
-        "Skill_AdaptiveIntelligentDefense_Desc": "This is description for Adaptive Intelligent Defense",
-
+        "Skill_AdaptiveIntelligentDefense_Desc": "AI is a groundbreaking technology that enables machines to simulate human-like intelligence, allowing them to process data, learn from experience, and make intelligent decisions. In your spaceship, this advanced AI system empowers you with the remarkable skill of \"Adaptive Intelligent Defense\".",
+        "Skill_AdaptiveIntelligentDefense_Level_1": "Summon <color=yellow> 3 </color> AI spaceships for <color=yellow> 10 </color> seconds",
+        
         "Skill_ElectronicWarfare": "Electronic Warfare",
-        "Skill_ElectronicWarfare_Desc": "This is description for Electronic Warfare",
+        "Skill_ElectronicWarfare_Desc": "Cybersecurity plays a pivotal role in safeguarding vital systems and data from malicious cyber threats. In your spaceship, you wield the game-changing skill called \"Electronic Warfare\", a potent defensive ability that disrupts enemy attacks with unrivaled precision.",
+        "Skill_ElectronicWarfare_Level_1": "Pause enemy attack for <color=yellow> 5 </color> seconds",
+
 
         "Skill_IntelligentDataMining": "Intelligent Data Mining",
         "Skill_IntelligentDataMining_Desc": "This is description for Intelligent Data Mining",
@@ -257,10 +263,17 @@
         "Skill_SensorArray_Desc": "This is description for Sensor Array",
 
         "Skill_EdgeComputing": "Edge Computing",
-        "Skill_EdgeComputing_Desc": "This is description for Edge Computing",
+        "Skill_EdgeComputing_Desc": "Cloud computing is a cutting-edge technology that leverages the collective power of interconnected servers and networks to store, process, and analyze vast amounts of data. In your spaceship, cloud computing brings forth the awe-inspiring skill known as \"Edge Computing\".",
+        "Skill_EdgeComputing_Level_1": "Attack power is doubled for <color=yellow> 5 </color> seconds",
+
+        "Skill_BlockchainResurgence": "Blockchain Resurgence",
+        "Skill_BlockchainResurgence_Desc": "Blockchain is a decentralized, immutable ledger that ensures transparent and tamper-proof transactions. The essence of blockchain technology is that every action is recorded, and no data can be altered without consensus. In your spaceship, the awe-inspiring skill called \"Blockchain Resurgence\" empowers you to rise from the ashes once, leveraging the power of blockchain to restore your spaceship's health to 100% after facing a near-fatal encounter.",
+        "Skill_BlockchainResurgence_Level_1": "Respawn <color=yellow> once </color>",
 
         "Skill_IntelligentLinkage": "Intelligent Linkage",
         "Skill_IntelligentLinkage_Desc": "This is description for Intelligent Linkage",
+
+
 
 
 
@@ -294,6 +307,15 @@
 
         "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. Get ready to fight!",
         
+        "Domain_0": "Common",
+        "Domain_1": "Cloud Computint",
+        "Domain_2": "Artificial Intelligence",
+        "Domain_3": "CyberSecurity",
+        "Domain_4": "Data Science",
+        "Domain_5": "Blockchain",
+        "Domain_6": "Internet of Things",
+
+
         "IntermidateBattle CloudComputing Intro": "This is the boss enemy in Cloud Computing Domain.",
         "IntermidateBattle CyberSecurity Intro": "This is the boss enemy in CyberSecurity Domain.",
         "IntermidateBattle AI Intro" : "This is the boss enemy in Artificial Intelligence Domain.",

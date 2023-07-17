@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-16 03:15:05.994
+// 生成时间：2023-07-17 11:07:04.351
 //------------------------------------------------------------
 
 namespace ETLG
@@ -92,9 +92,9 @@ namespace ETLG
         CrossChainInteroperability = 602,
 
         /// <summary>
-        /// 去中心化
+        /// 区块链复兴
         /// </summary>
-        Decentralization = 603,
+        BlockchainResurgence = 603,
 
         /// <summary>
         /// 感应阵列
