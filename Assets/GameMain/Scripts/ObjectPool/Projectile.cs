@@ -73,7 +73,7 @@ namespace ETLG
             return false;
         }
 
-        private void OnDisable() 
+        protected virtual void OnDisable() 
         {
             StopAllCoroutines();
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);

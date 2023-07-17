@@ -111,6 +111,7 @@ namespace ETLG
             else if (Input.GetKeyDown(KeyCode.B))
             {
                 procedureOwner.SetData<VarString>("BattleType", "FinalBattle");
+                procedureOwner.SetData<VarString>("BossType", "FinalBoss");
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
         }

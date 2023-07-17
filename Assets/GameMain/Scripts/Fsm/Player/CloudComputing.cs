@@ -38,7 +38,7 @@ namespace ETLG
 
             changeToRespawnState = false;
             
-            boostScale = 5f;
+            boostScale = 2f;
             originalAttack = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
             skillAttack = (int) (originalAttack * boostScale);
             lastingTime = 5f;

@@ -49,6 +49,7 @@ namespace ETLG
                 // if player can't respawn
                 else 
                 {
+                    ObjectPoolManager.SpawnObject(BattleManager.Instance.explodeFXPrefab, transform.position, transform.rotation, ObjectPoolManager.PoolType.ParticleSystem);
                     GameEntry.Event.Fire(this, PlayerDeadEventArgs.Create());
                 }
             }

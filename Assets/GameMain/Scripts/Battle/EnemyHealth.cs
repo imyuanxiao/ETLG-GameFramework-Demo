@@ -80,6 +80,7 @@ namespace ETLG
             {
                 BattleManager.Instance.basicEnemyKilled++;
             }
+            ObjectPoolManager.SpawnObject(BattleManager.Instance.explodeFXPrefab, transform.position, transform.rotation, ObjectPoolManager.PoolType.ParticleSystem);
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 

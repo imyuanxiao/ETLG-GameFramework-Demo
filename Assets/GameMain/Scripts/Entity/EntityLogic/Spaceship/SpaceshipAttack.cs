@@ -44,6 +44,7 @@ namespace ETLG
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
                 GameEntry.Sound.PlaySound(EnumSound.BulletImpact14);
+                ObjectPoolManager.SpawnObject(BattleManager.Instance.muzzleFlashPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.ParticleSystem);
             }
             // fire equiped weapon
             if (Input.GetKeyDown(KeyCode.E))

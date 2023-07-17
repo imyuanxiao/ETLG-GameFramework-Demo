@@ -49,6 +49,7 @@ namespace ETLG
 
             if (GetComponent<Respawn>() == null || !GetComponent<Respawn>().isActiveAndEnabled)
             {
+                ObjectPoolManager.SpawnObject(BattleManager.Instance.explodeFXPrefab, transform.position, transform.rotation, ObjectPoolManager.PoolType.ParticleSystem);
                 GameEntry.Event.Fire(this, BattleWinEventArgs.Create(controller.bossEnemyType));
             }
         }

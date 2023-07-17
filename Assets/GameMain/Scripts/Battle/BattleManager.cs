@@ -41,6 +41,11 @@ namespace ETLG
         [Header("Instant Move Settings")]
         public Transform[] instantMovePoints;
 
+        [Header("FX")]
+        public GameObject explodeFXPrefab;
+        public GameObject muzzleFlashPrefab;
+        public GameObject missileFlarePrefab;
+
         protected override void Awake() 
         {
             base.Awake();
