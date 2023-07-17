@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.Assertions;
 
 
 namespace ETLG
@@ -17,7 +19,7 @@ namespace ETLG
         public enum PoolType { ParticleSystem, GameObject, Test, None }
         public static PoolType PoolingType;
 
-        private void Awake() 
+        public void Awake() 
         {
             ObjectPools = new List<PooledObjectInfo>();
             SetupEmpties();    
@@ -108,13 +110,21 @@ namespace ETLG
             }
         }
 
-        private void OnDisable() 
+        public void OnDisable() 
         {
             ObjectPools.Clear();
+
+            #if UNITY_EDITOR
+            DestroyImmediate(_particleSystemsEmpty);
+            DestroyImmediate(_gameObjectsEmpty);
+            DestroyImmediate(_testEmpty);
+            DestroyImmediate(_objectPoolEmptyHolder);
+            #else
             Destroy(_particleSystemsEmpty);
             Destroy(_gameObjectsEmpty);
             Destroy(_testEmpty);
             Destroy(_objectPoolEmptyHolder);
+            #endif
         }
     }
 
