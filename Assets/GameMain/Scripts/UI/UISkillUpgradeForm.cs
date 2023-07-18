@@ -76,6 +76,13 @@ namespace ETLG
 
             Title.text = isMaxLevel ? "Cannot be upgraded any more." : title;
 
+            if(Constant.Type.SKILL_LOCKED == dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId))
+            {
+                Title.text = "Domain knowledge required for unlocking.";
+                UpgradeButton.interactable = false;
+            }
+
+
         }
 
         public void OnCancelButtonClick()

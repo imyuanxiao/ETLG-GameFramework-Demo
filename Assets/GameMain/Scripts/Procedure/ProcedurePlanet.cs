@@ -35,8 +35,8 @@ namespace ETLG
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
             this.changeToProcedureMap = false;
-            this.currentNPCUIID = null;
-            this.artifactTradeInfoUIID = null;
+
+            ResetStates();
 
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
@@ -50,6 +50,14 @@ namespace ETLG
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
+        }
+
+
+        private void ResetStates()
+        {
+            currentNPCUIID = null;
+            artifactTradeInfoUIID = null;
+            artifactInfoUIID = null;
         }
 
         private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
@@ -99,6 +107,7 @@ namespace ETLG
             NPCUIChangeEventArgs ne = (NPCUIChangeEventArgs)e;
             if (ne == null)
                 return;
+
 
             if (currentNPCUIID != null)
             {

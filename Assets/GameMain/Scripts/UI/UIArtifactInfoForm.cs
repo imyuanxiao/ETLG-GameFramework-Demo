@@ -17,10 +17,7 @@ namespace ETLG
         public DataArtifact dataArtifact;
         public DataPlayer dataPlayer;
 
-        private ArtifactDataBase artifactDataBase;
-
-
-        public Transform UIContainer;
+        public RectTransform UIContainer;
 
         public TextMeshProUGUI ArtifactName = null;
         public TextMeshProUGUI ArtifactType = null;
@@ -29,44 +26,53 @@ namespace ETLG
         public TextMeshProUGUI ArtifactNumber = null;
         public TextMeshProUGUI ArtifactDescription = null;
 
-        private object userData;
-
+        private bool refresh;
 
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            this.userData = userData;
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
 
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            if (refresh)
+            {
+                showContent();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+                refresh = false;
+            }
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+        }
+
         protected override void OnOpen(object userData)
         {
+            base.OnOpen(userData);
+            refresh = true;
 
-            artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
+        }
 
+        private void showContent()
+        {
+            ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
             UIContainer.position = dataArtifact.artifactInfoPosition;
-
             ArtifactName.text = artifactDataBase.NameID;
             ArtifactType.text = GameEntry.Localization.GetString(Constant.Type.ARTIFACT_TYPE + artifactDataBase.Type);
             ArtifactTradeable.text = artifactDataBase.Tradeable ? "Tradeable" : "Untradeable";
             ArtifactValue.text = artifactDataBase.Value.ToString();
-
             ArtifactNumber.text = dataPlayer.GetPlayerData().GetArtifactNumById(artifactDataBase.Id).ToString();
             ArtifactDescription.text = artifactDataBase.Description;
-
-
-            base.OnOpen(userData);
-
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            artifactDataBase = null;
+            refresh = false;
             base.OnClose(isShutdown, userData);
 
         }
