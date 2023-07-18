@@ -61,6 +61,7 @@ namespace ETLG
             Log.Debug("Open Achievement");
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+            
             if (!dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(5001))
             {
                 GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
@@ -80,7 +81,9 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
+
         }
         private void showContent()
         {

@@ -19,6 +19,7 @@ namespace ETLG
         public Transform UIContainer;
         public TextMeshProUGUI Title = null;
         public Button CancelButton;
+        public Button CloseButton;
         public Button UpgradeButton;
         public bool refresh;
 
@@ -30,6 +31,7 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             CancelButton.onClick.AddListener(OnCancelButtonClick);
+            CloseButton.onClick.AddListener(OnCancelButtonClick);
             UpgradeButton.onClick.AddListener(OnUpgradeButtonClick);
 
 
@@ -73,6 +75,13 @@ namespace ETLG
             string title = dataSkill.CanUpgradeCurrentSkill ? "Upgrade skill" : "Lack of upgrade materials.";
 
             Title.text = isMaxLevel ? "Cannot be upgraded any more." : title;
+
+            if(Constant.Type.SKILL_LOCKED == dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId))
+            {
+                Title.text = "Domain knowledge required for unlocking.";
+                UpgradeButton.interactable = false;
+            }
+
 
         }
 

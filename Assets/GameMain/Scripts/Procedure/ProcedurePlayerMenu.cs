@@ -21,11 +21,12 @@ namespace ETLG
         private int? artifactInfoUIID;
         private int? moduleInfoUIID;
         private int? moduleEquipInfoUIID;
-
         private int? achievementUIID;
+        private int? tipUIID;
 
         private DataPlayer dataPlayer;
-        private int? tipUIID;
+        private DataArtifact dataArtifact;
+        private DataSkill dataSkill;
 
 
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -39,30 +40,24 @@ namespace ETLG
 
             // subscribe events
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
-
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(SkillUpgradeInfoUIChangeEventArgs.EventId, OnSkillUpgradeInfoUIChange);
-
             GameEntry.Event.Subscribe(ModuleInfoUIChangeEventArgs.EventId, OnModuleInfoUIChange);
             GameEntry.Event.Subscribe(ModuleEquipUIchangeEventArgs.EventId, OnModuleEquipUIChange);
-
             GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
-            
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
-
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
             GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
-
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId,OnAchievementPoPUp);
+
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            dataSkill = GameEntry.Data.GetData<DataSkill>();
 
-            skillInfoUIID = null;
-            skillUpgradeInfoUIID = null;
-            artifactInfoUIID = null;
-            tipUIID = null;
+            ResetStates();
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
@@ -130,12 +125,30 @@ namespace ETLG
             ChangePlayerMenuEventArgs ne = (ChangePlayerMenuEventArgs)e;
             if (ne == null)
                 return;
-
             dataPlayer.currentSelectedPlayerMenu = ne.UIFormID;
+
+            ResetStates();
 
             GameEntry.UI.CloseAllLoadedUIForms();
             GameEntry.UI.OpenUIForm(ne.UIFormID);
+        }
 
+        private void ResetStates()
+        {
+            skillInfoUIID = null;
+            skillUpgradeInfoUIID = null;
+
+            artifactInfoUIID = null;
+
+            moduleInfoUIID = null;
+            moduleEquipInfoUIID = null;
+
+            achievementUIID = null;
+
+            tipUIID = null;
+
+            dataArtifact.lockCurrentModuleID = false;
+            dataSkill.lockCurrentSkillID = false;
         }
 
 
