@@ -128,7 +128,6 @@ namespace ETLG
             if (inputNum > limitNum || inputNum > maxNum)
             {
                 inputNum = maxNum;
-
             }
             else if (inputNum < 0)
             {
@@ -151,12 +150,16 @@ namespace ETLG
         private void tradeClick()
         {
             //如果买家余额充足，则购买并关闭此UI
-            if (ownedMoney > totalPrice)
+            if (ownedMoney >= totalPrice)
             {
                 //输入量和总金额
                 OnTradeDataSent?.Invoke(inputNum, totalPrice);
 
                 closeButtonClick();
+            }
+            else
+            {
+                //如果不充足点击trade无反应，是否跳出提示余额不足？
             }
 
         }
@@ -164,6 +167,7 @@ namespace ETLG
         private void closeButtonClick()
         {
             artifactDataBase.isTrade = false;
+            OnTradeDataSent?.Invoke(-1, -1);
             this.Close();
         }
 

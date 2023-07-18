@@ -47,12 +47,11 @@ namespace ETLG
         {
             if (Type != Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+                 GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
                 ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
                 artifactDataBase.isTrade = true;
 
                 OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
-
             }
 
         }

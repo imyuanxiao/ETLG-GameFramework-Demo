@@ -71,11 +71,19 @@ namespace ETLG.Data
             }
         }
 
-        public string XMLSource
+        public string XMLDialogSource
         {
             get
             {
-                return dRNPC.XMLSource;
+                return dRNPC.XMLDialogSource;
+            }
+        }
+
+        public string XMLQuizSource
+        {
+            get
+            {
+                return dRNPC.XMLQuizSource;
             }
         }
 

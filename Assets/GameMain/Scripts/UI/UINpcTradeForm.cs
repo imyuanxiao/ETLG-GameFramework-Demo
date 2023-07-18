@@ -28,6 +28,7 @@ namespace ETLG
         private DataNPC dataNPC;
 
         private bool refresh;
+        private bool isTrade=false;
 
         public delegate void TradeConditionEventHandler(int totalNum,int ownedMoney);
         public static event TradeConditionEventHandler OnTradeConditionSent;
@@ -49,18 +50,14 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
-            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            dataNPC = GameEntry.Data.GetData<DataNPC>();
-            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
-            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
-
-            closeButton.onClick.AddListener(OnCloseButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            closeButton.onClick.AddListener(OnCloseButtonClick);
+
+            loadArtifactsData();
 
             UIArtifactInfoTradeForm.OnTradeDataSent += HandleTradeData;
             refresh = true;
@@ -68,6 +65,14 @@ namespace ETLG
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
             playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
 
+        }
+
+        private void loadArtifactsData()
+        {
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataNPC = GameEntry.Data.GetData<DataNPC>();
+            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -78,16 +83,26 @@ namespace ETLG
                 HideAllItem();
                 showContent();
                 refresh = false;
+                updateArtifactData();
             }
         }
 
         //触发trade按钮后交易，刷新item和money
         private void HandleTradeData(int inputNum, int totalPrice)
         {
+            isTrade = false;
             refresh = true;
             this.tradeNum = inputNum;
             this.totalPrice = totalPrice;
-            tradeArtifact(artifactID, type);
+            if (inputNum < 0)
+            {
+                isTrade = false;
+            }
+            else
+            {
+                tradeArtifact(artifactID, type);
+            }
+            
         }
 
         private void showContent()
@@ -101,12 +116,11 @@ namespace ETLG
             ShowNPCArtifactIcons();
         }
 
-        private void updatePlayerData()
+        private void updateArtifactData()
         {
             //更新玩家数据
             dataPlayer.GetPlayerData().updateArtifact(playerArtifacts);
             dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
-
 
             dataPlayer.GetPlayerData().setNpcArtifactsByNpcId(dataNPC.currentNPCId,npcArtifacts);
             dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money = npcMoney;
@@ -114,9 +128,9 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-
-            base.OnClose(isShutdown, userData);
             UIArtifactInfoTradeForm.OnTradeDataSent -= HandleTradeData;
+            base.OnClose(isShutdown, userData);
+            
         }
 
         private void OnCloseButtonClick()
@@ -124,7 +138,6 @@ namespace ETLG
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-            updatePlayerData();
             this.Close();
 
         }
@@ -201,18 +214,23 @@ namespace ETLG
 
         private void OnItemClickedFromIcon(int artifactID, int totalNum, int type)
         {
-            this.totalNum = totalNum;
-            this.artifactID = artifactID;
-            this.type = type;
+            if (!isTrade)
+            {
+                isTrade = true;
 
-            //npc买东西需要花钱吗？
-            if (type == Constant.Type.TRADE_NPC_PLAYER)
-            {
-                OnTradeConditionSent?.Invoke(totalNum,playerMoney);
-            }
-            else
-            {
-                OnTradeConditionSent?.Invoke(totalNum,npcMoney);
+                this.totalNum = totalNum;
+                this.artifactID = artifactID;
+                this.type = type;
+
+                //npc买东西需要花钱吗？
+                if (type == Constant.Type.TRADE_NPC_PLAYER)
+                {
+                    OnTradeConditionSent?.Invoke(totalNum, playerMoney);
+                }
+                else
+                {
+                    OnTradeConditionSent?.Invoke(totalNum, npcMoney);
+                }
             }
         }
 

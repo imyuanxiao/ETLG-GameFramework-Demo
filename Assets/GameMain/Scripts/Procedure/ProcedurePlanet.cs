@@ -114,6 +114,10 @@ namespace ETLG
             {
                 currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
             }
+            else if(ne.Type == Constant.Type.NPC_UI_QUIZ_OPEN)
+            {
+                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
+            }
             else if (ne.Type == Constant.Type.UI_CLOSE)
             {
                 if (currentNPCUIID != null)
@@ -200,13 +204,14 @@ namespace ETLG
             base.OnDestroy(procedureOwner);
         }
 
-        private void MouseControl() {
+        private void MouseControl()
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // store the returned value into hitInfo
             Physics.Raycast(ray, out hitInfo);
 
             // if left mouse button is clicked and the object that the ray has hit has collider
-            if (Input.GetMouseButtonDown(0) && hitInfo.collider != null) 
+            if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
             {
                 // if clicked on a landing point
                 if (hitInfo.collider.gameObject.CompareTag("LandingPoint"))
@@ -214,14 +219,14 @@ namespace ETLG
                     LandingPoint currentlyClickedLandingPoint = hitInfo.collider.gameObject.GetComponent<LandingPoint>();
                     GameEntry.Data.GetData<DataLandingPoint>().currentLandingPointID = currentlyClickedLandingPoint.landingPointId;
                     GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
-                } 
+                }
             }
 
             // if right clicked
-            if (Input.GetMouseButtonDown(1)) 
+            if (Input.GetMouseButtonDown(1))
             {
                 PlanetBase currentlyFocusedPlanet = MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>();
-                GameEntry.Event.Fire(this, UnFocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));     
+                GameEntry.Event.Fire(this, UnFocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));
                 this.changeToProcedureMap = true;
             }
         }

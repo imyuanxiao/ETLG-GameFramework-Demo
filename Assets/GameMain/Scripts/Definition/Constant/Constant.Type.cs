@@ -11,6 +11,7 @@
 
             public const int NPC_UI_TALK_OPEN = 2;
             public const int NPC_UI_TRADE_OPEN = 3;
+            public const int NPC_UI_QUIZ_OPEN = 4;
 
 
             // player menu title

@@ -53,20 +53,20 @@ namespace ETLG
         {
             base.OnInit(userData);
 
-            closeButton.onClick.AddListener(OnCloseButtonClick);
-            maxButton.onClick.AddListener(OnMaxButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            closeButton.onClick.AddListener(OnCloseButtonClick);
+            maxButton.onClick.AddListener(OnMaxButtonClick);
 
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = npcData.Avatar;
             npc_description.text = npcData.Description;
-            XMLPath = npcData.XMLSource;
+            XMLPath = npcData.XMLDialogSource;
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
 
