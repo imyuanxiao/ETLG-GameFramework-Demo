@@ -19,6 +19,7 @@ namespace ETLG
         public Transform UIContainer;
         public TextMeshProUGUI Title = null;
         public Button CancelButton;
+        public Button CloseButton;
         public Button UpgradeButton;
         public bool refresh;
 
@@ -30,6 +31,7 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             CancelButton.onClick.AddListener(OnCancelButtonClick);
+            CloseButton.onClick.AddListener(OnCancelButtonClick);
             UpgradeButton.onClick.AddListener(OnUpgradeButtonClick);
 
 

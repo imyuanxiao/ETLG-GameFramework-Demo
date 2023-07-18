@@ -21,7 +21,7 @@ namespace ETLG
 
         //public PlayerSkillData playerSkillData;
 
-        public Transform UIContainer;
+        public RectTransform UIContainer;
 
         public RawImage skillIcon;
         public TextMeshProUGUI SkillName = null;
@@ -55,13 +55,18 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
 
             if (refresh)
             {
                 showContent();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
                 refresh = false;
             }
+
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+     
+
         }
 
         protected override void OnOpen(object userData)
@@ -73,21 +78,27 @@ namespace ETLG
 
         public void showContent()
         {
+
+            UIContainer.position = dataSkill.skillInfoPosition;
+            hideBottomPart = dataSkill.hideSkillInfoBottomPart;
+
             SkillData skillData = dataSkill.GetCurrentSkillData();
 
             int playerSkillLevel = -1;
             
-            if(dataPlayer.GetPlayerData() == null)
+            if(dataPlayer.GetPlayerData() == null || hideBottomPart)
             {
                 playerSkillLevel = 1;
             }
-            else
+            else if(dataPlayer.GetPlayerData().GetAllSkills().ContainsKey(dataSkill.currentSkillId))
             {
                 playerSkillLevel = dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId);
             }
+            else
+            {
+                playerSkillLevel = 0;
+            }
 
-            UIContainer.position = dataSkill.skillInfoPosition;
-            hideBottomPart = dataSkill.hideSkillInfoBottomPart;
 
             SkillName.text = skillData.Name;
             Domain.text = skillData.Domain;
@@ -124,7 +135,11 @@ namespace ETLG
                 NextLevelDescription.text = skillData.GetLevelEffectByLevel(currentLevel + 1);
                 ShowCosts(CostsContainer, skillData.GetLevelCosts(currentLevel + 1));
             }
+
+
         }
+
+
 
         protected override void OnClose(bool isShutdown, object userData)
         {

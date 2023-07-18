@@ -24,15 +24,14 @@ namespace ETLG
         {
             base.OnInit(userData);
             buttonImages = new RawImage[]
-{
+            {
                 spaceshipButton.GetComponent<RawImage>(),
                 skillButton.GetComponent<RawImage>(),
                 missionButton.GetComponent<RawImage>(),
                 achievementButton.GetComponent<RawImage>(),
                 knowledgeBaseButton.GetComponent<RawImage>(),
                 leaderboardButton.GetComponent<RawImage>()
-};
-
+            };
             spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, Constant.Type.PLAYERMENU_SPACESHIP));
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, Constant.Type.PLAYERMENU_SKILL));
             missionButton.onClick.AddListener(() => OnButtonClick(missionButton, Constant.Type.PLAYERMENU_MISSION));

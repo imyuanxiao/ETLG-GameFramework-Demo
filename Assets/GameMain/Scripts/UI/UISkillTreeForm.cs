@@ -76,7 +76,6 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             refreshLeftUI = true;
-
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -108,11 +107,10 @@ namespace ETLG
 
         private void OnResetButtonClick()
         {
-            Log.Debug("Reset skill data");
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-
-            // reset skill data，此处等实现clone方法后再完善
-
+            if (dataSkill.lockCurrentSkillID)
+            {
+                return;
+            }
             dataPlayer.GetPlayerData().ResetSkills();
         }
 
