@@ -25,8 +25,7 @@ namespace ETLG.Data
         {
             get
             {
-                // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_TITLE);
+                return GameEntry.Localization.GetString(Constant.Key.PRE_NPC + Id + Constant.Key.POST_TITLE);
             }
         }
 
@@ -35,7 +34,7 @@ namespace ETLG.Data
             get
             {
                 // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_DESC);
+                return GameEntry.Localization.GetString(Constant.Key.PRE_NPC + Id + Constant.Key.POST_DESC);
             }
         }
 

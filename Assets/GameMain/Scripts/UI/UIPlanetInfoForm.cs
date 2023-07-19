@@ -24,7 +24,6 @@ namespace ETLG
         {
             base.OnInit(userData);
 
-            // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
 
         }
