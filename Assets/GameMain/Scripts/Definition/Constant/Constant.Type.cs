@@ -12,6 +12,7 @@
 
             public const int NPC_UI_TALK_OPEN = 2;
             public const int NPC_UI_TRADE_OPEN = 3;
+            public const int NPC_UI_QUIZ_OPEN = 4;
 
 
             // player menu title
@@ -126,6 +127,11 @@
             public const int ADD = 1;
             public const int SUB = 2;
             public const int MUL = 2;
+
+            //questions type
+            public const string QUIZ_MULTIPLE_ANSWERS_CHOICES  = "MCM";
+            public const string QUIZ_SINGLE_ANSWERS_CHOICES  = "MCS";
+            public const string QUIZ_MATCHING_CHOICES  = "MAT";
 
         }
     }

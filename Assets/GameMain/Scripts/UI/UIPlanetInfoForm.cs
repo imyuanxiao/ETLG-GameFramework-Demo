@@ -12,7 +12,6 @@ namespace ETLG
     public class UIPlanetInfoForm : UGuiFormEx
     {
 
-        public TextMeshProUGUI p_title = null;
 
         public TextMeshProUGUI p_name = null;
         public TextMeshProUGUI p_type = null;
@@ -35,12 +34,10 @@ namespace ETLG
             base.OnOpen(userData);
 
             PlanetData currentPlanetData = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData();
-
-            p_title.text = currentPlanetData.Name;
-
             p_name.text = currentPlanetData.Name;
             p_type.text = currentPlanetData.TypeStr;
-            p_description.text = currentPlanetData.Description; 
+            p_description.text = currentPlanetData.Description;
+
 
         }
 

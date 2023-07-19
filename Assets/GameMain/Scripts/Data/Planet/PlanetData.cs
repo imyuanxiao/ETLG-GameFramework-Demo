@@ -26,7 +26,7 @@ namespace ETLG.Data
         {
             get
             {
-                return GameEntry.Localization.GetString(Constant.Key.PRE_DOMAIN + Id);
+                return GameEntry.Localization.GetString(Constant.Key.PRE_DOMAIN + Type);
             }
         }
 

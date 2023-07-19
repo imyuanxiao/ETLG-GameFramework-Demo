@@ -356,3 +356,28 @@ string field2 = newData.Field2;
    int eventParam = ??? // 触发事件时需要传入的参数
    GameEntry.Event.Fire(this, NewEventArgs.Create(eventParam));
    ```
+
+## 9. 如何保存数据
+
+假如我们想保存```PlayerCalculatedSpaceshipData```类中的所有数据到本地：
+```
+SaveManager.Instance.Save("PlayerSpaceshipData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
+```
+```Save(string key, object data)```方法接受2个参数，
+- 第一个参数是给我们保存到本地的数据一个名称，在这里我们将要保存的数据命名为```"PlayerSpaceshipData"``` （可随意命名）
+- 第二个参数是我们要保存的数据所在的类的一个实例，在这里也就是```playerCalculatedSpaceshipData```
+
+如果我们想要从本地保存的文件中读取数据，并覆盖当前游戏相关类中的数据：
+```
+SaveManager.Instance.Load("PlayerSpaceshipData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
+```
+```Load(string key, object data)```方法同样接受2个参数，
+- 第一个参数是我们想要获取的本地保存数据的名字，也就是我们在上一步保存数据时传入```Save()```方法的第一个参数
+- 第二个参数则指明要将本地保存的数据写入（覆盖）哪个类的实例。在这里，```playerCalculatedSpaceshipData```中的field都会被更新为之前被保存的数据
+
+**[注意]**
+- 目前使用Unity的PlayerPrefs将Json格式的数据保存至本地，保存的位置根据不同的操作系统会有所不同。在Windows系统下，数据会被保存至注册表。
+- 目前使用Newtonsoft.Json来将Object转换欸Json字符串，该方法还没有详尽测试过，也许在保存某些类型的数据上会出现Bug（基本的int, float, double, string, List, Array, Dictionary等没有问题），尤其是当数据之间的相互关联过于复杂时。因此建议分门别类地存储数据，避免数据间的相互引用过于复杂而报错。
+- 保存和读取class类型数据前务必确保该class的实例是存在的，因此不能在PlayerData还没有实例化的时候去对它做保存或读取操作。
+- 若想要清除所有保存的文件，在Unity编辑器窗口Edit -> Clear All PlayerPrefs
+

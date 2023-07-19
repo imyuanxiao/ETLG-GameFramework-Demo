@@ -53,13 +53,13 @@ namespace ETLG
         {
             base.OnInit(userData);
 
-            closeButton.onClick.AddListener(OnCloseButtonClick);
-            maxButton.onClick.AddListener(OnMaxButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            closeButton.onClick.AddListener(OnCloseButtonClick);
+            maxButton.onClick.AddListener(OnMaxButtonClick);
 
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
@@ -98,10 +98,18 @@ namespace ETLG
         private void loadAvatar()
         {
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
+            if(NPCTexture == null)
+            {
+                NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
             NPCSprite = Sprite.Create(NPCTexture, new Rect(0, 0, NPCTexture.width, NPCTexture.height), Vector2.one * 0.5f);
             npc_avatar.texture = NPCTexture;
 
             Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
+            if (playerTexture == null)
+            {
+                playerTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
             playerSprite = Sprite.Create(playerTexture, new Rect(0, 0, playerTexture.width, playerTexture.height), Vector2.one * 0.5f);
         }
 

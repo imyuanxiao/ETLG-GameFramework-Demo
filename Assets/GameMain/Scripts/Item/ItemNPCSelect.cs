@@ -16,8 +16,8 @@ namespace ETLG
         public TextMeshProUGUI npc_name = null;
 
         public Button talkButton;
-
         public Button tradeButton;
+        public Button quizButton;
 
         private DataNPC dataNPC;
         private NPCData npcData;
@@ -44,7 +44,7 @@ namespace ETLG
 
             talkButton.onClick.AddListener(OnTalkButtonClick);
             tradeButton.onClick.AddListener(OnTradeButtonClick);
-
+            quizButton.onClick.AddListener(OnQuizButtonClick);
         }
 
 
@@ -54,7 +54,7 @@ namespace ETLG
             base.OnHide(isShutdown, userData);
             talkButton.onClick.RemoveAllListeners();
             tradeButton.onClick.RemoveAllListeners();
-
+            quizButton.onClick.RemoveAllListeners();
         }
 
         public void OnTalkButtonClick()
@@ -72,6 +72,15 @@ namespace ETLG
             dataNPC.currentNPCId = npcData.Id;
 
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_TRADE_OPEN));
+
+        }
+
+        public void OnQuizButtonClick()
+        {
+
+            dataNPC.currentNPCId = npcData.Id;
+
+            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_QUIZ_OPEN));
 
         }
 
