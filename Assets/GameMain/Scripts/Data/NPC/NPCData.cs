@@ -4,9 +4,6 @@ namespace ETLG.Data
     public sealed class NPCData
     {
         private DRNPC dRNPC;
-       // private QuestData[] quests;
-
-        
         
         public int Id
         {
@@ -24,11 +21,21 @@ namespace ETLG.Data
             }
         }
 
-        public string Avatar
+        public string Title
         {
             get
             {
-                return dRNPC.Avatar;
+                // return dRPlanet.Description;
+                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_TITLE);
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                // return dRPlanet.Description;
+                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_DESC);
             }
         }
 
@@ -36,7 +43,17 @@ namespace ETLG.Data
         {
             get
             {
-                return dRNPC.Type;
+                switch (dRNPC.Type)
+                {
+                    case Constant.Type.NPC_TYPE_TEACHER:
+                        return "Teacher";
+                    case Constant.Type.NPC_TYPE_EXAMINER:
+                        return "Teacher";
+                    default:
+                        return "Others";
+
+                }
+
             }
         }
 
@@ -56,26 +73,19 @@ namespace ETLG.Data
             }
         }
 
-        public int[] Quests
+        public string DialogXML
         {
             get
             {
-                return dRNPC.Quests;
-            }
-        }
-        public string Description
-        {
-            get
-            {
-                return dRNPC.Description;
+                return AssetUtility.GetDialogXML(dRNPC.DialogXML);
             }
         }
 
-        public string XMLSource
+        public string QuizXML
         {
             get
             {
-                return dRNPC.XMLSource;
+                return AssetUtility.GetQuizXML(dRNPC.QuizXML);
             }
         }
 
@@ -84,11 +94,6 @@ namespace ETLG.Data
         {
             this.dRNPC = dRNPC;
         }
-/*        public NPCData(DRNPC dRNPC, QuestData[] quests)
-        {
-            this.dRNPC = dRNPC;
-            this.quests = quests;
-        }*/
 
     }
 

@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-16 03:15:03.924
+// 生成时间：2023-07-19 17:10:45.415
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,18 +37,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取经纬度（可以用球坐标代替）。
+        /// 获取课程名称。
         /// </summary>
-        public string Location
+        public string Course
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取类型（资源登录点或NPC互动点）。
+        /// 获取偏移量。
         /// </summary>
-        public string Type
+        public int Offset
         {
             get;
             private set;
@@ -75,8 +75,8 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Location = columnStrings[index++];
-            Type = columnStrings[index++];
+            Course = columnStrings[index++];
+            Offset = int.Parse(columnStrings[index++]);
                 NPCsID = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
@@ -90,8 +90,8 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Location = binaryReader.ReadString();
-                    Type = binaryReader.ReadString();
+                    Course = binaryReader.ReadString();
+                    Offset = binaryReader.Read7BitEncodedInt32();
                         NPCsID = binaryReader.ReadInt32Array();
                 }
             }

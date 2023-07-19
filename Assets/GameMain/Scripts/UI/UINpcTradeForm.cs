@@ -52,8 +52,7 @@ namespace ETLG
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
-            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
-            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
+
 
             closeButton.onClick.AddListener(OnCloseButtonClick);
         }
@@ -65,16 +64,15 @@ namespace ETLG
             UIArtifactInfoTradeForm.OnTradeDataSent += HandleTradeData;
             refresh = true;
 
-            npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
-            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
-
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
+
             if (refresh)
             {
+
                 HideAllItem();
                 showContent();
                 refresh = false;
@@ -92,6 +90,12 @@ namespace ETLG
 
         private void showContent()
         {
+
+            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
+            npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
+            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
+
             npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
             npc_money.text = npcMoney.ToString();
@@ -108,7 +112,7 @@ namespace ETLG
             dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
 
 
-            dataPlayer.GetPlayerData().setNpcArtifactsByNpcId(dataNPC.currentNPCId,npcArtifacts);
+            dataPlayer.GetPlayerData().setNpcArtifactsByNpcId(dataNPC.currentNPCId, npcArtifacts);
             dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money = npcMoney;
         }
 

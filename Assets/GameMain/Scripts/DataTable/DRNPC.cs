@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-16 03:15:03.930
+// 生成时间：2023-07-19 17:10:45.423
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,27 +46,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取头像。
+        /// 获取NPC类型(1-teacher,2-examiner)。
         /// </summary>
-        public string Avatar
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取NPC类型。
-        /// </summary>
-        public string Type
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取描述。
-        /// </summary>
-        public string Description
+        public int Type
         {
             get;
             private set;
@@ -91,18 +73,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取任务ID。
+        /// 获取对话文本路径。
         /// </summary>
-        public int[] Quests
+        public string DialogXML
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取对话文本路径。
+        /// 获取题库路径。
         /// </summary>
-        public string XMLSource
+        public string QuizXML
         {
             get;
             private set;
@@ -119,15 +101,12 @@ namespace ETLG
             int index = 0;
             index++;
             m_Id = int.Parse(columnStrings[index++]);
-            index++;
             Name = columnStrings[index++];
-            Avatar = columnStrings[index++];
-            Type = columnStrings[index++];
-            Description = columnStrings[index++];
+            Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
-                Quests = DataTableExtension.ParseInt32Array(columnStrings[index++]);
-            XMLSource = columnStrings[index++];
+            DialogXML = columnStrings[index++];
+            QuizXML = columnStrings[index++];
 
             GeneratePropertyArray();
             return true;
@@ -141,13 +120,11 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
-                    Avatar = binaryReader.ReadString();
-                    Type = binaryReader.ReadString();
-                    Description = binaryReader.ReadString();
+                    Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();
-                        Quests = binaryReader.ReadInt32Array();
-                    XMLSource = binaryReader.ReadString();
+                    DialogXML = binaryReader.ReadString();
+                    QuizXML = binaryReader.ReadString();
                 }
             }
 

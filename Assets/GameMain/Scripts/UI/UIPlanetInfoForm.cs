@@ -39,7 +39,7 @@ namespace ETLG
             p_title.text = currentPlanetData.Name;
 
             p_name.text = currentPlanetData.Name;
-            p_type.text = currentPlanetData.Type;
+            p_type.text = currentPlanetData.TypeStr;
             p_description.text = currentPlanetData.Description; 
 
         }
