@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,7 @@ namespace ETLG
         public Button playerMenuButton;
         public Button selectSpaceshipButton;
         public Button planetLandingPointButton;
+        public Button saveGameButton;
 
         public Button planetInfoButton;
 
@@ -31,7 +33,19 @@ namespace ETLG
             selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
             planetLandingPointButton.onClick.AddListener(OnPlanetLandingPointButtonClick);
             planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);
+            saveGameButton.onClick.AddListener(OnSaveGame);
 
+        }
+
+        private void OnSaveGame()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
+            {
+                GameEntry.UI.GetUIForm(EnumUIForm.UIMapPlayerInfoForm).Close();
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UILoadGameForm);
+            this.Close();
         }
 
         protected override void OnOpen(object userData)
