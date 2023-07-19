@@ -12,16 +12,24 @@ namespace ETLG
 {
     public class UINpcQuizForm : UGuiFormEx
     {
-
         private NPCData npcData;
         private string npcAvatarPath;
-        private string XMLPath= "Assets/GameMain/Res/QuizXML/CloudComputing/Basic/B.The History and Evolution of the Cloud.xml";
-        private Dictionary<string, XmlNode> quizNodes;
+        private string XMLPath;
+        private UIQuizManager UIQuizManager = new UIQuizManager();
+        private List<UIQuiz> quizArray;
 
         public TextMeshProUGUI npc_name;
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public TextMeshProUGUI statement;
+        public Transform ChoicesContainer;
+        public Canvas ChoicePrefab;
+        public Button LastButton;
+        public Button NextButton;
+        public Button SubmitButton;
+
+        private int currentQuizIndex = 0;
+        private UIQuiz currentQuiz;
 
         public Button closeButton;
         protected override void OnInit(object userData)
@@ -42,8 +50,12 @@ namespace ETLG
             npc_description.text = npcData.Description;
             XMLPath = npcData.XMLQuizSource;
 
+            SubmitButton.onClick.AddListener(OnSubmitButtonClick);
+
             loadAvatar();
             parseXMLFile();
+            loadQuestions();
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -74,16 +86,92 @@ namespace ETLG
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(XMLPath);
-
-            quizNodes = new Dictionary<string, XmlNode>();
-
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
 
             foreach (XmlNode node in nodes)
             {
-                string nodeId = node.Attributes["id"].Value;
-                quizNodes.Add(nodeId, node);
+                UIQuizManager.addQuiz(new UIQuiz(node));
             }
+            quizArray = UIQuizManager.quizArray;
+
+        }
+
+        private void getCurrentQuiz()
+        {
+            currentQuiz = quizArray[currentQuizIndex];
+            currentQuizIndex++;
+        }
+
+        private void loadQuestions()
+        {
+            //第一次进load一次，触发next last或submit重新load
+            getCurrentQuiz();
+            statement.text = currentQuiz.statement;
+            if (currentQuiz.type == Constant.Type.QUIZ_MULTIPLE_ANSWERS_CHOICES)
+            {
+                multipleAnswersChoices();
+            }
+            else if (currentQuiz.type == Constant.Type.QUIZ_SINGLE_ANSWERS_CHOICES)
+            {
+                singleAnswersChoices();
+            }
+            else
+            {
+                matchingQuestions();
+            }
+        }
+
+        private void multipleAnswersChoices()
+        {
+            //是否有作答记录
+            if (!currentQuiz.haveSeen)
+            {
+                instantiateChoicesPrefab();
+            }
+            else
+            {
+
+            }
+            
+        }
+        private void instantiateChoicesPrefab()
+        {
+
+            foreach (KeyValuePair<string, string> option in currentQuiz.Options)
+            {
+                Canvas newChoicePrefab = Instantiate(ChoicePrefab, ChoicesContainer);
+                Toggle toggle = newChoicePrefab.GetComponentInChildren<Toggle>();
+                toggle.isOn = false;
+
+                TextMeshProUGUI choiceText = newChoicePrefab.GetComponentInChildren<TextMeshProUGUI>();
+                choiceText.text = option.Value;
+
+                currentQuiz.addOptionsCanvas(option.Key, newChoicePrefab);
+                //增加确认按钮和下一个按钮的处理，保存当前作答状态
+                //toggle group
+            }
+
+        }
+
+
+        private void singleAnswersChoices()
+        {
+
+        }
+
+        private void trueOrFalse()
+        {
+
+        }
+
+        private void matchingQuestions()
+        {
+
+        }
+
+        private void OnSubmitButtonClick()
+        {
+
         }
     }
 }

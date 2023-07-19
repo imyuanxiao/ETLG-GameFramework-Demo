@@ -1,6 +1,6 @@
 <quiz>
-  <question id="1" type="MCM">
-    <statement timelimit="30">Question 1: What is the capital of France?</statement>
+  <question type="MCM" timelimit="30">
+    <statement>Question 1: What is the capital of France?</statement>
     <hint>question1 hint here</hint>
     <options>
       <option id="A">A. Paris</option>
@@ -9,9 +9,12 @@
       <option id="D">D. Berlin</option>
     </options>
     <analysis>The capital of France is Paris.</analysis>
-    <answer>A</answer>
+    <answers>
+      <answer>A</answer>
+      <answer>B</answer>
+    </answers>
   </question>
-  <question id="2" type="MCM">
+  <question type="MCM" timelimit="20">
     <statement>Question 2: Which planet is known as the Red Planet?</statement>
     <hint>question2 hint here</hint>
     <options>
@@ -21,6 +24,8 @@
       <option id="D">D. Venus</option>
     </options>
     <analysis>Mars is Red Planet.</analysis>
-    <answer>B</answer>
+    <answers>
+      <answer>B</answer>
+    </answers>
   </question>
 </quiz>

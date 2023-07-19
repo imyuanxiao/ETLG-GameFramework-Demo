@@ -214,6 +214,7 @@ namespace ETLG
 
         private void OnItemClickedFromIcon(int artifactID, int totalNum, int type)
         {
+            //if click other icon when trading, ignore the click
             if (!isTrade)
             {
                 isTrade = true;
