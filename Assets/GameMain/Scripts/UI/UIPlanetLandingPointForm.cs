@@ -46,10 +46,6 @@ namespace ETLG
         {
 
             NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
-            Vector3 offset = new Vector3(0f, -50f, 0f); // 偏移量
-
-            int i = 0;
-
             foreach (var npcData in npcDatas)
             {
                 ShowItem<ItemNPCSelect>(EnumItem.NPCSelect, (item) =>
@@ -57,7 +53,6 @@ namespace ETLG
                     item.transform.SetParent(NPCsContainer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + (i++) * offset; // 根据偏移量计算新的位置
                     item.GetComponent<ItemNPCSelect>().SetNPCData(npcData);
                 });
             }
