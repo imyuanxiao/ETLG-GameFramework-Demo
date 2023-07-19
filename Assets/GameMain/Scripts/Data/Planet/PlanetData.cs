@@ -64,14 +64,31 @@ namespace ETLG.Data
             }
         }
 
-
+        public int[] LandingPoints
+        {
+            get
+            {
+                return dRPlanet.LandingPoints;
+            }
+        }
+/*        public LandingpointData[] LandingPoints
+        {
+            get
+            {
+                return landingpoints;
+            }
+        }
+*/
         // 构造方法
-        public PlanetData(DRPlanet dRPlanet, LandingpointData[] landingpoints)
+    /*    public PlanetData(DRPlanet dRPlanet, LandingpointData[] landingpoints)
         {
             this.dRPlanet = dRPlanet;
             this.landingpoints = landingpoints;
+        }*/
+        public PlanetData(DRPlanet dRPlanet)
+        {
+            this.dRPlanet = dRPlanet;
         }
-
     }
 
 }

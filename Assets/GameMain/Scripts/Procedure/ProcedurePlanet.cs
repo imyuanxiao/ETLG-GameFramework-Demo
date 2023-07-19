@@ -144,8 +144,7 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            // 打开 planetScene UI
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
+            GameEntry.Data.GetData<DataUI>().LandingPointInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
         }
 
         private void OnPlanetInfo(object sender, GameEventArgs e)

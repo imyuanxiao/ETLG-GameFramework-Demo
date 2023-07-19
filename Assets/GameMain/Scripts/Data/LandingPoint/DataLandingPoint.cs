@@ -84,9 +84,6 @@ namespace ETLG.Data
 
         public LandingpointData GetCurrentLandingPointData()
         {
-            //为测试，这里直接 赋值 101，应该是动态变化的
-
-            // currentLandingPointID = 101;
 
             if (!dicLandingPointData.ContainsKey(currentLandingPointID))
             {

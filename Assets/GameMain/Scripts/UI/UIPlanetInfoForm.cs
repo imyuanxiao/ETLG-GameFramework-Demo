@@ -17,6 +17,8 @@ namespace ETLG
         public TextMeshProUGUI p_type = null;
         public TextMeshProUGUI p_description = null;
 
+        public Transform LandingPointsContainer;
+
         public Button closeButton = null;
 
         // 初始化菜单数据
@@ -37,9 +39,24 @@ namespace ETLG
             p_type.text = currentPlanetData.TypeStr;
             p_description.text = currentPlanetData.Description;
 
-
+            ShowLandingPoints();
         }
+        private void ShowLandingPoints()
+        {
 
+            int[] LandingPoints = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData().LandingPoints;
+
+            foreach (var LandingPoint in LandingPoints)
+            {
+                ShowItem<ItemLandingPointSelect>(EnumItem.ItemLandingPointSelect, (item) =>
+                {
+                    item.transform.SetParent(LandingPointsContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.GetComponent<ItemLandingPointSelect>().SetData(LandingPoint);
+                });
+            }
+        }
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);

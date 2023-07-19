@@ -103,6 +103,10 @@ namespace ETLG.Data
         private Dictionary<int, UIData> dicUIData;
         private Dictionary<int, UIGroupData> dicUIGroupData;
 
+
+        // global UIID
+        public int? LandingPointInfoUIID { get; set; }
+
         protected override void OnInit()
         {
 
