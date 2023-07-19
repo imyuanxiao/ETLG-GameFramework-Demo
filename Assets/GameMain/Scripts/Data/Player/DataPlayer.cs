@@ -47,6 +47,11 @@ namespace ETLG.Data
             playerData = new PlayerData(spaceshipData);
         }
 
+        public void LoadGame(SpaceshipData spaceshipData)
+        {
+            playerData = new PlayerData(spaceshipData);
+        }
+
         public void ContinueGame()
         {
             LoadPlayerData();

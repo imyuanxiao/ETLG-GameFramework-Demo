@@ -360,6 +360,11 @@ namespace ETLG.Data
             return result;
         }
 
+        public int[] GetEquippedModules()
+        {
+            return this.equippedModules;
+        }
+
         public void EquipCurrentModule()
         {
 
@@ -415,6 +420,11 @@ namespace ETLG.Data
 
             return playerNPCs[NpcId];
 
+        }
+
+        public Dictionary<int, PlayerNPCData> GetPlayerNPCsData()
+        {
+            return this.playerNPCs;
         }
 
         public Dictionary<int, int> GetNpcArtifactsByNpcId(int NpcId)
