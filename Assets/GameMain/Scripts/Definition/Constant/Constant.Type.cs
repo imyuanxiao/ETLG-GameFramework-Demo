@@ -4,6 +4,7 @@
     {
         public static class Type
         {
+            public const string NULL = "NULL";
 
             // UI Type
             public const int UI_OPEN = 0;
@@ -45,6 +46,8 @@
             public const string SKILL_TYPE_ACTIVE_STR = "Active";
             public const string SKILL_TYPE_PASSIVE_STR = "Passive";
 
+            public const string ICON_LOST = "iconLost";
+
 
             // skill domain
             public const int DOMAIN_COMMON = 0;
@@ -56,7 +59,10 @@
             public const int DOMAIN_IoT = 6;
 
 
-            public const string ICON_LOST = "iconLost";
+            // NPC Type
+            public const int NPC_TYPE_TEACHER = 1;
+            public const int NPC_TYPE_EXAMINER = 2;
+
 
             // artifact icon type
             public const int ARTIFACT_ICON_DEFAULT = 1;

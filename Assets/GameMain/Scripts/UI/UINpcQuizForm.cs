@@ -46,9 +46,9 @@ namespace ETLG
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
-            npcAvatarPath = npcData.Avatar;
+            npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Description;
-            XMLPath = npcData.XMLQuizSource;
+            XMLPath = npcData.QuizXML;
 
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);
 
@@ -79,6 +79,10 @@ namespace ETLG
         private void loadAvatar()
         {
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
+            if (NPCTexture == null)
+            {
+                NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
             npc_avatar.texture = NPCTexture;
         }
 

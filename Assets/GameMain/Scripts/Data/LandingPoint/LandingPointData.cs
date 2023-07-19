@@ -14,19 +14,21 @@ namespace ETLG.Data
             }
         }
 
-        public string Location
+        public string Title
         {
             get
             {
-                return dRLandingPoint.Location;
+                // return dRPlanet.Description;
+                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_TITLE);
             }
         }
 
-        public string Type
+        public string Description
         {
             get
             {
-                return dRLandingPoint.Type;
+                // return dRPlanet.Description;
+                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_DESC);
             }
         }
 

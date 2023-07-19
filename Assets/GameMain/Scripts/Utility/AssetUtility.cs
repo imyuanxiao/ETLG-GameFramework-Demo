@@ -21,11 +21,6 @@ namespace ETLG
             return Utility.Text.Format("Assets/GameMain/DataTables/{0}.{1}", assetName, fromBytes ? "bytes" : "txt");
         }
 
-        // public static string GetDataTableAsset(string assetName, bool fromBytes = false)
-        // {
-        //     return Utility.Text.Format("Assets/GameMain/DataTables/{0}.{1}", assetName, fromBytes ? "bytes" : "txt");
-        // }
-
         public static string GetDictionaryAsset(string assetName, bool fromBytes = false)
         {
             return Utility.Text.Format("Assets/GameMain/Localization/{0}/Dictionaries/{1}.{2}", GameEntry.Localization.Language.ToString(), assetName, fromBytes ? "bytes" : "json");
@@ -93,6 +88,30 @@ namespace ETLG
 
             // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
             return Utility.Text.Format("Achievement/{0}", "unlocked_treasure_chest");
+        }
+
+        public static string GetAvatarMissing()
+        {
+            return "Avatar/1000";
+        }
+
+        public static string GetNPCAvatar(string NPCID)
+        {
+            return Utility.Text.Format("Avatar/NPC/{0}", NPCID);
+        }
+        public static string GetPlayerAvatar()
+        {
+            return Utility.Text.Format("Avatar/Player/1000");
+        }
+
+        public static string GetDialogXML(string path)
+        {
+            return Utility.Text.Format("Assets/GameMain/Res/DialogXML/{0}", path);
+        }
+
+        public static string GetQuizXML(string path)
+        {
+            return Utility.Text.Format("Assets/GameMain/Res/QuizXML/{0}", path);
         }
 
     }
