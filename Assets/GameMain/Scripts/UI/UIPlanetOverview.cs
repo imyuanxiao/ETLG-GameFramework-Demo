@@ -32,6 +32,30 @@ namespace ETLG
         private void OnChallengeButtonClicked()
         {
             string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId).TypeStr;
+            Debug.Log(planetType);
+            switch (planetType)
+            {
+                case "Cloud Computing":
+                    planetType = "CloudComputing";
+                    break;
+                case "Artificial Intelligence":
+                    planetType = "AI";
+                    break;
+                case "CyberSecurity":
+                    planetType = "CyberSecurity";
+                    break;
+                case "Data Science":
+                    planetType = "DataScience";
+                    break;
+                case "Blockchain":
+                    planetType = "Blockchain";
+                    break;
+                case "Internet of Things":
+                    planetType = "IoT";
+                    break;
+                default:
+                    break;
+            }
             GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("IntermidateBattle", planetType));
         }
 
