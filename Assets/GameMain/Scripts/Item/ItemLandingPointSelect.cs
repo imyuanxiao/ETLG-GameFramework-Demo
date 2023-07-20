@@ -20,6 +20,8 @@ namespace ETLG
 
         private int landingPointID;
 
+        private int Type;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -33,9 +35,11 @@ namespace ETLG
 
         }
 
-        public void SetData(int landingPointID)
+        public void SetData(int landingPointID, int Type)
         {
             this.landingPointID = landingPointID;
+
+            this.Type = Type; 
 
             landingpoint_title.text = dataLandingPoint.GetLandingPointData(landingPointID).Title;
 
@@ -56,7 +60,14 @@ namespace ETLG
 
             dataLandingPoint.currentLandingPointID = landingPointID;
 
-            GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
+            if(Type == Constant.Type.LP_IN_MAP)
+            {
+                // move to planet
+            }
+            else if (Type == Constant.Type.LP_IN_PLANET)
+            {
+                GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
+            }
 
         }
 

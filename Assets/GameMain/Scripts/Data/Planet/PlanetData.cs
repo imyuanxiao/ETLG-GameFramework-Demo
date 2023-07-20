@@ -1,10 +1,11 @@
 ﻿
+using Unity.Burst.CompilerServices;
+
 namespace ETLG.Data
 {
     public sealed class PlanetData
     {
         private DRPlanet dRPlanet;
-        //private LandingpointData[] landingpoints;
 
         public int Id
         {
@@ -54,13 +55,11 @@ namespace ETLG.Data
             }
         }
 
-        // This will be shown on PlanetInfo UI
         public string Description
         {
             get
             {
-                // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Name + Constant.Key.POST_DESC);
+                return GameEntry.Localization.GetString(Constant.Key.PRE_PLANET + Id + Constant.Key.POST_DESC);
             }
         }
 

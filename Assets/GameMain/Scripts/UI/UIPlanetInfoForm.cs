@@ -53,7 +53,7 @@ namespace ETLG
                     item.transform.SetParent(LandingPointsContainer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.GetComponent<ItemLandingPointSelect>().SetData(LandingPoint);
+                    item.GetComponent<ItemLandingPointSelect>().SetData(LandingPoint, Constant.Type.LP_IN_PLANET);
                 });
             }
         }

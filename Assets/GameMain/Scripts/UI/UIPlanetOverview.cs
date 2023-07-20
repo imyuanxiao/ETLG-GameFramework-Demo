@@ -14,10 +14,14 @@ namespace ETLG
         public Button challengeButton;
         public Button exploreButton;
         public Button cancelButton;
+
         public TextMeshProUGUI planetName;
-        //public TextMeshProUGUI planetType;
-        public TextMeshProUGUI overview;
+        public TextMeshProUGUI planetType;
+
+        public TextMeshProUGUI Desription;
+
         public Image progressBar;
+
         private PlanetBase currentPlanet = null;
 
         protected override void OnInit(object userData)
@@ -98,8 +102,8 @@ namespace ETLG
             PlanetData data = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId);
 
             planetName.text = data.Name;
-            //planetType.text = data.Type;
-            overview.text = data.Description;
+            planetType.text = data.TypeStr;
+            Desription.text = data.Description;
             progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
         }
 

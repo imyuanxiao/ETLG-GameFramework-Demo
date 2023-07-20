@@ -4,6 +4,7 @@ using UnityEngine;
 using GameFramework.Data;
 using GameFramework.DataTable;
 using UnityGameFramework.Runtime;
+using System.Linq;
 
 namespace ETLG.Data
 {
@@ -71,6 +72,12 @@ namespace ETLG.Data
         protected override void OnShutdown()
         {
 
+        }
+
+        public int[] GetAllPlanetIDs()
+        {
+
+            return dicPlanetData.Keys.ToArray();
         }
 
         public PlanetData GetPlanetData(int id)

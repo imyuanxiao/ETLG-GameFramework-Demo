@@ -19,6 +19,8 @@
 
             public const string PRE_TUTORIAL = "Tutorial_";
 
+            public const string PRE_PLANET = "Planet_";
+
 
             public const string POST_TITLE = "_Title";
             public const string POST_DESC = "_Desc";

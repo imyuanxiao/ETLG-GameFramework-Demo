@@ -121,5 +121,15 @@ namespace ETLG
             return Utility.Text.Format("Tutorial/1000");
         }
 
+        public static string GetArrowImg(int Type)
+        {
+            if (Type.Equals(Constant.Type.ARROW_DOWN))
+            {
+                return Utility.Text.Format("PlanetMenu/ArrowDown");
+            }
+            return Utility.Text.Format("PlanetMenu/ArrowRight");
+
+        }
+
     }
 }

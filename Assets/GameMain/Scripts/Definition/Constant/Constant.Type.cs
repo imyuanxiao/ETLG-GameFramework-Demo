@@ -133,6 +133,16 @@
             public const string QUIZ_SINGLE_ANSWERS_CHOICES  = "MCS";
             public const string QUIZ_MATCHING_CHOICES  = "MAT";
 
+            //arrow icon type
+            public const int ARROW_RIGHT = 0;
+            public const int ARROW_DOWN = 1;
+
+            //landing point select type
+            public const int LP_IN_MAP = 0;
+            public const int LP_IN_PLANET = 1;
+
+
+
         }
     }
 }
