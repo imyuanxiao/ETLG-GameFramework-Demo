@@ -45,11 +45,12 @@ namespace ETLG
             this.saveSlots[saveId].saveSlotObj.SetActive(false);
         }
 
+        // Create a new save slot (other than save slot 0)
         private void OnCreateNewSave()
         {
             int saveId = GetEmptySaveSlotId();
             Debug.Log("New Save Id = " + saveId);
-            if (saveId == -1)
+            if (saveId == -1 || saveId == 0)
             {
                 return;
             }
@@ -179,7 +180,7 @@ namespace ETLG
         {
             foreach (var item in this.saveSlots)
             {
-                if (!item.isFilled)
+                if (!item.isFilled && item.SaveId != 0)
                 {
                     return item.SaveId;
                 }

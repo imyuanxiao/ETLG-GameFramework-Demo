@@ -119,6 +119,36 @@ namespace ETLG
             }
         }
 
+        public void SaveResolution(int width, int height)
+        {
+            PlayerPrefs.SetInt("Resolution_Width", width);
+            PlayerPrefs.SetInt("Resolution_Height", height);
+        }
+
+        public void SaveSoundVolume(float soundVolume)
+        {
+            PlayerPrefs.SetFloat("SoundVolume", soundVolume);
+        }
+
+        public int[] LoadResolution()
+        {
+            int[] resolution = {1920, 1080};
+            if (PlayerPrefs.HasKey("Resolution_Width") && PlayerPrefs.HasKey("Resolution_Height"))
+            {
+                resolution[0] = PlayerPrefs.GetInt("Resolution_Width");
+                resolution[1] = PlayerPrefs.GetInt("Resolution_Height");
+            }
+            return resolution;
+        }
+
+        public void LoadSoundVolume()
+        {
+            if (PlayerPrefs.HasKey("SoundVolume"))
+            {
+                AudioListener.volume = PlayerPrefs.GetFloat("SoundVolume");
+            }
+        }
+
         public void Delete(string key)
         {
             if (PlayerPrefs.HasKey(key))

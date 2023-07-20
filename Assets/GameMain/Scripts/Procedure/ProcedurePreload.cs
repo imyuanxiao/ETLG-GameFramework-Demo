@@ -56,6 +56,9 @@ namespace ETLG
             }
 
             PreloadResources();
+
+            SaveManager.Instance.LoadSoundVolume();
+            SaveManager.Instance.LoadResolution();
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
