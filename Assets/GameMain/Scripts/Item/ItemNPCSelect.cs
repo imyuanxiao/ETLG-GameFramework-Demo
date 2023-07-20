@@ -56,7 +56,7 @@ namespace ETLG
             quizButton.gameObject.SetActive(true);
 
 
-            if (Constant.Type.NULL.Equals(npcData.DialogXML))
+            if (npcData.NoDialogXML)
             {
                 talkButton.gameObject.SetActive(false);
             }
@@ -66,7 +66,7 @@ namespace ETLG
                 tradeButton.gameObject.SetActive(false);
             }
 
-            if (Constant.Type.NULL.Equals(npcData.QuizXML))
+            if (npcData.NoQuizXML)
             {
                 quizButton.gameObject.SetActive(false);
             }
