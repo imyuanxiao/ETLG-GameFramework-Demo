@@ -72,11 +72,27 @@ namespace ETLG.Data
             }
         }
 
+        public bool NoDialogXML
+        {
+            get
+            {
+                return Constant.Type.NULL.Equals(dRNPC.DialogXML);
+            }
+        }
+
         public string DialogXML
         {
             get
             {
                 return AssetUtility.GetDialogXML(dRNPC.DialogXML);
+            }
+        }
+
+        public bool NoQuizXML
+        {
+            get
+            {
+                return Constant.Type.NULL.Equals(dRNPC.QuizXML);
             }
         }
 

@@ -14,7 +14,7 @@ namespace ETLG
     {
 
         public TextMeshProUGUI npc_title = null;
-        public TextMeshProUGUI npc_desc = null;
+        //public TextMeshProUGUI npc_desc = null;
 
         public TextMeshProUGUI npc_name = null;
 
@@ -44,7 +44,7 @@ namespace ETLG
             this.npcData = npcData;
 
             npc_title.text = npcData.Title;
-            npc_desc.text = npcData.Description;
+            //npc_desc.text = npcData.Description;
             npc_name.text = npcData.Name;
 
             talkButton.onClick.AddListener(OnTalkButtonClick);
@@ -56,7 +56,7 @@ namespace ETLG
             quizButton.gameObject.SetActive(true);
 
 
-            if (Constant.Type.NULL.Equals(npcData.DialogXML))
+            if (npcData.NoDialogXML)
             {
                 talkButton.gameObject.SetActive(false);
             }
@@ -66,7 +66,7 @@ namespace ETLG
                 tradeButton.gameObject.SetActive(false);
             }
 
-            if (Constant.Type.NULL.Equals(npcData.QuizXML))
+            if (npcData.NoQuizXML)
             {
                 quizButton.gameObject.SetActive(false);
             }

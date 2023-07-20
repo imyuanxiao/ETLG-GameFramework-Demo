@@ -4,8 +4,8 @@ namespace ETLG.Data
     public sealed class PlanetData
     {
         private DRPlanet dRPlanet;
-        private LandingpointData[] landingpoints;
-        
+        //private LandingpointData[] landingpoints;
+
         public int Id
         {
             get
@@ -53,7 +53,7 @@ namespace ETLG.Data
                 return dRPlanet.AssetID;
             }
         }
-        
+
         // This will be shown on PlanetInfo UI
         public string Description
         {
@@ -71,20 +71,7 @@ namespace ETLG.Data
                 return dRPlanet.LandingPoints;
             }
         }
-/*        public LandingpointData[] LandingPoints
-        {
-            get
-            {
-                return landingpoints;
-            }
-        }
-*/
-        // 构造方法
-    /*    public PlanetData(DRPlanet dRPlanet, LandingpointData[] landingpoints)
-        {
-            this.dRPlanet = dRPlanet;
-            this.landingpoints = landingpoints;
-        }*/
+
         public PlanetData(DRPlanet dRPlanet)
         {
             this.dRPlanet = dRPlanet;

@@ -35,7 +35,7 @@ namespace ETLG.Data
 
             DRNPC[] dRNPCs = dtNpcs.GetAllDataRows();
 
-            DataQuest dataQuest = GameEntry.Data.GetData<DataQuest>();
+            //DataQuest dataQuest = GameEntry.Data.GetData<DataQuest>();
 
             dicNPCData = new Dictionary<int, NPCData>(); 
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,8 +191,6 @@ MonoBehaviour:
   - enable: 1
     dataTypeName: ETLG.Data.DataBossEnemy
   - enable: 1
-    dataTypeName: ETLG.Data.DataQuest
-  - enable: 1
     dataTypeName: ETLG.Data.DataNPC
   - enable: 1
     dataTypeName: ETLG.Data.DataLandingPoint
@@ -204,6 +202,8 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataPlayer
   - enable: 1
     dataTypeName: ETLG.Data.DataAchievement
+  - enable: 1
+    dataTypeName: ETLG.Data.DataTutorial
 --- !u!1 &477424328
 GameObject:
   m_ObjectHideFlags: 0
