@@ -728,7 +728,16 @@ namespace ETLG.Data
                 playerAchievement.Add(id, level);
             }
         }
+        public int GetCurrentAchievementLevelById(int id)
+        {
+            return playerAchievement.ContainsKey(id) ? playerAchievement[id] : 0;
         }
+        public bool isAchievementAchieved(int count)
+        {
+            return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
+       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
+        }
+    }
 
 }
 

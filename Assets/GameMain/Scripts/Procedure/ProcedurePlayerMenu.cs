@@ -27,7 +27,7 @@ namespace ETLG
         private DataPlayer dataPlayer;
         private DataArtifact dataArtifact;
         private DataSkill dataSkill;
-
+        private DataAchievement dataAchievement;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -56,6 +56,7 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
             ResetStates();
 
@@ -329,7 +330,12 @@ namespace ETLG
                 return;
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                dataAchievement.cuurrentPopUpId = ne.achievementId;
+                if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
+                {
+                    dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
+                    achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                }
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {

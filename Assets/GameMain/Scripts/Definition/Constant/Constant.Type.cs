@@ -21,7 +21,7 @@
             public const int PLAYERMENU_MISSION = 2;
             public const int PLAYERMENU_ACHIEVEMENT = 1027;
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 5;
+            public const int PLAYERMENU_LEADERBOARD = 1032;
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;

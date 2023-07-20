@@ -21,7 +21,9 @@ namespace ETLG
         private int? currentNPCUIID;
         private int? artifactTradeInfoUIID;
         private int? artifactInfoUIID;
-
+        private int? achievementUIID;
+        private DataPlayer dataPlayer;
+        private DataAchievement dataAchievement;
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -44,12 +46,15 @@ namespace ETLG
             GameEntry.Event.Subscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
             //GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
-
+            GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
+
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
         }
 
 
@@ -195,6 +200,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
             //GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
+            GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
@@ -251,6 +257,29 @@ namespace ETLG
                 GameEntry.UI.GetUIForm(EnumUIForm.UINPCTradeForm).Close();
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
                 GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm).Close();
+        }
+        public void OnAchievementPoPUp(object sender, GameEventArgs e)
+        {
+            AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
+            if (ne == null)
+                return;
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                dataAchievement.cuurrentPopUpId = ne.achievementId;
+                if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
+                {
+                    dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
+                    achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                }
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (achievementUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)achievementUIID);
+                }
+                achievementUIID = null;
+            }
         }
     }
 }
