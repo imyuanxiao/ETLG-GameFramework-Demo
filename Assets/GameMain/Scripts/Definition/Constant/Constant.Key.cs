@@ -12,12 +12,16 @@
 
             public const string PRE_MODULE_EFFECT = "Module_Effect_";
 
-
-            public const string POST_SKILL_LEVEL = "_Level_";
-
             public const string PRE_TIP = "Tip_";
 
+            public const string PRE_LANDING_POINT = "Landing_Point_";
+            public const string PRE_NPC = "NPC_";
+
+
+            public const string POST_TITLE = "_Title";
             public const string POST_DESC = "_Desc";
+
+            public const string POST_SKILL_LEVEL = "_Level_";
 
 
 

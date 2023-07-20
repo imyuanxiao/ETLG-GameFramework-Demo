@@ -12,11 +12,12 @@ namespace ETLG
     public class UIPlanetInfoForm : UGuiFormEx
     {
 
-        public TextMeshProUGUI p_title = null;
 
         public TextMeshProUGUI p_name = null;
         public TextMeshProUGUI p_type = null;
         public TextMeshProUGUI p_description = null;
+
+        public Transform LandingPointsContainer;
 
         public Button closeButton = null;
 
@@ -25,7 +26,6 @@ namespace ETLG
         {
             base.OnInit(userData);
 
-            // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
 
         }
@@ -35,15 +35,28 @@ namespace ETLG
             base.OnOpen(userData);
 
             PlanetData currentPlanetData = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData();
-
-            p_title.text = currentPlanetData.Name;
-
             p_name.text = currentPlanetData.Name;
-            p_type.text = currentPlanetData.Type;
-            p_description.text = currentPlanetData.Description; 
+            p_type.text = currentPlanetData.TypeStr;
+            p_description.text = currentPlanetData.Description;
 
+            ShowLandingPoints();
         }
+        private void ShowLandingPoints()
+        {
 
+            int[] LandingPoints = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData().LandingPoints;
+
+            foreach (var LandingPoint in LandingPoints)
+            {
+                ShowItem<ItemLandingPointSelect>(EnumItem.ItemLandingPointSelect, (item) =>
+                {
+                    item.transform.SetParent(LandingPointsContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.GetComponent<ItemLandingPointSelect>().SetData(LandingPoint);
+                });
+            }
+        }
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);

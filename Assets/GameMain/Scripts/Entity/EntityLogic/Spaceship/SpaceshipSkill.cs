@@ -34,7 +34,7 @@ namespace ETLG
 
             // TODO : change its value accroding to skill data
             this.canRespawn = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills().ContainsKey((int) EnumSkill.BlockchainResurgence);
-            PrintSkillsInfo();
+            // PrintSkillsInfo();
         }
 
         public bool IsSkillReady(EnumSkill id) 

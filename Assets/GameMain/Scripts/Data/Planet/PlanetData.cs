@@ -22,6 +22,22 @@ namespace ETLG.Data
             }
         }
 
+        public string TypeStr
+        {
+            get
+            {
+                return GameEntry.Localization.GetString(Constant.Key.PRE_DOMAIN + Type);
+            }
+        }
+
+        public int Type
+        {
+            get
+            {
+                return dRPlanet.Type;
+            }
+        }
+
         public int[] Coordinates
         {
             get
@@ -37,42 +53,42 @@ namespace ETLG.Data
                 return dRPlanet.AssetID;
             }
         }
-
-
-        public string Type
-        {
-            get
-            {
-                return dRPlanet.Type;
-            }
-        }
-
+        
         // This will be shown on PlanetInfo UI
         public string Description
         {
             get
             {
                 // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Name + " Description");
+                return GameEntry.Localization.GetString(Name + Constant.Key.POST_DESC);
             }
         }
 
-        // This will be shown on PlanetOverview UI
-        public string Overview 
+        public int[] LandingPoints
         {
             get
             {
-                return GameEntry.Localization.GetString(Name + " Overview");
+                return dRPlanet.LandingPoints;
             }
         }
-
+/*        public LandingpointData[] LandingPoints
+        {
+            get
+            {
+                return landingpoints;
+            }
+        }
+*/
         // 构造方法
-        public PlanetData(DRPlanet dRPlanet, LandingpointData[] landingpoints)
+    /*    public PlanetData(DRPlanet dRPlanet, LandingpointData[] landingpoints)
         {
             this.dRPlanet = dRPlanet;
             this.landingpoints = landingpoints;
+        }*/
+        public PlanetData(DRPlanet dRPlanet)
+        {
+            this.dRPlanet = dRPlanet;
         }
-
     }
 
 }

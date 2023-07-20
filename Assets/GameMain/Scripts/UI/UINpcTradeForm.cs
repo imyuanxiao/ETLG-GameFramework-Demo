@@ -62,9 +62,6 @@ namespace ETLG
             UIArtifactInfoTradeForm.OnTradeDataSent += HandleTradeData;
             refresh = true;
 
-            npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
-            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
-
         }
 
         private void loadArtifactsData()
@@ -78,8 +75,10 @@ namespace ETLG
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
+
             if (refresh)
             {
+
                 HideAllItem();
                 showContent();
                 refresh = false;
@@ -107,6 +106,12 @@ namespace ETLG
 
         private void showContent()
         {
+
+            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
+            npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
+            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
+
             npc_name.text = dataNPC.GetCurrentNPCData().Name;
 
             npc_money.text = npcMoney.ToString();

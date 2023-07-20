@@ -1,4 +1,5 @@
 using ETLG.Data;
+using GameFramework.Event;
 using GameFramework.Resource;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,12 +17,13 @@ namespace ETLG
         private DataAchievement dataAchievement;
         public TextMeshProUGUI acheivementName = null;
         public Button closeButton = null;
-
+        private DataPlayer dataPlayer;
         public Vector3 UIPosition { get; set; }
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+            dataPlayer= GameEntry.Data.GetData<DataPlayer>();
             closeButton.onClick.AddListener(OncloseButtonClick);
         }
         protected override void OnOpen(object userData)

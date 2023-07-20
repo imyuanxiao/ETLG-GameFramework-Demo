@@ -13,6 +13,9 @@ namespace ETLG
     public class ItemNPCSelect : ItemLogicEx
     {
 
+        public TextMeshProUGUI npc_title = null;
+        public TextMeshProUGUI npc_desc = null;
+
         public TextMeshProUGUI npc_name = null;
 
         public Button talkButton;
@@ -40,11 +43,33 @@ namespace ETLG
         {
             this.npcData = npcData;
 
+            npc_title.text = npcData.Title;
+            npc_desc.text = npcData.Description;
             npc_name.text = npcData.Name;
 
             talkButton.onClick.AddListener(OnTalkButtonClick);
             tradeButton.onClick.AddListener(OnTradeButtonClick);
             quizButton.onClick.AddListener(OnQuizButtonClick);
+
+            talkButton.gameObject.SetActive(true);
+            tradeButton.gameObject.SetActive(true);
+            quizButton.gameObject.SetActive(true);
+
+
+            if (Constant.Type.NULL.Equals(npcData.DialogXML))
+            {
+                talkButton.gameObject.SetActive(false);
+            }
+
+            if (npcData.Artifacts.Length <= 1)
+            {
+                tradeButton.gameObject.SetActive(false);
+            }
+
+            if (Constant.Type.NULL.Equals(npcData.QuizXML))
+            {
+                quizButton.gameObject.SetActive(false);
+            }
         }
 
 

@@ -36,13 +36,13 @@ namespace ETLG.Data
 
             DRPlanet[] dRPlanets = dtPlanets.GetAllDataRows();
 
-            DataLandingPoint dataLandingPoint = GameEntry.Data.GetData<DataLandingPoint>();
+            //DataLandingPoint dataLandingPoint = GameEntry.Data.GetData<DataLandingPoint>();
 
             dicPlanetData = new Dictionary<int, PlanetData>(); 
 
             foreach (var dRPlanet in dRPlanets)
             {
-                LandingpointData[] landingpoints = new LandingpointData[dRPlanet.LandingPoints.Length];
+               /* LandingpointData[] landingpoints = new LandingpointData[dRPlanet.LandingPoints.Length];
 
                 for(int i = 0; i < dRPlanet.LandingPoints.Length; i++)
                 {
@@ -53,9 +53,10 @@ namespace ETLG.Data
                         throw new System.Exception(string.Format("Can not find landingpoint id '{0}' in DataTable LandingPoint.", dRPlanet.LandingPoints[i]));
                     }
                     landingpoints[i] = landingpointData;
-                }
+                }*/
 
-                dicPlanetData.Add(dRPlanet.Id, new PlanetData(dRPlanet, landingpoints));
+               // dicPlanetData.Add(dRPlanet.Id, new PlanetData(dRPlanet, landingpoints));
+                dicPlanetData.Add(dRPlanet.Id, new PlanetData(dRPlanet));
 
             }
 

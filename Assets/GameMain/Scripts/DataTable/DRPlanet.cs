@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-18 16:26:30.040
+// 生成时间：2023-07-20 01:30:26.595
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,6 +46,15 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取类型。
+        /// </summary>
+        public int Type
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取坐标(x,y轴）。
         /// </summary>
         public int[] Coordinates
@@ -58,24 +67,6 @@ namespace ETLG
         /// 获取资源ID（模型路径）。
         /// </summary>
         public int AssetID
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取类型。
-        /// </summary>
-        public string Type
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取描述。
-        /// </summary>
-        public string Description
         {
             get;
             private set;
@@ -103,10 +94,9 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Name = columnStrings[index++];
+            Type = int.Parse(columnStrings[index++]);
                 Coordinates = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             AssetID = int.Parse(columnStrings[index++]);
-            Type = columnStrings[index++];
-            Description = columnStrings[index++];
                 LandingPoints = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
             GeneratePropertyArray();
@@ -121,10 +111,9 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
+                    Type = binaryReader.Read7BitEncodedInt32();
                         Coordinates = binaryReader.ReadInt32Array();
                     AssetID = binaryReader.Read7BitEncodedInt32();
-                    Type = binaryReader.ReadString();
-                    Description = binaryReader.ReadString();
                         LandingPoints = binaryReader.ReadInt32Array();
                 }
             }

@@ -24,41 +24,45 @@ namespace ETLG
         public Transform container;
         public string tipTitle;
         public int position = 0;
+        public bool refresh;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
-            EventTrigger trigger = achievementButton.gameObject.AddComponent<EventTrigger>();
 
         }
-        /* public void OnPointerEnter(PointerEventData eventData)
-         {
-             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-             Vector3 newPosition = itemPosition + new Vector3(0f, 50f, 0f);
-             if (acheivementName.text != null)
-             {
-                 tipTitle = acheivementName.text;
-             }
-             GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
-         }
-
-         public void OnPointerExit(PointerEventData eventData)
-         {
-             GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-         }
-         */
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (refresh)
+            {
+                SetData();
+                refresh = false;
+            }
+        }
+        public void UpdateData()
+        {
+            refresh = true;
+        }
         public void SetAchievementData(int id, Transform container)
         {
+            this.container = container;
             this.achievementData = dataAchievement.GetDataById(id);
+            refresh = false;
+            SetData();
+        }
+        private void SetData()
+        {
             int type = achievementData.TypeId;
-            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id,dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
+            int id = achievementData.Id;
+            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
             {
                 Sprite sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon());
                 this.image.sprite = sprite;
             }
             this.acheivementName.text = achievementData.Name;
-            switch(type)
+            switch (type)
             {
                 case Constant.Type.ACHV_QUIZ:
                     //player data
@@ -86,7 +90,7 @@ namespace ETLG
                     break;
                 case Constant.Type.ACHV_SPACESHIP:
                     //level
-                    if(dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                    if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                     {
                         this.progress.text = dataPlayer.GetPlayerData().GetPlayerAchievement()[id].ToString();
                     }
@@ -108,15 +112,15 @@ namespace ETLG
                 case Constant.Type.ACHV_HIDDEN:
                     break;
             }
-           
+
+            //先暂时都设为0
             this.progress.text = "0";
-            this.next_level.text= GetNextLevel();
-            this.container=container;
+            this.next_level.text = GetNextLevel();
         }
         private string GetNextLevel()
         {
             PlayerData playerData = dataPlayer.GetPlayerData();
-            Dictionary<int,int> playerAchievement = playerData.GetPlayerAchievement();
+            Dictionary<int, int> playerAchievement = playerData.GetPlayerAchievement();
 
             if (!playerAchievement.ContainsKey(achievementData.Id))
             {

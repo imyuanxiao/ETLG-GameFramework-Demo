@@ -98,6 +98,24 @@ namespace ETLG.Data
             AchievementData achievementData = GetDataById(id);
             return level >= achievementData.Count.Length;
         }
+        public int GetNextLevel(int Id, int count)
+        {
+            AchievementData achievementData = GetDataById(Id);
+            if (achievementData == null)
+            {
+                return 0;
+            }
+            int[] Count = achievementData.Count;
+            for (int i = 0; i < Count.Length; i++)
+            {
+                if (count < Count[i])
+                {
+                    return i;
+                }
+            }
+
+            return Count.Length - 1;
+        }
     }
 }
 

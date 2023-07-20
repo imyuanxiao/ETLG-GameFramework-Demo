@@ -15,7 +15,7 @@ namespace ETLG
         public Button exploreButton;
         public Button cancelButton;
         public TextMeshProUGUI planetName;
-        public TextMeshProUGUI planetType;
+        //public TextMeshProUGUI planetType;
         public TextMeshProUGUI overview;
         public Image progressBar;
         private PlanetBase currentPlanet = null;
@@ -31,7 +31,31 @@ namespace ETLG
 
         private void OnChallengeButtonClicked()
         {
-            string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId).Type;
+            string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId).TypeStr;
+            Debug.Log(planetType);
+            switch (planetType)
+            {
+                case "Cloud Computing":
+                    planetType = "CloudComputing";
+                    break;
+                case "Artificial Intelligence":
+                    planetType = "AI";
+                    break;
+                case "CyberSecurity":
+                    planetType = "CyberSecurity";
+                    break;
+                case "Data Science":
+                    planetType = "DataScience";
+                    break;
+                case "Blockchain":
+                    planetType = "Blockchain";
+                    break;
+                case "Internet of Things":
+                    planetType = "IoT";
+                    break;
+                default:
+                    break;
+            }
             GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("IntermidateBattle", planetType));
         }
 
@@ -74,8 +98,8 @@ namespace ETLG
             PlanetData data = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(currentPlanet.PlanetId);
 
             planetName.text = data.Name;
-            planetType.text = data.Type;
-            overview.text = data.Overview;
+            //planetType.text = data.Type;
+            overview.text = data.Description;
             progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
         }
 

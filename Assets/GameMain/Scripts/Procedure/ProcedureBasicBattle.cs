@@ -49,7 +49,7 @@ namespace ETLG
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
 
-            GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
+            // GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
             // BattleManager.Instance.SetEnemiesData();
             BattleManager.Instance.SpawnBasicEnemies();
@@ -130,6 +130,7 @@ namespace ETLG
         private void onShowSuccess(Entity entity)
         {
             spaceShipEntity = entity;
+            GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleInfo, entity.GetComponent<Health>());
         }
 

@@ -360,6 +360,11 @@ namespace ETLG.Data
             return result;
         }
 
+        public int[] GetEquippedModules()
+        {
+            return this.equippedModules;
+        }
+
         public void EquipCurrentModule()
         {
 
@@ -415,6 +420,11 @@ namespace ETLG.Data
 
             return playerNPCs[NpcId];
 
+        }
+
+        public Dictionary<int, PlayerNPCData> GetPlayerNPCsData()
+        {
+            return this.playerNPCs;
         }
 
         public Dictionary<int, int> GetNpcArtifactsByNpcId(int NpcId)
@@ -718,7 +728,16 @@ namespace ETLG.Data
                 playerAchievement.Add(id, level);
             }
         }
+        public int GetCurrentAchievementLevelById(int id)
+        {
+            return playerAchievement.ContainsKey(id) ? playerAchievement[id] : 0;
         }
+        public bool isAchievementAchieved(int count)
+        {
+            return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
+       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
+        }
+    }
 
 }
 

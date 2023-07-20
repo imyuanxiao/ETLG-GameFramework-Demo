@@ -64,9 +64,9 @@ namespace ETLG
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
-            npcAvatarPath = npcData.Avatar;
+            npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Description;
-            XMLPath = npcData.XMLDialogSource;
+            XMLPath = npcData.DialogXML;
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
 
@@ -98,10 +98,18 @@ namespace ETLG
         private void loadAvatar()
         {
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
+            if(NPCTexture == null)
+            {
+                NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
             NPCSprite = Sprite.Create(NPCTexture, new Rect(0, 0, NPCTexture.width, NPCTexture.height), Vector2.one * 0.5f);
             npc_avatar.texture = NPCTexture;
 
-            Texture2D playerTexture = Resources.Load<Texture2D>("Avatar/1012");
+            Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
+            if (playerTexture == null)
+            {
+                playerTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
             playerSprite = Sprite.Create(playerTexture, new Rect(0, 0, playerTexture.width, playerTexture.height), Vector2.one * 0.5f);
         }
 

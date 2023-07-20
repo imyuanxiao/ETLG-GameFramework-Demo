@@ -19,6 +19,10 @@ namespace ETLG
 
         private RaycastHit hitInfo;  // store the information of the object that the ray hitted
 
+        private int? achievementUIID;
+        private DataPlayer dataPlayer;
+        private DataAchievement dataAchievement;
+
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -33,6 +37,9 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
             GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
+            GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
             MapManager.Instance.focusedPlanet = null;
 
@@ -43,6 +50,8 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UIMapPlayerInfoForm);
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
+
+            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
         }
 
         // called when player clicked the challenge button on UIPlanetOverview
@@ -147,7 +156,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
-
+            GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
             {
                 GameEntry.UI.GetUIForm(EnumUIForm.UIMapPlayerInfoForm).Close();
@@ -184,6 +193,29 @@ namespace ETLG
                 Log.Error("Invalid Event [FocusOnPlanetEventArgs]");
 
             changeToProcedurePlanet = true;
+        }
+        public void OnAchievementPoPUp(object sender, GameEventArgs e)
+        {
+            AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
+            if (ne == null)
+                return;
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                dataAchievement.cuurrentPopUpId = ne.achievementId;
+                if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
+                {
+                    dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
+                    achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                }
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (achievementUIID != null)
+                {
+                    GameEntry.UI.CloseUIForm((int)achievementUIID);
+                }
+                achievementUIID = null;
+            }
         }
     }
 }
