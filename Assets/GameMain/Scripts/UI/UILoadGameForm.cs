@@ -62,6 +62,9 @@ namespace ETLG
             this.saveSlots[saveId].saveName.text = "Save-" + saveId.ToString();
             this.saveSlots[saveId].saveTime.text = savedData.savedGamesDic[saveId];
             this.saveSlots[saveId].saveSlotObj.SetActive(true);
+
+            this.saveSlots[saveId].loadBtnObj.SetActive(false);
+            this.saveSlots[saveId].overwriteBtnObj.SetActive(true);
         }
 
         protected override void OnOpen(object userData)
