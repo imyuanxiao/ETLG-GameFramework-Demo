@@ -26,10 +26,10 @@ namespace ETLG
         private void Start()
         {
             // Calculate the left, right, up and bottom movement boundaries of the camera
-            leftBoundary = cameraBounds.position.x - cameraBounds.localScale.x / 2f;
-            rightBoundary = cameraBounds.position.x + cameraBounds.localScale.x / 2f;
-            upBoundary = cameraBounds.position.z + cameraBounds.localScale.z / 2f;
-            bottomBoundary = cameraBounds.position.z - cameraBounds.localScale.z / 2f;
+            leftBoundary = cameraBounds.position.x - cameraBounds.localScale.x / 2f - 2;
+            rightBoundary = cameraBounds.position.x + cameraBounds.localScale.x / 2f + 10;
+            upBoundary = cameraBounds.position.z + cameraBounds.localScale.z / 2f - 4;
+            bottomBoundary = cameraBounds.position.z - cameraBounds.localScale.z / 2f + 7;
         }
 
         private void OnEnable() 
@@ -67,19 +67,19 @@ namespace ETLG
         private void MoveCamera() {
             if (isFocused) { return; }
             // Check if the mouse is at the right boundary
-            if (Input.mousePosition.x <= 0) {
+            if (Input.mousePosition.x <= 30) {
                 MoveCameraRight();
             }
             // Check if the mouse is at the left boundary
-            else if (Input.mousePosition.x >= Screen.width - 1) {
+            else if (Input.mousePosition.x >= Screen.width - 30) {
                 MoveCameraLeft();
             }
             // Check if the mouse is at the up boundary
-            else if (Input.mousePosition.y <= 0) {
+            else if (Input.mousePosition.y <= 30) {
                 MoveCameraUp();
             }
             // Check if the mouse is at the bottom boundary
-            else if (Input.mousePosition.y >= Screen.height - 1) {
+            else if (Input.mousePosition.y >= Screen.height - 30) {
                 MoveCameraDown();
             }
         }
