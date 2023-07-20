@@ -11,6 +11,9 @@ namespace ETLG
 {
     public class UIPlanetOverview : UGuiFormEx
     {
+        public RectTransform UIContainer;
+
+
         public Button challengeButton;
         public Button exploreButton;
         public Button cancelButton;
@@ -105,6 +108,9 @@ namespace ETLG
             planetType.text = data.TypeStr;
             Desription.text = data.Description;
             progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

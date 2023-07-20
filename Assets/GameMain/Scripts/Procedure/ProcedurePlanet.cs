@@ -22,6 +22,7 @@ namespace ETLG
         private int? artifactTradeInfoUIID;
         private int? artifactInfoUIID;
         private int? achievementUIID;
+
         private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -63,6 +64,7 @@ namespace ETLG
             currentNPCUIID = null;
             artifactTradeInfoUIID = null;
             artifactInfoUIID = null;
+            achievementUIID = null;
         }
 
         private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
@@ -206,8 +208,7 @@ namespace ETLG
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
             MapManager.Instance.focusedPlanet = null;
 
-            artifactTradeInfoUIID = null;
-            currentNPCUIID = null;
+            GameEntry.UI.CloseAllLoadedUIForms();
 
             CloseUI();
             GameEntry.Sound.StopMusic();

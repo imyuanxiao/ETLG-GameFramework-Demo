@@ -30,7 +30,6 @@ namespace ETLG
         {
             base.OnEnter(procedureOwner);
 
-            Log.Debug("进入 ProcedureLoadingScene 流程");
 
             loadSceneCompleted = false;
             loadingSceneId = -1;
@@ -59,6 +58,7 @@ namespace ETLG
 
             // 关闭所有UI
             GameEntry.UI.CloseAllLoadedUIForms();
+            GameEntry.UI.OpenUIForm(EnumUIForm.UILoadingSceneForm);
 
             loadingSceneId = procedureOwner.GetData<VarInt32>(Constant.ProcedureData.NextSceneId).Value;
             sceneData = GameEntry.Data.GetData<DataScene>().GetSceneData(loadingSceneId);
@@ -101,6 +101,8 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(LoadSceneUpdateEventArgs.EventId, OnLoadSceneUpdate);
             GameEntry.Event.Unsubscribe(LoadSceneDependencyAssetEventArgs.EventId, OnLoadSceneDependencyAsset);
 
+            GameEntry.UI.CloseAllLoadedUIForms();
+            
             //GameEntry.Event.Unsubscribe(NotDestroyMapEventArgs.EventId, OnNotDestroyMap);
 
         }

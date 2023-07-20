@@ -30,9 +30,8 @@ namespace ETLG
 
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
-            Log.Debug("进入 ProcedureMap 流程");
             base.OnEnter(procedureOwner);
-
+            ResetStates();
             // 订阅事件
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(FocusOnPlanetEventArgs.EventId, OnFocusOnPlanet);
@@ -55,6 +54,11 @@ namespace ETLG
 
             // Auto-Save : will overwirte the first save slot
             SaveManager.Instance.SaveGame();
+        }
+
+        private void ResetStates()
+        {
+            achievementUIID = null;
         }
 
         // called when player clicked the challenge button on UIPlanetOverview
@@ -168,6 +172,10 @@ namespace ETLG
             {
                 GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetOverview).Close();
             }
+
+            GameEntry.UI.CloseAllLoadedUIForms();
+
+
             // 停止音乐
             GameEntry.Sound.StopMusic();
         }
