@@ -1,31 +1,61 @@
 <quiz>
-  <question type="MCM" timelimit="30">
-    <statement>Question 1: What is the capital of France?</statement>
-    <hint>question1 hint here</hint>
+  <question type="MCS" timelimit="30">
+    <statement>How does virtualization assist with cloud computing?</statement>
+    <hint></hint>
     <options>
-      <option id="A">A. Paris</option>
-      <option id="B">B. London</option>
-      <option id="C">C. Rome</option>
-      <option id="D">D. Berlin</option>
+      <option id="A">Speeds up mathematical calculations</option>
+      <option id="B">Facilitates the management of keys</option>
+      <option id="C">Slower provisioning</option>
+      <option id="D">Efficient use of physical computer hardware</option>
     </options>
-    <analysis>The capital of France is Paris.</analysis>
+    <analysis></analysis>
     <answers>
-      <answer>A</answer>
-      <answer>B</answer>
+      <answer>D</answer>
     </answers>
   </question>
+
   <question type="MCS" timelimit="20">
-    <statement>Question 2: Which planet is known as the Red Planet?</statement>
-    <hint>question2 hint here</hint>
+    <statement>Which company introduced virtualization?</statement>
+    <hint></hint>
     <options>
-      <option id="A">A. Jupiter</option>
-      <option id="B">B. Mars</option>
-      <option id="C">C. Saturn</option>
-      <option id="D">D. Venus</option>
+      <option id="A">IBM</option>
+      <option id="B">Microsoft</option>
+      <option id="C">Compaq</option>
+      <option id="D">Amazon</option>
     </options>
-    <analysis>Mars is Red Planet.</analysis>
+    <analysis></analysis>
     <answers>
-      <answer>B</answer>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCS">
+    <statement>What are resource efficiency, easier management, minimal downtime, and faster provisioning?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Visualization</option>
+      <option id="B">Resource management</option>
+      <option id="C">Virtualization</option>
+      <option id="D">Dematerialization</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS">
+    <statement>What is a type of application virtualization?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Virtual desktop</option>
+      <option id="B">Software-defined networking (SDN) virtualization</option>
+      <option id="C">CPU virtualization</option>
+      <option id="D">Local application virtualization</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
     </answers>
   </question>
 </quiz>

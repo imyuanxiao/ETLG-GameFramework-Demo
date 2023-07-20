@@ -62,8 +62,6 @@ namespace ETLG.Data
             {
                 return 0;
             }
-            Debug.Log("corrent" + CorrectQuestions);
-            Debug.Log("submit" + TotalSubmitQuestions);
             float accuracy = (float)CorrectQuestions / (float)TotalSubmitQuestions;
             return accuracy;
         }
