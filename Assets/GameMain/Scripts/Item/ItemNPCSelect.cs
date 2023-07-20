@@ -14,7 +14,7 @@ namespace ETLG
     {
 
         public TextMeshProUGUI npc_title = null;
-        public TextMeshProUGUI npc_desc = null;
+        //public TextMeshProUGUI npc_desc = null;
 
         public TextMeshProUGUI npc_name = null;
 
@@ -44,7 +44,7 @@ namespace ETLG
             this.npcData = npcData;
 
             npc_title.text = npcData.Title;
-            npc_desc.text = npcData.Description;
+            //npc_desc.text = npcData.Description;
             npc_name.text = npcData.Name;
 
             talkButton.onClick.AddListener(OnTalkButtonClick);

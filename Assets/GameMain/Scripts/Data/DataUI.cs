@@ -106,6 +106,7 @@ namespace ETLG.Data
 
         // global UIID
         public int? LandingPointInfoUIID { get; set; }
+        public int? UINavigationFormUIID { get; set; }
 
         protected override void OnInit()
         {

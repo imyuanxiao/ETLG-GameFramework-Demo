@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-20 14:33:49.079
+// 生成时间：2023-07-20 14:33:49.161
 //------------------------------------------------------------
 
 using GameFramework;
@@ -19,9 +19,9 @@ using UnityGameFramework.Runtime;
 namespace ETLG
 {
     /// <summary>
-    /// 成就配置表。
+    /// 教程配置表（文本FALSE时，图片宽高1820*840，否则1820*540）。
     /// </summary>
-    public class DRAchievement : DataRowBase
+    public class DRTutorial : DataRowBase
     {
         private int m_Id = 0;
 
@@ -37,45 +37,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取成就名称。
+        /// 获取文本。
         /// </summary>
-        public string Name
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取成就类型Id。
-        /// </summary>
-        public int TypeId
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取解锁条件Id。
-        /// </summary>
-        public int ConditionId
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取解锁条件。
-        /// </summary>
-        public int[] Count
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取成就点数。
-        /// </summary>
-        public int[] Points
+        public bool Text
         {
             get;
             private set;
@@ -93,11 +57,7 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Name = columnStrings[index++];
-            TypeId = int.Parse(columnStrings[index++]);
-            ConditionId = int.Parse(columnStrings[index++]);
-                Count = DataTableExtension.ParseInt32Array(columnStrings[index++]);
-                Points = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+            Text = bool.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -110,11 +70,7 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Name = binaryReader.ReadString();
-                    TypeId = binaryReader.Read7BitEncodedInt32();
-                    ConditionId = binaryReader.Read7BitEncodedInt32();
-                        Count = binaryReader.ReadInt32Array();
-                        Points = binaryReader.ReadInt32Array();
+                    Text = binaryReader.ReadBoolean();
                 }
             }
 

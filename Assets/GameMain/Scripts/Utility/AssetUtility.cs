@@ -66,7 +66,6 @@ namespace ETLG
             return "IconMissing";
         }
 
-        // 通过技能ID和技能状态获取对应的图标
         public static string GetSkillIcon(string skillId)
         {
             return Utility.Text.Format("Skills/{0}", skillId);
@@ -80,13 +79,11 @@ namespace ETLG
         public static string GetArtifactIcon(string iconName)
         {
 
-           // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
             return Utility.Text.Format("Artifacts/{0}", iconName);
         }
         public static string GetUnLockAchievementIcon()
         {
 
-            // return Utility.Text.Format("Assets/GameMain/Res/Skills/{0}.png", iconName);
             return Utility.Text.Format("Achievement/{0}", "unlocked_treasure_chest");
         }
 
@@ -112,6 +109,16 @@ namespace ETLG
         public static string GetQuizXML(string path)
         {
             return Utility.Text.Format("Assets/GameMain/Res/QuizXML/{0}", path);
+        }
+
+        public static string GetTutorialImg(string id)
+        {
+            return Utility.Text.Format("Tutorial/{0}", id);
+        }
+
+        public static string GetLostTutorialImg()
+        {
+            return Utility.Text.Format("Tutorial/1000");
         }
 
     }

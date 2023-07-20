@@ -17,6 +17,8 @@
             public const string PRE_LANDING_POINT = "Landing_Point_";
             public const string PRE_NPC = "NPC_";
 
+            public const string PRE_TUTORIAL = "Tutorial_";
+
 
             public const string POST_TITLE = "_Title";
             public const string POST_DESC = "_Desc";
