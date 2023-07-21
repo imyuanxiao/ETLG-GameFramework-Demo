@@ -5,16 +5,21 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemNPCSelect : ItemLogicEx
+    public class ItemNPCSelect : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
 
         public TextMeshProUGUI npc_title = null;
-        //public TextMeshProUGUI npc_desc = null;
+
+        public RectTransform RewardIcon;
+
+        public GameObject RewardTick;
+        public GameObject FinishTick;
 
         public TextMeshProUGUI npc_name = null;
 
@@ -70,9 +75,24 @@ namespace ETLG
             {
                 quizButton.gameObject.SetActive(false);
             }
+
+            // get finished chapters from playerData
+            RewardTick.SetActive(true);
+            FinishTick.SetActive(true);
+
+
+
         }
 
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Log.Debug("Show Rewards");
+        }
 
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            Log.Debug("Hide Rewards");
+        }
 
         protected override void OnHide(bool isShutdown, object userData)
         {
@@ -109,6 +129,7 @@ namespace ETLG
 
         }
 
+ 
     }
 }
 
