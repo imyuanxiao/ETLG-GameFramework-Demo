@@ -43,8 +43,7 @@ namespace ETLG
             nameLabel.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.NameId;
             attack.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower.ToString();
             defense.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Shields.ToString();
-            int skillNum =  GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillsByFunctionality(Constant.Type.SKILL_TYPE_COMBAT_STR).Count;
-            Debug.Log("Skill Count: " + skillNum);
+            // int skillNum =  GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSkillsByFunctionality(Constant.Type.SKILL_TYPE_COMBAT_STR).Count;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -90,6 +89,7 @@ namespace ETLG
         public EnumSkill skillId;
         public TextMeshProUGUI usageCount;
         public RawImage skillImage;
+        public RawImage lockImage;
         public Image skillMaskImage;
     }
 }

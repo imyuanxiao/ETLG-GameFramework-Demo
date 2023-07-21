@@ -43,6 +43,11 @@ namespace ETLG
             return skillInfo.isUnlocked && skillInfo.usageCount > 0;
         }
 
+        public bool IsSkillLocked(EnumSkill id) 
+        {
+            return !GetSkillInfoById(id).isUnlocked;
+        }
+
         public SkillInfo GetSkillInfoById(EnumSkill id) 
         {
             Debug.Log("Target Id : " + id);

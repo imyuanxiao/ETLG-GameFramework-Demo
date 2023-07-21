@@ -78,15 +78,50 @@ namespace ETLG
         {
             base.OnHide(isShutdown, userData);
             expandButton.onClick.RemoveAllListeners();
+            overviewButton.onClick.RemoveAllListeners();
+            combatButton.onClick.RemoveAllListeners();
         }
 
         public void OnOverviewButtonClick()
         {
+            // change false to true for final product
+            if(EnterRandomBattle(false)) { return; }
 
+            PlanetBase currentPlanet = MapManager.Instance.GetPlanetBaseById(PlanetID);
+
+            MapManager.Instance.focusedPlanet = currentPlanet.gameObject;
+            GameEntry.Data.GetData<DataPlanet>().currentPlanetID = currentPlanet.PlanetId;
+            currentPlanet.isFocused = true;
+            GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(currentPlanet));
         }
 
         public void OnCombatButtonClick()
         {
+            string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(PlanetID).TypeStr;
+            switch (planetType)
+            {
+                case "Cloud Computing":
+                    planetType = "CloudComputing";
+                    break;
+                case "Artificial Intelligence":
+                    planetType = "AI";
+                    break;
+                case "CyberSecurity":
+                    planetType = "CyberSecurity";
+                    break;
+                case "Data Science":
+                    planetType = "DataScience";
+                    break;
+                case "Blockchain":
+                    planetType = "Blockchain";
+                    break;
+                case "Internet of Things":
+                    planetType = "IoT";
+                    break;
+                default:
+                    break;
+            }
+            GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("IntermidateBattle", planetType));
 
         }
 
@@ -141,6 +176,22 @@ namespace ETLG
             Vector2 newSizeDelta = rectTransform.sizeDelta;
             newSizeDelta.x = newWidth;
             rectTransform.sizeDelta = newSizeDelta;
+        }
+
+        private bool EnterRandomBattle(bool isActive)
+        {
+            if (!isActive) { return false; }
+
+            // calculate if enter random battle     
+            int enterBasicBattleProbablity = 3;
+            int r = UnityEngine.Random.Range(0, 10);
+            if (r < enterBasicBattleProbablity)
+            {
+                // Enter Basic Battle
+                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", ""));
+                return true;
+            }
+            return false;
         }
 
     }

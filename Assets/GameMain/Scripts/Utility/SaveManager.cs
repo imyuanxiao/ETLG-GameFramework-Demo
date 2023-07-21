@@ -35,7 +35,7 @@ namespace ETLG
             Save("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
             Save("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
             Save("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
-            // Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
+            Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Save("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
@@ -70,13 +70,26 @@ namespace ETLG
             Load("PlayerSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Load("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Load("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
-            // Load("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
             LoadPlayerModules("PlayerModules" + saveIdStr);
             LoadEquippedModules("EquippedModules" + saveIdStr);
-            // Load("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
+            LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+        }
+
+        private void LoadPlayerNPCs(string key)
+        {
+            JObject jsonData = LoadJsonObject(key);
+            foreach (int npcId in GameEntry.Data.GetData<DataNPC>().getAllNPCsID())
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].NPCId = (int) jsonData[npcId.ToString()]["NPCId"];
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Money = (int) jsonData[npcId.ToString()]["Money"];
+                for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length; i++)
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) jsonData[npcId.ToString()]["Artifacts"][i];
+                }
+            }
         }
 
         private void LoadEquippedModules(string key)
@@ -111,7 +124,7 @@ namespace ETLG
             Delete("PlayerArtifacts" + saveIdStr);
             Delete("PlayerModules" + saveIdStr);
             Delete("EquippedModules" + saveIdStr);
-            // Delete("PlayerNPCs" + saveIdStr);
+            Delete("PlayerNPCs" + saveIdStr);
             Delete("PlayerAchievement" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
@@ -239,9 +252,9 @@ namespace ETLG
                 PrintSavedData("PlayerArtifacts_0");
                 PrintSavedData("PlayerModules_0");
                 PrintSavedData("EquippedModules_0");
-                // PrintSavedData("PlayerNPCs_0");
                 PrintSavedData("PlayerAchievement_0");
                 PrintSavedData("SavedGamesInfo");
+                PrintSavedData("PlayerNPCs_0");
             }
         }
     }

@@ -62,6 +62,7 @@ namespace ETLG.Data
             playerSkills = new Dictionary<int, int>();
 
             playerNPCs = new Dictionary<int, PlayerNPCData>();
+            instantiatePlayerNPCs();
 
             playerAchievement = new Dictionary<int, int>(); // id + level
 
@@ -84,6 +85,15 @@ namespace ETLG.Data
             // add mock artifacts
             AddMockData();
             //initPlayerAchievementData();
+        }
+
+        private void instantiatePlayerNPCs()
+        {
+            foreach(int id in dataNPC.getAllNPCsID())
+            {
+                playerNPCs.Add(id, new PlayerNPCData(dataNPC.GetNPCData(id)));
+            }
+
         }
 
         // Call this method everytime skills change or initialSpaceship changes

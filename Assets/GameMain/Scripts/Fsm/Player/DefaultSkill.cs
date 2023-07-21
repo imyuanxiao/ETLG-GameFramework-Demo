@@ -84,7 +84,8 @@ namespace ETLG
 
             foreach (var skillUI in this.uiBattleInfoForm.skillsUI)
             {
-                skillUI.skillMaskImage.fillAmount = 1f;
+                if (!spaceshipSkill.IsSkillLocked(skillUI.skillId))
+                    skillUI.skillMaskImage.fillAmount = 1f;
             }
 
             this.uiBattleInfoForm = null;
@@ -105,10 +106,21 @@ namespace ETLG
                 foreach (var skillUI in this.uiBattleInfoForm.skillsUI)
                 {
                     if (spaceshipSkill.IsSkillReady(skillUI.skillId))
+                    {
                         skillUI.skillMaskImage.fillAmount = 0f;
-                    else 
+                        skillUI.skillImage.transform.parent.gameObject.SetActive(true);
+                        skillUI.lockImage.gameObject.SetActive(false);
+                    }
+                    else if (spaceshipSkill.IsSkillLocked(skillUI.skillId))
+                    {
+                        skillUI.skillMaskImage.fillAmount = 0f;
+                        skillUI.skillImage.transform.parent.gameObject.SetActive(false);
+                        skillUI.lockImage.gameObject.SetActive(true);
+                    }
+                    else
+                    {
                         skillUI.skillMaskImage.fillAmount = 1f;
-                    
+                    }
                     skillUI.usageCount.text = spaceshipSkill.GetSkillInfoById(skillUI.skillId).usageCount.ToString();
                 }
             }            

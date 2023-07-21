@@ -29,6 +29,7 @@ namespace ETLG
             base.OnEnter(procedureOwner);
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
+            this.isWinning = false;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);

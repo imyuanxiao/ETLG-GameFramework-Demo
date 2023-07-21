@@ -94,7 +94,16 @@ namespace ETLG.Data
             return dicNPCData[currentNPCId];
         }
 
+        public List<int> getAllNPCsID()
+        {
+            List<int> allNPCId = new List<int>();
+            foreach(KeyValuePair<int, NPCData> kvp in dicNPCData)
+            {
+                allNPCId.Add(kvp.Key);
 
+            }
+            return allNPCId;
+        }
     }
 }
 
