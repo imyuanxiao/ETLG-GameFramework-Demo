@@ -17,6 +17,11 @@ namespace ETLG
         public Button expandButton;
         public RawImage expandButtonIcon;
 
+
+        public Button overviewButton;
+        public Button combatButton;
+
+
         public TextMeshProUGUI planet_name = null;
         public TextMeshProUGUI planet_domain = null;
 
@@ -53,6 +58,8 @@ namespace ETLG
             this.PlanetID = PlanetID;
 
             expandButton.onClick.AddListener(OnExpandButtonClick);
+            overviewButton.onClick.AddListener(OnOverviewButtonClick);
+            combatButton.onClick.AddListener(OnCombatButtonClick);
 
             planet_name.text = dataPlanet.GetPlanetData(PlanetID).Name;
             planet_domain.text = dataPlanet.GetPlanetData(PlanetID).TypeStr;
@@ -71,6 +78,16 @@ namespace ETLG
         {
             base.OnHide(isShutdown, userData);
             expandButton.onClick.RemoveAllListeners();
+        }
+
+        public void OnOverviewButtonClick()
+        {
+
+        }
+
+        public void OnCombatButtonClick()
+        {
+
         }
 
         public void OnExpandButtonClick()
