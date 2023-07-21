@@ -141,7 +141,15 @@
             public const int LP_IN_MAP = 0;
             public const int LP_IN_PLANET = 1;
 
-
+            //leaderboard type
+            public const int LB_ACHIVEMENT = 1;
+            public const int LB_SPACESHIP = 2;
+            public const int LB_BOSS_AI = 3;
+            public const int LB_BOSS_CLOUDCOMPUTING = 4;
+            public const int LB_BOSS_BLOCKCHAIN = 5;
+            public const int LB_BOSS_CYBERSECURITY = 6;
+            public const int LB_BOSS_DATASCIENCE = 7;
+            public const int LB_BOSS_IOT = 8;
 
         }
     }

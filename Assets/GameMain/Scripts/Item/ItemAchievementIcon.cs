@@ -56,6 +56,7 @@ namespace ETLG
         {
             int type = achievementData.TypeId;
             int id = achievementData.Id;
+            int conditionId = achievementData.ConditionId;
             if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
             {
                 Sprite sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon());
@@ -66,11 +67,58 @@ namespace ETLG
             {
                 case Constant.Type.ACHV_QUIZ:
                     //player data
+                    this.progress.text = "0";
                     break;
                 case Constant.Type.ACHV_RESOURCE:
-                    //player data
+                    //money
+                    if(conditionId==5001)
+                    {
+                        this.progress.text= dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
+                    }
+                    //spend money
+                   //Knowledge Fragments 
+                    else if (conditionId == 5004)
+                    {
+                        int count = 0;
+                        EnumArtifact[] artifactTypes = new EnumArtifact[]
+                        {
+                            EnumArtifact.KnowledgeFragments_AI,
+                            EnumArtifact.KnowledgeFragments_Blockchain,
+                            EnumArtifact.KnowledgeFragments_CloudComputing,
+                            EnumArtifact.KnowledgeFragments_Cybersecurity,
+                            EnumArtifact.KnowledgeFragments_DataScience,
+                            EnumArtifact.KnowledgeFragments_IoT
+                        };
+                        foreach (EnumArtifact artifactType in artifactTypes)
+                        {
+                            count += dataPlayer.GetPlayerData().GetArtifactNumById((int)artifactType);
+                        }
+
+                        this.progress.text = count.ToString();
+                    }
+                    //Knowledge point
+                    else if(conditionId==5005)
+                    {
+                        this.progress.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.KnowledgePoint).ToString();
+                    }
+                    //mineral
+                    else if (conditionId == 5006)
+                    {
+                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.HighPurityMetal) + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.RareOre);
+                        this.progress.text = count.ToString();
+                    }
+                    //Fule
+                    else if (conditionId == 5007)
+                    {
+                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.LiquidMethane) + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.PlasmaFuel);
+                        this.progress.text = count.ToString();
+                    }
+                    else
+                    {
+                        this.progress.text = "0";
+                    }
                     break;
-                case Constant.Type.ACHV_KNOWLEDGE_BASE:
+                case Constant.Type.ACHV_INTERSTELLAR:
                     //level
                     if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                     {
@@ -81,12 +129,9 @@ namespace ETLG
                         this.progress.text = "0";
                     }
                     break;
-                case Constant.Type.ACHV_INTERSTELLAR:
-                    //conditionId=3001,player data
-                    //others, level
-                    break;
                 case Constant.Type.ACHV_BATTLE:
                     //player data
+                    this.progress.text = "0";
                     break;
                 case Constant.Type.ACHV_SPACESHIP:
                     //level
@@ -99,22 +144,8 @@ namespace ETLG
                         this.progress.text = "0";
                     }
                     break;
-                case Constant.Type.ACHV_LOGIN:
-                    //player data
-                    break;
-                case Constant.Type.ACHV_LEADERSHIP:
-                    //player data
-                    break;
-                case Constant.Type.ACHV_ACHIEVEMENT:
-                    //player data
-                    this.progress.text = dataPlayer.GetPlayerData().GetPlayerAchievementPoints().ToString();
-                    break;
-                case Constant.Type.ACHV_HIDDEN:
-                    break;
             }
 
-            //先暂时都设为0
-            this.progress.text = "0";
             this.next_level.text = GetNextLevel();
         }
         private string GetNextLevel()

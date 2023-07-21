@@ -435,9 +435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_4
-
-'
+  m_text: Boss Cybersecurity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -756,10 +754,10 @@ RectTransform:
   m_Father: {fileID: 5291459266154367016}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.98115516}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000019073486, y: -0.00032043457}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.0000019073486, y: -0.000021276996}
+  m_SizeDelta: {x: 1559, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7389405512977613033
 MonoBehaviour:
@@ -781,10 +779,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 1559, y: 150}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!114 &6248089576595335501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_5
+  m_text: 'Boss Data Science
 
 '
   m_isRightToLeft: 0
@@ -1705,7 +1703,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1462763242697358942}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1831,7 +1829,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3736051708145095009}
   m_HandleRect: {fileID: 2285546867174337042}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2299,7 +2297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_3
+  m_text: 'Boss Blockchain
 
 '
   m_isRightToLeft: 0
@@ -3273,7 +3271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_1
+  m_text: 'Boss AI
 
 '
   m_isRightToLeft: 0
@@ -3410,7 +3408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_6
+  m_text: 'Boss IoT
 
 '
   m_isRightToLeft: 0
@@ -4002,9 +4000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss_2
-
-'
+  m_text: Boss Cloud Computing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4231,12 +4227,13 @@ MonoBehaviour:
   achievementButton: {fileID: 3263389891742888437}
   spaceshipButton: {fileID: 4892975639205524462}
   bossButton: {fileID: 696445287519434039}
-  bossButton_1: {fileID: 2150001940314524115}
-  bossButton_2: {fileID: 9035824021063982753}
-  bossButton_3: {fileID: 684708305804203076}
-  bossButton_4: {fileID: 7326443677246058633}
-  bossButton_5: {fileID: 4668355161174136967}
-  bossButton_6: {fileID: 2485347770885269259}
+  bossButton_AI: {fileID: 2150001940314524115}
+  bossButton_CloudComputing: {fileID: 9035824021063982753}
+  bossButton_Blockchain: {fileID: 684708305804203076}
+  bossButton_Cybersecurity: {fileID: 7326443677246058633}
+  bossButton_DataScience: {fileID: 4668355161174136967}
+  bossButton_IoT: {fileID: 2485347770885269259}
+  container: {fileID: 446942741409375265}
   panel: {fileID: 1019467887756298200}
 --- !u!1 &7659687775664286158
 GameObject:
@@ -4552,7 +4549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 144.97003, y: -472.95486}
+  m_AnchoredPosition: {x: 144.97003, y: -472.9546}
   m_SizeDelta: {x: 289.94, y: 945.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3271896666233114774
