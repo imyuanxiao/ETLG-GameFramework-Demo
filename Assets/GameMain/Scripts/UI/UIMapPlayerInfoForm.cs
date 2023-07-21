@@ -17,13 +17,24 @@ namespace ETLG
 
         public RectTransform PlanetsContainer;
 
+        public Button playerMenuButton;
 
         private bool refreshPlanetsContainer;
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+            playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
+
         }
+
+        private void OnPlayerMenuButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
+
+        }
+
 
         protected override void OnOpen(object userData)
         {

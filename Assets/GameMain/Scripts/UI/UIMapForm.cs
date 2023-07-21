@@ -13,12 +13,13 @@ namespace ETLG
     public class UIMapForm : UGuiFormEx
     {
         public Button menuButton;
-        public Button playerMenuButton;
+        public Button continueButton;
+       /* public Button playerMenuButton;
         public Button selectSpaceshipButton;
-        public Button planetLandingPointButton;
+        public Button planetLandingPointButton;*/
         public Button saveGameButton;
 
-        public Button planetInfoButton;
+       // public Button planetInfoButton;
 
 
 
@@ -29,24 +30,15 @@ namespace ETLG
 
             // 绑定按钮点击事件
             menuButton.onClick.AddListener(OnMenuButtonClick);
-            playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
+  /*          playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
             selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
             planetLandingPointButton.onClick.AddListener(OnPlanetLandingPointButtonClick);
-            planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);
-            saveGameButton.onClick.AddListener(OnSaveGame);
+            planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);*/
+            saveGameButton.onClick.AddListener(OnSaveGameClick);
+            continueButton.onClick.AddListener(OnContinueClick);
 
         }
 
-        private void OnSaveGame()
-        {
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
-            {
-                GameEntry.UI.GetUIForm(EnumUIForm.UIMapPlayerInfoForm).Close();
-            }
-            GameEntry.UI.OpenUIForm(EnumUIForm.UILoadGameForm);
-            this.Close();
-        }
 
         protected override void OnOpen(object userData)
         {
@@ -56,58 +48,36 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+  
+
             base.OnClose(isShutdown, userData);
-        }
 
-        private void OnPlayerMenuButtonClick()
-        {
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
 
         }
 
-        private void OnSelectSpaceshipButtonClick()
+
+
+        private void OnSaveGameClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.NewGame")));
+            GameEntry.UI.OpenUIForm(EnumUIForm.UILoadGameForm);
+
+        }
+
+        private void OnContinueClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+
+            this.Close();
 
         }
 
         private void OnMenuButtonClick()
         {
-            Log.Debug("返回主菜菜单");
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
-
-        }
-
-        private void OnPlanetLandingPointButtonClick()
-        {
-            Log.Debug("调出星球登录点UI");
-
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-            GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
-
-        }
-
-        private void OnPlanetInfoButtonClick()
-        {
-            Log.Debug("调出星球信息UI");
-
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-
-            // 通过设置事件，流程里监听该事件从而设置下一个场景和流程
-            // 需要传入鼠标点击的星球的ID
-            GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(101));
-
-
 
         }
 

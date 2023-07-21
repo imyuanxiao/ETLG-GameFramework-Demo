@@ -73,6 +73,8 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(SaveGameEventArgs.EventId, OnGameSave);
 
+
+
             InitSaveSlot();
             
             // Player should not be able to create new save slot when they are in ProcedureMenu, since
@@ -147,18 +149,18 @@ namespace ETLG
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             Close();
-            if (GameEntry.Procedure.CurrentProcedure is ProcedureMenu)
+  /*          if (GameEntry.Procedure.CurrentProcedure is ProcedureMenu)
             {
                 GameEntry.UI.OpenUIForm(EnumUIForm.UIMainMenuForm);
-            }
-            else if (GameEntry.Procedure.CurrentProcedure is ProcedureMap)
+            }*/
+ /*           else if (GameEntry.Procedure.CurrentProcedure is ProcedureMap)
             {
                 GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
                 if (!GameEntry.UI.HasUIForm(EnumUIForm.UIMapPlayerInfoForm))
                 {
                     GameEntry.UI.OpenUIForm(EnumUIForm.UIMapPlayerInfoForm);
                 }
-            }
+            }*/
         }
 
         private void OnLoadButtonClicked(int id)
