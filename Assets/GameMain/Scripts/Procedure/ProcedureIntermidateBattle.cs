@@ -34,6 +34,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
 
             // Debug.Log(BattleManager.Instance.bossType);
 
@@ -146,6 +147,11 @@ namespace ETLG
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameEntry.Event.Fire(this, GamePauseEventArgs.Create(EnumUIForm.UIPausePanelForm));
+            }
+
             if (changeScene)
             {
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
@@ -163,12 +169,20 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
+            GameEntry.Event.Unsubscribe(GamePauseEventArgs.EventId, OnGamePause);
+        }
+
+        private void OnGamePause(object sender, GameEventArgs e)
+        {
+            GamePauseEventArgs ne = (GamePauseEventArgs) e;
+            GameEntry.UI.OpenUIForm(ne.UIPauseId);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
         {
             base.OnDestroy(procedureOwner);
         }
+        
 
         private void onShowPlayerSuccess(Entity entity)
         {

@@ -19,6 +19,7 @@ namespace ETLG
 
         private SpaceshipController controller;
         private IFsm<SpaceshipAttack> m_Fsm = null;
+        private int equippedModuleIdx;
 
         private void Awake() 
         {
@@ -35,6 +36,9 @@ namespace ETLG
                                                                                 new PlayerRespawn(GetComponent<PlayerHealth>()),
                                                                                 new PlayerAIAssist(GetComponent<SpaceshipSkill>()));
             m_Fsm.Start<DefaultSkill>();
+
+            this.equippedModuleIdx = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules()[0];
+            Debug.Log("Equipped Module: " + this.equippedModuleIdx);
         }
 
         private void Update() 
@@ -47,6 +51,23 @@ namespace ETLG
                 ObjectPoolManager.SpawnObject(BattleManager.Instance.muzzleFlashPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.ParticleSystem);
             }
             // fire equiped weapon
+            if (Input.GetMouseButtonDown(1))
+            {
+                switch (this.equippedModuleIdx)
+                {
+                    case (int) EnumArtifact.MissileLauncher:
+                        FireMissile();
+                        break;
+                    case (int) EnumArtifact.BeamEmitter:
+                        FireLaser();
+                        break;
+                    case (int) EnumArtifact.RailgunMount:
+                        FireRailgun();
+                        break;
+                    default:
+                        break;
+                }
+            }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 FireMissile();

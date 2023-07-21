@@ -9,14 +9,12 @@ namespace ETLG
 {
     public class UIBasicBattleLost : UGuiFormEx
     {
-        public Button retryButton;
         public Button leaveButton;
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
-            retryButton.onClick.AddListener(OnRetryButtonClick);
             leaveButton.onClick.AddListener(OnLeaveButtonClick);
         }
 
@@ -26,10 +24,6 @@ namespace ETLG
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
         }
 
-        private void OnRetryButtonClick()
-        {
-            
-        }
 
         protected override void OnOpen(object userData)
         {

@@ -18,9 +18,6 @@ namespace ETLG
         private bool changeScene = false;
         private bool isWinning = false;
 
-        // public int basicEnemyAttackBase;
-        // public int basicEnemyHealthBase;
-
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -32,10 +29,6 @@ namespace ETLG
             base.OnEnter(procedureOwner);
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
-
-            // calculate basic enemy's attack power and health value
-            // basicEnemyAttackBase = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
-            // basicEnemyHealthBase = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
@@ -51,7 +44,6 @@ namespace ETLG
 
             // GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
-            // BattleManager.Instance.SetEnemiesData();
             BattleManager.Instance.SpawnBasicEnemies();
 
             GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);
