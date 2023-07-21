@@ -3,9 +3,9 @@
 #	int		string	int	int	bool	bool
 #	配置编号	策划备注	界面名字	界面组Id	资源Id	是否允许多个界面实例	是否暂停被其覆盖的界面
 	1001	主菜单	UIMainMenuForm	1001	1001	FALSE	TRUE
-	1002	设置	UISettingsForm	1001	1002	FALSE	TRUE
+	1002	设置	UISettingsForm	1013	1002	FALSE	TRUE
 	1003	飞船选择	UISpaceshipSelectForm	1001	1003	FALSE	TRUE
-	1004	星系地图界面	UIMapInfoForm	1002	1004	FALSE	TRUE
+	1004	星系地图界面	UIMapInfoForm	1013	1004	FALSE	TRUE
 	1005	星球信息界面	UIPlanetInfoForm	1003	1005	FALSE	FALSE
 	1006	暂停界面	UIPausePanelForm	1004	1006	FALSE	TRUE
 	1007	游戏结束	UIGameOverForm	1005	1007	FALSE	TRUE
@@ -24,19 +24,19 @@
 	1022	Boss血条界面	UIBossEnemyHealth	1020	1022	FALSE	FALSE
 	1023	战斗信息界面	UIBattleInfo	1020	1023	FALSE	FALSE
 	1024	NPC交易界面	UINPCTradeForm	1003	1024	FALSE	FALSE
-	1025	读取游戏界面	UILoadGameForm	1002	1025	FALSE	TRUE
+	1025	读取游戏界面	UILoadGameForm	1013	1025	FALSE	TRUE
 	1026	玩家菜单导航	UINavigationForm	1011	1026	FALSE	FALSE
 	1027	成就界面	UIAchievementForm	1011	1027	FALSE	FALSE
 	1028	技能升级确认	UISkillUpgradeInfoForm	1011	1028	FALSE	FALSE
 	1029	模组信息	UIModuleInfoForm	1011	1029	FALSE	FALSE
 	1030	模组装备确认框	UIModuleEquipForm	1011	1030	FALSE	FALSE
-	1040	地图玩家信息界面	UIMapPlayerInfoForm	1002	1040	FALSE	FALSE
-	1041	星球概览界面	UIPlanetOverview	1002	1041	FALSE	FALSE
 	1031	成就达成界面	UIAchievementPopUp	1011	1031	FALSE	FALSE
-	1042	战斗预览界面	UIBattleIntro	1020	1042	FALSE	FALSE
 	1032	排行榜界面	UILeaderBoardForm	1011	1032	FALSE	FALSE
 	1033	道具交易界面	UIArtifactInfoTradeForm	1003	1033	FALSE	FALSE
 	1034	NPC考试界面	UINPCQuizForm	1003	1034	FALSE	FALSE
 	1035	玩家个人空间界面	UIPlayerZoneForm	1011	1035	FALSE	FALSE
 	1036	教程UI	UITutorialForm	1012	1036	FALSE	TRUE
 	1037	加载UI	UILoadingSceneForm	1012	1037	FALSE	TRUE
+	1040	地图玩家信息界面	UIMapPlayerInfoForm	1002	1040	FALSE	FALSE
+	1041	星球概览界面	UIPlanetOverview	1002	1041	FALSE	FALSE
+	1042	战斗预览界面	UIBattleIntro	1020	1042	FALSE	FALSE

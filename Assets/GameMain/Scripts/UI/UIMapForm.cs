@@ -18,6 +18,7 @@ namespace ETLG
         public Button selectSpaceshipButton;
         public Button planetLandingPointButton;*/
         public Button saveGameButton;
+        public Button settingButton;
 
        // public Button planetInfoButton;
 
@@ -34,8 +35,9 @@ namespace ETLG
             selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
             planetLandingPointButton.onClick.AddListener(OnPlanetLandingPointButtonClick);
             planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);*/
-            saveGameButton.onClick.AddListener(OnSaveGameClick);
-            continueButton.onClick.AddListener(OnContinueClick);
+            saveGameButton.onClick.AddListener(OnSaveGameButtonClick);
+            continueButton.onClick.AddListener(OnContinueButtonClick);
+            settingButton.onClick.AddListener( OnSettingsButtonClick);
 
         }
 
@@ -57,7 +59,7 @@ namespace ETLG
 
 
 
-        private void OnSaveGameClick()
+        private void OnSaveGameButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
@@ -65,12 +67,18 @@ namespace ETLG
 
         }
 
-        private void OnContinueClick()
+        private void OnContinueButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
 
             this.Close();
 
+        }
+        private void OnSettingsButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            //Close();
+            GameEntry.UI.OpenUIForm(EnumUIForm.UISettingsForm);
         }
 
         private void OnMenuButtonClick()

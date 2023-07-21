@@ -48,14 +48,14 @@ namespace ETLG
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             GameEntry.UI.OpenUIForm(EnumUIForm.UILoadGameForm);
-            Close();
+            //Close();
 
         }
 
         private void OnSettingsButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
-            Close();
+            //Close();
             GameEntry.UI.OpenUIForm(EnumUIForm.UISettingsForm);
         }
 

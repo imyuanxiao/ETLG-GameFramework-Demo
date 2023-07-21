@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-20 22:40:42.111
+// 生成时间：2023-07-21 09:42:04.396
 //------------------------------------------------------------
 
 namespace ETLG
@@ -152,24 +152,9 @@ namespace ETLG
         UIModuleEquipForm = 1030,
 
         /// <summary>
-        /// 地图玩家信息界面
-        /// </summary>
-        UIMapPlayerInfoForm = 1040,
-
-        /// <summary>
-        /// 星球概览界面
-        /// </summary>
-        UIPlanetOverview = 1041,
-
-        /// <summary>
         /// 成就达成界面
         /// </summary>
         UIAchievementPopUp = 1031,
-
-        /// <summary>
-        /// 战斗预览界面
-        /// </summary>
-        UIBattleIntro = 1042,
 
         /// <summary>
         /// 排行榜界面
@@ -200,5 +185,20 @@ namespace ETLG
         /// 加载UI
         /// </summary>
         UILoadingSceneForm = 1037,
+
+        /// <summary>
+        /// 地图玩家信息界面
+        /// </summary>
+        UIMapPlayerInfoForm = 1040,
+
+        /// <summary>
+        /// 星球概览界面
+        /// </summary>
+        UIPlanetOverview = 1041,
+
+        /// <summary>
+        /// 战斗预览界面
+        /// </summary>
+        UIBattleIntro = 1042,
     }
 }
