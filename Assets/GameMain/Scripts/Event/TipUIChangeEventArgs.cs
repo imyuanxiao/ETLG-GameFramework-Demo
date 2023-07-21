@@ -26,7 +26,8 @@ namespace ETLG
         public string tipTitle { get; set; }
         public int Type { get; set; }
 
-
+        public int level { get; set; }
+        public int achievementId { get; set; }
         public static TipUIChangeEventArgs Create(int Type)
         {
             TipUIChangeEventArgs e = ReferencePool.Acquire<TipUIChangeEventArgs>();
@@ -42,7 +43,16 @@ namespace ETLG
             e.Type = Type;
             return e;
         }
-
+        public static TipUIChangeEventArgs Create(Vector3 position, string title, int Type,int level,int achievementId)
+        {
+            TipUIChangeEventArgs e = ReferencePool.Acquire<TipUIChangeEventArgs>();
+            e.position = position;
+            e.tipTitle = title;
+            e.Type = Type;
+            e.level = level;
+            e.achievementId = achievementId;
+            return e;
+        }
         public override void Clear()
         {
         }

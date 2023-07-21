@@ -747,6 +747,23 @@ namespace ETLG.Data
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
        dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
         }
+        public int GetNextLevel(int Id)
+        {
+            AchievementData achievementData = dataAchievement.GetDataById(Id);
+            if (achievementData == null)
+            {
+                return 0;
+            }
+
+            if (!playerAchievement.ContainsKey(Id))
+            {
+                return 1;
+            }
+            else
+            {
+                return dataAchievement.isMaxLevel(Id, playerAchievement[Id]) ? playerAchievement[Id] : playerAchievement[Id] + 1;
+            }
+        }
     }
 
 }

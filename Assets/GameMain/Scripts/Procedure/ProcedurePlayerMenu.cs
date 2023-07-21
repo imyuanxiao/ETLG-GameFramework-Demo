@@ -21,7 +21,6 @@ namespace ETLG
         private int? artifactInfoUIID;
         private int? moduleInfoUIID;
         private int? moduleEquipInfoUIID;
-        private int? achievementUIID;
         private int? tipUIID;
 
         private DataPlayer dataPlayer;
@@ -144,8 +143,6 @@ namespace ETLG
             moduleInfoUIID = null;
             moduleEquipInfoUIID = null;
 
-            achievementUIID = null;
-
             tipUIID = null;
 
             dataArtifact.lockCurrentModuleID = false;
@@ -237,6 +234,11 @@ namespace ETLG
             {
                 dataPlayer.tipUiPosition = ne.position;
                 dataPlayer.tipTitle = ne.tipTitle;
+                if(ne.level!=0 && ne.achievementId!=0)
+                {
+                    dataAchievement.discriptionId = ne.achievementId;
+                    dataAchievement.descriptionLevel = ne.level;
+                }
                 tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
             }
 
@@ -334,16 +336,16 @@ namespace ETLG
                 if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
                 {
                     dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
-                    achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                     
                 }
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (achievementUIID != null)
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
-                    GameEntry.UI.CloseUIForm((int)achievementUIID);
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
                 }
-                achievementUIID = null;
             }
         }
     }

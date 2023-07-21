@@ -16,6 +16,7 @@ namespace ETLG.Data
         public float Boss_Cybersecurity { get; set; }
         public float Boss_DataScience { get; set; }
         public float Boss_IoT { get; set; }
+        public float Boss_Final { get; set; }
         public LeaderboardData()
         {
 
@@ -25,7 +26,7 @@ namespace ETLG.Data
             this.Id = Id;
             //
         }
-        public LeaderboardData(string Name,int Id, int AchievementScore, int SpaceshipScore, float Boss_AI, float Boss_CloudComputing, float Boss_Blockchain, float Boss_Cybersecurity, float Boss_DataScience, float Boss_IoT)
+        public LeaderboardData(string Name,int Id, int AchievementScore, int SpaceshipScore, float Boss_AI, float Boss_CloudComputing, float Boss_Blockchain, float Boss_Cybersecurity, float Boss_DataScience, float Boss_IoT,float Boss_Final)
         {
             this.Name = Name;
             this.Id = Id;
@@ -37,6 +38,7 @@ namespace ETLG.Data
             this.Boss_Cybersecurity = Boss_Cybersecurity;
             this.Boss_DataScience = Boss_DataScience;
             this.Boss_IoT = Boss_IoT;
+            this.Boss_Final = Boss_Final;
         }
     }
 }

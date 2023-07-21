@@ -150,6 +150,7 @@
             public const int LB_BOSS_CYBERSECURITY = 6;
             public const int LB_BOSS_DATASCIENCE = 7;
             public const int LB_BOSS_IOT = 8;
+            public const int LB_BOSS_FINAL = 9;
 
         }
     }

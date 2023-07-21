@@ -13,7 +13,7 @@ namespace ETLG
     public class UITipForm : UGuiFormEx
     {
         private DataPlayer dataPlayer;
-
+        private DataAchievement dataAchievement;
         public Transform UIContainer;
 
         public TextMeshProUGUI TipTitle = null;
@@ -23,27 +23,29 @@ namespace ETLG
         {
             base.OnInit(userData);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-         
-
             UIContainer.position = dataPlayer.tipUiPosition;
             TipTitle.text = dataPlayer.tipTitle;
-            TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle); 
-
+            if(dataAchievement.descriptionLevel==0)
+            {
+                TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle);
+            }
+            else
+            {
+                TipContent.text = GameEntry.Localization.GetString(Constant.Key. PRE_ACHIEVE+ dataAchievement.discriptionId.ToString()+ Constant.Key.POST_ACHIEVE_LEVEL+ dataAchievement.descriptionLevel.ToString());
+            }
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-
             base.OnClose(isShutdown, userData);
-
+            dataAchievement.descriptionLevel = 0;
         }
- 
 
     }
 }

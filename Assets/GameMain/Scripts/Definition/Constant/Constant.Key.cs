@@ -27,8 +27,8 @@
 
             public const string POST_SKILL_LEVEL = "_Level_";
 
-
-
+            public const string PRE_ACHIEVE = "Achieve_";
+            public const string POST_ACHIEVE_LEVEL = "_Level_";
         }
     }
 }

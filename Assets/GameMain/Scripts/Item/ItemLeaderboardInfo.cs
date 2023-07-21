@@ -68,6 +68,9 @@ namespace ETLG
                 case Constant.Type.LB_BOSS_IOT:
                     s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_IoT);
                     break;
+                case Constant.Type.LB_BOSS_FINAL:
+                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_Final);
+                    break;
             }
         }
         private string ConvertFloatToTimeString(float seconds)

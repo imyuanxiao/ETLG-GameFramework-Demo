@@ -21,13 +21,14 @@ namespace ETLG
         public Button bossButton_Cybersecurity;
         public Button bossButton_DataScience;
         public Button bossButton_IoT;
+        public Button bossButton_Final;
         public Transform container = null;
         public GameObject panel;
         private bool isPanelVisible = false;
         //current player
         private DataPlayer dataPlayer;
-        //mock players
-        private DataPlayer[] mockPlayers;
+        // players
+        private DataPlayer[] players;
         private DataSpaceship dataSpaceship;
         private SpaceshipData spaceshipData;
         private List<LeaderboardData> leaderboardData;
@@ -45,11 +46,10 @@ namespace ETLG
             bossButton_Cybersecurity.onClick.AddListener(OnBossButtonCybersecurityClick);
             bossButton_DataScience.onClick.AddListener(OnBossButtonDataScienceClick);
             bossButton_IoT.onClick.AddListener(OnBossButtonIoTClick);
-
+            bossButton_Final.onClick.AddListener(OnBossButtonFinalClick);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataSpaceship = GameEntry.Data.GetData<DataSpaceship>();
             leaderboardData = new List<LeaderboardData>();
-
         }
 
         protected override void OnOpen(object userData)
@@ -74,7 +74,7 @@ namespace ETLG
         }
         private void OnachievementButtonClick()
         {
-            s_name.text = "Achievment Leaderboard";
+            s_name.text = "Achievement Leaderboard";
             leaderboardData.Sort((a, b) => b.AchievementScore.CompareTo(a.AchievementScore));
             showLeaderBoardInfo(Constant.Type.LB_ACHIVEMENT);
         }
@@ -91,53 +91,59 @@ namespace ETLG
         }
         private void OnBossButtonAIClick()
         {
-            s_name.text = "Boss AI Leaderboard";
+            s_name.text = "AI Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_AI.CompareTo(b.Boss_AI));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_AI);
         }
         private void OnBossButtonCloudComputingClick()
         {
-            s_name.text = "Boss Cloud Computing Leaderboard";
+            s_name.text = "Cloud Computing Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_CloudComputing.CompareTo(b.Boss_CloudComputing));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_CLOUDCOMPUTING);
         }
         private void OnBossButtonBlockchainClick()
         {
-            s_name.text = "Boss Blockchain Leaderboard";
+            s_name.text = "Blockchain Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Blockchain.CompareTo(b.Boss_Blockchain));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_BLOCKCHAIN);
         }
         private void OnBossButtonCybersecurityClick()
         {
-            s_name.text = "Boss Cybersecurity Leaderboard";
+            s_name.text = "Cybersecurity Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Cybersecurity.CompareTo(b.Boss_Cybersecurity));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_CYBERSECURITY);
         }
         private void OnBossButtonDataScienceClick()
         {
-            s_name.text = "Boss Data Science Leaderboard";
+            s_name.text = "Data Science Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_DataScience.CompareTo(b.Boss_DataScience));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_DATASCIENCE);
         }
         private void OnBossButtonIoTClick()
         {
-            s_name.text = "Boss IoT Leaderboard";
+            s_name.text = "IoT Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_IoT.CompareTo(b.Boss_IoT));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_IOT);
+        }
+        private void OnBossButtonFinalClick()
+        {
+            s_name.text = "Final Boss Leaderboard";
+            leaderboardData.Sort((a, b) => a.Boss_Final.CompareTo(b.Boss_Final));
+            showLeaderBoardInfo(Constant.Type.LB_BOSS_FINAL);
         }
         private void AddMockPlayers()
         {
 
-            leaderboardData.Add(new LeaderboardData("Player1", 1, 1000, 150, 10.5f, 8.2f, 7.5f, 6.9f, 12.3f, 9.8f));
-            leaderboardData.Add(new LeaderboardData("Player2", 2, 800, 30, 8.0f, 7.3f, 6.5f, 5.9f, 10.2f, 8.5f));
-            leaderboardData.Add(new LeaderboardData("Player3", 3, 1200, 45, 15.2f, 11.8f, 10.5f, 9.6f, 14.0f, 11.2f));
-            leaderboardData.Add(new LeaderboardData("Player4", 4, 900, 10, 9.8f, 8.1f, 7.2f, 6.6f, 11.1f, 9.2f));
-            leaderboardData.Add(new LeaderboardData("Player5", 5, 1100, 75, 13.5f, 10.3f, 9.5f, 8.9f, 13.2f, 10.6f));
-            leaderboardData.Add(new LeaderboardData("Player6", 6, 750, 300, 7.0f, 6.2f, 5.5f, 5.0f, 9.8f, 7.3f));
-            leaderboardData.Add(new LeaderboardData("Player7", 7, 1350, 400, 16.7f, 12.5f, 11.0f, 10.2f, 15.5f, 12.8f));
-            leaderboardData.Add(new LeaderboardData("Player8", 8, 950, 250, 10.3f, 8.5f, 7.8f, 7.2f, 11.8f, 9.6f));
-            leaderboardData.Add(new LeaderboardData("Player9", 9, 1050, 165, 14.0f, 10.9f, 9.8f, 9.1f, 12.8f, 10.4f));
-            leaderboardData.Add(new LeaderboardData("Player10", 10, 800, 55, 8.5f, 7.6f, 6.9f, 6.3f, 10.5f, 8.8f));
+            leaderboardData.Add(new LeaderboardData("Player1", 1, 1000, 150, 10.5f, 8.2f, 7.5f, 6.9f, 12.3f, 9.8f,15.8f));
+            leaderboardData.Add(new LeaderboardData("Player2", 2, 800, 30, 8.0f, 7.3f, 6.5f, 5.9f, 10.2f, 8.5f,62.5f));
+            leaderboardData.Add(new LeaderboardData("Player3", 3, 1200, 45, 15.2f, 11.8f, 10.5f, 9.6f, 14.0f, 11.2f,25.6f));
+            leaderboardData.Add(new LeaderboardData("Player4", 4, 900, 10, 9.8f, 8.1f, 7.2f, 6.6f, 11.1f, 9.2f,30f));
+            leaderboardData.Add(new LeaderboardData("Player5", 5, 1100, 75, 13.5f, 10.3f, 9.5f, 8.9f, 13.2f, 10.6f,25.6f));
+            leaderboardData.Add(new LeaderboardData("Player6", 6, 750, 300, 7.0f, 6.2f, 5.5f, 5.0f, 9.8f, 7.3f,58.9f));
+            leaderboardData.Add(new LeaderboardData("Player7", 7, 1350, 400, 16.7f, 12.5f, 11.0f, 10.2f, 15.5f, 12.8f,62.3f));
+            leaderboardData.Add(new LeaderboardData("Player8", 8, 950, 250, 10.3f, 8.5f, 7.8f, 7.2f, 11.8f, 9.6f,45.6f));
+            leaderboardData.Add(new LeaderboardData("Player9", 9, 1050, 165, 14.0f, 10.9f, 9.8f, 9.1f, 12.8f, 10.4f,38.9f));
+            leaderboardData.Add(new LeaderboardData("Player10", 10, 800, 55, 8.5f, 7.6f, 6.9f, 6.3f, 10.5f, 8.8f,22.9f));
         }
         private void AddCurrentPlayerData()
         {
@@ -152,6 +158,7 @@ namespace ETLG
             data.Boss_Cybersecurity = 1000f;
             data.Boss_DataScience = 1000f;
             data.Boss_IoT = 1000f;
+            data.Boss_Final = 1000f;
             leaderboardData.Add(data);
         }
         private void showLeaderBoardInfo(int Type)
@@ -228,6 +235,8 @@ namespace ETLG
                     return data1.Boss_DataScience.CompareTo(data2.Boss_DataScience);
                 case Constant.Type.LB_BOSS_IOT:
                     return data1.Boss_IoT.CompareTo(data2.Boss_IoT);
+                case Constant.Type.LB_BOSS_FINAL:
+                    return data1.Boss_Final.CompareTo(data2.Boss_Final);
                 default:
                     // Handle the default case or throw an exception if necessary
                     throw new ArgumentException("Invalid leaderboard type.");

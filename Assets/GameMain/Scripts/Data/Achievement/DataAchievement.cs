@@ -8,9 +8,10 @@ namespace ETLG.Data
         private IDataTable<DRAchievement> dtAchievement;
         private Dictionary<int, AchievementData> dicAchievementData;
         public int cuurrentPopUpId { set; get; }
+        public int descriptionLevel { set; get; }
+        public int discriptionId { set; get; }
         protected override void OnInit()
         {
-
         }
         protected override void OnPreload()
         {

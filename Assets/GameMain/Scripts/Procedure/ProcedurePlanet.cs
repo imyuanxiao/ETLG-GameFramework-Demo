@@ -21,7 +21,6 @@ namespace ETLG
         private int? currentNPCUIID;
         private int? artifactTradeInfoUIID;
         private int? artifactInfoUIID;
-        private int? achievementUIID;
 
         private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
@@ -70,7 +69,6 @@ namespace ETLG
             currentNPCUIID = null;
             artifactTradeInfoUIID = null;
             artifactInfoUIID = null;
-            achievementUIID = null;
         }
 
         private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
@@ -294,16 +292,16 @@ namespace ETLG
                 if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
                 {
                     dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
-                    achievementUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+
                 }
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (achievementUIID != null)
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
-                    GameEntry.UI.CloseUIForm((int)achievementUIID);
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
                 }
-                achievementUIID = null;
             }
         }
     }

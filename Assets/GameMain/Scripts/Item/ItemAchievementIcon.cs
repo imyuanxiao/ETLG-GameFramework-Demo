@@ -62,7 +62,7 @@ namespace ETLG
                 Sprite sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon());
                 this.image.sprite = sprite;
             }
-            this.acheivementName.text = achievementData.Name;
+            this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE+id.ToString()+Constant.Key.POST_TITLE);
             switch (type)
             {
                 case Constant.Type.ACHV_QUIZ:

@@ -9,11 +9,10 @@ namespace ETLG
     public class UIAchievementTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private string tipTitle;
-        private DataAchievement dataAchievement;
+        private DataPlayer dataPlayer;
         private void Start()
         {
-            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
-            
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -25,11 +24,12 @@ namespace ETLG
                 Debug.Log("ItemAchievementIcon found");
                 ItemAchievementIcon icon = button.GetComponent<ItemAchievementIcon>();
                 int id = icon.GetCurrentAchievementID();
+                int level = dataPlayer.GetPlayerData().GetNextLevel(id);
                 if (icon.acheivementName.text != null)
                 {
                     tipTitle = icon.acheivementName.text;
                 }
-                GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
+                GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN,level,id));
             }
             else
             {
