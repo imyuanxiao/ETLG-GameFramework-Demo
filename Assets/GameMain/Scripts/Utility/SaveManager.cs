@@ -35,7 +35,7 @@ namespace ETLG
             Save("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
             Save("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
             Save("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
-            Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
+            // Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Save("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
@@ -72,7 +72,7 @@ namespace ETLG
             Load("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
             Load("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
             Load("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
-            Load("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
+            // Load("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
@@ -92,7 +92,7 @@ namespace ETLG
             Delete("PlayerArtifacts" + saveIdStr);
             Delete("PlayerModules" + saveIdStr);
             Delete("EquippedModules" + saveIdStr);
-            Delete("PlayerNPCs" + saveIdStr);
+            // Delete("PlayerNPCs" + saveIdStr);
             Delete("PlayerAchievement" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
@@ -210,7 +210,7 @@ namespace ETLG
                 PrintSavedData("PlayerArtifacts_0");
                 PrintSavedData("PlayerModules_0");
                 PrintSavedData("EquippedModules_0");
-                PrintSavedData("PlayerNPCs_0");
+                // PrintSavedData("PlayerNPCs_0");
                 PrintSavedData("PlayerAchievement_0");
                 PrintSavedData("SavedGamesInfo");
             }

@@ -181,6 +181,7 @@ namespace ETLG
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
             MouseControl();
+            KeyboardControl();
 
             if (changeScene)
             {
@@ -243,6 +244,21 @@ namespace ETLG
                 PlanetBase currentlyFocusedPlanet = MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>();
                 GameEntry.Event.Fire(this, UnFocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));
                 this.changeToProcedureMap = true;
+            }
+        }
+
+        private void KeyboardControl()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
+                }
+                else
+                {
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+                }
             }
         }
 
