@@ -62,7 +62,11 @@ namespace ETLG
 
             if(Type == Constant.Type.LP_IN_MAP)
             {
+                // change false to true for final product
+                if(EnterRandomBattle(false)) { return; }
+
                 // move to planet
+                MoveToPlanet(landingPointID);
             }
             else if (Type == Constant.Type.LP_IN_PLANET)
             {
@@ -71,7 +75,35 @@ namespace ETLG
 
         }
 
+        private bool EnterRandomBattle(bool isActive)
+        {
+            if (!isActive) { return false; }
 
+            // calculate if enter random battle     
+            int enterBasicBattleProbablity = 3;
+            int r = UnityEngine.Random.Range(0, 10);
+            if (r < enterBasicBattleProbablity)
+            {
+                // Enter Basic Battle
+                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", ""));
+                return true;
+            }
+            return false;
+        }
+
+        private void MoveToPlanet(int landingPointID)
+        {
+            int planetId = 100 + (int) landingPointID / 100;
+
+            PlanetBase currentPlanet = MapManager.Instance.GetPlanetBaseById(planetId);
+
+            MapManager.Instance.focusedPlanet = currentPlanet.gameObject;
+            MapManager.Instance.currentLandingPointID = landingPointID;
+            GameEntry.Data.GetData<DataLandingPoint>().currentLandingPointID = landingPointID;
+            GameEntry.Data.GetData<DataPlanet>().currentPlanetID = planetId;
+            currentPlanet.isFocused = true;
+            GameEntry.Event.Fire(this, FocusOnPlanetEventArgs.Create(currentPlanet));
+        }
     }
 }
 

@@ -70,12 +70,31 @@ namespace ETLG
             Load("PlayerSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Load("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Load("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
-            Load("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
-            Load("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
+            // Load("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
+            LoadPlayerModules("PlayerModules" + saveIdStr);
+            LoadEquippedModules("EquippedModules" + saveIdStr);
             // Load("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+        }
+
+        private void LoadEquippedModules(string key)
+        {
+            JArray jsonData = LoadJsonArray(key);
+            for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules().Length; i++)
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules()[i] = (int) jsonData[i];
+            }
+        }
+
+        private void LoadPlayerModules(string key)
+        {
+            JArray jsonData = LoadJsonArray(key);
+            for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Count; i++)
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
+            }
         }
 
         public void DeleteSave(int SaveId)
@@ -172,6 +191,16 @@ namespace ETLG
             {
                 JObject jsonObj = JObject.Parse(PlayerPrefs.GetString(key));
                 return jsonObj;
+            }
+            return null;
+        }
+
+        public JArray LoadJsonArray(string key)
+        {
+            if (PlayerPrefs.HasKey(key)) 
+            {
+                JArray jsonArray = JArray.Parse(PlayerPrefs.GetString(key));
+                return jsonArray;
             }
             return null;
         }

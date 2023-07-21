@@ -52,6 +52,12 @@ namespace ETLG
 
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
 
+            // if player is entering from the explore button at UIMapPlayerInfoForm
+            if (MapManager.Instance.currentLandingPointID != -1)
+            {
+                GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
+            }
+
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -208,6 +214,7 @@ namespace ETLG
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
             MapManager.Instance.focusedPlanet = null;
+            MapManager.Instance.currentLandingPointID = -1;
 
             GameEntry.UI.CloseAllLoadedUIForms();
 
@@ -234,6 +241,7 @@ namespace ETLG
                 {
                     LandingPoint currentlyClickedLandingPoint = hitInfo.collider.gameObject.GetComponent<LandingPoint>();
                     GameEntry.Data.GetData<DataLandingPoint>().currentLandingPointID = currentlyClickedLandingPoint.landingPointId;
+                    MapManager.Instance.currentLandingPointID = currentlyClickedLandingPoint.landingPointId;
                     GameEntry.Event.Fire(this, PlanetLandingPointEventArgs.Create());
                 }
             }
