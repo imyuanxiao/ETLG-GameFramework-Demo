@@ -13,63 +13,60 @@ namespace ETLG
 {
     public class ItemLeaderboardInfo : ItemLogicEx
     {
-        private DataPlayer dataPlayer;
+       // private DataPlayer dataPlayer;
         public Button playerInfo;
         public TextMeshProUGUI s_rank = null;
         public TextMeshProUGUI s_name = null;
         public TextMeshProUGUI s_score = null;
+        private  LeaderboardData leaderboardData;
         public Transform container;
-
-        private LeaderboardData LeaderboardData;
         public bool refresh;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             playerInfo.onClick.AddListener(OnPlayerInfoClick);
-            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-
         }
         public void SetData(LeaderboardData leaderboardData, Transform container,int Type)
         {
+            this.leaderboardData = leaderboardData;
             this.container = container;
-            this.LeaderboardData = leaderboardData;
             showContent(Type);
         }
         private void showContent(int Type)
         {
-            s_rank.text = this.LeaderboardData.Rank.ToString();
-            if (this.LeaderboardData.Name != null)
+            s_rank.text = this.leaderboardData.Rank.ToString();
+            if (this.leaderboardData.Name != null)
             {
-                s_name.text = this.LeaderboardData.Name.ToString();
+                s_name.text = this.leaderboardData.Name.ToString();
             }
             switch (Type)
             {
                 case Constant.Type.LB_ACHIVEMENT:
-                    s_score.text = this.LeaderboardData.AchievementScore.ToString();
+                    s_score.text = this.leaderboardData.AchievementScore.ToString();
                     break;
                 case Constant.Type.LB_SPACESHIP:
-                    s_score.text = this.LeaderboardData.SpaceshipScore.ToString();
+                    s_score.text = this.leaderboardData.SpaceshipScore.ToString();
                     break;
                 case Constant.Type.LB_BOSS_AI:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_AI);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_AI);
                     break;
                 case Constant.Type.LB_BOSS_BLOCKCHAIN:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_Blockchain);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Blockchain);
                     break;
                 case Constant.Type.LB_BOSS_CLOUDCOMPUTING:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_CloudComputing);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_CloudComputing);
                     break;
                 case Constant.Type.LB_BOSS_CYBERSECURITY:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_Cybersecurity);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Cybersecurity);
                     break;
                 case Constant.Type.LB_BOSS_DATASCIENCE:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_DataScience);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_DataScience);
                     break;
                 case Constant.Type.LB_BOSS_IOT:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_IoT);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_IoT);
                     break;
                 case Constant.Type.LB_BOSS_FINAL:
-                    s_score.text = ConvertFloatToTimeString(this.LeaderboardData.Boss_Final);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Final);
                     break;
             }
         }
@@ -90,12 +87,16 @@ namespace ETLG
 
         private void OnPlayerInfoClick()
         {
-            
+                LeaderboardManager.Instance.leaderboardData=leaderboardData;
+                //œ»–¥≥…2
+                LeaderboardManager.Instance.planetNum = 2;
+                GameEntry.Event.Fire(this, PlayerZoneUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+
         }
 
         public void UpdateData(LeaderboardData leaderboardData, int Type)
         {
-            this.LeaderboardData = leaderboardData;
+            this.leaderboardData = leaderboardData;
             showContent(Type);
         }
     }

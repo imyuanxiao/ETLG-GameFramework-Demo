@@ -48,15 +48,15 @@ namespace ETLG
             GameEntry.Event.Subscribe(ChangePlayerMenuEventArgs.EventId, OnChangePlayerMenu);
             GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId,OnAchievementPoPUp);
+            GameEntry.Event.Subscribe(PlayerZoneUIChangeEventArgs.EventId, OnPlayerZoneUIChange);
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
-
+            LeaderboardManager.Instance.leaderboardData = null;
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
-
             ResetStates();
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
@@ -97,6 +97,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
 
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
+            GameEntry.Event.Unsubscribe(PlayerZoneUIChangeEventArgs.EventId, OnPlayerZoneUIChange);
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
@@ -345,6 +346,30 @@ namespace ETLG
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
+                }
+            }
+        }
+            public void OnPlayerZoneUIChange(object sender, GameEventArgs e)
+        {
+            PlayerZoneUIChangeEventArgs ne = (PlayerZoneUIChangeEventArgs)e;
+            if (ne == null)
+                return;
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlayerZoneForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIPlayerZoneForm).GetComponent<UIPlayerZoneForm>().updateData();
+                }
+                else
+                {
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIPlayerZoneForm);
+                }
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlayerZoneForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIPlayerZoneForm).Close();
                 }
             }
         }
