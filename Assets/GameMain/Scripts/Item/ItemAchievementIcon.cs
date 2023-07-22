@@ -104,13 +104,13 @@ namespace ETLG
                     //mineral
                     else if (conditionId == 5006)
                     {
-                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.HighPurityMetal) + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.RareOre);
+                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.RareOre);
                         this.progress.text = count.ToString();
                     }
                     //Fule
                     else if (conditionId == 5007)
                     {
-                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.LiquidMethane) + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.PlasmaFuel);
+                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.FuelRefillUnit);
                         this.progress.text = count.ToString();
                     }
                     else

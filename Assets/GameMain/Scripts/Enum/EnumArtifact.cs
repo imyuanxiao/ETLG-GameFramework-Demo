@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-21 09:42:04.407
+// 生成时间：2023-07-22 14:13:44.345
 //------------------------------------------------------------
 
 namespace ETLG
@@ -27,84 +27,24 @@ namespace ETLG
         RareOre = 1003,
 
         /// <summary>
-        /// 高纯度金属
+        /// 燃料补充单元
         /// </summary>
-        HighPurityMetal = 1004,
+        FuelRefillUnit = 1004,
 
         /// <summary>
-        /// 液态甲烷
+        /// 低级升级单元
         /// </summary>
-        LiquidMethane = 1005,
+        LowLevelUpgradeUnit = 1101,
 
         /// <summary>
-        /// 等离子燃料
+        /// 中级升级单元
         /// </summary>
-        PlasmaFuel = 1006,
+        IntermediateUpgradeUnit = 1102,
 
         /// <summary>
-        /// 通用升级单元
+        /// 高级升级单元
         /// </summary>
-        UniversalUpgradeUnit = 1101,
-
-        /// <summary>
-        /// 带宽资源
-        /// </summary>
-        BandwidthResource = 1201,
-
-        /// <summary>
-        /// 云服务器
-        /// </summary>
-        CloudServer = 1202,
-
-        /// <summary>
-        /// 数据集
-        /// </summary>
-        DataSet = 1301,
-
-        /// <summary>
-        /// GPU单元
-        /// </summary>
-        GPUUnit = 1302,
-
-        /// <summary>
-        /// 区块链节点
-        /// </summary>
-        BlockchainNode = 1401,
-
-        /// <summary>
-        /// 安全令牌
-        /// </summary>
-        SecurityToken = 1402,
-
-        /// <summary>
-        /// 入侵防御单元
-        /// </summary>
-        IntrusionPreventionUnit = 1501,
-
-        /// <summary>
-        /// 安全漏洞扫描器
-        /// </summary>
-        SecurityVulnerabilityScanner = 1502,
-
-        /// <summary>
-        /// 数据源
-        /// </summary>
-        DataSource = 1601,
-
-        /// <summary>
-        /// 统计单元
-        /// </summary>
-        StatisticalUnit = 1602,
-
-        /// <summary>
-        /// 传感器设备
-        /// </summary>
-        SensorDevices = 1701,
-
-        /// <summary>
-        /// 边缘设备
-        /// </summary>
-        EdgeProcessingUnit = 1702,
+        AdvancedUpgradeUnit = 1103,
 
         /// <summary>
         /// 知识碎片（云计算）

@@ -679,18 +679,17 @@ namespace ETLG.Data
             playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
 
-            AddArtifact((int)EnumArtifact.UniversalUpgradeUnit, 240);
-            AddArtifact((int)EnumArtifact.CloudServer, 340);
-            AddArtifact((int)EnumArtifact.DataSet, 278);
-            AddArtifact((int)EnumArtifact.GPUUnit, 638);
+            AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
+            AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
+            AddArtifact((int)EnumArtifact.AdvancedUpgradeUnit, 70);
 
             AddArtifact((int)EnumArtifact.FirepowerModule, 1);
             AddArtifact((int)EnumArtifact.DamageAmplifier, 1);
             AddArtifact((int)EnumArtifact.MissileLauncher, 1);
             AddArtifact((int)EnumArtifact.BeamEmitter, 1);
 
-            AddArtifact((int)EnumArtifact.PlasmaFuel, 100);
-            AddArtifact((int)EnumArtifact.LiquidMethane, 200);
+            AddArtifact((int)EnumArtifact.RareOre, 30);
+            AddArtifact((int)EnumArtifact.FuelRefillUnit, 40);
 
             AddArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
             AddArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);

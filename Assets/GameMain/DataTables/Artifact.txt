@@ -5,42 +5,30 @@
 	1001	货币	Money	-1	TRUE	0	999999999
 	1002	知识点	KnowledgePoint	-1	FALSE	0	9999
 	1003	稀有矿石	RareOre	1	TRUE	100	9999
-	1004	高纯度金属	HighPurityMetal	1	TRUE	200	9999
-	1005	液态甲烷	LiquidMethane	1	TRUE	300	9999
-	1006	等离子燃料	PlasmaFuel	1	TRUE	400	9999
-	1101	通用升级单元	UniversalUpgradeUnit	1	TRUE	100	9999
-	1201	带宽资源	BandwidthResource	1	TRUE	100	9999
-	1202	云服务器	CloudServer	1	TRUE	200	9999
-	1301	数据集	DataSet	1	TRUE	100	9999
-	1302	GPU单元	GPUUnit	1	TRUE	200	9999
-	1401	区块链节点	BlockchainNode	1	TRUE	100	9999
-	1402	安全令牌	SecurityToken	1	TRUE	200	9999
-	1501	入侵防御单元	IntrusionPreventionUnit	1	TRUE	100	9999
-	1502	安全漏洞扫描器	SecurityVulnerabilityScanner	1	TRUE	200	9999
-	1601	数据源	DataSource	1	TRUE	100	9999
-	1602	统计单元	StatisticalUnit	1	TRUE	300	9999
-	1701	传感器设备	SensorDevices	1	TRUE	100	9999
-	1702	边缘设备	EdgeProcessingUnit	1	TRUE	300	9999
+	1004	燃料补充单元	FuelRefillUnit	1	TRUE	300	9999
+	1101	低级升级单元	LowLevelUpgradeUnit	1	TRUE	100	9999
+	1102	中级升级单元	IntermediateUpgradeUnit	1	TRUE	100	9999
+	1103	高级升级单元	AdvancedUpgradeUnit	1	TRUE	100	9999
 	2001	知识碎片（云计算）	KnowledgeFragments_CloudComputing	2	FALSE	0	1
 	2002	知识碎片（人工智能）	KnowledgeFragments_AI	2	FALSE	0	1
 	2003	知识碎片（区块链）	KnowledgeFragments_Blockchain	2	FALSE	0	1
 	2004	知识碎片（网络安全）	KnowledgeFragments_Cybersecurity	2	FALSE	0	1
 	2005	知识碎片（数据科学）	KnowledgeFragments_DataScience	2	FALSE	0	1
 	2006	知识碎片（物联网）	KnowledgeFragments_IoT	2	FALSE	0	1
-	3001	防御系统升级	DefenseSystemUpgrade	3	FALSE	0	1
-	3002	装甲镀层	ArmorPlating	3	FALSE	0	1
-	3003	维修无人机舱	RepairDroneBay	3	FALSE	0	1
-	3004	能量护盾投影仪	EnergyShieldProjector	3	FALSE	0	1
-	3005	护盾发生器	ShieldGenerator	3	FALSE	0	1
-	3006	火力模块	FirepowerModule	3	FALSE	0	1
-	3007	伤害增幅器	DamageAmplifier	3	FALSE	0	1
-	3008	能源电容器	EnergyCapacitor	3	FALSE	0	1
-	3009	速度助推器	VelocityBooster	3	FALSE	0	1
-	3010	推进器增强	ThrusterEnhancement	3	FALSE	0	1
-	3011	隐形装置	CloakingDevice	3	FALSE	0	1
-	3012	存储扩展单元	StorageExpansioUnit	3	FALSE	0	1
-	3013	传感器阵列	SensorArray	3	FALSE	0	1
-	3014	导弹发射器	MissileLauncher	3	FALSE	0	1
-	3015	光束发射器	BeamEmitter	3	FALSE	0	1
-	3016	离子加速器	IonAccelerator	3	FALSE	0	1
-	3017	磁轨炮架	RailgunMount	3	FALSE	0	1
+	3001	防御系统升级	DefenseSystemUpgrade	3	TRUE	50000	1
+	3002	装甲镀层	ArmorPlating	3	TRUE	50000	1
+	3003	维修无人机舱	RepairDroneBay	3	TRUE	50000	1
+	3004	能量护盾投影仪	EnergyShieldProjector	3	TRUE	50000	1
+	3005	护盾发生器	ShieldGenerator	3	TRUE	50000	1
+	3006	火力模块	FirepowerModule	3	TRUE	50000	1
+	3007	伤害增幅器	DamageAmplifier	3	TRUE	50000	1
+	3008	能源电容器	EnergyCapacitor	3	TRUE	50000	1
+	3009	速度助推器	VelocityBooster	3	TRUE	50000	1
+	3010	推进器增强	ThrusterEnhancement	3	TRUE	50000	1
+	3011	隐形装置	CloakingDevice	3	TRUE	50000	1
+	3012	存储扩展单元	StorageExpansioUnit	3	TRUE	50000	1
+	3013	传感器阵列	SensorArray	3	TRUE	50000	1
+	3014	导弹发射器	MissileLauncher	3	TRUE	50000	1
+	3015	光束发射器	BeamEmitter	3	TRUE	50000	1
+	3016	离子加速器	IonAccelerator	3	TRUE	50000	1
+	3017	磁轨炮架	RailgunMount	3	TRUE	50000	1
