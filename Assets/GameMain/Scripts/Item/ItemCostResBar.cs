@@ -17,7 +17,6 @@ namespace ETLG
 
         public RawImage icon;
 
-        public TextMeshProUGUI resName;
         public TextMeshProUGUI hasNum;
         public TextMeshProUGUI needNum;
 

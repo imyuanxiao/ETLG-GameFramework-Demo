@@ -78,7 +78,7 @@ namespace ETLG
 
             if(Constant.Type.SKILL_LOCKED == dataPlayer.GetPlayerData().GetSkillLevelById(dataSkill.currentSkillId))
             {
-                Title.text = "Domain knowledge required for unlocking.";
+                Title.text = "Unlock this skill by gettting Landing Point Reward";
                 UpgradeButton.interactable = false;
             }
 

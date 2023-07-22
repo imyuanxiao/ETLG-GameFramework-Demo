@@ -253,8 +253,11 @@ namespace ETLG.Data
             {
                 playerArtifacts.Add(id, number);
             }
+            else
+            {
+                playerArtifacts[id] += number;
+            }
 
-            playerArtifacts[id] += number;
         }
 
         //update ALL artifacts after trading
