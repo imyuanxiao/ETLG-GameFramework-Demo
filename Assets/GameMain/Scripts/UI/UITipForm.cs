@@ -37,7 +37,7 @@ namespace ETLG
             }
             else
             {
-                TipContent.text = GameEntry.Localization.GetString(Constant.Key. PRE_ACHIEVE+ dataAchievement.discriptionId.ToString()+ Constant.Key.POST_ACHIEVE_LEVEL+ dataAchievement.descriptionLevel.ToString());
+                TipContent.text = GameEntry.Localization.GetString(Constant.Key. PRE_ACHIEVE+ dataAchievement.descriptionId.ToString()+ Constant.Key.POST_ACHIEVE_LEVEL+ dataAchievement.descriptionLevel.ToString());
             }
         }
 

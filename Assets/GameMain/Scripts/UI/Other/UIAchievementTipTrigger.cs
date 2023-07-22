@@ -39,7 +39,9 @@ namespace ETLG
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            Vector3 newPosition = itemPosition + new Vector3(-200f, 50f, 0f);
+            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_CLOSE, 0, 0));
         }
     }
 }
