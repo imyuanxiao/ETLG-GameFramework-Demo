@@ -18,10 +18,11 @@ namespace ETLG
         private bool changeToProcedureMap = false;
         private RaycastHit hitInfo;
 
-/*        private int? currentNPCUIID;
+        /*        private int? currentNPCUIID;
+                private int? artifactTradeInfoUIID;
+        */
         private int? artifactTradeInfoUIID;
-        private int? artifactInfoUIID;
-*/
+
         private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -43,7 +44,6 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
             GameEntry.Event.Subscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Subscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
-            //GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
@@ -63,34 +63,13 @@ namespace ETLG
         }
 
 
-   
-
-        private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
-        {
-            ArtifactInfoUIChangeEventArgs ne = (ArtifactInfoUIChangeEventArgs)e;
-            if (ne == null)
-                return;
-
-
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
-            {
-                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoForm));
-            }
-
-            if (ne.Type == Constant.Type.UI_OPEN)
-            {
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
-            }
-
-        }
-
         private void OnArtifactInfoTradeUIChange(object sender, GameEventArgs e)
         {
             ArtifactInfoTradeUIChangeEventArgs ne = (ArtifactInfoTradeUIChangeEventArgs)e;
             if (ne == null)
                 return;
 
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoTradeForm))
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoTradeForm));
             }
@@ -99,8 +78,6 @@ namespace ETLG
             {
                 GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoTradeForm);
             }
-
-
         }
 
         private void OnNPCUIChange(object sender, GameEventArgs e)
@@ -129,44 +106,43 @@ namespace ETLG
             }
             else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)
             {
-
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
             }
             else if (ne.Type == Constant.Type.NPC_UI_QUIZ_OPEN)
             {
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
             }
-
-
-/*
-            if (currentNPCUIID != null)
-            {
-                GameEntry.UI.CloseUIForm((int)currentNPCUIID);
-                currentNPCUIID = null;
-            }
-
-            if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
-            {
-                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
-            }
-            else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)
-            {
-                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
-            }
-            else if(ne.Type == Constant.Type.NPC_UI_QUIZ_OPEN)
-            {
-                currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
-            }
-            else if (ne.Type == Constant.Type.UI_CLOSE)
-            {
-                if (currentNPCUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)currentNPCUIID);
-                }
-
-                currentNPCUIID = null;
-            }*/
         }
+
+
+        /*
+                    if (currentNPCUIID != null)
+                    {
+                        GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+                        currentNPCUIID = null;
+                    }
+
+                    if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
+                    {
+                        currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+                    }
+                    else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)
+                    {
+                        currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
+                    }
+                    else if(ne.Type == Constant.Type.NPC_UI_QUIZ_OPEN)
+                    {
+                        currentNPCUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
+                    }
+                    else if (ne.Type == Constant.Type.UI_CLOSE)
+                    {
+                        if (currentNPCUIID != null)
+                        {
+                            GameEntry.UI.CloseUIForm((int)currentNPCUIID);
+                        }
+
+                        currentNPCUIID = null;
+                    }*/
 
         private void OnPlanetLandingPointClick(object sender, GameEventArgs e)
         {
@@ -229,7 +205,6 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
             GameEntry.Event.Unsubscribe(PlanetLandingPointEventArgs.EventId, OnPlanetLandingPointClick);
             GameEntry.Event.Unsubscribe(NPCUIChangeEventArgs.EventId, OnNPCUIChange);
-            //GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
 

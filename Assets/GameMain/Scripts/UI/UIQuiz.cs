@@ -126,11 +126,11 @@ namespace ETLG.Data
         {
             if (result)
             {
-                optionsCanvas[optionKey].GetComponentInChildren<RawImage>().color = Color.green;
+                optionsCanvas[optionKey].GetComponentInChildren<RawImage>().color = UIHexColor.HexToColor("386A38");
             }
             else
             {
-                optionsCanvas[optionKey].GetComponentInChildren<RawImage>().color = Color.red;
+                optionsCanvas[optionKey].GetComponentInChildren<RawImage>().color = UIHexColor.HexToColor("713838");
             }
         }
 
