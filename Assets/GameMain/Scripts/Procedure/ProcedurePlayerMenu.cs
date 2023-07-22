@@ -16,13 +16,6 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
 
-        private int? skillInfoUIID;
-        private int? skillUpgradeInfoUIID;
-        private int? artifactInfoUIID;
-        private int? moduleInfoUIID;
-        private int? moduleEquipInfoUIID;
-        private int? tipUIID;
-
         private DataPlayer dataPlayer;
         private DataArtifact dataArtifact;
         private DataSkill dataSkill;
@@ -136,16 +129,6 @@ namespace ETLG
 
         private void ResetStates()
         {
-            skillInfoUIID = null;
-            skillUpgradeInfoUIID = null;
-
-            artifactInfoUIID = null;
-
-            moduleInfoUIID = null;
-            moduleEquipInfoUIID = null;
-
-            tipUIID = null;
-
             dataArtifact.lockCurrentModuleID = false;
             dataSkill.lockCurrentSkillID = false;
         }
@@ -157,19 +140,17 @@ namespace ETLG
             if (ne == null)
                 return;
 
-
-            if (ne.Type == Constant.Type.UI_OPEN && skillUpgradeInfoUIID == null)
+            if (ne.Type == Constant.Type.UI_CLOSE && !GameEntry.UI.HasUIForm(EnumUIForm.UISkillUpgradeInfoForm))
             {
-                skillInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UISkillInfoForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UISkillInfoForm));
+                }
             }
 
-            if (ne.Type == Constant.Type.UI_CLOSE && skillUpgradeInfoUIID == null)
+            if (ne.Type == Constant.Type.UI_OPEN && !GameEntry.UI.HasUIForm(EnumUIForm.UISkillUpgradeInfoForm))
             {
-                if (skillInfoUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)skillInfoUIID);
-                }
-                skillInfoUIID = null;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UISkillInfoForm);
             }
         }
 
@@ -179,28 +160,25 @@ namespace ETLG
             if (ne == null)
                 return;
 
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                if (skillUpgradeInfoUIID != null)
+                if (!GameEntry.UI.HasUIForm(EnumUIForm.UISkillUpgradeInfoForm))
                 {
-                    return;
-                }
-
-                skillUpgradeInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UISkillUpgradeInfoForm);
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UISkillUpgradeInfoForm);
+                };
+                
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (skillUpgradeInfoUIID != null)
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UISkillUpgradeInfoForm))
                 {
-                    GameEntry.UI.CloseUIForm((int)skillUpgradeInfoUIID);
-                }
-                skillUpgradeInfoUIID = null;
-
-                if (skillInfoUIID != null)
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UISkillUpgradeInfoForm));
+                };
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UISkillInfoForm))
                 {
-                    GameEntry.UI.CloseUIForm((int)skillInfoUIID);
-                }
-                skillInfoUIID = null;
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UISkillInfoForm));
+                };
             }
         }
 
@@ -210,17 +188,15 @@ namespace ETLG
             if (ne == null)
                 return;
 
+
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoForm));
+            }
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
-            }
-            else if (ne.Type == Constant.Type.UI_CLOSE)
-            {
-                if (artifactInfoUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
-                }
-                artifactInfoUIID = null;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
 
         }
@@ -231,26 +207,23 @@ namespace ETLG
             if (ne == null)
                 return;
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
                 dataPlayer.tipUiPosition = ne.position;
                 dataPlayer.tipTitle = ne.tipTitle;
-                if(ne.level!=0 && ne.achievementId!=0)
+                if (ne.level != 0 && ne.achievementId != 0)
                 {
                     dataAchievement.discriptionId = ne.achievementId;
                     dataAchievement.descriptionLevel = ne.level;
                 }
-                tipUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
             }
 
-            if (ne.Type == Constant.Type.UI_CLOSE)
-            {
-                if (tipUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)tipUIID);
-                }
-                tipUIID = null;
-            }
         }
 
 
@@ -261,19 +234,17 @@ namespace ETLG
             if (ne == null)
                 return;
 
-
-            if (ne.Type == Constant.Type.UI_OPEN && moduleEquipInfoUIID == null)
+            if (ne.Type == Constant.Type.UI_OPEN && !GameEntry.UI.HasUIForm(EnumUIForm.UIModuleEquipForm))
             {
-                moduleInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleInfoForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleInfoForm);
             }
 
-            if (ne.Type == Constant.Type.UI_CLOSE && moduleEquipInfoUIID == null)
+            if (ne.Type == Constant.Type.UI_CLOSE && !GameEntry.UI.HasUIForm(EnumUIForm.UIModuleEquipForm))
             {
-                if (moduleInfoUIID != null)
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIModuleInfoForm))
                 {
-                    GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIModuleInfoForm));
                 }
-                moduleInfoUIID = null;
             }
         }
 
@@ -283,28 +254,26 @@ namespace ETLG
             if (ne == null)
                 return;
 
+
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                if (moduleEquipInfoUIID != null)
+                if (!GameEntry.UI.HasUIForm(EnumUIForm.UIModuleEquipForm))
                 {
-                    return;
-                }
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleEquipForm);
+                };
 
-                moduleEquipInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIModuleEquipForm);
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (moduleEquipInfoUIID != null)
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIModuleEquipForm))
                 {
-                    GameEntry.UI.CloseUIForm((int)moduleEquipInfoUIID);
-                }
-                moduleEquipInfoUIID = null;
-
-                if (moduleInfoUIID != null)
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIModuleEquipForm));
+                };
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIModuleInfoForm))
                 {
-                    GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
-                }
-                moduleInfoUIID = null;
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIModuleInfoForm));
+                };
             }
         }
 
@@ -314,17 +283,15 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if (moduleEquipInfoUIID != null)
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIModuleEquipForm))
             {
-                GameEntry.UI.CloseUIForm((int)moduleEquipInfoUIID);
-            }
-            moduleEquipInfoUIID = null;
-
-            if (moduleInfoUIID != null)
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIModuleEquipForm));
+            };
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIModuleInfoForm))
             {
-                GameEntry.UI.CloseUIForm((int)moduleInfoUIID);
-            }
-            moduleInfoUIID = null;
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIModuleInfoForm));
+            };
+ 
         }
         public void OnAchievementPoPUp(object sender, GameEventArgs e)
         {

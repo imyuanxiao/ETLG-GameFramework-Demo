@@ -61,8 +61,11 @@ namespace ETLG
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Data.GetData<DataUI>().LandingPointInfoUIID = null;
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlanetLandingPointForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetLandingPointForm));
+            }
             this.Close();
         }
     }

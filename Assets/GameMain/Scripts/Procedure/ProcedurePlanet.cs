@@ -18,10 +18,10 @@ namespace ETLG
         private bool changeToProcedureMap = false;
         private RaycastHit hitInfo;
 
-        private int? currentNPCUIID;
+/*        private int? currentNPCUIID;
         private int? artifactTradeInfoUIID;
         private int? artifactInfoUIID;
-
+*/
         private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -38,7 +38,6 @@ namespace ETLG
             this.changeScene = false;
             this.changeToProcedureMap = false;
 
-            ResetStates();
 
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
@@ -64,12 +63,7 @@ namespace ETLG
         }
 
 
-        private void ResetStates()
-        {
-            currentNPCUIID = null;
-            artifactTradeInfoUIID = null;
-            artifactInfoUIID = null;
-        }
+   
 
         private void OnArtifactInfoUIChange(object sender, GameEventArgs e)
         {
@@ -77,17 +71,15 @@ namespace ETLG
             if (ne == null)
                 return;
 
+
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoForm));
+            }
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                artifactInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
-            }
-            else if (ne.Type == Constant.Type.UI_CLOSE)
-            {
-                if (artifactInfoUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)artifactInfoUIID);
-                }
-                artifactInfoUIID = null;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoForm);
             }
 
         }
@@ -98,18 +90,16 @@ namespace ETLG
             if (ne == null)
                 return;
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoTradeForm));
+            }
+
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                artifactTradeInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoTradeForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIArtifactInfoTradeForm);
             }
-            else if (ne.Type == Constant.Type.UI_CLOSE)
-            {
-                if (artifactTradeInfoUIID != null)
-                {
-                    GameEntry.UI.CloseUIForm((int)artifactTradeInfoUIID);
-                }
-                artifactTradeInfoUIID = null;
-            }
+
 
         }
 
@@ -119,7 +109,36 @@ namespace ETLG
             if (ne == null)
                 return;
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
+            }
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCTradeForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCTradeForm));
+            }
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizForm));
+            }
 
+            // Open UI
+            if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+            }
+            else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)
+            {
+
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCTradeForm);
+            }
+            else if (ne.Type == Constant.Type.NPC_UI_QUIZ_OPEN)
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
+            }
+
+
+/*
             if (currentNPCUIID != null)
             {
                 GameEntry.UI.CloseUIForm((int)currentNPCUIID);
@@ -146,7 +165,7 @@ namespace ETLG
                 }
 
                 currentNPCUIID = null;
-            }
+            }*/
         }
 
         private void OnPlanetLandingPointClick(object sender, GameEventArgs e)
@@ -155,7 +174,12 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            GameEntry.Data.GetData<DataUI>().LandingPointInfoUIID = GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIPlanetLandingPointForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetLandingPointForm));
+            }
+
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIPlanetLandingPointForm);
         }
 
         private void OnPlanetInfo(object sender, GameEventArgs e)
