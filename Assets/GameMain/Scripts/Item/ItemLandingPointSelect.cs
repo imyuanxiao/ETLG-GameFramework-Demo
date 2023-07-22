@@ -15,6 +15,7 @@ namespace ETLG
 
         public TextMeshProUGUI landingpoint_title = null;
         public Button exploreButton;
+        public Button combatButton;
 
         private DataLandingPoint dataLandingPoint;
 
@@ -44,6 +45,7 @@ namespace ETLG
             landingpoint_title.text = dataLandingPoint.GetLandingPointData(landingPointID).Title;
 
             exploreButton.onClick.AddListener(OnExploreButtonClick);
+            combatButton.onClick.AddListener(OnCombatButtonClick);
 
 
 
@@ -53,6 +55,11 @@ namespace ETLG
         {
             base.OnHide(isShutdown, userData);
             exploreButton.onClick.RemoveAllListeners();
+        }
+
+        public void OnCombatButtonClick()
+        {
+
         }
 
         public void OnExploreButtonClick()

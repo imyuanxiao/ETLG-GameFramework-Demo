@@ -12,6 +12,7 @@ namespace ETLG
     public class UIPlanetInfoForm : UGuiFormEx
     {
 
+       // public RectTransform UIContainer;
 
         public TextMeshProUGUI p_name = null;
         public TextMeshProUGUI p_type = null;
@@ -20,6 +21,8 @@ namespace ETLG
         public Transform LandingPointsContainer;
 
         public Button closeButton = null;
+
+        private bool refresh;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -34,13 +37,38 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+           // ShowContent();
+           refresh = true;
+
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+
+            if (refresh)
+            {
+                Log.Debug("Update");
+                ShowContent();
+                refresh = false;
+            }
+
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
+        }
+
+        private void ShowContent()
+        {
             PlanetData currentPlanetData = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData();
             p_name.text = currentPlanetData.Name;
             p_type.text = currentPlanetData.TypeStr;
             p_description.text = currentPlanetData.Description;
 
+            //LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+
             ShowLandingPoints();
+
         }
+
         private void ShowLandingPoints()
         {
 
