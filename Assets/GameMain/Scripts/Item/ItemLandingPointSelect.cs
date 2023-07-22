@@ -60,7 +60,33 @@ namespace ETLG
 
         public void OnCombatButtonClick()
         {
-
+            int PlanetID = 100 + (int) landingPointID / 100;
+            string planetType = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(PlanetID).TypeStr;
+            switch (planetType)
+            {
+                case "Cloud Computing":
+                    planetType = "CloudComputing";
+                    break;
+                case "Artificial Intelligence":
+                    planetType = "AI";
+                    break;
+                case "CyberSecurity":
+                    planetType = "CyberSecurity";
+                    break;
+                case "Data Science":
+                    planetType = "DataScience";
+                    break;
+                case "Blockchain":
+                    planetType = "Blockchain";
+                    break;
+                case "Internet of Things":
+                    planetType = "IoT";
+                    break;
+                default:
+                    break;
+            }
+            Debug.Log("Basic Battle Planet Type: " + planetType);
+            GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", planetType));
         }
 
         public void OnExploreButtonClick()
@@ -70,9 +96,6 @@ namespace ETLG
 
             if(Type == Constant.Type.LP_IN_MAP)
             {
-                // change false to true for final product
-                if(EnterRandomBattle(false)) { return; }
-
                 // move to planet
                 MoveToPlanet(landingPointID);
             }
@@ -83,21 +106,6 @@ namespace ETLG
 
         }
 
-        private bool EnterRandomBattle(bool isActive)
-        {
-            if (!isActive) { return false; }
-
-            // calculate if enter random battle     
-            int enterBasicBattleProbablity = 3;
-            int r = UnityEngine.Random.Range(0, 10);
-            if (r < enterBasicBattleProbablity)
-            {
-                // Enter Basic Battle
-                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", ""));
-                return true;
-            }
-            return false;
-        }
 
         private void MoveToPlanet(int landingPointID)
         {
