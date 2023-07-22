@@ -43,7 +43,7 @@ namespace ETLG
         private int totalPrice;
         private int ownedMoney;
 
-        public delegate void TradeDataEventHandler(int tradeNum,int totalPrice);
+        public delegate void TradeDataEventHandler(int tradeNum, int totalPrice);
         public static event TradeDataEventHandler OnTradeDataSent;
 
         // 初始化菜单数据
@@ -62,6 +62,8 @@ namespace ETLG
 
         protected override void OnOpen(object userData)
         {
+            base.OnOpen(userData);
+
             artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
 
             UIContainer.position = dataArtifact.artifactInfoPosition;
@@ -77,12 +79,11 @@ namespace ETLG
             ArtifactNumber.text = dataPlayer.GetPlayerData().GetArtifactNumById(artifactDataBase.Id).ToString();
             ArtifactDescription.text = artifactDataBase.Description;
 
-            base.OnOpen(userData);
-
             Transform InteractContainerRectTransform = InteractContainer.GetComponent<Transform>();
             InteractContainerRectTransform.gameObject.SetActive(false);
             Transform ClickHintRectTransform = ClickHint.GetComponent<Transform>();
             ClickHintRectTransform.gameObject.SetActive(true);
+
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
 
             UINpcTradeForm.OnTradeConditionSent += HandleTradeCondition;
@@ -90,6 +91,8 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+            artifactDataBase.isTrade = false;
+            UINpcTradeForm.isTrade = false;
             artifactDataBase = null;
             UINpcTradeForm.OnTradeConditionSent -= HandleTradeCondition;
             base.OnClose(isShutdown, userData);
@@ -97,7 +100,7 @@ namespace ETLG
         }
 
         //卖家拥有的item总数量
-        private void HandleTradeCondition(int totalNum,int ownedMoney)
+        private void HandleTradeCondition(int totalNum, int ownedMoney)
         {
             this.maxNum = totalNum;
             this.ownedMoney = ownedMoney;
@@ -112,6 +115,13 @@ namespace ETLG
                 InteractContainerRectTransform.gameObject.SetActive(true);
                 Transform ClickHintRectTransform = ClickHint.GetComponent<Transform>();
                 ClickHintRectTransform.gameObject.SetActive(false);
+            }
+            else
+            {
+                Transform InteractContainerRectTransform = InteractContainer.GetComponent<Transform>();
+                InteractContainerRectTransform.gameObject.SetActive(false);
+                Transform ClickHintRectTransform = ClickHint.GetComponent<Transform>();
+                ClickHintRectTransform.gameObject.SetActive(true);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
 
@@ -166,9 +176,7 @@ namespace ETLG
 
         private void closeButtonClick()
         {
-            artifactDataBase.isTrade = false;
-            OnTradeDataSent?.Invoke(-1, -1);
-            this.Close();
+            GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
         private void minusNumClick()
