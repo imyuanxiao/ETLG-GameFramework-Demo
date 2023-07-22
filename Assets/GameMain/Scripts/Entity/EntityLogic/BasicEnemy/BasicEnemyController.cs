@@ -16,6 +16,10 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
             GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
+            if (GetComponent<BasicEnemyAttack>() != null)
+            {
+                GetComponent<BasicEnemyAttack>().enabled = true;
+            }
         }
 
         private void OnBattleWin(object sender, GameEventArgs e)

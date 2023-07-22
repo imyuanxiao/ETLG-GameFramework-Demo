@@ -39,6 +39,7 @@ namespace ETLG
             this.recoveryCnt = 0;
 
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().fireWallFx.SetActive(true);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -85,6 +86,7 @@ namespace ETLG
             base.OnLeave(fsm, isShutdown);
 
             GameEntry.Event.Unsubscribe(PlayerRespawnEventArgs.EventId, OnPlayerRespawn);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().fireWallFx.SetActive(false);
         }
 
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)

@@ -11,6 +11,12 @@ namespace ETLG
         [Header("Skills Info")]
         public List<SkillInfo> skills = new List<SkillInfo>();
 
+        [Header("Skill FX")]
+        public GameObject cloudComputingFX;
+        public GameObject medicalSupportFX;
+        public GameObject fireWallFx;
+        public GameObject electronicWarfareFX;
+
         // Respawn Settings
         [HideInInspector] public bool canRespawn = false;
         [HideInInspector] public int respawnCnt = 0;
@@ -20,8 +26,14 @@ namespace ETLG
 
         private void OnEnable() 
         {
+            DisableAllSkillFX();
             SetPlayerSkill(); 
             respawnCnt = 0;   
+        }
+
+        private void DisableAllSkillFX()
+        {
+            this.cloudComputingFX.SetActive(false);
         }
 
         private void SetPlayerSkill()
@@ -50,10 +62,8 @@ namespace ETLG
 
         public SkillInfo GetSkillInfoById(EnumSkill id) 
         {
-            Debug.Log("Target Id : " + id);
             foreach (var skillInfo in skills)
             {
-                Debug.Log("Current Id : " + skillInfo.skillEnumId);
                 if (skillInfo.skillEnumId == id) 
                 {
                     return skillInfo;
@@ -77,6 +87,7 @@ namespace ETLG
         
         private void OnDisable() 
         {
+            DisableAllSkillFX();
             skills.Clear();    
         }
     }

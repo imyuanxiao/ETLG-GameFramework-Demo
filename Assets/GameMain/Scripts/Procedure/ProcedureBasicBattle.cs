@@ -17,6 +17,7 @@ namespace ETLG
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
         private bool isWinning = false;
+        private float startTime = 0f;
 
 
         protected override void OnInit(ProcedureOwner procedureOwner)
@@ -30,6 +31,7 @@ namespace ETLG
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
             this.isWinning = false;
+            this.startTime = Time.time;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
@@ -52,6 +54,8 @@ namespace ETLG
 
         private void OnBasicBattleWin(object sender, GameEventArgs e)
         {
+            float timeUsed = Time.time - this.startTime;
+            Debug.Log("Used Time: " + timeUsed);
             Dictionary<string, int> result = new Dictionary<string, int>();
             BasicBattleWinEventArgs ne = (BasicBattleWinEventArgs) e;
             result.Add("Killed", ne.BasicEnemyKilled);

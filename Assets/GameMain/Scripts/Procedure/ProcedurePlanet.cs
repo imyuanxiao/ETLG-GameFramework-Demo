@@ -47,6 +47,7 @@ namespace ETLG
             //GameEntry.Event.Subscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
+            GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
@@ -90,6 +91,18 @@ namespace ETLG
                 artifactInfoUIID = null;
             }
 
+        }
+
+        private void OnEnterBattle(object sender, GameEventArgs e) 
+        {
+            EnterBattleEventArgs ne = (EnterBattleEventArgs) e;
+            if (ne == null)
+                return;
+            
+            procedureOwner.SetData<VarString>("BattleType", ne.BattleType);
+            procedureOwner.SetData<VarString>("BossType", ne.BossType);
+            
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
         }
 
         private void OnArtifactInfoTradeUIChange(object sender, GameEventArgs e)
@@ -208,6 +221,7 @@ namespace ETLG
             //GameEntry.Event.Unsubscribe(ArtifactInfoUIChangeEventArgs.EventId, OnArtifactInfoUIChange);
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
+            GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;

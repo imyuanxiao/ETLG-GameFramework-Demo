@@ -28,11 +28,20 @@ namespace ETLG
 
             changeToRespawnState = false;
             lastingTime = 5f;
-            if (BattleManager.Instance.bossEnemyEntity != null)
+            if (GameEntry.Procedure.CurrentProcedure is not ProcedureBasicBattle && BattleManager.Instance.bossEnemyEntity != null)
             {
                 BattleManager.Instance.bossEnemyEntity.GetComponent<BossEnemyAttack>().enabled = false;
             }
+            // if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            // {
+            //     BasicEnemyController[] targets = GameObject.FindObjectsByType<BasicEnemyController>(FindObjectsSortMode.None);
+            //     foreach (var item in targets)
+            //     {
+            //         item.gameObject.GetComponent<BasicEnemyAttack>().enabled = false;
+            //     }
+            // }
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().electronicWarfareFX.SetActive(true);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -63,6 +72,15 @@ namespace ETLG
             {
                 ChangeState<DefaultSkill>(fsm);
             }
+
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            {
+                BasicEnemyController[] targets = GameObject.FindObjectsByType<BasicEnemyController>(FindObjectsSortMode.None);
+                foreach (var item in targets)
+                {
+                    item.gameObject.GetComponent<BasicEnemyAttack>().enabled = false;
+                }
+            }
         }
 
         protected override void OnLeave(IFsm<SpaceshipAttack> fsm, bool isShutdown)
@@ -77,6 +95,16 @@ namespace ETLG
             }
             lastingTime = 5f;
             timeElapsed = 0f;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().electronicWarfareFX.SetActive(false);
+
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
+            {
+                BasicEnemyController[] targets = GameObject.FindObjectsByType<BasicEnemyController>(FindObjectsSortMode.None);
+                foreach (var item in targets)
+                {
+                    item.gameObject.GetComponent<BasicEnemyAttack>().enabled = true;
+                }
+            }
         }
 
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)
