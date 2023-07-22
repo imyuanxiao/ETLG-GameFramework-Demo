@@ -49,15 +49,17 @@ namespace ETLG
         private const float max_prefabWidth = 1760f;
         private const float max_textWidth = 1540f;
 
+        private bool isShown;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
             closeButton.onClick.AddListener(OnCloseButtonClick);
             maxButton.onClick.AddListener(OnMaxButtonClick);
 
@@ -85,11 +87,17 @@ namespace ETLG
             if ((nextNodeID != "end" && isNext) || (nextNodeID != "end" && currentNode == null))
             {
                 getCurrentNode();
-                showText(currentdialogUIWidth);
+                showText(currentdialogUIWidth, isShown);
             }
             else if (nextNodeID == "end" && isNext)
             {
                 removePlayerResponseInput();
+
+                //检测有没有得过奖励
+                //if (!award)
+                //{
+                //    getAward();
+                //}
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
         }
@@ -98,7 +106,7 @@ namespace ETLG
         private void loadAvatar()
         {
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
-            if(NPCTexture == null)
+            if (NPCTexture == null)
             {
                 NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
             }
@@ -224,11 +232,20 @@ namespace ETLG
             {
                 playerText = responseNode.InnerText;
                 nextNodeID = responseNode.Attributes["nextnode"].Value;
+
+                if (currentNode.SelectSingleNode("player").Attributes["isShown"] != null)
+                {
+                    isShown = false;
+                }
+                else
+                {
+                    isShown = true;
+                }
                 playerButtons.Add(playerText, nextNodeID);
             }
         }
 
-        private void showText(float width)
+        private void showText(float width, bool isShown)
         {
             Image NPCModule = instantiatePrefab(NPCText, "NPC");
 
@@ -241,7 +258,10 @@ namespace ETLG
                 {
                     nextNodeID = data.Value;
                     isNext = true;
-                    instantiatePrefab(data.Key, "player");
+                    if (isShown)
+                    {
+                        instantiatePrefab(data.Key, "player");
+                    }
                 });
 
                 //选项文本加载
@@ -258,7 +278,6 @@ namespace ETLG
             {
                 Destroy(buttonScrollContent.GetChild(i).gameObject);
             }
-
         }
 
         //分别实例化NPC和玩家的聊天记录prefab,并加载文本
@@ -270,6 +289,8 @@ namespace ETLG
             if (type == "NPC")
             {
                 textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
+                Color color = UIHexColor.HexToColor("4E4E4E");
+                textModule.color = color;
                 textModuleRectTransform = textModule.GetComponent<RectTransform>();
                 setColorAlpha(textModuleRectTransform, "NPC");
                 dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
@@ -279,6 +300,8 @@ namespace ETLG
             else
             {
                 textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
+                Color color = UIHexColor.HexToColor("383838");
+                textModule.color = color;
                 textModuleRectTransform = textModule.GetComponent<RectTransform>();
                 setColorAlpha(textModuleRectTransform, "player");
                 dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
@@ -286,9 +309,6 @@ namespace ETLG
                 dialogText.alignment = TextAlignmentOptions.Right;
             }
             //加载文本,设置对齐方式
-
-
-
             return textModule;
         }
 
@@ -312,11 +332,16 @@ namespace ETLG
                 notShownImage = NPCImage;
                 shownImage.sprite = playerSprite;
             }
-
             tempColor = notShownImage.color;
             tempColor.a = 0f;
             notShownImage.color = tempColor;
         }
+
+        private void getAward()
+        {
+
+        }
+
     }
 }
 

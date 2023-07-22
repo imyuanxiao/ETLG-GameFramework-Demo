@@ -84,9 +84,6 @@ namespace ETLG
 
         public void OnOverviewButtonClick()
         {
-            // change false to true for final product
-            if(EnterRandomBattle(false)) { return; }
-
             PlanetBase currentPlanet = MapManager.Instance.GetPlanetBaseById(PlanetID);
 
             MapManager.Instance.focusedPlanet = currentPlanet.gameObject;
@@ -177,23 +174,6 @@ namespace ETLG
             newSizeDelta.x = newWidth;
             rectTransform.sizeDelta = newSizeDelta;
         }
-
-        private bool EnterRandomBattle(bool isActive)
-        {
-            if (!isActive) { return false; }
-
-            // calculate if enter random battle     
-            int enterBasicBattleProbablity = 3;
-            int r = UnityEngine.Random.Range(0, 10);
-            if (r < enterBasicBattleProbablity)
-            {
-                // Enter Basic Battle
-                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", ""));
-                return true;
-            }
-            return false;
-        }
-
     }
 }
 

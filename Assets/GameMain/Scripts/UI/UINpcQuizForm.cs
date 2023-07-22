@@ -15,7 +15,7 @@ namespace ETLG
         private NPCData npcData;
         private string npcAvatarPath;
         private string XMLPath;
-        private UIQuizManager UIQuizManager = new UIQuizManager();
+        private UIQuizManager UIQuizManager=null;
         private List<UIQuiz> quizArray;
         public VerticalLayoutGroup ChoicesContainerverticalLayoutGroup;
         public VerticalLayoutGroup ContentverticalLayoutGroup;
@@ -62,7 +62,11 @@ namespace ETLG
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);
 
             loadAvatar();
-            parseXMLFile();
+            
+            if (UIQuizManager==null)
+            {
+                parseXMLFile();
+            }
             loadQuestions();
             updateProgress();
             updateAccuracy();
@@ -134,7 +138,7 @@ namespace ETLG
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(XMLPath);
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
-
+            UIQuizManager = new UIQuizManager();
             foreach (XmlNode node in nodes)
             {
                 UIQuizManager.addQuiz(new UIQuiz(node));

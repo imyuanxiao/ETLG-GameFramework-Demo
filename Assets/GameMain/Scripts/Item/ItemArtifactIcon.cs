@@ -13,11 +13,9 @@ namespace ETLG
 {
     public class ItemArtifactIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
-
         public DataArtifact dataArtifact;
 
         public int CurrentArtifactID;
-
 
         public RawImage artifactIcon;
 
@@ -47,30 +45,35 @@ namespace ETLG
         {
             if (Type != Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                 GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
                 ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
                 artifactDataBase.isTrade = true;
 
                 OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
+                Debug.Log("itemÖÐ´æµÄcurrent£¬Í¬pointerenter" + CurrentArtifactID);
             }
 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-                Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            iconButton.enabled = true;
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
 
-                Vector3 offset = new Vector3(0f, 0f, 0f);
+            Vector3 offset;
+            if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
+            {
+                offset = new Vector3(0f, -330f, 0f);
+            }
+            else
+            {
+                offset = new Vector3(0f, -400f, 0f);
+            }
 
-                if (Type == Constant.Type.TRADE_NPC_PLAYER)
-                {
-                    offset = new Vector3(400f, -100f, 0f);
-                }
+            Vector3 newPosition = itemPosition + offset;
 
-                Vector3 newPosition = itemPosition + offset;
-
-                dataArtifact.CurrentArtifactID = CurrentArtifactID;
-                dataArtifact.artifactInfoPosition = newPosition;
+            dataArtifact.CurrentArtifactID = CurrentArtifactID;
+            Debug.Log("pointerEnter"+ CurrentArtifactID);
+            dataArtifact.artifactInfoPosition = newPosition;
 
             if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
@@ -78,7 +81,11 @@ namespace ETLG
             }
             else
             {
-                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+                if (!UINpcTradeForm.isTrade)
+                {
+                    GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+                }
+
             }
         }
 
@@ -90,7 +97,11 @@ namespace ETLG
             }
             else
             {
-                GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+                //if pointerexit from other icon, but should not close current tradeinfo UI
+                if (!UINpcTradeForm.isTrade)
+                {
+                    GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+                }
             }
         }
 

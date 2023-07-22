@@ -39,6 +39,7 @@ namespace ETLG
             this.recoveryCnt = 0;
 
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().medicalSupportFX.SetActive(true);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -88,6 +89,7 @@ namespace ETLG
 
             this.timeElapsed = 0f;
             this.recoveryCnt = 0;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().medicalSupportFX.SetActive(false);
         }
 
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)

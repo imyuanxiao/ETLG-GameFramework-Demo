@@ -6,15 +6,19 @@ namespace ETLG
 {
     public class Bullet : Projectile
     {
+        public TrailRenderer trail;
         protected override void OnEnable() 
         {
             base.OnEnable();
             destoryTime = 4f;
-            // StartCoroutine(ReturnToPoolAfterTime());
         }
 
         private void Update() 
         {
+            if (trail != null && !trail.gameObject.activeSelf)
+            {
+                trail.gameObject.SetActive(true);
+            }
             rb.velocity = flyingDirection * flyingSpeed * Time.deltaTime;
             if (IsOffScreen())
             {
