@@ -9,7 +9,7 @@ namespace ETLG.Data
         private Dictionary<int, AchievementData> dicAchievementData;
         public int cuurrentPopUpId { set; get; }
         public int descriptionLevel { set; get; }
-        public int discriptionId { set; get; }
+        public int descriptionId { set; get; }
         protected override void OnInit()
         {
         }
