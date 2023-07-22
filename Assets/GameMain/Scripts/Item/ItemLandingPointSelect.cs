@@ -55,6 +55,7 @@ namespace ETLG
         {
             base.OnHide(isShutdown, userData);
             exploreButton.onClick.RemoveAllListeners();
+            combatButton.onClick.RemoveAllListeners();
         }
 
         public void OnCombatButtonClick()
