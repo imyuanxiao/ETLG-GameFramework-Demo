@@ -90,7 +90,7 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoForm))
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIArtifactInfoTradeForm))
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIArtifactInfoTradeForm));
             }
