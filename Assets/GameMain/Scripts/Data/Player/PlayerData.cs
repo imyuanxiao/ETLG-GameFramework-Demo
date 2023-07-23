@@ -46,6 +46,7 @@ namespace ETLG.Data
         private DataAchievement dataAchievement { get; set; }
 
         public UITradeData UI_tradeData = null;
+        public int battleVictoryCount;
 
         public PlayerData (SpaceshipData spaceshipData)
         {
@@ -87,6 +88,8 @@ namespace ETLG.Data
             // add mock artifacts
             AddMockData();
             //initPlayerAchievementData();
+
+            battleVictoryCount = 0;
         }
 
         private void instantiatePlayerNPCs()

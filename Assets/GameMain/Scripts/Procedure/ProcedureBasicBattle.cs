@@ -37,6 +37,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
+            GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
 
             entityLoader = EntityLoader.Create(this);
 
@@ -87,6 +88,7 @@ namespace ETLG
             Debug.Log("ProcedureBasicBattle: Player Dead");
             BattleManager.Instance.StopSpawnBasicEnemies();
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBasicBattleLost);
+            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6003, 1));
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -117,6 +119,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(GamePauseEventArgs.EventId, OnGamePause);
             GameEntry.Event.Unsubscribe(BasicBattleWinEventArgs.EventId, OnBasicBattleWin);
+            GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
@@ -141,6 +144,31 @@ namespace ETLG
             {
                 isWinning = true;
                 GameEntry.Event.Fire(this, BasicBattleWinEventArgs.Create(basicEnemyKilled, basicEnemyPassed));
+            }
+        }
+
+        public void OnAchievementPoPUp(object sender, GameEventArgs e)
+        {
+            AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
+            if (ne == null)
+                return;
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = ne.achievementId;
+                if (!GameEntry.Data.GetData<DataPlayer>().GetPlayerData().isAchievementAchieved(ne.count))
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, 
+                                                                                GameEntry.Data.GetData<DataAchievement>().GetNextLevel(ne.achievementId, ne.count));
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+
+                }
+            }
+            if (ne.Type == Constant.Type.UI_CLOSE)
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
+                }
             }
         }
     }

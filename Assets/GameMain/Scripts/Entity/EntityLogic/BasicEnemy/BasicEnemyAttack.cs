@@ -48,7 +48,7 @@ namespace ETLG
 
         private IEnumerator Fire()
         {
-            float elapsedTime = fireRate;
+            float elapsedTime = fireRate / 2;
 
             while (true)
             {
