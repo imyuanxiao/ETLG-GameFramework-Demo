@@ -17,6 +17,8 @@ namespace ETLG.Data
 
         public int currentNPCId { get; set; }
 
+        public Vector3 RewardUIPosition { get; set; }
+
         protected override void OnInit()
         {
             currentNPCId = Constant.Type.PLAYERMENU_SPACESHIP;

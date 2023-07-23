@@ -192,7 +192,7 @@ namespace ETLG
                     continue;
                 }
 
-                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                ShowItem<ItemArtifactIcon>(EnumItem.ItemArtifactIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
@@ -213,7 +213,7 @@ namespace ETLG
                 int ModuleID = playerModuleIDs[i];
                 Vector3 offset = new Vector3((i % 4) * 90f + 10f, (i / 4) * -90f - 10f, 0f);
 
-                ShowItem<ItemModuleIcon>(EnumItem.ModuleIcon, (item) =>
+                ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
@@ -235,7 +235,7 @@ namespace ETLG
                 int ModuleID = playerEquippedModuleIDs[i];
                 Vector3 offset = new Vector3((i % 3) * 90f + 10f, (i / 3) * -90f - 10f, 0f);
 
-                ShowItem<ItemModuleIcon>(EnumItem.ModuleIcon, (item) =>
+                ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;

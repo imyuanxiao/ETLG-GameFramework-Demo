@@ -152,6 +152,11 @@
             public const int LB_BOSS_IOT = 8;
             public const int LB_BOSS_FINAL = 9;
 
+            // reward
+            public const int REWARD_TYPE_ARTIFACT = 0;
+            public const int REWARD_TYPE_SKILL = 1;
+
+
         }
     }
 }

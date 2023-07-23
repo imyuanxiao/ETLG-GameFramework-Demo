@@ -145,7 +145,7 @@ namespace ETLG
                 {
                     continue;
                 }
-                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                ShowItem<ItemArtifactIcon>(EnumItem.ItemArtifactIcon, (item) =>
                 {
                     item.transform.SetParent(PlayerContainer, false);
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_PLAYER_NPC);
@@ -216,7 +216,7 @@ namespace ETLG
                     continue;
                 }
 
-                ShowItem<ItemArtifactIcon>(EnumItem.ArtifactIcon, (item) =>
+                ShowItem<ItemArtifactIcon>(EnumItem.ItemArtifactIcon, (item) =>
                 {
                     item.transform.SetParent(NpcContainer, false);
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_NPC_PLAYER);

@@ -72,6 +72,22 @@ namespace ETLG.Data
             }
         }
 
+        public int[] RewardArtifacts
+        {
+            get
+            {
+                return dRNPC.RewardArtifacts;
+            }
+        }
+
+        public int RewardSkill
+        {
+            get
+            {
+                return dRNPC.RewardSkill;
+            }
+        }
+
         public bool NoDialogXML
         {
             get

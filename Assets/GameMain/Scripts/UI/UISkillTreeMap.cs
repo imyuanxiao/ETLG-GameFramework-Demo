@@ -78,7 +78,7 @@ namespace ETLG
             {
                 //PlayerSkillData playerSkillData =  dataPlayer.GetPlayerData().getSkillById(skillData.Id);
 
-                ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
+                ShowItem<ItemSkillIcon>(EnumItem.ItemSkillIcon, (item) =>
                 {
                     item.transform.SetParent(layer, false);
                     item.transform.localScale = Vector3.one;

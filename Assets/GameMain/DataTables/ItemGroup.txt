@@ -2,8 +2,15 @@
 #	Id		Name	PoolParamId
 #	int		string	int
 #	配置编号	策划备注	物体组名字	对象池参数Id
-	1001	NPC选择	NPCSelect	1001
-	1002	技能图标	SkillIcon	1001
-	1003	道具图标	ArtifactIcon	1001
-	1004	其他	Others	1001
-	1005	登陆点选择	ItemLandingPointSelect	1001
+	1001	NPC选择	ItemNPCSelect	1001
+	1002	技能图标	ItemSkillIcon	1001
+	1003	道具图标	ItemArtifactIcon	1001
+	1004	技能升级按钮	ItemSkillUpButton	1001
+	1005	成就图标	AchievementIcon	1001
+	1006	资源消耗	ItemCostResBar	1001
+	1007	模组图标	ItemModuleIcon	1001
+	1008	排行榜按钮	UILeaderboardInfo	1001
+	1009	登陆点选择条	ItemLandingPointSelect	1001
+	1010	星球选择条	ItemPlanetSelect	1001
+	1011	奖励预览	ItemRwardPreview	1001
+	1012	奖励图标	ItemRewardIcon	1001

@@ -166,7 +166,7 @@ namespace ETLG
                     dataSkill.CanUpgradeCurrentSkill = false;
                 }
 
-                ShowItem<ItemCostResBar>(EnumItem.CostResBar, (item) =>
+                ShowItem<ItemCostResBar>(EnumItem.ItemCostResBar, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;

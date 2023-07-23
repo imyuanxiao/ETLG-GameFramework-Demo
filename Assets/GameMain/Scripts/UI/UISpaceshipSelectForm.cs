@@ -249,7 +249,7 @@ namespace ETLG
             //foreach (var tmpPlayerSkill in tmpPlayerSkillsData)
             foreach (var SkillIds in currentSpaceshipData.SkillIds)
             {
-                ShowItem<ItemSkillIcon>(EnumItem.SkillIcon, (item) =>
+                ShowItem<ItemSkillIcon>(EnumItem.ItemSkillIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one * 0.5f;

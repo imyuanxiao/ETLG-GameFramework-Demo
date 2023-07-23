@@ -48,7 +48,7 @@ namespace ETLG
             NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
             foreach (var npcData in npcDatas)
             {
-                ShowItem<ItemNPCSelect>(EnumItem.NPCSelect, (item) =>
+                ShowItem<ItemNPCSelect>(EnumItem.ItemNPCSelect, (item) =>
                 {
                     item.transform.SetParent(NPCsContainer, false);
                     item.transform.localScale = Vector3.one;

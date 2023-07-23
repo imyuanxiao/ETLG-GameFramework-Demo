@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-22 16:30:36.525
+// 生成时间：2023-07-23 14:02:53.335
 //------------------------------------------------------------
 
 using GameFramework;
@@ -73,6 +73,24 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取道具奖励（ID+数量）。
+        /// </summary>
+        public int[] RewardArtifacts
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取技能奖励（ID）。
+        /// </summary>
+        public int RewardSkill
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取对话文本路径。
         /// </summary>
         public string DialogXML
@@ -105,6 +123,8 @@ namespace ETLG
             Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+                RewardArtifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+            RewardSkill = int.Parse(columnStrings[index++]);
             DialogXML = columnStrings[index++];
             QuizXML = columnStrings[index++];
 
@@ -123,6 +143,8 @@ namespace ETLG
                     Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();
+                        RewardArtifacts = binaryReader.ReadInt32Array();
+                    RewardSkill = binaryReader.Read7BitEncodedInt32();
                     DialogXML = binaryReader.ReadString();
                     QuizXML = binaryReader.ReadString();
                 }

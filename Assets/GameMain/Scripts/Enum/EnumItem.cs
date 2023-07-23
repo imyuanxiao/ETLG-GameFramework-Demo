@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-22 16:30:37.718
+// 生成时间：2023-07-23 15:16:43.440
 //------------------------------------------------------------
 
 namespace ETLG
@@ -14,22 +14,22 @@ namespace ETLG
         /// <summary>
         /// NPC选择
         /// </summary>
-        NPCSelect = 1001,
+        ItemNPCSelect = 1001,
 
         /// <summary>
         /// 技能图标
         /// </summary>
-        SkillIcon = 1002,
+        ItemSkillIcon = 1002,
 
         /// <summary>
         /// 道具图标
         /// </summary>
-        ArtifactIcon = 1003,
+        ItemArtifactIcon = 1003,
 
         /// <summary>
         /// 技能升级按钮
         /// </summary>
-        SkillUpButton = 1004,
+        ItemSkillUpButton = 1004,
 
         /// <summary>
         /// 成就图标
@@ -39,12 +39,12 @@ namespace ETLG
         /// <summary>
         /// 资源消耗
         /// </summary>
-        CostResBar = 1006,
+        ItemCostResBar = 1006,
 
         /// <summary>
         /// 模组图标
         /// </summary>
-        ModuleIcon = 1007,
+        ItemModuleIcon = 1007,
 
         /// <summary>
         /// 排行榜按钮
@@ -60,5 +60,15 @@ namespace ETLG
         /// 星球选择条
         /// </summary>
         ItemPlanetSelect = 1010,
+
+        /// <summary>
+        /// 奖励预览
+        /// </summary>
+        ItemRewardPreview = 1011,
+
+        /// <summary>
+        /// 奖励图标
+        /// </summary>
+        ItemRewardIcon = 1012,
     }
 }

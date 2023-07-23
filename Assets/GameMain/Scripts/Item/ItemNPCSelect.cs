@@ -1,5 +1,6 @@
 using ETLG.Data;
 using GameFramework.Resource;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,12 +12,13 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemNPCSelect : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
+    public class ItemNPCSelect : ItemLogicEx
     {
 
         public TextMeshProUGUI npc_title = null;
 
-        public RectTransform RewardIcon;
+        public RectTransform RewardIconContainer;
+
 
         public GameObject RewardTick;
         public GameObject FinishTick;
@@ -26,6 +28,7 @@ namespace ETLG
         public Button talkButton;
         public Button tradeButton;
         public Button quizButton;
+
 
         private DataNPC dataNPC;
         private NPCData npcData;
@@ -49,7 +52,6 @@ namespace ETLG
             this.npcData = npcData;
 
             npc_title.text = npcData.Title;
-            //npc_desc.text = npcData.Description;
             npc_name.text = npcData.Name;
 
             talkButton.onClick.AddListener(OnTalkButtonClick);
@@ -76,22 +78,19 @@ namespace ETLG
                 quizButton.gameObject.SetActive(false);
             }
 
+            ShowItem<ItemRewardIcon>(EnumItem.ItemRewardIcon, (item) =>
+            {
+                item.transform.SetParent(RewardIconContainer, false);
+                item.transform.localScale = Vector3.one;
+                item.transform.eulerAngles = Vector3.zero;
+                item.transform.localPosition = Vector3.zero;
+                item.GetComponent<ItemRewardIcon>().SetData(this.npcData.Id);
+            });
+
             // get finished chapters from playerData
-            RewardTick.SetActive(true);
-            FinishTick.SetActive(true);
+            RewardTick.SetActive(false);
+            FinishTick.SetActive(false);
 
-
-
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Log.Debug("Show Rewards");
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Log.Debug("Hide Rewards");
         }
 
         protected override void OnHide(bool isShutdown, object userData)
@@ -104,6 +103,7 @@ namespace ETLG
 
         public void OnTalkButtonClick()
         {
+            Log.Debug("{0}", this.GetInstanceID());
 
             dataNPC.currentNPCId = npcData.Id;
 
@@ -129,7 +129,24 @@ namespace ETLG
 
         }
 
- 
+    /*    public void OnRewardButtonClick()
+        {
+
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            Vector3 offset = new Vector3(-10f, 0, 0);
+            Vector3 newPosition = itemPosition + offset;
+
+            dataNPC.currentNPCId = npcData.Id;
+            dataNPC.RewardUIPosition = newPosition;
+
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIRewardPreviewForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIRewardPreviewForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIRewardPreviewForm);
+        }*/
+
+
     }
 }
 
