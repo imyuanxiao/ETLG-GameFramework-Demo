@@ -73,12 +73,14 @@ namespace ETLG
 
             dataSkill.hideSkillInfoBottomPart = Type == Constant.Type.SKILL_ICON_SELECT_SPACESHIP ? true : false;
 
+
             GameEntry.Event.Fire(this, SkillInfoUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
 
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+           
             GameEntry.Event.Fire(this, SkillInfoUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
