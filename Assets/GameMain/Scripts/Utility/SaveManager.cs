@@ -37,6 +37,7 @@ namespace ETLG
             Save("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
             Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Save("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
+            Save("BattleVictoryCount" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -74,6 +75,7 @@ namespace ETLG
             LoadEquippedModules("EquippedModules" + saveIdStr);
             LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
+            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
         }
@@ -255,6 +257,7 @@ namespace ETLG
                 PrintSavedData("PlayerAchievement_0");
                 PrintSavedData("SavedGamesInfo");
                 PrintSavedData("PlayerNPCs_0");
+                PrintSavedData("BattleVictoryCount_0");
             }
         }
     }
