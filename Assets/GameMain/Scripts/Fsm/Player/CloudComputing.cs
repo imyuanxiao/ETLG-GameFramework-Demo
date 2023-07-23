@@ -45,6 +45,8 @@ namespace ETLG
             // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getSkillsByType("combat");
 
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().cloudComputingFX.SetActive(true);
         }
 
         private void OnPlayerRespawn(object sender, GameEventArgs e)
@@ -89,6 +91,8 @@ namespace ETLG
             timeElapsed = 0f;
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower = originalAttack;
             this.uiBattleInfoForm = null;
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().cloudComputingFX.SetActive(false);
         }
 
         protected override void OnDestroy(IFsm<SpaceshipAttack> fsm)

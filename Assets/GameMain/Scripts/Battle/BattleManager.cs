@@ -45,6 +45,7 @@ namespace ETLG
         public GameObject explodeFXPrefab;
         public GameObject muzzleFlashPrefab;
         public GameObject missileFlarePrefab;
+        public GameObject cloudComputingSkillFX;
 
         protected override void Awake() 
         {
