@@ -15,11 +15,6 @@ namespace GameFramework.Procedure
     /// </summary>
     public abstract class ProcedureBase : FsmState<IProcedureManager>
     {
-
-
-
-
-
         /// <summary>
         /// 状态初始化时调用。
         /// </summary>

@@ -124,11 +124,10 @@ namespace UnityGameFramework.Runtime
 #endif
 
 #if UNITY_2017_1_OR_NEWER
-    isError = unityWebRequest.result == UnityWebRequest.Result.ConnectionError || unityWebRequest.result == UnityWebRequest.Result.ProtocolError;
+            isError = unityWebRequest.isNetworkError || unityWebRequest.isHttpError;
 #else
-    isError = unityWebRequest.isError;
+            isError = unityWebRequest.isError;
 #endif
-
             bytes = unityWebRequest.downloadHandler.data;
             errorMessage = isError ? unityWebRequest.error : null;
             unityWebRequest.Dispose();

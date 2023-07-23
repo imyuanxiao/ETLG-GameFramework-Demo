@@ -162,9 +162,11 @@ namespace UnityGameFramework.Runtime
             }
 
             bool isError = false;
-
-            isError = m_UnityWebRequest.result == UnityWebRequest.Result.ConnectionError || m_UnityWebRequest.result == UnityWebRequest.Result.ProtocolError;
-
+#if UNITY_2017_1_OR_NEWER
+            isError = m_UnityWebRequest.isNetworkError || m_UnityWebRequest.isHttpError;
+#else
+            isError = m_UnityWebRequest.isError;
+#endif
             if (isError)
             {
                 WebRequestAgentHelperErrorEventArgs webRequestAgentHelperErrorEventArgs = WebRequestAgentHelperErrorEventArgs.Create(m_UnityWebRequest.error);

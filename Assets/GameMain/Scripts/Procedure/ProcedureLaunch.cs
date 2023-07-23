@@ -30,7 +30,6 @@ namespace ETLG
             // 此字典文件记录了资源更新前使用的各种语言的字符串，会随 App 一起发布，故不可更新
             GameEntry.BuiltinData.InitDefaultDictionary();
 
-            Log.Debug("进入 ProcedureLaunch");
             base.OnEnter(procedureOwner);
         }
 
@@ -38,8 +37,8 @@ namespace ETLG
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
-            // ChangeState<ProcedureSplash>(procedureOwner);
-            ChangeState<ProcedurePreload>(procedureOwner);
+             ChangeState<ProcedureSplash>(procedureOwner);
+           // ChangeState<ProcedurePreload>(procedureOwner);
 
         }
 

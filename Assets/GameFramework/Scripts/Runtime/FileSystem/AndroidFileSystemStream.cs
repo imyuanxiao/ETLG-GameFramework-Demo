@@ -245,9 +245,7 @@ namespace UnityGameFramework.Runtime
 
         private int InternalRead(int length, out byte[] result)
         {
-
-            IntPtr resultPtr = AndroidJNI.NewSByteArray(length);
-
+            IntPtr resultPtr = AndroidJNI.NewByteArray(length);
             int offset = 0;
             int bytesLeft = length;
             while (bytesLeft > 0)
@@ -265,7 +263,7 @@ namespace UnityGameFramework.Runtime
                 bytesLeft -= bytesRead;
             }
 
-            result = Array.ConvertAll(AndroidJNI.FromSByteArray(resultPtr), b => (byte)b);
+            result = AndroidJNI.FromByteArray(resultPtr);
             AndroidJNI.DeleteLocalRef(resultPtr);
             return offset;
         }

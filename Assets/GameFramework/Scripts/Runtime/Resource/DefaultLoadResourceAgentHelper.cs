@@ -399,13 +399,11 @@ namespace UnityGameFramework.Runtime
                     else
                     {
                         bool isError = false;
-                        
 #if UNITY_2017_1_OR_NEWER
-    isError = m_UnityWebRequest.result == UnityWebRequest.Result.ConnectionError || m_UnityWebRequest.result == UnityWebRequest.Result.ProtocolError;
+                        isError = m_UnityWebRequest.isNetworkError || m_UnityWebRequest.isHttpError;
 #else
-    isError = m_UnityWebRequest.isError;
+                        isError = m_UnityWebRequest.isError;
 #endif
-
                         LoadResourceAgentHelperErrorEventArgs loadResourceAgentHelperErrorEventArgs = LoadResourceAgentHelperErrorEventArgs.Create(LoadResourceStatus.NotExist, Utility.Text.Format("Can not load asset bundle '{0}' with error message '{1}'.", m_BytesFullPath, isError ? m_UnityWebRequest.error : null));
                         m_LoadResourceAgentHelperErrorEventHandler(this, loadResourceAgentHelperErrorEventArgs);
                         ReferencePool.Release(loadResourceAgentHelperErrorEventArgs);
