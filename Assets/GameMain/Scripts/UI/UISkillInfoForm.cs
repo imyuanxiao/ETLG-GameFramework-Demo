@@ -36,7 +36,7 @@ namespace ETLG
 
         public GameObject bottomPart;
 
-        public Transform CostsContainer;
+        public RectTransform CostsContainer;
 
         public bool hideBottomPart { get; set; }
 
@@ -59,7 +59,9 @@ namespace ETLG
             if (refresh)
             {
                 showContent();
+               // LayoutRebuilder.ForceRebuildLayoutImmediate(CostsContainer);
                 LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+                UIContainer.position = dataSkill.skillInfoPosition;
                 refresh = false;
             }
 
@@ -79,7 +81,6 @@ namespace ETLG
         public void showContent()
         {
 
-            UIContainer.position = dataSkill.skillInfoPosition;
             hideBottomPart = dataSkill.hideSkillInfoBottomPart;
 
             SkillData skillData = dataSkill.GetCurrentSkillData();

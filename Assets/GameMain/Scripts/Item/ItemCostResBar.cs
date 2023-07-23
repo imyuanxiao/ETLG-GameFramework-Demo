@@ -11,12 +11,13 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemCostResBar : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
+    public class ItemCostResBar : ItemLogicEx
     {
         private DataArtifact dataArtifact;
 
         public RawImage icon;
 
+        public TextMeshProUGUI ArtifactName;
         public TextMeshProUGUI hasNum;
         public TextMeshProUGUI needNum;
 
@@ -42,6 +43,8 @@ namespace ETLG
         public void SetCostResData(int ArtifactId, int hasNum, int needNum)
         {
             this.ArtifactId = ArtifactId;
+
+            ArtifactName.text = dataArtifact.GetArtifactData(ArtifactId).Name;
 
             int has = hasNum;
 
@@ -72,7 +75,7 @@ namespace ETLG
 
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+  /*      public void OnPointerEnter(PointerEventData eventData)
         {
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 newPosition = itemPosition + new Vector3(0f, 10f, 0f);
@@ -88,7 +91,7 @@ namespace ETLG
         public void OnPointerExit(PointerEventData eventData)
         {
             GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-        }
+        }*/
 
 
     }
