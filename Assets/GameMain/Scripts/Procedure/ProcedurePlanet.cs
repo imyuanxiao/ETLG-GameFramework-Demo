@@ -17,6 +17,7 @@ namespace ETLG
         private bool changeScene = false;
         private bool changeToProcedureMap = false;
         private RaycastHit hitInfo;
+        private NPCUIChangeEventArgs ne=null;
 
         /*        private int? currentNPCUIID;
                 private int? artifactTradeInfoUIID;
@@ -38,7 +39,6 @@ namespace ETLG
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
             this.changeToProcedureMap = false;
-
 
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(PlanetInfoEventArgs.EventId, OnPlanetInfo);
@@ -94,7 +94,7 @@ namespace ETLG
 
         private void OnNPCUIChange(object sender, GameEventArgs e)
         {
-            NPCUIChangeEventArgs ne = (NPCUIChangeEventArgs)e;
+            this.ne = (NPCUIChangeEventArgs)e;
             if (ne == null)
                 return;
 
@@ -125,7 +125,6 @@ namespace ETLG
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
             }
         }
-
 
         /*
                     if (currentNPCUIID != null)

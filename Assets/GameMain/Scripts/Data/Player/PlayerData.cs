@@ -44,7 +44,9 @@ namespace ETLG.Data
         //Player Achievement Data
         private Dictionary<int,int> playerAchievement { get; set; }
         private DataAchievement dataAchievement { get; set; }
-        
+
+        public UITradeData UI_tradeData = null;
+
         public PlayerData (SpaceshipData spaceshipData)
         {
             initialSpaceship = spaceshipData;
@@ -93,7 +95,6 @@ namespace ETLG.Data
             {
                 playerNPCs.Add(id, new PlayerNPCData(dataNPC.GetNPCData(id)));
             }
-
         }
 
         // Call this method everytime skills change or initialSpaceship changes
@@ -277,7 +278,6 @@ namespace ETLG.Data
                     AddArtifact(id, number);
                 }
             }
-
         }
 
         public void DeleteArtifact(int id, int number)

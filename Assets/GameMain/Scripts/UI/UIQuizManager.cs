@@ -16,7 +16,6 @@ namespace ETLG.Data
 
         public int TotalSubmitQuestions
         {
-            
             get 
             {
                 totalSubmitQuestions = 0;

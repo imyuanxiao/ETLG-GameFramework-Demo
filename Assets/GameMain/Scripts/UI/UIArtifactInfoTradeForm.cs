@@ -15,6 +15,7 @@ namespace ETLG
     {
         public DataArtifact dataArtifact;
         public DataPlayer dataPlayer;
+        private DataNPC dataNPC;
 
         private ArtifactDataBase artifactDataBase;
 
@@ -43,8 +44,10 @@ namespace ETLG
         private int totalPrice;
         private int ownedMoney;
 
-        public delegate void TradeDataEventHandler(int tradeNum, int totalPrice);
-        public static event TradeDataEventHandler OnTradeDataSent;
+        private bool needClose = false;
+
+        //public delegate void TradeDataEventHandler(int tradeNum, int totalPrice);
+        //public static event TradeDataEventHandler OnTradeDataSent;
 
         // 初始化菜单数据
         protected override void OnInit(object userData)
@@ -53,6 +56,7 @@ namespace ETLG
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataNPC = GameEntry.Data.GetData<DataNPC>();
 
             tradeButton.onClick.AddListener(tradeClick);
             CloseButton.onClick.AddListener(closeButtonClick);
@@ -85,25 +89,14 @@ namespace ETLG
             ClickHintRectTransform.gameObject.SetActive(true);
 
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
-
-            UINpcTradeForm.OnTradeConditionSent += HandleTradeCondition;
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             artifactDataBase.isTrade = false;
-            UINpcTradeForm.isTrade = false;
             artifactDataBase = null;
-            UINpcTradeForm.OnTradeConditionSent -= HandleTradeCondition;
             base.OnClose(isShutdown, userData);
 
-        }
-
-        //卖家拥有的item总数量
-        private void HandleTradeCondition(int totalNum, int ownedMoney)
-        {
-            this.maxNum = totalNum;
-            this.ownedMoney = ownedMoney;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -128,12 +121,20 @@ namespace ETLG
             InputField.onValidateInput += ValidateNumericInput;
             bool success = int.TryParse(InputField.text, out inputNum);
 
-            testTradeNum();
-            updateInputNumAndTotalPrice();
+            if (dataPlayer.GetPlayerData().UI_tradeData != null)
+            {
+                testTradeNum();
+                updateInputNumAndTotalPrice();
+                if (dataPlayer.GetPlayerData().UI_tradeData.save && needClose)
+                {
+                    closeButtonClick();
+                }
+            }
         }
 
         private void testTradeNum()
         {
+            maxNum = dataPlayer.GetPlayerData().UI_tradeData.artifactNum;
             //输入数量不能大于可买数量
             if (inputNum > limitNum || inputNum > maxNum)
             {
@@ -159,14 +160,18 @@ namespace ETLG
 
         private void tradeClick()
         {
-            //如果买家余额充足，则购买并关闭此UI
-            if (ownedMoney >= totalPrice)
+            bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= dataPlayer.GetPlayerData().UI_tradeData.totalPrice;
+            if (dataPlayer.GetPlayerData().UI_tradeData.tradeType == Constant.Type.TRADE_NPC_PLAYER || (dataPlayer.GetPlayerData().UI_tradeData.tradeType == Constant.Type.TRADE_PLAYER_NPC && enoughPlayerMoney))
             {
                 //输入量和总金额
-                OnTradeDataSent?.Invoke(inputNum, totalPrice);
+                dataPlayer.GetPlayerData().UI_tradeData.inputNum = inputNum;
+                dataPlayer.GetPlayerData().UI_tradeData.totalPrice = totalPrice;
+                dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton = true;
 
-                closeButtonClick();
+                needClose = true;
             }
+            //如果买家余额充足，则购买并关闭此UI
+
             else
             {
                 //如果不充足点击trade无反应，是否跳出提示余额不足？
@@ -176,6 +181,8 @@ namespace ETLG
 
         private void closeButtonClick()
         {
+            needClose = false;
+            dataPlayer.GetPlayerData().UI_tradeData = null;
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 

@@ -52,6 +52,7 @@ namespace ETLG
         {
             base.OnOpen(userData);
 
+            UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
@@ -62,11 +63,7 @@ namespace ETLG
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);
 
             loadAvatar();
-            
-            if (UIQuizManager==null)
-            {
-                parseXMLFile();
-            }
+            parseXMLFile();
             loadQuestions();
             updateProgress();
             updateAccuracy();
