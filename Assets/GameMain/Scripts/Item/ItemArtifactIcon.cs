@@ -23,9 +23,7 @@ namespace ETLG
 
         public TextMeshProUGUI artifactNumber;
         public int artifactNum;
-
-        public delegate void ItemClickedEventHandler(int artifactID, int num, int Type);
-        public event ItemClickedEventHandler OnItemClicked;
+        private DataPlayer dataPlayer;
 
         public int Type { get; private set; }
 
@@ -35,10 +33,9 @@ namespace ETLG
             base.OnInit(userData);
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
-
-
         }
 
         private void OnIconButtonClick()
@@ -47,11 +44,9 @@ namespace ETLG
             {
                 ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
                 artifactDataBase.isTrade = true;
+                dataPlayer.GetPlayerData().UI_tradeData = new UITradeData(CurrentArtifactID,artifactNum,Type);
 
-                OnItemClicked.Invoke(CurrentArtifactID, artifactNum, Type);
-                Debug.Log("itemÖÐ´æµÄcurrent£¬Í¬pointerenter" + CurrentArtifactID);
             }
-
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -62,7 +57,7 @@ namespace ETLG
             Vector3 offset;
             if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                offset = new Vector3(0f, -330f, 0f);
+                offset = new Vector3(-310f, -350f, 0f);
             }
             else
             {
@@ -72,7 +67,6 @@ namespace ETLG
             Vector3 newPosition = itemPosition + offset;
 
             dataArtifact.CurrentArtifactID = CurrentArtifactID;
-            Debug.Log("pointerEnter"+ CurrentArtifactID);
             dataArtifact.artifactInfoPosition = newPosition;
 
             if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
@@ -81,7 +75,7 @@ namespace ETLG
             }
             else
             {
-                if (!UINpcTradeForm.isTrade)
+                if (dataPlayer.GetPlayerData().UI_tradeData==null)
                 {
                     GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
                 }
@@ -98,7 +92,7 @@ namespace ETLG
             else
             {
                 //if pointerexit from other icon, but should not close current tradeinfo UI
-                if (!UINpcTradeForm.isTrade)
+                if (dataPlayer.GetPlayerData().UI_tradeData == null)
                 {
                     GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
                 }
