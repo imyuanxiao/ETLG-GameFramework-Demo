@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-24 04:01:31.867
+// 生成时间：2023-07-24 15:22:57.134
 //------------------------------------------------------------
 
 namespace ETLG
@@ -60,5 +60,10 @@ namespace ETLG
         /// LaserGunSalve
         /// </summary>
         LaserGunSalve = 31005,
+
+        /// <summary>
+        /// Magic_Spell_Simple_Swoosh_6
+        /// </summary>
+        Magic_Spell_Simple_Swoosh_6 = 31006,
     }
 }

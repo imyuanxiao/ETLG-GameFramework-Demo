@@ -48,30 +48,36 @@ namespace ETLG
             SetUIBattleInfo();
             if (changeToRespawnState)
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 ChangeState<PlayerRespawn>(fsm);
             }
             if (Input.GetKeyDown(KeyCode.Alpha1) && spaceshipSkill.IsSkillReady(EnumSkill.EdgeComputing))
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 this.spaceshipSkill.ReduceUsageCount(EnumSkill.EdgeComputing);
                 ChangeState<CloudComputing>(fsm);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2) && spaceshipSkill.IsSkillReady(EnumSkill.ElectronicWarfare))
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 this.spaceshipSkill.ReduceUsageCount(EnumSkill.ElectronicWarfare);
                 ChangeState<ElectronicWarfare>(fsm);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3) && spaceshipSkill.IsSkillReady(EnumSkill.MedicalSupport))
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 this.spaceshipSkill.ReduceUsageCount(EnumSkill.MedicalSupport);
                 ChangeState<Medicalsupport>(fsm);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4) && spaceshipSkill.IsSkillReady(EnumSkill.EnergyBoost))
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 this.spaceshipSkill.ReduceUsageCount(EnumSkill.EnergyBoost);
                 ChangeState<FireWall>(fsm);
             }
             if (Input.GetKeyDown(KeyCode.Alpha5) && spaceshipSkill.IsSkillReady(EnumSkill.AdaptiveIntelligentDefense))
             {
+                GameEntry.Sound.PlaySound(EnumSound.Magic_Spell_Simple_Swoosh_6);
                 this.spaceshipSkill.ReduceUsageCount(EnumSkill.AdaptiveIntelligentDefense);
                 ChangeState<PlayerAIAssist>(fsm);
             }
