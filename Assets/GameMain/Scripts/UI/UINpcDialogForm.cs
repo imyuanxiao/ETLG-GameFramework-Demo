@@ -7,18 +7,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 using System.Xml;
+using UnityEngine.Video;
 
 namespace ETLG
 {
     public class UINpcDialogForm : UGuiFormEx
     {
         public Image dialogModulePrefab;
+        public Canvas ImageContainerPrefab;
+        public Canvas VideoContainerPrefab;
         public Button playerButtonPrefab;
         public Transform dialogScrollContent;
         public Transform buttonScrollContent;
+        private List<Image> textModules = new List<Image>();
 
         public Button closeButton;
         public Button maxButton;
+        public Button FontPlusButton;
+        public Button FontSubButton;
         public RawImage dialogBg;
 
         public TextMeshProUGUI npc_name;
@@ -48,8 +54,16 @@ namespace ETLG
         private const float max_contentWidth = 1830f;
         private const float max_prefabWidth = 1760f;
         private const float max_textWidth = 1540f;
+        private int default_fontsize = 20;
+        private int fontsizeChangeValue = 0;
 
         private bool isShown;
+        private int fontSizeGap = 0;
+        private Color textColor = Color.white;
+        private string imagePath = null;
+        private string videoPath = null;
+        private string videoTexture = null;
+
 
         protected override void OnInit(object userData)
         {
@@ -62,12 +76,14 @@ namespace ETLG
 
             closeButton.onClick.AddListener(OnCloseButtonClick);
             maxButton.onClick.AddListener(OnMaxButtonClick);
+            FontPlusButton.onClick.AddListener(OnfontPlus);
+            FontSubButton.onClick.AddListener(OnfontSub);
 
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
-            npc_description.text = npcData.Description;
+            //npc_description.text = npcData.Description;
             XMLPath = npcData.DialogXML;
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
@@ -87,7 +103,7 @@ namespace ETLG
             if ((nextNodeID != "end" && isNext) || (nextNodeID != "end" && currentNode == null))
             {
                 getCurrentNode();
-                showText(currentdialogUIWidth, isShown);
+                showText(isShown);
             }
             else if (nextNodeID == "end" && isNext)
             {
@@ -166,6 +182,10 @@ namespace ETLG
                     newContentSize.x = prefabWidth;
                     dialogModuleRectTransform.sizeDelta = newContentSize;
 
+                    Transform dialogContainer=dialogModuleRectTransform.Find("ContentContainer");
+                    RectTransform dialogContainerRectTransform= dialogContainer.GetComponent<RectTransform>();
+                    dialogContainerRectTransform.sizeDelta = new Vector2(textWidth, dialogContainerRectTransform.sizeDelta.y);
+
                     TextMeshProUGUI dialogTextUI = dialogModuleRectTransform.GetComponentInChildren<TextMeshProUGUI>();
                     RectTransform dialogTextUIRectTransform = dialogTextUI.GetComponent<RectTransform>();
                     dialogTextUIRectTransform.sizeDelta = new Vector2(textWidth, dialogTextUIRectTransform.sizeDelta.y);
@@ -208,6 +228,51 @@ namespace ETLG
             }
         }
 
+        private void getFeatures()
+        {
+            XmlNode currentNPCNode = currentNode.SelectSingleNode("npc");
+            NPCText = currentNPCNode.InnerText;
+
+            if (currentNPCNode.Attributes["font"] != null)
+            {
+                fontSizeGap = int.Parse(currentNPCNode.Attributes["font"].Value) * 4;
+            }
+            else
+            {
+                fontSizeGap = 0;
+            }
+
+            if (currentNPCNode.Attributes["color"] != null)
+            {
+                textColor = UIHexColor.HexToColor(currentNPCNode.Attributes["color"].Value);
+            }
+            else
+            {
+                textColor = Color.white;
+            }
+
+            if (currentNPCNode.Attributes["image"] != null)
+            {
+                imagePath = AssetUtility.GetXMLImage(currentNPCNode.Attributes["image"].Value.ToString());
+            }
+            else
+            {
+                imagePath = null;
+            }
+
+            if (currentNPCNode.Attributes["video"] != null)
+            {
+                videoPath = AssetUtility.GetXMLVideo(currentNPCNode.Attributes["video"].Value.ToString());
+                videoTexture = AssetUtility.GetXMLVideoRender(currentNPCNode.Attributes["video"].Value.ToString());
+            }
+            else
+            {
+                videoPath = null;
+                videoTexture = null;
+            }
+
+        }
+
         private void getCurrentNode()
         {
             isNext = false;
@@ -221,7 +286,7 @@ namespace ETLG
                 currentNode = dialogueNodes[nextNodeID];
             }
 
-            NPCText = currentNode.SelectSingleNode("npc").InnerText;
+            getFeatures();
 
             playerResponses = currentNode.SelectNodes("player/response");
 
@@ -245,7 +310,7 @@ namespace ETLG
             }
         }
 
-        private void showText(float width, bool isShown)
+        private void showText(bool isShown)
         {
             Image NPCModule = instantiatePrefab(NPCText, "NPC");
 
@@ -288,14 +353,7 @@ namespace ETLG
             TextMeshProUGUI dialogText;
             if (type == "NPC")
             {
-                textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
-                Color color = UIHexColor.HexToColor("4E4E4E");
-                textModule.color = color;
-                textModuleRectTransform = textModule.GetComponent<RectTransform>();
-                setColorAlpha(textModuleRectTransform, "NPC");
-                dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
-                dialogText.text = text;
-                dialogText.alignment = TextAlignmentOptions.Left;
+                textModule = NPCModuleSet(text);
             }
             else
             {
@@ -306,10 +364,89 @@ namespace ETLG
                 setColorAlpha(textModuleRectTransform, "player");
                 dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
                 dialogText.text = text;
+                dialogText.fontSize = default_fontsize + fontsizeChangeValue;
                 dialogText.alignment = TextAlignmentOptions.Right;
             }
+            textModules.Add(textModule);
             //加载文本,设置对齐方式
             return textModule;
+        }
+
+        private Image NPCModuleSet(string text)
+        {
+            Image textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
+            Color color = UIHexColor.HexToColor("4E4E4E");
+            textModule.color = color;
+            RectTransform textModuleRectTransform = textModule.GetComponent<RectTransform>();
+            setColorAlpha(textModuleRectTransform, "NPC");
+            TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
+            dialogText.text = text;
+            dialogText.fontSize = default_fontsize + fontSizeGap + fontsizeChangeValue;
+            dialogText.alignment = TextAlignmentOptions.Left;
+            Transform contentContainer = textModuleRectTransform.Find("ContentContainer");
+
+            if (textColor != Color.white)
+            {
+                dialogText.color = textColor;
+            }
+            if (imagePath != null)
+            {
+                instantiateImage(contentContainer);
+            }
+            if (videoPath != null)
+            {
+                instantiateVideo(contentContainer);
+            }
+
+            return textModule;
+        }
+
+        private Canvas instantiateImage(Transform contentContainer)
+        {
+            Canvas imageModule = Instantiate(ImageContainerPrefab, contentContainer);
+            Image image = imageModule.GetComponentInChildren<Image>();
+            Debug.Log(imagePath);
+            Texture2D imageTexture = Resources.Load<Texture2D>(imagePath);
+
+            //set original ratio
+            float aspectRatio = (float)imageTexture.width / imageTexture.height;
+            float fixedHeight = 400f / aspectRatio;
+
+            Sprite sprite = Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));
+            if (imageTexture != null)
+            {
+                // Set the loaded sprite to the target Image component
+                image.sprite = sprite;
+                RectTransform imageTransform = image.GetComponent<RectTransform>();
+                imageTransform.sizeDelta = new Vector2(400f, fixedHeight);
+            }
+            return imageModule;
+        }
+
+        private Canvas instantiateVideo(Transform contentContainer)
+        {
+            Canvas videoModule = Instantiate(VideoContainerPrefab, contentContainer);
+            VideoPlayer videoPlayer = videoModule.GetComponentInChildren<VideoPlayer>();
+            if (videoPlayer != null)
+            {
+                videoPath = "Assets/Resources/" + videoPath;
+                // Load the video from the specified path
+                videoPlayer.url = videoPath;
+                videoPlayer.Play();
+            }
+            else
+            {
+                Debug.LogError("VideoPlayer component not found on the GameObject named \"Video\".");
+            }
+
+            Debug.Log(videoPath);
+            Debug.Log(videoTexture);
+
+            RawImage rawImage = videoModule.GetComponentInChildren<RawImage>();
+            RenderTexture renderTexture = Resources.Load<RenderTexture>(videoTexture);
+            rawImage.texture = renderTexture;
+            videoPlayer.targetTexture = renderTexture;
+            return videoModule;
         }
 
         //加载对话模块对应头像
@@ -340,6 +477,33 @@ namespace ETLG
         private void getAward()
         {
 
+        }
+
+        private void OnfontPlus()
+        {
+            if (default_fontsize+ default_fontsize < 50)
+            {
+                fontsizeChangeValue += 2;
+            }
+            updateFontSize();
+        }
+
+        private void OnfontSub()
+        {
+            if (default_fontsize+default_fontsize > 0)
+            {
+                fontsizeChangeValue -= 2;
+            }
+            updateFontSize();
+        }
+
+        private void updateFontSize()
+        {
+            foreach (Image singleTextModule in textModules)
+            {
+                TextMeshProUGUI text = singleTextModule.GetComponentInChildren<TextMeshProUGUI>();
+                text.fontSize = default_fontsize + fontsizeChangeValue;
+            }
         }
 
     }

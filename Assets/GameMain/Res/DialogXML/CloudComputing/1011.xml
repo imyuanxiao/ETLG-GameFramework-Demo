@@ -1,0 +1,225 @@
+<dialogue>
+	<node id="1">
+		<npc video="110101" font="2" color="FF0000" >Cloud computing is an evolution of technology that dates back to the 1950s. Cloud computing would not exist without utilizing computer hardware and virtualization, a concept that was pioneered by IBM. Virtualization uses software that divides the hardware elements of a single computer into multiple virtual computers, also known as virtual machines (VMs). Cloud computing has also undergone many phases including grid, utility, and on-demand computing. </npc>
+		<player>
+			<response nextnode="2">Now I got a brief history of Cloud Computing. Please go ahead.</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc font="1">Please choose the decade regarding the cloud and I will tell you the events during that period that played a role in shaping the cloud as it is known today. </npc>
+		<player>
+			<response nextnode="3">1950s</response>
+			<response nextnode="4">1960s</response>
+			<response nextnode="5">1970s</response>
+			<response nextnode="6">1980s</response>
+			<response nextnode="7">1990s</response>
+			<response nextnode="8">2000s</response>
+			<response nextnode="9">2010s and beyond</response>
+			<response nextnode="10">I have learned the whold timeline in detail.Please go ahead.</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc image="101101" video="110102">1950s
+The foundations for what would become cloudcomputing are laid.
+Multiple users share the resources provided by a centralmainframe computer through dumb terminals.
+Shared access to the mainframe is limited bygeographical constraints.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>1960s
+In 1966,the ARPANET (Advanced Research ProjectsAgency Network) project is initiated to enable access toremote computers.
+The first computers were attached in 1969 and it wasfully operational in 1971.
+It was the first wide-area packet-switched network withdistributed control and one of the first networks to useTCP/IP. Both technologies became the technicalfoundation of the Internet.
+IBM invents virtualization in 1967, which allows multiplevirtual machines to run on a single physical host.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>1970s
+The first email is sent over the ARPANET in 1971Virtualization becomes a major technology driver and acatalyst for the largest evolution in communications andcomputing
+The first mass-produced chip, the Intel 4004, hits themarket in 1971, fueling reduced component costs.
+Later in the decade, familiar technology brands start tobecome established, such as Apple and Microsoft, ascomputers for everyone' starts to become a reality.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>1980s
+IBM invents the PC allowing more and more householdsand companies to own computers.
+Wired Ethernet networks allow companies to connecttheir computers together.
+Client-Server architecture becomes established, a majorprinciple on which many Internet services work.
+Tim Berners-Lee lavs the foundations of the World WideWeb in 1989.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>1990s
+ARPANET was formally decommissioned in 1990.
+Over 1 million computers are connected to the Internetby 1992.
+Grid computing is coined as a term to describecomputers connected over the Internet to form a high-power virtual computer.
+E-commerce starts to emerge - Amazon is founded in1994.
+Compaq coins the term "Cloud Computing" in 1995
+The forerunner of Software as a Service emerges by theend of the decade.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>2000s
+The Internet becomes more accessible to all.
+Off-site, centrally managed hosting in data centersbecomes more prevalent.
+Server virtualization becomes the norm, with VMware asa dominant player.
+In 2006, Amazon launches its Elastic Compute Cloud(allows users to rent virtual machines)
+Dropbox (file hosting service) is established in 2007
+Both IBM and Microsoft have entered the cloudcomputing market by the end of 2000s.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>2010s and beyond
+Office 365 is launched in 2011, bringing SaaS to the masses
+Docker is established in 2013 and Kubernetes in 2014paving the way for container-based solutions.
+Serverless computing on the cloud is established in 2014.
+Technologies such as the Internet of Things and Blockchainand IBM Watson become established.
+Edge Computing, Fog Computing and advances in MachineLearning as well as quantum computing are among likelyfuture developments
+According to one report, the global cloud computing marketsize is set to grow from USD 445.3 billion in 2021 to USD947.3 billion by 2026.
+		</npc>
+		<player>
+			<response nextnode="2">Go back and choose another decade.</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>Virtualization is the foundation for cloud computing. It is the process of creating a software version of a physical computing resource. Virtualization uses software to create a layer over computer hardware that allows the hardware elements of a computer, such as processors, memory, storage, etc., to be divided into multiple computers, or virtual machines (VMs), which are virtual environments that use software to mimic a physical computer.</npc>
+		<player>
+			<response nextnode="11">Oh, so this is virtualization! What are types of virtualization?</response>
+		</player>
+	</node>
+
+
+	<node id="11">
+		<npc>There are different types of virtualization, some of them include desktop, network, application, and server virtualization.
+Please choose to learn further.</npc>
+		<player>
+			<response nextnode="12">Desktop Virtualization</response>
+			<response nextnode="13">Network Virtualization</response>
+			<response nextnode="14">Application Virtualization</response>
+			<response nextnode="15">Server Virtualization</response>
+			<response nextnode="16">I have learnt all types of virtualization. What are benefits of Virtualization?</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>Desktop virtualization allows for running multiple desktop operating systems on the same computer in their own VM. There are two types of desktop virtualization: virtual desktop infrastructure (VDI) and local desktop virtualization.
+Virtual desktop infrastructure runs multiple desktops in a virtual machine on a central server and allows the organization to provide its users access to an OS (operating system) without needing to install them on the devices.
+Local desktop virtualization runs a hypervisor, which is a software layer that allows VMs to run alongside each other while sharing the same physical computing resources so that a user can run one or more operating systems on a local computer and seamlessly switch between one operating system to another.</npc>
+		<player>
+			<response nextnode="11">Go back and choose another type.</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>Network Virtualization uses software to create an overview of the network that an administrator can use to manage it without needing access to the physical components. It takes the hardware elements and functions and abstracts them into the software. There are two types of network virtualization: software-defined networking (SDN) and network function virtualization (NFV).
+Software-defined networking (SDN) virtualizes hardware that controls network traffic routing.
+Network function virtualization (NFV) virtualizes hardware appliances that provide a network function, such as firewall, load balancer, or traffic analyzer thus, making it easier to configure and provision.</npc>
+		<player>
+			<response nextnode="11">Go back and choose another type.</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>Application virtualization runs application software without needing it to be installed in the OS, so users can access an application on a separate computer than on the one that the application was originally installed on. There are three types of application virtualization, local application virtualization, application streaming, and server-based application virtualization.
+Local application virtualization runs on the endpoint device but runs in a runtime environment instead of on the native hardware.
+Application streaming lives on a server that sends small components of the software to run on the end user's device when needed.
+Server-based application virtualization runs entirely on a server that sends only its user interface to the client device.
+		</npc>
+		<player>
+			<response nextnode="11">Go back and choose another type.</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>Server virtualization allows multiple virtual 'guest' servers to share the same physical hardware. This works by installing software called a hypervisor, which then controls shared access for each virtual guest to the physical components of the server, including CPU, memory, disk, and networking.
+Server virtualization has been an important part of the development of IT since it drives down cost and is a key component of cloud computing as a whole.
+		</npc>
+		<player>
+			<response nextnode="11">Go back and choose another type.</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>Choose each item to learn more about each benefit of virtualization.</npc>
+		<player>
+			<response nextnode="17">Resource Efficiency</response>
+			<response nextnode="18">Easier Management</response>
+			<response nextnode="19">Minimal Downtime</response>
+			<response nextnode="20">Faster Provisioning</response>
+			<response nextnode="21">I have learnt all the benefits. Please go ahead.</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>Resource Efficiency: Server virtualization allows several virtualmachines to run on the same physical host,thereby making fuller use of the physical capacity of the hardware.</npc>
+		<player>
+			<response nextnode="16">Go back and choose another benefit.</response>
+		</player>
+	</node>
+	
+	<node id="18">
+		<npc>Easier Management: Virtual machines can be defined by software.This means that policies can be written into software that provides the ability to create automated IT service management workflows.</npc> 
+		<player>
+			<response nextnode="16">Go back and choose another benefit.</response>
+		</player>
+	</node>
+
+	<node id="19">
+		<npc>Minimal Downtime: Maintaining highly available compute environments has become cheaper since server virtualization is more cost-efficient than maintaining multiple physical hosts.</npc>
+		<player>
+			<response nextnode="16">Go back and choose another benefit.</response>
+		</player>
+	</node>
+
+	<node id="20">
+		<npc>Resource Efficiency: Virtual machines can be created and run within afew minutes, compared to several hours or even weeks for physical hosts.</npc>
+		<player>
+			<response nextnode="16">Go back and choose another benefit.</response>
+		</player>
+	</node>
+
+	<node id="21">
+		<npc>A container is an executable unit of software that packages up all application code and necessary libraries it needs so that it can run reliably in different computing environments. This allows developers to create containerized applications and deploy them simply, with zero changes, in multiple locations. Containers inherit much of their functionality from the underlying platform on which they are running.</npc>
+		<player>
+			<response nextnode="22">I see this is container. What are the benefits of it?</response>
+		</player>
+	</node>
+
+	<node id="22">
+		<npc>Portable, lightweight, and scalable.
+Continuous Integration and Delivery, which is a set of processes that help software development teams deliver code changes more frequently and reliably.
+Streamline development and deployment of cloud-native applications.
+Includes application's code, system tools and libraries, runtime, and settings.
+		</npc>
+		<player>
+			<response nextnode="end">Thank you for your teaching.</response>
+		</player>
+	</node>
+</dialogue>

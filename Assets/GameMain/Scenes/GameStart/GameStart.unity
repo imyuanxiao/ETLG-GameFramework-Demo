@@ -357,22 +357,6 @@ PrefabInstance:
       propertyPath: m_AvailableProcedureTypeNames.Array.data[13]
       value: ETLG.ProcedureSplash
       objectReference: {fileID: 0}
-    - target: {fileID: 11405216, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
-      propertyPath: m_AvailableProcedureTypeNames.Array.data[14]
-      value: ETLG.ProcedureUpdateVersion
-      objectReference: {fileID: 0}
-    - target: {fileID: 11405216, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
-      propertyPath: m_AvailableProcedureTypeNames.Array.data[15]
-      value: ETLG.ProcedureUpdateVersion
-      objectReference: {fileID: 0}
-    - target: {fileID: 11405216, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
-      propertyPath: m_AvailableProcedureTypeNames.Array.data[16]
-      value: ETLG.ProcedureUpdateVersion
-      objectReference: {fileID: 0}
-    - target: {fileID: 11405216, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
-      propertyPath: m_AvailableProcedureTypeNames.Array.data[17]
-      value: ETLG.ProcedureUpdateVersion
-      objectReference: {fileID: 0}
     - target: {fileID: 11413340, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
       propertyPath: m_AudioMixer
       value: 
@@ -387,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11499388, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}
       propertyPath: m_EditorResourceMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 3}

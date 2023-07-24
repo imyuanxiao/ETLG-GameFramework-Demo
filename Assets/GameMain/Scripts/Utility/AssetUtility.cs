@@ -96,6 +96,23 @@ namespace ETLG
         {
             return Utility.Text.Format("Avatar/NPC/{0}", NPCID);
         }
+
+        public static string GetXMLImage(string imageID)
+        {
+            return Utility.Text.Format("XMLImage/{0}", imageID);
+        }
+
+        public static string GetXMLVideo(string videoID)
+        {
+            return Utility.Text.Format("XMLVideo/{0}.mp4", videoID);
+        }
+
+        public static string GetXMLVideoRender(string videoID)
+        {
+            //return Utility.Text.Format("XMLVideo/{0}.renderTexture", videoID);
+            return Utility.Text.Format("XMLVideo/{0}", videoID);
+        }
+
         public static string GetPlayerAvatar()
         {
             return Utility.Text.Format("Avatar/Player/1000");
