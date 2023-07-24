@@ -51,9 +51,11 @@ namespace ETLG
         private const float min_contentWidth = 1100f;
         private const float min_prefabWidth = 1040f;
         private const float min_textWidth = 820f;
+        private const float min_imageWidth = 820f;
         private const float max_contentWidth = 1830f;
         private const float max_prefabWidth = 1760f;
         private const float max_textWidth = 1540f;
+        //private const float max_imageWidth = 1300f;
         private int default_fontsize = 20;
         private int fontsizeChangeValue = 0;
 
@@ -116,6 +118,7 @@ namespace ETLG
                 //}
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
+            updateFontSize();
         }
 
         //读取头像数据
@@ -189,6 +192,13 @@ namespace ETLG
                     TextMeshProUGUI dialogTextUI = dialogModuleRectTransform.GetComponentInChildren<TextMeshProUGUI>();
                     RectTransform dialogTextUIRectTransform = dialogTextUI.GetComponent<RectTransform>();
                     dialogTextUIRectTransform.sizeDelta = new Vector2(textWidth, dialogTextUIRectTransform.sizeDelta.y);
+
+                    //Image dialogImage = dialogContainerRectTransform.GetComponentInChildren<Image>();
+                    //if (dialogImage != null)
+                    //{
+                    //    RectTransform dialogImageRectTransform = dialogImage.GetComponent<RectTransform>();
+                    //    dialogTextUIRectTransform.sizeDelta = new Vector2(imageWidth, imageWidth / dialogImageRectTransform.sizeDelta.x* dialogImageRectTransform.sizeDelta.y);
+                    //}
                 }
             }
         }
@@ -410,7 +420,7 @@ namespace ETLG
 
             //set original ratio
             float aspectRatio = (float)imageTexture.width / imageTexture.height;
-            float fixedHeight = 400f / aspectRatio;
+            float fixedHeight = min_imageWidth / aspectRatio;
 
             Sprite sprite = Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));
             if (imageTexture != null)
@@ -418,7 +428,7 @@ namespace ETLG
                 // Set the loaded sprite to the target Image component
                 image.sprite = sprite;
                 RectTransform imageTransform = image.GetComponent<RectTransform>();
-                imageTransform.sizeDelta = new Vector2(400f, fixedHeight);
+                imageTransform.sizeDelta = new Vector2(min_imageWidth, fixedHeight);
             }
             return imageModule;
         }
@@ -481,20 +491,18 @@ namespace ETLG
 
         private void OnfontPlus()
         {
-            if (default_fontsize+ default_fontsize < 50)
+            if (default_fontsize+ fontsizeChangeValue < 50)
             {
                 fontsizeChangeValue += 2;
             }
-            updateFontSize();
         }
 
         private void OnfontSub()
         {
-            if (default_fontsize+default_fontsize > 0)
+            if (default_fontsize+ fontsizeChangeValue > 10)
             {
                 fontsizeChangeValue -= 2;
             }
-            updateFontSize();
         }
 
         private void updateFontSize()
@@ -503,7 +511,12 @@ namespace ETLG
             {
                 TextMeshProUGUI text = singleTextModule.GetComponentInChildren<TextMeshProUGUI>();
                 text.fontSize = default_fontsize + fontsizeChangeValue;
+                VerticalLayoutGroup verticalLayoutGroup = singleTextModule.GetComponentInChildren<VerticalLayoutGroup>();
+                HorizontalLayoutGroup horizontalLayoutGroup = singleTextModule.GetComponentInChildren<HorizontalLayoutGroup>();
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);
             }
+            
         }
 
     }
