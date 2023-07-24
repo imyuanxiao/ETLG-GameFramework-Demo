@@ -120,7 +120,9 @@
             public const int ACHV_LOGIN = 108;
             public const int ACHV_LEADERSHIP = 109;
             public const int ACHV_HIDDEN = 110;
-            
+
+            public const int ACHIV_TOTAL_SPEND_MONEY = 5001;
+
             public const string UNLOCKED_TREASURE_CHEST = "unlocked_treasure_chest";
 
             // operation

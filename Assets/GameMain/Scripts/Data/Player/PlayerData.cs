@@ -43,6 +43,7 @@ namespace ETLG.Data
 
         //Player Achievement Data
         private Dictionary<int,int> playerAchievement { get; set; }
+        public Dictionary<int, int> playerTotalArtifacts { get; set; }
         private DataAchievement dataAchievement { get; set; }
 
         public UITradeData UI_tradeData = null;
@@ -68,6 +69,7 @@ namespace ETLG.Data
             instantiatePlayerNPCs();
 
             playerAchievement = new Dictionary<int, int>(); // id + level
+            playerTotalArtifacts = new Dictionary<int, int>();
 
             // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
             equippedModules = new int[6];
@@ -84,6 +86,10 @@ namespace ETLG.Data
             // add money and skill points
             playerArtifacts.Add((int)EnumArtifact.Money, 0);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
+
+            playerTotalArtifacts.Add((int)EnumArtifact.Money, 0);
+            playerTotalArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
+            playerTotalArtifacts.Add(Constant.Type.ACHIV_TOTAL_SPEND_MONEY, 0);
 
             // add mock artifacts
             AddMockData();
@@ -262,6 +268,25 @@ namespace ETLG.Data
                 playerArtifacts[id] += number;
             }
 
+            //total artifacts for achievement
+            if(dataAchievement.isReset)
+            {
+                return;
+            }
+            if (!playerTotalArtifacts.ContainsKey(id))
+            {
+                playerTotalArtifacts.Add(id, number);
+            }
+            else
+            {
+                playerTotalArtifacts[id] += number;
+            }
+            foreach(KeyValuePair<int, int> pair in playerTotalArtifacts)
+            {
+                UpdateArtifactAchievements(pair.Key,pair.Value);
+            }
+            
+            
         }
 
         //update ALL artifacts after trading
@@ -305,6 +330,24 @@ namespace ETLG.Data
             if (playerArtifacts[id] <= 0)
             {
                 playerArtifacts.Remove(id);
+            }
+
+            //handle total spend money
+            if (dataAchievement.isReset)
+            {
+                //total spand money
+                //sub totoal spend
+                if (id == (int)EnumArtifact.Money && playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] > 0)
+                {
+                    playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] -= number;
+                }
+            }
+            else
+            {
+                if (id == (int)EnumArtifact.Money)
+                {
+                    playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] += number;
+                }
             }
         }
 
@@ -615,7 +658,7 @@ namespace ETLG.Data
 
             // reset all costs consumed
             //PlayerSkillData[] playerSkillDatas =  playerSkills.Values.ToArray();
-
+            dataAchievement.isReset = true;
             foreach (var playerSkill in playerSkills)
             {
                 int skillId = playerSkill.Key;
@@ -628,7 +671,7 @@ namespace ETLG.Data
                 }
 
             }
-
+           
             // clear skills;
             playerSkills.Clear();
 
@@ -653,7 +696,7 @@ namespace ETLG.Data
                 }
 
             }
-
+            dataAchievement.isReset = false;
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             UpdateAttrsByAllModules(Constant.Type.ADD);
@@ -680,10 +723,13 @@ namespace ETLG.Data
         private void AddMockData()
         {
 
+            AddArtifact((int)EnumArtifact.Money, 99999);
+            AddArtifact((int)EnumArtifact.KnowledgePoint, 45);
+           // playerArtifacts[(int)EnumArtifact.Money] += 99999;
+           // playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
-            playerArtifacts[(int)EnumArtifact.Money] += 99999;
-            playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
-
+           // playerTotalArtifacts[(int)EnumArtifact.Money] += 99999;
+           // playerTotalArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
             AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
             AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
@@ -767,6 +813,20 @@ namespace ETLG.Data
             else
             {
                 return dataAchievement.isMaxLevel(Id, playerAchievement[Id]) ? playerAchievement[Id] : playerAchievement[Id] + 1;
+            }
+        }
+        public void UpdateArtifactAchievements(int id, int number)
+        {
+            if (id == (int)EnumArtifact.Money)
+            {
+                int[] counts = dataAchievement.GetDataById(5001).Count;
+                foreach (int count in counts)
+                {
+                    if (number >= count)
+                    {
+                        GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, number));
+                    }
+                }
             }
         }
     }
