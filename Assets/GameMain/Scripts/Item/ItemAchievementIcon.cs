@@ -25,6 +25,7 @@ namespace ETLG
         public string tipTitle;
         public int position = 0;
         public bool refresh;
+        private Dictionary<int, int> playerTotalArtifact;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -57,12 +58,13 @@ namespace ETLG
             int type = achievementData.TypeId;
             int id = achievementData.Id;
             int conditionId = achievementData.ConditionId;
+            playerTotalArtifact = dataPlayer.GetPlayerData().playerTotalArtifacts;
             if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
             {
                 Sprite sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon());
                 this.image.sprite = sprite;
             }
-            this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE+id.ToString()+Constant.Key.POST_TITLE);
+            this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
             switch (type)
             {
                 case Constant.Type.ACHV_QUIZ:
@@ -71,51 +73,51 @@ namespace ETLG
                     break;
                 case Constant.Type.ACHV_RESOURCE:
                     //money
-                    if(conditionId==5001)
+                    switch (conditionId)
                     {
-                        this.progress.text= dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money).ToString();
-                    }
-                    //spend money
-                   //Knowledge Fragments 
-                    else if (conditionId == 5004)
-                    {
-                        int count = 0;
-                        EnumArtifact[] artifactTypes = new EnumArtifact[]
-                        {
+                        case 5001:
+                            this.progress.text = GetAchievementProgress((int)EnumArtifact.Money).ToString();
+                            break;
+                        //spend money
+                        case 5002:
+                            this.progress.text = GetAchievementProgress(Constant.Type.ACHIV_TOTAL_SPEND_MONEY).ToString();
+                            break;
+                        //Knowledge Fragments 
+                        case 5004:
+                            int fragmentCount = 0;
+                            EnumArtifact[] artifactTypes = new EnumArtifact[]
+                            {
                             EnumArtifact.KnowledgeFragments_AI,
                             EnumArtifact.KnowledgeFragments_Blockchain,
                             EnumArtifact.KnowledgeFragments_CloudComputing,
                             EnumArtifact.KnowledgeFragments_Cybersecurity,
                             EnumArtifact.KnowledgeFragments_DataScience,
                             EnumArtifact.KnowledgeFragments_IoT
-                        };
-                        foreach (EnumArtifact artifactType in artifactTypes)
-                        {
-                            count += dataPlayer.GetPlayerData().GetArtifactNumById((int)artifactType);
-                        }
+                            };
+                            foreach (EnumArtifact artifactType in artifactTypes)
+                            {
+                                fragmentCount += GetAchievementProgress((int)artifactType);
+                            }
 
-                        this.progress.text = count.ToString();
-                    }
-                    //Knowledge point
-                    else if(conditionId==5005)
-                    {
-                        this.progress.text = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.KnowledgePoint).ToString();
-                    }
-                    //mineral
-                    else if (conditionId == 5006)
-                    {
-                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.RareOre);
-                        this.progress.text = count.ToString();
-                    }
-                    //Fule
-                    else if (conditionId == 5007)
-                    {
-                        int count = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.FuelRefillUnit);
-                        this.progress.text = count.ToString();
-                    }
-                    else
-                    {
-                        this.progress.text = "0";
+                            this.progress.text = fragmentCount.ToString();
+                            break;
+                        //Knowledge point
+                        case 5005:
+                            this.progress.text = GetAchievementProgress((int)EnumArtifact.KnowledgePoint).ToString();
+                            break;
+                        //mineral
+                        case 5006:
+                            int mineralCount = GetAchievementProgress((int)EnumArtifact.RareOre);
+                            this.progress.text = mineralCount.ToString();
+                            break;
+                        //Fule
+                        case 5007:
+                            int fuleCount = GetAchievementProgress((int)EnumArtifact.FuelRefillUnit);
+                            this.progress.text = fuleCount.ToString();
+                            break;
+                        default:
+                            this.progress.text = "0";
+                            break;
                     }
                     break;
                 case Constant.Type.ACHV_INTERSTELLAR:
@@ -166,6 +168,14 @@ namespace ETLG
         public int GetCurrentAchievementID()
         {
             return this.achievementData.Id;
+        }
+        public int GetAchievementProgress(int id)
+        {
+            if (!playerTotalArtifact.ContainsKey(id))
+            {
+                return 0;
+            }
+            return playerTotalArtifact[id];
         }
     }
 }

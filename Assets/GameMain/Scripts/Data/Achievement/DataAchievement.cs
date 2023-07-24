@@ -10,6 +10,7 @@ namespace ETLG.Data
         public int cuurrentPopUpId { set; get; }
         public int descriptionLevel { set; get; }
         public int descriptionId { set; get; }
+        public bool isReset;
         protected override void OnInit()
         {
         }
@@ -117,6 +118,7 @@ namespace ETLG.Data
 
             return Count.Length - 1;
         }
+        
     }
 }
 
