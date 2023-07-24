@@ -51,11 +51,9 @@ namespace ETLG
         private const float min_contentWidth = 1100f;
         private const float min_prefabWidth = 1040f;
         private const float min_textWidth = 820f;
-        private const float min_imageWidth = 820f;
         private const float max_contentWidth = 1830f;
         private const float max_prefabWidth = 1760f;
         private const float max_textWidth = 1540f;
-        //private const float max_imageWidth = 1300f;
         private int default_fontsize = 20;
         private int fontsizeChangeValue = 0;
 
@@ -193,15 +191,24 @@ namespace ETLG
                     RectTransform dialogTextUIRectTransform = dialogTextUI.GetComponent<RectTransform>();
                     dialogTextUIRectTransform.sizeDelta = new Vector2(textWidth, dialogTextUIRectTransform.sizeDelta.y);
 
-                    //Image dialogImage = dialogContainerRectTransform.GetComponentInChildren<Image>();
-                    //if (dialogImage != null)
-                    //{
-                    //    RectTransform dialogImageRectTransform = dialogImage.GetComponent<RectTransform>();
-                    //    dialogTextUIRectTransform.sizeDelta = new Vector2(imageWidth, imageWidth / dialogImageRectTransform.sizeDelta.x* dialogImageRectTransform.sizeDelta.y);
-                    //}
+                    Image image = dialogContainer.GetComponentInChildren<Image>();
+                    if (image != null)
+                    {
+                        RectTransform dialogImageRectTransform = image.GetComponent<RectTransform>();
+                        float ratio = dialogImageRectTransform.sizeDelta.y / dialogImageRectTransform.sizeDelta.x;
+                        dialogImageRectTransform.sizeDelta = new Vector2(textWidth, textWidth * ratio);
+                    }
+
+                    VideoPlayer video = dialogContainer.GetComponentInChildren<VideoPlayer>();
+                    if (video != null)
+                    {
+                        RectTransform dialogVideoRectTransform = video.GetComponent<RectTransform>();
+                        dialogVideoRectTransform.sizeDelta = new Vector2(textWidth, textWidth * 0.75f);
+                    }
                 }
             }
         }
+
         //根据当前页面大小，统一聊天记录大小
         private void resizeDialog(float currentWidth)
         {
@@ -420,7 +427,7 @@ namespace ETLG
 
             //set original ratio
             float aspectRatio = (float)imageTexture.width / imageTexture.height;
-            float fixedHeight = min_imageWidth / aspectRatio;
+            float fixedHeight = min_textWidth / aspectRatio;
 
             Sprite sprite = Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));
             if (imageTexture != null)
@@ -428,7 +435,7 @@ namespace ETLG
                 // Set the loaded sprite to the target Image component
                 image.sprite = sprite;
                 RectTransform imageTransform = image.GetComponent<RectTransform>();
-                imageTransform.sizeDelta = new Vector2(min_imageWidth, fixedHeight);
+                imageTransform.sizeDelta = new Vector2(min_textWidth, fixedHeight);
             }
             return imageModule;
         }
@@ -507,12 +514,14 @@ namespace ETLG
 
         private void updateFontSize()
         {
-            foreach (Image singleTextModule in textModules)
+            //Image singleTextModule in textModules
+            
+            foreach (Transform dialogModule in dialogScrollContent)
             {
-                TextMeshProUGUI text = singleTextModule.GetComponentInChildren<TextMeshProUGUI>();
+                TextMeshProUGUI text = dialogModule.GetComponentInChildren<TextMeshProUGUI>();
                 text.fontSize = default_fontsize + fontsizeChangeValue;
-                VerticalLayoutGroup verticalLayoutGroup = singleTextModule.GetComponentInChildren<VerticalLayoutGroup>();
-                HorizontalLayoutGroup horizontalLayoutGroup = singleTextModule.GetComponentInChildren<HorizontalLayoutGroup>();
+                VerticalLayoutGroup verticalLayoutGroup = dialogModule.GetComponentInChildren<VerticalLayoutGroup>();
+                HorizontalLayoutGroup horizontalLayoutGroup = dialogModule.GetComponentInChildren<HorizontalLayoutGroup>();
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);
             }
