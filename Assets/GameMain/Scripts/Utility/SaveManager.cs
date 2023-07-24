@@ -30,7 +30,7 @@ namespace ETLG
             string saveIdStr = "_" + SaveId.ToString();
             
             Save("InitialSpaceshipIdx" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.Id);
-            Save("PlayerCalculatedSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
+            // Save("PlayerCalculatedSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Save("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Save("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
             Save("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
@@ -68,7 +68,7 @@ namespace ETLG
             
             GameEntry.Data.GetData<DataPlayer>().LoadGame(GameEntry.Data.GetData<DataSpaceship>().GetSpaceshipData(initialSpaceshipId));
 
-            Load("PlayerSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
+            // Load("PlayerSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Load("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Load("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
             LoadPlayerModules("PlayerModules" + saveIdStr);
@@ -87,10 +87,16 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].NPCId = (int) jsonData[npcId.ToString()]["NPCId"];
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Money = (int) jsonData[npcId.ToString()]["Money"];
-                for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length; i++)
+                JArray artifacts = (JArray) jsonData[npcId.ToString()]["Artifacts"];
+                for (int i=0; i < artifacts.Count; i++)
                 {
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) jsonData[npcId.ToString()]["Artifacts"][i];
+                    // if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
                 }
+                // for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length; i++)
+                // {
+                //     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) jsonData[npcId.ToString()]["Artifacts"][i];
+                // }
             }
         }
 
@@ -106,10 +112,21 @@ namespace ETLG
         private void LoadPlayerModules(string key)
         {
             JArray jsonData = LoadJsonArray(key);
-            for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Count; i++)
+            for (int i=0; i < jsonData.Count; i++)
             {
-                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
+                if (i >= GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Count)
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Add((int) jsonData[i]);
+                }
+                else
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
+                }
             }
+            // for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Count; i++)
+            // {
+            //     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
+            // }
         }
 
         public void DeleteSave(int SaveId)
@@ -121,13 +138,14 @@ namespace ETLG
             }
             string saveIdStr = "_" + SaveId.ToString();
 
-            Delete("PlayerSpaceshipData" + saveIdStr);
+            // Delete("PlayerSpaceshipData" + saveIdStr);
             Delete("PlayerSkillData" + saveIdStr);
             Delete("PlayerArtifacts" + saveIdStr);
             Delete("PlayerModules" + saveIdStr);
             Delete("EquippedModules" + saveIdStr);
             Delete("PlayerNPCs" + saveIdStr);
             Delete("PlayerAchievement" + saveIdStr);
+            Delete("BattleVictoryCount" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -243,13 +261,14 @@ namespace ETLG
             }
             if (Input.GetKeyDown(KeyCode.O))
             {
-                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower += 10;
-                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int)EnumSkill.ElectronicWarfare, 0);
+                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower += 10;
+                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int)EnumSkill.ElectronicWarfare, 0);
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact(3010, 1);
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
                 PrintSavedData("InitialSpaceshipIdx_0");
-                PrintSavedData("PlayerCalculatedSpaceshipData_0");
+                // PrintSavedData("PlayerCalculatedSpaceshipData_0");
                 PrintSavedData("PlayerSkillData_0");
                 PrintSavedData("PlayerArtifacts_0");
                 PrintSavedData("PlayerModules_0");
