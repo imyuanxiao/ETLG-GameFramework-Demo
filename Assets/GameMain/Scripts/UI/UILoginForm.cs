@@ -50,7 +50,10 @@ namespace ETLG
         }
         private void showContent()
         {
-            if(!isRegister)
+            userName.text = null;
+            pwd.text = null;
+            confirmPwd.text = null;
+            if (!isRegister)
             {
                 titleName.text = "Login";
                 switchTitle.text = "Register";
@@ -81,7 +84,14 @@ namespace ETLG
             }
             else
             {
-                reminder.text = "User does not exist.";
+                if (!string.IsNullOrEmpty(this.pwd.text))
+                {
+                    reminder.text = "User does not exist.";
+                }
+                else
+                {
+                    reminder.text = "Please enter passward.";
+                }
             }
         }
         private void OnRegister()
