@@ -1,21 +1,22 @@
 <dialogue>
-	<node id="1"> 
-		<npc>
-			<statement font="2" color="FF0000">Introduction</statement>
-			<statement font="1">In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
-		</npc>
-		<player isShown="false">
-			<response nextnode="2">Continue</response>
+	<node id="1">
+		<npc image="101101" video="110101" font="2" color="FF0000" >Cloud computing is an evolution of technology that dates back to the 1950s. Cloud computing would not exist without utilizing computer hardware and virtualization, a concept that was pioneered by IBM. Virtualization uses software that divides the hardware elements of a single computer into multiple virtual computers, also known as virtual machines (VMs). Cloud computing has also undergone many phases including grid, utility, and on-demand computing. </npc>
+		<player>
+			<response nextnode="2">Now I got a brief history of Cloud Computing. Please go ahead.</response>
 		</player>
 	</node>
 
 	<node id="2">
-		<npc>
-			<statement font="2" color="FF0000">Throughout this topic, we will attempt to answer the following questions: </statement>
-			<statement image="101101">1. How have industries benefitted from adopting digital transformation practices?&#xA;What role have technologies such as AI, Cloud, and IoT played in the digital revolution?  </statement>
-		</npc>
-		<player isShown="false">
-			<response nextnode="3">Continue</response>
+		<npc font="1">Please choose the decade regarding the cloud and I will tell you the events during that period that played a role in shaping the cloud as it is known today. </npc>
+		<player>
+			<response nextnode="3">1950s</response>
+			<response nextnode="4">1960s</response>
+			<response nextnode="5">1970s</response>
+			<response nextnode="6">1980s</response>
+			<response nextnode="7">1990s</response>
+			<response nextnode="8">2000s</response>
+			<response nextnode="9">2010s and beyond</response>
+			<response nextnode="10">I have learned the whold timeline in detail.Please go ahead.</response>
 		</player>
 	</node>
 
