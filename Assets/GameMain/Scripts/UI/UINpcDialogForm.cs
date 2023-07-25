@@ -43,6 +43,7 @@ namespace ETLG
         private string NPCText;
         private string playerText;
         private XmlNodeList playerResponses;
+        private XmlNodeList NPCStatements;
         private Dictionary<string, string> playerButtons;
         private bool isNext = false;
         private float playerInputBoxOriginalHeight;
@@ -245,9 +246,8 @@ namespace ETLG
             }
         }
 
-        private void getFeatures()
+        private void getFeatures(XmlNode currentNPCNode)
         {
-            XmlNode currentNPCNode = currentNode.SelectSingleNode("npc");
             NPCText = currentNPCNode.InnerText;
 
             if (currentNPCNode.Attributes["font"] != null)
@@ -303,7 +303,7 @@ namespace ETLG
                 currentNode = dialogueNodes[nextNodeID];
             }
 
-            getFeatures();
+            NPCStatements = currentNode.SelectNodes("npc/statement");
 
             playerResponses = currentNode.SelectNodes("player/response");
 
@@ -329,8 +329,12 @@ namespace ETLG
 
         private void showText(bool isShown)
         {
-            Image NPCModule = instantiatePrefab(NPCText, "NPC");
-
+            foreach (XmlNode node in NPCStatements)
+            {
+                getFeatures(node);
+                Image NPCModule = instantiatePrefab(NPCText, "NPC");
+            }
+            
             foreach (KeyValuePair<string, string> data in playerButtons)
             {
                 Button playerButton = Instantiate(playerButtonPrefab, buttonScrollContent);
@@ -399,6 +403,7 @@ namespace ETLG
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
             dialogText.text = text;
             dialogText.fontSize = default_fontsize + fontSizeGap + fontsizeChangeValue;
+            Debug.Log(dialogText.fontSize);
             dialogText.alignment = TextAlignmentOptions.Left;
             Transform contentContainer = textModuleRectTransform.Find("ContentContainer");
 
