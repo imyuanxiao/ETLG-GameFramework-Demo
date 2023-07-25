@@ -1615,10 +1615,14 @@ MonoBehaviour:
   titleName: {fileID: 6916617933905846076}
   switchTitle: {fileID: 6916617933490658043}
   submitTitle: {fileID: 6916617932479544474}
+  reminder: {fileID: 0}
   switchButton: {fileID: 6916617933701322809}
-  returnhButton: {fileID: 6916617932777252639}
+  returnButton: {fileID: 6916617932777252639}
   submitButton: {fileID: 6916617932763472874}
   confirmPassword: {fileID: 6916617933255722532}
+  userName: {fileID: 6916617932058505371}
+  pwd: {fileID: 6916617933178404435}
+  confirmPwd: {fileID: 6916617933255722534}
 --- !u!1 &6916617933091359245
 GameObject:
   m_ObjectHideFlags: 0

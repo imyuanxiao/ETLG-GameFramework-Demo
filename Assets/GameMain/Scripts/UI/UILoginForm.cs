@@ -13,13 +13,20 @@ namespace ETLG
         public TextMeshProUGUI titleName = null;
         public TextMeshProUGUI switchTitle = null;
         public TextMeshProUGUI submitTitle = null;
+        public TextMeshProUGUI reminder = null;
         public Button switchButton;
         public Button returnButton;
         public Button submitButton;
         public GameObject confirmPassword;
         bool isRegister;
-
-        // 初始化菜单数据
+        //login
+        [SerializeField]
+        private TMP_InputField userName;
+        [SerializeField]
+        private TMP_InputField pwd;
+        //register
+        [SerializeField]
+        private TMP_InputField confirmPwd;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -35,8 +42,6 @@ namespace ETLG
             base.OnOpen(userData);
             Log.Debug("Open login form");
             showContent();
-            LogIn();
-           
         }
         protected override void OnClose(bool isShutdown, object userData)
         {
@@ -60,26 +65,49 @@ namespace ETLG
                 confirmPassword.SetActive(true);
             }
         }
-        private void LogIn()
+        private void OnLogIn()
         {
-           
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
+            {
+                if (PlayerPrefs.GetString(userName.text + "password") == pwd.text)
+                {
+                    reminder.text = "Login successful!";
+                    //load player data.......
+                }
+                else
+                {
+                    reminder.text = "Incorrect password";
+                }
+            }
+            else
+            {
+                reminder.text = "User does not exist.";
+            }
         }
-        private void Register()
+        private void OnRegister()
         {
-           
+            if(string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
+            {
+                if(pwd.text==confirmPwd.text)
+                {
+                    PlayerPrefs.SetString(userName.text, userName.text);
+                    PlayerPrefs.SetString(userName.text + "password", pwd.text);
+                    reminder.text = "Register successful! Please login.";
+                }
+                else
+                {
+                    reminder.text = "Passwords do not match.";
+                }
+            }
+            else
+            {
+                reminder.text = "Username exists.";
+            }
         }
         private void OnSwitchButtonClick()
         {
             isRegister = !isRegister;
             showContent();
-            if(isRegister)
-            {
-                Register();
-            }
-            else
-            {
-                LogIn();
-            }
         }
         private void OnReturnButtonClick()
         {
@@ -89,11 +117,11 @@ namespace ETLG
         {
             if(isRegister)
             {
-
+                OnRegister();
             }
             else
             {
-
+                OnLogIn();
             }
         }
     }
