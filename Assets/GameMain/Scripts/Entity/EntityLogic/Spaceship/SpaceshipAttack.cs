@@ -20,6 +20,9 @@ namespace ETLG
         private SpaceshipController controller;
         private IFsm<SpaceshipAttack> m_Fsm = null;
         private int equippedModuleIdx;
+        private float fireRate;
+        private float timeElapsed;
+        private bool readyToFire;
 
         private void Awake() 
         {
@@ -38,17 +41,37 @@ namespace ETLG
             m_Fsm.Start<DefaultSkill>();
 
             this.equippedModuleIdx = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules()[0];
-            Debug.Log("Equipped Module: " + this.equippedModuleIdx);
+
+            fireRate = 0.25f;
+            timeElapsed = 0;
+            readyToFire = true;
+        }
+
+        private void CheckFire()
+        {
+            if (readyToFire) { return; }
+            if (timeElapsed < fireRate)
+            {
+                readyToFire = false;
+                timeElapsed += Time.deltaTime;
+            }
+            else
+            {
+                readyToFire = true;
+                timeElapsed = 0f;
+            }
         }
 
         private void Update() 
         {
-            if (controller.FireInput)
+            CheckFire();
+            if (Input.GetButton("Fire1") && readyToFire)// (controller.FireInput)
             {
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());
                 GameEntry.Sound.PlaySound(EnumSound.BulletImpact14);
                 ObjectPoolManager.SpawnObject(BattleManager.Instance.muzzleFlashPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.ParticleSystem);
+                readyToFire = false;
             }
             // fire equiped weapon
             if (Input.GetMouseButtonDown(1))

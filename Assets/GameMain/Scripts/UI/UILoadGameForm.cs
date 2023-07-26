@@ -30,7 +30,13 @@ namespace ETLG
                 saveSlot.loadBtn.onClick.AddListener(delegate{OnLoadButtonClicked(saveSlot.SaveId);});
                 saveSlot.overwriteBtn.onClick.AddListener(delegate{OnOverwriteClicked(saveSlot.SaveId);});
                 saveSlot.deleteBtn.onClick.AddListener(delegate{OnDeleteButtonClicked(saveSlot.SaveId);});
+                saveSlot.uploadBtn.onClick.AddListener(delegate{OnUploadButtonClicked(saveSlot.SaveId);});
             }
+        }
+
+        private void OnUploadButtonClicked(int saveId)
+        {
+            Debug.Log("Upload Button Clicked : " + saveId);
         }
 
         private void OnDeleteButtonClicked(int saveId)
@@ -208,6 +214,7 @@ namespace ETLG
         public Button loadBtn;
         public Button overwriteBtn;
         public Button deleteBtn;
+        public Button uploadBtn;
     }
 }
 
