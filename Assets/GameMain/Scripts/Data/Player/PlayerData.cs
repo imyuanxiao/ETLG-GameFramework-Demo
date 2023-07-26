@@ -281,10 +281,8 @@ namespace ETLG.Data
             {
                 playerTotalArtifacts[id] += number;
             }
-            foreach(KeyValuePair<int, int> pair in playerTotalArtifacts)
-            {
-                UpdateArtifactAchievements(pair.Key,pair.Value);
-            }
+            
+                UpdateArtifactAchievements();
             
             
         }
@@ -349,6 +347,11 @@ namespace ETLG.Data
                     playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] += number;
                 }
             }
+            if(dataAchievement.isReset)
+            {
+                return;
+            }
+            UpdateArtifactAchievements();
         }
 
         public void SellArtifact(int id, int number)
@@ -728,9 +731,6 @@ namespace ETLG.Data
            // playerArtifacts[(int)EnumArtifact.Money] += 99999;
            // playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
-           // playerTotalArtifacts[(int)EnumArtifact.Money] += 99999;
-           // playerTotalArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
-
             AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
             AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
             AddArtifact((int)EnumArtifact.AdvancedUpgradeUnit, 70);
@@ -782,11 +782,11 @@ namespace ETLG.Data
         {
             if(playerAchievement.ContainsKey(id))
             {
-                playerAchievement[id] = level;
+                playerAchievement[id] = level+1;
             }
             else
             {
-                playerAchievement.Add(id, level);
+                playerAchievement.Add(id, level+1);
             }
         }
         public int GetCurrentAchievementLevelById(int id)
@@ -797,6 +797,11 @@ namespace ETLG.Data
         {
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
        dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
+        }
+        public bool isAchievementAchieved(int id,int count)
+        {
+            return playerAchievement.ContainsKey(id) &&
+       dataAchievement.GetNextLevel(id, count) == playerAchievement[id];
         }
         public int GetNextLevel(int Id)
         {
@@ -815,17 +820,82 @@ namespace ETLG.Data
                 return dataAchievement.isMaxLevel(Id, playerAchievement[Id]) ? playerAchievement[Id] : playerAchievement[Id] + 1;
             }
         }
-        public void UpdateArtifactAchievements(int id, int number)
+        public void UpdateArtifactAchievements()
         {
-            if (id == (int)EnumArtifact.Money)
+            int number, achievementId=0;
+            int[] counts;
+            int[] artifactIds = {
+                                   (int)EnumArtifact.Money,
+                                   Constant.Type.ACHIV_TOTAL_SPEND_MONEY,
+                                   (int)EnumArtifact.KnowledgePoint,
+                                   (int)EnumArtifact.RareOre,
+                                   (int)EnumArtifact.FuelRefillUnit
+                                 };
+
+            foreach (int artifactId in artifactIds)
             {
-                int[] counts = dataAchievement.GetDataById(5001).Count;
-                foreach (int count in counts)
+                if (playerTotalArtifacts.ContainsKey(artifactId))
                 {
-                    if (number >= count)
+                    if (artifactId == (int)EnumArtifact.Money)
                     {
-                        GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, number));
+                        achievementId = 5001;
                     }
+                    else if (artifactId == Constant.Type.ACHIV_TOTAL_SPEND_MONEY)
+                    {
+                        achievementId = 5002;
+                    }
+                    else if (artifactId == (int)EnumArtifact.KnowledgePoint)
+                    {
+                        achievementId = 5004;
+                    }
+                    else if (artifactId == (int)EnumArtifact.RareOre)
+                    {
+                        achievementId = 5005;
+                    }
+                    else if (artifactId == (int)EnumArtifact.FuelRefillUnit)
+                    {
+                        achievementId = 5006;
+                    }
+                   
+                    number = playerTotalArtifacts[artifactId];
+                    counts = dataAchievement.GetDataById(achievementId).Count;
+
+                    foreach (int count in counts)
+                    {
+                        if (number >= count && !isAchievementAchieved(achievementId, count))
+                        {
+                            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                        }
+                    }
+                }
+            }
+
+            // Total fragments
+            achievementId = 5003;
+            int[] fragmentsId = {
+                                    (int)EnumArtifact.KnowledgeFragments_AI,
+                                    (int)EnumArtifact.KnowledgeFragments_Blockchain,
+                                    (int)EnumArtifact.KnowledgeFragments_CloudComputing,
+                                    (int)EnumArtifact.KnowledgeFragments_Cybersecurity,
+                                    (int)EnumArtifact.KnowledgeFragments_DataScience,
+                                    (int)EnumArtifact.KnowledgeFragments_IoT
+                                };
+            number = 0;
+
+            foreach (int fragmentId in fragmentsId)
+            {
+                if (playerTotalArtifacts.ContainsKey(fragmentId))
+                {
+                    number += playerTotalArtifacts[fragmentId];
+                }
+            }
+
+            counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                if (number >= count && !isAchievementAchieved(achievementId, count))
+                {
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }
         }
