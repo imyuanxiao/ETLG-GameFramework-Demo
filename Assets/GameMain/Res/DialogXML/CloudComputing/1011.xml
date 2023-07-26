@@ -1,221 +1,271 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" color="FF0000">Introduction</statement>
+			<statement font="2" isBold="true">Introduction</statement>
 			<statement font="1">In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
 		</npc>
-		<player isShown="false">
-			<response nextnode="2">Continue</response>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="2">
 		<npc>
-			<statement font="2" color="FF0000">Throughout this topic, we will attempt to answer the following questions: </statement>
-			<statement image="101101">1. How have industries benefitted from adopting digital transformation practices?&#xA;What role have technologies such as AI, Cloud, and IoT played in the digital revolution?  </statement>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions: </statement>
+			<statement image="1">1. How have industries benefitted from adopting digital transformation practices?&#xA;2. What role have technologies such as AI, Cloud, and IoT played in the digital revolution?  </statement>
 		</npc>
-		<player isShown="false">
-			<response nextnode="3">Continue</response>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="3">
-		<npc image="101101" video="110102">1950s
-The foundations for what would become cloudcomputing are laid.
-Multiple users share the resources provided by a centralmainframe computer through dumb terminals.
-Shared access to the mainframe is limited bygeographical constraints.
+		<npc>
+			<statement font="1" color="FF0000">1. How have industries benefitted from adopting digital transformation practices? </statement> 
+			<statement font="2">We are at one of the tipping points in history where the impact of technology on business is significant enough to transform the whole way that business gets done. </statement> 
+			<statement font="1" isBold="true">The New Digital Age</statement> 
+			<statement font="1">It's no secret that the pace of innovation and change has accelerated rapidly over the last few years. From the explosion of social media to online shopping and apps to track your driver, digital transformation has quickly become an integral part of daily life. </statement> 
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="4" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="4">
-		<npc>1960s
-In 1966,the ARPANET (Advanced Research ProjectsAgency Network) project is initiated to enable access toremote computers.
-The first computers were attached in 1969 and it wasfully operational in 1971.
-It was the first wide-area packet-switched network withdistributed control and one of the first networks to useTCP/IP. Both technologies became the technicalfoundation of the Internet.
-IBM invents virtualization in 1967, which allows multiplevirtual machines to run on a single physical host.
+		<npc>
+			<statement>In every industry, business leaders realize customer expectations have created tremendous pressure to change the way they set their strategies and run their organizations. Yet, because they have to manage existing, often traditional, offerings and operations, new requirements to incorporate information and interactivity quickly drive up costs and complexity.</statement>
+			<statement>Business leaders have long used information technology (IT) to improve productivity and efficiency, reach new markets and optimize supply chains. What’s new is that customer expectations have also changed. People everywhere are using social networks to find jobs and restaurants, lost friends and new partners—and, as citizens, to achieve common political goals. They are using the internet for entertainment, shopping, socializing, and household management.</statement>
+			<statement>At the same time, businesses are undertaking their own digital transformations, rethinking what customers value most, and creating operating models that take advantage of what’s newly possible for competitive differentiation. The challenge for business is how fast and how far to go on the path to digital transformation.</statement>
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="5" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="5">
-		<npc>1970s
-The first email is sent over the ARPANET in 1971Virtualization becomes a major technology driver and acatalyst for the largest evolution in communications andcomputing
-The first mass-produced chip, the Intel 4004, hits themarket in 1971, fueling reduced component costs.
-Later in the decade, familiar technology brands start tobecome established, such as Apple and Microsoft, ascomputers for everyone' starts to become a reality.
+		<npc>
+			<statement font="1" image="3" isBold="true">What is Digital Transformation?</statement>
+			<statement >Digital transformation takes a customer-driven, digital-first approach to all aspects of a business, from its business models to customer experiences to processes and operations. It uses AI, automation, hybrid cloud, and other digital technologies to leverage data and drive intelligent workflows, faster and smarter decision-making, and real-time response to market disruptions. And ultimately, it changes customer expectations and creates new business opportunities.</statement>
+			<statement>While many organizations have undertaken a digital transformation in response to a single competitive threat or market shift, it has never been about making a one-time fix. According to MIT Sloan Management Review, "Digital Transformation is better thought of as continual adaptation to a constantly changing environment." Its goal is to build a technical and operational foundation, to evolve and respond in the best possible way to unpredictable and ever-changing customer expectations, market conditions, and local or global events. </statement>
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="6" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="6">
-		<npc>1980s
-IBM invents the PC allowing more and more householdsand companies to own computers.
-Wired Ethernet networks allow companies to connecttheir computers together.
-Client-Server architecture becomes established, a majorprinciple on which many Internet services work.
-Tim Berners-Lee lavs the foundations of the World WideWeb in 1989.
+		<npc>
+			<statement font="1" isBold="true">Digital Transformation Drivers</statement> 
+			<statement>Customer expectations have always been the prime drivers of digital transformation. It began when a rush of new technologies made new kinds of information and capabilities accessible in new ways, such as: </statement>
+			<statement>· Mobile devices&#xA;· Social media&#xA;· The internet of things (IoT)&#xA;· Cloud computing</statement>
+			<statement isBold="true">Pioneers—disruptors—such as Amazon and Netflix snatched market share from their competition by adopting these technologies to:</statement>
+			<statement>· Reinvent business models (e-commerce, electronic delivery).&#xA;· Optimize processes (supply chain management, new feature development).&#xA;· Constantly improve the customer experience (in-context customer reviews, personalized recommendations).</statement>
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="7">
-		<npc>1990s
-ARPANET was formally decommissioned in 1990.
-Over 1 million computers are connected to the Internetby 1992.
-Grid computing is coined as a term to describecomputers connected over the Internet to form a high-power virtual computer.
-E-commerce starts to emerge - Amazon is founded in1994.
-Compaq coins the term "Cloud Computing" in 1995
-The forerunner of Software as a Service emerges by theend of the decade.
+		<npc>
+			<statement>Competitors adapted to provide even more capability and convenience (or they struggled and maybe even disappeared). Today, customers expect to conduct all business digitally, wherever, and whenever, using any device, with all the supporting information and content they need close at hand. Ultimately, digital transformation is about meeting these ever-escalating expectations. But often, an organization's entry point is a transformation initiative that addresses a specific means to this end, such as:</statement>
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="8">Automating business processes</response>
+			<response nextnode="9">Defending against disruption</response>			
+			<response nextnode="10">Dealing with change effectively</response>
+			<response nextnode="11">Enabling on-demand access to more resources, with fewer limits</response>
+			<response nextnode="12" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="8">
-		<npc>2000s
-The Internet becomes more accessible to all.
-Off-site, centrally managed hosting in data centersbecomes more prevalent.
-Server virtualization becomes the norm, with VMware asa dominant player.
-In 2006, Amazon launches its Elastic Compute Cloud(allows users to rent virtual machines)
-Dropbox (file hosting service) is established in 2007
-Both IBM and Microsoft have entered the cloudcomputing market by the end of 2000s.
+		<npc>
+			<statement>Adding AI and automation serves customers better and produces higher-value work. Theycreate intelligent workflows that simplify operating models, increase productivity and enablemployees to make better decisions faster.</statement> 
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="9">
-		<npc>2010s and beyond
-Office 365 is launched in 2011, bringing SaaS to the masses
-Docker is established in 2013 and Kubernetes in 2014paving the way for container-based solutions.
-Serverless computing on the cloud is established in 2014.
-Technologies such as the Internet of Things and Blockchainand IBM Watson become established.
-Edge Computing, Fog Computing and advances in MachineLearning as well as quantum computing are among likelyfuture developments
-According to one report, the global cloud computing marketsize is set to grow from USD 445.3 billion in 2021 to USD947.3 billion by 2026.
+		<npc>
+			<statement>Digital transformation implements technologies and best practices for fast product creation.new customer experiences, and new business models in response to shifts in competitivethreats, market trends, and customer expectations.</statement> 
 		</npc>
 		<player>
-			<response nextnode="2">Go back and choose another decade.</response>
+			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="10">
-		<npc>Virtualization is the foundation for cloud computing. It is the process of creating a software version of a physical computing resource. Virtualization uses software to create a layer over computer hardware that allows the hardware elements of a computer, such as processors, memory, storage, etc., to be divided into multiple computers, or virtual machines (VMs), which are virtual environments that use software to mimic a physical computer.</npc>
+		<npc>
+			<statement>This process can include modernizing legacy technology to run on modern infrastructure andinteroperate with modern applications, It builds resilience into systems and processes andassimilates applications and data from acquisitions or mergers.</statement> 
+		</npc>
 		<player>
-			<response nextnode="11">Oh, so this is virtualization! What are types of virtualization?</response>
+			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
-
 	<node id="11">
-		<npc>There are different types of virtualization, some of them include desktop, network, application, and server virtualization.
-Please choose to learn further.</npc>
+		<npc>
+			<statement>Digital transformation empowers the business to adopt the widest possible range of solutionsand services from ecosystem partners, industry solution leaders, and multiple cloud serviceproviders.</statement> 
+		</npc>
 		<player>
-			<response nextnode="12">Desktop Virtualization</response>
-			<response nextnode="13">Network Virtualization</response>
-			<response nextnode="14">Application Virtualization</response>
-			<response nextnode="15">Server Virtualization</response>
-			<response nextnode="16">I have learnt all types of virtualization. What are benefits of Virtualization?</response>
+			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="12">
-		<npc>Desktop virtualization allows for running multiple desktop operating systems on the same computer in their own VM. There are two types of desktop virtualization: virtual desktop infrastructure (VDI) and local desktop virtualization.
-Virtual desktop infrastructure runs multiple desktops in a virtual machine on a central server and allows the organization to provide its users access to an OS (operating system) without needing to install them on the devices.
-Local desktop virtualization runs a hypervisor, which is a software layer that allows VMs to run alongside each other while sharing the same physical computing resources so that a user can run one or more operating systems on a local computer and seamlessly switch between one operating system to another.</npc>
+		<npc>
+			<statement font="1" isBold="true" image="4">COVID-19 pandemic: The ultimate driver? </statement> 
+			<statement>In 2020, the COVID-19 pandemic laid bare every organization's digital transformation efforts and progress (or lack thereof). Manufacturers learned just how quickly and effectively they could get new products to market. Retailers scrambled to provide customers with new and safer ways to shop. Employers adopted or expanded technologies that let employees work from home. &#xA;Among operational workflows, supply chains were the most glaringly exposed. Supply chains are always vulnerable; according to the McKinsey Global Institute, supply chain disruptions lasting one month or longer occur every 3.7 years. But shortly after the pandemic began, the United States suddenly imported almost 50% less from major trading partners. Companies were forced to undergo years or decades' worth of supply chain transformation in weeks or months. </statement> 
+			<statement>The arrival of the pandemic forced us to reconsider the capabilities we had at our fingertips and adapt them to the circumstances we now face daily. Take video conferencing, for example. We’ve had this capability for years, but we never quite realized its full potential. Now, video calls are an essential part of our day, proving their worth far beyond hosting meetings remotely. &#xA;Patients can have a video consultation with their doctor and have their prescription made available at their closest pharmacy. It benefits the doctor, the patient, and everyone who may come into contact with the patient. This highlights the rapid acceleration of digital transformation out of necessity – but also how the right technology can enhance employee and customer safety.  </statement> 
+		</npc>
 		<player>
-			<response nextnode="11">Go back and choose another type.</response>
+			<response nextnode="13">OK! I have known how industries have benefitted from adopting digital transformation practices.  </response>
 		</player>
 	</node>
 
 	<node id="13">
-		<npc>Network Virtualization uses software to create an overview of the network that an administrator can use to manage it without needing access to the physical components. It takes the hardware elements and functions and abstracts them into the software. There are two types of network virtualization: software-defined networking (SDN) and network function virtualization (NFV).
-Software-defined networking (SDN) virtualizes hardware that controls network traffic routing.
-Network function virtualization (NFV) virtualizes hardware appliances that provide a network function, such as firewall, load balancer, or traffic analyzer thus, making it easier to configure and provision.</npc>
+		<npc>
+			<statement font="1" color="FF0000">2. What role have technologies such as AI, Cloud, and IoT played in the digital revolution? </statement> 
+			<statement font="2">Enterprises will look back at the start of the 2020s as a moment when they either seized opportunities or naively hoped old ways of doing business would survive. Smarter businesses realize that it's a critical time to meet people's evolving needs and give their customers exceptional experiences. Business transformation is the key to accomplishing these goals, studies show. </statement> 
+			<statement font="1">As disruption and volatility may continue for the foreseeable future, the organizations that apply human-focused strategies Business transformation will determine who thrives in the new landscape ahead and the new capabilities of emerging and advancing technologies will be positioned to lead in the “new normal” to come. </statement> 
+			<statement font="1" isBold="true">Transformational Technologies</statement> 
+		</npc>
 		<player>
-			<response nextnode="11">Go back and choose another type.</response>
+			<response nextnode="14" isShown="false">Continue</response>
+
 		</player>
 	</node>
 
 	<node id="14">
-		<npc>Application virtualization runs application software without needing it to be installed in the OS, so users can access an application on a separate computer than on the one that the application was originally installed on. There are three types of application virtualization, local application virtualization, application streaming, and server-based application virtualization.
-Local application virtualization runs on the endpoint device but runs in a runtime environment instead of on the native hardware.
-Application streaming lives on a server that sends small components of the software to run on the end user's device when needed.
-Server-based application virtualization runs entirely on a server that sends only its user interface to the client device.
+		<npc>
+			<statement>Virtually any digital technology can play a role in an organization's digital transformation strategy. But technologies that figure to play a central role today and in the near future include:  </statement> 
 		</npc>
 		<player>
-			<response nextnode="11">Go back and choose another type.</response>
+			<response nextnode="15">Digitization</response>
+			<response nextnode="16">Artificial intelligence and automation</response>
+			<response nextnode="17">Cloud Computing</response>
+			<response nextnode="18">Microservices</response>
+v			<response nextnode="19">Internet of Things</response>
+			<response nextnode="20">Blockchain</response>
+			<response nextnode="21" isShown="false">Continue</response>
+
 		</player>
 	</node>
 
+
 	<node id="15">
-		<npc>Server virtualization allows multiple virtual 'guest' servers to share the same physical hardware. This works by installing software called a hypervisor, which then controls shared access for each virtual guest to the physical components of the server, including CPU, memory, disk, and networking.
-Server virtualization has been an important part of the development of IT since it drives down cost and is a key component of cloud computing as a whole.
+		<npc>
+			<statement>Digitization, or digitalization, is the conversion of paper-based information into digital data.Digitizing printed information may seem like an old practice, but it's a component of digitaltransformation efforts in virtually every industry or sector, It's also a cornerstone of foundationatransformation initiatives in healthcare (electronic medical records or EMR), government, andeducation.</statement> 
 		</npc>
 		<player>
-			<response nextnode="11">Go back and choose another type.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="16">
-		<npc>Choose each item to learn more about each benefit of virtualization.</npc>
+		<npc>
+			<statement>Artificial intelligence (AI) technologies, such as machine learning, enable a computer ormachine to mimic the human mind's capabilities. AI learns from examples, recognizing objectsmaking decisions, and more. When combined with automation, AI can infuse intelligence andreal-time decision-making into any workflow, It can drive everything from innovative smartproducts, from increasingly personalized customer and user experiences to optimizedworkflows for supply chain management, change management, and more.</statement> 
+		</npc>
 		<player>
-			<response nextnode="17">Resource Efficiency</response>
-			<response nextnode="18">Easier Management</response>
-			<response nextnode="19">Minimal Downtime</response>
-			<response nextnode="20">Faster Provisioning</response>
-			<response nextnode="21">I have learnt all the benefits. Please go ahead.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="17">
-		<npc>Resource Efficiency: Server virtualization allows several virtualmachines to run on the same physical host,thereby making fuller use of the physical capacity of the hardware.</npc>
+		<npc>
+			<statement>Cloud computing is on-demand access, via the internet, to computing resources-applications.servers (physical servers and virtual servers), data storage, development tools, networkingcapabilities, and more-hosted at a remote data center managed by a cloud services provider</statement> 
+		</npc>
 		<player>
-			<response nextnode="16">Go back and choose another benefit.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
-	
+
 	<node id="18">
-		<npc>Easier Management: Virtual machines can be defined by software.This means that policies can be written into software that provides the ability to create automated IT service management workflows.</npc> 
+		<npc>
+			<statement>Whether they're accessing a website or a mobile app, people have high expectations of the appsthat they regularly use. As a result, companies must continuously deliver new features and fixesIn the past, this process was painful because an application was usually developed, built, andmade available as a single, often monolithic, application, Microservices is an applicationarchitectural stvle in which an application is composed of many discrete, network-connectedcomponents.</statement> 
+		</npc>
 		<player>
-			<response nextnode="16">Go back and choose another benefit.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="19">
-		<npc>Minimal Downtime: Maintaining highly available compute environments has become cheaper since server virtualization is more cost-efficient than maintaining multiple physical hosts.</npc>
+		<npc>
+			<statement>The Internet of Things (IoT) refers to objects and devices equipped with sensors that collect andtransmit data over the internet, IoT devices are where digital technology meets physical reality.Applications like supply chain logistics and self-driving cars generate real-time data that AI andbig data analytics applications turn into automation and decisions.</statement> 
+		</npc>
 		<player>
-			<response nextnode="16">Go back and choose another benefit.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="20">
-		<npc>Resource Efficiency: Virtual machines can be created and run within afew minutes, compared to several hours or even weeks for physical hosts.</npc>
+		<npc>
+			<statement>Blockchain is a distributed, permanent and unchangeable ledger or record of electronictransactions or assets. Blockchain provides total transaction transparency to those who requireit and is inaccessible to those that don't, Organizations are using blockchain as a foundation forsuper-resilient supply chain and cross-porder financial services transformations.</statement> 
+		</npc>
 		<player>
-			<response nextnode="16">Go back and choose another benefit.</response>
+			<response nextnode="14" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="21">
-		<npc>A container is an executable unit of software that packages up all application code and necessary libraries it needs so that it can run reliably in different computing environments. This allows developers to create containerized applications and deploy them simply, with zero changes, in multiple locations. Containers inherit much of their functionality from the underlying platform on which they are running.</npc>
+		<npc>
+			<statement>Combining multiple technologies, including cloud, cognitive AI, mobile, and the Internet of Things (IoT), Digital Reinvention rethink customer and partner relationships from a need-, use- or aspiration-first perspective. Digital Reinvention helps organizations create unique, compelling experiences for their customers, partners, employees, and other stakeholders. These benefits arise regardless of whether enablement or fulfillment of the experience involves the direct provision of products or services or orchestration of products or services from partner organizations by way of a business ecosystem. The most successful digitally reinvented businesses establish a platform of engagement for their customers, acting as an enabler, conduit, and partner. </statement> 
+		</npc>
 		<player>
-			<response nextnode="22">I see this is container. What are the benefits of it?</response>
+			<response nextnode="22" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="22">
-		<npc>Portable, lightweight, and scalable.
-Continuous Integration and Delivery, which is a set of processes that help software development teams deliver code changes more frequently and reliably.
-Streamline development and deployment of cloud-native applications.
-Includes application's code, system tools and libraries, runtime, and settings.
+		<npc>
+			<statement isBold="true">How Cloud Fits into the Bigger Picture  </statement> 
+			<statement>The ongoing digital revolution affects individuals and businesses alike. Increasingly, social networks and digital devices are the default means for engaging government, businesses, and civil society, as well as friends and family members. People use mobile, interactive tools to determine who to trust, where to go, and what to buy. This means that the last best experience that people have anywhere becomes the minimum expectation for the experience they want everywhere, including in the enterprise. Given the competitive landscape, this means that enterprises must undertake their own digital transformations, rethink what their customers value most, and create operating models that take advantage of what is newly possible for competitive differentiation. The challenge for the enterprise is how fast and how far to go down the path to digital transformation and cloud adoption.</statement> 
+			<statement image="5">Increasing customer expectations and a more competitive business context have placed tremendous pressure on business leaders to change the way they set their strategies and run their organizations. New requirements to incorporate more information and greater interactivity quickly drive up costs and complexity.</statement> 
+			<statement>Business leaders have long used information technology to improve productivity and efficiency, reach new markets, and optimize supply chains. What is new is that customer expectations have changed.</statement> 
+			<statement>· How can enterprises best respond to this shift? &#xA;· How can they take advantage of the opportunity to innovate and grow through technology adoption? &#xA;· How can they do all this cost-efficiently?</statement> 
+		</npc>
+		<player>
+			<response nextnode="23" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="23">
+		<npc>
+			<statement>This is the domain of digital transformation and its intersection with cloud adoption. Digital transformation incorporates the change associated with the application of digital technology in all aspects of society. Cloud Adoption is the way in which businesses implement digital transformation.&#xA;We believe the most crucial decision that a company can make to successfully pursue a digital transformation strategy is to wholeheartedly yet thoughtfully adopt the cloud as the IT platform of choice. We have observed many companies that have successfully used cloud adoption to rapidly advance their digital transformation strategy. We have also seen companies make unsuccessful cloud adoption decisions that have hampered or set back their pace of digital transformation. What we will show you in this book is how to model your decision-making process after the successful transformations while avoiding the common pitfalls we’ve seen in the unsuccessful transformations. &#xA;In our work with clients, we have found that enterprises that can develop and effectively execute a digital transformation strategy and take full advantage of new technologies, such as cloud are able to transform their business models and set a new direction for entire industries.</statement> 
+		</npc>
+		<player>
+			<response nextnode="24" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="24">
+		<npc>
+			<statement isBold="true">How the hybrid cloud can create the world's computer</statement> 
+		</npc>
+		<player>
+			<response nextnode="25" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="25">
+		<npc>
+			<statement isBold="true">Digital Transformation in Action</statement> 
+			<statement image="6">Convoy looks to disrupt the USD $700billion trucking industry Convoy, a Seattle-based start-up, has developed an Uber-like app interface to give individual truckers a more efficient way to connect with individuals and businesses that want to ship goods. &#xA;By matching truck drivers with clients directly, Convoy disintermediates traditional brokers. The company and other entrants such as Los Angeles-based Cargomatic intend to reduce the average transportation prices and delivery times while increasing average loads and trucker income.&#xA; Lending Club challenges traditional banks in their backyard San Francisco-headquartered Lending Club offers better borrowing and lending rates than traditional banks. </statement> 
+			<statement image="7">Operating online, Lending Club automates peer-to-peer loans across its digital platform. With operating costs that are 60 percent lower than those of traditional banks, Lending Club has experienced massive growth over the past five years. Lending Club still has substantial space for growth in an area of the market that has historically produced more than 4 billion in profits annually. </statement> 
+			<statement image="8">Clean Energy Collective devises new modes of generation and consumption Founded in 2010, the Colorado-based Clean Energy Collective (CEC) builds, operates, and maintains community-based clean energy facilities.&#xA;Using remote metering technologies that integrate seamlessly with utility billing systems and installing solar panels either on customer’s property or elsewhere, CEC is able to track and apply for clean energy production credits directly on customer’s bills. &#xA;By the end of 2015, more than 27 gigawatts of solar capacity was online in the United States, enough to power more than 5.4 million homes. </statement> 
+		</npc>
+		<player>
+			<response nextnode="26" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="26">
+		<npc>
+			<statement isBold="true">Why it matters? </statement> 
+			<statement>Since the rise of the internet in the late 1990s, companies under increasing pressure to stay ahead of the curve. Social media, big data, artificial intelligence, and cloud computing are just a few of the technologies at the forefront of the digital revolution. To remain competitive, organizations must continually adapt and innovate in order to meet customer expectations.</statement> 
 		</npc>
 		<player>
 			<response nextnode="end">Thank you for your teaching.</response>

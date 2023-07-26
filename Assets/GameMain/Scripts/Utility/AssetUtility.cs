@@ -97,9 +97,9 @@ namespace ETLG
             return Utility.Text.Format("Avatar/NPC/{0}", NPCID);
         }
 
-        public static string GetXMLImage(string imageID)
+        public static string GetXMLImage(string NPCID,string imageID)
         {
-            return Utility.Text.Format("XMLImage/{0}", imageID);
+            return Utility.Text.Format("XMLImage/{0}/{1}", NPCID,imageID);
         }
 
         public static string GetXMLVideo(string videoID)

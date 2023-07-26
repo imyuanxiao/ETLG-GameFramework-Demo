@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 using System.Xml;
 using UnityEngine.Video;
+using UnityEditor.Rendering;
 
 namespace ETLG
 {
@@ -41,10 +42,9 @@ namespace ETLG
         private XmlNode currentNode = null;
         private string nextNodeID = null;
         private string NPCText;
-        private string playerText;
         private XmlNodeList playerResponses;
         private XmlNodeList NPCStatements;
-        private Dictionary<string, string> playerButtons;
+        private List<UIPlayerButton> playerButtons=new List<UIPlayerButton>();
         private bool isNext = false;
         private float playerInputBoxOriginalHeight;
         private RectTransform buttonScrollContentRectTransform;
@@ -58,12 +58,12 @@ namespace ETLG
         private int default_fontsize = 20;
         private int fontsizeChangeValue = 0;
 
-        private bool isShown;
         private int fontSizeGap = 0;
         private Color textColor = Color.white;
         private string imagePath = null;
         private string videoPath = null;
         private string videoTexture = null;
+        private bool isBold = false;
 
 
         protected override void OnInit(object userData)
@@ -84,7 +84,7 @@ namespace ETLG
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
-            //npc_description.text = npcData.Description;
+            npc_description.text = npcData.Domain+"\n"+npcData.Course+"\n"+npcData.Chapter;
             XMLPath = npcData.DialogXML;
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
@@ -104,7 +104,7 @@ namespace ETLG
             if ((nextNodeID != "end" && isNext) || (nextNodeID != "end" && currentNode == null))
             {
                 getCurrentNode();
-                showText(isShown);
+                showText();
             }
             else if (nextNodeID == "end" && isNext)
             {
@@ -270,7 +270,7 @@ namespace ETLG
 
             if (currentNPCNode.Attributes["image"] != null)
             {
-                imagePath = AssetUtility.GetXMLImage(currentNPCNode.Attributes["image"].Value.ToString());
+                imagePath = AssetUtility.GetXMLImage(npcData.Id.ToString(), currentNPCNode.Attributes["image"].Value.ToString());
             }
             else
             {
@@ -286,6 +286,15 @@ namespace ETLG
             {
                 videoPath = null;
                 videoTexture = null;
+            }
+
+            if(currentNPCNode.Attributes["isBold"] != null)
+            {
+                isBold = true;
+            }
+            else
+            {
+                isBold = false;
             }
 
         }
@@ -307,27 +316,28 @@ namespace ETLG
 
             playerResponses = currentNode.SelectNodes("player/response");
 
-            playerButtons = new Dictionary<string, string>();
+            playerButtons = new List<UIPlayerButton>();
             removePlayerResponseInput();
 
             foreach (XmlNode responseNode in playerResponses)
             {
-                playerText = responseNode.InnerText;
-                nextNodeID = responseNode.Attributes["nextnode"].Value;
+                UIPlayerButton newUIPlayerButton= new UIPlayerButton();
+                newUIPlayerButton.buttonText= responseNode.InnerText;
+                newUIPlayerButton.nextNodeID = responseNode.Attributes["nextnode"].Value;
 
-                if (currentNode.SelectSingleNode("player").Attributes["isShown"] != null)
+                if (responseNode.Attributes["isShown"] != null)
                 {
-                    isShown = false;
+                    newUIPlayerButton.isShown = false;
                 }
                 else
                 {
-                    isShown = true;
+                    newUIPlayerButton.isShown = true;
                 }
-                playerButtons.Add(playerText, nextNodeID);
+                playerButtons.Add(newUIPlayerButton);
             }
         }
 
-        private void showText(bool isShown)
+        private void showText()
         {
             foreach (XmlNode node in NPCStatements)
             {
@@ -335,24 +345,24 @@ namespace ETLG
                 Image NPCModule = instantiatePrefab(NPCText, "NPC");
             }
             
-            foreach (KeyValuePair<string, string> data in playerButtons)
+            foreach (UIPlayerButton button in playerButtons)
             {
                 Button playerButton = Instantiate(playerButtonPrefab, buttonScrollContent);
                 RectTransform buttonRectTransform = playerButton.GetComponent<RectTransform>();
 
                 playerButton.onClick.AddListener(() =>
                 {
-                    nextNodeID = data.Value;
+                    nextNodeID = button.nextNodeID;
                     isNext = true;
-                    if (isShown)
+                    if (button.isShown)
                     {
-                        instantiatePrefab(data.Key, "player");
+                        instantiatePrefab(button.buttonText, "player");
                     }
                 });
 
                 //选项文本加载
                 TextMeshProUGUI buttonText = playerButton.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = data.Key;
+                buttonText.text = button.buttonText;
             }
         }
 
@@ -370,26 +380,30 @@ namespace ETLG
         private Image instantiatePrefab(string text, string type)
         {
             Image textModule;
-            RectTransform textModuleRectTransform;
-            TextMeshProUGUI dialogText;
             if (type == "NPC")
             {
                 textModule = NPCModuleSet(text);
             }
             else
             {
-                textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
-                Color color = UIHexColor.HexToColor("383838");
-                textModule.color = color;
-                textModuleRectTransform = textModule.GetComponent<RectTransform>();
-                setColorAlpha(textModuleRectTransform, "player");
-                dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
-                dialogText.text = text;
-                dialogText.fontSize = default_fontsize + fontsizeChangeValue;
-                dialogText.alignment = TextAlignmentOptions.Right;
+                textModule = playerModuleSet(text);
             }
             textModules.Add(textModule);
             //加载文本,设置对齐方式
+            return textModule;
+        }
+
+        private Image playerModuleSet(string text)
+        {
+            Image textModule = Instantiate(dialogModulePrefab, dialogScrollContent);
+            Color color = UIHexColor.HexToColor("383838");
+            textModule.color = color;
+            RectTransform textModuleRectTransform = textModule.GetComponent<RectTransform>();
+            setColorAlpha(textModuleRectTransform, "player");
+            TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
+            dialogText.fontSize = default_fontsize + fontsizeChangeValue;
+            dialogText.text = text;
+            dialogText.alignment = TextAlignmentOptions.Right;
             return textModule;
         }
 
@@ -403,10 +417,16 @@ namespace ETLG
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
             dialogText.text = text;
             dialogText.fontSize = default_fontsize + fontSizeGap + fontsizeChangeValue;
+            dialogText.ForceMeshUpdate();
+
             Debug.Log(dialogText.fontSize);
             dialogText.alignment = TextAlignmentOptions.Left;
             Transform contentContainer = textModuleRectTransform.Find("ContentContainer");
 
+            if (isBold)
+            {
+                dialogText.fontStyle = FontStyles.Bold;
+            }
             if (textColor != Color.white)
             {
                 dialogText.color = textColor;
@@ -420,6 +440,7 @@ namespace ETLG
                 instantiateVideo(contentContainer);
             }
 
+            
             return textModule;
         }
 
@@ -427,7 +448,6 @@ namespace ETLG
         {
             Canvas imageModule = Instantiate(ImageContainerPrefab, contentContainer);
             Image image = imageModule.GetComponentInChildren<Image>();
-            Debug.Log(imagePath);
             Texture2D imageTexture = Resources.Load<Texture2D>(imagePath);
 
             //set original ratio
@@ -460,10 +480,6 @@ namespace ETLG
             {
                 Debug.LogError("VideoPlayer component not found on the GameObject named \"Video\".");
             }
-
-            Debug.Log(videoPath);
-            Debug.Log(videoTexture);
-
             RawImage rawImage = videoModule.GetComponentInChildren<RawImage>();
             RenderTexture renderTexture = Resources.Load<RenderTexture>(videoTexture);
             rawImage.texture = renderTexture;
@@ -524,7 +540,7 @@ namespace ETLG
             foreach (Transform dialogModule in dialogScrollContent)
             {
                 TextMeshProUGUI text = dialogModule.GetComponentInChildren<TextMeshProUGUI>();
-                text.fontSize = default_fontsize + fontsizeChangeValue;
+                text.fontSize = text.fontSize + fontsizeChangeValue;
                 VerticalLayoutGroup verticalLayoutGroup = dialogModule.GetComponentInChildren<VerticalLayoutGroup>();
                 HorizontalLayoutGroup horizontalLayoutGroup = dialogModule.GetComponentInChildren<HorizontalLayoutGroup>();
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);

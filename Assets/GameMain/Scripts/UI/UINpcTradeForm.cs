@@ -1,6 +1,7 @@
 ﻿using ETLG.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace ETLG
     public class UINpcTradeForm : UGuiFormEx
     {
         public Button closeButton;
+        public RawImage npc_avatar;
+        public RawImage player_avatar;
 
         public Transform NpcContainer;
         public Transform PlayerContainer;
@@ -51,28 +54,41 @@ namespace ETLG
 
         protected override void OnOpen(object userData)
         {
-            
+
             base.OnOpen(userData);
             closeButton.onClick.AddListener(OnCloseButtonClick);
 
-            loadArtifactsData();
+            loadData();
             refresh = true;
         }
 
-        private void loadArtifactsData()
+        private void loadData()
         {
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+            NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
             playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
+
+            string npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
+            Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
+            if (NPCTexture == null)
+            {
+                NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
+            }
+            npc_avatar.texture = NPCTexture;
+
+            //TODO player Name 输入
+            Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
+            player_avatar.texture = playerTexture;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-            if (dataPlayer.GetPlayerData().UI_tradeData!=null&& dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton)
+            if (dataPlayer.GetPlayerData().UI_tradeData != null && dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton)
             {
                 HandleTradeData();
             }
@@ -90,7 +106,7 @@ namespace ETLG
         {
             tradeNum = dataPlayer.GetPlayerData().UI_tradeData.inputNum;
             totalPrice = dataPlayer.GetPlayerData().UI_tradeData.totalPrice;
-            receivedArtifactID= dataPlayer.GetPlayerData().UI_tradeData.artifactID;
+            receivedArtifactID = dataPlayer.GetPlayerData().UI_tradeData.artifactID;
             receivedType = dataPlayer.GetPlayerData().UI_tradeData.tradeType;
             totalNum = dataPlayer.GetPlayerData().UI_tradeData.artifactNum;
             dataPlayer.GetPlayerData().UI_tradeData.save = true;

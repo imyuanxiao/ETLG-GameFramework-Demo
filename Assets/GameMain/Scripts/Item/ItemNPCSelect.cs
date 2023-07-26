@@ -15,7 +15,7 @@ namespace ETLG
     public class ItemNPCSelect : ItemLogicEx
     {
 
-        public TextMeshProUGUI npc_title = null;
+        public TextMeshProUGUI npc_description = null;
 
         public RectTransform RewardIconContainer;
 
@@ -51,7 +51,7 @@ namespace ETLG
         {
             this.npcData = npcData;
 
-            npc_title.text = npcData.Title;
+            npc_description.text = npcData.Chapter;
             npc_name.text = npcData.Name;
 
             talkButton.onClick.AddListener(OnTalkButtonClick);

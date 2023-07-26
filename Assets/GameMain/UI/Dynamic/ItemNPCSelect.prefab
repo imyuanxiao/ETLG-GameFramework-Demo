@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8257028e081a4c46a0394beb96b7c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_title: {fileID: 7327409304931195087}
+  npc_description: {fileID: 7327409304931195087}
   RewardIconContainer: {fileID: 7608730820508001912}
   RewardTick: {fileID: 2996732297321077131}
   FinishTick: {fileID: 2566235307710274781}
@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8257028e081a4c46a0394beb96b7c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_title: {fileID: 0}
+  npc_description: {fileID: 0}
   RewardIconContainer: {fileID: 0}
   RewardTick: {fileID: 0}
   FinishTick: {fileID: 0}
@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8257028e081a4c46a0394beb96b7c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_title: {fileID: 0}
+  npc_description: {fileID: 0}
   RewardIconContainer: {fileID: 0}
   RewardTick: {fileID: 0}
   FinishTick: {fileID: 0}
