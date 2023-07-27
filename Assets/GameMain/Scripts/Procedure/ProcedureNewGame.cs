@@ -43,6 +43,9 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
 
+            GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
+
+
         }
 
         protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)

@@ -15,9 +15,9 @@ namespace ETLG
         public TextMeshProUGUI submitTitle = null;
         public TextMeshProUGUI reminder = null;
         public Button switchButton;
-        public Button returnButton;
         public Button submitButton;
         public GameObject confirmPassword;
+        public GameObject playerAvater;
         bool isRegister;
         //login
         [SerializeField]
@@ -33,7 +33,6 @@ namespace ETLG
             // 获取玩家数据管理器
 
             switchButton.onClick.AddListener(OnSwitchButtonClick);
-            returnButton.onClick.AddListener(OnReturnButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
         }
 
@@ -59,6 +58,7 @@ namespace ETLG
                 switchTitle.text = "Register";
                 submitTitle.text = "Play";
                 confirmPassword.SetActive(false);
+                playerAvater.SetActive(false);
             }
             else
             {
@@ -66,6 +66,7 @@ namespace ETLG
                 switchTitle.text = "Login";
                 submitTitle.text = "Submit";
                 confirmPassword.SetActive(true);
+                playerAvater.SetActive(true);
             }
         }
         private void OnLogIn()
@@ -118,10 +119,6 @@ namespace ETLG
         {
             isRegister = !isRegister;
             showContent();
-        }
-        private void OnReturnButtonClick()
-        {
-
         }
         private void OnSubmitButtonClick()
         {
