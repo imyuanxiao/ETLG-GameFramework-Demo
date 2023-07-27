@@ -2,7 +2,7 @@
 	<node id="1"> 
 		<npc>
 			<statement font="2" isBold="true">Introduction</statement>
-			<statement font="1">In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
+			<statement font="1" >In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
@@ -243,7 +243,7 @@ v			<response nextnode="19">Internet of Things</response>
 
 	<node id="24">
 		<npc>
-			<statement isBold="true">How the hybrid cloud can create the world's computer</statement> 
+			<statement isBold="true" video="1">How the hybrid cloud can create the world's computer</statement> 
 		</npc>
 		<player>
 			<response nextnode="25" isShown="false">Continue</response>

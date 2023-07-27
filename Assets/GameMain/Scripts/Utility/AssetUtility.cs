@@ -97,20 +97,19 @@ namespace ETLG
             return Utility.Text.Format("Avatar/NPC/{0}", NPCID);
         }
 
-        public static string GetXMLImage(string NPCID,string imageID)
+        public static string GetXMLImage(string NPCID, string imageID)
         {
-            return Utility.Text.Format("XMLImage/{0}/{1}", NPCID,imageID);
+            return Utility.Text.Format("XMLImage/{0}/{1}", NPCID, imageID);
         }
 
-        public static string GetXMLVideo(string videoID)
+        public static string GetXMLVideo(string NPCID, string videoID)
         {
-            return Utility.Text.Format("XMLVideo/{0}.mp4", videoID);
+            return Utility.Text.Format("XMLVideo/{0}/{1}.mp4", NPCID, videoID);
         }
 
-        public static string GetXMLVideoRender(string videoID)
+        public static string GetXMLVideoRender(string NPCID, string videoID)
         {
-            //return Utility.Text.Format("XMLVideo/{0}.renderTexture", videoID);
-            return Utility.Text.Format("XMLVideo/{0}", videoID);
+            return Utility.Text.Format("XMLVideo/{0}/{1}", NPCID, videoID);
         }
 
         public static string GetPlayerAvatar()
