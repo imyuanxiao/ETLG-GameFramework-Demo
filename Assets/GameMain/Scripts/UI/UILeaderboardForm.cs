@@ -32,7 +32,8 @@ namespace ETLG
         private DataSpaceship dataSpaceship;
         private SpaceshipData spaceshipData;
         private List<LeaderboardData> leaderboardData;
-
+        private string responseData;
+        private List<List<object>> rankList;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -50,6 +51,8 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataSpaceship = GameEntry.Data.GetData<DataSpaceship>();
             leaderboardData = new List<LeaderboardData>();
+            responseData = DataManager.Instance.responseData;
+            
         }
 
         protected override void OnOpen(object userData)
@@ -61,6 +64,7 @@ namespace ETLG
             AddMockPlayers();
             //AddOtherPlayerData();
             AddCurrentPlayerData();
+            rankList = DataManager.Instance.GetRankData(1, 10, DataManager.RankMode.Score);
             showContent();
         }
 

@@ -17,6 +17,7 @@ namespace ETLG.Data
         public float Boss_DataScience { get; set; }
         public float Boss_IoT { get; set; }
         public float Boss_Final { get; set; }
+        public int exploredChapter { get; set; }
         public LeaderboardData()
         {
 
