@@ -25,7 +25,8 @@ namespace ETLG.Data
         {
             get
             {
-                return GameEntry.Localization.GetString(Constant.Key.PRE_TUTORIAL + Id + Constant.Key.POST_TITLE);
+                //return GameEntry.Localization.GetString(Constant.Key.PRE_TUTORIAL + Id + Constant.Key.POST_TITLE);
+                return dRTutorial.Title;
             }
         }
 

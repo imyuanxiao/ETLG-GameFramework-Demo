@@ -18,7 +18,7 @@ namespace ETLG.Data
 
         protected override void OnInit()
         {
-
+            CurrentTutorialID = 1001;
         }
 
         protected override void OnPreload()
