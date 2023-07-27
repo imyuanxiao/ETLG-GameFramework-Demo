@@ -88,11 +88,27 @@ namespace ETLG
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].NPCId = (int) jsonData[npcId.ToString()]["NPCId"];
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Money = (int) jsonData[npcId.ToString()]["Money"];
                 JArray artifacts = (JArray) jsonData[npcId.ToString()]["Artifacts"];
-                for (int i=0; i < artifacts.Count; i++)
-                {
-                    // if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
-                }
+
+                // if (artifacts.Count > GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
+                // {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts = new int[artifacts.Count];
+                    for (int i=0; i < artifacts.Count; i++)
+                    {
+                        GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
+                    }
+                // }
+
+                // for (int i=0; i < artifacts.Count; i++)
+                // {
+                //     if (i >= GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
+                //     {
+                //         // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.
+                //     }
+                //     else 
+                //     {
+                //         GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
+                //     }
+                // }
                 // for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length; i++)
                 // {
                 //     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) jsonData[npcId.ToString()]["Artifacts"][i];

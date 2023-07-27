@@ -416,7 +416,8 @@ namespace ETLG.Data
             Dictionary<int, int> targetList = GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
             foreach(var module in playerModules)
             {
-                targetList.Add(module, 1);
+                if (!targetList.ContainsKey(module))
+                    targetList.Add(module, 1);
             }
             return targetList;
         }
