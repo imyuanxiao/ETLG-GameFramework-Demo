@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-23 14:02:53.335
+// 生成时间：2023-07-26 03:29:59.242
 //------------------------------------------------------------
 
 using GameFramework;
@@ -40,6 +40,33 @@ namespace ETLG
         /// 获取NPC名字。
         /// </summary>
         public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取领域名称。
+        /// </summary>
+        public string Domain
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取课程名称。
+        /// </summary>
+        public string Course
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取章节名称。
+        /// </summary>
+        public string Chapter
         {
             get;
             private set;
@@ -120,6 +147,9 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             Name = columnStrings[index++];
+            Domain = columnStrings[index++];
+            Course = columnStrings[index++];
+            Chapter = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
@@ -140,6 +170,9 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
+                    Domain = binaryReader.ReadString();
+                    Course = binaryReader.ReadString();
+                    Chapter = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();

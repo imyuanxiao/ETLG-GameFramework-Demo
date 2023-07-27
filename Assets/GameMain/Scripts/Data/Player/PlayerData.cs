@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking.Types;
 using Unity.VisualScripting;
 using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
 
 namespace ETLG.Data
 {
@@ -43,6 +44,7 @@ namespace ETLG.Data
 
         //Player Achievement Data
         private Dictionary<int,int> playerAchievement { get; set; }
+        public Dictionary<int, int> playerTotalArtifacts { get; set; }
         private DataAchievement dataAchievement { get; set; }
 
         public UITradeData UI_tradeData = null;
@@ -68,6 +70,7 @@ namespace ETLG.Data
             instantiatePlayerNPCs();
 
             playerAchievement = new Dictionary<int, int>(); // id + level
+            playerTotalArtifacts = new Dictionary<int, int>();
 
             // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
             equippedModules = new int[6];
@@ -84,6 +87,10 @@ namespace ETLG.Data
             // add money and skill points
             playerArtifacts.Add((int)EnumArtifact.Money, 0);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
+
+            playerTotalArtifacts.Add((int)EnumArtifact.Money, 0);
+            playerTotalArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
+            playerTotalArtifacts.Add(Constant.Type.ACHIV_TOTAL_SPEND_MONEY, 0);
 
             // add mock artifacts
             AddMockData();
@@ -279,6 +286,23 @@ namespace ETLG.Data
                 playerArtifacts[id] += number;
             }
 
+            //total artifacts for achievement
+            if(dataAchievement.isReset)
+            {
+                return;
+            }
+            if (!playerTotalArtifacts.ContainsKey(id))
+            {
+                playerTotalArtifacts.Add(id, number);
+            }
+            else
+            {
+                playerTotalArtifacts[id] += number;
+            }
+            
+                UpdateArtifactAchievements();
+            
+            
         }
 
         //update ALL artifacts after trading
@@ -321,15 +345,6 @@ namespace ETLG.Data
                     }
                 }
 
-                /*
-                                if (playerArtifacts.ContainsKey(id))
-                                {
-                                    playerArtifacts[id] = number;
-                                }
-                                else
-                                {
-                                    AddArtifact(id, number);
-                                }*/
             }
         }
 
@@ -356,6 +371,29 @@ namespace ETLG.Data
             {
                 playerArtifacts.Remove(id);
             }
+
+            //handle total spend money
+            if (dataAchievement.isReset)
+            {
+                //total spand money
+                //sub totoal spend
+                if (id == (int)EnumArtifact.Money && playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] > 0)
+                {
+                    playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] -= number;
+                }
+            }
+            else
+            {
+                if (id == (int)EnumArtifact.Money)
+                {
+                    playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] += number;
+                }
+            }
+            if(dataAchievement.isReset)
+            {
+                return;
+            }
+            UpdateArtifactAchievements();
         }
 
         public void SellArtifact(int id, int number)
@@ -529,10 +567,23 @@ namespace ETLG.Data
 
         public void setNpcArtifactsByNpcId(int NpcId, Dictionary<int, int> npcArtifacts)
         {
-            int[] newNPCArtifacts = new int[npcArtifacts.Count*2];
+            // remove unnecessary artifacts
+            List<int> keysToRemove = new List<int>();
+            foreach (KeyValuePair<int, int> kvp in npcArtifacts)
+            {
+                if(kvp.Value <= 0)
+                {
+                    keysToRemove.Add(kvp.Key);
+                };
+            }
+            foreach (int key in keysToRemove)
+            {
+                npcArtifacts.Remove(key);
+            }
+            // update npc artifacts
+            int[] newNPCArtifacts = new int[npcArtifacts.Count * 2];
             int index = 0;
-
-            foreach (KeyValuePair<int,int> kvp in npcArtifacts)
+            foreach (KeyValuePair<int, int> kvp in npcArtifacts)
             {
                 newNPCArtifacts[index] = kvp.Key;
                 index++;
@@ -675,7 +726,7 @@ namespace ETLG.Data
 
             // reset all costs consumed
             //PlayerSkillData[] playerSkillDatas =  playerSkills.Values.ToArray();
-
+            dataAchievement.isReset = true;
             foreach (var playerSkill in playerSkills)
             {
                 int skillId = playerSkill.Key;
@@ -688,7 +739,7 @@ namespace ETLG.Data
                 }
 
             }
-
+           
             // clear skills;
             playerSkills.Clear();
 
@@ -713,7 +764,7 @@ namespace ETLG.Data
                 }
 
             }
-
+            dataAchievement.isReset = false;
             UpdateAttrsByAllSkills(Constant.Type.ADD);
 
             UpdateAttrsByAllModules(Constant.Type.ADD);
@@ -740,10 +791,10 @@ namespace ETLG.Data
         private void AddMockData()
         {
 
-
-            playerArtifacts[(int)EnumArtifact.Money] += 99999;
-            playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
-
+            AddArtifact((int)EnumArtifact.Money, 99999);
+            AddArtifact((int)EnumArtifact.KnowledgePoint, 45);
+           // playerArtifacts[(int)EnumArtifact.Money] += 99999;
+           // playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
             AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
             AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
@@ -796,11 +847,11 @@ namespace ETLG.Data
         {
             if(playerAchievement.ContainsKey(id))
             {
-                playerAchievement[id] = level;
+                playerAchievement[id] = level+1;
             }
             else
             {
-                playerAchievement.Add(id, level);
+                playerAchievement.Add(id, level+1);
             }
         }
         public int GetCurrentAchievementLevelById(int id)
@@ -811,6 +862,11 @@ namespace ETLG.Data
         {
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
        dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
+        }
+        public bool isAchievementAchieved(int id,int count)
+        {
+            return playerAchievement.ContainsKey(id) &&
+       dataAchievement.GetNextLevel(id, count) == playerAchievement[id];
         }
         public int GetNextLevel(int Id)
         {
@@ -827,6 +883,85 @@ namespace ETLG.Data
             else
             {
                 return dataAchievement.isMaxLevel(Id, playerAchievement[Id]) ? playerAchievement[Id] : playerAchievement[Id] + 1;
+            }
+        }
+        public void UpdateArtifactAchievements()
+        {
+            int number, achievementId=0;
+            int[] counts;
+            int[] artifactIds = {
+                                   (int)EnumArtifact.Money,
+                                   Constant.Type.ACHIV_TOTAL_SPEND_MONEY,
+                                   (int)EnumArtifact.KnowledgePoint,
+                                   (int)EnumArtifact.RareOre,
+                                   (int)EnumArtifact.FuelRefillUnit
+                                 };
+
+            foreach (int artifactId in artifactIds)
+            {
+                if (playerTotalArtifacts.ContainsKey(artifactId))
+                {
+                    if (artifactId == (int)EnumArtifact.Money)
+                    {
+                        achievementId = 5001;
+                    }
+                    else if (artifactId == Constant.Type.ACHIV_TOTAL_SPEND_MONEY)
+                    {
+                        achievementId = 5002;
+                    }
+                    else if (artifactId == (int)EnumArtifact.KnowledgePoint)
+                    {
+                        achievementId = 5004;
+                    }
+                    else if (artifactId == (int)EnumArtifact.RareOre)
+                    {
+                        achievementId = 5005;
+                    }
+                    else if (artifactId == (int)EnumArtifact.FuelRefillUnit)
+                    {
+                        achievementId = 5006;
+                    }
+                   
+                    number = playerTotalArtifacts[artifactId];
+                    counts = dataAchievement.GetDataById(achievementId).Count;
+
+                    foreach (int count in counts)
+                    {
+                        if (number >= count && !isAchievementAchieved(achievementId, count))
+                        {
+                            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                        }
+                    }
+                }
+            }
+
+            // Total fragments
+            achievementId = 5003;
+            int[] fragmentsId = {
+                                    (int)EnumArtifact.KnowledgeFragments_AI,
+                                    (int)EnumArtifact.KnowledgeFragments_Blockchain,
+                                    (int)EnumArtifact.KnowledgeFragments_CloudComputing,
+                                    (int)EnumArtifact.KnowledgeFragments_Cybersecurity,
+                                    (int)EnumArtifact.KnowledgeFragments_DataScience,
+                                    (int)EnumArtifact.KnowledgeFragments_IoT
+                                };
+            number = 0;
+
+            foreach (int fragmentId in fragmentsId)
+            {
+                if (playerTotalArtifacts.ContainsKey(fragmentId))
+                {
+                    number += playerTotalArtifacts[fragmentId];
+                }
+            }
+
+            counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                if (number >= count && !isAchievementAchieved(achievementId, count))
+                {
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                }
             }
         }
     }

@@ -49,7 +49,7 @@ namespace ETLG
             // 播放BGM
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
 
-            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
+           // GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
 
             // Auto-Save : will overwirte the first save slot
             SaveManager.Instance.SaveGame();

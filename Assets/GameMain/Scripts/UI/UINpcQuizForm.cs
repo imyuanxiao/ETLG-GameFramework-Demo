@@ -57,7 +57,7 @@ namespace ETLG
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
-            npc_description.text = npcData.Description;
+            npc_description.text =npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
             XMLPath = npcData.QuizXML;
 
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);

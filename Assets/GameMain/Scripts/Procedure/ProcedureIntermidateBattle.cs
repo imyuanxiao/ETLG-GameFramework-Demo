@@ -18,6 +18,7 @@ namespace ETLG
         private Entity bossEnemyEntity;
         private bool changeScene;
         private ProcedureOwner procedureOwner;
+        private float startTime;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -30,6 +31,7 @@ namespace ETLG
             
             changeScene = false;
             this.procedureOwner = procedureOwner;
+            this.startTime = Time.time;
 
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
@@ -100,30 +102,40 @@ namespace ETLG
         private void OnBattleWin(object sender, GameEventArgs e)
         {
             BattleWinEventArgs ne = (BattleWinEventArgs) e;
+
+            float timeUsed = Time.time - this.startTime;
+            Debug.Log("Time Used: " + timeUsed);
+
             // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
             entityLoader.HideEntity(bossEnemyEntity);
 
-            // Unlock battle skills
+            // Unlock battle skills, award Knowledge Fragments
             switch (this.procedureOwner.GetData<VarString>("BossType"))
             {
                 case "CloudComputing":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EdgeComputing, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_CloudComputing, 1);
                     break;
                 case "CyberSecurity":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.ElectronicWarfare, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_Cybersecurity, 1);
                     break;
                 case "DataScience":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EnergyBoost, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_DataScience, 1);
                     break;
                 case "AI":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.AdaptiveIntelligentDefense, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_AI, 1);
                     break;
                 case "Blockchain":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.BlockchainResurgence, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_Blockchain, 1);
                     break;
                 case "IoT":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.MedicalSupport, 0);
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_IoT, 1);
                     break;
                 default:
                     break;

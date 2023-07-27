@@ -59,6 +59,9 @@ namespace ETLG
             Debug.Log("Used Time: " + timeUsed);
             Dictionary<string, int> result = new Dictionary<string, int>();
             BasicBattleWinEventArgs ne = (BasicBattleWinEventArgs) e;
+
+            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.Money, ne.BasicEnemyKilled * 100);
+            
             result.Add("Killed", ne.BasicEnemyKilled);
             result.Add("Passed", ne.BasicEnemyPassed);
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin, result);

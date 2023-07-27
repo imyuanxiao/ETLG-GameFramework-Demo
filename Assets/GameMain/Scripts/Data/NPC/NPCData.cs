@@ -21,20 +21,27 @@ namespace ETLG.Data
             }
         }
 
-        public string Title
+        public string Domain
         {
             get
             {
-                return GameEntry.Localization.GetString(Constant.Key.PRE_NPC + Id + Constant.Key.POST_TITLE);
+                return dRNPC.Domain;
             }
         }
 
-        public string Description
+        public string Course
         {
             get
             {
-                // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Constant.Key.PRE_NPC + Id + Constant.Key.POST_DESC);
+                return dRNPC.Course;
+            }
+        }
+
+        public string Chapter
+        {
+            get
+            {
+                return dRNPC.Chapter;
             }
         }
 

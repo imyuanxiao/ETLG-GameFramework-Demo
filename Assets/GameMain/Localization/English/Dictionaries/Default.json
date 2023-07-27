@@ -298,17 +298,17 @@
         "TipContentSKILL_LAYER" : "Different skill layer",
 
 
-        "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. Get ready to fight!",
+        "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. \n\nGet ready to fight!",
         
 
 
 
-        "IntermidateBattle CloudComputing Intro": "This is the boss enemy in Cloud Computing Domain.",
-        "IntermidateBattle CyberSecurity Intro": "This is the boss enemy in CyberSecurity Domain.",
-        "IntermidateBattle AI Intro" : "This is the boss enemy in Artificial Intelligence Domain.",
-        "IntermidateBattle DataScience Intro" : "This is the boss enemy in Data Science Domain.",
-        "IntermidateBattle Blockchain Intro" : "This is the boss enemy in Blockchain Domain.",
-        "IntermidateBattle IoT Intro" : "This is the boss enemy in Internet of Things Domain.",
+        "IntermidateBattle CloudComputing Intro": "This is the boss enemy in Cloud Computing Domain. \n\nBe careful, this enemy will constantly regenerate health. Destroy it as soon as possible before it recovers",
+        "IntermidateBattle CyberSecurity Intro": "This is the boss enemy in CyberSecurity Domain.\n\nIts firewall will try to protect itself. Let's smash its shield first!",
+        "IntermidateBattle AI Intro" : "This is the boss enemy in Artificial Intelligence Domain. \n\nWhen the battle is against it, it will summon 3 AI ships to save the day.",
+        "IntermidateBattle DataScience Intro" : "This is the boss enemy in Data Science Domain. \n\nIts data analysis module will continue to scan your spaceship to find your spaceship's weaknesses. Pay attention to avoid its crit attack!",
+        "IntermidateBattle Blockchain Intro" : "This is the boss enemy in Blockchain Domain. \n\nWhen it is defeated, it can retrieve data from the blockchain to restore its own ship's durability. Don't celebrate prematurely, prepare for its resurrection!",
+        "IntermidateBattle IoT Intro" : "This is the boss enemy in Internet of Things Domain. \n\nIt can teleport to dodge your attacks. Keep an eye on it, don't let it escape your eyes!",
 
         "FinalBattle Intro" : "This is the final boss! Defeat it so you can recover your home planet!",
         
@@ -486,9 +486,6 @@
 
         "Achieve_6003_Title" :"First Encounter with Failure",
         "Achieve_6003_Level_1" :"Experience the first battle defeat.",
-
-        "Achieve_6004_Title" :"Untouchable",
-        "Achieve_6004_Level_1" :"Maintain full health until the end of a battle.",
 
         "Achieve_6005_Title" :"Narrow Escape",
         "Achieve_6005_Level_1" :"Have only 10 HP or less remaining at the end of a battle."

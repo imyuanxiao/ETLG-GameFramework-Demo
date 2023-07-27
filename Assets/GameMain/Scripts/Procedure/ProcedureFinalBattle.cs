@@ -18,6 +18,7 @@ namespace ETLG
         private Entity bossEnemyEntity;
         private bool changeScene;
         private ProcedureOwner procedureOwner;
+        private float startTime;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -72,6 +73,10 @@ namespace ETLG
         private void OnBattleWin(object sender, GameEventArgs e)
         {
             BattleWinEventArgs ne = (BattleWinEventArgs) e;
+
+            float timeUsed = Time.time - this.startTime;
+            Debug.Log("Time Used: " + timeUsed);
+
             // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
             entityLoader.HideEntity(bossEnemyEntity);
