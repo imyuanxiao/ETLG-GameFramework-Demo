@@ -207,11 +207,11 @@ namespace ETLG
         private void ShowModuleIcons(Transform container, int Type)
         {
             List<int> playerModuleIDs = dataPlayer.GetPlayerData().GetModulesByType(Type);
-
+            Log.Debug("modules count {0}",playerModuleIDs.Count);
             for(int i = 0; i <  playerModuleIDs.Count; i++)
             {
                 int ModuleID = playerModuleIDs[i];
-                Vector3 offset = new Vector3((i % 4) * 90f + 10f, (i / 4) * -90f - 10f, 0f);
+                Vector3 offset = new Vector3((i % 6) * 90f + 10f, (i / 6) * -90f - 10f, 0f);
 
                 ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
                 {

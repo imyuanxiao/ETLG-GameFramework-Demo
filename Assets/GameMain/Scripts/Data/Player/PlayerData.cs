@@ -20,7 +20,7 @@ namespace ETLG.Data
         public PlayerCalculatedSpaceshipData playerCalculatedSpaceshipData { get; set; }
 
         // Player position
-        public Vector3 position { get; set; }
+        //public Vector3 position { get; set; }
         
         // player artifacts - ID, Number
         private Dictionary<int, int> playerArtifacts { get; set; }
@@ -208,10 +208,27 @@ namespace ETLG.Data
 
         public float GetPlayerScore()
         {
-
-            return GetSpaceshipScore();
+            float sum = 0f;
+            sum += GetSpaceshipScore();
+            sum += GetSkillScore();
+            sum += GetModuleScore();
+            return sum;
         }
 
+        public float GetSkillScore()
+        {
+            float sum = 0f;
+            sum += 50 * GetUnlockedLevelsNum();
+            sum += 50 * GetUnlockedSkillsNum();
+            return sum;
+        }
+
+        public float GetModuleScore()
+        {
+            float sum = 0f;
+            sum += 200 * playerModules.Count;
+            return sum;
+        }
 
         public float GetSpaceshipAttribute(int AttrType)
         {
@@ -272,14 +289,47 @@ namespace ETLG.Data
                 int id = kvp.Key;
                 int number = kvp.Value;
 
-                if (playerArtifacts.ContainsKey(id))
+                // module
+                if (dataArtifact.GetArtifactData(id) is ArtifactModuleData)
                 {
-                    playerArtifacts[id] = number;
+                    if(number <= 0 && playerModules.Contains(id))
+                    {
+                        playerModules.Remove(id);
+                    }
+                    else if (!playerModules.Contains(id))
+                    {
+                        playerModules.Add(id);
+                    }
                 }
+                // artifact
                 else
                 {
-                    AddArtifact(id, number);
+                    if (number <= 0 && playerArtifacts.ContainsKey(id))
+                    {
+                        playerArtifacts.Remove(id);
+                    }
+                    else
+                    {
+                        if (!playerArtifacts.ContainsKey(id))
+                        {
+                            AddArtifact(id, number);
+                        }
+                        else
+                        {
+                            playerArtifacts[id] = number;
+                        }
+                    }
                 }
+
+                /*
+                                if (playerArtifacts.ContainsKey(id))
+                                {
+                                    playerArtifacts[id] = number;
+                                }
+                                else
+                                {
+                                    AddArtifact(id, number);
+                                }*/
             }
         }
 
@@ -321,6 +371,16 @@ namespace ETLG.Data
             playerArtifacts[(int)EnumArtifact.Money] += number * value;
 
             DeleteArtifact(id, number);
+        }
+
+        public Dictionary<int, int> GetTradeableArtifacts()
+        {
+            Dictionary<int, int> targetList = GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            foreach(var module in playerModules)
+            {
+                targetList.Add(module, 1);
+            }
+            return targetList;
         }
 
         public Dictionary<int, int> GetArtifactsByType(int Type)

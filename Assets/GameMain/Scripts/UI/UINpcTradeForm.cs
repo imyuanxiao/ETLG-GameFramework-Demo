@@ -53,17 +53,18 @@ namespace ETLG
         {
             
             base.OnOpen(userData);
-            closeButton.onClick.AddListener(OnCloseButtonClick);
-
-            loadArtifactsData();
             refresh = true;
+            closeButton.onClick.AddListener(OnCloseButtonClick);
+            loadArtifactsData();
         }
+
 
         private void loadArtifactsData()
         {
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
-            playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            //playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
+            playerArtifacts = dataPlayer.GetPlayerData().GetTradeableArtifacts();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
             playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
@@ -71,18 +72,21 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
-            if (dataPlayer.GetPlayerData().UI_tradeData!=null&& dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton)
-            {
-                HandleTradeData();
-            }
             if (refresh)
             {
+                
                 HideAllItem();
                 showContent();
                 refresh = false;
                 updateArtifactData();
             }
+            if (dataPlayer.GetPlayerData().UI_tradeData != null && dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton)
+            {
+                HandleTradeData();
+            }
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+ 
+
         }
 
         //触发trade按钮后交易，刷新item和money
@@ -123,7 +127,9 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+            playerArtifacts = null;
             dataPlayer.GetPlayerData().UI_tradeData = null;
+            closeButton.onClick.RemoveAllListeners() ;
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             base.OnClose(isShutdown, userData);
