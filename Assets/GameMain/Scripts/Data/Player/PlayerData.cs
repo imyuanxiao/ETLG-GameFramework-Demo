@@ -614,11 +614,28 @@ namespace ETLG.Data
 
         public void AddSkill(int id, int level)
         {
+            for(int i = 0; i <= level; i++)
+            {
+                AddSkill(id);
+            }
+        }
+        public void AddSkill(int id)
+        {
             if (!playerSkills.ContainsKey(id))
             {
                 playerSkills.Add(id, 0);
             }
-            playerSkills[id] = level;
+            else
+            {
+                int maxLevel = dataSkill.GetSkillData(id).Levels.Length;
+                playerSkills[id]++;
+                if(playerSkills[id] > maxLevel)
+                {
+                    playerSkills[id] = maxLevel;
+
+                }
+            }
+            
         }
 
         public int GetSkillLevelById(int Id)
