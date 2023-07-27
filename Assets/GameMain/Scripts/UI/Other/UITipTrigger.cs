@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using ETLG;
+using ETLG.Data;
 
 public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public string tipTitle;
+    public string tipContent = "";
 
     public int position = 0;
 
@@ -24,13 +26,27 @@ public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             newPosition = itemPosition + new Vector3(-410f, -100f, 0f);
         }
 
-        GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
+        GameEntry.Data.GetData<DataPlayer>().tipUiPosition = newPosition;
+        GameEntry.Data.GetData<DataPlayer>().tipTitle = tipTitle;
+        GameEntry.Data.GetData<DataPlayer>().tipContent = tipContent;
+
+        if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+        {
+            GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+        }
+
+        GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
+       // GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, tipTitle, Constant.Type.UI_OPEN));
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+        if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+        {
+            GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+        }
+        //GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
     }
 
 

@@ -33,7 +33,15 @@ namespace ETLG
             TipTitle.text = dataPlayer.tipTitle;
             if(dataAchievement.descriptionLevel==0)
             {
-                TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle);
+                //TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle);
+            /*    if(GameEntry.Data.GetData<DataPlayer>().tipContent != )
+                {*/
+                    TipContent.text = GameEntry.Data.GetData<DataPlayer>().tipContent;
+                //}
+        /*        else
+                {
+                    TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle);
+                }*/
             }
             else
             {

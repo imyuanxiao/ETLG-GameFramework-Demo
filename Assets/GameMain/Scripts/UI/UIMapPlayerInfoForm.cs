@@ -48,6 +48,11 @@ namespace ETLG
             GameEntry.Event.Subscribe(PlanetExpandedEventArgs.EventId, OnPlanetExpanded);
 
             ShowPlanets();
+
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

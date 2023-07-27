@@ -16,9 +16,9 @@ namespace ETLG
 
         public Button CloseButton = null;
 
-        public RectTransform ImgContainer;
-        public RectTransform TextContainer;
-        public TextMeshProUGUI Description;
+       // public RectTransform ImgContainer;
+        //public RectTransform TextContainer;
+        //public TextMeshProUGUI Description;
 
         public RawImage TutorialImg;
 
@@ -66,27 +66,28 @@ namespace ETLG
             if(currentTutorialData == null)
             {
                 currentTutorialData = dataTutorial.GetTutorialData(1001);
+                dataTutorial.CurrentTutorialID = 1001;
             }
-
-
             Title.text = currentTutorialData.Title;
+            /*
 
-            Vector2 sizeDelta = ImgContainer.sizeDelta;
-            sizeDelta.y = 840f;
 
-            if (currentTutorialData.HasText)
-            {
-                TextContainer.gameObject.SetActive(true);
-                Description.text = currentTutorialData.Description;
-                sizeDelta.y = 540f;
-            }
-            else
-            {
-                TextContainer.gameObject.SetActive(false);
-            }
+                        Vector2 sizeDelta = ImgContainer.sizeDelta;
+                        sizeDelta.y = 840f;
 
-            ImgContainer.sizeDelta = sizeDelta;
+                        if (currentTutorialData.HasText)
+                        {
+                            TextContainer.gameObject.SetActive(true);
+                            Description.text = currentTutorialData.Description;
+                            sizeDelta.y = 540f;
+                        }
+                        else
+                        {
+                            TextContainer.gameObject.SetActive(false);
+                        }
 
+                        ImgContainer.sizeDelta = sizeDelta;
+            */
             string texturePath = AssetUtility.GetTutorialImg(currentTutorialData.Id.ToString());
 
             Texture texture = Resources.Load<Texture>(texturePath);

@@ -27,6 +27,8 @@ namespace ETLG.Data
         private Dictionary<int, int> playerArtifacts { get; set; }
         private List<int> playerModules { get; set; }
 
+        public List<int> PlayedTutorial { get; set; }
+
         private int[] equippedModules { get; set; }
 
         private DataArtifact dataArtifact { get; set; }
@@ -63,6 +65,7 @@ namespace ETLG.Data
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
+            PlayedTutorial = new List<int>();
 
             playerSkills = new Dictionary<int, int>();
 

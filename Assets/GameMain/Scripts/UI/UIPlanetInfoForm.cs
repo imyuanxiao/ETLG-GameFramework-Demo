@@ -89,6 +89,10 @@ namespace ETLG
         {
             base.OnClose(isShutdown, userData);
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
         }
 
 

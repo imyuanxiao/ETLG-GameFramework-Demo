@@ -32,7 +32,10 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
             ShowNPCSelectionButtonItems();
         }
 
