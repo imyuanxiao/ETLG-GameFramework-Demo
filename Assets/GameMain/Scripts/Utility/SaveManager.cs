@@ -91,30 +91,11 @@ namespace ETLG
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Money = (int) jsonData[npcId.ToString()]["Money"];
                 JArray artifacts = (JArray) jsonData[npcId.ToString()]["Artifacts"];
 
-                // if (artifacts.Count > GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
-                // {
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts = new int[artifacts.Count];
-                    for (int i=0; i < artifacts.Count; i++)
-                    {
-                        GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
-                    }
-                // }
-
-                // for (int i=0; i < artifacts.Count; i++)
-                // {
-                //     if (i >= GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length)
-                //     {
-                //         // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.
-                //     }
-                //     else 
-                //     {
-                //         GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
-                //     }
-                // }
-                // for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts.Length; i++)
-                // {
-                //     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) jsonData[npcId.ToString()]["Artifacts"][i];
-                // }
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts = new int[artifacts.Count];
+                for (int i=0; i < artifacts.Count; i++)
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData()[npcId].Artifacts[i] = (int) artifacts[i];
+                }
             }
         }
 
@@ -147,6 +128,27 @@ namespace ETLG
             // }
         }
 
+        public Dictionary<string, string> UploadSave(int SaveId)
+        {
+            this.savedGamesInfo.cloudSaveId = SaveId;
+            Save("SavedGamesInfo", savedGamesInfo);
+
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            string saveIdStr = "_" + SaveId.ToString();
+            result.Add("InitialSpaceshipIdx" + saveIdStr, PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
+            result.Add("PlayerSkillData" + saveIdStr, PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
+            result.Add("PlayerArtifacts" + saveIdStr, PlayerPrefs.GetString("PlayerArtifacts" + saveIdStr));
+            result.Add("PlayerModules" + saveIdStr, PlayerPrefs.GetString("PlayerModules" + saveIdStr));
+            result.Add("EquippedModules" + saveIdStr, PlayerPrefs.GetString("EquippedModules" + saveIdStr));
+            result.Add("PlayerNPCs" + saveIdStr, PlayerPrefs.GetString("PlayerNPCs" + saveIdStr));
+            result.Add("PlayerAchievement" + saveIdStr, PlayerPrefs.GetString("PlayerAchievement" + saveIdStr));
+            result.Add("BattleVictoryCount" + saveIdStr, PlayerPrefs.GetString("BattleVictoryCount" + saveIdStr));
+            result.Add("BossDefeatTime" + saveIdStr, PlayerPrefs.GetString("BossDefeatTime" + saveIdStr));
+
+            return result;
+        }
+
         public void DeleteSave(int SaveId)
         {
             if (SaveId < 0 || SaveId > 4)
@@ -169,6 +171,10 @@ namespace ETLG
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
                 savedGamesInfo.savedGamesDic.Remove(SaveId);
+            }
+            if (savedGamesInfo.cloudSaveId == SaveId)
+            {
+                savedGamesInfo.cloudSaveId = -1;
             }
 
             Save("SavedGamesInfo", savedGamesInfo);
@@ -305,10 +311,12 @@ namespace ETLG
     public class SavedGamesInfo
     {
         public Dictionary<int, string> savedGamesDic;
+        public int cloudSaveId;
 
         public SavedGamesInfo()
         {
             this.savedGamesDic = new Dictionary<int, string>();
+            this.cloudSaveId = -1;
         }
     }
 }

@@ -37,6 +37,19 @@ namespace ETLG
         private void OnUploadButtonClicked(int saveId)
         {
             Debug.Log("Upload Button Clicked : " + saveId);
+            Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
+
+            for (int i=0; i < this.saveSlots.Length; i++)
+            {
+                if (i == saveId)
+                {
+                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color = Color.gray;
+                }
+                else 
+                {
+                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color =  new Color(249f, 230f, 196f, 255f);
+                }
+            }
         }
 
         private void OnDeleteButtonClicked(int saveId)
@@ -119,6 +132,16 @@ namespace ETLG
                         this.saveSlots[item.Key].loadBtnObj.SetActive(false);
                         this.saveSlots[item.Key].overwriteBtnObj.SetActive(true);
                     }
+                }
+                // set the upload button icon color
+                if (savedData.cloudSaveId != -1 && savedData.cloudSaveId < this.saveSlots.Length)
+                {
+                    this.saveSlots[savedData.cloudSaveId].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color = Color.gray;
+                }
+                // can not upload the auto save
+                if (savedData.savedGamesDic.Count > 0)
+                {
+                    this.saveSlots[0].uploadBtn.transform.parent.gameObject.SetActive(false);
                 }
             }
         }
