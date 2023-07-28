@@ -233,7 +233,6 @@ namespace ETLG
         //读取对话XML文件
         private void parseXMLFile()
         {
-            Debug.Log("");
             TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlFile.text);
@@ -369,7 +368,6 @@ namespace ETLG
             dialogText.fontSize = default_fontsize + UI_NPCDialogNPCStatment.fontSizeGap + fontsizeChangeValue;
             dialogText.ForceMeshUpdate();
 
-            Debug.Log(dialogText.fontSize);
             dialogText.alignment = TextAlignmentOptions.Left;
             Transform contentContainer = textModuleRectTransform.Find("ContentContainer");
 
@@ -413,20 +411,30 @@ namespace ETLG
             VideoPlayer videoPlayer = videoModule.GetComponentInChildren<VideoPlayer>();
             if (videoPlayer != null)
             {
-                VideoClip vedioSource = Resources.Load<VideoClip>(UI_NPCDialogNPCStatment.imagePath);
-                UI_NPCDialogNPCStatment.videoPath = "Assets/Resources/" + UI_NPCDialogNPCStatment.videoPath;
+                Debug.Log(UI_NPCDialogNPCStatment.videoPath);
+                VideoClip videoClip = Resources.Load<VideoClip>(UI_NPCDialogNPCStatment.videoPath);
+                if (videoClip == null)
+                {
+                    Debug.Log("clip是空");
+                }
+                else
+                {
+                    Debug.Log("clip不是空");
+                }
+
                 // Load the video from the specified path
-                videoPlayer.url = UI_NPCDialogNPCStatment.videoPath;
-                videoPlayer.Play();
+                videoPlayer.clip = videoClip;
             }
             else
             {
+                Debug.Log("");
                 Debug.LogError("VideoPlayer component not found on the GameObject named \"Video\".");
             }
             RawImage rawImage = videoModule.GetComponentInChildren<RawImage>();
             RenderTexture renderTexture = Resources.Load<RenderTexture>(UI_NPCDialogNPCStatment.videoTexture);
             rawImage.texture = renderTexture;
             videoPlayer.targetTexture = renderTexture;
+            videoPlayer.Play();
             return videoModule;
         }
 

@@ -104,7 +104,7 @@ namespace ETLG
 
         public static string GetXMLVideo(string NPCID, string videoID)
         {
-            return Utility.Text.Format("XMLVideo/{0}/{1}.mp4", NPCID, videoID);
+            return Utility.Text.Format("XMLVideo/{0}/{1}", NPCID, videoID);
         }
 
         public static string GetXMLVideoRender(string NPCID, string videoID)
