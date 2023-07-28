@@ -91,7 +91,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2085750438536944936}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -791,7 +791,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6819162564852091785}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Land
-  tipContent: Click to see Course Information
+  tipContent: Chck Course details and chapters
   position: 0
 --- !u!1 &3494944922052116878
 GameObject:
@@ -1208,7 +1208,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4325720623777923505}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -1225,8 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Enemy Combat
-  tipContent: Click to battle with normal enemies and gain resources to upgrade your
-    skills
+  tipContent: Battle with normal enemies and gain resources to upgrade your skills
   position: 0
 --- !u!114 &4325720623777923505
 MonoBehaviour:

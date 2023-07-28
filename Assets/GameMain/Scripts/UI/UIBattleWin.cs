@@ -39,6 +39,8 @@ namespace ETLG
                 // info2.text = "You got " + data["Killed"] * 100 + " coins!";
                 rewardsInfo[0].text = "You got " + data["Killed"] * 100 + " coins!";
                 rewardsInfo[0].gameObject.transform.parent.gameObject.SetActive(true);
+                rewardsInfo[0].transform.parent.gameObject.GetComponent<UITipTrigger>().tipTitle = GameEntry.Localization.GetString("Artifact_Money");
+                rewardsInfo[0].transform.parent.gameObject.GetComponent<UITipTrigger>().tipContent = GameEntry.Localization.GetString("Tip_Money");
             }
             else if (GameEntry.Procedure.CurrentProcedure is ProcedureIntermidateBattle)
             {
@@ -48,6 +50,11 @@ namespace ETLG
                 rewardsInfo[2].text = "You got a knowledge fraction in " + GetDomain() + " domain";
                 rewardsInfo[1].gameObject.transform.parent.gameObject.SetActive(true);
                 rewardsInfo[2].gameObject.transform.parent.gameObject.SetActive(true);
+
+                rewardsInfo[1].transform.parent.gameObject.GetComponent<UITipTrigger>().tipTitle = GetUnlockedSkill();
+                rewardsInfo[1].transform.parent.gameObject.GetComponent<UITipTrigger>().tipContent = GetUnlockedSkillDesc();
+                rewardsInfo[2].transform.parent.gameObject.GetComponent<UITipTrigger>().tipTitle = GetKnowledgeFraction()[0];
+                rewardsInfo[2].transform.parent.gameObject.GetComponent<UITipTrigger>().tipContent = GetKnowledgeFraction()[1];
             }
             else if (GameEntry.Procedure.CurrentProcedure is ProcedureFinalBattle)
             {
@@ -117,6 +124,58 @@ namespace ETLG
                 default:
                     return "";
             }
+        }
+
+        private string GetUnlockedSkillDesc()
+        {
+            switch (BattleManager.Instance.bossType)
+            {
+                case "CloudComputing":
+                    return GameEntry.Localization.GetString("Skill_EdgeComputing_Level_1");
+                case "CyberSecurity":
+                    return GameEntry.Localization.GetString("Skill_ElectronicWarfare_Level_1");
+                case "AI":
+                    return GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense_Level_1");
+                case "DataScience":
+                    return GameEntry.Localization.GetString("Skill_EnergyBoost_Level_1");
+                case "Blockchain":
+                    return GameEntry.Localization.GetString("Skill_BlockchainResurgence_Level_1");
+                case "IoT":
+                    return GameEntry.Localization.GetString("Skill_MedicalSupport_Level_1");
+                default:
+                    return "";
+            }
+        }
+
+        private List<string> GetKnowledgeFraction()
+        {
+            switch (BattleManager.Instance.bossType)
+            {
+                case "CloudComputing":
+                    return GetTipResult("Artifact_KnowledgeFragments_CloudComputing", "Tip_Knowledge Fragments - Cloud Computing");
+                case "CyberSecurity":
+                    return GetTipResult("Artifact_KnowledgeFragments_Cybersecurity", "Tip_Knowledge Fragments - Cybersecurity");
+                case "AI":
+                    return GetTipResult("Artifact_KnowledgeFragments_AI", "Tip_Knowledge Fragments - AI");
+                case "DataScience":
+                    return GetTipResult("Artifact_KnowledgeFragments_DataScience", "Tip_Knowledge Fragments - Data Science");
+                case "Blockchain":
+                    return GetTipResult("Artifact_KnowledgeFragments_Blockchain", "Tip_Knowledge Fragments - Blockchain");
+                case "IoT":
+                    return GetTipResult("Artifact_KnowledgeFragments_IoT", "Tip_Knowledge Fragments - IoT");
+                default:
+                    return null;
+            }
+        }
+
+        private List<string> GetTipResult(string title, string tip)
+        {
+            List<string> result = new List<string>();
+            string key = GameEntry.Localization.GetString(title);
+            string value = GameEntry.Localization.GetString(tip);
+            result.Add(key);
+            result.Add(value);
+            return result;
         }
     }
 }

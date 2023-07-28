@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 423804939779311826}
   - component: {fileID: 7327409304931195087}
   - component: {fileID: 7230312867012273320}
+  - component: {fileID: 555087251201838496}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -150,6 +151,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &555087251201838496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382818097565414584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Chapter
+  tipContent: Chapter title, Rewards and Competion Status. You can earn rewards by
+    Talk or Quiz.
+  position: 0
 --- !u!1 &1759082153115245924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,8 +1975,6 @@ GameObject:
   - component: {fileID: 3773717677299554483}
   - component: {fileID: 5860571247984099576}
   - component: {fileID: 43557848381378399}
-  - component: {fileID: 8591729565721236383}
-  - component: {fileID: 6096785704918777842}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2059,49 +2074,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &8591729565721236383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8865250828390436272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!114 &6096785704918777842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8865250828390436272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipTitle: Chapter
-  tipContent: Chapter title, Rewards and Competion Status. You can earn rewards by
-    Talk or Quiz.
-  position: 0
 --- !u!1 &8911968754933090288
 GameObject:
   m_ObjectHideFlags: 0

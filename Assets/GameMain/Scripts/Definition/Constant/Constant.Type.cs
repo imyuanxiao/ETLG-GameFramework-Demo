@@ -26,6 +26,7 @@
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;
             public const int TIP_INFO_POSITION_LEFT = 1;
+            public const int TIP_INFO_POSITION_DOWN = 2;
 
             // skill activate state
             public const int SKILL_LOCKED = -1;
