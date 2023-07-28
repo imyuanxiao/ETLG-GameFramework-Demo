@@ -9,9 +9,9 @@ namespace ETLG
     {
         public Button spaceshipButton;
         public Button skillButton;
-        public Button missionButton;
+        //public Button missionButton;
         public Button achievementButton;
-        public Button knowledgeBaseButton;
+        //public Button knowledgeBaseButton;
         public Button leaderboardButton;
 
         private RawImage[] buttonImages;
@@ -27,16 +27,16 @@ namespace ETLG
             {
                 spaceshipButton.GetComponent<RawImage>(),
                 skillButton.GetComponent<RawImage>(),
-                missionButton.GetComponent<RawImage>(),
+                //missionButton.GetComponent<RawImage>(),
                 achievementButton.GetComponent<RawImage>(),
-                knowledgeBaseButton.GetComponent<RawImage>(),
+                //knowledgeBaseButton.GetComponent<RawImage>(),
                 leaderboardButton.GetComponent<RawImage>()
             };
             spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, Constant.Type.PLAYERMENU_SPACESHIP));
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, Constant.Type.PLAYERMENU_SKILL));
-            missionButton.onClick.AddListener(() => OnButtonClick(missionButton, Constant.Type.PLAYERMENU_MISSION));
+           // missionButton.onClick.AddListener(() => OnButtonClick(missionButton, Constant.Type.PLAYERMENU_MISSION));
             achievementButton.onClick.AddListener(() => OnButtonClick(achievementButton, Constant.Type.PLAYERMENU_ACHIEVEMENT));
-            knowledgeBaseButton.onClick.AddListener(() => OnButtonClick(knowledgeBaseButton, Constant.Type.PLAYERMENU_KNOWLEDGE_BASE));
+            //knowledgeBaseButton.onClick.AddListener(() => OnButtonClick(knowledgeBaseButton, Constant.Type.PLAYERMENU_KNOWLEDGE_BASE));
             leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, Constant.Type.PLAYERMENU_LEADERBOARD));
         }
 
@@ -67,14 +67,20 @@ namespace ETLG
 
         private void SetButtonColors(int selectedButton)
         {
-            Log.Debug("selectedButton {0}",selectedButton);
+            //Log.Debug("selectedButton {0}",selectedButton);
 
             int index = 0;
-            if (selectedButton == Constant.Type.PLAYERMENU_SKILL)
+            if (selectedButton == (int)EnumUIForm.UISkillTreeForm)
             {
                 index = 1;
             }
-            if (selectedButton == Constant.Type.PLAYERMENU_ACHIEVEMENT)
+
+            if (selectedButton == (int)(int)EnumUIForm.UIAchievementForm)
+            {
+                index = 2;
+            }
+
+            if (selectedButton == (int)(int)EnumUIForm.UILeaderBoardForm)
             {
                 index = 3;
             }

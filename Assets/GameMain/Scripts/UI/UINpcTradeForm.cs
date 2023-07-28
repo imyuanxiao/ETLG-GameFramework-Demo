@@ -93,7 +93,6 @@ namespace ETLG
             }
             if (refresh)
             {
-
                 HideAllItem();
                 showContent();
                 updateArtifactData();
@@ -114,6 +113,12 @@ namespace ETLG
 
             tradeArtifact();
             refresh = true;
+
+        }
+
+        private void OnOpenAlertForm()
+        {
+            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
 
         }
 

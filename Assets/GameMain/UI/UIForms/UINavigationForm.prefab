@@ -357,9 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spaceshipButton: {fileID: 4042188391445274557}
   skillButton: {fileID: 1283704817336776206}
-  missionButton: {fileID: 1829211931099458892}
   achievementButton: {fileID: 7645558126706539731}
-  knowledgeBaseButton: {fileID: 3176424200517287641}
   leaderboardButton: {fileID: 261430562177257574}
 --- !u!1 &5397354675523377861
 GameObject:
@@ -681,7 +679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Misson
+  m_text: null
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1189,7 +1187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Knowledge Base
+  m_text: null
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

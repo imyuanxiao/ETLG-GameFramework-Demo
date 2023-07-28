@@ -68,7 +68,7 @@ namespace ETLG
             base.OnOpen(userData);
 
             closeButton.onClick.AddListener(OnCloseButtonClick);
-            maxButton.onClick.AddListener(OnOpenAlertForm);
+            maxButton.onClick.AddListener(OnMaxButtonClick);
             FontPlusButton.onClick.AddListener(OnfontPlus);
             FontSubButton.onClick.AddListener(OnfontSub);
 
