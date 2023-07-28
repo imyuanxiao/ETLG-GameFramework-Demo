@@ -20,7 +20,7 @@ namespace ETLG
         private SpaceshipController controller;
         private IFsm<SpaceshipAttack> m_Fsm = null;
         private int equippedModuleIdx;
-        private float fireRate;
+        public float fireRate;
         private float timeElapsed;
         private bool readyToFire;
 
