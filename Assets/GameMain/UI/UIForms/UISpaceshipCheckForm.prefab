@@ -10987,7 +10987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000047683716}
+  m_AnchoredPosition: {x: 0, y: 0.0003060531}
   m_SizeDelta: {x: 540, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4061517717630679452
@@ -11309,7 +11309,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116988936990735128}
-  - component: {fileID: 6515177753519011805}
+  - component: {fileID: 6161162109598547561}
+  - component: {fileID: 6015545885053464445}
+  - component: {fileID: 7066346598933593663}
   m_Layer: 5
   m_Name: Type
   m_TagString: Untagged
@@ -11338,9 +11340,44 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 22}
+  m_SizeDelta: {x: 300, y: 22}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &6515177753519011805
+--- !u!222 &6161162109598547561
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253664135245671278}
+  m_CullTransparentMesh: 1
+--- !u!114 &6015545885053464445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253664135245671278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &7066346598933593663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11352,8 +11389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipTitle: Spaceship Type
-  tipContent: 
+  tipTitle: Type
+  tipContent: This is type
   position: 0
 --- !u!1 &8305969073198842556
 GameObject:

@@ -43,7 +43,7 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipSelectForm);
 
-            GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
+           // GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
 
 
         }
