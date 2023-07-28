@@ -55,12 +55,12 @@ namespace ETLG
             SaveManager.Instance.SaveGame();
 
 
-            if (!dataPlayer.GetPlayerData().PlayedTutorial.Contains(1002))
+/*            if (!dataPlayer.GetPlayerData().PlayedTutorial.Contains(1002))
             {
                 dataPlayer.GetPlayerData().PlayedTutorial.Add(1002);
                 GameEntry.Data.GetData<DataTutorial>().CurrentTutorialID = 1002;
                 GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
-            }
+            }*/
 
         }
 
