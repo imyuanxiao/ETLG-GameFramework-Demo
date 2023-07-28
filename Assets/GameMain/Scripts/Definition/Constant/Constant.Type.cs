@@ -21,7 +21,7 @@
             public const int PLAYERMENU_MISSION = 2;
             public const int PLAYERMENU_ACHIEVEMENT = 1027;
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 1032;
+            public const int PLAYERMENU_LEADERBOARD = 1044;
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;
@@ -145,14 +145,14 @@
 
             //leaderboard type
             public const int LB_ACHIVEMENT = 1;
-            public const int LB_SPACESHIP = 2;
-            public const int LB_BOSS_AI = 3;
-            public const int LB_BOSS_CLOUDCOMPUTING = 4;
-            public const int LB_BOSS_BLOCKCHAIN = 5;
-            public const int LB_BOSS_CYBERSECURITY = 6;
-            public const int LB_BOSS_DATASCIENCE = 7;
-            public const int LB_BOSS_IOT = 8;
-            public const int LB_BOSS_FINAL = 9;
+            public const int LB_SPACESHIP = 0;
+            public const int LB_BOSS_AI = 2;
+            public const int LB_BOSS_CLOUDCOMPUTING = 6;
+            public const int LB_BOSS_BLOCKCHAIN = 7;
+            public const int LB_BOSS_CYBERSECURITY = 5;
+            public const int LB_BOSS_DATASCIENCE = 3;
+            public const int LB_BOSS_IOT = 4;
+            public const int LB_BOSS_FINAL = 8;
 
             // reward
             public const int REWARD_TYPE_ARTIFACT = 0;
