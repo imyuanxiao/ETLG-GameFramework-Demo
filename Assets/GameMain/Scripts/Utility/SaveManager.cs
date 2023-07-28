@@ -38,6 +38,7 @@ namespace ETLG
             Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
             Save("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
             Save("BattleVictoryCount" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount);
+            Save("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -75,6 +76,7 @@ namespace ETLG
             LoadEquippedModules("EquippedModules" + saveIdStr);
             LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
+            Load("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
@@ -162,6 +164,7 @@ namespace ETLG
             Delete("PlayerNPCs" + saveIdStr);
             Delete("PlayerAchievement" + saveIdStr);
             Delete("BattleVictoryCount" + saveIdStr);
+            Delete("BossDefeatTime" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -293,6 +296,7 @@ namespace ETLG
                 PrintSavedData("SavedGamesInfo");
                 PrintSavedData("PlayerNPCs_0");
                 PrintSavedData("BattleVictoryCount_0");
+                PrintSavedData("BossDefeatTime_0");
             }
         }
     }
