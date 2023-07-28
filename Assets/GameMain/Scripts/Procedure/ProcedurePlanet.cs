@@ -47,6 +47,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
+            GameEntry.Event.Subscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
@@ -73,6 +74,23 @@ namespace ETLG
             procedureOwner.SetData<VarString>("BossType", ne.BossType);
             
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+        }
+
+        private void OnAlertUITrigger(object sender, GameEventArgs e)
+        {
+            UIAlertTriggerEventArgs ne = (UIAlertTriggerEventArgs)e;
+            if (ne == null)
+                return;
+
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIAlertForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIAlertForm));
+            }
+
+            if (ne.Type == Constant.Type.UI_OPEN)
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIAlertForm);
+            }
         }
 
         private void OnArtifactInfoTradeUIChange(object sender, GameEventArgs e)
@@ -219,6 +237,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
+            GameEntry.Event.Unsubscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;

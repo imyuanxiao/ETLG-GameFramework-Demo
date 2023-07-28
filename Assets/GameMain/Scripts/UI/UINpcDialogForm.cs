@@ -68,7 +68,7 @@ namespace ETLG
             base.OnOpen(userData);
 
             closeButton.onClick.AddListener(OnCloseButtonClick);
-            maxButton.onClick.AddListener(OnMaxButtonClick);
+            maxButton.onClick.AddListener(OnOpenAlertForm);
             FontPlusButton.onClick.AddListener(OnfontPlus);
             FontSubButton.onClick.AddListener(OnfontSub);
 
@@ -109,6 +109,12 @@ namespace ETLG
                 //}
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
+        }
+
+        private void OnOpenAlertForm()
+        {
+            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
+
         }
 
         //读取头像数据
@@ -472,7 +478,6 @@ namespace ETLG
         private void updateFontSize()
         {
             //Image singleTextModule in textModules
-            
             foreach (Transform dialogModule in dialogScrollContent)
             {
                 TextMeshProUGUI text = dialogModule.GetComponentInChildren<TextMeshProUGUI>();

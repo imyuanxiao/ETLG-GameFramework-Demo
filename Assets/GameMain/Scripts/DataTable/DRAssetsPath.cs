@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-27 16:43:33.018
+// 生成时间：2023-07-28 03:38:45.656
 //------------------------------------------------------------
 
 using GameFramework;
@@ -68,6 +68,9 @@ namespace ETLG
             index++;
             AssetPath = columnStrings[index++];
             ResourceGroupIndexs = columnStrings[index++];
+            index++;
+            index++;
+            index++;
 
             GeneratePropertyArray();
             return true;
