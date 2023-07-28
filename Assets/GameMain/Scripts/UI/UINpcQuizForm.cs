@@ -15,7 +15,7 @@ namespace ETLG
         private NPCData npcData;
         private string npcAvatarPath;
         private string XMLPath;
-        private UIQuizManager UIQuizManager=null;
+        private UIQuizManager UIQuizManager = null;
         private List<UIQuiz> quizArray;
         public VerticalLayoutGroup ChoicesContainerverticalLayoutGroup;
         public VerticalLayoutGroup ContentverticalLayoutGroup;
@@ -57,7 +57,7 @@ namespace ETLG
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
-            npc_description.text =npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
+            npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
             XMLPath = npcData.QuizXML;
 
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);
@@ -76,6 +76,14 @@ namespace ETLG
             updateSubmitButtonStatus();
             updateLastButtonStatus();
             updateNextButtonStatus();
+            if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion)
+            {
+                SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "FINISH";
+            }
+            else
+            {
+                SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "SUBMIT";
+            }
 
         }
 
@@ -88,7 +96,7 @@ namespace ETLG
 
         private void updateAccuracy()
         {
-            string rate= (UIQuizManager.calculateAccuracy() * 100).ToString("F0");
+            string rate = (UIQuizManager.calculateAccuracy() * 100).ToString("F0");
             AccuracyRate.text = rate + "%";
             AccuracySlider.value = UIQuizManager.calculateAccuracy();
         }
@@ -102,6 +110,10 @@ namespace ETLG
                     SubmitButton.enabled = true;
                 }
                 currentQuiz.haveShown = true;
+            }
+            else if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion && SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text == "FINISH")
+            {
+                SubmitButton.enabled = true;
             }
             else
             {
@@ -221,10 +233,17 @@ namespace ETLG
 
         private void OnSubmitButtonClick()
         {
-            currentQuiz.testOnToggleMCM();
-            currentQuiz.haveSubmitted = true;
-            updateProgress();
-            updateAccuracy();
+            if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "FINISH")
+            {
+                currentQuiz.testOnToggleMCM();
+                currentQuiz.haveSubmitted = true;
+                updateProgress();
+                updateAccuracy();
+            }
+            else
+            {
+                GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
+            }
         }
 
         private void OnLastButtonClick()
