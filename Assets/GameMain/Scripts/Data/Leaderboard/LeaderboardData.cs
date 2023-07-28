@@ -17,7 +17,23 @@ namespace ETLG.Data
         public float Boss_DataScience { get; set; }
         public float Boss_IoT { get; set; }
         public float Boss_Final { get; set; }
-        public int exploredChapter { get; set; }
+        public int ExploredChapter { get; set; }
+
+        public float bossTime;
+        /// <summary>
+        /// 后端数据库连上之后
+        /// public string Name { get; set; }
+        /// public int Id { get; set; }
+        /// public int AvatarId { get; set; }
+        /// public int Rank { get; set; }
+        /// public int AchievementScore { get; set; }
+        /// public float SpaceshipScore { get; set; }
+        /// public int exploredChapter { get; set; }
+        ///public int dataScore;
+        ///public float bossTime;
+        /// 
+        /// </summary>
+
         public LeaderboardData()
         {
 

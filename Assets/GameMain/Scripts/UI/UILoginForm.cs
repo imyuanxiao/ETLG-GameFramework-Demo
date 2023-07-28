@@ -16,9 +16,22 @@ namespace ETLG
         public TextMeshProUGUI reminder = null;
         public Button switchButton;
         public Button submitButton;
+        public Button avatar1;
+        public Button avatar2;
+        public Button avatar3;
+        public Button avatar4;
+        public Button avatar5;
+        public Button avatar6;
+
+        private Button selectedButton;
+        private int playerAvatarId;
+        private Color normalColor;
+        private Color selectedColor;
+        private RawImage selectedRawImage;
         public GameObject confirmPassword;
         public GameObject playerAvater;
         bool isRegister;
+
         //login
         [SerializeField]
         private TMP_InputField userName;
@@ -34,12 +47,25 @@ namespace ETLG
 
             switchButton.onClick.AddListener(OnSwitchButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
+            avatar1.onClick.AddListener(OnAvatar1ButtonClick);
+            avatar2.onClick.AddListener(OnAvatar2ButtonClick);
+            avatar3.onClick.AddListener(OnAvatar3ButtonClick);
+            avatar4.onClick.AddListener(OnAvatar4ButtonClick);
+            avatar5.onClick.AddListener(OnAvatar5ButtonClick);
+            avatar6.onClick.AddListener(OnAvatar6ButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
             Log.Debug("Open login form");
+
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+
+            submitTitle.text = "Submit";
+            normalColor = new Color32(55, 55, 55, 255);
+            selectedColor = new Color32(249, 230, 196,255);
+            playerAvatarId = 0;
             showContent();
         }
         protected override void OnClose(bool isShutdown, object userData)
@@ -52,11 +78,11 @@ namespace ETLG
             userName.text = null;
             pwd.text = null;
             confirmPwd.text = null;
+            reminder.text = null;
             if (!isRegister)
             {
                 titleName.text = "Login";
                 switchTitle.text = "Register";
-                submitTitle.text = "Play";
                 confirmPassword.SetActive(false);
                 playerAvater.SetActive(false);
             }
@@ -64,7 +90,6 @@ namespace ETLG
             {
                 titleName.text = "Register";
                 switchTitle.text = "Login";
-                submitTitle.text = "Submit";
                 confirmPassword.SetActive(true);
                 playerAvater.SetActive(true);
             }
@@ -76,7 +101,8 @@ namespace ETLG
                 if (PlayerPrefs.GetString(userName.text + "password") == pwd.text)
                 {
                     reminder.text = "Login successful!";
-                    //load player data.......
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UILoginForm));
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UILeaderBoardForm);
                 }
                 else
                 {
@@ -97,27 +123,36 @@ namespace ETLG
         }
         private void OnRegister()
         {
-            if(string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
+            if(playerAvatarId==0)
             {
-                if(pwd.text==confirmPwd.text)
-                {
-                    PlayerPrefs.SetString(userName.text, userName.text);
-                    PlayerPrefs.SetString(userName.text + "password", pwd.text);
-                    reminder.text = "Register successful! Please login.";
-                }
-                else
-                {
-                    reminder.text = "Passwords do not match.";
-                }
+                reminder.text = "Please choose an avatar.";
             }
             else
             {
-                reminder.text = "Username exists.";
+                if (string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
+                {
+                    if (pwd.text == confirmPwd.text)
+                    {
+                        PlayerPrefs.SetString(userName.text, userName.text);
+                        PlayerPrefs.SetString(userName.text + "password", pwd.text);
+                        reminder.text = "Register successful! Please login.";
+                    }
+                    else
+                    {
+                        reminder.text = "Passwords do not match.";
+                    }
+                }
+                else
+                {
+                    reminder.text = "Username exists.";
+                }
             }
+           
         }
         private void OnSwitchButtonClick()
         {
             isRegister = !isRegister;
+            playerAvatarId = 0;
             showContent();
         }
         private void OnSubmitButtonClick()
@@ -130,6 +165,53 @@ namespace ETLG
             {
                 OnLogIn();
             }
+        }
+        private void OnAvatar1ButtonClick()
+        {
+            playerAvatarId = 1000;
+            SetSelectedButtonandColor(avatar1);
+        }
+        private void OnAvatar2ButtonClick()
+        {
+            playerAvatarId = 1001;
+            SetSelectedButtonandColor(avatar2);
+        }
+        private void OnAvatar3ButtonClick()
+        {
+            playerAvatarId = 1002;
+            SetSelectedButtonandColor(avatar3);
+        }
+        private void OnAvatar4ButtonClick()
+        {
+            playerAvatarId = 1003;
+            SetSelectedButtonandColor(avatar4);
+        }
+        private void OnAvatar5ButtonClick()
+        {
+            playerAvatarId = 1004;
+            SetSelectedButtonandColor(avatar5);
+        }
+        private void OnAvatar6ButtonClick()
+        {
+            playerAvatarId = 1005;
+            SetSelectedButtonandColor(avatar6);
+        }
+        private void SetSelectedButtonandColor(Button button)
+        {
+            ColorBlock colorBlock;
+            if (selectedButton != button)
+            {
+                if (selectedButton != null)
+                {
+                    colorBlock = selectedButton.colors;
+                    colorBlock.normalColor = normalColor;
+                    selectedButton.colors = colorBlock;
+                }
+            }
+            selectedButton = button;
+            colorBlock = selectedButton.colors;
+            colorBlock.normalColor = selectedColor;
+            selectedButton.colors = colorBlock;
         }
     }
 }

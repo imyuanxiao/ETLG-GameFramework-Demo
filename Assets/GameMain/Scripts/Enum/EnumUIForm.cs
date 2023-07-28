@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-28 03:38:47.604
+// 生成时间：2023-07-28 04:02:00.090
 //------------------------------------------------------------
 
 namespace ETLG
@@ -207,8 +207,13 @@ namespace ETLG
         UIRewardPreviewForm = 1043,
 
         /// <summary>
+        /// 登录注册界面
+        /// </summary>
+        UILoginForm = 1044,
+
+        /// <summary>
         /// 提示和奖励界面
         /// </summary>
-        UIAlertForm = 1044,
+        UIAlertForm = 1045,
     }
 }

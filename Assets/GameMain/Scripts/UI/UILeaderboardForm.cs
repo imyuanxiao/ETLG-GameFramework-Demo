@@ -28,12 +28,8 @@ namespace ETLG
         //current player
         private DataPlayer dataPlayer;
         // players
-        private DataPlayer[] players;
-        private DataSpaceship dataSpaceship;
-        private SpaceshipData spaceshipData;
         private List<LeaderboardData> leaderboardData;
-        private string responseData;
-        private List<List<object>> rankList;
+        private List<LeaderboardData> rankList;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -49,10 +45,7 @@ namespace ETLG
             bossButton_IoT.onClick.AddListener(OnBossButtonIoTClick);
             bossButton_Final.onClick.AddListener(OnBossButtonFinalClick);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            dataSpaceship = GameEntry.Data.GetData<DataSpaceship>();
             leaderboardData = new List<LeaderboardData>();
-            responseData = DataManager.Instance.responseData;
-            
         }
 
         protected override void OnOpen(object userData)
@@ -62,9 +55,8 @@ namespace ETLG
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
             AddMockPlayers();
-            //AddOtherPlayerData();
             AddCurrentPlayerData();
-            rankList = DataManager.Instance.GetRankData(1, 10, DataManager.RankMode.Score);
+            panel.SetActive(false);
             showContent();
         }
 
@@ -81,12 +73,16 @@ namespace ETLG
             s_name.text = "Achievement Leaderboard";
             leaderboardData.Sort((a, b) => b.AchievementScore.CompareTo(a.AchievementScore));
             showLeaderBoardInfo(Constant.Type.LB_ACHIVEMENT);
+
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_ACHIVEMENT);
         }
         private void OnspaceshipButtonClick()
         {
             s_name.text = "Spaceship Leaderboard";
             leaderboardData.Sort((a, b) => b.SpaceshipScore.CompareTo(a.SpaceshipScore));
             showLeaderBoardInfo(Constant.Type.LB_SPACESHIP);
+           
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_SPACESHIP);
         }
         private void OnBossButtonClick()
         {
@@ -98,42 +94,56 @@ namespace ETLG
             s_name.text = "AI Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_AI.CompareTo(b.Boss_AI));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_AI);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_AI);
         }
         private void OnBossButtonCloudComputingClick()
         {
             s_name.text = "Cloud Computing Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_CloudComputing.CompareTo(b.Boss_CloudComputing));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_CLOUDCOMPUTING);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CLOUDCOMPUTING);
         }
         private void OnBossButtonBlockchainClick()
         {
             s_name.text = "Blockchain Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Blockchain.CompareTo(b.Boss_Blockchain));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_BLOCKCHAIN);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_BLOCKCHAIN);
         }
         private void OnBossButtonCybersecurityClick()
         {
             s_name.text = "Cybersecurity Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Cybersecurity.CompareTo(b.Boss_Cybersecurity));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_CYBERSECURITY);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CYBERSECURITY);
         }
         private void OnBossButtonDataScienceClick()
         {
             s_name.text = "Data Science Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_DataScience.CompareTo(b.Boss_DataScience));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_DATASCIENCE);
+           
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_DATASCIENCE);
         }
         private void OnBossButtonIoTClick()
         {
             s_name.text = "IoT Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_IoT.CompareTo(b.Boss_IoT));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_IOT);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_IOT);
         }
         private void OnBossButtonFinalClick()
         {
             s_name.text = "Final Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Final.CompareTo(b.Boss_Final));
             showLeaderBoardInfo(Constant.Type.LB_BOSS_FINAL);
+            
+            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_FINAL);
         }
         private void AddMockPlayers()
         {
@@ -246,6 +256,7 @@ namespace ETLG
                     throw new ArgumentException("Invalid leaderboard type.");
             }
         }
+       
     }
 
 }
