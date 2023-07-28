@@ -10,7 +10,6 @@ namespace ETLG.Data
     public sealed class DataPlayer : DataBase
     {
         private PlayerData playerData;
-
         public Vector3 tipUiPosition { get ; set; }
         public string tipTitle { get ; set; }
         public string tipContent { get ; set; }

@@ -144,8 +144,9 @@ namespace ETLG
 
         private void parseXMLFile()
         {
+            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(XMLPath);
+            xmlDoc.LoadXml(xmlFile.text);
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
             UIQuizManager = new UIQuizManager();
             foreach (XmlNode node in nodes)

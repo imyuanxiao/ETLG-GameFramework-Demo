@@ -233,8 +233,10 @@ namespace ETLG
         //读取对话XML文件
         private void parseXMLFile()
         {
+            Debug.Log("");
+            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(XMLPath);
+            xmlDoc.LoadXml(xmlFile.text);
 
             dialogueNodes = new Dictionary<string, XmlNode>();
 
@@ -411,6 +413,7 @@ namespace ETLG
             VideoPlayer videoPlayer = videoModule.GetComponentInChildren<VideoPlayer>();
             if (videoPlayer != null)
             {
+                VideoClip vedioSource = Resources.Load<VideoClip>(UI_NPCDialogNPCStatment.imagePath);
                 UI_NPCDialogNPCStatment.videoPath = "Assets/Resources/" + UI_NPCDialogNPCStatment.videoPath;
                 // Load the video from the specified path
                 videoPlayer.url = UI_NPCDialogNPCStatment.videoPath;

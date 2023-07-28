@@ -147,7 +147,7 @@ namespace ETLG
         {
             playerArtifacts = null;
             dataPlayer.GetPlayerData().UI_tradeData = null;
-            closeButton.onClick.RemoveAllListeners() ;
+            closeButton.onClick.RemoveAllListeners();
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             base.OnClose(isShutdown, userData);

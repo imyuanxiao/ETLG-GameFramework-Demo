@@ -4,7 +4,7 @@ namespace ETLG.Data
     public sealed class NPCData
     {
         private DRNPC dRNPC;
-        
+
         public int Id
         {
             get

@@ -119,12 +119,12 @@ namespace ETLG
 
         public static string GetDialogXML(string path)
         {
-            return Utility.Text.Format("Assets/GameMain/Res/DialogXML/{0}", path);
+            return Utility.Text.Format("DialogXML/{0}", path);
         }
 
         public static string GetQuizXML(string path)
         {
-            return Utility.Text.Format("Assets/GameMain/Res/QuizXML/{0}", path);
+            return Utility.Text.Format("QuizXML/{0}", path);
         }
 
         public static string GetTutorialImg(string id)
