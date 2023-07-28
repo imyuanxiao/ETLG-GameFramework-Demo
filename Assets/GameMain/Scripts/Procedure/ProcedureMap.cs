@@ -87,19 +87,19 @@ namespace ETLG
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
             MouseControl();
-            
+            KeyboardControl();
             // Open UI Map Info (for testing purpose only)
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
-                {
-                    GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
-                }
-                else
-                {
-                    GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
-                }
-            }
+            // if (Input.GetKeyDown(KeyCode.Escape))
+            // {
+            //     if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
+            //     {
+            //         GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
+            //     }
+            //     else
+            //     {
+            //         GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+            //     }
+            // }
 
             if (changeScene)
             {
@@ -233,6 +233,26 @@ namespace ETLG
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
                 }
+            }
+        }
+
+        private void KeyboardControl()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
+                }
+                else
+                {
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveManager.Instance.SaveGame();
             }
         }
     }

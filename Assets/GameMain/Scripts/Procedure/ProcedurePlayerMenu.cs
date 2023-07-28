@@ -68,6 +68,7 @@ namespace ETLG
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
             }
 
+            KeyboardControl();
         }
 
 
@@ -338,6 +339,26 @@ namespace ETLG
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIPlayerZoneForm).Close();
                 }
+            }
+        }
+
+        private void KeyboardControl()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
+                {
+                    GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
+                }
+                else
+                {
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveManager.Instance.SaveGame();
             }
         }
     }

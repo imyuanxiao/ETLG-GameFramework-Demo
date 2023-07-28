@@ -48,6 +48,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
             GameEntry.Event.Subscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
+            GameEntry.Event.Subscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = true;
@@ -62,6 +63,13 @@ namespace ETLG
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+        }
+
+        private void OnToProcedureMap(object sender, GameEventArgs e)
+        {
+            PlanetBase currentlyFocusedPlanet = MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>();
+            GameEntry.Event.Fire(this, UnFocusOnPlanetEventArgs.Create(currentlyFocusedPlanet));
+            this.changeToProcedureMap = true;
         }
 
         private void OnEnterBattle(object sender, GameEventArgs e) 
@@ -238,6 +246,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
             GameEntry.Event.Unsubscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
+            GameEntry.Event.Unsubscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
@@ -295,6 +304,11 @@ namespace ETLG
                 {
                     GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveManager.Instance.SaveGame();
             }
         }
 

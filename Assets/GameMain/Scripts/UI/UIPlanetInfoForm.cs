@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
+using UnityEngine.EventSystems;
 
 namespace ETLG
 {
@@ -99,6 +100,7 @@ namespace ETLG
         private void OnCloseButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            GameEntry.Event.Fire(this, ToProcedureMapEventArgs.Create());
             this.Close();
         }
     }

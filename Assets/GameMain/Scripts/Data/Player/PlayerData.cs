@@ -51,6 +51,7 @@ namespace ETLG.Data
 
         public UITradeData UI_tradeData = null;
         public int battleVictoryCount;
+        public Dictionary<int, float> bossDefeatTime;
 
         public PlayerData (SpaceshipData spaceshipData)
         {
@@ -77,6 +78,9 @@ namespace ETLG.Data
 
             // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
             equippedModules = new int[6];
+
+            bossDefeatTime = new Dictionary<int, float>();
+            initBossDefeatTime();
 
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
@@ -108,6 +112,17 @@ namespace ETLG.Data
             {
                 playerNPCs.Add(id, new PlayerNPCData(dataNPC.GetNPCData(id)));
             }
+        }
+
+        private void initBossDefeatTime()
+        {
+            this.bossDefeatTime.Add((int) EnumEntity.CloudComputingBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.ArtificialIntelligenceBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.BlockchainBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.InternetofThingsBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.DataScienceBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.CybersecurityBoss, -1);
+            this.bossDefeatTime.Add((int) EnumEntity.FinalBoss, -1);
         }
 
         // Call this method everytime skills change or initialSpaceship changes
