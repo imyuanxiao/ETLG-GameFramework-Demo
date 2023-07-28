@@ -30,28 +30,36 @@ namespace ETLG
         // initial attrs
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
-        public TextMeshProUGUI s_firepower = null;
-        public TextMeshProUGUI s_energy = null;
 
         public TextMeshProUGUI s_agility = null;
-        public TextMeshProUGUI s_speed = null;
-        public TextMeshProUGUI s_detection = null;
-        public TextMeshProUGUI s_capacity = null;
+        public TextMeshProUGUI s_energy = null;
 
+        public TextMeshProUGUI s_firepower = null;
         public TextMeshProUGUI s_fireRate = null;
-        public TextMeshProUGUI s_dogde = null;
+
+
+
+        //public TextMeshProUGUI s_speed = null;
+        //public TextMeshProUGUI s_detection = null;
+        //public TextMeshProUGUI s_capacity = null;
+
+        //public TextMeshProUGUI s_dogde = null;
 
 
         private float valueBarMaxWidth = 150;
 
         public GameObject s_durability_valueBar = null;
         public GameObject s_shields_valueBar = null;
-        public GameObject s_firepower_valueBar = null;
         public GameObject s_energy_valueBar = null;
         public GameObject s_agility_valueBar = null;
-        public GameObject s_speed_valueBar = null;
-        public GameObject s_detection_valueBar = null;
-        public GameObject s_capacity_valueBar = null;
+
+        public GameObject s_firepower_valueBar = null;
+        public GameObject s_firerate_valueBar = null;
+
+
+        //public GameObject s_speed_valueBar = null;
+        //public GameObject s_detection_valueBar = null;
+        //public GameObject s_capacity_valueBar = null;
 
         // initial skills
         public Transform skillContainer = null;
@@ -207,22 +215,22 @@ namespace ETLG
             s_energy.text = currentSpaceshipData.Energy.ToString();
 
             s_agility.text = currentSpaceshipData.Agility.ToString();
-            s_speed.text = currentSpaceshipData.Speed.ToString();
+            //s_speed.text = currentSpaceshipData.Speed.ToString();
 
-            s_detection.text = currentSpaceshipData.Detection.ToString();
-            s_capacity.text = currentSpaceshipData.Capacity.ToString();
+           // s_detection.text = currentSpaceshipData.Detection.ToString();
+           // s_capacity.text = currentSpaceshipData.Capacity.ToString();
 
             s_fireRate.text = currentSpaceshipData.FireRate.ToString();
-            s_dogde.text = currentSpaceshipData.Dogde.ToString();
+            //s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
             SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
             SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
             SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
             SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
-            SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
-            SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
-            SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
+            //SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
+           // SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
+            SetWidth(s_firerate_valueBar, currentSpaceshipData.Capacity);
 
             ShowNewSpaceshipSelect();
 

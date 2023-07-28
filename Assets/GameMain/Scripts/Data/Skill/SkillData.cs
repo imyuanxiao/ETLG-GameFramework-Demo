@@ -253,15 +253,15 @@ namespace ETLG.Data
             switch (id)
             {
                 case (int) EnumSkill.EdgeComputing:
-                    return 2;
+                    return 2 + (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Energy / 100;
                 case (int) EnumSkill.ElectronicWarfare:
-                    return 1;
+                    return 1 + (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Energy / 100;
                 case (int) EnumSkill.MedicalSupport:
-                    return 3;
+                    return 3 + (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Energy / 100;
                 case (int) EnumSkill.EnergyBoost:
-                    return 3;
+                    return 3 + (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Energy / 100;
                 case (int) EnumSkill.AdaptiveIntelligentDefense:
-                    return 1;
+                    return 1 + (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Energy / 100;
                 default:
                     return 0;
             }

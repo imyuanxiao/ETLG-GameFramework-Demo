@@ -22,7 +22,7 @@ namespace ETLG
         public Button combatButton;
 
 
-        public TextMeshProUGUI planet_name = null;
+       // public TextMeshProUGUI planet_name = null;
         public TextMeshProUGUI planet_domain = null;
 
         public TextMeshProUGUI planet_percentage = null;
@@ -61,7 +61,7 @@ namespace ETLG
             overviewButton.onClick.AddListener(OnOverviewButtonClick);
             combatButton.onClick.AddListener(OnCombatButtonClick);
 
-            planet_name.text = dataPlanet.GetPlanetData(PlanetID).Name;
+           // planet_name.text = dataPlanet.GetPlanetData(PlanetID).Name;
             planet_domain.text = dataPlanet.GetPlanetData(PlanetID).TypeStr;
 
             // need to get study progress

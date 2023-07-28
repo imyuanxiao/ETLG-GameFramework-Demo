@@ -15,7 +15,9 @@ namespace ETLG
 
         public TextMeshProUGUI landingpoint_title = null;
         public Button exploreButton;
-        public Button combatButton;
+        //public Button combatButton;
+
+        public TextMeshProUGUI planet_percentage = null;
 
         private DataLandingPoint dataLandingPoint;
 
@@ -45,8 +47,12 @@ namespace ETLG
             landingpoint_title.text = dataLandingPoint.GetLandingPointData(landingPointID).Title;
 
             exploreButton.onClick.AddListener(OnExploreButtonClick);
-            combatButton.onClick.AddListener(OnCombatButtonClick);
+           // combatButton.onClick.AddListener(OnCombatButtonClick);
 
+            // need to get study progress
+            float percentage = 33.45f;
+
+            planet_percentage.text = (int)percentage + "%";
 
 
         }
@@ -55,7 +61,7 @@ namespace ETLG
         {
             base.OnHide(isShutdown, userData);
             exploreButton.onClick.RemoveAllListeners();
-            combatButton.onClick.RemoveAllListeners();
+            //combatButton.onClick.RemoveAllListeners();
         }
 
         public void OnCombatButtonClick()

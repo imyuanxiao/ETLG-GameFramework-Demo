@@ -141,9 +141,9 @@ namespace ETLG
         {
             if (Type.Equals(Constant.Type.ARROW_DOWN))
             {
-                return Utility.Text.Format("PlanetMenu/ArrowDown");
+                return Utility.Text.Format("PlanetMenu/TreeExpand");
             }
-            return Utility.Text.Format("PlanetMenu/ArrowRight");
+            return Utility.Text.Format("PlanetMenu/TreeCollapse");
 
         }
 
