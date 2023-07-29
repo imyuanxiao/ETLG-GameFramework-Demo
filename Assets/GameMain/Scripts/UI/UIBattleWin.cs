@@ -14,6 +14,7 @@ namespace ETLG
         [SerializeField] private TextMeshProUGUI info1 = null;
         // [SerializeField] private TextMeshProUGUI info2 = null;
         [SerializeField] private TextMeshProUGUI[] rewardsInfo;  // 0: coin, 1: skill, 2: fraction
+        public Transform rewardContainer;
         private List<int> rewardsId;
 
         protected override void OnInit(object userData)
@@ -73,6 +74,8 @@ namespace ETLG
                 info1.text = "Reward";
                 // info2.text = "Reward";
             }
+
+            DisplayRewardInfo();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -211,7 +214,10 @@ namespace ETLG
 
         private void DisplayRewardInfo()
         {
+            // Reward ID: [id, num, id, num, ...]
             // this.rewardsId;
+            // Reward Container Transform
+            // this.rewardContainer;
         }
     }
 }
