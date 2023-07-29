@@ -3,6 +3,7 @@
   <ResourceCollection>
     <Resources>
       <Resource Name="Configs/BuildInfo" LoadType="0" Packed="False" />
+      <Resource Name="Configs/BuildSettings" LoadType="0" Packed="False" />
       <Resource Name="Configs/DataTableCodeTemplate" LoadType="0" Packed="False" />
       <Resource Name="Configs/Default" LoadType="0" Packed="False" />
       <Resource Name="Configs/DefaultConfig" LoadType="0" Packed="False" />
@@ -91,6 +92,8 @@
       <Resource Name="Entity/Spaceships/BossEnemy/DataScienceBoss" LoadType="0" Packed="False" />
       <Resource Name="Entity/Spaceships/BossEnemy/FinalBoss" LoadType="0" Packed="False" />
       <Resource Name="Entity/Spaceships/BossEnemy/IoTBoss" LoadType="0" Packed="False" />
+      <Resource Name="Entity/Spaceships/BossEnemy/model" LoadType="0" Packed="False" />
+      <Resource Name="Entity/Spaceships/BossEnemy/model-2" LoadType="0" Packed="False" />
       <Resource Name="Entity/Spaceships/FX/CloudComputingFX" LoadType="0" Packed="False" />
       <Resource Name="Entity/Spaceships/FX/ElectronicWarfare" LoadType="0" Packed="False" />
       <Resource Name="Entity/Spaceships/FX/FireWallFX" LoadType="0" Packed="False" />
@@ -323,6 +326,7 @@
       <Resource Name="Sounds/FreePack/Flaregun5-2" LoadType="0" Packed="False" />
       <Resource Name="Sounds/FreePack/HandGun2" LoadType="0" Packed="False" />
       <Resource Name="Sounds/FreePack/LaserGunSalve" LoadType="0" Packed="False" />
+      <Resource Name="Sounds/FreePack/Magic_Spell_Simple_Swoosh_6" LoadType="0" Packed="False" />
       <Resource Name="Sounds/FreePack/Railgun-Shot6" LoadType="0" Packed="False" />
       <Resource Name="Sounds/Music/GameMusic" LoadType="0" Packed="False" />
       <Resource Name="Sounds/Music/MenuMusic" LoadType="0" Packed="False" />
@@ -332,20 +336,25 @@
       <Resource Name="UI/Dynamic/Choice" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/Dialog/ArtifactSlot" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/Dialog/bgColor" LoadType="0" Packed="False" />
+      <Resource Name="UI/Dynamic/Dialog/ImageContainer" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/Dialog/RespondButton" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/Dialog/UINPCDialogForm" LoadType="0" Packed="False" />
+      <Resource Name="UI/Dynamic/Dialog/VideoContainer" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemArtifactIcon" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemCostResBar" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemLandingPointSelect" LoadType="0" Packed="False" />
+      <Resource Name="UI/Dynamic/ItemLandingPointSelect-old" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemModuleIcon" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemNPCSelect" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemPlanetSelect" LoadType="0" Packed="False" />
+      <Resource Name="UI/Dynamic/ItemPlanetSelect-old" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemRewardIcon" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemRewardPreview" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/ItemSkillIcon" LoadType="0" Packed="False" />
       <Resource Name="UI/Dynamic/UILeaderboardInfo" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIAchievementForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIAchievementPopUp" LoadType="0" Packed="False" />
+      <Resource Name="UI/UIForms/UIAlertForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIArtifactInfoForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIArtifactInfoTradeForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIBasicBattleLost" LoadType="0" Packed="False" />
@@ -359,6 +368,7 @@
       <Resource Name="UI/UIForms/UILeaderBoardForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UILoadGameForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UILoadingSceneForm" LoadType="0" Packed="False" />
+      <Resource Name="UI/UIForms/UILoginForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIMainMenuForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIMapInfoForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIMapPlayerInfoForm" LoadType="0" Packed="False" />
@@ -384,9 +394,11 @@
       <Resource Name="UI/UIForms/UISkillUpgradeInfoForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UISpaceshipCheckForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UISpaceshipSelectForm" LoadType="0" Packed="False" />
+      <Resource Name="UI/UIForms/UISpaceshipSelectForm-old" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UITemplate" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UITipForm" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UITutorialForm" LoadType="0" Packed="False" />
+      <Resource Name="UI/UIForms/UITutorialForm-old" LoadType="0" Packed="False" />
       <Resource Name="UI/UIForms/UIUpdateResourceForm" LoadType="0" Packed="False" />
     </Resources>
     <Assets>
@@ -432,6 +444,7 @@
       <Asset Guid="154bbb6bdc39d5e47b092bfa603f6ec2" ResourceName="UI/Dynamic/Dialog/UINPCDialogForm" />
       <Asset Guid="15e2bf8429954624197afde70d321228" ResourceName="UI/UIForms/UISkillTreeForm" />
       <Asset Guid="163adec682b5ccd4c8dbb7766c20f3fb" ResourceName="Res/UnityTechnologies/ParticlePack/Scenes/Main" />
+      <Asset Guid="169f87cebb3ea394a9d9aa4e2f276729" ResourceName="UI/Dynamic/Dialog/VideoContainer" />
       <Asset Guid="16db349a6a34d1842aa7dae341465efe" ResourceName="Res/Models/Spaceships/Package/Prefabs/Modules/MainBody13" />
       <Asset Guid="177402d57fe3731418fe6f6f06a001ce" ResourceName="DataTables/ItemGroup" />
       <Asset Guid="1795a009689392141bfef739626c2eea" ResourceName="UI/UIForms/UIPlanetTag" />
@@ -449,6 +462,8 @@
       <Asset Guid="1ed4cc9591ab237489f81e57fa0f1f24" ResourceName="UI/UIForms/UIPlayerMenuForm" />
       <Asset Guid="2029c1e0d197912438111bb29eaa9885" ResourceName="Res/Models/Spaceships/Package/Materials/Engines/Thrusters/Thrusters1" />
       <Asset Guid="20929db29720c824681faf2ef34d3cc4" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_MetallicSmooth" />
+      <Asset Guid="20a1219ce1f6d974b9f5621c2f181aef" ResourceName="UI/Dynamic/Dialog/ImageContainer" />
+      <Asset Guid="20ea1b47931204549b304268c714d189" ResourceName="UI/UIForms/UIAlertForm" />
       <Asset Guid="21617474d5ac06548b6020406dbe6e6b" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/CornerWall" />
       <Asset Guid="21c505286c5bbe045a472bee261889e8" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ConcreteFloor" />
       <Asset Guid="21f4ee7b875c5614bae545ccd6c7652e" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Step" />
@@ -496,6 +511,7 @@
       <Asset Guid="43585d00c43c25f4d8c4d32eb00ee80e" ResourceName="Res/Models/Spaceships/Package/Textures/Engines/Engine1/Masks/Engine1_Neutral" />
       <Asset Guid="440e95bfc37e3db4a9df0a5e5b4ee7ea" ResourceName="DataTables/SoundPlayParam" />
       <Asset Guid="446cd81926e0f8f41ba901232882f7eb" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorLong" />
+      <Asset Guid="44896e3f768b47a4a9f9b45c72beb9f0" ResourceName="UI/UIForms/UITutorialForm-old" />
       <Asset Guid="449cd94dd3780f8459b1d619676a4b0a" ResourceName="Res/Models/Spaceships/Package/Textures/Cockpits/CockpitsEquipments/Masks/CockpitsEquipments_Mask2" />
       <Asset Guid="44b8d580b17830f47bea41c5340ecb07" ResourceName="DataTables/PoolParam" />
       <Asset Guid="45e11ca837ab9e64c8cb8a9ae58fc6f3" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_AmbientOcclusion" />
@@ -508,11 +524,13 @@
       <Asset Guid="4a71a58a3a7116c4a8aabbf8699066aa" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorMiddle" />
       <Asset Guid="4ab2fc4928ff37746b26b549008cd60d" ResourceName="Res/Models/Spaceships/Package/Prefabs/Examples/Example2_Grey" />
       <Asset Guid="4ac9803d443f78f4bbedb0ef1c4a4f21" ResourceName="Res/Models/Spaceships/Package/Materials/Cockpits/Grey/Cockpit3Grey_interior" />
+      <Asset Guid="4c0bd3b9396d6dd428a5a34e5ab23dce" ResourceName="UI/Dynamic/ItemLandingPointSelect-old" />
       <Asset Guid="4c849bd80048b234f88f393b50f13cef" ResourceName="Entity/PlanetResources/Fragment/source/Meterials/CloudComputing" />
       <Asset Guid="4e219e4526922b441a10f1e5eec7bc64" ResourceName="Res/Models/Spaceships/Package/Materials/MainBodies/Red/MainBody13" />
       <Asset Guid="4f273eaa73143dd40952f40fc149bf96" ResourceName="UI/UIForms/UIMapPlayerInfoForm" />
       <Asset Guid="500d4c35f4ac641418cc7788ffc0e950" ResourceName="Res/Texture/Square" />
       <Asset Guid="50b3b1d8d68cdcc4bb21947d703b7d7e" ResourceName="DataTables/Artifact" />
+      <Asset Guid="50c0b83fc52c94c41ae0773ae70ec368" ResourceName="Entity/Spaceships/BossEnemy/model-2" />
       <Asset Guid="50d56e9319acd7440a97582160b01520" ResourceName="Res/Models/Spaceships/Package/Prefabs/Examples/Example1_Grey" />
       <Asset Guid="50d6c6916e743b64c8b4e4282f2c9603" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Materials/MetalRailing" />
       <Asset Guid="50ebca0a9ecce6b45af74ca6cb6174f3" ResourceName="Res/Models/Spaceships/Package/Textures/Wings/Wing6/Wing6_Grey" />
@@ -520,6 +538,7 @@
       <Asset Guid="52915f992843f8247b7efd2a65b1b998" ResourceName="Res/Materials/DiverseSpace/Textures/diversespace-front" />
       <Asset Guid="52f0aa9ae4de2f143bd32e59f6d03e4a" ResourceName="UI/UIForms/UIBattleIntro" />
       <Asset Guid="53228af3de13b9840bdda175cf6cc634" ResourceName="Res/Materials/ClassicSpace/Textures/right-classicspace" />
+      <Asset Guid="53269347f1cb015489fffa7e21ed859a" ResourceName="Entity/Spaceships/BossEnemy/model" />
       <Asset Guid="534f375dff9795c4baa527015ef28ddb" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Models/AreaLine" />
       <Asset Guid="540e87623294c5b40a980fe993cc54df" ResourceName="UI/UIForms/UIEquipInfoForm" />
       <Asset Guid="54e1b562c3fea284f8a0ec8cdc70057c" ResourceName="Res/Models/Spaceships/Package/Prefabs/Modules/Cockpit3_WithInterior" />
@@ -548,7 +567,7 @@
       <Asset Guid="5ff823f546b52574a931e1d9b44290a6" ResourceName="Sounds/FreePack/Cannonimpact9" />
       <Asset Guid="605d16aa917c90e48971f4340823b8bc" ResourceName="DataTables/UIForm" />
       <Asset Guid="608a51bfce29a174aa86b692c9ff38b3" ResourceName="Res/Materials/DiverseSpace/Textures/diversespace-left" />
-      <Asset Guid="60a40c19d88fd31468710b983f7e59d0" ResourceName="UI/Dynamic/ItemPlanetSelect" />
+      <Asset Guid="60a40c19d88fd31468710b983f7e59d0" ResourceName="UI/Dynamic/ItemPlanetSelect-old" />
       <Asset Guid="62a5c21637649fb4fb57ae4346141d17" ResourceName="UI/UIForms/UITipForm" />
       <Asset Guid="62b51f228b42c324fb2ec0d41ffbbe8e" ResourceName="UI/UIForms/UIUpdateResourceForm" />
       <Asset Guid="62ccee03ad9bf0844a2b5088d42aa28c" ResourceName="Entity/PlanetResources/RewardChest/source/textures/RewardChest" />
@@ -632,6 +651,7 @@
       <Asset Guid="987197a2dc9ee3f4c98478add1a7df9e" ResourceName="UI/UIForms/UILeaderBoardForm" />
       <Asset Guid="9b4e20ea3ad32e04da99a01b0dde1557" ResourceName="UI/UIForms/UILoadGameForm" />
       <Asset Guid="9b9f550889d540d4aa3953db001cc91f" ResourceName="Res/Models/Spaceships/Package/Textures/MainBodies/MainBody2/Masks/MainBody2_Neutral" />
+      <Asset Guid="9bcca43c64b224b4ba78d2b02c96597d" ResourceName="UI/UIForms/UISpaceshipSelectForm-old" />
       <Asset Guid="9c0b3284c094e9941a652ea28f317c0b" ResourceName="Res/Models/Spaceships/Package/Textures/Weapons/Blaster/Masks/Blaster_Neutral" />
       <Asset Guid="9d7da096aebbcb54bb22fd6953e517fb" ResourceName="Res/Models/Spaceships/Package/Textures/MainBodies/MainBody13/MainBody13_MetallicSmoothness" />
       <Asset Guid="9e7f9a051631c1c4c8eaa31eb406ff68" ResourceName="Res/Models/Spaceships/Package/Prefabs/Modules/Cockpit3_WithoutInterior" />
@@ -686,6 +706,7 @@
       <Asset Guid="b954d265697c4d746939c5ca5f72f71a" ResourceName="UI/UIForms/UITutorialForm" />
       <Asset Guid="bcada2e71caed854899333a54af12339" ResourceName="Entity/Spaceships/BossEnemy/AIBoss" />
       <Asset Guid="bccfe129d6c46dd42a2332a24a0ea3cc" ResourceName="Res/Materials/DiverseSpace/Textures/diversespace-up" />
+      <Asset Guid="bd494862310aaa24ebcfb19620602043" ResourceName="UI/Dynamic/ItemPlanetSelect" />
       <Asset Guid="bdd1b3872cd77a74c805d90b38fab05e" ResourceName="Res/Models/Spaceships/Package/Textures/Cockpits/Cockpit3/Cockpit3_MetallicSmoothness" />
       <Asset Guid="be2b7a08a7e89504e81e5369dc423f30" ResourceName="Entity/Spaceships/BossEnemy/BlockchainBoss" />
       <Asset Guid="c0bc782e0d4335743a6d7f351079b682" ResourceName="DataTables/SoundPlayParam" />
@@ -704,6 +725,8 @@
       <Asset Guid="ca8f010e31c281c4ca6dfb2f070deb93" ResourceName="UI/Dynamic/ItemModuleIcon" />
       <Asset Guid="cb79dfaeb8eb1db47a2fd674eb857b1e" ResourceName="UI/UIForms/UIAchievementForm" />
       <Asset Guid="cbfc8e5b57a43684aacd34f77a9ceccb" ResourceName="Res/Models/Spaceships/Package/Textures/Cockpits/Cockpit3/Cockpit3_Red" />
+      <Asset Guid="cc6699269b4c1d44ea1e860518b9bb73" ResourceName="Sounds/FreePack/Magic_Spell_Simple_Swoosh_6" />
+      <Asset Guid="cd6aba15a95f094498ac7e252ef3d628" ResourceName="Configs/BuildSettings" />
       <Asset Guid="cdaac7b3e4461db4296ff1edf0046d09" ResourceName="Entity/PlanetResources/Fragment/source/Meterials/Cybersecurity" />
       <Asset Guid="cf08aeb1da73b6142be2a02582dcf194" ResourceName="Entity/PlanetResources/Coins/sourse/knowledgeCoin" />
       <Asset Guid="cf1e9f7b9be1bc14b88c4cb982ac62ee" ResourceName="Entity/PlanetResources/HighPurityMetal/source/Materials/Metal-lower" />
@@ -719,6 +742,7 @@
       <Asset Guid="d40e6ae8e2813774882bcaf23d9a9cd6" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Stairs" />
       <Asset Guid="d45426413e686514299d5831d7e0e5fc" ResourceName="Res/Models/Spaceships/Package/Textures/Weapons/Blaster/Masks/Blaster_Mask2" />
       <Asset Guid="d580c3c76245fea46b16f5adc019967a" ResourceName="Res/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_MetallicSmooth" />
+      <Asset Guid="d58847e5dab286b4eae1ec4d519ac4c0" ResourceName="UI/UIForms/UILoginForm" />
       <Asset Guid="d750c3427ce4d8b47b341a8a90a7b1ac" ResourceName="DataTables/SoundGroup" />
       <Asset Guid="d787a65b60177aa45a2e22873ffca22c" ResourceName="Configs/ResourceBuilder" />
       <Asset Guid="d8431d3a8826f5a4c97dfc66a52a185d" ResourceName="Entity/Spaceships/BossEnemy/CybersecurityBoss" />

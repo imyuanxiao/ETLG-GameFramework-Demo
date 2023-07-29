@@ -56,7 +56,9 @@ namespace ETLG
         private const float max_prefabWidth = 1760f;
         private const float max_textWidth = 1540f;
         private int default_fontsize = 20;
-        private int fontsizeChangeValue = 0;
+        private int fontsizeChangePlusValue = 0;
+        private int fontsizeChangeSubValue = 0;
+        private int fontsizeStandardOffset = 2;
 
         protected override void OnInit(object userData)
         {
@@ -166,7 +168,6 @@ namespace ETLG
                 dialogBGTransfrom.sizeDelta = new Vector2(min_contentWidth, currentdialogUIHeight);
                 resizeDialog(min_prefabWidth, min_textWidth);
             }
-            updateFontSize();
         }
 
         //修改聊天记录宽度
@@ -350,7 +351,7 @@ namespace ETLG
             RectTransform textModuleRectTransform = textModule.GetComponent<RectTransform>();
             setColorAlpha(textModuleRectTransform, "player");
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
-            dialogText.fontSize = default_fontsize + fontsizeChangeValue;
+            dialogText.fontSize = default_fontsize + fontsizeChangePlusValue+fontsizeChangeSubValue;
             dialogText.text = text;
             dialogText.alignment = TextAlignmentOptions.Right;
             return textModule;
@@ -365,7 +366,7 @@ namespace ETLG
             setColorAlpha(textModuleRectTransform, "NPC");
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
             dialogText.text = text;
-            dialogText.fontSize = default_fontsize + UI_NPCDialogNPCStatment.fontSizeGap + fontsizeChangeValue;
+            dialogText.fontSize = default_fontsize + UI_NPCDialogNPCStatment.fontSizeGap + fontsizeChangePlusValue + fontsizeChangeSubValue;
             dialogText.ForceMeshUpdate();
 
             dialogText.alignment = TextAlignmentOptions.Left;
@@ -413,14 +414,6 @@ namespace ETLG
             {
                 Debug.Log(UI_NPCDialogNPCStatment.videoPath);
                 VideoClip videoClip = Resources.Load<VideoClip>(UI_NPCDialogNPCStatment.videoPath);
-                if (videoClip == null)
-                {
-                    Debug.Log("clip是空");
-                }
-                else
-                {
-                    Debug.Log("clip不是空");
-                }
 
                 // Load the video from the specified path
                 videoPlayer.clip = videoClip;
@@ -470,29 +463,31 @@ namespace ETLG
 
         private void OnfontPlus()
         {
-            if (default_fontsize+ fontsizeChangeValue < 50)
+            if (fontsizeChangePlusValue+ fontsizeChangeSubValue < 30)
             {
-                fontsizeChangeValue += 2;
+                fontsizeChangePlusValue += 2;
+                updateFontSize(fontsizeStandardOffset);
             }
-            updateFontSize();
         }
 
         private void OnfontSub()
         {
-            if (default_fontsize+ fontsizeChangeValue > 10)
+            if (fontsizeChangePlusValue + fontsizeChangeSubValue > -10)
             {
-                fontsizeChangeValue -= 2;
+                fontsizeChangeSubValue -= 2;
+                updateFontSize(fontsizeStandardOffset*-1);
             }
-            updateFontSize();
         }
 
-        private void updateFontSize()
+        private void updateFontSize(int changeValue)
         {
+            Debug.Log("plus"+fontsizeChangePlusValue);
+            Debug.Log("sub"+ fontsizeChangeSubValue);
             //Image singleTextModule in textModules
             foreach (Transform dialogModule in dialogScrollContent)
             {
                 TextMeshProUGUI text = dialogModule.GetComponentInChildren<TextMeshProUGUI>();
-                text.fontSize = text.fontSize + fontsizeChangeValue;
+                text.fontSize = text.fontSize + changeValue;
                 VerticalLayoutGroup verticalLayoutGroup = dialogModule.GetComponentInChildren<VerticalLayoutGroup>();
                 HorizontalLayoutGroup horizontalLayoutGroup = dialogModule.GetComponentInChildren<HorizontalLayoutGroup>();
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
