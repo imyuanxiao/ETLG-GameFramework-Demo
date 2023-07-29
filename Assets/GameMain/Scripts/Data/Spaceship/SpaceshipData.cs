@@ -120,38 +120,6 @@ namespace ETLG.Data
             }
         }
 
-        public float Speed
-        {
-            get
-            {
-                return dRSpaceship.Speed;
-            }
-        }
-
-        public float Dogde
-        {
-            get
-            {
-                return dRSpaceship.Dogde;
-            }
-        }
-
-        public float Detection
-        {
-            get
-            {
-                return dRSpaceship.Detection;
-            }
-        }
-
-        public float Capacity
-        {
-            get
-            {
-                return dRSpaceship.Capacity;
-            }
-        }
-
         public int[] SkillIds
         {
             get
@@ -160,47 +128,11 @@ namespace ETLG.Data
             }
         }
 
-        /*        public int ProjectileId
-                {
-                    get
-                    {
-                        return dRSpaceship.ProjectileId;
-                    }
-                }*/
-
-
-
         public SpaceshipData(DRSpaceship dRSpaceship)
         {
             this.dRSpaceship = dRSpaceship;
         }
 
- /*       public SpaceshipData(DRSpaceship dRSpaceship, SkillData[] skillDatas)
-        {
-            this.dRSpaceship = dRSpaceship;
-            this.skillDatas = skillDatas;
-        }*/
-
-        // 获取飞船初始技能信息
-
-/*        public SkillData[] GetSkillDatas()
-        {
-            return skillDatas;
-        }
-
-        public SkillData GetSkillData(int num)
-        {
-            if (skillDatas == null || num > GetMaxNum())
-                return null;
-
-            return skillDatas[num];
-        }
-
-        public int GetMaxNum()
-        {
-            return skillDatas == null ? 0 : skillDatas.Length - 1;
-        }
-*/
     }
 }
 

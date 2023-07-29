@@ -149,20 +149,8 @@ namespace ETLG.Data
                 case Constant.Type.ATTR_Agility:
                     newValue = playerCalculatedSpaceshipData.Agility;
                     break;
-                case Constant.Type.ATTR_Speed:
-                    newValue = playerCalculatedSpaceshipData.Speed;
-                    break;
-                case Constant.Type.ATTR_Detection:
-                    newValue = playerCalculatedSpaceshipData.Detection;
-                    break;
-                case Constant.Type.ATTR_Capacity:
-                    newValue = playerCalculatedSpaceshipData.Capacity;
-                    break;
                 case Constant.Type.ATTR_Firerate:
                     newValue = playerCalculatedSpaceshipData.FireRate;
-                    break;
-                case Constant.Type.ATTR_Dogde:
-                    newValue = playerCalculatedSpaceshipData.Dogde;
                     break;
             }
 
@@ -195,20 +183,8 @@ namespace ETLG.Data
                 case Constant.Type.ATTR_Agility:
                     playerCalculatedSpaceshipData.Agility = newValue;
                     break;
-                case Constant.Type.ATTR_Speed:
-                    playerCalculatedSpaceshipData.Speed = newValue;
-                    break;
-                case Constant.Type.ATTR_Detection:
-                    playerCalculatedSpaceshipData.Detection = newValue;
-                    break;
-                case Constant.Type.ATTR_Capacity:
-                    playerCalculatedSpaceshipData.Capacity = newValue;
-                    break;
                 case Constant.Type.ATTR_Firerate:
                     playerCalculatedSpaceshipData.FireRate = newValue;
-                    break;
-                case Constant.Type.ATTR_Dogde:
-                    playerCalculatedSpaceshipData.Dogde += newValue;
                     break;
             }
 
@@ -223,11 +199,7 @@ namespace ETLG.Data
             sum += playerCalculatedSpaceshipData.Firepower;
             sum += playerCalculatedSpaceshipData.Energy;
             sum += playerCalculatedSpaceshipData.Agility;
-            sum += playerCalculatedSpaceshipData.Speed;
-            sum += playerCalculatedSpaceshipData.Detection;
-            sum += playerCalculatedSpaceshipData.Capacity;
-            sum += playerCalculatedSpaceshipData.FireRate * 100;
-            sum += playerCalculatedSpaceshipData.Dogde * 100;
+            sum += playerCalculatedSpaceshipData.FireRate;
             return sum;
         }
 
@@ -269,16 +241,8 @@ namespace ETLG.Data
                     return playerCalculatedSpaceshipData.Energy;
                 case Constant.Type.ATTR_Agility:
                     return playerCalculatedSpaceshipData.Agility;
-                case Constant.Type.ATTR_Speed:
-                    return playerCalculatedSpaceshipData.Speed;
-                case Constant.Type.ATTR_Detection:
-                    return playerCalculatedSpaceshipData.Detection;
-                case Constant.Type.ATTR_Capacity:
-                    return playerCalculatedSpaceshipData.Capacity;
                 case Constant.Type.ATTR_Firerate:
                     return playerCalculatedSpaceshipData.FireRate;
-                case Constant.Type.ATTR_Dogde:
-                    return playerCalculatedSpaceshipData.Dogde;
             }
             return 0f;
         }
@@ -337,6 +301,13 @@ namespace ETLG.Data
                     if(number <= 0 && playerModules.Contains(id))
                     {
                         playerModules.Remove(id);
+                        // if equipped module, remove
+                        for(int i = 0; i < equippedModules.Length; i++)
+                        {
+                            if (equippedModules[i] == id) equippedModules[i] = 0;
+                        }
+
+
                     }
                     else if (!playerModules.Contains(id))
                     {
@@ -479,9 +450,10 @@ namespace ETLG.Data
             return targetList;
         }
 
-        public List<int> GetEquippedModuleIdS()
+        public int[] GetEquippedModuleIdS()
         {
-            List<int> result = new List<int>();
+            return equippedModules;
+/*            List<int> result = new List<int>();
             foreach(var id in equippedModules)
             {
                 if(id != 0)
@@ -489,8 +461,7 @@ namespace ETLG.Data
                     result.Add(id);
                 }
             }
-
-            return result;
+            return result;*/
         }
 
         public int[] GetEquippedModules()

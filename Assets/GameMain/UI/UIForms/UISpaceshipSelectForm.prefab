@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Durability
-  tipContent: Increases survivability in combat.
+  tipContent: 0
   position: 0
 --- !u!222 &5136690138107860613
 CanvasRenderer:
@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Firepower
-  tipContent: Boosts attack capabilities and damage-dealing abilities.
+  tipContent: 0
   position: 0
 --- !u!222 &4665739443349088864
 CanvasRenderer:
@@ -3069,7 +3069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Agility
-  tipContent: Improves evasion of enemy attacks.
+  tipContent: 0
   position: 0
 --- !u!222 &8201951832035761897
 CanvasRenderer:
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Energy
-  tipContent: Enables more skills, enhancing combat and travel range.
+  tipContent: 0
   position: 0
 --- !u!222 &8892251138844296091
 CanvasRenderer:
@@ -5600,8 +5600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipTitle: Firerate
-  tipContent: firerate
+  tipTitle: FireRate
+  tipContent: 0
   position: 0
 --- !u!222 &3848155079759545376
 CanvasRenderer:
@@ -7094,7 +7094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Shields
-  tipContent: Provides better defense against enemy attacks.
+  tipContent: 0
   position: 0
 --- !u!222 &6809660487003812546
 CanvasRenderer:
@@ -7252,9 +7252,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 335.995}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &6379757458253359338
 CanvasRenderer:
   m_ObjectHideFlags: 0

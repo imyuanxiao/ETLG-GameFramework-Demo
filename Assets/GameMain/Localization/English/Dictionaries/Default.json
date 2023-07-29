@@ -19,7 +19,18 @@
         "Map_Welcome_Desc":"Welcome to XXXX ! You can explore your learning journal by chossing one of following planet!",
 
         "Tip_Tmp_Reward" : "In development",
-        
+        "Tip_Durability" : "Increases survivability in combat.",
+        "Tip_Shields" : "Provides better defense against enemy attacks.",
+        "Tip_Firepower" : "Boosts attack capabilities and damage-dealing abilities.",
+        "Tip_Energy" : "Every 100 points increase in energy grants an additional use of skills.",
+        "Tip_Agility" : "Enhances movement speed in combat.",
+        "Tip_Speed" : "Enhances movement speed for faster navigation.",
+        "Tip_Detection" : "Improves scanning range and reconnaissance capabilities.",
+        "Tip_Capacity" : "Enhances cargo-carrying capacity and trading abilities.",
+        "Tip_FireRate" : "Every 100 points of attack speed reduce the cooldown of normal attacks by 10%.",
+        "Tip_Dogde" : "Increases the likelihood of evading enemy attacks.",
+        "Tip_Skill Layer" : "Higher-layer skill upgrades require more resources.",
+
 
         "InterstellarExplorer": "Interstellar Explorer",
         "InterstellarExplorerDescription": "The Interstellar Explorer is an advanced spaceship designed for exploring the unknown universe. It was developed due to humanity's urgent desire to uncover hidden secrets and discover new resources in the cosmos. Equipped with advanced detection equipment and navigation systems, the spacecraft can swiftly travel through space and explore various unknown galaxies, planets, and cosmic phenomena. The crew of the Interstellar Explorer comes from different scientific fields, working together to unravel the mysteries and secrets of the universe.",
@@ -30,19 +41,10 @@
         "Guardian": "Guardian",
         "GuardianDescription": "The Guardian is a spaceship specifically designed for support and rescue missions. Its mission is to protect and assist other ships by providing aid and support in hazardous environments. The Guardian is equipped with advanced medical facilities, repair systems, and energy field generators to provide emergency repairs and healing for injured ships. The crew of this ship typically consists of professionals with medical, engineering, and rescue backgrounds.",
         
-        "TipContentSpaceship Type" : "Spaceship type",
-        "TipContentSpaceship Size" : "The smaller the spaceship, the easier it is to dodge the attack",
-        
-        "TipContentDurability" : "Increases resilience and survivability in combat.",
-        "TipContentShields" : "Provides better defense against enemy attacks.",
-        "TipContentFirepower" : "Boosts attack capabilities and damage-dealing abilities.",
-        "TipContentEnergy" : "Enables more skills, enhancing combat and travel range.",
-        "TipContentAgility" : "Improves maneuverability and evasion of enemy attacks.",
-        "TipContentSpeed" : "Enhances movement speed for faster navigation.",
-        "TipContentDetection" : "Improves scanning range and reconnaissance capabilities.",
-        "TipContentCapacity" : "Enhances cargo-carrying capacity and trading abilities.",
-        "TipContentFireRate" : "Higher values mean more rapid and continuous assaults.",
-        "TipContentDogde" : "Increases the likelihood of evading enemy attacks.",
+
+
+
+
 
         "ARTIFACT_TYPE_1" : "Trade",
         "ARTIFACT_TYPE_2" : "Special",
@@ -208,6 +210,13 @@
         "Artifact_CloakingDevice_Desc": "This is description for Cloaking Device",
         "Tip_Cloaking Device": "This is tip for Cloaking Device",
 
+
+        "Artifact_LowLevelUpgradeUnit": "LowLevel UpgradeUnit",
+        "Artifact_IntermediateUpgradeUnit": "Intermediate UpgradeUnit",
+        "Artifact_AdvancedUpgradeUnit": "Advanced UpgradeUnit",
+
+
+
         "Skill_AlienLinguistics": "Alien Linguistics",
         "Skill_AlienLinguistics_Desc": "Alien Linguistics is a skill that allows you to achieve barrier-free communication across various star systems.",
         "Skill_AlienLinguistics_Level_1": "No special effect.",
@@ -278,24 +287,6 @@
 
         "Skill_IntelligentLinkage": "Intelligent Linkage",
         "Skill_IntelligentLinkage_Desc": "This is description for Intelligent Linkage",
-
-
-
-
-
-        "Tip_Durability" : "Increases resilience and survivability in combat.",
-        "Tip_Shields" : "Provides better defense against enemy attacks.",
-        "Tip_Firepower" : "Boosts attack capabilities and damage-dealing abilities.",
-        "Tip_Energy" : "Enables more skills, enhancing combat and travel range.",
-        "Tip_Agility" : "Improves maneuverability and evasion of enemy attacks.",
-        "Tip_Speed" : "Enhances movement speed for faster navigation.",
-        "Tip_Detection" : "Improves scanning range and reconnaissance capabilities.",
-        "Tip_Capacity" : "Enhances cargo-carrying capacity and trading abilities.",
-        "Tip_FireRate" : "Higher values mean more rapid and continuous assaults.",
-        "Tip_Dogde" : "Increases the likelihood of evading enemy attacks.",
-        "Tip_SKILL_LAYER" : "Higher-layer skill upgrades require more resources.",
-
-        "TipContentSKILL_LAYER" : "Different skill layer",
 
 
         "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. \n\nGet ready to fight!",

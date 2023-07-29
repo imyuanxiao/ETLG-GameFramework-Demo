@@ -20,8 +20,8 @@ namespace ETLG
         public RectTransform RewardIconContainer;
 
 
-        public GameObject RewardTick;
-        public GameObject FinishTick;
+       // public GameObject RewardTick;
+       // public GameObject FinishTick;
 
         public TextMeshProUGUI npc_name = null;
 
@@ -88,8 +88,8 @@ namespace ETLG
             });
 
             // get finished chapters from playerData
-            RewardTick.SetActive(false);
-            FinishTick.SetActive(false);
+            //RewardTick.SetActive(false);
+            //FinishTick.SetActive(false);
 
         }
 

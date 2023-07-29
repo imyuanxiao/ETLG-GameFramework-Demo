@@ -33,7 +33,8 @@ public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         GameEntry.Data.GetData<DataPlayer>().tipUiPosition = newPosition;
         GameEntry.Data.GetData<DataPlayer>().tipTitle = tipTitle;
-        GameEntry.Data.GetData<DataPlayer>().tipContent = tipContent;
+        GameEntry.Data.GetData<DataPlayer>().tipContent = tipContent.Equals("0") ? 
+            GameEntry.Localization.GetString(Constant.Key.PRE_TIP + tipTitle) : tipContent;
 
         if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
         {

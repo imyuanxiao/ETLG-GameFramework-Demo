@@ -210,27 +210,17 @@ namespace ETLG
 
             s_durability.text = currentSpaceshipData.Durability.ToString();
             s_shields.text = currentSpaceshipData.Shields.ToString();
-
-            s_firepower.text = currentSpaceshipData.Firepower.ToString();
-            s_energy.text = currentSpaceshipData.Energy.ToString();
-
             s_agility.text = currentSpaceshipData.Agility.ToString();
-            //s_speed.text = currentSpaceshipData.Speed.ToString();
-
-           // s_detection.text = currentSpaceshipData.Detection.ToString();
-           // s_capacity.text = currentSpaceshipData.Capacity.ToString();
-
+            s_energy.text = currentSpaceshipData.Energy.ToString();
+            s_firepower.text = currentSpaceshipData.Firepower.ToString();
             s_fireRate.text = currentSpaceshipData.FireRate.ToString();
-            //s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
             SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
             SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
             SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
             SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
             SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
-            //SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
-           // SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
-            SetWidth(s_firerate_valueBar, currentSpaceshipData.Capacity);
+            SetWidth(s_firerate_valueBar, currentSpaceshipData.FireRate);
 
             ShowNewSpaceshipSelect();
 

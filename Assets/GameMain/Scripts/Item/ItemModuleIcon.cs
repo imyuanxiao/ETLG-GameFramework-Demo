@@ -22,6 +22,7 @@ namespace ETLG
 
         public Button iconButton;
 
+        private bool equipped;
 
         protected override void OnInit(object userData)
         {
@@ -30,11 +31,12 @@ namespace ETLG
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
-
+            equipped = false;
         }
 
         private void OnIconButtonClick()
         {
+            if (equipped) return;
             dataArtifact.lockCurrentModuleID = true;
             GameEntry.Event.Fire(this, ModuleEquipUIchangeEventArgs.Create(Constant.Type.UI_OPEN));
 
@@ -42,6 +44,7 @@ namespace ETLG
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 offset = new Vector3(-10f, 0f, 0f);
             Vector3 newPosition = itemPosition + offset;
@@ -65,9 +68,10 @@ namespace ETLG
 
         }
 
-        public void SetModuleData(int ModuleID)
+        public void SetModuleData(int ModuleID, bool equipped)
         {
             this.CurrentModuleID = ModuleID;
+            this.equipped = equipped;
 
             string texturePath = AssetUtility.GetArtifactIcon(ModuleID.ToString());
 

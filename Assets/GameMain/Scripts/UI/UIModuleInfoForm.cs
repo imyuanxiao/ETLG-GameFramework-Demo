@@ -62,7 +62,7 @@ namespace ETLG
 
             ArtifactModuleData moduleData = dataArtifact.GetCurrentShowModuleData();
 
-            UIContainer.position = new Vector3(50f, 120f, 0f);
+            UIContainer.position = new Vector3(50f,450f, 0f);
 
             ModuleName.text = moduleData.Name;
             ModuleType.text = moduleData.ClassificationName();

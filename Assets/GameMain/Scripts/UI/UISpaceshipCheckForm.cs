@@ -38,27 +38,26 @@ namespace ETLG
         // initial attrs
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
-        public TextMeshProUGUI s_firepower = null;
-        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_agility = null;
-        public TextMeshProUGUI s_speed = null;
-
-        public TextMeshProUGUI s_detection = null;
-        public TextMeshProUGUI s_capacity = null;
-
+        public TextMeshProUGUI s_energy = null;
+        public TextMeshProUGUI s_firepower = null;
         public TextMeshProUGUI s_fireRate = null;
-        public TextMeshProUGUI s_dogde = null;
+
+        public GameObject s_durability_initialVal = null;
+        public GameObject s_shields_initialVal = null;
+        public GameObject s_agility_initialVal = null;
+        public GameObject s_energy_initialVal = null;
+        public GameObject s_firepower_initialVal = null;
+        public GameObject s_fireRate_initialVal = null;
+
+        public GameObject s_durability_increVal = null;
+        public GameObject s_shields_increVal = null;
+        public GameObject s_agility_increVal = null;
+        public GameObject s_energy_increVal = null;
+        public GameObject s_firepower_increVal = null;
+        public GameObject s_fireRate_increVal = null;
 
         private readonly float valueBarMaxWidth = 180;
-
-        public GameObject s_durability_valueBar = null;
-        public GameObject s_shields_valueBar = null;
-        public GameObject s_energy_valueBar = null;
-        public GameObject s_firepower_valueBar = null;
-        public GameObject s_agility_valueBar = null;
-        public GameObject s_speed_valueBar = null;
-        public GameObject s_detection_valueBar = null;
-        public GameObject s_capacity_valueBar = null;
 
         public TextMeshProUGUI playerMoney = null;
         public TextMeshProUGUI playerScore = null;
@@ -67,7 +66,14 @@ namespace ETLG
 
         public Transform moduleContainer = null;
 
-        public Transform equippedModuleContainer = null;
+        public Transform moduleWeapon = null;
+        public Transform moduleAttack = null;
+        public Transform moduleDefense = null;
+        public Transform modulePowerDrive = null;
+        public Transform moduleSupport1 = null;
+        public Transform moduleSupport2 = null;
+
+        //public Transform equippedModuleContainer = null;
 
         private DataPlayer dataPlayer;
 
@@ -106,8 +112,6 @@ namespace ETLG
             modulePowerdriveButton.onClick.AddListener(OnModulePowerdriveButtonClick);
             moduleSupportButton.onClick.AddListener(OnModuleSupportButtonClick);
 
-
-
             // 获取玩家数据管理器
             dataPlayer = GameEntry.Data.GetData < DataPlayer>();
 
@@ -128,7 +132,6 @@ namespace ETLG
 
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
             selectedModuleType = Constant.Type.ARTIFACT_ALL;
-
 
         }
 
@@ -175,9 +178,7 @@ namespace ETLG
         {
 
             Dictionary<int, int> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Type);
-
             int i = 0;
-
             foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
                 int ArtifactID = kvp.Key;
@@ -185,7 +186,6 @@ namespace ETLG
 
                 Vector3 offset = new Vector3((i % 4) * 90f + 15f, (i / 4) * (-110f) - 10f, 0f);
                 i++;
-
                 if (ArtifactID == (int)EnumArtifact.Money || ArtifactID == (int)EnumArtifact.KnowledgePoint)
                 {
                     i--;
@@ -207,50 +207,51 @@ namespace ETLG
         private void ShowModuleIcons(Transform container, int Type)
         {
             List<int> playerModuleIDs = dataPlayer.GetPlayerData().GetModulesByType(Type);
-            Log.Debug("modules count {0}",playerModuleIDs.Count);
             for(int i = 0; i <  playerModuleIDs.Count; i++)
             {
                 int ModuleID = playerModuleIDs[i];
                 Vector3 offset = new Vector3((i % 6) * 90f + 10f, (i / 6) * -90f - 10f, 0f);
-
                 ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID);
+                    item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID, false);
                 });
             }
 
         }
 
-        private void ShowEquipeedModuleIcons(Transform container)
+        private void ShowEquipeedModuleIcons()
         {
-            List<int> playerEquippedModuleIDs = dataPlayer.GetPlayerData().GetEquippedModuleIdS();
+            int[] playerEquippedModuleIDs = dataPlayer.GetPlayerData().GetEquippedModuleIdS();
 
+            if (playerEquippedModuleIDs[0] != 0) ShowIcon(moduleWeapon, playerEquippedModuleIDs[0]);
+            if (playerEquippedModuleIDs[1] != 0) ShowIcon(moduleAttack, playerEquippedModuleIDs[1]);
+            if (playerEquippedModuleIDs[2] != 0) ShowIcon(moduleDefense, playerEquippedModuleIDs[2]);
+            if (playerEquippedModuleIDs[3] != 0) ShowIcon(modulePowerDrive, playerEquippedModuleIDs[3]);
+            if (playerEquippedModuleIDs[4] != 0) ShowIcon(moduleSupport1, playerEquippedModuleIDs[4]);
+            if (playerEquippedModuleIDs[5] != 0) ShowIcon(moduleSupport2, playerEquippedModuleIDs[5]);
 
-            for (int i = 0; i < playerEquippedModuleIDs.Count; i++)
+        }
+
+        private void ShowIcon(Transform container, int ModuleID)
+        {
+            ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
             {
-                int ModuleID = playerEquippedModuleIDs[i];
-                Vector3 offset = new Vector3((i % 3) * 90f + 10f, (i / 3) * -90f - 10f, 0f);
-
-                ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
-                {
-                    item.transform.SetParent(container, false);
-                    item.transform.localScale = Vector3.one;
-                    item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + offset;
-                    item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID);
-                });
-            }
-
+                item.transform.SetParent(container, false);
+                item.transform.localScale = Vector3.one;
+                item.transform.eulerAngles = Vector3.zero;
+                item.transform.localPosition = Vector3.zero;
+                item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID, true);
+            });
         }
 
 
         public void ShowContent()
         {
-
+            SpaceshipData initialSpaceshipData = dataPlayer.GetPlayerData().initialSpaceship;
             PlayerCalculatedSpaceshipData currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             if (currentSpaceshipData == null)
@@ -272,24 +273,26 @@ namespace ETLG
             s_firepower.text = currentSpaceshipData.Firepower.ToString();
             s_fireRate.text = currentSpaceshipData.FireRate.ToString();
             s_agility.text = currentSpaceshipData.Agility.ToString();
-            s_speed.text = currentSpaceshipData.Speed.ToString();
-            s_detection.text = currentSpaceshipData.Detection.ToString();
-            s_capacity.text = currentSpaceshipData.Capacity.ToString();
-            s_dogde.text = currentSpaceshipData.Dogde.ToString();
 
-            SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
-            SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
-            SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
-            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
-            SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
-            SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
-            SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
-            SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
+
+            SetWidth(s_durability_initialVal, initialSpaceshipData.Durability);
+            SetWidth(s_shields_initialVal, initialSpaceshipData.Shields);
+            SetWidth(s_agility_initialVal, initialSpaceshipData.Agility);
+            SetWidth(s_energy_initialVal, initialSpaceshipData.Energy);
+            SetWidth(s_firepower_initialVal, initialSpaceshipData.Firepower);
+            SetWidth(s_fireRate_initialVal, initialSpaceshipData.FireRate);
+
+            SetWidth(s_durability_increVal, currentSpaceshipData.Durability - initialSpaceshipData.Durability);
+            SetWidth(s_shields_increVal, currentSpaceshipData.Shields - initialSpaceshipData.Shields);
+            SetWidth(s_agility_increVal, currentSpaceshipData.Agility - initialSpaceshipData.Agility);
+            SetWidth(s_energy_increVal, currentSpaceshipData.Energy - initialSpaceshipData.Energy);
+            SetWidth(s_firepower_increVal, currentSpaceshipData.Firepower - initialSpaceshipData.Firepower);
+            SetWidth(s_fireRate_increVal, currentSpaceshipData.FireRate - initialSpaceshipData.FireRate);
 
             HideAllItem();
             ShowArtifactIcons(artifactContainer, selectedArtifactType);
             ShowModuleIcons(moduleContainer, selectedModuleType);
-            ShowEquipeedModuleIcons(equippedModuleContainer);
+            ShowEquipeedModuleIcons();
 
         }
 
