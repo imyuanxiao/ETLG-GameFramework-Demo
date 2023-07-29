@@ -12,7 +12,6 @@ namespace ETLG
         public string responseData;
         List<LeaderboardData> rankList;
         //≈≈––∞Ò
-
         private string leaderboard_url = "https://github.com/xw22087/rbac/tree/main/rbac-backend/src/main/java/com/imyuanxiao/rbac/controller/api/profile/getRank";
 
 
@@ -70,7 +69,7 @@ namespace ETLG
                 else
                 {
                     // API«Î«Û ß∞‹
-                 //   Debug.LogError("Error: " + www.error);
+                    Debug.LogError("Error: " + www.error);
                 }
             }
         }
