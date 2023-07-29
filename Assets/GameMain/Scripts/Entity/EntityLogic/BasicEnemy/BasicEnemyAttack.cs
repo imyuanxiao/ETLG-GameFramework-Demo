@@ -13,6 +13,7 @@ namespace ETLG
         [SerializeField] private Transform bulletSpawnPosition;
         private BasicEnemyController controller;
         private float fireRate;
+        private int difficulty;
 
         private void Awake() 
         {
@@ -24,6 +25,7 @@ namespace ETLG
             // fireRate = 1.5f;
             InitBasicEnemy();
             StartCoroutine(Fire());
+            this.difficulty = SaveManager.Instance.difficulty;
         }
 
         private void InitBasicEnemy()
@@ -73,7 +75,7 @@ namespace ETLG
         {
             // bullet.damage = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
             // bullet.damage = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyAttackBase;
-            bullet.damage = BattleManager.Instance.basicEnemyAttackBase;
+            bullet.damage = BattleManager.Instance.basicEnemyAttackBase + 3 * difficulty;
             bullet.flyingDirection = new Vector3(0, 0, -1);
             bullet.flyingSpeed = 1000;
         }

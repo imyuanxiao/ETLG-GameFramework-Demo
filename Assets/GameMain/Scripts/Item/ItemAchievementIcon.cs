@@ -11,7 +11,7 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class ItemAchievementIcon : ItemLogicEx
+    public class ItemAchievementIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
         private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
@@ -22,8 +22,9 @@ namespace ETLG
         public TextMeshProUGUI progress = null;
         public TextMeshProUGUI next_level = null;
         public Transform container;
-        public string tipTitle;
         public int position = 0;
+        private int level;
+        private int id;
         public bool refresh;
         private Dictionary<int, int> playerTotalArtifact;
         protected override void OnInit(object userData)
@@ -31,7 +32,6 @@ namespace ETLG
             base.OnInit(userData);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
-
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -50,13 +50,15 @@ namespace ETLG
         {
             this.container = container;
             this.achievementData = dataAchievement.GetDataById(id);
+            this.id = id;
+            
             refresh = false;
             SetData();
         }
         private void SetData()
         {
+            level = dataPlayer.GetPlayerData().GetNextLevel(achievementData.Id);
             int type = achievementData.TypeId;
-            int id = achievementData.Id;
             int conditionId = achievementData.ConditionId;
             playerTotalArtifact = dataPlayer.GetPlayerData().playerTotalArtifacts;
             if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
@@ -165,10 +167,6 @@ namespace ETLG
 
             return achievementData.Count[countIndex].ToString();
         }
-        public int GetCurrentAchievementID()
-        {
-            return this.achievementData.Id;
-        }
         public int GetAchievementProgress(int id)
         {
             if (!playerTotalArtifact.ContainsKey(id))
@@ -176,6 +174,24 @@ namespace ETLG
                 return 0;
             }
             return playerTotalArtifact[id];
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
+            Vector3 newPosition = itemPosition + new Vector3(-200f, 50f, 0f);
+            GameEntry.Data.GetData<DataAchievement>().descriptionId = id;
+            GameEntry.Data.GetData<DataAchievement>().descriptionLevel= level;
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
+            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(newPosition, acheivementName.text, Constant.Type.UI_OPEN));
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            dataAchievement.descriptionId = 0;
+            GameEntry.Event.Fire(this, TipUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
     }
 }

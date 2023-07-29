@@ -12,6 +12,7 @@ namespace ETLG
     public class SaveManager : Singleton<SaveManager>
     {
         public SavedGamesInfo savedGamesInfo;
+        public int difficulty;  // 0 - easy, 1 - normal, 2 - hard, 3 - challenge
         private void OnEnable() 
         {
             savedGamesInfo = new SavedGamesInfo();
@@ -29,6 +30,7 @@ namespace ETLG
 
             string saveIdStr = "_" + SaveId.ToString();
             
+            Save("Difficulty" + saveIdStr, this.difficulty);
             Save("InitialSpaceshipIdx" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.Id);
             // Save("PlayerCalculatedSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Save("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
@@ -42,11 +44,11 @@ namespace ETLG
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
-                savedGamesInfo.savedGamesDic[SaveId] = DateTime.Now.ToLongTimeString();
+                savedGamesInfo.savedGamesDic[SaveId] = DateTime.Now.ToLongTimeString() + " | " + GetDifficultyStr(this.difficulty);
             }
             else
             {
-                savedGamesInfo.savedGamesDic.Add(SaveId, DateTime.Now.ToLongTimeString());
+                savedGamesInfo.savedGamesDic.Add(SaveId, DateTime.Now.ToLongTimeString() + " | " + GetDifficultyStr(this.difficulty));
             }
 
             Save("SavedGamesInfo", savedGamesInfo);
@@ -66,6 +68,7 @@ namespace ETLG
             string saveIdStr = "_" + SaveId.ToString();
 
             int initialSpaceshipId = LoadObject<int>("InitialSpaceshipIdx" + saveIdStr);
+            this.difficulty = LoadObject<int>("Difficulty" + saveIdStr);
             
             GameEntry.Data.GetData<DataPlayer>().LoadGame(GameEntry.Data.GetData<DataSpaceship>().GetSpaceshipData(initialSpaceshipId));
 
@@ -136,6 +139,7 @@ namespace ETLG
             Dictionary<string, string> result = new Dictionary<string, string>();
 
             string saveIdStr = "_" + SaveId.ToString();
+            result.Add("Difficulty" + saveIdStr, PlayerPrefs.GetString("Difficulty" + saveIdStr));
             result.Add("InitialSpaceshipIdx" + saveIdStr, PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
             result.Add("PlayerSkillData" + saveIdStr, PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
             result.Add("PlayerArtifacts" + saveIdStr, PlayerPrefs.GetString("PlayerArtifacts" + saveIdStr));
@@ -159,6 +163,7 @@ namespace ETLG
             string saveIdStr = "_" + SaveId.ToString();
 
             // Delete("PlayerSpaceshipData" + saveIdStr);
+            Delete("Difficulty" + saveIdStr);
             Delete("PlayerSkillData" + saveIdStr);
             Delete("PlayerArtifacts" + saveIdStr);
             Delete("PlayerModules" + saveIdStr);
@@ -263,6 +268,18 @@ namespace ETLG
             return null;
         }
 
+        public string GetDifficultyStr(int idx)
+        {
+            switch (idx)
+            {
+                case 0: return "Easy";
+                case 1: return "Normal";
+                case 2: return "Hard";
+                case 3: return "Challenge";
+                default: return "Unknown";
+            }
+        }
+
         public void PrintSavedData(string key)
         {
             Debug.Log(key + " : " + PlayerPrefs.GetString(key));
@@ -292,6 +309,7 @@ namespace ETLG
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
+                PrintSavedData("Difficulty_0");
                 PrintSavedData("InitialSpaceshipIdx_0");
                 // PrintSavedData("PlayerCalculatedSpaceshipData_0");
                 PrintSavedData("PlayerSkillData_0");

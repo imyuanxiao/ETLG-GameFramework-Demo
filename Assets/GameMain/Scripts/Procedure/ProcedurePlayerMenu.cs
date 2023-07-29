@@ -217,11 +217,6 @@ namespace ETLG
             {
                 dataPlayer.tipUiPosition = ne.position;
                 dataPlayer.tipTitle = ne.tipTitle;
-                if (ne.level != 0 && ne.achievementId != 0)
-                {
-                    dataAchievement.descriptionId = ne.achievementId;
-                    dataAchievement.descriptionLevel = ne.level;
-                }
                 GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
             }
 
