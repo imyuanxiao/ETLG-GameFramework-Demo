@@ -16,10 +16,6 @@ namespace ETLG
 
         public Button CloseButton = null;
 
-       // public RectTransform ImgContainer;
-        //public RectTransform TextContainer;
-        //public TextMeshProUGUI Description;
-
         public RawImage TutorialImg;
 
         public bool refresh;
@@ -43,10 +39,10 @@ namespace ETLG
                 refresh = false;
             }
 
-            LeftButton.interactable = dataTutorial.CurrentTutorialID <= 1001 ? false : true;
+            LeftButton.interactable = dataTutorial.CurrentTutorialID <= dataTutorial.GetFirstTutorialId() ? false : true;
 
             // max tutorial ID
-            RightButton.interactable = dataTutorial.CurrentTutorialID >= 1004 ? false : true;
+            RightButton.interactable = dataTutorial.CurrentTutorialID >= dataTutorial.GetLastTutorialId() ? false : true;
             
 
             base.OnUpdate(elapseSeconds, realElapseSeconds);
@@ -63,31 +59,8 @@ namespace ETLG
         {
             TutorialData currentTutorialData = dataTutorial.GetCurrentTutorialData();
 
-            if(currentTutorialData == null)
-            {
-                currentTutorialData = dataTutorial.GetTutorialData(1001);
-                dataTutorial.CurrentTutorialID = 1001;
-            }
             Title.text = currentTutorialData.Title;
-            /*
-
-
-                        Vector2 sizeDelta = ImgContainer.sizeDelta;
-                        sizeDelta.y = 840f;
-
-                        if (currentTutorialData.HasText)
-                        {
-                            TextContainer.gameObject.SetActive(true);
-                            Description.text = currentTutorialData.Description;
-                            sizeDelta.y = 540f;
-                        }
-                        else
-                        {
-                            TextContainer.gameObject.SetActive(false);
-                        }
-
-                        ImgContainer.sizeDelta = sizeDelta;
-            */
+            
             string texturePath = AssetUtility.GetTutorialImg(currentTutorialData.Id.ToString());
 
             Texture texture = Resources.Load<Texture>(texturePath);
@@ -110,12 +83,12 @@ namespace ETLG
 
         public void OnLeftButtonClick()
         {
-            dataTutorial.CurrentTutorialID--;
+            dataTutorial.SetLastTutorial();
             refresh = true;
         }
         public void OnRightButtonClick()
         {
-            dataTutorial.CurrentTutorialID++;
+            dataTutorial.SetNextTutorial();
             refresh = true;
         }
         public void OnCloseButtonClick()

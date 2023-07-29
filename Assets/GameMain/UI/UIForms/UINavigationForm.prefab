@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Leaderboard
+  m_text: Null
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2003351260954942385}
   - component: {fileID: 7645558126706539731}
   m_Layer: 5
-  m_Name: Achievements
+  m_Name: Leaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,8 +357,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spaceshipButton: {fileID: 4042188391445274557}
   skillButton: {fileID: 1283704817336776206}
-  achievementButton: {fileID: 7645558126706539731}
-  leaderboardButton: {fileID: 261430562177257574}
+  achievementButton: {fileID: 1829211931099458892}
+  leaderboardButton: {fileID: 7645558126706539731}
+  tutorialButton: {fileID: 261430562177257574}
 --- !u!1 &5397354675523377861
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Achievements
+  m_text: Leaderboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -507,7 +508,7 @@ GameObject:
   - component: {fileID: 7567085207901239970}
   - component: {fileID: 3176424200517287641}
   m_Layer: 5
-  m_Name: Knowledge Base
+  m_Name: Profile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: null
+  m_text: Achievements
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -761,7 +762,7 @@ GameObject:
   - component: {fileID: 2671248961813724975}
   - component: {fileID: 261430562177257574}
   m_Layer: 5
-  m_Name: Leaderboard
+  m_Name: Tuotrial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1016,7 @@ GameObject:
   - component: {fileID: 3915125144650342709}
   - component: {fileID: 1829211931099458892}
   m_Layer: 5
-  m_Name: Misson
+  m_Name: Achievements
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1187,7 +1188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: null
+  m_text: Profile
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

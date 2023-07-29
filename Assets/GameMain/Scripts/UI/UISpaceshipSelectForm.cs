@@ -107,10 +107,10 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
-            // ShowSpaceshipSelect();
-
             refreshUI = true;
+
+            // tutorial in spaceship menu
+            GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -231,20 +231,10 @@ namespace ETLG
         private void ShowSkillIconInContainer(Transform container)
         {
 
-
-       /*     List<PlayerSkillData> tmpPlayerSkillsData = new List<PlayerSkillData>();
-            foreach (var skillId in currentSpaceshipData.SkillIds)
-            {
-                tmpPlayerSkillsData.Add(new PlayerSkillData(skillId, Constant.Type.SKILL_UPGRADED, 1));
-            }
-*/
-            //SkillData[] skillDatas = currentSpaceshipData.GetSkillDatas();
-
             Vector3 offset = new Vector3(150f, 0f, 0f); // 偏移量
 
             int i = 0;
 
-            //foreach (var tmpPlayerSkill in tmpPlayerSkillsData)
             foreach (var SkillIds in currentSpaceshipData.SkillIds)
             {
                 ShowItem<ItemSkillIcon>(EnumItem.ItemSkillIcon, (item) =>

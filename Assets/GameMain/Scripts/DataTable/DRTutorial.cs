@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 12:08:30.987
+// 生成时间：2023-07-29 18:30:55.535
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,7 +37,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取。
+        /// 获取标题。
         /// </summary>
         public string Title
         {
@@ -46,9 +46,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取文本。
+        /// 获取教程组别。
         /// </summary>
-        public bool Text
+        public int Group
         {
             get;
             private set;
@@ -67,7 +67,7 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Title = columnStrings[index++];
-            Text = bool.Parse(columnStrings[index++]);
+            Group = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -81,7 +81,7 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Title = binaryReader.ReadString();
-                    Text = binaryReader.ReadBoolean();
+                    Group = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

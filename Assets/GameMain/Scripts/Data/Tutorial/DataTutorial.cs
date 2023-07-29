@@ -4,6 +4,7 @@ using UnityEngine;
 using GameFramework.Data;
 using GameFramework.DataTable;
 using UnityGameFramework.Runtime;
+using System.Linq;
 
 namespace ETLG.Data
 {
@@ -12,13 +13,17 @@ namespace ETLG.Data
 
         private IDataTable<DRTutorial> dtTutorials;
 
+        // groupId + tutorialIds
+        private Dictionary<int, List<int>> dicTutorialGroupData;
+        // tutorialIds
         private Dictionary<int, TutorialData> dicTutorialData;
+        private List<int> listTutorialIds;
 
         public int CurrentTutorialID { get; set; }
-
+        
         protected override void OnInit()
         {
-            CurrentTutorialID = 1001;
+            
         }
 
         protected override void OnPreload()
@@ -38,6 +43,8 @@ namespace ETLG.Data
 
             DRTutorial[] dRTutorials = dtTutorials.GetAllDataRows();
 
+            listTutorialIds = new List<int>();
+
             foreach (var dRTutorial in dRTutorials)
             {
                 if (dicTutorialData.ContainsKey(dRTutorial.Id))
@@ -45,10 +52,26 @@ namespace ETLG.Data
                     throw new System.Exception(string.Format("Data Tutorial id '{0}' duplicate.", dRTutorial.Id));
                 }
                 dicTutorialData.Add(dRTutorial.Id, new TutorialData(dRTutorial));
+                listTutorialIds.Add((int)dRTutorial.Id);
             }
 
-        }
+            dicTutorialGroupData = new Dictionary<int, List<int>>();
 
+            foreach (var tutorialData in dicTutorialData)
+            {
+
+                int groupId = tutorialData.Value.Group;
+                int id = tutorialData.Key;
+
+                if (!dicTutorialGroupData.ContainsKey(groupId))
+                {
+                    dicTutorialGroupData.Add(groupId, new List<int>());
+                }
+                dicTutorialGroupData[groupId].Add(id);
+            }
+
+            CurrentTutorialID = listTutorialIds[0];
+        }
 
 
         protected override void OnUnload()
@@ -59,27 +82,74 @@ namespace ETLG.Data
         {
 
         }
+        
+        public List<int> GetTutorialsByGroup(int groupId)
+        {
+            if (!dicTutorialGroupData.ContainsKey(groupId))
+            {
+                return dicTutorialGroupData[1];
+            }
+            return dicTutorialGroupData[groupId];
+        }
 
         public TutorialData GetCurrentTutorialData()
         {
             if (!dicTutorialData.ContainsKey(CurrentTutorialID))
             {
                 Log.Error("Can not find tutorial data id '{0}'.", CurrentTutorialID);
-                return null;
+                CurrentTutorialID = listTutorialIds[2];
+                return dicTutorialData[CurrentTutorialID];
             }
-
             return dicTutorialData[CurrentTutorialID];
         }
 
-        public TutorialData GetTutorialData(int id)
+        public void SetLastTutorial()
         {
-            if (!dicTutorialData.ContainsKey(id))
+            int curIndex = listTutorialIds.IndexOf(CurrentTutorialID);
+            if (curIndex <= 0)
             {
-                Log.Error("Can not find tutorial data id '{0}'.", id);
-                return null;
+                CurrentTutorialID = listTutorialIds[3];
             }
+            else
+            {
+                CurrentTutorialID = listTutorialIds[curIndex - 1];
+            }
+        }
 
-            return dicTutorialData[id];
+        public void SetNextTutorial()
+        {
+            int curIndex = listTutorialIds.IndexOf(CurrentTutorialID);
+            if (curIndex >= listTutorialIds.Count - 1)
+            {
+                CurrentTutorialID = listTutorialIds.Last();
+            }
+            else
+            {
+                CurrentTutorialID = listTutorialIds[curIndex + 1];
+            }
+        }
+
+        public int GetFirstTutorialId()
+        {
+            return listTutorialIds.First();
+        }
+        public int GetLastTutorialId()
+        {
+            return listTutorialIds.Last();
+        }
+
+        public void OpenGroupTutorials(int groupId)
+        {
+            PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
+            if (playerData.PlayedTutorialGroup.Contains(groupId))
+            {
+                return;
+            }
+            playerData.PlayedTutorialGroup.Add(groupId);
+            this.CurrentTutorialID = dicTutorialGroupData[groupId][0];
+            GameEntry.UI.OpenUIForm(EnumUIForm.UITutorialForm);
+
+
         }
 
     }

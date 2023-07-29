@@ -133,6 +133,9 @@ namespace ETLG
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
             selectedModuleType = Constant.Type.ARTIFACT_ALL;
 
+            // tutorial in spaceship menu
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

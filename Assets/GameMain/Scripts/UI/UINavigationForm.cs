@@ -14,6 +14,7 @@ namespace ETLG
         //public Button knowledgeBaseButton;
         public Button leaderboardButton;
 
+
         private RawImage[] buttonImages;
 
         private Color selectedColor = new Color(1f, 1f, 1f, 1f);
@@ -90,5 +91,7 @@ namespace ETLG
                 buttonImage.color = (buttonImage == buttonImages[index].GetComponent<RawImage>()) ? selectedColor : deselectedColor;
             }
         }
+
+
     }
 }

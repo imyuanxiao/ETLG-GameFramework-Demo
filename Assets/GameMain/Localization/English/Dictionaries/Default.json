@@ -30,7 +30,13 @@
         "Tip_FireRate" : "Every 100 points of attack speed reduce the cooldown of normal attacks by 10%.",
         "Tip_Dogde" : "Increases the likelihood of evading enemy attacks.",
         "Tip_Skill Layer" : "Higher-layer skill upgrades require more resources.",
+        "Tip_Overall Combat Power" : "Calculated based on spaceship attributes, skills, modules, achievements, props, etc.",
 
+
+        "Tutorial_1001_Title" : "Spaceship Panel",
+        "Tutorial_1002_Title" : "Package",
+        "Tutorial_1003_Title" : "Spaceship Module",
+        "Tutorial_1004_Title" : "Skill Tree",
 
         "InterstellarExplorer": "Interstellar Explorer",
         "InterstellarExplorerDescription": "The Interstellar Explorer is an advanced spaceship designed for exploring the unknown universe. It was developed due to humanity's urgent desire to uncover hidden secrets and discover new resources in the cosmos. Equipped with advanced detection equipment and navigation systems, the spacecraft can swiftly travel through space and explore various unknown galaxies, planets, and cosmic phenomena. The crew of the Interstellar Explorer comes from different scientific fields, working together to unravel the mysteries and secrets of the universe.",
@@ -112,109 +118,82 @@
  
         "Artifact_DataSource": "Data Source",
         "Artifact_DataSource_Desc": "This is description for Data Source",
-        "Tip_Data Source": "This is tip for Data Source",
 
         "Artifact_StatisticalUnit": "Statistical Unit",
         "Artifact_StatisticalUnit_Desc": "This is description for Statistical Unit",
-        "Tip_Statistical Unit": "This is tip for Statistical Unit",
 
         "Artifact_SensorDevices": "Sensor Devices",
         "Artifact_SensorDevices_Desc": "This is description for Sensor Devices",
-        "Tip_Sensor Devices": "This is tip for Sensor Devices",
 
         "Artifact_EdgeProcessingUnit": "Edge Processing Unit",
         "Artifact_EdgeProcessingUnit_Desc": "This is description for Edge Processing Unit",
-        "Tip_Edge Processing Unit": "This is tip for Edge Processing Unit",
 
         "Artifact_KnowledgeFragments_CloudComputing": "Knowledge Fragments - Cloud Computing",
         "Artifact_KnowledgeFragments_CloudComputing_Desc": "This is description for Knowledge Fragments - Cloud Computing",
-        "Tip_Knowledge Fragments - Cloud Computing": "This is tip for Knowledge Fragments - Cloud Computing",
 
         "Artifact_KnowledgeFragments_AI": "Knowledge Fragments - AI",
         "Artifact_KnowledgeFragments_AI_Desc": "This is description for Knowledge Fragments - AI",
-        "Tip_Knowledge Fragments - AI": "This is tip for Knowledge Fragments - AI",
 
         "Artifact_KnowledgeFragments_Blockchain": "Knowledge Fragments - Blockchain",
         "Artifact_KnowledgeFragments_Blockchain_Desc": "This is description for Knowledge Fragments - Blockchain",
-        "Tip_Knowledge Fragments - Blockchain": "This is tip for Knowledge Fragments - Blockchain",
 
         "Artifact_KnowledgeFragments_Cybersecurity": "Knowledge Fragments - Cybersecurity",
         "Artifact_KnowledgeFragments_Cybersecurity_Desc": "This is description for Knowledge Fragments - Cybersecurity",
-        "Tip_Knowledge Fragments - Cybersecurity": "This is tip for Knowledge Fragments - Cybersecurity",
 
         "Artifact_KnowledgeFragments_DataScience": "Knowledge Fragments - Data Science",
         "Artifact_KnowledgeFragments_DataScience_Desc": "This isdescription for Knowledge Fragments - Data Science",
-        "Tip_Knowledge Fragments - Data Science": "This is tip for Knowledge Fragments - Data Science",
 
         "Artifact_KnowledgeFragments_IoT": "Knowledge Fragments - IoT",
         "Artifact_KnowledgeFragments_IoT_Desc": "This is description for Knowledge Fragments - IoT",
-        "Tip_Knowledge Fragments - IoT": "This is tip for Knowledge Fragments - IoT",
 
         "Artifact_FirepowerModule": "Firepower Module",
         "Artifact_FirepowerModule_Desc": "This is description for Firepower Module",
-        "Tip_Firepower Module": "This is tip for Firepower Module",
 
         "Artifact_DamageAmplifier": "Damage Amplifier",
         "Artifact_DamageAmplifier_Desc": "This is description for Damage Amplifier",
-        "Tip_Damage Amplifier": "This is tip for Damage Amplifier",
 
         "Artifact_TargetingComputer": "Targeting Computer",
         "Artifact_TargetingComputer_Desc": "This is description for Targeting Computer",
-        "Tip_Targeting Computer": "This is tip for Targeting Computer",
 
         "Artifact_MissileLauncher": "Missile Launcher",
         "Artifact_MissileLauncher_Desc": "This is description for Missile Launcher",
-        "Tip_Missile Launcher": "This is tip for Missile Launcher",
 
         "Artifact_DefenseSystemUpgrade": "Defense System Upgrade",
         "Artifact_DefenseSystemUpgrade_Desc": "This is description for Defense System Upgrade",
-        "Tip_Defense System Upgrade": "This is tip for Defense System Upgrade",
 
         "Artifact_ShieldGenerator": "Shield Generator",
         "Artifact_ShieldGenerator_Desc": "This is description for Shield Generator",
-        "Tip_Shield Generator": "This is tip for Shield Generator",
 
         "Artifact_ArmorPlating": "Armor Plating",
         "Artifact_ArmorPlating_Desc": "This is description for Armor Plating",
-        "Tip_Armor Plating": "This is tip for Armor Plating",
 
         "Artifact_RepairDroneBay": "Repair Drone Bay",
         "Artifact_RepairDroneBay_Desc": "This is description for Repair Drone Bay",
-        "Tip_Repair DroneBay": "This is tip for Repair Drone Bay",
 
         "Artifact_EnergyShieldProjector": "Energy Shield Projector",
         "Artifact_EnergyShieldProjector_Desc": "This is description for Energy Shield Projector",
-        "Tip_Energy Shield Projector": "This is tip for Energy Shield Projector",
 
         "Artifact_VelocityBooster": "Velocity Booster",
         "Artifact_VelocityBooster_Desc": "This is description for Velocity Booster",
-        "Tip_Velocity Booster": "This is tip for Velocity Booster",
 
         "Artifact_ThrusterEnhancement": "Thruster Enhancement",
         "Artifact_ThrusterEnhancement_Desc": "This is description for Thruster Enhancement",
-        "Tip_Thruster Enhancement": "This is tip for Thruster Enhancement",
 
         "Artifact_SensorArray": "Sensor Array",
         "Artifact_SensorArray_Desc": "This is description for Sensor Array",
-        "Tip_Sensor Array": "This is tip for Sensor Array",
 
         "Artifact_StorageExpansioUnit": "Storage Expansion Unit",
         "Artifact_StorageExpansioUnit_Desc": "This is description for Storage Expansion Unit",
-        "Tip_Storage Expansio Unit": "This is tip for Storage Expansion Unit",
 
         "Artifact_EnergyCapacitor": "Energy Capacitor",
         "Artifact_EnergyCapacitor_Desc": "This is description for Energy Capacitor",
-        "Tip_Energy Capacitor": "This is tip for Energy Capacitor",
 
         "Artifact_CloakingDevice": "Cloaking Device",
         "Artifact_CloakingDevice_Desc": "This is description for Cloaking Device",
-        "Tip_Cloaking Device": "This is tip for Cloaking Device",
-
 
         "Artifact_LowLevelUpgradeUnit": "LowLevel UpgradeUnit",
         "Artifact_IntermediateUpgradeUnit": "Intermediate UpgradeUnit",
         "Artifact_AdvancedUpgradeUnit": "Advanced UpgradeUnit",
-
 
 
         "Skill_AlienLinguistics": "Alien Linguistics",
@@ -292,8 +271,6 @@
         "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. \n\nGet ready to fight!",
         
 
-
-
         "IntermidateBattle CloudComputing Intro": "This is the boss enemy in Cloud Computing Domain. \n\nBe careful, this enemy will constantly regenerate health. Destroy it as soon as possible before it recovers",
         "IntermidateBattle CyberSecurity Intro": "This is the boss enemy in CyberSecurity Domain.\n\nIts firewall will try to protect itself. Let's smash its shield first!",
         "IntermidateBattle AI Intro" : "This is the boss enemy in Artificial Intelligence Domain. \n\nWhen the battle is against it, it will summon 3 AI ships to save the day.",
@@ -322,21 +299,6 @@
         "Planet_104_Desc" : " toloud and Cloud Computing. \n\nMajor topics in this curriculum: \n\n - Introduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
         "Planet_105_Desc" : "ntroduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
         "Planet_106_Desc" : "The Cloud C-n - Services Available on IBM Cloud",
-
-
-
-        "Tutorial_1001_Title" : "Spaceship Panel",
-        "Tutorial_1001_Desc" : "Spaceship Panel Tutorial Text",
-
-
-        "Tutorial_1002_Title" : "Package",
-        "Tutorial_1002_Desc" : "Package Tutorial Text",
-
-        "Tutorial_1003_Title" : "Spaceship Module",
-        "Tutorial_1003_Desc" : "Spaceship Module Text",
-
-        "Tutorial_1004_Title" : "Skill Tree",
-        "Tutorial_1004_Desc" : "Skill Tree Text",
 
         "Achieve_1001_Title" :"Knowledge is Power",
         "Achieve_1001_Level_1":"First victory in a quiz.",

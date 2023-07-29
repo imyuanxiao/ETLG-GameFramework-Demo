@@ -13,13 +13,6 @@ namespace ETLG.Data
             }
         }
 
-        public bool HasText
-        {
-            get
-            {
-                return dRTutorial.Text;
-            }
-        }
 
         public string Title
         {
@@ -30,13 +23,14 @@ namespace ETLG.Data
             }
         }
 
-        public string Description
+        public int Group
         {
             get
             {
-                return GameEntry.Localization.GetString(Constant.Key.PRE_TUTORIAL + Id + Constant.Key.POST_DESC);
+                return dRTutorial.Group;
             }
         }
+
 
         public TutorialData(DRTutorial dRTutorial)
         {

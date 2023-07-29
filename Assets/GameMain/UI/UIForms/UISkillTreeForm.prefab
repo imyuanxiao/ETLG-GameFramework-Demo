@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Overall Combat Power
-  tipContent: 
+  tipContent: 0
   position: 0
 --- !u!1 &434725460384819890
 GameObject:
@@ -852,7 +852,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 22}
+  m_SizeDelta: {x: 360, y: 22}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1101946875109090310
 MonoBehaviour:
@@ -866,8 +866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipTitle: Spaceship Type
-  tipContent: 
+  tipTitle: UnLokced Skills
+  tipContent: The number of unlocked skills that can be used to unlock achievements
   position: 0
 --- !u!1 &829108367010761660
 GameObject:
@@ -2374,7 +2374,6 @@ GameObject:
   - component: {fileID: 854911181747224860}
   - component: {fileID: 4927981678259708412}
   - component: {fileID: 8176485252511255638}
-  - component: {fileID: 8265484572218354566}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2400,7 +2399,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 330, y: 0}
+  m_SizeDelta: {x: 330, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4927981678259708412
 CanvasRenderer:
@@ -2499,20 +2498,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8265484572218354566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2425881955159180844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &2497454208191122744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,7 +4470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 7841410618464839291}
-  TutorialID: 1001
+  TutorialID: 4001
 --- !u!114 &5840174970805725799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5423,7 +5408,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 22}
+  m_SizeDelta: {x: 360, y: 22}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2226945420283811436
 MonoBehaviour:
@@ -5437,8 +5422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipTitle: Spaceship Type
-  tipContent: 
+  tipTitle: Upgraded Levels
+  tipContent: The number of upgraded skills that can be used to unlock achievements
   position: 0
 --- !u!1 &5222929765384002202
 GameObject:
@@ -6295,6 +6280,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8195553337837181321}
+  - component: {fileID: 821715282988798276}
+  - component: {fileID: 297585829219777578}
+  - component: {fileID: 3959837217747986118}
   m_Layer: 5
   m_Name: Points
   m_TagString: Untagged
@@ -6323,8 +6311,59 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 22}
+  m_SizeDelta: {x: 360, y: 22}
   m_Pivot: {x: 0, y: 1}
+--- !u!222 &821715282988798276
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624340722808325916}
+  m_CullTransparentMesh: 1
+--- !u!114 &297585829219777578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624340722808325916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!114 &3959837217747986118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624340722808325916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Knowledge Points
+  tipContent: Required for skill upgrades and can be obtained by completing course
+    chapters
+  position: 0
 --- !u!1 &6864624326172738924
 GameObject:
   m_ObjectHideFlags: 0
@@ -6600,6 +6639,7 @@ GameObject:
   - component: {fileID: 4800048585335135810}
   - component: {fileID: 2947725733927839992}
   - component: {fileID: 6461477180069049467}
+  - component: {fileID: 2363894171403851328}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -6626,8 +6666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 160, y: 0}
+  m_SizeDelta: {x: 320, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2947725733927839992
 MonoBehaviour:
@@ -6669,6 +6709,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!222 &2363894171403851328
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7241701666808670386}
+  m_CullTransparentMesh: 1
 --- !u!1 &7297454170441850991
 GameObject:
   m_ObjectHideFlags: 0
@@ -7969,7 +8017,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UnLocked Skills
+  m_text: Unlocked Skills
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

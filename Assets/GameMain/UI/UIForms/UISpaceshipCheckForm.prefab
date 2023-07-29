@@ -114,7 +114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 235, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1935332265003502504
@@ -1311,7 +1311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 237.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 275, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2339353562653909011
@@ -2801,6 +2801,7 @@ GameObject:
   - component: {fileID: 3726419121839978119}
   - component: {fileID: 1207322656256973164}
   - component: {fileID: 7321218770068747592}
+  - component: {fileID: 6847065754720181548}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -2850,6 +2851,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &6847065754720181548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964792401173924601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1997622950818289971
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,7 +6099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 7995729932685409135}
-  TutorialID: 1001
+  TutorialID: 3003
 --- !u!114 &518731588839145296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6611,7 +6642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 4562005291070150725}
-  TutorialID: 1001
+  TutorialID: 3001
 --- !u!114 &2301228726936835275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6925,7 +6956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 3145700523631737663}
-  TutorialID: 1001
+  TutorialID: 3002
 --- !u!114 &8447570248147457687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9287,7 +9318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipTitle: Overall Combat Power
-  tipContent: 
+  tipContent: 0
   position: 0
 --- !u!1 &6724466797381034664
 GameObject:
