@@ -41,6 +41,7 @@ namespace ETLG
             Save("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
             Save("BattleVictoryCount" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount);
             Save("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
+            Save("PlayedTutorialGroup" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -80,6 +81,7 @@ namespace ETLG
             LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
             Load("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
+            LoadPlayedTutorialGroup("PlayedTutorialGroup" + saveIdStr);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
@@ -131,6 +133,22 @@ namespace ETLG
             // }
         }
 
+        private void LoadPlayedTutorialGroup(string key)
+        {
+            JArray jsonData = LoadJsonArray(key);
+            for (int i=0; i < jsonData.Count; i++)
+            {
+                if (i >= GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup.Count)
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup.Add((int) jsonData[i]);
+                }
+                else
+                {
+                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup[i] = (int) jsonData[i];
+                }
+            }
+        }
+
         public Dictionary<string, string> UploadSave(int SaveId)
         {
             this.savedGamesInfo.cloudSaveId = SaveId;
@@ -149,6 +167,7 @@ namespace ETLG
             result.Add("PlayerAchievement" + saveIdStr, PlayerPrefs.GetString("PlayerAchievement" + saveIdStr));
             result.Add("BattleVictoryCount" + saveIdStr, PlayerPrefs.GetString("BattleVictoryCount" + saveIdStr));
             result.Add("BossDefeatTime" + saveIdStr, PlayerPrefs.GetString("BossDefeatTime" + saveIdStr));
+            result.Add("PlayedTutorialGroup" + saveIdStr, PlayerPrefs.GetString("PlayedTutorialGroup" + saveIdStr));
 
             return result;
         }
@@ -172,6 +191,7 @@ namespace ETLG
             Delete("PlayerAchievement" + saveIdStr);
             Delete("BattleVictoryCount" + saveIdStr);
             Delete("BossDefeatTime" + saveIdStr);
+            Delete("PlayedTutorialGroup" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -321,6 +341,7 @@ namespace ETLG
                 PrintSavedData("PlayerNPCs_0");
                 PrintSavedData("BattleVictoryCount_0");
                 PrintSavedData("BossDefeatTime_0");
+                PrintSavedData("PlayedTutorialGroup_0");
             }
         }
     }
