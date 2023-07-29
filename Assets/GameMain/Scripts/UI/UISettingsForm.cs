@@ -15,11 +15,13 @@ namespace ETLG
 
         public TMP_Dropdown resolutionDropdown;
         public Slider volumeSlider;
+        public TMP_Dropdown difficultyDropdown;
         private string resolution;
 
         private int width;
         private int height;
         private int resolutionOptionIdx;
+        private int difficulty;  // 0 - easy, 1 - normal, 2 - hard, 3 - challenge
 
         protected override void OnInit(object userData)
         {
@@ -33,6 +35,9 @@ namespace ETLG
             volumeSlider.onValueChanged.AddListener(delegate {
                 SliderValueChanged(volumeSlider);
             });
+            difficultyDropdown.onValueChanged.AddListener(delegate {
+                DifficultyChange(difficultyDropdown);
+            });
         }
 
         protected override void OnOpen(object userData)
@@ -41,6 +46,7 @@ namespace ETLG
 
             LoadResolution();  // Init the default option of the resolution dropdown (doesn't change the actual resultion)
             LoadSoundVolume(); // Init the default position of the volume slider (doesn't change the actual sound volume)
+            LoadDifficulty();  // Init the default option of the difficulty dropdown (doesn't change the actual difficulty)
         }
         private void OnCancelButtonClick()
         {
@@ -55,6 +61,8 @@ namespace ETLG
 
             SaveResolution(this.resolutionOptionIdx);
             SaveManager.Instance.SaveResolution(width, height);
+            SaveManager.Instance.difficulty = this.difficulty;
+            SaveManager.Instance.Save("Difficulty_0", this.difficulty);
 
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             Close();
@@ -75,6 +83,12 @@ namespace ETLG
             this.width = width;
             this.height = height;
             this.resolutionOptionIdx = optionIdx;
+        }
+
+        private void DifficultyChange(TMP_Dropdown change)
+        {
+            int optionIdx = change.value;
+            this.difficulty = optionIdx;
         }
         
         private void SliderValueChanged(Slider volumeSlider)
@@ -117,6 +131,14 @@ namespace ETLG
             else 
             {
                 volumeSlider.value = 1.0f;
+            }
+        }
+
+        private void LoadDifficulty()
+        {
+            if (PlayerPrefs.HasKey("Difficulty_0"))
+            {
+                difficultyDropdown.value = PlayerPrefs.GetInt("Difficulty_0");
             }
         }
     }

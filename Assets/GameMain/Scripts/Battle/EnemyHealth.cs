@@ -11,6 +11,7 @@ namespace ETLG
     public class EnemyHealth : Health
     {
         private BasicEnemyController controller;
+        private int difficulty;
 
         private void Awake() 
         {
@@ -19,6 +20,7 @@ namespace ETLG
 
         private void OnEnable() 
         {
+            this.difficulty = SaveManager.Instance.difficulty;
             InitBasicBattleEnemy();
 
             CurrentHealth = MaxHealth;
@@ -34,14 +36,14 @@ namespace ETLG
             {
                 // MaxHealth = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower * 2;
                 // MaxHealth = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyHealthBase * 2;
-                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 2;
+                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 2 + 3 * difficulty;
                 MaxShield = 0;
             }
             else if (controller.basicEnemyType == BasicEnemyType.BasicEnemy2)
             {
                 // MaxHealth = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower * 3;
                 // MaxHealth = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyHealthBase * 3;
-                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 3;
+                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 3 + 3 * difficulty;
                 MaxShield = 0;
             }
             else if (controller.basicEnemyType == BasicEnemyType.AI)
