@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using ETLG.Data;
+using System.Xml.Linq;
 
 namespace ETLG
 {
@@ -215,9 +216,34 @@ namespace ETLG
         private void DisplayRewardInfo()
         {
             // Reward ID: [id, num, id, num, ...]
-            // this.rewardsId;
-            // Reward Container Transform
-            // this.rewardContainer;
+            // int »ò List¶¼ÐÐ
+            int[] rewardArtifactId = new int[1];
+
+            for (int i = 0; i < rewardArtifactId.Length; i += 2) {
+                int id = rewardArtifactId[i];
+                int num = rewardArtifactId[i + 1];
+                ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+                {
+                    item.transform.SetParent(rewardContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero;
+                    item.GetComponent<ItemRewardPreview>().SetRewardData(id, num, Constant.Type.REWARD_TYPE_ARTIFACT);
+                });
+            }
+            
+            // reward skill
+            int skillId = 0;
+
+            ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+            {
+                item.transform.SetParent(rewardContainer, false);
+                item.transform.localScale = Vector3.one;
+                item.transform.eulerAngles = Vector3.zero;
+                item.transform.localPosition = Vector3.zero;
+                item.GetComponent<ItemRewardPreview>().SetRewardData(skillId, 1, Constant.Type.REWARD_TYPE_SKILL);
+            });
+
         }
     }
 }
