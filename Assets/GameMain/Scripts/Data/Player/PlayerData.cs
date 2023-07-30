@@ -89,8 +89,6 @@ namespace ETLG.Data
 
             }
 
-            UpdateAttrsByAllSkills(Constant.Type.ADD);
-
             // add money and skill points
             playerArtifacts.Add((int)EnumArtifact.Money, 0);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
@@ -104,6 +102,9 @@ namespace ETLG.Data
             //initPlayerAchievementData();
 
             battleVictoryCount = 0;
+
+            UpdateAttrsByAllSkills(Constant.Type.ADD);
+
         }
 
         private void instantiatePlayerNPCs()
@@ -588,6 +589,10 @@ namespace ETLG.Data
 
             if (!playerArtifacts.ContainsKey(id))
             {
+                if (playerModules.Contains(id))
+                {
+                    return 1;
+                }
                 return 0;
             }
             return playerArtifacts[id];
@@ -798,25 +803,46 @@ namespace ETLG.Data
         private void AddMockData()
         {
 
-            AddArtifact((int)EnumArtifact.Money, 99999);
-            AddArtifact((int)EnumArtifact.KnowledgePoint, 45);
+            // add artifacts
+            List<int> artifactsIds = new List<int>
+            {
+                1001,1002,1003, 1004, 1101, 1102, 1103, 2001, 2002, 2003, 2004, 2005,
+                2006
+            };
+            int i = 0;
+            foreach (var id in artifactsIds)
+            {
+                AddArtifact(id,  i++ * 100);
+            }
 
-            AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
-            AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
-            AddArtifact((int)EnumArtifact.AdvancedUpgradeUnit, 70);
 
-            AddArtifact((int)EnumArtifact.AdvancedSelfRepairSystem, 1);
-            AddArtifact((int)EnumArtifact.ParticleBarrierProjector, 1);
-            AddArtifact((int)EnumArtifact.RateofFireModulator, 1);
-            AddArtifact((int)EnumArtifact.MissileLauncher, 1);
-            AddArtifact((int)EnumArtifact.BeamEmitter, 1);
+            // add skills
+            List<int> skillIds = new List<int>
+            {
+                101, 102, 201, 202, 203, 301, 302, 303,
+                401, 402, 403, 501, 502, 503, 601, 602,
+                603, 701, 702, 703
+            };
+            foreach(var id in skillIds)
+            {
+                AddSkill(id);
+                AddSkill(id);
+                AddSkill(id);
+                AddSkill(id);
+            }
 
-            AddArtifact((int)EnumArtifact.RareOre, 30);
-            AddArtifact((int)EnumArtifact.FuelRefillUnit, 40);
+            // add modules
+            List<int> moduleIds = new List<int>
+            {
+                3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009, 3010,
+                3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020,
+                3021, 3022
+            };
 
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
+            foreach (var id in moduleIds)
+            {
+                AddArtifact(id, 1);
+            }
            
         }
 

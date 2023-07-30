@@ -62,7 +62,7 @@ namespace ETLG
             }
             else
             {
-                offset = new Vector3(420f, -100f, 0f);
+                offset = new Vector3(420f, -110f, 0f);
             }
 
             Vector3 newPosition = itemPosition + offset;

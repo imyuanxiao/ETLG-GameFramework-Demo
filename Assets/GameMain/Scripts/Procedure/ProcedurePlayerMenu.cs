@@ -56,6 +56,8 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
 
+            // tutorial in spaceship menu
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
 
         }
 

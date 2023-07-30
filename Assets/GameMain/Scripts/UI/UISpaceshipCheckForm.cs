@@ -133,8 +133,7 @@ namespace ETLG
             selectedArtifactType = Constant.Type.ARTIFACT_ALL;
             selectedModuleType = Constant.Type.ARTIFACT_ALL;
 
-            // tutorial in spaceship menu
-            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+
 
         }
 
@@ -181,17 +180,17 @@ namespace ETLG
         {
 
             Dictionary<int, int> playerArtifacts = dataPlayer.GetPlayerData().GetArtifactsByType(Type);
-            int i = 0;
+            //int i = 0;
             foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
                 int ArtifactID = kvp.Key;
                 int Num = kvp.Value;
 
-                Vector3 offset = new Vector3((i % 4) * 90f + 15f, (i / 4) * (-110f) - 10f, 0f);
-                i++;
+            /*    Vector3 offset = new Vector3((i % 4) * 90f + 15f, (i / 4) * (-110f) - 10f, 0f);
+                i++;*/
                 if (ArtifactID == (int)EnumArtifact.Money || ArtifactID == (int)EnumArtifact.KnowledgePoint)
                 {
-                    i--;
+                    //i--;
                     continue;
                 }
 
@@ -200,7 +199,7 @@ namespace ETLG
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + offset;
+                    //item.transform.localPosition = Vector3.zero + offset;
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.ARTIFACT_ICON_DEFAULT);
                 });
 
@@ -213,13 +212,13 @@ namespace ETLG
             for(int i = 0; i <  playerModuleIDs.Count; i++)
             {
                 int ModuleID = playerModuleIDs[i];
-                Vector3 offset = new Vector3((i % 6) * 90f + 10f, (i / 6) * -90f - 10f, 0f);
+               // Vector3 offset = new Vector3((i % 4) * 90f + 10f, (i / 4) * -90f - 10f, 0f);
                 ShowItem<ItemModuleIcon>(EnumItem.ItemModuleIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
-                    item.transform.localPosition = Vector3.zero + offset;
+                   // item.transform.localPosition = Vector3.zero + offset;
                     item.GetComponent<ItemModuleIcon>().SetModuleData(ModuleID, false);
                 });
             }
