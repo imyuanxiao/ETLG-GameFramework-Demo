@@ -18,7 +18,7 @@ namespace ETLG
         private RawImage[] buttonImages;
 
         private Color selectedColor = new Color(1f, 1f, 1f, 1f);
-        private Color deselectedColor = new Color(1f, 1f, 1f, 0.3f);
+        private Color deselectedColor = new Color(1f, 1f, 1f, 0.7f);
 
 
         protected override void OnInit(object userData)
@@ -28,17 +28,13 @@ namespace ETLG
             {
                 spaceshipButton.GetComponent<RawImage>(),
                 skillButton.GetComponent<RawImage>(),
-                //missionButton.GetComponent<RawImage>(),
                 achievementButton.GetComponent<RawImage>(),
-                //knowledgeBaseButton.GetComponent<RawImage>(),
                 leaderboardButton.GetComponent<RawImage>()
             };
-            spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, Constant.Type.PLAYERMENU_SPACESHIP));
-            skillButton.onClick.AddListener(() => OnButtonClick(skillButton, Constant.Type.PLAYERMENU_SKILL));
-           // missionButton.onClick.AddListener(() => OnButtonClick(missionButton, Constant.Type.PLAYERMENU_MISSION));
-            achievementButton.onClick.AddListener(() => OnButtonClick(achievementButton, Constant.Type.PLAYERMENU_ACHIEVEMENT));
-            //knowledgeBaseButton.onClick.AddListener(() => OnButtonClick(knowledgeBaseButton, Constant.Type.PLAYERMENU_KNOWLEDGE_BASE));
-            leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, Constant.Type.PLAYERMENU_LEADERBOARD));
+            spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, (int)EnumUIForm.UISpaceshipCheckForm));
+            skillButton.onClick.AddListener(() => OnButtonClick(skillButton, (int)EnumUIForm.UISkillTreeForm));
+            achievementButton.onClick.AddListener(() => OnButtonClick(achievementButton, (int)EnumUIForm.UIAchievementForm));
+            leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UILeaderBoardForm));
         }
 
         protected override void OnOpen(object userData)

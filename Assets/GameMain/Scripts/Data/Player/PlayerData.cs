@@ -486,11 +486,11 @@ namespace ETLG.Data
                     equippedModules[4] = equippedModules[5];
                 }
                 equippedModules[5] = moduleData.Id;
-                return;
             }
-
-            equippedModules[moduleData.Classification - 1] = moduleData.Id;
-
+            else
+            {
+                equippedModules[moduleData.Classification - 1] = moduleData.Id;
+            }
             dataArtifact.lockCurrentModuleID = false;
 
             // after modules change

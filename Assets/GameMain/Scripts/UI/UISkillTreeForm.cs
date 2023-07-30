@@ -78,8 +78,6 @@ namespace ETLG
 
             refreshLeftUI = true;
 
-            // tutorial in spaceship menu
-            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(4);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

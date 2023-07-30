@@ -56,8 +56,8 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
 
-            // tutorial in spaceship menu
             GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+
 
         }
 
@@ -128,6 +128,17 @@ namespace ETLG
 
             GameEntry.UI.CloseAllLoadedUIForms();
             GameEntry.UI.OpenUIForm(ne.UIFormID);
+
+            if(ne.UIFormID == (int)EnumUIForm.UISpaceshipCheckForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+            }
+
+            if (ne.UIFormID == (int)EnumUIForm.UISkillTreeForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(4);
+            }
+
         }
 
         private void ResetStates()

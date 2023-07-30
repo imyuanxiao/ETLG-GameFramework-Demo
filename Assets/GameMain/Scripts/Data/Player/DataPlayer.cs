@@ -16,9 +16,7 @@ namespace ETLG.Data
         public int currentSelectedPlayerMenu { get; set; }
         protected override void OnInit()
         {
-
-    
-               currentSelectedPlayerMenu = Constant.Type.PLAYERMENU_SPACESHIP;
+               currentSelectedPlayerMenu = (int)EnumUIForm.UISpaceshipCheckForm;
         }
 
         protected override void OnPreload()
