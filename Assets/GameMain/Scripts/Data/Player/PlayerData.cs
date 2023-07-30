@@ -800,15 +800,14 @@ namespace ETLG.Data
 
             AddArtifact((int)EnumArtifact.Money, 99999);
             AddArtifact((int)EnumArtifact.KnowledgePoint, 45);
-           // playerArtifacts[(int)EnumArtifact.Money] += 99999;
-           // playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
 
             AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
             AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
             AddArtifact((int)EnumArtifact.AdvancedUpgradeUnit, 70);
 
-            AddArtifact((int)EnumArtifact.FirepowerModule, 1);
-            AddArtifact((int)EnumArtifact.DamageAmplifier, 1);
+            AddArtifact((int)EnumArtifact.AdvancedSelfRepairSystem, 1);
+            AddArtifact((int)EnumArtifact.ParticleBarrierProjector, 1);
+            AddArtifact((int)EnumArtifact.RateofFireModulator, 1);
             AddArtifact((int)EnumArtifact.MissileLauncher, 1);
             AddArtifact((int)EnumArtifact.BeamEmitter, 1);
 

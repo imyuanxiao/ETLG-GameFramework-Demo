@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 18:30:55.516
+// 生成时间：2023-07-30 13:02:57.277
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,15 +37,6 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取使用消耗能源。
-        /// </summary>
-        public float Energy
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 获取升级消耗资源（ID,数量）。
         /// </summary>
         public int[] Costs
@@ -55,7 +46,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取属性(1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIRERATE;10-DOGDE)。
+        /// 获取属性(1-Durability;2-SHIELDS;3-AGILITY;4-ENERGY;5-FIREPOWER;;6-FIRERATE)。
         /// </summary>
         public int[] Attributes
         {
@@ -75,7 +66,6 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            Energy = float.Parse(columnStrings[index++]);
                 Costs = DataTableExtension.ParseInt32Array(columnStrings[index++]);
                 Attributes = DataTableExtension.ParseInt32Array(columnStrings[index++]);
 
@@ -90,7 +80,6 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Energy = binaryReader.ReadSingle();
                         Costs = binaryReader.ReadInt32Array();
                         Attributes = binaryReader.ReadInt32Array();
                 }

@@ -78,7 +78,7 @@ namespace ETLG
             singleValue = artifactDataBase.Value;
             ArtifactValue.text = singleValue.ToString();
 
-            limitNum = artifactDataBase.MaxNumber;
+            //limitNum = artifactDataBase.MaxNumber;
 
             ArtifactNumber.text = dataPlayer.GetPlayerData().GetArtifactNumById(artifactDataBase.Id).ToString();
             ArtifactDescription.text = artifactDataBase.Description;

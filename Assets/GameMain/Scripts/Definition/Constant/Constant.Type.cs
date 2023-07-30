@@ -84,14 +84,10 @@
 
             public const int ATTR_Durability = 1;
             public const int ATTR_Shields = 2;
-            public const int ATTR_Firepower = 3;
+            public const int ATTR_Agility = 3;
             public const int ATTR_Energy = 4;
-            public const int ATTR_Agility = 5;
-            public const int ATTR_Speed = 6;
-            public const int ATTR_Detection = 7;
-            public const int ATTR_Capacity = 8;
-            public const int ATTR_Firerate = 9;
-            public const int ATTR_Dogde = 10;
+            public const int ATTR_Firepower = 5;
+            public const int ATTR_Firerate = 6;
 
 
             public const string ARTIFACT_TYPE = "ARTIFACT_TYPE_";

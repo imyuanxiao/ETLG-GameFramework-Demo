@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 18:30:55.465
+// 生成时间：2023-07-30 13:02:57.198
 //------------------------------------------------------------
 
 using GameFramework;
@@ -72,15 +72,6 @@ namespace ETLG
             private set;
         }
 
-        /// <summary>
-        /// 获取道具上限。
-        /// </summary>
-        public int MaxNumber
-        {
-            get;
-            private set;
-        }
-
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -97,7 +88,6 @@ namespace ETLG
             Type = int.Parse(columnStrings[index++]);
             Tradeable = bool.Parse(columnStrings[index++]);
             Value = int.Parse(columnStrings[index++]);
-            MaxNumber = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -114,7 +104,6 @@ namespace ETLG
                     Type = binaryReader.Read7BitEncodedInt32();
                     Tradeable = binaryReader.ReadBoolean();
                     Value = binaryReader.Read7BitEncodedInt32();
-                    MaxNumber = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

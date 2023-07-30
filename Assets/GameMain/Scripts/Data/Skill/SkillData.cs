@@ -204,16 +204,8 @@ namespace ETLG.Data
                     return result += " <color=yellow> " + attrs[i + 1] + " </color> Energy";
                 case Constant.Type.ATTR_Agility:
                     return result += " <color=yellow> " + attrs[i + 1] + " </color> Agility";
-                case Constant.Type.ATTR_Speed:
-                    return result += " <color=yellow> " + attrs[i + 1] + " </color> Speed";
-                case Constant.Type.ATTR_Detection:
-                    return result += " <color=yellow> " + attrs[i + 1] + " </color> Detection";
-                case Constant.Type.ATTR_Capacity:
-                    return result += " <color=yellow> " + attrs[i + 1] + " </color> Capacity";
                 case Constant.Type.ATTR_Firerate:
                     return result += " <color=yellow> " + attrs[i + 1] + " </color> Firerate";
-                case Constant.Type.ATTR_Dogde:
-                    return result += " <color=yellow> " + attrs[i + 1] + " </color> Dogde";
                 default:
                     return "Unknown effect";
             }

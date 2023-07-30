@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 17:53:34.225
+// 生成时间：2023-07-30 13:03:00.150
 //------------------------------------------------------------
 
 namespace ETLG
@@ -77,88 +77,113 @@ namespace ETLG
         KnowledgeFragments_IoT = 2006,
 
         /// <summary>
-        /// 防御系统升级
+        /// 加强船体板
         /// </summary>
-        DefenseSystemUpgrade = 3001,
+        ReinforcedHullPlating = 3001,
 
         /// <summary>
-        /// 装甲镀层
+        /// 弹性护盾矩阵
         /// </summary>
-        ArmorPlating = 3002,
+        ResilientShieldMatrix = 3002,
 
         /// <summary>
-        /// 维修无人机舱
+        /// 能量偏转场
         /// </summary>
-        RepairDroneBay = 3003,
+        EnergyDeflectionField = 3003,
 
         /// <summary>
-        /// 能量护盾投影仪
+        /// 护盾再生模块
         /// </summary>
-        EnergyShieldProjector = 3004,
+        ShieldRegenerationModule = 3004,
 
         /// <summary>
-        /// 护盾发生器
+        /// 推力矢量系统
         /// </summary>
-        ShieldGenerator = 3005,
+        ThrustVectoringSystem = 3005,
 
         /// <summary>
-        /// 火力模块
+        /// 敏捷机动推进器
         /// </summary>
-        FirepowerModule = 3006,
+        AgileManeuveringThrusters = 3006,
 
         /// <summary>
-        /// 伤害增幅器
+        /// 增强型传感器陀螺仪
         /// </summary>
-        DamageAmplifier = 3007,
+        EnhancedSensorGyros = 3007,
 
         /// <summary>
-        /// 能源电容器
+        /// 大容量电源核心
         /// </summary>
-        EnergyCapacitor = 3008,
+        HighCapacityPowerCore = 3008,
 
         /// <summary>
-        /// 速度助推器
+        /// 先进的能量稳定器
         /// </summary>
-        VelocityBooster = 3009,
+        AdvancedEnergyStabilizer = 3009,
 
         /// <summary>
-        /// 推进器增强
+        /// 高性能量再分配阵列
         /// </summary>
-        ThrusterEnhancement = 3010,
+        EfficientEnergyRedistributionArray = 3010,
 
         /// <summary>
-        /// 隐形装置
+        /// 先进的自我修复系统
         /// </summary>
-        CloakingDevice = 3011,
+        AdvancedSelfRepairSystem = 3011,
 
         /// <summary>
-        /// 存储扩展单元
+        /// 粒子屏障投影仪
         /// </summary>
-        StorageExpansioUnit = 3012,
+        ParticleBarrierProjector = 3012,
 
         /// <summary>
-        /// 传感器阵列
+        /// 先进武器瞄准系统
         /// </summary>
-        SensorArray = 3013,
+        AdvancedWeaponTargetingSystem = 3013,
+
+        /// <summary>
+        /// 增强型等离子炮阵列
+        /// </summary>
+        EnhancedPlasmaCannonArray = 3014,
+
+        /// <summary>
+        /// 精密轨道炮制导模块
+        /// </summary>
+        PrecisionRailgunGuidanceModule = 3015,
+
+        /// <summary>
+        /// 快速电容器
+        /// </summary>
+        RapidFireCapacitors = 3016,
+
+        /// <summary>
+        /// 射速调节器
+        /// </summary>
+        RateofFireModulator = 3017,
+
+        /// <summary>
+        /// 超灵敏触发机制
+        /// </summary>
+        HyperResponsiveTriggerMechanism = 3018,
 
         /// <summary>
         /// 导弹发射器
         /// </summary>
-        MissileLauncher = 3014,
+        MissileLauncher = 3019,
 
         /// <summary>
         /// 光束发射器
         /// </summary>
-        BeamEmitter = 3015,
+        BeamEmitter = 3020,
 
         /// <summary>
         /// 离子加速器
         /// </summary>
-        IonAccelerator = 3016,
+        IonAccelerator = 3021,
 
         /// <summary>
         /// 磁轨炮架
         /// </summary>
-        RailgunMount = 3017,
+        RailgunMount = 3022,
     }
 }
