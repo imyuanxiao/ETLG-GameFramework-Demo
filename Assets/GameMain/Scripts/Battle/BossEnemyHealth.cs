@@ -25,8 +25,8 @@ namespace ETLG
 
         private void InitBossEnemy()
         {
-            MaxHealth = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Durability + difficulty * 5;
-            MaxShield = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Shields + difficulty * 5;
+            MaxHealth = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Durability + difficulty * 100;
+            MaxShield = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Shields + difficulty * 100;
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
         }

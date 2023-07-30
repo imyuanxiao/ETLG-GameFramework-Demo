@@ -37,19 +37,11 @@ namespace ETLG
         private void OnUploadButtonClicked(int saveId)
         {
             Debug.Log("Upload Button Clicked : " + saveId);
+            UpdateUploadButton(saveId);
+
             Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
 
-            for (int i=0; i < this.saveSlots.Length; i++)
-            {
-                if (i == saveId)
-                {
-                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color = Color.gray;
-                }
-                else 
-                {
-                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color =  new Color(249f, 230f, 196f, 255f);
-                }
-            }
+            
         }
 
         private void OnDeleteButtonClicked(int saveId)
@@ -220,6 +212,21 @@ namespace ETLG
                 }
             }
             return -1;
+        }
+
+        private void UpdateUploadButton(int saveId)
+        {
+            for (int i=0; i < this.saveSlots.Length; i++)
+            {
+                if (i == saveId)
+                {
+                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color = Color.gray;
+                }
+                else 
+                {
+                    this.saveSlots[i].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color =  new Color(249f, 230f, 196f, 255f);
+                }
+            }
         }
 
     }

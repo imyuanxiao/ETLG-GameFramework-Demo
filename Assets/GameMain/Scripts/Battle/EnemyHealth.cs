@@ -36,14 +36,14 @@ namespace ETLG
             {
                 // MaxHealth = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower * 2;
                 // MaxHealth = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyHealthBase * 2;
-                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 2 + 3 * difficulty;
+                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 2 + 5 * difficulty;
                 MaxShield = 0;
             }
             else if (controller.basicEnemyType == BasicEnemyType.BasicEnemy2)
             {
                 // MaxHealth = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower * 3;
                 // MaxHealth = ((ProcedureBasicBattle) GameEntry.Procedure.GetProcedure<ProcedureBasicBattle>()).basicEnemyHealthBase * 3;
-                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 3 + 3 * difficulty;
+                MaxHealth = BattleManager.Instance.basicEnemyHealthBase * 3 + 5 * difficulty;
                 MaxShield = 0;
             }
             else if (controller.basicEnemyType == BasicEnemyType.AI)
