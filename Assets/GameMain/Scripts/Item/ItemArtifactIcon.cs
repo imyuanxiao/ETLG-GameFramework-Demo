@@ -53,11 +53,11 @@ namespace ETLG
             Vector3 offset;
             if (Type == Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                offset = new Vector3(-310f, -350f, 0f);
+                offset = new Vector3(0f, -110f, 0f);
             }
             else
             {
-                offset = new Vector3(0f, -400f, 0f);
+                offset = new Vector3(420f, -110f, 0f);
             }
 
             Vector3 newPosition = itemPosition + offset;
