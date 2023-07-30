@@ -16,6 +16,7 @@ namespace ETLG
         public DataArtifact dataArtifact;
         public DataPlayer dataPlayer;
         private DataNPC dataNPC;
+        private DataTrade dataTrade;
 
         private ArtifactDataBase artifactDataBase;
 
@@ -67,6 +68,8 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            dataTrade = GameEntry.Data.GetData<DataTrade>();
+            InputField.text = (0).ToString();
 
             artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
 
@@ -93,16 +96,15 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            artifactDataBase.isTrade = false;
-            artifactDataBase = null;
+            needClose = false;
+            dataTrade.clearData();
             base.OnClose(isShutdown, userData);
-
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-            if (artifactDataBase.isTrade)
+            if (dataTrade.clickItemIcon)
             {
                 Transform InteractContainerRectTransform = InteractContainer.GetComponent<Transform>();
                 InteractContainerRectTransform.gameObject.SetActive(true);
@@ -121,11 +123,11 @@ namespace ETLG
             InputField.onValidateInput += ValidateNumericInput;
             bool success = int.TryParse(InputField.text, out inputNum);
 
-            if (dataPlayer.GetPlayerData().UI_tradeData != null)
+            updateInputNumAndTotalPrice();
+            if (dataTrade.clickTradeButton)
             {
                 testTradeNum();
-                updateInputNumAndTotalPrice();
-                if (dataPlayer.GetPlayerData().UI_tradeData.save && needClose)
+                if (dataTrade.save && needClose)
                 {
                     closeButtonClick();
                 }
@@ -134,7 +136,7 @@ namespace ETLG
 
         private void testTradeNum()
         {
-            maxNum = dataPlayer.GetPlayerData().UI_tradeData.artifactNum;
+            maxNum = dataTrade.artifactNum;
             //输入数量不能大于可买数量
             if (inputNum > limitNum || inputNum > maxNum)
             {
@@ -160,18 +162,14 @@ namespace ETLG
 
         private void tradeClick()
         {
-            bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= dataPlayer.GetPlayerData().UI_tradeData.totalPrice;
-            if (dataPlayer.GetPlayerData().UI_tradeData.tradeType == Constant.Type.TRADE_NPC_PLAYER || (dataPlayer.GetPlayerData().UI_tradeData.tradeType == Constant.Type.TRADE_PLAYER_NPC && enoughPlayerMoney))
+            bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= dataTrade.totalPrice;
+            //如果买家余额充足，则购买并关闭此UI
+            if (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER || (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC && enoughPlayerMoney))
             {
                 //输入量和总金额
-                dataPlayer.GetPlayerData().UI_tradeData.inputNum = inputNum;
-                dataPlayer.GetPlayerData().UI_tradeData.totalPrice = totalPrice;
-                dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton = true;
-
+                dataTrade.setTradeData(inputNum, totalPrice);
                 needClose = true;
-            }
-            //如果买家余额充足，则购买并关闭此UI
-
+            } 
             else
             {
                 //如果不充足点击trade无反应，是否跳出提示余额不足？
@@ -182,7 +180,6 @@ namespace ETLG
         private void closeButtonClick()
         {
             needClose = false;
-            dataPlayer.GetPlayerData().UI_tradeData = null;
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 

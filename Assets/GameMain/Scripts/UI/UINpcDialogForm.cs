@@ -481,8 +481,6 @@ namespace ETLG
 
         private void updateFontSize(int changeValue)
         {
-            Debug.Log("plus"+fontsizeChangePlusValue);
-            Debug.Log("sub"+ fontsizeChangeSubValue);
             //Image singleTextModule in textModules
             foreach (Transform dialogModule in dialogScrollContent)
             {

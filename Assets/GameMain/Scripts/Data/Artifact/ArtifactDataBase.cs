@@ -11,7 +11,6 @@ namespace ETLG.Data
         public bool Tradeable { get; protected set; }
         public int Value { get; protected set; }
         public int MaxNumber { get; protected set; }
-        public bool isTrade { get; set; }
 
     }
 

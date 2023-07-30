@@ -19,7 +19,6 @@ namespace ETLG.Data
             Tradeable = dRArtifact.Tradeable;
             Value = dRArtifact.Value;
             MaxNumber = dRArtifact.MaxNumber;
-            isTrade = false;
 
         }
 

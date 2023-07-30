@@ -30,6 +30,7 @@ namespace ETLG
 
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
+        private DataTrade dataTrade=null;
 
         private bool refresh;
 
@@ -67,6 +68,7 @@ namespace ETLG
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             playerArtifacts = dataPlayer.GetPlayerData().GetTradeableArtifacts();
+            dataTrade= GameEntry.Data.GetData<DataTrade>();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
             playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
@@ -87,7 +89,7 @@ namespace ETLG
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-            if (dataPlayer.GetPlayerData().UI_tradeData != null && dataPlayer.GetPlayerData().UI_tradeData.clickTradeButton)
+            if (dataTrade.clickTradeButton)
             {
                 HandleTradeData();
             }
@@ -104,12 +106,12 @@ namespace ETLG
         //触发trade按钮后交易，刷新item和money
         private void HandleTradeData()
         {
-            tradeNum = dataPlayer.GetPlayerData().UI_tradeData.inputNum;
-            totalPrice = dataPlayer.GetPlayerData().UI_tradeData.totalPrice;
-            receivedArtifactID = dataPlayer.GetPlayerData().UI_tradeData.artifactID;
-            receivedType = dataPlayer.GetPlayerData().UI_tradeData.tradeType;
-            totalNum = dataPlayer.GetPlayerData().UI_tradeData.artifactNum;
-            dataPlayer.GetPlayerData().UI_tradeData.save = true;
+            tradeNum = dataTrade.inputNum;
+            totalPrice = dataTrade.totalPrice;
+            receivedArtifactID = dataTrade.artifactID;
+            receivedType = dataTrade.tradeType;
+            totalNum = dataTrade.artifactNum;
+            dataTrade.save = true;
 
             tradeArtifact();
             refresh = true;
@@ -146,7 +148,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             playerArtifacts = null;
-            dataPlayer.GetPlayerData().UI_tradeData = null;
+            dataTrade = null;
             closeButton.onClick.RemoveAllListeners();
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));

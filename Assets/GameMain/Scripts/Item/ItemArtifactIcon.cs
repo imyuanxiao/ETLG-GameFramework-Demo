@@ -24,9 +24,9 @@ namespace ETLG
         public TextMeshProUGUI artifactNumber;
         public int artifactNum;
         private DataPlayer dataPlayer;
+        private DataTrade dataTrade;
 
         public int Type { get; private set; }
-
 
         protected override void OnInit(object userData)
         {
@@ -34,6 +34,7 @@ namespace ETLG
 
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataTrade = GameEntry.Data.GetData<DataTrade>();
 
             iconButton.onClick.AddListener(OnIconButtonClick);
         }
@@ -42,10 +43,7 @@ namespace ETLG
         {
             if (Type != Constant.Type.ARTIFACT_ICON_DEFAULT)
             {
-                ArtifactDataBase artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
-                artifactDataBase.isTrade = true;
-                dataPlayer.GetPlayerData().UI_tradeData = new UITradeData(CurrentArtifactID,artifactNum,Type);
-
+                dataTrade.setArtifactData(CurrentArtifactID, artifactNum, Type);
             }
         }
 
@@ -75,7 +73,7 @@ namespace ETLG
             }
             else
             {
-                if (dataPlayer.GetPlayerData().UI_tradeData==null)
+                if (!dataTrade.clickItemIcon)
                 {
                     GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
                 }
@@ -92,7 +90,7 @@ namespace ETLG
             else
             {
                 //if pointerexit from other icon, but should not close current tradeinfo UI
-                if (dataPlayer.GetPlayerData().UI_tradeData == null)
+                if (!dataTrade.clickItemIcon)
                 {
                     GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
                 }

@@ -49,7 +49,6 @@ namespace ETLG.Data
         public Dictionary<int, int> playerTotalArtifacts { get; set; }
         private DataAchievement dataAchievement { get; set; }
 
-        public UITradeData UI_tradeData = null;
         public int battleVictoryCount;
         public Dictionary<int, float> bossDefeatTime;
 

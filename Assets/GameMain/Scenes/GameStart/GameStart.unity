@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -204,6 +204,8 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataAchievement
   - enable: 1
     dataTypeName: ETLG.Data.DataTutorial
+  - enable: 1
+    dataTypeName: ETLG.Data.DataTrade
 --- !u!1 &444730643
 GameObject:
   m_ObjectHideFlags: 0
