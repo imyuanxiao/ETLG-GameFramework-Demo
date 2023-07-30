@@ -21,7 +21,7 @@
             public const int PLAYERMENU_MISSION = 2;
             public const int PLAYERMENU_ACHIEVEMENT = 1027;
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 1044;
+            public const int PLAYERMENU_LEADERBOARD = 1032;
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;
@@ -159,7 +159,10 @@
             public const int REWARD_TYPE_ARTIFACT = 0;
             public const int REWARD_TYPE_SKILL = 1;
 
-
+            //error type
+            public const int ERROR_NETWORK=1;
+            public const int ERROR_SERVER = 2;
+            public const int ERROR_DATA = 3;
         }
     }
 }

@@ -13,9 +13,7 @@ namespace ETLG.Data
         public Vector3 tipUiPosition { get ; set; }
         public string tipTitle { get ; set; }
         public string tipContent { get ; set; }
-
         public int currentSelectedPlayerMenu { get; set; }
-
         protected override void OnInit()
         {
 
