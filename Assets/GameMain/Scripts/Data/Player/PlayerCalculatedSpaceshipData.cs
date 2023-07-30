@@ -17,10 +17,6 @@ namespace ETLG.Data
         public float Firepower { get; set; }
         public float FireRate { get; set; }
         public float Agility { get; set; }
-        public float Speed { get; set; }
-        public float Dogde { get; set; }
-        public float Detection { get; set; }
-        public float Capacity { get; set; }
 
 
         public PlayerCalculatedSpaceshipData(SpaceshipData spaceshipData) {
@@ -31,10 +27,6 @@ namespace ETLG.Data
             Firepower = spaceshipData.Firepower;
             FireRate = spaceshipData.FireRate;
             Agility = spaceshipData.Agility;
-            Speed = spaceshipData.Speed;
-            Dogde = spaceshipData.Dogde;
-            Detection = spaceshipData.Detection;
-            Capacity = spaceshipData.Capacity;
         }
 
     }

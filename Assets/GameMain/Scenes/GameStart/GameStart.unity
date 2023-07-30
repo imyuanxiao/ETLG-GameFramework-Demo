@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 444730645}
   - component: {fileID: 444730644}
   m_Layer: 0
-  m_Name: DataManager
+  m_Name: BackendDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,10 +232,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 444730643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74d4337f227d7845a8ea9978a2bbd3b, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d017ee6693db04d8ce6175fd275f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   responseData: 
+  errorType: 0
 --- !u!4 &444730645
 Transform:
   m_ObjectHideFlags: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373d7bc16eba89041a3046bd03ba0296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
 --- !u!1 &1046933264
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ namespace ETLG
 
             this.equippedModuleIdx = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules()[0];
 
-            fireRate = 0.25f; // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.FireRate;
+            fireRate = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.FireRate / 500;
             timeElapsed = 0;
             readyToFire = true;
         }

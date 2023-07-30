@@ -35,7 +35,6 @@ namespace ETLG
         {
             base.OnInit(userData);
             // 获取玩家数据管理器
-
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
         }

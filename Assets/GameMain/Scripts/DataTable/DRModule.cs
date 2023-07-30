@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 00:08:30.271
+// 生成时间：2023-07-30 13:02:57.236
 //------------------------------------------------------------
 
 using GameFramework;
@@ -19,7 +19,7 @@ using UnityGameFramework.Runtime;
 namespace ETLG
 {
     /// <summary>
-    /// 道具配置表。
+    /// 飞船模组配置表。
     /// </summary>
     public class DRModule : DataRowBase
     {
@@ -55,7 +55,7 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取属性(0-特殊,1-Durability;2-SHIELDS;3-FIREPOWER;4-ENERGY;5-AGILITY;6-SPEED;7-DETECTION;8-CAPACITY;9-FIREPOWER;10-DOGDE)。
+        /// 获取属性(0特殊,1-Durability;2-SHIELDS;3-AGILITY;4-ENERGY;5-FIREPOWER;;6-FIRERATE)。
         /// </summary>
         public int[] Attributes
         {

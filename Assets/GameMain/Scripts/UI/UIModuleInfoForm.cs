@@ -18,7 +18,7 @@ namespace ETLG
 
         public DataPlayer dataPlayer;
 
-        public Transform UIContainer;
+        public RectTransform UIContainer;
 
         public RawImage moduleIcon;
         public TextMeshProUGUI ModuleName = null;
@@ -47,6 +47,8 @@ namespace ETLG
             if (refresh)
             {
                 showContent();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+                UIContainer.position = new Vector3(50f, 450f, 0f);
                 refresh = false;
             }
         }
@@ -62,7 +64,6 @@ namespace ETLG
 
             ArtifactModuleData moduleData = dataArtifact.GetCurrentShowModuleData();
 
-            UIContainer.position = new Vector3(50f, 120f, 0f);
 
             ModuleName.text = moduleData.Name;
             ModuleType.text = moduleData.ClassificationName();
@@ -71,7 +72,7 @@ namespace ETLG
             ModuleEffect.text = moduleData.GetEffect();
 
             // set skill icon            
-            string texturePath = AssetUtility.GetSkillIcon(moduleData.Id.ToString());
+            string texturePath = AssetUtility.GetArtifactIcon(moduleData.Id.ToString());
             Texture texture = Resources.Load<Texture>(texturePath);
             if (texture == null)
             {

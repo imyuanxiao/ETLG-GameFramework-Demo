@@ -31,7 +31,7 @@ namespace ETLG
             base.OnOpen(userData);
             UIContainer.position = dataPlayer.tipUiPosition;
             TipTitle.text = dataPlayer.tipTitle;
-            if(dataAchievement.descriptionLevel==0)
+            if(dataAchievement.descriptionId==0)
             {
                 //TipContent.text = GameEntry.Localization.GetString(Constant.Key.PRE_TIP + dataPlayer.tipTitle);
             /*    if(GameEntry.Data.GetData<DataPlayer>().tipContent != )
@@ -52,7 +52,6 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
-            dataAchievement.descriptionLevel = 0;
         }
 
     }

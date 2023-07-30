@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using ETLG.Data;
+using System.Xml.Linq;
 
 namespace ETLG
 {
@@ -14,7 +15,9 @@ namespace ETLG
         [SerializeField] private TextMeshProUGUI info1 = null;
         // [SerializeField] private TextMeshProUGUI info2 = null;
         [SerializeField] private TextMeshProUGUI[] rewardsInfo;  // 0: coin, 1: skill, 2: fraction
+        public Transform rewardContainer;
         private List<int> rewardsId;
+        private int awardedSkillId;
 
         protected override void OnInit(object userData)
         {
@@ -33,6 +36,7 @@ namespace ETLG
         {
             base.OnOpen(userData);
             this.rewardsId = new List<int>();
+            this.awardedSkillId = -1;
 
             if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
             {
@@ -73,6 +77,8 @@ namespace ETLG
                 info1.text = "Reward";
                 // info2.text = "Reward";
             }
+
+            DisplayRewardInfo();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -117,28 +123,34 @@ namespace ETLG
             switch (BattleManager.Instance.bossType)
             {
                 case "CloudComputing":
-                    this.rewardsId.Add((int) EnumSkill.EdgeComputing);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.EdgeComputing);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.EdgeComputing;
                     return GameEntry.Localization.GetString("Skill_EdgeComputing"); //+ " : " + GameEntry.Localization.GetString("Skill_EdgeComputing_Level_1");
                 case "CyberSecurity":
-                    this.rewardsId.Add((int) EnumSkill.ElectronicWarfare);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.ElectronicWarfare);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.ElectronicWarfare;
                     return GameEntry.Localization.GetString("Skill_ElectronicWarfare"); // + " : " + GameEntry.Localization.GetString("Skill_ElectronicWarfare_Level_1");
                 case "AI":
-                    this.rewardsId.Add((int) EnumSkill.AdaptiveIntelligentDefense);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.AdaptiveIntelligentDefense);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.AdaptiveIntelligentDefense;
                     return GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense"); // + " : " + GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense_Level_1");
                 case "DataScience":
-                    this.rewardsId.Add((int) EnumSkill.EnergyBoost);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.EnergyBoost);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.EnergyBoost;
                     return GameEntry.Localization.GetString("Skill_EnergyBoost"); // + " : " + GameEntry.Localization.GetString("Skill_EnergyBoost_Level_1");
                 case "Blockchain":
-                    this.rewardsId.Add((int) EnumSkill.BlockchainResurgence);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.BlockchainResurgence);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.BlockchainResurgence;
                     return GameEntry.Localization.GetString("Skill_BlockchainResurgence"); // + " : " + GameEntry.Localization.GetString("Skill_BlockchainResurgence_Level_1");
                 case "IoT":
-                    this.rewardsId.Add((int) EnumSkill.MedicalSupport);
-                    this.rewardsId.Add(1);
+                    // this.rewardsId.Add((int) EnumSkill.MedicalSupport);
+                    // this.rewardsId.Add(1);
+                    this.awardedSkillId = (int) EnumSkill.MedicalSupport;
                     return GameEntry.Localization.GetString("Skill_MedicalSupport"); // + " : " + GameEntry.Localization.GetString("Skill_MedicalSupport_Level_1");
                 default:
                     return "";
@@ -211,7 +223,37 @@ namespace ETLG
 
         private void DisplayRewardInfo()
         {
-            // this.rewardsId;
+            // Reward ID: [id, num, id, num, ...]
+            // int �� List����
+            // int[] rewardArtifactId = new int[1];
+            List<int> rewardArtifactId = this.rewardsId;
+
+            for (int i = 0; i < rewardArtifactId.Count; i += 2) {
+                int id = rewardArtifactId[i];
+                int num = rewardArtifactId[i + 1];
+                ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+                {
+                    item.transform.SetParent(rewardContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero;
+                    item.GetComponent<ItemRewardPreview>().SetRewardData(id, num, Constant.Type.REWARD_TYPE_ARTIFACT);
+                });
+            }
+            
+            // reward skill
+            int skillId = this.awardedSkillId;
+            if (skillId == -1) { return; }
+
+            ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+            {
+                item.transform.SetParent(rewardContainer, false);
+                item.transform.localScale = Vector3.one;
+                item.transform.eulerAngles = Vector3.zero;
+                item.transform.localPosition = Vector3.zero;
+                item.GetComponent<ItemRewardPreview>().SetRewardData(skillId, 1, Constant.Type.REWARD_TYPE_SKILL);
+            });
+
         }
     }
 }

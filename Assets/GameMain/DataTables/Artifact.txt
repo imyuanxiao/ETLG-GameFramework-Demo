@@ -1,34 +1,39 @@
-﻿#	道具配置表（贴图直接根据ID获取）						
-#	Id		NameID	Type	Tradeable	Value	MaxNumber
-#	int		string	int	bool	int	int
-#	配置编号	策划备注	道具枚举ID	道具类型(1-Trade,2-Special, 3-Module)	是否可交易	交易价值	道具上限
-	1001	货币	Money	-1	TRUE	0	999999999
-	1002	知识点	KnowledgePoint	-1	FALSE	0	9999
-	1003	稀有矿石	RareOre	1	TRUE	100	9999
-	1004	燃料补充单元	FuelRefillUnit	1	TRUE	300	9999
-	1101	低级升级单元	LowLevelUpgradeUnit	1	TRUE	100	9999
-	1102	中级升级单元	IntermediateUpgradeUnit	1	TRUE	100	9999
-	1103	高级升级单元	AdvancedUpgradeUnit	1	TRUE	100	9999
-	2001	知识碎片（云计算）	KnowledgeFragments_CloudComputing	2	FALSE	0	1
-	2002	知识碎片（人工智能）	KnowledgeFragments_AI	2	FALSE	0	1
-	2003	知识碎片（区块链）	KnowledgeFragments_Blockchain	2	FALSE	0	1
-	2004	知识碎片（网络安全）	KnowledgeFragments_Cybersecurity	2	FALSE	0	1
-	2005	知识碎片（数据科学）	KnowledgeFragments_DataScience	2	FALSE	0	1
-	2006	知识碎片（物联网）	KnowledgeFragments_IoT	2	FALSE	0	1
-	3001	防御系统升级	DefenseSystemUpgrade	3	TRUE	50000	1
-	3002	装甲镀层	ArmorPlating	3	TRUE	50000	1
-	3003	维修无人机舱	RepairDroneBay	3	TRUE	50000	1
-	3004	能量护盾投影仪	EnergyShieldProjector	3	TRUE	50000	1
-	3005	护盾发生器	ShieldGenerator	3	TRUE	50000	1
-	3006	火力模块	FirepowerModule	3	TRUE	50000	1
-	3007	伤害增幅器	DamageAmplifier	3	TRUE	50000	1
-	3008	能源电容器	EnergyCapacitor	3	TRUE	50000	1
-	3009	速度助推器	VelocityBooster	3	TRUE	50000	1
-	3010	推进器增强	ThrusterEnhancement	3	TRUE	50000	1
-	3011	隐形装置	CloakingDevice	3	TRUE	50000	1
-	3012	存储扩展单元	StorageExpansioUnit	3	TRUE	50000	1
-	3013	传感器阵列	SensorArray	3	TRUE	50000	1
-	3014	导弹发射器	MissileLauncher	3	TRUE	50000	1
-	3015	光束发射器	BeamEmitter	3	TRUE	50000	1
-	3016	离子加速器	IonAccelerator	3	TRUE	50000	1
-	3017	磁轨炮架	RailgunMount	3	TRUE	50000	1
+﻿#	道具配置表（贴图直接根据ID获取）					
+#	Id		NameID	Type	Tradeable	Value
+#	int		string	int	bool	int
+#	配置编号	策划备注	道具枚举ID	道具类型(1-Trade,2-Special, 3-Module)	是否可交易	交易价值
+	1001	货币	Money	-1	TRUE	0
+	1002	知识点	KnowledgePoint	-1	FALSE	0
+	1003	稀有矿石	RareOre	1	TRUE	100
+	1004	燃料补充单元	FuelRefillUnit	1	TRUE	300
+	1101	低级升级单元	LowLevelUpgradeUnit	1	TRUE	100
+	1102	中级升级单元	IntermediateUpgradeUnit	1	TRUE	100
+	1103	高级升级单元	AdvancedUpgradeUnit	1	TRUE	100
+	2001	知识碎片（云计算）	KnowledgeFragments_CloudComputing	2	FALSE	0
+	2002	知识碎片（人工智能）	KnowledgeFragments_AI	2	FALSE	0
+	2003	知识碎片（区块链）	KnowledgeFragments_Blockchain	2	FALSE	0
+	2004	知识碎片（网络安全）	KnowledgeFragments_Cybersecurity	2	FALSE	0
+	2005	知识碎片（数据科学）	KnowledgeFragments_DataScience	2	FALSE	0
+	2006	知识碎片（物联网）	KnowledgeFragments_IoT	2	FALSE	0
+	3001	加强船体板	ReinforcedHullPlating	3	TRUE	20000
+	3002	弹性护盾矩阵	ResilientShieldMatrix	3	TRUE	40000
+	3003	能量偏转场	EnergyDeflectionField	3	TRUE	20000
+	3004	护盾再生模块	ShieldRegenerationModule	3	TRUE	40000
+	3005	推力矢量系统	ThrustVectoringSystem	3	TRUE	20000
+	3006	敏捷机动推进器	AgileManeuveringThrusters	3	TRUE	40000
+	3007	增强型传感器陀螺仪	EnhancedSensorGyros	3	TRUE	60000
+	3008	大容量电源核心	HighCapacityPowerCore	3	TRUE	20000
+	3009	先进的能量稳定器	AdvancedEnergyStabilizer	3	TRUE	40000
+	3010	高性能量再分配阵列	EfficientEnergyRedistributionArray	3	TRUE	40000
+	3011	先进的自我修复系统	AdvancedSelfRepairSystem	3	TRUE	40000
+	3012	粒子屏障投影仪	ParticleBarrierProjector	3	TRUE	40000
+	3013	先进武器瞄准系统	AdvancedWeaponTargetingSystem	3	TRUE	20000
+	3014	增强型等离子炮阵列	EnhancedPlasmaCannonArray	3	TRUE	40000
+	3015	精密轨道炮制导模块	PrecisionRailgunGuidanceModule	3	TRUE	60000
+	3016	快速电容器	RapidFireCapacitors	3	TRUE	20000
+	3017	射速调节器	RateofFireModulator	3	TRUE	40000
+	3018	超灵敏触发机制	HyperResponsiveTriggerMechanism	3	TRUE	60000
+	3019	导弹发射器	MissileLauncher	3	TRUE	50000
+	3020	光束发射器	BeamEmitter	3	TRUE	50000
+	3021	离子加速器	IonAccelerator	3	TRUE	50000
+	3022	磁轨炮架	RailgunMount	3	TRUE	50000

@@ -22,25 +22,26 @@ namespace ETLG
         // initial attrs
         public TextMeshProUGUI s_durability = null;
         public TextMeshProUGUI s_shields = null;
-        public TextMeshProUGUI s_firepower = null;
-        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_agility = null;
-        public TextMeshProUGUI s_speed = null;
-        public TextMeshProUGUI s_detection = null;
-        public TextMeshProUGUI s_capacity = null;
+        public TextMeshProUGUI s_energy = null;
         public TextMeshProUGUI s_fireRate = null;
-        public TextMeshProUGUI s_dogde = null;
+        public TextMeshProUGUI s_firepower = null;
 
         private readonly float valueBarMaxWidth = 180;
 
-        public GameObject s_durability_valueBar = null;
-        public GameObject s_shields_valueBar = null;
-        public GameObject s_energy_valueBar = null;
-        public GameObject s_firepower_valueBar = null;
-        public GameObject s_agility_valueBar = null;
-        public GameObject s_speed_valueBar = null;
-        public GameObject s_detection_valueBar = null;
-        public GameObject s_capacity_valueBar = null;
+        public GameObject s_durability_initialVal = null;
+        public GameObject s_shields_initialVal = null;
+        public GameObject s_agility_initialVal = null;
+        public GameObject s_energy_initialVal = null;
+        public GameObject s_firepower_initialVal = null;
+        public GameObject s_fireRate_initialVal = null;
+
+        public GameObject s_durability_increVal = null;
+        public GameObject s_shields_increVal = null;
+        public GameObject s_agility_increVal = null;
+        public GameObject s_energy_increVal = null;
+        public GameObject s_firepower_increVal = null;
+        public GameObject s_fireRate_increVal = null;
 
         public TextMeshProUGUI playerKnowledgePoints = null;
         public TextMeshProUGUI playerScore = null;
@@ -76,6 +77,7 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             refreshLeftUI = true;
+
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -116,7 +118,7 @@ namespace ETLG
 
         public void ShowContent()
         {
-
+            SpaceshipData initialSpaceshipData = dataPlayer.GetPlayerData().initialSpaceship;
             PlayerCalculatedSpaceshipData currentSpaceshipData = dataPlayer.GetPlayerData().playerCalculatedSpaceshipData;
 
             if (currentSpaceshipData == null)
@@ -129,32 +131,33 @@ namespace ETLG
 
             playerScore.text = dataPlayer.GetPlayerData().GetPlayerScore().ToString();
 
+
+            s_energy.text = currentSpaceshipData.Energy.ToString();
             s_durability.text = currentSpaceshipData.Durability.ToString();
             s_shields.text = currentSpaceshipData.Shields.ToString();
             s_firepower.text = currentSpaceshipData.Firepower.ToString();
-            s_energy.text = currentSpaceshipData.Energy.ToString();
             s_fireRate.text = currentSpaceshipData.FireRate.ToString();
             s_agility.text = currentSpaceshipData.Agility.ToString();
-            s_speed.text = currentSpaceshipData.Speed.ToString();
-            s_detection.text = currentSpaceshipData.Detection.ToString();
-            s_capacity.text = currentSpaceshipData.Capacity.ToString();
-            s_dogde.text = currentSpaceshipData.Dogde.ToString();
+
+            SetWidth(s_durability_initialVal, initialSpaceshipData.Durability);
+            SetWidth(s_shields_initialVal, initialSpaceshipData.Shields);
+            SetWidth(s_agility_initialVal, initialSpaceshipData.Agility);
+            SetWidth(s_energy_initialVal, initialSpaceshipData.Energy);
+            SetWidth(s_firepower_initialVal, initialSpaceshipData.Firepower);
+            SetWidth(s_fireRate_initialVal, initialSpaceshipData.FireRate);
+
+            SetWidth(s_durability_increVal, currentSpaceshipData.Durability - initialSpaceshipData.Durability);
+            SetWidth(s_shields_increVal, currentSpaceshipData.Shields - initialSpaceshipData.Shields);
+            SetWidth(s_agility_increVal, currentSpaceshipData.Agility - initialSpaceshipData.Agility);
+            SetWidth(s_energy_increVal, currentSpaceshipData.Energy - initialSpaceshipData.Energy);
+            SetWidth(s_firepower_increVal, currentSpaceshipData.Firepower - initialSpaceshipData.Firepower);
+            SetWidth(s_fireRate_increVal, currentSpaceshipData.FireRate - initialSpaceshipData.FireRate);
 
 
             totalSkillsNum.text = "/" + dataSkill.skillCount.ToString();
             totalLevelsNum.text = "/" + dataSkill.levelCount.ToString();
             unlockedSkillsNum.text = dataPlayer.GetPlayerData().GetUnlockedSkillsNum().ToString();
             upgradedLevelsNum.text = dataPlayer.GetPlayerData().GetUnlockedLevelsNum().ToString();
-
-            SetWidth(s_energy_valueBar, currentSpaceshipData.Energy);
-            SetWidth(s_durability_valueBar, currentSpaceshipData.Durability);
-            SetWidth(s_shields_valueBar, currentSpaceshipData.Shields);
-            SetWidth(s_firepower_valueBar, currentSpaceshipData.Firepower);
-            SetWidth(s_agility_valueBar, currentSpaceshipData.Agility);
-            SetWidth(s_speed_valueBar, currentSpaceshipData.Speed);
-            SetWidth(s_detection_valueBar, currentSpaceshipData.Detection);
-            SetWidth(s_capacity_valueBar, currentSpaceshipData.Capacity);
-
 
         }
 

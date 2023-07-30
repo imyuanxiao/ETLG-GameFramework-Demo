@@ -53,6 +53,9 @@ namespace ETLG
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
             }
+
+            // tutorial in spaceship menu
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(2);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

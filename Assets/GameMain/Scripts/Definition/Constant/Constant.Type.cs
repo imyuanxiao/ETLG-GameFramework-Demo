@@ -16,12 +16,12 @@
 
 
             // player menu title
-            public const int PLAYERMENU_SPACESHIP = 1011;
+/*            public const int PLAYERMENU_SPACESHIP = 1011;
             public const int PLAYERMENU_SKILL = 1012;
             public const int PLAYERMENU_MISSION = 2;
             public const int PLAYERMENU_ACHIEVEMENT = 1027;
             public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 1044;
+            public const int PLAYERMENU_LEADERBOARD = 1032;*/
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;
@@ -84,14 +84,10 @@
 
             public const int ATTR_Durability = 1;
             public const int ATTR_Shields = 2;
-            public const int ATTR_Firepower = 3;
+            public const int ATTR_Agility = 3;
             public const int ATTR_Energy = 4;
-            public const int ATTR_Agility = 5;
-            public const int ATTR_Speed = 6;
-            public const int ATTR_Detection = 7;
-            public const int ATTR_Capacity = 8;
-            public const int ATTR_Firerate = 9;
-            public const int ATTR_Dogde = 10;
+            public const int ATTR_Firepower = 5;
+            public const int ATTR_Firerate = 6;
 
 
             public const string ARTIFACT_TYPE = "ARTIFACT_TYPE_";
@@ -159,7 +155,10 @@
             public const int REWARD_TYPE_ARTIFACT = 0;
             public const int REWARD_TYPE_SKILL = 1;
 
-
+            //error type
+            public const int ERROR_NETWORK=1;
+            public const int ERROR_SERVER = 2;
+            public const int ERROR_DATA = 3;
         }
     }
 }

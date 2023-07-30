@@ -56,6 +56,8 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
 
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+
 
         }
 
@@ -126,6 +128,17 @@ namespace ETLG
 
             GameEntry.UI.CloseAllLoadedUIForms();
             GameEntry.UI.OpenUIForm(ne.UIFormID);
+
+            if(ne.UIFormID == (int)EnumUIForm.UISpaceshipCheckForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+            }
+
+            if (ne.UIFormID == (int)EnumUIForm.UISkillTreeForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(4);
+            }
+
         }
 
         private void ResetStates()
@@ -217,11 +230,6 @@ namespace ETLG
             {
                 dataPlayer.tipUiPosition = ne.position;
                 dataPlayer.tipTitle = ne.tipTitle;
-                if (ne.level != 0 && ne.achievementId != 0)
-                {
-                    dataAchievement.descriptionId = ne.achievementId;
-                    dataAchievement.descriptionLevel = ne.level;
-                }
                 GameEntry.UI.OpenUIForm(EnumUIForm.UITipForm);
             }
 

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7160389700176793513}
   - component: {fileID: 5095247853650463714}
   - component: {fileID: 4765015463123270075}
-  - component: {fileID: 6473763688041522570}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -77,26 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6473763688041522570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256183757828356914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5231d6bf465644390b982c2b8a4655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 4765015463123270075}
-  achievementButton: {fileID: 4639620351842612673}
-  acheivementName: {fileID: 3060192950820808883}
-  progress: {fileID: 6329474254075908613}
-  next_level: {fileID: 0}
-  container: {fileID: 0}
-  tipTitle: 
-  position: 0
 --- !u!1 &412677682941722980
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,9 +87,7 @@ GameObject:
   - component: {fileID: 4016662390543793803}
   - component: {fileID: 8027493369625656345}
   - component: {fileID: 7658278665972985082}
-  - component: {fileID: 4639620351842612673}
   - component: {fileID: 3505795438766232651}
-  - component: {fileID: 5220700741299448683}
   m_Layer: 5
   m_Name: AchievementIcon
   m_TagString: Untagged
@@ -181,50 +158,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4639620351842612673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412677682941722980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 7658278665972985082}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3505795438766232651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,25 +171,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4765015463123270075}
-  achievementButton: {fileID: 4639620351842612673}
+  achievementButton: {fileID: 0}
   acheivementName: {fileID: 3060192950820808883}
   progress: {fileID: 6329474254075908613}
   next_level: {fileID: 1700535864126762430}
   container: {fileID: 0}
-  tipTitle: 
   position: 0
---- !u!114 &5220700741299448683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412677682941722980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a841921ae9ce48449c711591b1bb612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  refresh: 0
 --- !u!1 &2724464865261213276
 GameObject:
   m_ObjectHideFlags: 0

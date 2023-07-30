@@ -24,8 +24,12 @@ namespace ETLG
         public Button bossButton_Final;
         public Transform container = null;
         public GameObject panel;
+        public Image arrow;
         private bool isPanelVisible = false;
-        //current player
+        private bool isError;
+        private bool isRefresh;
+        private int type;
+        //current player 后面连上后端就只留云端储存的玩家排名
         private DataPlayer dataPlayer;
         // players
         private List<LeaderboardData> leaderboardData;
@@ -57,97 +61,147 @@ namespace ETLG
             AddMockPlayers();
             AddCurrentPlayerData();
             panel.SetActive(false);
-            showContent();
+            
+            OnachievementButtonClick();
+   
+        }
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            //if error
+            if (BackendDataManager.Instance.isNewFetch && !isError && BackendDataManager.Instance.errorType!=0)
+            {
+                SetItemsStatus(false);
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                }
+
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                isError = true;
+            }
+            //if error again
+            if (BackendDataManager.Instance.isNewFetch && isError && BackendDataManager.Instance.errorType != 0)
+            {
+                SetItemsStatus(false);
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                }
+
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+            }
+            //if success
+            if (BackendDataManager.Instance.isNewFetch && isError && BackendDataManager.Instance.errorType == 0)
+            {
+                isError = false;
+                isRefresh = true;
+                SetItemsStatus(true);
+            }
+            BackendDataManager.Instance.isNewFetch = false;
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
         }
-        private void showContent()
-        {
-            OnachievementButtonClick();
-        }
         private void OnachievementButtonClick()
         {
             s_name.text = "Achievement Leaderboard";
             leaderboardData.Sort((a, b) => b.AchievementScore.CompareTo(a.AchievementScore));
-            showLeaderBoardInfo(Constant.Type.LB_ACHIVEMENT);
-
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_ACHIVEMENT);
+            type = Constant.Type.LB_ACHIVEMENT;
+            if(BackendDataManager.IsInitialized)
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_ACHIVEMENT);
+            showLeaderBoardInfo();
         }
         private void OnspaceshipButtonClick()
         {
             s_name.text = "Spaceship Leaderboard";
             leaderboardData.Sort((a, b) => b.SpaceshipScore.CompareTo(a.SpaceshipScore));
-            showLeaderBoardInfo(Constant.Type.LB_SPACESHIP);
+            type = Constant.Type.LB_SPACESHIP;
+            showLeaderBoardInfo();
            
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_SPACESHIP);
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_SPACESHIP);
         }
         private void OnBossButtonClick()
         {
             isPanelVisible = !isPanelVisible;
+            //箭头垂直翻转180度
+            Vector3 currentRotation = arrow.transform.rotation.eulerAngles;
+            currentRotation.x += 180f;
+            arrow.transform.rotation = Quaternion.Euler(currentRotation);
             panel.SetActive(isPanelVisible);
         }
         private void OnBossButtonAIClick()
         {
             s_name.text = "AI Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_AI.CompareTo(b.Boss_AI));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_AI);
+            type = Constant.Type.LB_BOSS_AI;
+            showLeaderBoardInfo();
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_AI);
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_AI);
         }
         private void OnBossButtonCloudComputingClick()
         {
             s_name.text = "Cloud Computing Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_CloudComputing.CompareTo(b.Boss_CloudComputing));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_CLOUDCOMPUTING);
+            type = Constant.Type.LB_BOSS_CLOUDCOMPUTING;
+            showLeaderBoardInfo();
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CLOUDCOMPUTING);
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CLOUDCOMPUTING);
         }
         private void OnBossButtonBlockchainClick()
         {
             s_name.text = "Blockchain Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Blockchain.CompareTo(b.Boss_Blockchain));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_BLOCKCHAIN);
+            type = Constant.Type.LB_BOSS_BLOCKCHAIN;
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_BLOCKCHAIN);
+            
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_BLOCKCHAIN);
+            showLeaderBoardInfo();
         }
         private void OnBossButtonCybersecurityClick()
         {
             s_name.text = "Cybersecurity Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Cybersecurity.CompareTo(b.Boss_Cybersecurity));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_CYBERSECURITY);
+            type = Constant.Type.LB_BOSS_CYBERSECURITY;
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CYBERSECURITY);
+            
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CYBERSECURITY);
+            showLeaderBoardInfo();
         }
         private void OnBossButtonDataScienceClick()
         {
             s_name.text = "Data Science Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_DataScience.CompareTo(b.Boss_DataScience));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_DATASCIENCE);
+            type = Constant.Type.LB_BOSS_DATASCIENCE;
+            
            
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_DATASCIENCE);
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_DATASCIENCE);
+            showLeaderBoardInfo();
         }
         private void OnBossButtonIoTClick()
         {
             s_name.text = "IoT Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_IoT.CompareTo(b.Boss_IoT));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_IOT);
+            type = Constant.Type.LB_BOSS_IOT;
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_IOT);
+            
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_IOT);
+            showLeaderBoardInfo();
         }
         private void OnBossButtonFinalClick()
         {
             s_name.text = "Final Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Final.CompareTo(b.Boss_Final));
-            showLeaderBoardInfo(Constant.Type.LB_BOSS_FINAL);
+            type = Constant.Type.LB_BOSS_FINAL;
             
-            rankList = DataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_FINAL);
+            
+            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_FINAL);
+            showLeaderBoardInfo();
         }
         private void AddMockPlayers()
         {
-
             leaderboardData.Add(new LeaderboardData("Player1", 1, 1000, 150, 10.5f, 8.2f, 7.5f, 6.9f, 12.3f, 9.8f,15.8f));
             leaderboardData.Add(new LeaderboardData("Player2", 2, 800, 30, 8.0f, 7.3f, 6.5f, 5.9f, 10.2f, 8.5f,62.5f));
             leaderboardData.Add(new LeaderboardData("Player3", 3, 1200, 45, 15.2f, 11.8f, 10.5f, 9.6f, 14.0f, 11.2f,25.6f));
@@ -175,38 +229,41 @@ namespace ETLG
             data.Boss_Final = 1000f;
             leaderboardData.Add(data);
         }
-        private void showLeaderBoardInfo(int Type)
+        private void showLeaderBoardInfo()
         {
-            addRank(Type);
+            addRank();
+            
             ItemLeaderboardInfo[] items = container.GetComponentsInChildren<ItemLeaderboardInfo>(true);
             if (items.Length==0)
             {
+                //先排前10名
                 for (int i = 0; i < 10; i++)
                 {
                     LeaderboardData data = leaderboardData[i];
                     ShowItem<ItemLeaderboardInfo>(EnumItem.UILeaderboardInfo, (item) =>
                     {
                         item.transform.SetParent(container, false);
-                        item.GetComponent<ItemLeaderboardInfo>().SetData(data, container, Type);
+                        item.GetComponent<ItemLeaderboardInfo>().SetData(data, container, type);
                     });
                 }
             }
             else
             {
-                UpdateData(Type);
+                UpdateData();
             }
             
         }
-        private void UpdateData(int Type)
+        private void UpdateData()
         {
+            
             ItemLeaderboardInfo[] items = container.GetComponentsInChildren<ItemLeaderboardInfo>(true);
             int i = 0;
             foreach (ItemLeaderboardInfo subItem in items)
             {
-                subItem.UpdateData(leaderboardData[i++],Type);
+                subItem.UpdateData(leaderboardData[i++],type);
             }
         }
-        private void addRank(int type)
+        private void addRank()
         {
             int currentRank = 1;
             LeaderboardData previousData = null;
@@ -256,7 +313,14 @@ namespace ETLG
                     throw new ArgumentException("Invalid leaderboard type.");
             }
         }
-       
+       public void SetItemsStatus(bool status)
+        {
+            ItemLeaderboardInfo[] items = container.GetComponentsInChildren<ItemLeaderboardInfo>(!status);
+            foreach(ItemLeaderboardInfo subItem in items)
+            {
+                subItem.gameObject.SetActive(status);
+            }
+        }
     }
 
 }

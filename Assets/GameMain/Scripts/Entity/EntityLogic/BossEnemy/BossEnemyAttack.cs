@@ -30,6 +30,7 @@ namespace ETLG
         [SerializeField] public int spiralBulletNum = 9;
         [SerializeField] public int spiralBulletRound = 5;
         [SerializeField] public float spiralBulletAngle = 20f;
+        private int difficulty;
 
         private void Awake() 
         {
@@ -46,18 +47,19 @@ namespace ETLG
                 new EnemyRespawn(GetComponent<BossEnemyHealth>()),
                 new InstantMove(gameObject));
             m_Fsm.Start<VerticalFire>();
+            this.difficulty = SaveManager.Instance.difficulty;
         }
 
         public void InitBossEnemyBullet(Bullet bullet, Vector3 direction)
         {
-            bullet.damage = 20; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
+            bullet.damage = 20 + 5 * this.difficulty; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
             bullet.flyingDirection = direction;
             bullet.flyingSpeed = 1000;
         }
 
         public void InitBossEnemyLaser(Laser laser, Vector3 direction)
         {
-            laser.damage = 200;
+            laser.damage = 150 + 5 * this.difficulty;
             laser.flyingDirection = direction;
             laser.flyingSpeed = 4000;
         }

@@ -99,5 +99,6 @@ namespace ETLG
             this.leaderboardData = leaderboardData;
             showContent(Type);
         }
+       
     }
 }

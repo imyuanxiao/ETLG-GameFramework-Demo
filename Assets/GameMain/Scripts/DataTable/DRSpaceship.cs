@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-29 00:08:30.313
+// 生成时间：2023-07-30 13:02:57.300
 //------------------------------------------------------------
 
 using GameFramework;
@@ -82,15 +82,6 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取能量。
-        /// </summary>
-        public float Energy
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 获取耐久。
         /// </summary>
         public float Durability
@@ -103,6 +94,24 @@ namespace ETLG
         /// 获取护盾。
         /// </summary>
         public float Shields
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取敏捷。
+        /// </summary>
+        public float Agility
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取能量。
+        /// </summary>
+        public float Energy
         {
             get;
             private set;
@@ -127,63 +136,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取敏捷。
-        /// </summary>
-        public float Agility
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取移动速度。
-        /// </summary>
-        public float Speed
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取闪避率。
-        /// </summary>
-        public float Dogde
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取探测范围。
-        /// </summary>
-        public float Detection
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取容量。
-        /// </summary>
-        public float Capacity
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 获取初始技能。
         /// </summary>
         public int[] Skills
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取发射物编号。
-        /// </summary>
-        public int ProjectileId
         {
             get;
             private set;
@@ -206,18 +161,13 @@ namespace ETLG
             SType = columnStrings[index++];
             SSize = columnStrings[index++];
             EntityId = int.Parse(columnStrings[index++]);
-            Energy = float.Parse(columnStrings[index++]);
             Durability = float.Parse(columnStrings[index++]);
             Shields = float.Parse(columnStrings[index++]);
+            Agility = float.Parse(columnStrings[index++]);
+            Energy = float.Parse(columnStrings[index++]);
             Firepower = float.Parse(columnStrings[index++]);
             FireRate = float.Parse(columnStrings[index++]);
-            Agility = float.Parse(columnStrings[index++]);
-            Speed = float.Parse(columnStrings[index++]);
-            Dogde = float.Parse(columnStrings[index++]);
-            Detection = float.Parse(columnStrings[index++]);
-            Capacity = float.Parse(columnStrings[index++]);
                 Skills = DataTableExtension.ParseInt32Array(columnStrings[index++]);
-            ProjectileId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -235,18 +185,13 @@ namespace ETLG
                     SType = binaryReader.ReadString();
                     SSize = binaryReader.ReadString();
                     EntityId = binaryReader.Read7BitEncodedInt32();
-                    Energy = binaryReader.ReadSingle();
                     Durability = binaryReader.ReadSingle();
                     Shields = binaryReader.ReadSingle();
+                    Agility = binaryReader.ReadSingle();
+                    Energy = binaryReader.ReadSingle();
                     Firepower = binaryReader.ReadSingle();
                     FireRate = binaryReader.ReadSingle();
-                    Agility = binaryReader.ReadSingle();
-                    Speed = binaryReader.ReadSingle();
-                    Dogde = binaryReader.ReadSingle();
-                    Detection = binaryReader.ReadSingle();
-                    Capacity = binaryReader.ReadSingle();
                         Skills = binaryReader.ReadInt32Array();
-                    ProjectileId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

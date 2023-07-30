@@ -27,7 +27,7 @@ namespace ETLG.Data
         private Dictionary<int, int> playerArtifacts { get; set; }
         private List<int> playerModules { get; set; }
 
-        public List<int> PlayedTutorial { get; set; }
+        public List<int> PlayedTutorialGroup { get; set; }
 
         private int[] equippedModules { get; set; }
 
@@ -65,7 +65,7 @@ namespace ETLG.Data
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
-            PlayedTutorial = new List<int>();
+            PlayedTutorialGroup = new List<int>();
 
             playerSkills = new Dictionary<int, int>();
 
@@ -88,8 +88,6 @@ namespace ETLG.Data
 
             }
 
-            UpdateAttrsByAllSkills(Constant.Type.ADD);
-
             // add money and skill points
             playerArtifacts.Add((int)EnumArtifact.Money, 0);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
@@ -103,6 +101,9 @@ namespace ETLG.Data
             //initPlayerAchievementData();
 
             battleVictoryCount = 0;
+
+            UpdateAttrsByAllSkills(Constant.Type.ADD);
+
         }
 
         private void instantiatePlayerNPCs()
@@ -148,20 +149,8 @@ namespace ETLG.Data
                 case Constant.Type.ATTR_Agility:
                     newValue = playerCalculatedSpaceshipData.Agility;
                     break;
-                case Constant.Type.ATTR_Speed:
-                    newValue = playerCalculatedSpaceshipData.Speed;
-                    break;
-                case Constant.Type.ATTR_Detection:
-                    newValue = playerCalculatedSpaceshipData.Detection;
-                    break;
-                case Constant.Type.ATTR_Capacity:
-                    newValue = playerCalculatedSpaceshipData.Capacity;
-                    break;
                 case Constant.Type.ATTR_Firerate:
                     newValue = playerCalculatedSpaceshipData.FireRate;
-                    break;
-                case Constant.Type.ATTR_Dogde:
-                    newValue = playerCalculatedSpaceshipData.Dogde;
                     break;
             }
 
@@ -194,20 +183,8 @@ namespace ETLG.Data
                 case Constant.Type.ATTR_Agility:
                     playerCalculatedSpaceshipData.Agility = newValue;
                     break;
-                case Constant.Type.ATTR_Speed:
-                    playerCalculatedSpaceshipData.Speed = newValue;
-                    break;
-                case Constant.Type.ATTR_Detection:
-                    playerCalculatedSpaceshipData.Detection = newValue;
-                    break;
-                case Constant.Type.ATTR_Capacity:
-                    playerCalculatedSpaceshipData.Capacity = newValue;
-                    break;
                 case Constant.Type.ATTR_Firerate:
                     playerCalculatedSpaceshipData.FireRate = newValue;
-                    break;
-                case Constant.Type.ATTR_Dogde:
-                    playerCalculatedSpaceshipData.Dogde += newValue;
                     break;
             }
 
@@ -222,11 +199,7 @@ namespace ETLG.Data
             sum += playerCalculatedSpaceshipData.Firepower;
             sum += playerCalculatedSpaceshipData.Energy;
             sum += playerCalculatedSpaceshipData.Agility;
-            sum += playerCalculatedSpaceshipData.Speed;
-            sum += playerCalculatedSpaceshipData.Detection;
-            sum += playerCalculatedSpaceshipData.Capacity;
-            sum += playerCalculatedSpaceshipData.FireRate * 100;
-            sum += playerCalculatedSpaceshipData.Dogde * 100;
+            sum += playerCalculatedSpaceshipData.FireRate;
             return sum;
         }
 
@@ -268,16 +241,8 @@ namespace ETLG.Data
                     return playerCalculatedSpaceshipData.Energy;
                 case Constant.Type.ATTR_Agility:
                     return playerCalculatedSpaceshipData.Agility;
-                case Constant.Type.ATTR_Speed:
-                    return playerCalculatedSpaceshipData.Speed;
-                case Constant.Type.ATTR_Detection:
-                    return playerCalculatedSpaceshipData.Detection;
-                case Constant.Type.ATTR_Capacity:
-                    return playerCalculatedSpaceshipData.Capacity;
                 case Constant.Type.ATTR_Firerate:
                     return playerCalculatedSpaceshipData.FireRate;
-                case Constant.Type.ATTR_Dogde:
-                    return playerCalculatedSpaceshipData.Dogde;
             }
             return 0f;
         }
@@ -336,6 +301,13 @@ namespace ETLG.Data
                     if(number <= 0 && playerModules.Contains(id))
                     {
                         playerModules.Remove(id);
+                        // if equipped module, remove
+                        for(int i = 0; i < equippedModules.Length; i++)
+                        {
+                            if (equippedModules[i] == id) equippedModules[i] = 0;
+                        }
+
+
                     }
                     else if (!playerModules.Contains(id))
                     {
@@ -478,9 +450,10 @@ namespace ETLG.Data
             return targetList;
         }
 
-        public List<int> GetEquippedModuleIdS()
+        public int[] GetEquippedModuleIdS()
         {
-            List<int> result = new List<int>();
+            return equippedModules;
+/*            List<int> result = new List<int>();
             foreach(var id in equippedModules)
             {
                 if(id != 0)
@@ -488,8 +461,7 @@ namespace ETLG.Data
                     result.Add(id);
                 }
             }
-
-            return result;
+            return result;*/
         }
 
         public int[] GetEquippedModules()
@@ -513,11 +485,11 @@ namespace ETLG.Data
                     equippedModules[4] = equippedModules[5];
                 }
                 equippedModules[5] = moduleData.Id;
-                return;
             }
-
-            equippedModules[moduleData.Classification - 1] = moduleData.Id;
-
+            else
+            {
+                equippedModules[moduleData.Classification - 1] = moduleData.Id;
+            }
             dataArtifact.lockCurrentModuleID = false;
 
             // after modules change
@@ -616,6 +588,10 @@ namespace ETLG.Data
 
             if (!playerArtifacts.ContainsKey(id))
             {
+                if (playerModules.Contains(id))
+                {
+                    return 1;
+                }
                 return 0;
             }
             return playerArtifacts[id];
@@ -826,26 +802,46 @@ namespace ETLG.Data
         private void AddMockData()
         {
 
-            AddArtifact((int)EnumArtifact.Money, 99999);
-            AddArtifact((int)EnumArtifact.KnowledgePoint, 45);
-           // playerArtifacts[(int)EnumArtifact.Money] += 99999;
-           // playerArtifacts[(int)EnumArtifact.KnowledgePoint] += 45;
+            // add artifacts
+            List<int> artifactsIds = new List<int>
+            {
+                1001,1002,1003, 1004, 1101, 1102, 1103, 2001, 2002, 2003, 2004, 2005,
+                2006
+            };
+            int i = 0;
+            foreach (var id in artifactsIds)
+            {
+                AddArtifact(id,  i++ * 100);
+            }
 
-            AddArtifact((int)EnumArtifact.LowLevelUpgradeUnit, 50);
-            AddArtifact((int)EnumArtifact.IntermediateUpgradeUnit, 60);
-            AddArtifact((int)EnumArtifact.AdvancedUpgradeUnit, 70);
 
-            AddArtifact((int)EnumArtifact.FirepowerModule, 1);
-            AddArtifact((int)EnumArtifact.DamageAmplifier, 1);
-            AddArtifact((int)EnumArtifact.MissileLauncher, 1);
-            AddArtifact((int)EnumArtifact.BeamEmitter, 1);
+            // add skills
+            List<int> skillIds = new List<int>
+            {
+                101, 102, 201, 202, 203, 301, 302, 303,
+                401, 402, 403, 501, 502, 503, 601, 602,
+                603, 701, 702, 703
+            };
+            foreach(var id in skillIds)
+            {
+                AddSkill(id);
+                AddSkill(id);
+                AddSkill(id);
+                AddSkill(id);
+            }
 
-            AddArtifact((int)EnumArtifact.RareOre, 30);
-            AddArtifact((int)EnumArtifact.FuelRefillUnit, 40);
+            // add modules
+            List<int> moduleIds = new List<int>
+            {
+                3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009, 3010,
+                3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020,
+                3021, 3022
+            };
 
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_CloudComputing, 1);
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_AI, 1);
-            AddArtifact((int)EnumArtifact.KnowledgeFragments_Blockchain, 1);
+            foreach (var id in moduleIds)
+            {
+                AddArtifact(id, 1);
+            }
            
         }
 

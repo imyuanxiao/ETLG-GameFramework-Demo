@@ -18,9 +18,7 @@ namespace ETLG
         public int CurrentArtifactID;
 
         public RawImage artifactIcon;
-
         public Button iconButton;
-
         public TextMeshProUGUI artifactNumber;
         public int artifactNum;
         private DataPlayer dataPlayer;

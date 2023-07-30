@@ -8,6 +8,7 @@ namespace ETLG
     public class BossEnemyHealth : Health
     {
         private BossEnemyController controller;
+        private int difficulty;
 
         private void Awake() 
         {
@@ -16,14 +17,16 @@ namespace ETLG
 
         private void OnEnable() 
         {
+            this.difficulty = SaveManager.Instance.difficulty;
             InitBossEnemy();
             StartCoroutine(CheckDeath()); 
+            Debug.Log("Difficulty: " + this.difficulty);
         }
 
         private void InitBossEnemy()
         {
-            MaxHealth = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Durability;
-            MaxShield = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Shields;
+            MaxHealth = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Durability + difficulty * 100;
+            MaxShield = (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) controller.bossEnemyType).Shields + difficulty * 100;
             CurrentHealth = MaxHealth;
             CurrentShield = MaxShield;
         }
