@@ -5,16 +5,20 @@ using GameFramework;
 using UnityGameFramework.Runtime;
 using ETLG.Data;
 using UnityEngine.Networking;
+using ETLG;
 namespace ETLG
 {
-    public class DataManager : Singleton<DataManager>
+    public class BackendDataManager : Singleton<BackendDataManager>
     {
         public string responseData;
-        List<LeaderboardData> rankList;
+        private List<LeaderboardData> rankList;
         //排行榜
         private string leaderboard_url = "https://github.com/xw22087/rbac/tree/main/rbac-backend/src/main/java/com/imyuanxiao/rbac/controller/api/profile/getRank";
-
-
+        //登录注册
+        private string Login_url ;
+        private string Register_url;
+        public int errorType;
+        public bool isNewFetch;
         protected override void Awake()
         {
             base.Awake();
@@ -33,13 +37,14 @@ namespace ETLG
             form.AddField("pageNumber", pageNumber);
             form.AddField("pageSize", pageSize);
             form.AddField("rankMode", rankMode);
-
+            isNewFetch = true;
             using (UnityWebRequest www = UnityWebRequest.Post(leaderboard_url, form))
             {
                 yield return www.SendWebRequest();
-
+                Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
+                    errorType = 0;
                     // 获取API响应数据
                     string responseJson = www.downloadHandler.text;
 
@@ -69,8 +74,32 @@ namespace ETLG
                 else
                 {
                     // API请求失败
-                    Debug.LogError("Error: " + www.error);
+                    HandleErrorMessages(www);
                 }
+            }
+        }
+        private void HandleLogin()
+        {
+
+        }
+        private void HandleRegister()
+        {
+
+        }
+        private void HandleErrorMessages(UnityWebRequest www)
+        {
+            Debug.LogError("Error: " + www.error);
+            if (www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                errorType = Constant.Type.ERROR_NETWORK;
+            }
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                errorType = Constant.Type.ERROR_SERVER;
+            }
+            if (www.result == UnityWebRequest.Result.DataProcessingError)
+            {
+                errorType = Constant.Type.ERROR_DATA;
             }
         }
         [System.Serializable]

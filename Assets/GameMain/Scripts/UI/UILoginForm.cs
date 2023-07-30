@@ -27,7 +27,6 @@ namespace ETLG
         private int playerAvatarId;
         private Color normalColor;
         private Color selectedColor;
-        private RawImage selectedRawImage;
         public GameObject confirmPassword;
         public GameObject playerAvater;
         bool isRegister;
@@ -101,8 +100,7 @@ namespace ETLG
                 if (PlayerPrefs.GetString(userName.text + "password") == pwd.text)
                 {
                     reminder.text = "Login successful!";
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UILoginForm));
-                    GameEntry.UI.OpenUIForm(EnumUIForm.UILeaderBoardForm);
+                   // GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UILoginForm));
                 }
                 else
                 {
