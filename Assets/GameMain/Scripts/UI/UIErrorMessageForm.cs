@@ -23,27 +23,34 @@ namespace ETLG
         {
             base.OnOpen(userData);
             Debug.Log("errorType: " + BackendDataManager.Instance.errorType);
-            switch( BackendDataManager.Instance.errorType)
-            {
-                case Constant.Type.ERROR_NETWORK:
-                    errorTitle.text = "Network error";
-                    errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
 
-                    break;
-                case Constant.Type.ERROR_SERVER:
-                    errorTitle.text = "Server error";
-                    errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
-                    break;
-                case Constant.Type.ERROR_DATA:
-                    errorTitle.text = "Data error";
-                    errorMessage.text = "Oops! We encountered an issue while processing data. Please try again later.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
-                    break;
-                default:
-                    break;
+            //if is backend error
+            if(BackendDataManager.Instance.isNewFetch)
+            {
+                switch (BackendDataManager.Instance.errorType)
+                {
+                    case Constant.Type.ERROR_NETWORK:
+                        errorTitle.text = "Network error";
+                        errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
+
+                        break;
+                    case Constant.Type.ERROR_SERVER:
+                        errorTitle.text = "Server error";
+                        errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
+                        break;
+                    case Constant.Type.ERROR_DATA:
+                        errorTitle.text = "Data error";
+                        errorMessage.text = "Oops! We encountered an issue while processing data. Please try again later.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
+                        break;
+                    default:
+                        break;
+                }
+                BackendDataManager.Instance.isNewFetch = false;
             }
+            
             
 
         }
