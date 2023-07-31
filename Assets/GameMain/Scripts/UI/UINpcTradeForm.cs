@@ -22,8 +22,9 @@ namespace ETLG
 
         public TextMeshProUGUI npc_name = null;
         public TextMeshProUGUI npc_money = null;
-
         public TextMeshProUGUI player_money = null;
+        public ScrollRect NPCScrollView;
+        public ScrollRect PlayerScrollView;
 
         private Dictionary<int, int> playerArtifacts;
         private Dictionary<int, int> npcArtifacts;
@@ -89,6 +90,22 @@ namespace ETLG
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (dataTrade.clickItemIcon)
+            {
+                if (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER)
+                {
+                    NPCScrollView.vertical = false;
+                }
+                else
+                {
+                    PlayerScrollView.vertical = false;
+                }
+            }
+            else
+            {
+                NPCScrollView.vertical = true;
+                PlayerScrollView.vertical = true;
+            }
             if (dataTrade.clickTradeButton)
             {
                 HandleTradeData();

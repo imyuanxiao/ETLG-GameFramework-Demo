@@ -124,6 +124,7 @@ namespace ETLG
             bool success = int.TryParse(InputField.text, out inputNum);
 
             updateInputNumAndTotalPrice();
+            
             if (dataTrade.clickTradeButton)
             {
                 testTradeNum();
@@ -162,9 +163,10 @@ namespace ETLG
 
         private void tradeClick()
         {
+            
             bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= dataTrade.totalPrice;
             //如果买家余额充足，则购买并关闭此UI
-            if (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER || (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC && enoughPlayerMoney))
+            if (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC || (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER && enoughPlayerMoney))
             {
                 //输入量和总金额
                 dataTrade.setTradeData(inputNum, totalPrice);
@@ -172,7 +174,13 @@ namespace ETLG
             } 
             else
             {
-                //如果不充足点击trade无反应，是否跳出提示余额不足？
+                //钱不够点击trade无反应，跳出提示余额不足
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCAlertForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCAlertForm));
+                }
+
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCAlertForm);
             }
 
         }

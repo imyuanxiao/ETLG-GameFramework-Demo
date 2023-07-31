@@ -1825,6 +1825,8 @@ MonoBehaviour:
   npc_name: {fileID: 5094763382407449916}
   npc_money: {fileID: 8997869056837067449}
   player_money: {fileID: 2841075715783492909}
+  NPCScrollView: {fileID: 6510115418473928310}
+  PlayerScrollView: {fileID: 3630671573822311561}
 --- !u!1 &5305108538041854929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,7 +1966,6 @@ GameObject:
   - component: {fileID: 6551320473734379143}
   - component: {fileID: 8397929558946479872}
   - component: {fileID: 2061622360881700295}
-  - component: {fileID: 5824709760686768307}
   - component: {fileID: 6006490068582710618}
   m_Layer: 5
   m_Name: Bg
@@ -2046,18 +2047,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.654902, g: 0.68235296, b: 0.7254902, a: 1}
   m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
---- !u!114 &5824709760686768307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6310741875760638626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 386dc3d978031bc499be1e23afd5b9ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6006490068582710618
 MonoBehaviour:
   m_ObjectHideFlags: 0
