@@ -11,18 +11,17 @@ using System.Collections;
 
 namespace ETLG.Data
 {
-  public sealed class PlayerData
+    public sealed class PlayerData
     {
-
         // Initial SpaceshipData(include model asset)
-        public SpaceshipData initialSpaceship { get;  set; }
+        public SpaceshipData initialSpaceship { get; set; }
 
         // Spaceship attributes increased by skills, etc. (for display and calculation)
         public PlayerCalculatedSpaceshipData playerCalculatedSpaceshipData { get; set; }
 
         // Player position
         //public Vector3 position { get; set; }
-        
+
         // player artifacts - ID, Number
         private Dictionary<int, int> playerArtifacts { get; set; }
         private List<int> playerModules { get; set; }
@@ -45,14 +44,16 @@ namespace ETLG.Data
         private DataNPC dataNPC { get; set; }
 
         //Player Achievement Data
-        private Dictionary<int,int> playerAchievement { get; set; }
+        private Dictionary<int, int> playerAchievement { get; set; }
         public Dictionary<int, int> playerTotalArtifacts { get; set; }
         private DataAchievement dataAchievement { get; set; }
 
         public int battleVictoryCount;
         public Dictionary<int, float> bossDefeatTime;
 
-        public PlayerData (SpaceshipData spaceshipData)
+        public Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
+
+        public PlayerData(SpaceshipData spaceshipData)
         {
             initialSpaceship = spaceshipData;
             playerCalculatedSpaceshipData = new PlayerCalculatedSpaceshipData(spaceshipData);
@@ -61,7 +62,7 @@ namespace ETLG.Data
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
-            dataAchievement= GameEntry.Data.GetData<DataAchievement>();
+            dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 
@@ -108,7 +109,7 @@ namespace ETLG.Data
 
         private void instantiatePlayerNPCs()
         {
-            foreach(int id in dataNPC.getAllNPCsID())
+            foreach (int id in dataNPC.getAllNPCsID())
             {
                 playerNPCs.Add(id, new PlayerNPCData(dataNPC.GetNPCData(id)));
             }
@@ -116,13 +117,13 @@ namespace ETLG.Data
 
         private void initBossDefeatTime()
         {
-            this.bossDefeatTime.Add((int) EnumEntity.CloudComputingBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.ArtificialIntelligenceBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.BlockchainBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.InternetofThingsBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.DataScienceBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.CybersecurityBoss, -1);
-            this.bossDefeatTime.Add((int) EnumEntity.FinalBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.CloudComputingBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.ArtificialIntelligenceBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.BlockchainBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.InternetofThingsBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.DataScienceBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.CybersecurityBoss, -1);
+            this.bossDefeatTime.Add((int)EnumEntity.FinalBoss, -1);
         }
 
         // Call this method everytime skills change or initialSpaceship changes
@@ -249,9 +250,9 @@ namespace ETLG.Data
         public void AddArtifact(int id, int number)
         {
             // module -> playerModules
-            if(dataArtifact.GetArtifactData(id) is ArtifactModuleData)
+            if (dataArtifact.GetArtifactData(id) is ArtifactModuleData)
             {
-                if(!playerModules.Contains(id))
+                if (!playerModules.Contains(id))
                 {
                     playerModules.Add(id);
                 }
@@ -259,7 +260,7 @@ namespace ETLG.Data
             }
 
             // artifacts -> playerArtifacts
-            if(!playerArtifacts.ContainsKey(id))
+            if (!playerArtifacts.ContainsKey(id))
             {
                 playerArtifacts.Add(id, number);
             }
@@ -269,7 +270,7 @@ namespace ETLG.Data
             }
 
             //total artifacts for achievement
-            if(dataAchievement.isReset)
+            if (dataAchievement.isReset)
             {
                 return;
             }
@@ -281,14 +282,14 @@ namespace ETLG.Data
             {
                 playerTotalArtifacts[id] += number;
             }
-            
-                UpdateArtifactAchievements();
-            
-            
+
+            UpdateArtifactAchievements();
+
+
         }
 
         //update ALL artifacts after trading
-        public void updateArtifact(Dictionary<int,int> newPlayerArtifacts)
+        public void updateArtifact(Dictionary<int, int> newPlayerArtifacts)
         {
             foreach (KeyValuePair<int, int> kvp in newPlayerArtifacts)
             {
@@ -298,11 +299,11 @@ namespace ETLG.Data
                 // module
                 if (dataArtifact.GetArtifactData(id) is ArtifactModuleData)
                 {
-                    if(number <= 0 && playerModules.Contains(id))
+                    if (number <= 0 && playerModules.Contains(id))
                     {
                         playerModules.Remove(id);
                         // if equipped module, remove
-                        for(int i = 0; i < equippedModules.Length; i++)
+                        for (int i = 0; i < equippedModules.Length; i++)
                         {
                             if (equippedModules[i] == id) equippedModules[i] = 0;
                         }
@@ -378,7 +379,7 @@ namespace ETLG.Data
                     playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] += number;
                 }
             }
-            if(dataAchievement.isReset)
+            if (dataAchievement.isReset)
             {
                 return;
             }
@@ -403,7 +404,7 @@ namespace ETLG.Data
         public Dictionary<int, int> GetTradeableArtifacts()
         {
             Dictionary<int, int> targetList = GetArtifactsByType(Constant.Type.ARTIFACT_TRADE);
-            foreach(var module in playerModules)
+            foreach (var module in playerModules)
             {
                 if (!targetList.ContainsKey(module))
                     targetList.Add(module, 1);
@@ -453,15 +454,15 @@ namespace ETLG.Data
         public int[] GetEquippedModuleIdS()
         {
             return equippedModules;
-/*            List<int> result = new List<int>();
-            foreach(var id in equippedModules)
-            {
-                if(id != 0)
-                {
-                    result.Add(id);
-                }
-            }
-            return result;*/
+            /*            List<int> result = new List<int>();
+                        foreach(var id in equippedModules)
+                        {
+                            if(id != 0)
+                            {
+                                result.Add(id);
+                            }
+                        }
+                        return result;*/
         }
 
         public int[] GetEquippedModules()
@@ -478,7 +479,7 @@ namespace ETLG.Data
             // change modules
             ArtifactModuleData moduleData = dataArtifact.GetCurrentShowModuleData();
 
-            if(moduleData.Classification == Constant.Type.MODULE_TYPE_SUPPORT)
+            if (moduleData.Classification == Constant.Type.MODULE_TYPE_SUPPORT)
             {
                 if (equippedModules[5] != 0)
                 {
@@ -548,7 +549,7 @@ namespace ETLG.Data
 
             for (int i = 0; i < ArtifactIds.Length; i += 2)
             {
-                targetList.Add(ArtifactIds[i], ArtifactIds[i+1]);
+                targetList.Add(ArtifactIds[i], ArtifactIds[i + 1]);
 
             }
 
@@ -561,7 +562,7 @@ namespace ETLG.Data
             List<int> keysToRemove = new List<int>();
             foreach (KeyValuePair<int, int> kvp in npcArtifacts)
             {
-                if(kvp.Value <= 0)
+                if (kvp.Value <= 0)
                 {
                     keysToRemove.Add(kvp.Key);
                 };
@@ -597,7 +598,7 @@ namespace ETLG.Data
             return playerArtifacts[id];
         }
 
-        public bool SetArtifactNumById(int id,int newValue)
+        public bool SetArtifactNumById(int id, int newValue)
         {
             if (playerArtifacts.ContainsKey(id))
             {
@@ -608,7 +609,7 @@ namespace ETLG.Data
 
         public void AddSkill(int id, int level)
         {
-            for(int i = 0; i <= level; i++)
+            for (int i = 0; i <= level; i++)
             {
                 AddSkill(id);
             }
@@ -623,13 +624,13 @@ namespace ETLG.Data
             {
                 int maxLevel = dataSkill.GetSkillData(id).Levels.Length;
                 playerSkills[id]++;
-                if(playerSkills[id] > maxLevel)
+                if (playerSkills[id] > maxLevel)
                 {
                     playerSkills[id] = maxLevel;
 
                 }
             }
-            
+
         }
 
         public int GetSkillLevelById(int Id)
@@ -643,11 +644,11 @@ namespace ETLG.Data
 
         public List<int> GetSkillsByFunctionality(string Type)
         {
-     /*       if (Type.Equals(Constant.Type.SKILL_TYPE_ALL))
-            {
-                return playerSkills.Keys.ToList();
-            }
-*/
+            /*       if (Type.Equals(Constant.Type.SKILL_TYPE_ALL))
+                   {
+                       return playerSkills.Keys.ToList();
+                   }
+       */
             List<int> targetIdList = new List<int>();
             foreach (var skillId in playerSkills.Keys)
             {
@@ -659,15 +660,15 @@ namespace ETLG.Data
             }
             return targetIdList;
         }
-        
+
         public Dictionary<int, int> GetAllSkills()
-        {   
+        {
             return this.playerSkills;
         }
 
         public void UpdateAttrsByAllSkills(int Type)
         {
-           // PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();
+            // PlayerSkillData[] playerSkillDatas  = playerSkills.Values.ToArray();
 
             foreach (var playerSkill in playerSkills)
             {
@@ -715,11 +716,11 @@ namespace ETLG.Data
                 return;
             }
 
-                for (int i = 0; i < AttrIDs.Length; i += 2)
+            for (int i = 0; i < AttrIDs.Length; i += 2)
             {
                 int AttrID = AttrIDs[i];
                 int Change = AttrIDs[i + 1];
-                if(Type == Constant.Type.SUB)
+                if (Type == Constant.Type.SUB)
                 {
                     Change = -Change;
                 }
@@ -744,13 +745,13 @@ namespace ETLG.Data
 
                 int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkill.Value);
 
-                for(int i = 0; i < costs.Length; i += 2)
+                for (int i = 0; i < costs.Length; i += 2)
                 {
                     AddArtifact(costs[i], costs[i + 1]);
                 }
 
             }
-           
+
             // clear skills;
             playerSkills.Clear();
 
@@ -792,7 +793,7 @@ namespace ETLG.Data
         public int GetUnlockedLevelsNum()
         {
             int result = 0;
-            foreach(var skillLevel in playerSkills.Values)
+            foreach (var skillLevel in playerSkills.Values)
             {
                 result += skillLevel;
             }
@@ -811,7 +812,7 @@ namespace ETLG.Data
             int i = 0;
             foreach (var id in artifactsIds)
             {
-                AddArtifact(id,  i++ * 100);
+                AddArtifact(id, i++ * 100);
             }
 
 
@@ -822,7 +823,7 @@ namespace ETLG.Data
                 401, 402, 403, 501, 502, 503, 601, 602,
                 603, 701, 702, 703
             };
-            foreach(var id in skillIds)
+            foreach (var id in skillIds)
             {
                 AddSkill(id);
                 AddSkill(id);
@@ -842,19 +843,19 @@ namespace ETLG.Data
             {
                 AddArtifact(id, 1);
             }
-           
+
         }
 
-        public Dictionary<int,int> GetPlayerAchievement()
+        public Dictionary<int, int> GetPlayerAchievement()
         {
             return this.playerAchievement;
         }
         public int GetUnlockedAchievementCount()
         {
             int result = 0;
-            foreach(KeyValuePair<int,int> pair in playerAchievement)
+            foreach (KeyValuePair<int, int> pair in playerAchievement)
             {
-                if(dataAchievement.isMaxLevel(pair.Key,pair.Value))
+                if (dataAchievement.isMaxLevel(pair.Key, pair.Value))
                 {
                     result++;
                 }
@@ -864,25 +865,25 @@ namespace ETLG.Data
         public int GetPlayerAchievementPoints()
         {
             int result = 0;
-            foreach(KeyValuePair<int,int> pair in playerAchievement)
+            foreach (KeyValuePair<int, int> pair in playerAchievement)
             {
                 AchievementData achievementData = dataAchievement.GetDataById(pair.Key);
-                for(int i=0;i<pair.Value;i++)
+                for (int i = 0; i < pair.Value; i++)
                 {
                     result += achievementData.Points[i];
                 }
             }
             return result;
         }
-        public void UpdatePlayerAchievementData(int id,int level)
+        public void UpdatePlayerAchievementData(int id, int level)
         {
-            if(playerAchievement.ContainsKey(id))
+            if (playerAchievement.ContainsKey(id))
             {
-                playerAchievement[id] = level+1;
+                playerAchievement[id] = level + 1;
             }
             else
             {
-                playerAchievement.Add(id, level+1);
+                playerAchievement.Add(id, level + 1);
             }
         }
         public int GetCurrentAchievementLevelById(int id)
@@ -894,7 +895,7 @@ namespace ETLG.Data
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
        dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
         }
-        public bool isAchievementAchieved(int id,int count)
+        public bool isAchievementAchieved(int id, int count)
         {
             return playerAchievement.ContainsKey(id) &&
        dataAchievement.GetNextLevel(id, count) == playerAchievement[id];
@@ -916,9 +917,10 @@ namespace ETLG.Data
                 return dataAchievement.isMaxLevel(Id, playerAchievement[Id]) ? playerAchievement[Id] : playerAchievement[Id] + 1;
             }
         }
+
         public void UpdateArtifactAchievements()
         {
-            int number, achievementId=0;
+            int number, achievementId = 0;
             int[] counts;
             int[] artifactIds = {
                                    (int)EnumArtifact.Money,
@@ -952,7 +954,7 @@ namespace ETLG.Data
                     {
                         achievementId = 5006;
                     }
-                   
+
                     number = playerTotalArtifacts[artifactId];
                     counts = dataAchievement.GetDataById(achievementId).Count;
 
@@ -995,7 +997,28 @@ namespace ETLG.Data
                 }
             }
         }
-    }
 
+        public UINPCDialogManager getUINPCDialogById(int NPCId)
+        {
+            if (playerDialogs.ContainsKey(NPCId))
+            {
+                UINPCDialogManager foundDialogManager = playerDialogs[NPCId];
+                return foundDialogManager;
+            }
+            return null;
+        }
+
+        public void setUINPCDialogById(int NPCId, UINPCDialogManager UINPCDialogManager)
+        {
+            if (playerDialogs.ContainsKey(NPCId))
+            {
+                playerDialogs[NPCId] = UINPCDialogManager;
+            }
+            else
+            {
+                playerDialogs.Add(NPCId, UINPCDialogManager);
+            }
+        }
+    }
 }
 

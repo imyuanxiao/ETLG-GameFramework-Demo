@@ -89,7 +89,6 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
             if (dataTrade.clickItemIcon)
             {
                 if (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER)
@@ -117,7 +116,7 @@ namespace ETLG
                 updateArtifactData();
                 refresh = false;
             }
-
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
         //触发trade按钮后交易，刷新item和money
@@ -166,7 +165,6 @@ namespace ETLG
         {
             playerArtifacts = null;
             dataTrade = null;
-            closeButton.onClick.RemoveAllListeners();
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             base.OnClose(isShutdown, userData);

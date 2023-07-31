@@ -57,6 +57,8 @@ namespace ETLG
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+            dataAlert = GameEntry.Data.GetData<DataAlert>();
+            dataTrade = GameEntry.Data.GetData<DataTrade>();
 
             tradeButton.onClick.AddListener(tradeClick);
             CloseButton.onClick.AddListener(closeButtonClick);
@@ -67,8 +69,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-            dataAlert = GameEntry.Data.GetData<DataAlert>();
-            dataTrade = GameEntry.Data.GetData<DataTrade>();
+            
             InputField.text = (0).ToString();
 
             artifactDataBase = dataArtifact.GetCurrentShowArtifactData();
@@ -165,7 +166,7 @@ namespace ETLG
         {
             bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= totalPrice;
             Debug.Log("player钱" + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money));
-            Debug.Log("总价" + dataTrade.totalPrice);
+            Debug.Log("总价" + totalPrice);
             Debug.Log("enough?"+ enoughPlayerMoney);
             //如果买家余额充足，则购买并关闭此UI
             if (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC || (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER && enoughPlayerMoney))
