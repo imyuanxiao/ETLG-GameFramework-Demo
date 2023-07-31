@@ -22,6 +22,13 @@ namespace ETLG
         private Transform focusedPlanet;
         public bool isFocused;
 
+        // 记录鼠标点击位置
+        private Vector3 lastMousePosition;
+
+        // 设置相机移动速度
+        public float cameraMoveSpeed =1e-1000000000000f;
+
+
 
         private void Start()
         {
@@ -61,53 +68,26 @@ namespace ETLG
 
         private void Update()
         {
-            MoveCamera();
-        }
-
-        private void MoveCamera() {
-            if (isFocused) { return; }
-            // Check if the mouse is at the right boundary
-            if (Input.mousePosition.x <= 30) {
-                MoveCameraRight();
+            if (Input.GetMouseButtonDown(0))
+            {
+                lastMousePosition = Input.mousePosition;
             }
-            // Check if the mouse is at the left boundary
-            else if (Input.mousePosition.x >= Screen.width - 30) {
-                MoveCameraLeft();
+
+            if (Input.GetMouseButton(0))
+            {
+                //鼠标拖动增量
+                Vector3 deltaMousePosition = Input.mousePosition - lastMousePosition;
+
+                //根据增量移动相机
+                Vector3 moveVector = new Vector3(deltaMousePosition.x * cameraMoveSpeed, 0, deltaMousePosition.y * cameraMoveSpeed);
+                transform.Translate(-moveVector, Space.Self);
+
+                //更新鼠标位置
+                lastMousePosition = Input.mousePosition;
+
+                //clamp相机位置
+                ClampCameraPosition();
             }
-            // Check if the mouse is at the up boundary
-            else if (Input.mousePosition.y <= 30) {
-                MoveCameraUp();
-            }
-            // Check if the mouse is at the bottom boundary
-            else if (Input.mousePosition.y >= Screen.height - 30) {
-                MoveCameraDown();
-            }
-        }
-
-        private void MoveCameraLeft()
-        {
-            // Move the camera to the left
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-            ClampCameraPosition();
-        }
-
-        private void MoveCameraRight()
-        {
-            // Move the camera to the right
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-            ClampCameraPosition();
-        }
-
-        private void MoveCameraUp() {
-            // Move the camera upward
-            transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
-            ClampCameraPosition();
-        }
-
-        private void MoveCameraDown() {
-            // Move the camera downward
-            transform.position += Vector3.back * moveSpeed * Time.deltaTime;
-            ClampCameraPosition();
         }
 
         private void ClampCameraPosition()
@@ -116,6 +96,7 @@ namespace ETLG
             Vector3 clampedPosition = transform.position;
             clampedPosition.x = Mathf.Clamp(clampedPosition.x, leftBoundary, rightBoundary);
             clampedPosition.z = Mathf.Clamp(clampedPosition.z, bottomBoundary, upBoundary);
+            clampedPosition.y = Mathf.Clamp(clampedPosition.y, 5f, 5f);
             transform.position = clampedPosition;
         }
 
