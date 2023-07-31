@@ -74,12 +74,14 @@ namespace ETLG
             {
                 SetItemsStatus(false);
                 isRefresh = false;
+                BackendDataManager.Instance.isNewFetch = false;
             }
             //if success
-            if (!isRefresh && isError && BackendDataManager.Instance.errorType == 0)
+            if (!isRefresh && isError && BackendDataManager.Instance.isNewFetch && BackendDataManager.Instance.errorType == 0)
             {
                 isError = false;
                 SetItemsStatus(true);
+                BackendDataManager.Instance.isNewFetch = false;
             }
         }
 
@@ -203,6 +205,7 @@ namespace ETLG
             data.Id = 123456;
             data.AchievementScore = dataPlayer.GetPlayerData().GetPlayerAchievementPoints();
             data.SpaceshipScore=dataPlayer.GetPlayerData().GetPlayerScore();
+            int[] bossId = { };
             data.Boss_AI = 1000f;
             data.Boss_Blockchain = 1000f;
             data.Boss_CloudComputing = 1000f;

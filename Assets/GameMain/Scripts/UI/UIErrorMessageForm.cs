@@ -9,8 +9,8 @@ namespace ETLG
     {
 
         public Button returnButton;
-        public TextMeshProUGUI errorTitle=null;
-        public TextMeshProUGUI errorMessage=null;
+        public TextMeshProUGUI errorTitle = null;
+        public TextMeshProUGUI errorMessage = null;
 
         public RawImage icon;
         protected override void OnInit(object userData)
@@ -24,29 +24,34 @@ namespace ETLG
             base.OnOpen(userData);
             Debug.Log("errorType: " + BackendDataManager.Instance.errorType);
 
-
-            switch( BackendDataManager.Instance.errorType)
+            //if is backend error
+            if (BackendDataManager.Instance.isNewFetch)
             {
-                case Constant.Type.ERROR_NETWORK:
-                    errorTitle.text = "Network error";
-                    errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
+                switch (BackendDataManager.Instance.errorType)
+                {
+                    case Constant.Type.ERROR_NETWORK:
+                        errorTitle.text = "Network error";
+                        errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
 
-                    break;
-                case Constant.Type.ERROR_SERVER:
-                    errorTitle.text = "Server error";
-                    errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
-                    break;
-                case Constant.Type.ERROR_DATA:
-                    errorTitle.text = "Data error";
-                    errorMessage.text = "Oops! We encountered an issue while processing data. Please try again later.";
-                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
-                    break;
-                default:
-                    break;
+                        break;
+                    case Constant.Type.ERROR_SERVER:
+                        errorTitle.text = "Server error";
+                        errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
+                        break;
+                    case Constant.Type.ERROR_DATA:
+                        errorTitle.text = "Data error";
+                        errorMessage.text = "Oops! We encountered an issue while processing data. Please try again later.";
+                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
+                        break;
+                    default:
+                        break;
+                }
+                BackendDataManager.Instance.isNewFetch = false;
             }
-            
+
+
 
         }
 

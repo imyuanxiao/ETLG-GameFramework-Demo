@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.024901927, g: 0.022690432, b: 0.07040433, a: 1}
+  m_IndirectSpecularColor: {r: 0.024951262, g: 0.022750102, b: 0.07044999, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedPlanet: {fileID: 0}
+  currentLandingPointID: -1
   planetsObj:
   - {fileID: 2041089922}
   - {fileID: 1156440362}
@@ -1927,6 +1928,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -8.6
       objectReference: {fileID: 0}
+    - target: {fileID: 6696033819381304199, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -620
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696033819381304199, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696033819381304199, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1442
+      objectReference: {fileID: 0}
     - target: {fileID: 6696033819500407857, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
@@ -1949,11 +1962,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6696033819518610203, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 134
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 6696033819518610203, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -129
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6696033819518610203, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1997,15 +2010,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8335108132098730819, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 102.6
+      value: 111.7
       objectReference: {fileID: 0}
     - target: {fileID: 8335108132098730819, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -145.4
+      value: -167.3
       objectReference: {fileID: 0}
     - target: {fileID: 8335108132098730819, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 125.4
+      value: 13.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecb75bcddf2c24fdc90d2ac28768a6ec, type: 3}
@@ -3414,6 +3427,7 @@ MonoBehaviour:
   moveSpeed: 10
   cameraBounds: {fileID: 128831383}
   isFocused: 0
+  cameraMoveSpeed: 0.1
 --- !u!1 &1849280416
 GameObject:
   m_ObjectHideFlags: 0
