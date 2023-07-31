@@ -52,12 +52,13 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+            closeButton.onClick.AddListener(OnCloseButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-            closeButton.onClick.AddListener(OnCloseButtonClick);
+            
             loadData();
             refresh = true;
         }

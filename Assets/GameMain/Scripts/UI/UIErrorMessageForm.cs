@@ -23,15 +23,15 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+            returnButton.onClick.AddListener(OnReturnButtonClick);
+            YesButton.onClick.AddListener(OnYesButtonClick);
+            CancelButton.onClick.AddListener(OnCancelButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
             base.OnOpen(userData);
-            returnButton.onClick.AddListener(OnReturnButtonClick);
-            YesButton.onClick.AddListener(OnYesButtonClick);
-            CancelButton.onClick.AddListener(OnCancelButtonClick);
 
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             alertType = dataAlert.AlertType;

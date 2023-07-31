@@ -62,16 +62,15 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
+            closeButton.onClick.AddListener(OnCloseButtonClick);
+            maxButton.onClick.AddListener(OnMaxButtonClick);
+            FontPlusButton.onClick.AddListener(OnfontPlus);
+            FontSubButton.onClick.AddListener(OnfontSub);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
-            closeButton.onClick.AddListener(OnCloseButtonClick);
-            maxButton.onClick.AddListener(OnMaxButtonClick);
-            FontPlusButton.onClick.AddListener(OnfontPlus);
-            FontSubButton.onClick.AddListener(OnfontSub);
 
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
@@ -145,19 +144,18 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
-            //if (buttonScrollContent.childCount != 0)
-            //{
-            //    if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
-            //    {
-            //        GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
-            //    }
-            //    dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT;
-            //    GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
-            //    return;
-            //}
+            if (buttonScrollContent.childCount != 0)
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                }
+                dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                return;
+            }
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            //GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-            //GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
+            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
         //页面最大化
