@@ -55,6 +55,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Event.Subscribe(ErrorMessagePopPUpEventArgs.EventId, OnErrorMessagePoPUp);
             Log.Debug("Open Leaderboard");
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
@@ -68,42 +69,24 @@ namespace ETLG
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-            //if error
-            if (BackendDataManager.Instance.isNewFetch && !isError && BackendDataManager.Instance.errorType!=0)
+            //if error message pop up
+            if (isRefresh && isError)
             {
                 SetItemsStatus(false);
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
-                {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
-                }
-
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
-                isError = true;
-            }
-            //if error again
-            if (BackendDataManager.Instance.isNewFetch && isError && BackendDataManager.Instance.errorType != 0)
-            {
-                SetItemsStatus(false);
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
-                {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
-                }
-
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                isRefresh = false;
             }
             //if success
-            if (BackendDataManager.Instance.isNewFetch && isError && BackendDataManager.Instance.errorType == 0)
+            if (!isRefresh && isError && BackendDataManager.Instance.errorType == 0)
             {
                 isError = false;
-                isRefresh = true;
                 SetItemsStatus(true);
             }
-            BackendDataManager.Instance.isNewFetch = false;
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(ErrorMessagePopPUpEventArgs.EventId, OnErrorMessagePoPUp);
         }
         private void OnachievementButtonClick()
         {
@@ -320,6 +303,14 @@ namespace ETLG
             {
                 subItem.gameObject.SetActive(status);
             }
+        }
+        public void OnErrorMessagePoPUp(object sender, GameEventArgs e)
+        {
+            ErrorMessagePopPUpEventArgs ne = (ErrorMessagePopPUpEventArgs)e;
+            if (ne == null)
+                return;
+            isError = true;
+            isRefresh = true;
         }
     }
 

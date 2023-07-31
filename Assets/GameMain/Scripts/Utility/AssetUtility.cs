@@ -86,7 +86,11 @@ namespace ETLG
 
             return Utility.Text.Format("Achievement/{0}", "unlocked_treasure_chest");
         }
+        public static string GetErrorIcon(string iconName)
+        {
 
+            return Utility.Text.Format("Others/{0}", iconName);
+        }
         public static string GetAvatarMissing()
         {
             return "Avatar/1000";

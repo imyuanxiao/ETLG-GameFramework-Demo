@@ -75,6 +75,7 @@ namespace ETLG
                 {
                     // API«Î«Û ß∞‹
                     HandleErrorMessages(www);
+                    GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                 }
             }
         }
