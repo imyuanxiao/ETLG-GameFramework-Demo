@@ -68,6 +68,7 @@ namespace ETLG
 
         private void Update()
         {
+            if (isFocused) { return; }
             if (Input.GetMouseButtonDown(0))
             {
                 lastMousePosition = Input.mousePosition;
