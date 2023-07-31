@@ -152,6 +152,7 @@ namespace ETLG
         //页面最大化
         private void OnMaxButtonClick()
         {
+            Debug.Log("Max");
             //bgm
             RectTransform dialogBGTransfrom = dialogBg.GetComponent<RectTransform>();
             float currentdialogUIWidth = dialogBGTransfrom.sizeDelta.x;

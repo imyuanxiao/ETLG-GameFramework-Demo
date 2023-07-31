@@ -90,14 +90,14 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UIAlertForm))
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
             {
-                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIAlertForm));
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
             }
 
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIAlertForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
             }
         }
 
@@ -126,6 +126,7 @@ namespace ETLG
 
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
             {
+                Debug.Log("关闭一次");
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
             }
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCTradeForm))
@@ -140,6 +141,7 @@ namespace ETLG
             // Open UI
             if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
             {
+                Debug.Log("打开一次");
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
             }
             else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)

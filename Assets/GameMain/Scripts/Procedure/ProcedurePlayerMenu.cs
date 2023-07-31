@@ -42,6 +42,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(EquippedModuleChangesEventArgs.EventId, OnEquippedModuleChanges);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId,OnAchievementPoPUp);
             GameEntry.Event.Subscribe(PlayerZoneUIChangeEventArgs.EventId, OnPlayerZoneUIChange);
+            GameEntry.Event.Subscribe(ErrorMessagePopPUpEventArgs.EventId, OnErrorMessagePoPUp);
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
@@ -94,6 +95,7 @@ namespace ETLG
 
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Unsubscribe(PlayerZoneUIChangeEventArgs.EventId, OnPlayerZoneUIChange);
+            GameEntry.Event.Unsubscribe(ErrorMessagePopPUpEventArgs.EventId, OnErrorMessagePoPUp);
             // 停止音乐
             GameEntry.Sound.StopMusic();
 
@@ -349,7 +351,22 @@ namespace ETLG
                 }
             }
         }
+        public void OnErrorMessagePoPUp(object sender, GameEventArgs e)
+        {
+            ErrorMessagePopPUpEventArgs ne = (ErrorMessagePopPUpEventArgs)e;
+            if (ne == null)
+                return;
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+            }
+            else
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+            };
+        }
         private void KeyboardControl()
         {
             if (Input.GetKeyDown(KeyCode.Escape))

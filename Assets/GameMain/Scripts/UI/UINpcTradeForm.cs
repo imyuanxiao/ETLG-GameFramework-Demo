@@ -56,7 +56,6 @@ namespace ETLG
 
         protected override void OnOpen(object userData)
         {
-
             base.OnOpen(userData);
             closeButton.onClick.AddListener(OnCloseButtonClick);
             loadData();
@@ -170,7 +169,6 @@ namespace ETLG
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             base.OnClose(isShutdown, userData);
-
         }
 
         private void OnCloseButtonClick()
