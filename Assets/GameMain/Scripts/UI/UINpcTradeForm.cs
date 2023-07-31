@@ -71,7 +71,7 @@ namespace ETLG
             dataTrade= GameEntry.Data.GetData<DataTrade>();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
-            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
+            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money); 
 
             string npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);

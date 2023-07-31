@@ -21,13 +21,11 @@ namespace ETLG
         public Transform dialogScrollContent;
         public Transform buttonScrollContent;
         private List<Image> textModules = new List<Image>();
-
         public Button closeButton;
         public Button maxButton;
         public Button FontPlusButton;
         public Button FontSubButton;
         public RawImage dialogBg;
-
         public TextMeshProUGUI npc_name;
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
@@ -36,6 +34,7 @@ namespace ETLG
         private Sprite NPCSprite;
         private Sprite playerSprite;
         private NPCData npcData;
+        private DataAlert dataAlert;
         private string npcAvatarPath;
         private string XMLPath;
         private Dictionary<string, XmlNode> dialogueNodes;
@@ -75,6 +74,7 @@ namespace ETLG
             FontSubButton.onClick.AddListener(OnfontSub);
 
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
+            dataAlert = GameEntry.Data.GetData<DataAlert>();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
@@ -145,8 +145,19 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
+            //if (buttonScrollContent.childCount != 0)
+            //{
+            //    if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+            //    {
+            //        GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+            //    }
+            //    dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT;
+            //    GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+            //    return;
+            //}
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            //GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            //GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
         }
 
         //页面最大化
@@ -421,7 +432,6 @@ namespace ETLG
             }
             else
             {
-                Debug.Log("");
                 Debug.LogError("VideoPlayer component not found on the GameObject named \"Video\".");
             }
             RawImage rawImage = videoModule.GetComponentInChildren<RawImage>();
@@ -464,6 +474,7 @@ namespace ETLG
 
         private void OnfontPlus()
         {
+            Debug.Log("加一次");
             if (fontsizeChangePlusValue+ fontsizeChangeSubValue < 30)
             {
                 fontsizeChangePlusValue += 2;
@@ -473,6 +484,7 @@ namespace ETLG
 
         private void OnfontSub()
         {
+            Debug.Log("减一次");
             if (fontsizeChangePlusValue + fontsizeChangeSubValue > -10)
             {
                 fontsizeChangeSubValue -= 2;

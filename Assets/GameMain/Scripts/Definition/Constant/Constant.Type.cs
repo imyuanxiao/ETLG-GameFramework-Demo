@@ -159,6 +159,8 @@
             public const int ERROR_NETWORK=1;
             public const int ERROR_SERVER = 2;
             public const int ERROR_DATA = 3;
+            public const int ALERT_TRADE_MONEYNOTENOUGH = 4;
+            public const int ALERT_DIALOG_QUIT = 5;
         }
     }
 }

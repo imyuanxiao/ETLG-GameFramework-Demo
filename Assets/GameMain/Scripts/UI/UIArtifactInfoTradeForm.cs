@@ -17,11 +17,10 @@ namespace ETLG
         public DataPlayer dataPlayer;
         private DataNPC dataNPC;
         private DataTrade dataTrade;
-
+        private DataAlert dataAlert;
         private ArtifactDataBase artifactDataBase;
 
         public Transform UIContainer;
-
         public TextMeshProUGUI ArtifactName = null;
         public TextMeshProUGUI ArtifactType = null;
         public TextMeshProUGUI ArtifactTradeable = null;
@@ -68,6 +67,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataTrade = GameEntry.Data.GetData<DataTrade>();
             InputField.text = (0).ToString();
 
@@ -181,7 +181,7 @@ namespace ETLG
                 {
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
                 }
-
+                dataAlert.AlertType = Constant.Type.ALERT_TRADE_MONEYNOTENOUGH;
                 GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
             }
 
