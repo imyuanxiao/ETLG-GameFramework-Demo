@@ -68,6 +68,11 @@ namespace ETLG
 
         private void Update()
         {
+            DragCameraMove();
+        }
+
+        private void DragCameraMove()
+        {
             if (isFocused) { return; }
             if (Input.GetMouseButtonDown(0))
             {
