@@ -74,7 +74,6 @@ namespace ETLG
             {
                 SetItemsStatus(false);
                 isRefresh = false;
-                BackendDataManager.Instance.isNewFetch = false;
             }
             //if success
             if (!isRefresh && isError && BackendDataManager.Instance.isNewFetch && BackendDataManager.Instance.errorType == 0)
