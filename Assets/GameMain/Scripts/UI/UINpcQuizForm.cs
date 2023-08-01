@@ -60,6 +60,7 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
+            dataQuizReport.reset();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
@@ -93,7 +94,7 @@ namespace ETLG
             updateNextButtonStatus();
             if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion)
             {
-                SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "FINISH";
+                SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "REPORT";
             }
             else
             {
@@ -126,7 +127,7 @@ namespace ETLG
                 }
                 currentQuiz.haveShown = true;
             }
-            else if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion && SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text == "FINISH")
+            else if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion && SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text == "REPORT")
             {
                 SubmitButton.enabled = true;
             }
@@ -143,7 +144,7 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
-            if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text == "SUBMIT")
+            if (!dataQuizReport.report)
             {
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
                 {
@@ -244,7 +245,7 @@ namespace ETLG
 
         private void OnSubmitButtonClick()
         {
-            if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "FINISH")
+            if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
             {
                 currentQuiz.testOnToggleMCM();
                 currentQuiz.haveSubmitted = true;
@@ -255,11 +256,8 @@ namespace ETLG
             {
                 if (UIQuizManager.calculateAccuracy() >= 0.8f)
                 {
-                    dataQuizReport.pass = true;
-                }
-                else
-                {
-                    dataQuizReport.pass = false;
+                    UIQuizManager.award = true;
+                    //¸ø½±Àø
                 }
                 dataQuizReport.accuracyText = rate;
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
@@ -267,6 +265,9 @@ namespace ETLG
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
                 }
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
+
+                //½±Àø
+                dataQuizReport.report = true;
             }
         }
 

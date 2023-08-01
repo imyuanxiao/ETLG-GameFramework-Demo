@@ -6,11 +6,16 @@ namespace ETLG.Data
     public class DataQuiz : DataBase
     {
         public string accuracyText;
-        public bool pass = false;
+        public bool report = false;
 
         public string getAccuracyText()
         {
             return accuracyText + "%";
+        }
+
+        public void reset()
+        {
+            report = false;
         }
     }
 }

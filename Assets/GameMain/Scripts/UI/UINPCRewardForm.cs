@@ -33,16 +33,27 @@ namespace ETLG
             CloseButton.onClick.AddListener(OnCloseButtonClick);
             OKButton.onClick.AddListener(OnOKButtonClick);
             Score.text = dataQuizReport.getAccuracyText();
+            //看有没有获得奖励，然后展示不同的
+
         }
 
         private void OnCloseButtonClick()
         {
-            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_CLOSE));
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
         }
 
         private void OnOKButtonClick()
         {
-            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_CLOSE));
+            //try again功能
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
         }
     }
 }

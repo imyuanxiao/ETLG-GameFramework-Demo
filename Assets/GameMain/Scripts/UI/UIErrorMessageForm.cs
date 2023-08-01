@@ -41,19 +41,19 @@ namespace ETLG
             {
                 case Constant.Type.ALERT_TRADE_MONEYNOTENOUGH:
                     errorTitle.text = "Trade failed!";
-                    errorMessage.text = "Your funds are insufficient!" + "\n" + "\n"+"Please adjust the trade quantity again.";
+                    errorMessage.text = "Your funds are insufficient!" + "\n" + "\n" + "Please adjust the trade quantity again.";
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
                     ButtonsContainer.SetActive(false);
                     break;
                 case Constant.Type.ALERT_DIALOG_QUIT:
                     errorTitle.text = "Confirm Exit";
-                    errorMessage.text = "Are you sure you want to quit now? " + "\n" + "\n" + "Your conversation will be saved.";
+                    errorMessage.text = "Are you sure you want to quit now? " + "\n" + "\n" + "You will NOT get any award! " + "\n" + "\n" + "Your conversation will be saved.";
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
                     ButtonsContainer.SetActive(true);
                     break;
                 case Constant.Type.ALERT_QUIZ_QUIT:
                     errorTitle.text = "Confirm Exit";
-                    errorMessage.text = "Are you sure you want to quit now? " + "\n" + "\n" + "Your quiz progress will be saved.";
+                    errorMessage.text = "Are you sure you want to quit now? " + "\n" + "\n" + "You will NOT get any award! " + "\n" + "\n" + "Your quiz progress will be saved.";
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
                     ButtonsContainer.SetActive(true);
                     break;
@@ -92,7 +92,7 @@ namespace ETLG
         private void OnYesButtonClick()
         {
             //如果点击Yes，当前提示框和对话页面一起关闭
-            if (alertType == Constant.Type.ALERT_DIALOG_QUIT)
+            if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT)
             {
                 GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
                 OnReturnButtonClick();
@@ -100,7 +100,7 @@ namespace ETLG
         }
         private void OnCancelButtonClick()
         {
-            if (alertType == Constant.Type.ALERT_DIALOG_QUIT)
+            if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT)
             {
                 //Cancel仅仅起到对比Yes的作用，与直接close当前提示框作用相同
                 OnReturnButtonClick();
@@ -117,7 +117,7 @@ namespace ETLG
         {
             dataAlert.AlertType = -1;
             base.OnClose(isShutdown, userData);
-            
+
         }
 
         private void OnReturnButtonClick()
