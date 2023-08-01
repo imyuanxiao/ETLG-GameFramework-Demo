@@ -13,10 +13,13 @@ namespace ETLG
     public class UINpcQuizForm : UGuiFormEx
     {
         private NPCData npcData;
+        private DataAlert dataAlert;
+        private DataQuiz dataQuizReport;
+        private DataPlayer dataPlayer;
         private string npcAvatarPath;
         private string XMLPath;
+        private string rate;
         private UIQuizManager UIQuizManager = null;
-        private List<UIQuiz> quizArray;
         public VerticalLayoutGroup ChoicesContainerverticalLayoutGroup;
         public VerticalLayoutGroup ContentverticalLayoutGroup;
 
@@ -54,16 +57,28 @@ namespace ETLG
 
             UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            dataAlert = GameEntry.Data.GetData<DataAlert>();
+            dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
-            XMLPath = npcData.QuizXML;
 
             SubmitButton.onClick.AddListener(OnSubmitButtonClick);
 
             loadAvatar();
-            parseXMLFile();
+            UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
+            if (tempUIQuizManager == null)
+            {
+                XMLPath = npcData.QuizXML;
+                UIQuizManager = new UIQuizManager(XMLPath);
+                dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
+            }
+            else
+            {
+                UIQuizManager = tempUIQuizManager;
+            }
             loadQuestions();
             updateProgress();
             updateAccuracy();
@@ -96,7 +111,7 @@ namespace ETLG
 
         private void updateAccuracy()
         {
-            string rate = (UIQuizManager.calculateAccuracy() * 100).ToString("F0");
+            rate = (UIQuizManager.calculateAccuracy() * 100).ToString("F0");
             AccuracyRate.text = rate + "%";
             AccuracySlider.value = UIQuizManager.calculateAccuracy();
         }
@@ -128,6 +143,16 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
+            if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text == "SUBMIT")
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                }
+                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                return;
+            }
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
@@ -142,24 +167,9 @@ namespace ETLG
             npc_avatar.texture = NPCTexture;
         }
 
-        private void parseXMLFile()
-        {
-            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(xmlFile.text);
-            XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
-            UIQuizManager = new UIQuizManager();
-            foreach (XmlNode node in nodes)
-            {
-                UIQuizManager.addQuiz(new UIQuiz(node));
-            }
-            quizArray = UIQuizManager.quizArray;
-            UIQuizManager.totalQuestion = quizArray.Count;
-        }
-
         private void getCurrentQuiz()
         {
-            currentQuiz = quizArray[currentQuizIndex];
+            currentQuiz = UIQuizManager.quizArray[currentQuizIndex];
         }
 
         private void loadQuestions()
@@ -243,7 +253,20 @@ namespace ETLG
             }
             else
             {
-                GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
+                if (UIQuizManager.calculateAccuracy() >= 0.8f)
+                {
+                    dataQuizReport.pass = true;
+                }
+                else
+                {
+                    dataQuizReport.pass = false;
+                }
+                dataQuizReport.accuracyText = rate;
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+                }
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
             }
         }
 

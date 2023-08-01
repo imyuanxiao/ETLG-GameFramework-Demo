@@ -161,6 +161,7 @@
             public const int ERROR_DATA = 3;
             public const int ALERT_TRADE_MONEYNOTENOUGH = 4;
             public const int ALERT_DIALOG_QUIT = 5;
+            public const int ALERT_QUIZ_QUIT = 6;
         }
     }
 }

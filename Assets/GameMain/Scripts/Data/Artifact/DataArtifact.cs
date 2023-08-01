@@ -146,7 +146,6 @@ namespace ETLG.Data
         {
             if (!dicArtifactData.ContainsKey(id))
             {
-                Log.Error("Can not find quest data id '{0}'.", id);
                 return null;
             }
             return dicArtifactData[id];

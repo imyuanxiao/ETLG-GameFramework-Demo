@@ -10,10 +10,17 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class UIAlertForm : UGuiFormEx
+    public class UINPCRewardForm : UGuiFormEx
     {
         public Button CloseButton;
         public Button OKButton;
+        public Button CancelButton;
+        public TextMeshProUGUI Score;
+        public TextMeshProUGUI TopContent;
+        public TextMeshProUGUI ButtomContent;
+        public Canvas AwardList;
+
+        private DataQuiz dataQuizReport;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -22,8 +29,10 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
             CloseButton.onClick.AddListener(OnCloseButtonClick);
             OKButton.onClick.AddListener(OnOKButtonClick);
+            Score.text = dataQuizReport.getAccuracyText();
         }
 
         private void OnCloseButtonClick()

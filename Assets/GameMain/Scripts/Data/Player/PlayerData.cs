@@ -52,6 +52,7 @@ namespace ETLG.Data
         public Dictionary<int, float> bossDefeatTime;
 
         public Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
+        public Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
 
         public PlayerData(SpaceshipData spaceshipData)
         {
@@ -90,7 +91,7 @@ namespace ETLG.Data
             }
 
             // add money and skill points
-            playerArtifacts.Add((int)EnumArtifact.Money, 0);
+            playerArtifacts.Add((int)EnumArtifact.Money, 5000);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
 
             playerTotalArtifacts.Add((int)EnumArtifact.Money, 0);
@@ -284,8 +285,6 @@ namespace ETLG.Data
             }
 
             UpdateArtifactAchievements();
-
-
         }
 
         //update ALL artifacts after trading
@@ -307,7 +306,6 @@ namespace ETLG.Data
                         {
                             if (equippedModules[i] == id) equippedModules[i] = 0;
                         }
-
 
                     }
                     else if (!playerModules.Contains(id))
@@ -1008,6 +1006,16 @@ namespace ETLG.Data
             return null;
         }
 
+        public UIQuizManager getUIQuizManager(int NPCId)
+        {
+            if (playerQuizes.ContainsKey(NPCId))
+            {
+                UIQuizManager found1QuizManager = playerQuizes[NPCId];
+                return found1QuizManager;
+            }
+            return null;
+        }
+
         public void setUINPCDialogById(int NPCId, UINPCDialogManager UINPCDialogManager)
         {
             if (playerDialogs.ContainsKey(NPCId))
@@ -1017,6 +1025,18 @@ namespace ETLG.Data
             else
             {
                 playerDialogs.Add(NPCId, UINPCDialogManager);
+            }
+        }
+
+        public void setUIQuizManagerById(int NPCId, UIQuizManager UIQuizManager)
+        {
+            if (playerQuizes.ContainsKey(NPCId))
+            {
+                playerQuizes[NPCId] = UIQuizManager;
+            }
+            else
+            {
+                playerQuizes.Add(NPCId, UIQuizManager);
             }
         }
     }

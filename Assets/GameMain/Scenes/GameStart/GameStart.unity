@@ -208,6 +208,8 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataTrade
   - enable: 1
     dataTypeName: ETLG.Data.DataAlert
+  - enable: 1
+    dataTypeName: ETLG.Data.DataQuiz
 --- !u!1 &444730643
 GameObject:
   m_ObjectHideFlags: 0

@@ -140,7 +140,7 @@ namespace ETLG
         {
             maxNum = dataTrade.artifactNum;
             //输入数量不能大于可买数量
-            if (inputNum > limitNum || inputNum > maxNum)
+            if (inputNum > maxNum)
             {
                 inputNum = maxNum;
             }
@@ -165,9 +165,6 @@ namespace ETLG
         private void tradeClick()
         {
             bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= totalPrice;
-            Debug.Log("player钱" + dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money));
-            Debug.Log("总价" + totalPrice);
-            Debug.Log("enough?"+ enoughPlayerMoney);
             //如果买家余额充足，则购买并关闭此UI
             if (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC || (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER && enoughPlayerMoney))
             {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace ETLG.Data
 {
@@ -13,6 +14,24 @@ namespace ETLG.Data
         public int totalQuestion { get; set; }
         private int totalSubmitQuestions;
         private int correctQuestions;
+
+        public UIQuizManager(string XMLPath)
+        {
+            parseXMLFile(XMLPath);
+        }
+
+        private void parseXMLFile(string XMLPath)
+        {
+            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlFile.text);
+            XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
+            foreach (XmlNode node in nodes)
+            {
+                addQuiz(new UIQuiz(node));
+            }
+            totalQuestion = quizArray.Count;
+        }
 
         public int TotalSubmitQuestions
         {

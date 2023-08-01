@@ -51,6 +51,12 @@ namespace ETLG
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
                     ButtonsContainer.SetActive(true);
                     break;
+                case Constant.Type.ALERT_QUIZ_QUIT:
+                    errorTitle.text = "Confirm Exit";
+                    errorMessage.text = "Are you sure you want to quit now? " + "\n" + "\n" + "Your quiz progress will be saved.";
+                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
+                    ButtonsContainer.SetActive(true);
+                    break;
             }
 
             Debug.Log("errorType: " + BackendDataManager.Instance.errorType);
