@@ -257,6 +257,10 @@ namespace ETLG.Data
                 {
                     playerModules.Add(id);
                 }
+                else
+                {
+                    playerModules.Remove(id);
+                }
                 return;
             }
 
@@ -328,7 +332,7 @@ namespace ETLG.Data
                         }
                         else
                         {
-                            playerArtifacts[id] = number;
+                            AddArtifact(id, number-playerArtifacts[id]);
                         }
                     }
                 }
@@ -419,13 +423,22 @@ namespace ETLG.Data
 
             Dictionary<int, int> targetList = new Dictionary<int, int>();
 
+            if (dataArtifact == null || playerArtifacts == null)
+            {
+                Debug.Log("不应该为空428");
+            }
             foreach (var playerArtifact in playerArtifacts)
             {
+                
+                Debug.Log("key"+playerArtifact.Key);
+                Debug.Log("value"+playerArtifact.Value);
                 if (dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
                 {
+                    
                     targetList.Add(playerArtifact.Key, playerArtifact.Value);
                 }
             }
+            Debug.Log("走到这里437");
             return targetList;
         }
 

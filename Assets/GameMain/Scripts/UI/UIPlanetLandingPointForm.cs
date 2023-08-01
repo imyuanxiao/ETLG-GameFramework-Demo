@@ -69,7 +69,6 @@ namespace ETLG
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIPlanetLandingPointForm));
             }
-            this.Close();
         }
     }
 }

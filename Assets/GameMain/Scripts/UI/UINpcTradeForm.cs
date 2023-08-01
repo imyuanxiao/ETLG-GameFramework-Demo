@@ -68,6 +68,7 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
+            Debug.Log("到这里都ok");
             playerArtifacts = dataPlayer.GetPlayerData().GetTradeableArtifacts();
             dataTrade = GameEntry.Data.GetData<DataTrade>();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
@@ -148,18 +149,8 @@ namespace ETLG
         private void updateArtifactData()
         {
             //更新玩家数据
-            //dataPlayer.GetPlayerData().updateArtifact(playerArtifacts);
-            //dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
-            if (receivedType == Constant.Type.TRADE_NPC_PLAYER)
-            {
-                dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum);
-                dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice * (-1));
-            }
-            else
-            {
-                dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum * (-1));
-                dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice);
-            }
+            dataPlayer.GetPlayerData().updateArtifact(playerArtifacts);
+            dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
 
             dataPlayer.GetPlayerData().setNpcArtifactsByNpcId(dataNPC.currentNPCId, npcArtifacts);
             dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money = npcMoney;
