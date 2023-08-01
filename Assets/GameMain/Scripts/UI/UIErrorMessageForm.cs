@@ -35,7 +35,6 @@ namespace ETLG
 
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             alertType = dataAlert.AlertType;
-
             //if is NPC error
             switch (alertType)
             {
