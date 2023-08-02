@@ -29,6 +29,7 @@ namespace ETLG
         private bool isError;
         private bool isRefresh;
         private int type;
+        public Button returnButton;
         //current player 后面连上后端就只留云端储存的玩家排名
         private DataPlayer dataPlayer;
         // players
@@ -48,6 +49,7 @@ namespace ETLG
             bossButton_DataScience.onClick.AddListener(OnBossButtonDataScienceClick);
             bossButton_IoT.onClick.AddListener(OnBossButtonIoTClick);
             bossButton_Final.onClick.AddListener(OnBossButtonFinalClick);
+            returnButton.onClick.AddListener(OnReturnButtonClick);
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             leaderboardData = new List<LeaderboardData>();
         }
@@ -305,6 +307,13 @@ namespace ETLG
             {
                 subItem.gameObject.SetActive(status);
             }
+        }
+        private void OnReturnButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+
         }
         public void OnErrorMessagePoPUp(object sender, GameEventArgs e)
         {
