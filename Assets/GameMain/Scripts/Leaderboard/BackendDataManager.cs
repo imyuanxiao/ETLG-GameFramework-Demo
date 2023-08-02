@@ -29,7 +29,11 @@ namespace ETLG
             StartCoroutine(GetRankDataRoutine(pageNumber, pageSize, rankMode));
             return rankList;
         }
-
+        public void GetUserById(long id)
+        {
+            string url = Login_url + id.ToString();
+            StartCoroutine(GetLogInUserRoutine(id));
+        }
         private IEnumerator GetRankDataRoutine(int pageNumber, int pageSize, int rankMode)
         {
             // 创建POST请求的表单数据
@@ -79,6 +83,37 @@ namespace ETLG
                 }
             }
         }
+        private IEnumerator GetLogInUserRoutine(long id)
+        {
+            // 创建POST请求的表单数据
+            WWWForm form = new WWWForm();
+            isNewFetch = true;
+            using (UnityWebRequest www = UnityWebRequest.Get(Login_url))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result == UnityWebRequest.Result.Success)
+                {
+                    // 获取API响应数据
+                    string responseJson = www.downloadHandler.text;
+
+                    // 解析JSON响应数据
+                    UserData userData = JsonUtility.FromJson<UserData>(responseJson);
+
+                    // 处理用户数据
+                    long userId = userData.id;
+                    string userPassword = userData.userPassword;
+
+                    Debug.Log("User ID: " + userId + ", User Password: " + userPassword);
+                }
+                else
+                {
+                    Debug.LogError("Error logging in: " + www.error);
+                    HandleErrorMessages(www);
+                    GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                }
+            }
+        }
         private void HandleLogin()
         {
 
@@ -107,6 +142,12 @@ namespace ETLG
         private class RankData
         {
             public List<List<object>> rankList;
+        }
+        [System.Serializable]
+        private class UserData
+        {
+            public long id;
+            public string userPassword;
         }
     }
 }

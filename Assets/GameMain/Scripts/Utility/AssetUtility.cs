@@ -150,6 +150,10 @@ namespace ETLG
             return Utility.Text.Format("PlanetMenu/TreeCollapse");
 
         }
+        public static string GetPlayerAvatar(string avatarId)
+        {
+            return Utility.Text.Format("Avatar/Player/{0}", avatarId);
+        }
 
     }
 }

@@ -93,6 +93,7 @@ namespace ETLG
         }
         private void OnachievementButtonClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Achievement Leaderboard";
             leaderboardData.Sort((a, b) => b.AchievementScore.CompareTo(a.AchievementScore));
             type = Constant.Type.LB_ACHIVEMENT;
@@ -102,6 +103,7 @@ namespace ETLG
         }
         private void OnspaceshipButtonClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Spaceship Leaderboard";
             leaderboardData.Sort((a, b) => b.SpaceshipScore.CompareTo(a.SpaceshipScore));
             type = Constant.Type.LB_SPACESHIP;
@@ -111,8 +113,17 @@ namespace ETLG
         }
         private void OnBossButtonClick()
         {
+            if (!isPanelVisible)
+            {
+                GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            }
+            else
+            {
+                GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            }
             isPanelVisible = !isPanelVisible;
             //箭头垂直翻转180度
+            
             Vector3 currentRotation = arrow.transform.rotation.eulerAngles;
             currentRotation.x += 180f;
             arrow.transform.rotation = Quaternion.Euler(currentRotation);
@@ -120,6 +131,7 @@ namespace ETLG
         }
         private void OnBossButtonAIClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "AI Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_AI.CompareTo(b.Boss_AI));
             type = Constant.Type.LB_BOSS_AI;
@@ -129,6 +141,7 @@ namespace ETLG
         }
         private void OnBossButtonCloudComputingClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Cloud Computing Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_CloudComputing.CompareTo(b.Boss_CloudComputing));
             type = Constant.Type.LB_BOSS_CLOUDCOMPUTING;
@@ -138,6 +151,7 @@ namespace ETLG
         }
         private void OnBossButtonBlockchainClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Blockchain Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Blockchain.CompareTo(b.Boss_Blockchain));
             type = Constant.Type.LB_BOSS_BLOCKCHAIN;
@@ -148,6 +162,7 @@ namespace ETLG
         }
         private void OnBossButtonCybersecurityClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Cybersecurity Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Cybersecurity.CompareTo(b.Boss_Cybersecurity));
             type = Constant.Type.LB_BOSS_CYBERSECURITY;
@@ -158,6 +173,7 @@ namespace ETLG
         }
         private void OnBossButtonDataScienceClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Data Science Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_DataScience.CompareTo(b.Boss_DataScience));
             type = Constant.Type.LB_BOSS_DATASCIENCE;
@@ -168,6 +184,7 @@ namespace ETLG
         }
         private void OnBossButtonIoTClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "IoT Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_IoT.CompareTo(b.Boss_IoT));
             type = Constant.Type.LB_BOSS_IOT;
@@ -178,6 +195,7 @@ namespace ETLG
         }
         private void OnBossButtonFinalClick()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Final Boss Leaderboard";
             leaderboardData.Sort((a, b) => a.Boss_Final.CompareTo(b.Boss_Final));
             type = Constant.Type.LB_BOSS_FINAL;
