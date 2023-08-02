@@ -183,7 +183,7 @@ namespace ETLG
 
         private void SetSpaceshipAttribute(int accuracy)
         {
-            float boostScale = 1 + (accuracy - 50) / 1000;
+            float boostScale = Mathf.Max(1, 1 + (float)(accuracy - 50) / 100f);
 
             PlayerCalculatedSpaceshipData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
 
