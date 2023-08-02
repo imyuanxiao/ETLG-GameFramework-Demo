@@ -162,6 +162,7 @@
             public const int ALERT_TRADE_MONEYNOTENOUGH = 4;
             public const int ALERT_DIALOG_QUIT = 5;
             public const int ALERT_QUIZ_QUIT = 6;
+            public const int ALERT_QUIZ_QUIT_GOTTENAWARD = 7;
         }
     }
 }

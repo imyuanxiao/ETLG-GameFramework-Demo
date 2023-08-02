@@ -10,6 +10,21 @@ namespace ETLG.Data
     public sealed class UIQuiz
     {
         private List<string> wrongAnswers = new List<string>();
+        private XmlNode node { get; }
+        public int questionTime { get; }
+        public string type { get; }
+        public bool isCorrect { get; set; }
+        public bool haveSubmitted { get; set; }
+        public bool haveShown { get; set; }
+        public string hint { get; }
+        public string analysis { get; }
+        public string statement { get; }
+        private SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+        private SortedDictionary<string, Canvas> optionsCanvas = new SortedDictionary<string, Canvas>();
+        public Dictionary<string, Toggle> toggleDic;
+        private List<string> selectAnswers = new List<string>();
+
+        private List<string> rightAnswers = new List<string>();
         public UIQuiz(XmlNode node)
         {
             this.node = node;
@@ -20,6 +35,16 @@ namespace ETLG.Data
             //this.questionTime = int.Parse(node.Attributes["timelimit"].Value);
             getRightAnswers();
             getAllOptions();
+        }
+
+        public void reset()
+        {
+            wrongAnswers = new List<string>();
+            isCorrect = false;
+            haveSubmitted = false;
+            haveShown = false;
+            optionsCanvas = new SortedDictionary<string, Canvas>();
+            selectAnswers = new List<string>();
         }
 
         private void getAllOptions()
@@ -39,29 +64,16 @@ namespace ETLG.Data
             }
         }
 
-        private XmlNode node { get; }
-        public int questionTime { get; }
-        public string type { get; }
-        public bool isCorrect { get; set; }
-        public bool haveSubmitted { get; set; }
-        public bool haveShown { get; set; }
-        public string hint { get; }
-        public string analysis { get; }
-        public string statement { get; }
-
-        private List<string> rightAnswers = new List<string>();
-
         public List<string> RightAnswers
         {
             get { return rightAnswers; }
         }
-
-        private SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+       
         public SortedDictionary<string, string> Options
         {
             get { return options; }
         }
-        private SortedDictionary<string, Canvas> optionsCanvas = new SortedDictionary<string, Canvas>();
+        
         public SortedDictionary<string, Canvas> OptionsCanvas
         {
             get { return optionsCanvas; }
@@ -71,8 +83,6 @@ namespace ETLG.Data
         {
             optionsCanvas.Add(id, newOption);
         }
-        public Dictionary<string, Toggle> toggleDic;
-        private List<string> selectAnswers = new List<string>();
 
         public void getToggleArray()
         {

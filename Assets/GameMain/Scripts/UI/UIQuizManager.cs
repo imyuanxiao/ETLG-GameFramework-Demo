@@ -15,6 +15,16 @@ namespace ETLG.Data
         private int totalSubmitQuestions;
         private int correctQuestions;
 
+        public void reset()
+        {
+            totalSubmitQuestions = 0;
+            correctQuestions = 0;
+            foreach(UIQuiz quiz in quizArray)
+            {
+                quiz.reset();
+            }
+        }
+
         public UIQuizManager(string XMLPath)
         {
             parseXMLFile(XMLPath);

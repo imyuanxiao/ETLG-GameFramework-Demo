@@ -5,8 +5,12 @@ namespace ETLG.Data
 {
     public class DataQuiz : DataBase
     {
+        public bool pass=false;
         public string accuracyText;
         public bool report = false;
+        public bool again = false;
+        public bool award = false;
+        public bool clickGetButton = false;
 
         public string getAccuracyText()
         {
@@ -16,6 +20,8 @@ namespace ETLG.Data
         public void reset()
         {
             report = false;
+            pass = false;
+            award = false;
         }
     }
 }

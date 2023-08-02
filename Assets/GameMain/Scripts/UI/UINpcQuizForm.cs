@@ -80,6 +80,7 @@ namespace ETLG
             {
                 UIQuizManager = tempUIQuizManager;
             }
+            dataQuizReport.award = UIQuizManager.award;
             loadQuestions();
             updateProgress();
             updateAccuracy();
@@ -87,6 +88,7 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
+            Debug.Log(currentQuizIndex);
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
             updateSubmitButtonStatus();
@@ -100,7 +102,23 @@ namespace ETLG
             {
                 SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "SUBMIT";
             }
-
+            if (dataQuizReport.again)
+            {
+                currentQuizIndex = 0;
+                UIQuizManager.reset();
+                dataQuizReport.reset();
+                destroyAllOptions();
+                loadQuestions();
+                updateProgress();
+                updateAccuracy();
+                dataQuizReport.again = false;
+            }
+            if (dataQuizReport.clickGetButton)
+            {
+                getAward();
+                dataQuizReport.clickGetButton = false;
+            }
+            dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id,UIQuizManager);
         }
 
         private void updateProgress()
@@ -115,6 +133,7 @@ namespace ETLG
             rate = (UIQuizManager.calculateAccuracy() * 100).ToString("F0");
             AccuracyRate.text = rate + "%";
             AccuracySlider.value = UIQuizManager.calculateAccuracy();
+
         }
 
         private void updateSubmitButtonStatus()
@@ -144,7 +163,17 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
-            if (!dataQuizReport.report)
+            if (!UIQuizManager.award)
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                }
+                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                return;
+            }
+            else if (!dataQuizReport.report&& !UIQuizManager.award)
             {
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
                 {
@@ -243,6 +272,11 @@ namespace ETLG
             }
         }
 
+        private void getAward()
+        {
+            UIQuizManager.award = true;
+        }
+
         private void OnSubmitButtonClick()
         {
             if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
@@ -256,10 +290,15 @@ namespace ETLG
             {
                 if (UIQuizManager.calculateAccuracy() >= 0.8f)
                 {
-                    UIQuizManager.award = true;
-                    //¸ø½±Àø
+                    dataQuizReport.pass = true;
+                }
+                else
+                {
+                    dataQuizReport.pass = false;
                 }
                 dataQuizReport.accuracyText = rate;
+
+
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
                 {
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
@@ -322,6 +361,20 @@ namespace ETLG
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
 
+        }
+
+        private void destroyAllOptions()
+        {
+            for (int i = 0; i < ChoicesContainer.childCount; i++)
+            {
+                Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
+                if (canvasComponent != null)
+                {
+                    Transform option = ChoicesContainer.GetChild(i);
+                    Destroy(option.gameObject);
+                }
+            }
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
         }
 
     }
