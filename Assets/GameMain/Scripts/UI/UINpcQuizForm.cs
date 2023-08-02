@@ -80,7 +80,9 @@ namespace ETLG
             {
                 UIQuizManager = tempUIQuizManager;
             }
+            dataQuizReport.boss = UIQuizManager.boss;
             dataQuizReport.award = UIQuizManager.award;
+
             loadQuestions();
             updateProgress();
             updateAccuracy();
@@ -88,7 +90,6 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            Debug.Log(currentQuizIndex);
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
             updateSubmitButtonStatus();
@@ -119,6 +120,7 @@ namespace ETLG
                 dataQuizReport.clickGetButton = false;
             }
             dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id,UIQuizManager);
+            
         }
 
         private void updateProgress()
@@ -275,6 +277,7 @@ namespace ETLG
         private void getAward()
         {
             UIQuizManager.award = true;
+            //真进来了吗
         }
 
         private void OnSubmitButtonClick()

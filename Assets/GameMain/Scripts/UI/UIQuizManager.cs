@@ -10,7 +10,7 @@ namespace ETLG.Data
         public bool award = false;
 
         public List<UIQuiz> quizArray = new List<UIQuiz>();
-
+        public bool boss = false;
         public int totalQuestion { get; set; }
         private int totalSubmitQuestions;
         private int correctQuestions;
@@ -35,6 +35,18 @@ namespace ETLG.Data
             TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlFile.text);
+
+            XmlNode quizNode = xmlDoc.SelectSingleNode("quiz");
+            XmlAttribute bossAttribute = quizNode.Attributes["boss"];
+            if (bossAttribute != null)
+            {
+                boss = true;
+            }
+            else
+            {
+                boss = false;
+            }
+
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
             foreach (XmlNode node in nodes)
             {

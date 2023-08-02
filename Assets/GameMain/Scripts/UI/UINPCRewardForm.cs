@@ -29,6 +29,7 @@ namespace ETLG
             base.OnInit(userData);
             CloseButton.onClick.AddListener(OnCloseButtonClick);
             OKButton.onClick.AddListener(OnOKButtonClick);
+            BattleButton.onClick.AddListener(OnBattleButtonClick);
         }
 
         protected override void OnOpen(object userData)
@@ -79,10 +80,11 @@ namespace ETLG
                 {
                     AwardHint.text = "Collect awards succesfully!";
                     dataQuizReport.clickGetButton = true;
+                    dataQuizReport.award = true;
                 }
                 else
                 {
-                    AwardHint.text = "You have already collected my awards before!\n"+"You can NOT collect one more.";
+                    AwardHint.text = "You have collected my awards before!\n" + "You can NOT collect one more.";
                 }
                 OKButton.GetComponentInChildren<Text>().text = "TRY AGAIN";
             }
@@ -94,6 +96,31 @@ namespace ETLG
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
                 }
             }
+        }
+
+        private void OnBattleButtonClick()
+        {
+            //准确率，0-100的数值
+            int accuracy = int.Parse(dataQuizReport.accuracyText);
+            Debug.Log(accuracy);
+            //领域,获取npc是什么领域的方法，还没有想好怎么写，现在是直接在DataQuiz.cs的脚本中，把dataQuizReport.domain写死了，如果你要换着测试，直接去DataQuiz的domain改值
+            switch (dataQuizReport.domain)
+            {
+                case Constant.Type.DOMAIN_CLOUD_COMPUTING:
+                    break;
+                case Constant.Type.DOMAIN_ARTIFICIAL_INTELLIGENCE:
+                    break;
+                case Constant.Type.DOMAIN_CYBERSECURITY:
+                    break;
+                case Constant.Type.DOMAIN_DATA_SCIENCE:
+                    break;
+                case Constant.Type.DOMAIN_BLOCKCHAIN:
+                    break;
+                case Constant.Type.DOMAIN_IoT:
+                    break;
+            }
+            //是否boss战
+            Debug.Log(dataQuizReport.boss);
         }
     }
 }

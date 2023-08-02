@@ -11,6 +11,8 @@ namespace ETLG.Data
         public bool again = false;
         public bool award = false;
         public bool clickGetButton = false;
+        public bool boss = false;
+        public int domain=1;
 
         public string getAccuracyText()
         {
@@ -21,7 +23,6 @@ namespace ETLG.Data
         {
             report = false;
             pass = false;
-            award = false;
         }
     }
 }
