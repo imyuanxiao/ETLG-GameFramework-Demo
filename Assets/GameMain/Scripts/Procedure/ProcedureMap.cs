@@ -78,6 +78,7 @@ namespace ETLG
             
             procedureOwner.SetData<VarString>("BattleType", ne.BattleType);
             procedureOwner.SetData<VarString>("BossType", ne.BossType);
+            procedureOwner.SetData<VarInt32>("Accuracy", ne.Accuracy);
             
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
         }
@@ -88,18 +89,6 @@ namespace ETLG
 
             MouseControl();
             KeyboardControl();
-            // Open UI Map Info (for testing purpose only)
-            // if (Input.GetKeyDown(KeyCode.Escape))
-            // {
-            //     if (GameEntry.UI.HasUIForm(EnumUIForm.UIMapInfoForm))
-            //     {
-            //         GameEntry.UI.GetUIForm(EnumUIForm.UIMapInfoForm).Close();
-            //     }
-            //     else
-            //     {
-            //         GameEntry.UI.OpenUIForm(EnumUIForm.UIMapInfoForm);
-            //     }
-            // }
 
             if (changeScene)
             {
@@ -116,25 +105,27 @@ namespace ETLG
             {
                 procedureOwner.SetData<VarString>("BattleType", "BasicBattle");
                 procedureOwner.SetData<VarString>("BossType", "");
+                procedureOwner.SetData<VarInt32>("Accuracy", 0);
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
-            //  2. switch to intermidate battle (mini boss battle)
-            else if (Input.GetKeyDown(KeyCode.V))
-            {
-                procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
-                // procedureOwner.SetData<VarString>("BossType", "CloudComputing");
-                // procedureOwner.SetData<VarString>("BossType", "Cybersecurity");
-                procedureOwner.SetData<VarString>("BossType", "AI");
-                // procedureOwner.SetData<VarString>("BossType", "DataScience");
-                // procedureOwner.SetData<VarString>("BossType", "Blockchain");
-                // procedureOwner.SetData<VarString>("BossType", "IoT");
-                GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
-            }
+            // //  2. switch to intermidate battle (mini boss battle)
+            // else if (Input.GetKeyDown(KeyCode.V))
+            // {
+            //     procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
+            //     // procedureOwner.SetData<VarString>("BossType", "CloudComputing");
+            //     // procedureOwner.SetData<VarString>("BossType", "Cybersecurity");
+            //     procedureOwner.SetData<VarString>("BossType", "AI");
+            //     // procedureOwner.SetData<VarString>("BossType", "DataScience");
+            //     // procedureOwner.SetData<VarString>("BossType", "Blockchain");
+            //     // procedureOwner.SetData<VarString>("BossType", "IoT");
+            //     GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
+            // }
             //  3. switch to final boss battle
             else if (Input.GetKeyDown(KeyCode.B))
             {
                 procedureOwner.SetData<VarString>("BattleType", "FinalBattle");
                 procedureOwner.SetData<VarString>("BossType", "FinalBoss");
+                procedureOwner.SetData<VarInt32>("Accuracy", 0);
                 GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
             }
         }

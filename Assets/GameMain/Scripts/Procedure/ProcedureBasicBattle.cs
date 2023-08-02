@@ -39,6 +39,9 @@ namespace ETLG
             GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
 
+            StoreRawSpaceshipAttribute();
+            SetSpaceshipAttribute(procedureOwner.GetData<VarInt32>("Accuracy"));
+
             entityLoader = EntityLoader.Create(this);
 
             // get player data
@@ -115,6 +118,7 @@ namespace ETLG
         {
             base.OnLeave(procedureOwner, isShutdown);
             
+            ResetSpaceshipAttribute();
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
             entityLoader.Clear();
@@ -173,6 +177,72 @@ namespace ETLG
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
                 }
             }
+        }
+
+        private void StoreRawSpaceshipAttribute()
+        {
+            PlayerCalculatedSpaceshipData rawData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Agility.ToString(), (double) rawData.Agility);
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Durability.ToString(), (double) rawData.Durability);
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Energy.ToString(), (double) rawData.Energy);
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Firepower.ToString(), (double) rawData.Firepower);
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Firerate.ToString(), (double) rawData.FireRate);
+            this.procedureOwner.SetData<VarDouble>(Constant.Type.ATTR_Shields.ToString(), (double) rawData.Shields);
+        }
+
+        private void SetSpaceshipAttribute(int accuracy)
+        {
+            float boostScale = 1 + (accuracy - 50) / 1000;
+
+            PlayerCalculatedSpaceshipData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+            
+            string planetType = this.procedureOwner.GetData<VarString>("BossType");
+            switch (planetType)
+            {
+                case "CloudComputing":
+                    data.Firepower *= boostScale;
+                    data.Energy *= boostScale;
+                    break;
+                case "AI":
+                    data.Energy *= boostScale;
+                    data.Firepower *= boostScale;
+                    break;
+                case "CyberSecurity":
+                    data.Shields *= boostScale;
+                    data.Durability *= boostScale;
+                    break;
+                case "DataScience":
+                    data.Firepower *= boostScale;
+                    data.Agility *= boostScale;
+                    break;
+                case "Blockchain":
+                    data.Durability *= boostScale;
+                    data.Shields *= boostScale;
+                    break;
+                case "IoT":
+                    data.Agility *= boostScale;
+                    data.Durability *= boostScale;
+                    break;
+            }
+
+            // data.Agility *= boostScale;
+            // data.Durability *= boostScale;
+            // data.Energy *= boostScale;
+            // data.Firepower *= boostScale;
+            // data.FireRate *= boostScale;
+            // data.Shields *= boostScale;
+        }
+
+        private void ResetSpaceshipAttribute()
+        {
+            PlayerCalculatedSpaceshipData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
+
+            data.Agility = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Agility.ToString());
+            data.Durability = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Durability.ToString());
+            data.Energy = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Energy.ToString());
+            data.Firepower = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firepower.ToString());
+            data.FireRate = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firerate.ToString());
+            data.Shields = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Shields.ToString());
         }
     }
 }

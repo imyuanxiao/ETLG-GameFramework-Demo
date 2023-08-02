@@ -80,6 +80,7 @@ namespace ETLG
             
             procedureOwner.SetData<VarString>("BattleType", ne.BattleType);
             procedureOwner.SetData<VarString>("BossType", ne.BossType);
+            procedureOwner.SetData<VarInt32>("Accuracy", ne.Accuracy);
             
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
         }

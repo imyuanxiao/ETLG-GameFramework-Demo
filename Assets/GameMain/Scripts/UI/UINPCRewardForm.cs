@@ -37,9 +37,16 @@ namespace ETLG
             base.OnOpen(userData);
             dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
             Score.text = dataQuizReport.getAccuracyText();
-            //¿´ÓÐÃ»ÓÐ»ñµÃ½±Àø£¬È»ºóÕ¹Ê¾²»Í¬µÄ
+            //ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð»ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½Õ¹Ê¾ï¿½ï¿½Í¬ï¿½ï¿½
             setAward();
+            DisplayBoostInfo();
+        }
 
+        protected override void OnClose(bool isShutdown, object userData)
+        {
+            base.OnClose(isShutdown, userData);
+
+            DisableAllBoostInfo();
         }
 
         private void setAward()
@@ -75,7 +82,7 @@ namespace ETLG
             Debug.Log(OKButton.GetComponentInChildren<Text>().text);
             if (OKButton.GetComponentInChildren<Text>().text == "GET AWARDS")
             {
-                //ÏÔÊ¾½±Àø¶«Î÷
+                //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (!dataQuizReport.award)
                 {
                     AwardHint.text = "Collect awards succesfully!";
@@ -100,27 +107,82 @@ namespace ETLG
 
         private void OnBattleButtonClick()
         {
-            //×¼È·ÂÊ£¬0-100µÄÊýÖµ
+            //×¼È·ï¿½Ê£ï¿½0-100ï¿½ï¿½ï¿½ï¿½Öµ
             int accuracy = int.Parse(dataQuizReport.accuracyText);
             Debug.Log(accuracy);
-            //ÁìÓò,»ñÈ¡npcÊÇÊ²Ã´ÁìÓòµÄ·½·¨£¬»¹Ã»ÓÐÏëºÃÔõÃ´Ð´£¬ÏÖÔÚÊÇÖ±½ÓÔÚDataQuiz.csµÄ½Å±¾ÖÐ£¬°ÑdataQuizReport.domainÐ´ËÀÁË£¬Èç¹ûÄãÒª»»×Å²âÊÔ£¬Ö±½ÓÈ¥DataQuizµÄdomain¸ÄÖµ
+            //ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½È¡npcï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½DataQuiz.csï¿½Ä½Å±ï¿½ï¿½Ð£ï¿½ï¿½ï¿½dataQuizReport.domainÐ´ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Å²ï¿½ï¿½Ô£ï¿½Ö±ï¿½ï¿½È¥DataQuizï¿½ï¿½domainï¿½ï¿½Öµ
+            
+            string planetType = "";
             switch (dataQuizReport.domain)
             {
                 case Constant.Type.DOMAIN_CLOUD_COMPUTING:
+                    planetType = "CloudComputing";
                     break;
                 case Constant.Type.DOMAIN_ARTIFICIAL_INTELLIGENCE:
+                    planetType = "AI";
                     break;
                 case Constant.Type.DOMAIN_CYBERSECURITY:
+                    planetType = "CyberSecurity";
                     break;
                 case Constant.Type.DOMAIN_DATA_SCIENCE:
+                    planetType = "DataScience";
                     break;
                 case Constant.Type.DOMAIN_BLOCKCHAIN:
+                    planetType = "Blockchain";
                     break;
                 case Constant.Type.DOMAIN_IoT:
+                    planetType = "IoT";
                     break;
             }
-            //ÊÇ·ñbossÕ½
-            Debug.Log(dataQuizReport.boss);
+            //ï¿½Ç·ï¿½bossÕ½
+            Debug.Log("Is Boss Fight ? " + dataQuizReport.boss);
+            if (dataQuizReport.boss)
+            {
+                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("IntermidateBattle", planetType, accuracy));
+            }
+            else
+            {
+                GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("BasicBattle", planetType, accuracy));
+            }
+        }
+
+        private void DisplayBoostInfo()
+        {
+            int accuracy = int.Parse(dataQuizReport.accuracyText);
+            UIAttributeList attrList = this.AttributeList.GetComponent<UIAttributeList>();
+
+            switch (dataQuizReport.domain)
+            {
+                case Constant.Type.DOMAIN_CLOUD_COMPUTING:
+                    attrList.DisplayCloudComputingBoost(accuracy);
+                    break;
+                case Constant.Type.DOMAIN_ARTIFICIAL_INTELLIGENCE:
+                    attrList.DisplayAIBoost(accuracy);
+                    break;
+                case Constant.Type.DOMAIN_CYBERSECURITY:
+                    attrList.DisplayCybersecurityBoost(accuracy);
+                    break;
+                case Constant.Type.DOMAIN_DATA_SCIENCE:
+                    attrList.DisplayDataScienceBoost(accuracy);
+                    break;
+                case Constant.Type.DOMAIN_BLOCKCHAIN:
+                    attrList.DisplayBlockchainBoost(accuracy);
+                    break;
+                case Constant.Type.DOMAIN_IoT:
+                    attrList.DisplayIoTBoost(accuracy);
+                    break;
+            }
+        }
+
+        private void DisableAllBoostInfo()
+        {
+            UIAttributeList attrList = this.AttributeList.GetComponent<UIAttributeList>();
+            attrList.firePower.SetActive(false);
+            attrList.energy.SetActive(false);
+            attrList.shield.SetActive(false);
+            attrList.durability.SetActive(false);
+            attrList.agility.SetActive(false);
+            attrList.fireRate.SetActive(false);
         }
     }
 }
