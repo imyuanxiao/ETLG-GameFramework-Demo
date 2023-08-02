@@ -890,11 +890,11 @@ namespace ETLG.Data
         {
             if (playerAchievement.ContainsKey(id))
             {
-                playerAchievement[id] = level + 1;
+                playerAchievement[id] = level-1;
             }
             else
             {
-                playerAchievement.Add(id, level + 1);
+                playerAchievement.Add(id, level-1);
             }
         }
         public int GetCurrentAchievementLevelById(int id)
@@ -904,12 +904,19 @@ namespace ETLG.Data
         public bool isAchievementAchieved(int count)
         {
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
-       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) == playerAchievement[dataAchievement.cuurrentPopUpId];
+       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count)-1 == playerAchievement[dataAchievement.cuurrentPopUpId];
         }
         public bool isAchievementAchieved(int id, int count)
         {
-            return playerAchievement.ContainsKey(id) &&
-       dataAchievement.GetNextLevel(id, count) == playerAchievement[id];
+            if(!playerAchievement.ContainsKey(id))
+            {
+                return false;
+            }
+            if(playerAchievement[id]>= dataAchievement.GetNextLevel(id, count)-1)
+            {
+                return true;
+            }
+            return false;
         }
         public int GetNextLevel(int Id)
         {
@@ -921,7 +928,7 @@ namespace ETLG.Data
 
             if (!playerAchievement.ContainsKey(Id))
             {
-                return 1;
+                return 0;
             }
             else
             {
@@ -971,7 +978,7 @@ namespace ETLG.Data
 
                     foreach (int count in counts)
                     {
-                        if (number >= count && !isAchievementAchieved(achievementId, count))
+                        if (number >= count && !isAchievementAchieved(achievementId, number))
                         {
                             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                         }
@@ -1004,6 +1011,7 @@ namespace ETLG.Data
             {
                 if (number >= count && !isAchievementAchieved(achievementId, count))
                 {
+                    
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }

@@ -97,7 +97,6 @@ namespace ETLG
                 //show locked achievements
                 foreach (AchievementData data in achievementDatas)
                 {
-
                     if (playerAchievement.ContainsKey(data.Id) && dataAchievement.isMaxLevel(data.Id, playerAchievement[data.Id]))
                     {
                         continue;

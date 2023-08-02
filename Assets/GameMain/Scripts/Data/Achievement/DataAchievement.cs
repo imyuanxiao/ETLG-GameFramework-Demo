@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameFramework.DataTable;
+using UnityEngine;
+
 namespace ETLG.Data
 {
     public class DataAchievement : DataBase
@@ -98,7 +100,7 @@ namespace ETLG.Data
         public bool isMaxLevel(int id,int level)
         {
             AchievementData achievementData = GetDataById(id);
-            return level >= achievementData.Count.Length;
+            return level >= achievementData.Count.Length-1;
         }
         public int GetNextLevel(int Id, int count)
         {
@@ -116,7 +118,7 @@ namespace ETLG.Data
                 }
             }
 
-            return Count.Length - 1;
+            return Count.Length ;
         }
         
     }
