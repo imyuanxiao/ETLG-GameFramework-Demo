@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 5142890494396105953}
   - component: {fileID: 6629566441832709655}
   - component: {fileID: 5067818056408890588}
+  - component: {fileID: 4213017903417563105}
   m_Layer: 5
   m_Name: Special
   m_TagString: Untagged
@@ -629,6 +630,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4213017903417563105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719491290821183546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Special
+  tipContent: Special artifacts for mission or special scene
+  position: 0
 --- !u!1 &722793796513376286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,7 +1218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 237.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 275, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2339353562653909011
@@ -5094,7 +5110,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &688268708279992577
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6084,6 +6100,7 @@ GameObject:
   - component: {fileID: 79584188875827304}
   - component: {fileID: 8102841422761343403}
   - component: {fileID: 2228189735525882595}
+  - component: {fileID: 375125837252355031}
   m_Layer: 5
   m_Name: Others
   m_TagString: Untagged
@@ -6190,6 +6207,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &375125837252355031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068639722309137205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Others
+  tipContent: All other artifacts
+  position: 0
 --- !u!1 &4071177041710612693
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,6 +6270,7 @@ GameObject:
   - component: {fileID: 3013569021089180579}
   - component: {fileID: 259162419414974280}
   - component: {fileID: 4088222033066350475}
+  - component: {fileID: 6529465997733006834}
   m_Layer: 5
   m_Name: Trade
   m_TagString: Untagged
@@ -6293,7 +6326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 328bd055d9f6154488ca9f5f3a2e47e8, type: 3}
+  m_Texture: {fileID: 2800000, guid: 483e01846507f1c4b8b1ee5f4f9cd530, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6344,6 +6377,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6529465997733006834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072970094622269455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Tradeable
+  tipContent: All tradeable artifacts
+  position: 0
 --- !u!1 &4158231483757098330
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,7 +7327,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &7847471501190465748
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9577,7 +9625,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &2057462241900030471
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10735,7 +10783,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &3190152969606236828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13430,7 +13478,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &6956414796594628329
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13537,6 +13585,7 @@ GameObject:
   - component: {fileID: 2345172636317578850}
   - component: {fileID: 7898377914203872745}
   - component: {fileID: 1735261484987625441}
+  - component: {fileID: 384318718512268612}
   m_Layer: 5
   m_Name: All
   m_TagString: Untagged
@@ -13643,6 +13692,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &384318718512268612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998122293116619742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: All
+  tipContent: All artifacts
+  position: 0
 --- !u!1 &9005077198475489081
 GameObject:
   m_ObjectHideFlags: 0

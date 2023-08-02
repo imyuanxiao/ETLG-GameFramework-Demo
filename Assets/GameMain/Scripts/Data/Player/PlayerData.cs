@@ -710,6 +710,8 @@ namespace ETLG.Data
                 int skillId = playerSkill.Key;
                 int currentLevel = playerSkill.Value;
 
+                if (currentLevel <= 0) continue;
+
                 SkillData skillData = dataSkill.GetSkillData(skillId);
                 int[] attrs = skillData.GetSkillLevelData(currentLevel).Attributes;
                 UpdateAttributes(attrs, Type);
@@ -787,12 +789,26 @@ namespace ETLG.Data
 
             }
 
+            List<int> UnlockedSkills = new List<int>();
+            foreach (var playerSkill in playerSkills)
+            {
+                UnlockedSkills.Add(playerSkill.Key);
+            }
+
             // clear skills;
             playerSkills.Clear();
 
+            // add all unlocked skill
+
+            foreach (var skillId in UnlockedSkills)
+            {
+                AddSkill(skillId);
+            }
+
+            // add initial spaceship skill
             foreach (var id in initialSpaceship.SkillIds)
             {
-                AddSkill(id, 1);
+                AddSkill(id);
             }
 
             // consume costs
@@ -802,8 +818,10 @@ namespace ETLG.Data
             foreach (var playerSkill in playerSkills)
             {
                 int skillId = playerSkill.Key;
+                int level = playerSkill.Value;
+                if (level <= 0) continue;
 
-                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkill.Value);
+                int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(level);
 
                 for (int i = 0; i < costs.Length; i += 2)
                 {
