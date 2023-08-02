@@ -94,7 +94,7 @@ namespace ETLG.Data
             playerArtifacts.Add((int)EnumArtifact.Money, 5000);
             playerArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
 
-            playerTotalArtifacts.Add((int)EnumArtifact.Money, 0);
+            playerTotalArtifacts.Add((int)EnumArtifact.Money, 5000);
             playerTotalArtifacts.Add((int)EnumArtifact.KnowledgePoint, 0);
             playerTotalArtifacts.Add(Constant.Type.ACHIV_TOTAL_SPEND_MONEY, 0);
 
@@ -263,7 +263,6 @@ namespace ETLG.Data
                 }
                 return;
             }
-
             // artifacts -> playerArtifacts
             if (!playerArtifacts.ContainsKey(id))
             {
@@ -275,22 +274,43 @@ namespace ETLG.Data
             }
 
             //total artifacts for achievement
-            if (dataAchievement.isReset)
+            if (dataAchievement.isReset || (number<=0 && id!=(int)EnumArtifact.Money))
             {
                 return;
             }
+
+            AddTotalArtifact(id,number);
+            
+        }
+        public void AddTotalArtifact(int id, int number)
+        {
             if (!playerTotalArtifacts.ContainsKey(id))
             {
-                playerTotalArtifacts.Add(id, number);
+                //if money number<0,add playerTotalArtifacts total spend money 
+                if (id == (int)EnumArtifact.Money && number < 0)
+                {
+                    playerTotalArtifacts.Add(Constant.Type.ACHIV_TOTAL_SPEND_MONEY, -number);
+                }
+                else
+                {
+                    playerTotalArtifacts.Add(id, number);
+                }
             }
             else
             {
-                playerTotalArtifacts[id] += number;
+                //if money number<0,add playerTotalArtifacts total spend money 
+                if (id == (int)EnumArtifact.Money && number < 0)
+                {
+                    playerTotalArtifacts[Constant.Type.ACHIV_TOTAL_SPEND_MONEY] += -number;
+                }
+                else
+                {
+                    playerTotalArtifacts[id] += number;
+                }
             }
 
             UpdateArtifactAchievements();
         }
-
         //update ALL artifacts after trading
         public void updateArtifact(Dictionary<int, int> newPlayerArtifacts)
         {
@@ -613,7 +633,11 @@ namespace ETLG.Data
         {
             if (playerArtifacts.ContainsKey(id))
             {
+                int preValue = playerArtifacts[id];
                 playerArtifacts[id] = newValue;
+
+                //set total got/spent money
+                AddTotalArtifact(id, newValue - preValue);
             }
             return false;
         }

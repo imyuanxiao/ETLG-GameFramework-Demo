@@ -164,11 +164,6 @@ namespace ETLG
 
             int level = playerAchievement[achievementData.Id];
             int countIndex = (level < achievementData.Count.Length-1) ? level+1 : level;
-            if(id==5003)
-            {
-                Debug.Log("count index ="+countIndex);
-                Debug.Log("achievementData.Count[countIndex] =" + achievementData.Count[countIndex]);
-            }
             return achievementData.Count[countIndex].ToString();
         }
         public int GetAchievementProgress(int id)
