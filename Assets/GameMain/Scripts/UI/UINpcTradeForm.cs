@@ -31,7 +31,7 @@ namespace ETLG
 
         private DataPlayer dataPlayer;
         private DataNPC dataNPC;
-        private DataTrade dataTrade=null;
+        private DataTrade dataTrade = null;
 
         private bool refresh;
 
@@ -58,7 +58,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-            
+
             loadData();
             refresh = true;
         }
@@ -68,11 +68,12 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
+            Debug.Log("到这里都ok");
             playerArtifacts = dataPlayer.GetPlayerData().GetTradeableArtifacts();
-            dataTrade= GameEntry.Data.GetData<DataTrade>();
+            dataTrade = GameEntry.Data.GetData<DataTrade>();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
             npcMoney = dataPlayer.GetPlayerData().GetNpcDataById(dataNPC.currentNPCId).Money;
-            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money); 
+            playerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money);
 
             string npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
@@ -89,7 +90,6 @@ namespace ETLG
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
             if (dataTrade.clickItemIcon)
             {
                 if (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER)
@@ -117,7 +117,7 @@ namespace ETLG
                 updateArtifactData();
                 refresh = false;
             }
-
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
         //触发trade按钮后交易，刷新item和money
@@ -132,12 +132,6 @@ namespace ETLG
 
             tradeArtifact();
             refresh = true;
-
-        }
-
-        private void OnOpenAlertForm()
-        {
-            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
 
         }
 
@@ -164,9 +158,6 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            playerArtifacts = null;
-            dataTrade = null;
-            closeButton.onClick.RemoveAllListeners();
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
             base.OnClose(isShutdown, userData);
@@ -179,7 +170,6 @@ namespace ETLG
 
         private void ShowPlayerArtifactIcons()
         {
-
             foreach (KeyValuePair<int, int> kvp in playerArtifacts)
             {
                 int ArtifactID = kvp.Key;
@@ -197,6 +187,27 @@ namespace ETLG
                 });
             }
         }
+
+        //private void tradeArtifact()
+        //{
+        //    if (receivedType == Constant.Type.TRADE_NPC_PLAYER)
+        //    {
+        //        dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum);
+        //        dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice * (-1));
+        //        npcMoney += totalPrice;
+        //        testArtifactExist(npcArtifacts, receivedArtifactID, Constant.Type.SUB);
+        //    }
+        //    else
+        //    {
+        //        dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum * (-1));
+        //        dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice);
+        //        npcMoney -= totalPrice;
+        //        if (!testArtifactExist(npcArtifacts, receivedArtifactID, Constant.Type.ADD))
+        //        {
+        //            npcArtifacts.Add(receivedArtifactID, tradeNum);
+        //        }
+        //    }
+        //}
 
         private void tradeArtifact()
         {

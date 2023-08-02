@@ -3,6 +3,7 @@ using GameFramework.Event;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 namespace ETLG
 {
@@ -22,7 +23,7 @@ namespace ETLG
         public Transform content_4 = null;
         public Transform content_5 = null;
         public Transform content_6 = null;
-
+        public Button returnButton;
         // initial attrs
 
         private DataPlayer dataPlayer;
@@ -37,6 +38,7 @@ namespace ETLG
             // 获取玩家数据管理器
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            returnButton.onClick.AddListener(OnReturnButtonClick);
         }
 
         protected override void OnOpen(object userData)
@@ -46,7 +48,6 @@ namespace ETLG
             Log.Debug("Open Achievement");
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
-           // GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(5001, 9999));
             showContent();
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -97,7 +98,6 @@ namespace ETLG
                 //show locked achievements
                 foreach (AchievementData data in achievementDatas)
                 {
-
                     if (playerAchievement.ContainsKey(data.Id) && dataAchievement.isMaxLevel(data.Id, playerAchievement[data.Id]))
                     {
                         continue;
@@ -158,6 +158,12 @@ namespace ETLG
                 return;
             this.refresh = true;
         }
+        private void OnReturnButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
 
+            GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
+
+        }
     }
 }

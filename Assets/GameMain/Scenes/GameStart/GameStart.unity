@@ -206,6 +206,10 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataTutorial
   - enable: 1
     dataTypeName: ETLG.Data.DataTrade
+  - enable: 1
+    dataTypeName: ETLG.Data.DataAlert
+  - enable: 1
+    dataTypeName: ETLG.Data.DataQuiz
 --- !u!1 &444730643
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   responseData: 
   errorType: 0
+  isNewFetch: 0
 --- !u!4 &444730645
 Transform:
   m_ObjectHideFlags: 0

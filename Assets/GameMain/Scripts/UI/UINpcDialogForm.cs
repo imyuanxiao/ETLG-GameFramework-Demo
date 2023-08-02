@@ -20,7 +20,6 @@ namespace ETLG
         public Button playerButtonPrefab;
         public Transform dialogScrollContent;
         public Transform buttonScrollContent;
-        private List<Image> textModules = new List<Image>();
         public Button closeButton;
         public Button maxButton;
         public Button FontPlusButton;
@@ -31,22 +30,18 @@ namespace ETLG
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
 
+        private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
         private Sprite playerSprite;
         private NPCData npcData;
+        private DataPlayer dataPlayer;
         private DataAlert dataAlert;
         private string npcAvatarPath;
         private string XMLPath;
-        private Dictionary<string, XmlNode> dialogueNodes;
-        private XmlNode currentNode = null;
-        private string nextNodeID = null;
-        private XmlNodeList playerResponses;
-        private UINPCDialogNPCStatment UI_NPCDialogNPCStatment;
-        private XmlNodeList NPCStatements;
-        private List<UINPCDialogPlayerButton> playerButtons=new List<UINPCDialogPlayerButton>();
-        private bool isNext = false;
-        private float playerInputBoxOriginalHeight;
+        private float playerInputBoxOriginalHeight=160f;
+        private float dialogScrollContentOriginalHeight=600f;
         private RectTransform buttonScrollContentRectTransform;
+        private RectTransform dialogScrollContentRectTransform;
 
         private const float min_contentWidth = 1100f;
         private const float min_prefabWidth = 1040f;
@@ -71,51 +66,65 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
-            npc_description.text = npcData.Domain+"\n"+npcData.Course+"\n"+npcData.Chapter;
-            XMLPath = npcData.DialogXML;
+            npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
+            dialogScrollContentRectTransform = dialogScrollContent.GetComponent<RectTransform>();
 
             loadAvatar();
-            parseXMLFile();
+            UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
+            if (tempDialogManager == null)
+            {
+                XMLPath = npcData.DialogXML;
+                UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
+                dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
+            }
+            else
+            {
+                UI_NPCDialogManager = tempDialogManager;
+            }
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
-
             RectTransform dialogBGTransfrom = dialogBg.GetComponent<RectTransform>();
             float currentdialogUIWidth = dialogBGTransfrom.sizeDelta.x;
             resizeDialog(currentdialogUIWidth);
 
-            if ((nextNodeID != "end" && isNext) || (nextNodeID != "end" && currentNode == null))
+            if ((UI_NPCDialogManager.nextNodeID != "end" && UI_NPCDialogManager.isNext) || (UI_NPCDialogManager.nextNodeID != "end" && UI_NPCDialogManager.currentNode == null))
             {
-                getCurrentNode();
-                showText();
+                if (UI_NPCDialogManager.dialogueNodes != null)
+                {
+                    getCurrentNode();
+                    showText();
+                }
+                dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id,UI_NPCDialogManager);
             }
-            else if (nextNodeID == "end" && isNext)
+            else if (UI_NPCDialogManager.nextNodeID == "end" && UI_NPCDialogManager.isNext)
             {
+                Debug.Log(UI_NPCDialogManager.nextNodeID);
+                Debug.Log(buttonScrollContent.childCount);
+                Debug.Log(UI_NPCDialogManager.isNext);
                 removePlayerResponseInput();
-
                 //检测有没有得过奖励
-                //if (!award)
-                //{
-                //    getAward();
-                //}
+                if (!UI_NPCDialogManager.award)
+                {
+                    getAward();
+                }
+                UI_NPCDialogManager.isNext = false;
+            }
+            else if(UI_NPCDialogManager.nextNodeID == "end"&& buttonScrollContent.childCount==0)
+            {
+                againButton();
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
-        }
-
-        private void OnOpenAlertForm()
-        {
-            GameEntry.Event.Fire(this, UIAlertTriggerEventArgs.Create(Constant.Type.UI_OPEN));
-
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
         //读取头像数据
@@ -161,7 +170,6 @@ namespace ETLG
         //页面最大化
         private void OnMaxButtonClick()
         {
-            Debug.Log("Max");
             //bgm
             RectTransform dialogBGTransfrom = dialogBg.GetComponent<RectTransform>();
             float currentdialogUIWidth = dialogBGTransfrom.sizeDelta.x;
@@ -180,6 +188,42 @@ namespace ETLG
             }
         }
 
+        public void getCurrentNode()
+        {
+            UI_NPCDialogManager.isNext = false;
+
+            if (UI_NPCDialogManager.currentNode == null)
+            {
+                UI_NPCDialogManager.currentNode = UI_NPCDialogManager.dialogueNodes["1"];
+            }
+            else
+            {
+                UI_NPCDialogManager.currentNode = UI_NPCDialogManager.dialogueNodes[UI_NPCDialogManager.nextNodeID];
+            }
+
+            UI_NPCDialogManager.NPCStatements = UI_NPCDialogManager.currentNode.SelectNodes("npc/statement");
+            UI_NPCDialogManager.playerResponses = UI_NPCDialogManager.currentNode.SelectNodes("player/response");
+            UI_NPCDialogManager.playerButtons = new List<UINPCDialogPlayerButton>();
+            removePlayerResponseInput();
+
+            foreach (XmlNode responseNode in UI_NPCDialogManager.playerResponses)
+            {
+                UINPCDialogPlayerButton newUIPlayerButton = new UINPCDialogPlayerButton();
+                newUIPlayerButton.buttonText = responseNode.InnerText;
+                newUIPlayerButton.nextNodeID = responseNode.Attributes["nextnode"].Value;
+
+                if (responseNode.Attributes["isShown"] != null)
+                {
+                    newUIPlayerButton.isShown = false;
+                }
+                else
+                {
+                    newUIPlayerButton.isShown = true;
+                }
+                UI_NPCDialogManager.playerButtons.Add(newUIPlayerButton);
+            }
+        }
+
         //修改聊天记录宽度
         private void resizeDialog(float prefabWidth, float textWidth)
         {
@@ -192,8 +236,8 @@ namespace ETLG
                     newContentSize.x = prefabWidth;
                     dialogModuleRectTransform.sizeDelta = newContentSize;
 
-                    Transform dialogContainer=dialogModuleRectTransform.Find("ContentContainer");
-                    RectTransform dialogContainerRectTransform= dialogContainer.GetComponent<RectTransform>();
+                    Transform dialogContainer = dialogModuleRectTransform.Find("ContentContainer");
+                    RectTransform dialogContainerRectTransform = dialogContainer.GetComponent<RectTransform>();
                     dialogContainerRectTransform.sizeDelta = new Vector2(textWidth, dialogContainerRectTransform.sizeDelta.y);
 
                     TextMeshProUGUI dialogTextUI = dialogModuleRectTransform.GetComponentInChildren<TextMeshProUGUI>();
@@ -240,80 +284,45 @@ namespace ETLG
             resizeDialog(correct_prefabWidth, correct_textWidth);
         }
 
-
-        //读取对话XML文件
-        private void parseXMLFile()
+        private void againButton()
         {
-            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(xmlFile.text);
+            Button playerButton = Instantiate(playerButtonPrefab, buttonScrollContent);
+            RectTransform buttonRectTransform = playerButton.GetComponent<RectTransform>();
 
-            dialogueNodes = new Dictionary<string, XmlNode>();
-
-            XmlNodeList nodes = xmlDoc.GetElementsByTagName("node");
-
-            foreach (XmlNode node in nodes)
+            playerButton.onClick.AddListener(() =>
             {
-                string nodeId = node.Attributes["id"].Value;
-                dialogueNodes.Add(nodeId, node);
-            }
+                Debug.Log("点击again");
+                UI_NPCDialogManager.reset();
+                removePlayerResponseInput();
+                removeConversations();
+                getCurrentNode();
+                showText();
+            });
+
+            //选项文本加载
+            TextMeshProUGUI buttonText = playerButton.GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = "Start Again";
         }
 
-        private void getCurrentNode()
-        {
-            isNext = false;
-
-            if (currentNode == null)
-            {
-                currentNode = dialogueNodes["1"];
-            }
-            else
-            {
-                currentNode = dialogueNodes[nextNodeID];
-            }
-
-            NPCStatements = currentNode.SelectNodes("npc/statement");
-
-            playerResponses = currentNode.SelectNodes("player/response");
-
-            playerButtons = new List<UINPCDialogPlayerButton>();
-            removePlayerResponseInput();
-
-            foreach (XmlNode responseNode in playerResponses)
-            {
-                UINPCDialogPlayerButton newUIPlayerButton= new UINPCDialogPlayerButton();
-                newUIPlayerButton.buttonText= responseNode.InnerText;
-                newUIPlayerButton.nextNodeID = responseNode.Attributes["nextnode"].Value;
-
-                if (responseNode.Attributes["isShown"] != null)
-                {
-                    newUIPlayerButton.isShown = false;
-                }
-                else
-                {
-                    newUIPlayerButton.isShown = true;
-                }
-                playerButtons.Add(newUIPlayerButton);
-            }
-        }
+ 
 
         private void showText()
         {
-            foreach (XmlNode node in NPCStatements)
+            foreach (XmlNode node in UI_NPCDialogManager.NPCStatements)
             {
-                UI_NPCDialogNPCStatment = new UINPCDialogNPCStatment(node, npcData.Id.ToString());
-                Image NPCModule = instantiatePrefab(UI_NPCDialogNPCStatment.NPCText, "NPC");
+                UI_NPCDialogManager.UI_NPCDialogNPCStatment = new UINPCDialogNPCStatment(node, npcData.Id.ToString());
+                Image NPCModule = instantiatePrefab(UI_NPCDialogManager.UI_NPCDialogNPCStatment.NPCText, "NPC");
             }
-            
-            foreach (UINPCDialogPlayerButton button in playerButtons)
+
+            foreach (UINPCDialogPlayerButton button in UI_NPCDialogManager.playerButtons)
             {
                 Button playerButton = Instantiate(playerButtonPrefab, buttonScrollContent);
                 RectTransform buttonRectTransform = playerButton.GetComponent<RectTransform>();
 
                 playerButton.onClick.AddListener(() =>
                 {
-                    nextNodeID = button.nextNodeID;
-                    isNext = true;
+                    UI_NPCDialogManager.nextNodeID = button.nextNodeID;
+                    UI_NPCDialogManager.isNext = true;
                     if (button.isShown)
                     {
                         instantiatePrefab(button.buttonText, "player");
@@ -329,11 +338,21 @@ namespace ETLG
         //清除玩家输入框所有按钮
         private void removePlayerResponseInput()
         {
-            buttonScrollContentRectTransform.sizeDelta = new Vector2(buttonScrollContentRectTransform.sizeDelta.x, playerInputBoxOriginalHeight);
             for (int i = buttonScrollContent.childCount - 1; i >= 0; i--)
             {
                 Destroy(buttonScrollContent.GetChild(i).gameObject);
             }
+            buttonScrollContentRectTransform.sizeDelta = new Vector2(buttonScrollContentRectTransform.sizeDelta.x, playerInputBoxOriginalHeight);
+        }
+
+        //清除所有聊天记录
+        private void removeConversations()
+        {
+            for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
+            {
+                Destroy(dialogScrollContentRectTransform.GetChild(i).gameObject);
+            }
+            dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
         }
 
         //分别实例化NPC和玩家的聊天记录prefab,并加载文本
@@ -348,7 +367,7 @@ namespace ETLG
             {
                 textModule = playerModuleSet(text);
             }
-            textModules.Add(textModule);
+            UI_NPCDialogManager.textModules.Add(textModule);
             //加载文本,设置对齐方式
             return textModule;
         }
@@ -361,7 +380,7 @@ namespace ETLG
             RectTransform textModuleRectTransform = textModule.GetComponent<RectTransform>();
             setColorAlpha(textModuleRectTransform, "player");
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
-            dialogText.fontSize = default_fontsize + fontsizeChangePlusValue+fontsizeChangeSubValue;
+            dialogText.fontSize = default_fontsize + fontsizeChangePlusValue + fontsizeChangeSubValue;
             dialogText.text = text;
             dialogText.alignment = TextAlignmentOptions.Right;
             return textModule;
@@ -376,30 +395,28 @@ namespace ETLG
             setColorAlpha(textModuleRectTransform, "NPC");
             TextMeshProUGUI dialogText = textModule.GetComponentInChildren<TextMeshProUGUI>();
             dialogText.text = text;
-            dialogText.fontSize = default_fontsize + UI_NPCDialogNPCStatment.fontSizeGap + fontsizeChangePlusValue + fontsizeChangeSubValue;
+            dialogText.fontSize = default_fontsize + UI_NPCDialogManager.UI_NPCDialogNPCStatment.fontSizeGap + fontsizeChangePlusValue + fontsizeChangeSubValue;
             dialogText.ForceMeshUpdate();
 
             dialogText.alignment = TextAlignmentOptions.Left;
             Transform contentContainer = textModuleRectTransform.Find("ContentContainer");
 
-            if (UI_NPCDialogNPCStatment.isBold)
+            if (UI_NPCDialogManager.UI_NPCDialogNPCStatment.isBold)
             {
                 dialogText.fontStyle = FontStyles.Bold;
             }
-            if (UI_NPCDialogNPCStatment.textColor != Color.white)
+            if (UI_NPCDialogManager.UI_NPCDialogNPCStatment.textColor != Color.white)
             {
-                dialogText.color = UI_NPCDialogNPCStatment.textColor;
+                dialogText.color = UI_NPCDialogManager.UI_NPCDialogNPCStatment.textColor;
             }
-            if (UI_NPCDialogNPCStatment.imagePath != null)
+            if (UI_NPCDialogManager.UI_NPCDialogNPCStatment.imagePath != null)
             {
                 instantiateImage(contentContainer);
             }
-            if (UI_NPCDialogNPCStatment.videoPath != null)
+            if (UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath != null)
             {
                 instantiateVideo(contentContainer);
             }
-
-            
             return textModule;
         }
 
@@ -407,7 +424,7 @@ namespace ETLG
         {
             Canvas imageModule = Instantiate(ImageContainerPrefab, contentContainer);
             Image image = imageModule.GetComponentInChildren<Image>();
-            Sprite imageSprite = Resources.Load<Sprite>(UI_NPCDialogNPCStatment.imagePath);
+            Sprite imageSprite = Resources.Load<Sprite>(UI_NPCDialogManager.UI_NPCDialogNPCStatment.imagePath);
             if (imageSprite != null)
             {
                 image.sprite = imageSprite;
@@ -422,8 +439,8 @@ namespace ETLG
             VideoPlayer videoPlayer = videoModule.GetComponentInChildren<VideoPlayer>();
             if (videoPlayer != null)
             {
-                Debug.Log(UI_NPCDialogNPCStatment.videoPath);
-                VideoClip videoClip = Resources.Load<VideoClip>(UI_NPCDialogNPCStatment.videoPath);
+                Debug.Log(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath);
+                VideoClip videoClip = Resources.Load<VideoClip>(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath);
 
                 // Load the video from the specified path
                 videoPlayer.clip = videoClip;
@@ -433,7 +450,7 @@ namespace ETLG
                 Debug.LogError("VideoPlayer component not found on the GameObject named \"Video\".");
             }
             RawImage rawImage = videoModule.GetComponentInChildren<RawImage>();
-            RenderTexture renderTexture = Resources.Load<RenderTexture>(UI_NPCDialogNPCStatment.videoTexture);
+            RenderTexture renderTexture = Resources.Load<RenderTexture>(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoTexture);
             rawImage.texture = renderTexture;
             videoPlayer.targetTexture = renderTexture;
             videoPlayer.Play();
@@ -467,13 +484,12 @@ namespace ETLG
 
         private void getAward()
         {
-
+            UI_NPCDialogManager.award = true;
         }
 
         private void OnfontPlus()
         {
-            Debug.Log("加一次");
-            if (fontsizeChangePlusValue+ fontsizeChangeSubValue < 30)
+            if (fontsizeChangePlusValue + fontsizeChangeSubValue < 30)
             {
                 fontsizeChangePlusValue += 2;
                 updateFontSize(fontsizeStandardOffset);
@@ -482,11 +498,10 @@ namespace ETLG
 
         private void OnfontSub()
         {
-            Debug.Log("减一次");
             if (fontsizeChangePlusValue + fontsizeChangeSubValue > -10)
             {
                 fontsizeChangeSubValue -= 2;
-                updateFontSize(fontsizeStandardOffset*-1);
+                updateFontSize(fontsizeStandardOffset * -1);
             }
         }
 
@@ -502,7 +517,7 @@ namespace ETLG
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);
             }
-            
+
         }
 
     }

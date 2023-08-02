@@ -25,6 +25,7 @@ namespace ETLG
         {
             GameObject bulletPrefab = other.gameObject;
             TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
+            ObjectPoolManager.SpawnObject(BattleManager.Instance.hitFXPrefab, bulletPrefab.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.ParticleSystem);
             ObjectPoolManager.ReturnObjectToPool(bulletPrefab); 
         }
 

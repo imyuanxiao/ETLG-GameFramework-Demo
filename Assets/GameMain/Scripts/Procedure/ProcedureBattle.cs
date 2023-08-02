@@ -32,6 +32,7 @@ namespace ETLG
             this.changeScene = false;
             string battleType = procedureOwner.GetData<VarString>("BattleType");
             string bossType = procedureOwner.GetData<VarString>("BossType");
+            int accuracy = procedureOwner.GetData<VarInt32>("Accuracy");
 
             if (battleType == "IntermidateBattle")
             {
@@ -41,6 +42,7 @@ namespace ETLG
             Dictionary<string, string> battleData = new Dictionary<string, string>();
             battleData.Add("BattleType", battleType);
             battleData.Add("BossType", bossType);
+            battleData.Add("Accuracy", accuracy.ToString());
             // show battle introduction UI, pass in the battle type and boss type
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleIntro, battleData);
 

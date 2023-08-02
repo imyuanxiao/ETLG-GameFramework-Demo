@@ -80,6 +80,7 @@ namespace ETLG
             
             procedureOwner.SetData<VarString>("BattleType", ne.BattleType);
             procedureOwner.SetData<VarString>("BossType", ne.BossType);
+            procedureOwner.SetData<VarInt32>("Accuracy", ne.Accuracy);
             
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
         }
@@ -126,7 +127,6 @@ namespace ETLG
 
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
             {
-                Debug.Log("关闭一次");
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
             }
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCTradeForm))
@@ -141,7 +141,6 @@ namespace ETLG
             // Open UI
             if (ne.Type == Constant.Type.NPC_UI_TALK_OPEN)
             {
-                Debug.Log("打开一次");
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
             }
             else if (ne.Type == Constant.Type.NPC_UI_TRADE_OPEN)

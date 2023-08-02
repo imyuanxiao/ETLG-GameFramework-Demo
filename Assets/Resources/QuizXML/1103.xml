@@ -1,4 +1,4 @@
-<quiz>
+<quiz boss="true">
   <question type="MCS" timelimit="30">
     <statement>How does virtualization assist with cloud computing?</statement>
     <hint></hint>
@@ -7,51 +7,6 @@
       <option id="B">Facilitates the management of keys</option>
       <option id="C">Slower provisioning</option>
       <option id="D">Efficient use of physical computer hardware</option>
-    </options>
-    <analysis></analysis>
-    <answers>
-      <answer>D</answer>
-    </answers>
-  </question>
-
-  <question type="MCS" timelimit="20">
-    <statement>Which company introduced virtualization?</statement>
-    <hint></hint>
-    <options>
-      <option id="A">IBM</option>
-      <option id="B">Microsoft</option>
-      <option id="C">Compaq</option>
-      <option id="D">Amazon</option>
-    </options>
-    <analysis></analysis>
-    <answers>
-      <answer>A</answer>
-    </answers>
-  </question>
-
-  <question type="MCS">
-    <statement>What are resource efficiency, easier management, minimal downtime, and faster provisioning?</statement>
-    <hint></hint>
-    <options>
-      <option id="A">Visualization</option>
-      <option id="B">Resource management</option>
-      <option id="C">Virtualization</option>
-      <option id="D">Dematerialization</option>
-    </options>
-    <analysis></analysis>
-    <answers>
-      <answer>C</answer>
-    </answers>
-  </question>
-
-  <question type="MCS">
-    <statement>What is a type of application virtualization?</statement>
-    <hint></hint>
-    <options>
-      <option id="A">Virtual desktop</option>
-      <option id="B">Software-defined networking (SDN) virtualization</option>
-      <option id="C">CPU virtualization</option>
-      <option id="D">Local application virtualization</option>
     </options>
     <analysis></analysis>
     <answers>

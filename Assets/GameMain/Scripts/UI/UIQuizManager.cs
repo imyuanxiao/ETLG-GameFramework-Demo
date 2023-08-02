@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace ETLG.Data
 {
@@ -9,10 +10,50 @@ namespace ETLG.Data
         public bool award = false;
 
         public List<UIQuiz> quizArray = new List<UIQuiz>();
-
+        public bool boss = false;
         public int totalQuestion { get; set; }
         private int totalSubmitQuestions;
         private int correctQuestions;
+
+        public void reset()
+        {
+            totalSubmitQuestions = 0;
+            correctQuestions = 0;
+            foreach(UIQuiz quiz in quizArray)
+            {
+                quiz.reset();
+            }
+        }
+
+        public UIQuizManager(string XMLPath)
+        {
+            parseXMLFile(XMLPath);
+        }
+
+        private void parseXMLFile(string XMLPath)
+        {
+            TextAsset xmlFile = Resources.Load<TextAsset>(XMLPath);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlFile.text);
+
+            XmlNode quizNode = xmlDoc.SelectSingleNode("quiz");
+            XmlAttribute bossAttribute = quizNode.Attributes["boss"];
+            if (bossAttribute != null)
+            {
+                boss = true;
+            }
+            else
+            {
+                boss = false;
+            }
+
+            XmlNodeList nodes = xmlDoc.GetElementsByTagName("question");
+            foreach (XmlNode node in nodes)
+            {
+                addQuiz(new UIQuiz(node));
+            }
+            totalQuestion = quizArray.Count;
+        }
 
         public int TotalSubmitQuestions
         {

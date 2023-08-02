@@ -43,6 +43,7 @@ namespace ETLG
 
         [Header("FX")]
         public GameObject explodeFXPrefab;
+        public GameObject hitFXPrefab;
         public GameObject muzzleFlashPrefab;
         public GameObject missileFlarePrefab;
         public GameObject cloudComputingSkillFX;

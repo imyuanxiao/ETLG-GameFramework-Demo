@@ -15,11 +15,14 @@ namespace ETLG
 
         public string BossType { get; private set; }
 
-        public static EnterBattleEventArgs Create(string BattleType, string BossType = null)
+        public int Accuracy { get; private set; }
+
+        public static EnterBattleEventArgs Create(string BattleType, string BossType = null, int Accuracy = 0)
         {
             EnterBattleEventArgs e = ReferencePool.Acquire<EnterBattleEventArgs>();
             e.BattleType = BattleType;
             e.BossType = BossType;
+            e.Accuracy = Accuracy;
             return e;
         }
 
