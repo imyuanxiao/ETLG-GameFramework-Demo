@@ -246,7 +246,7 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
-            GameEntry.Event.Unsubscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
+            // GameEntry.Event.Unsubscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
             GameEntry.Event.Unsubscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;
