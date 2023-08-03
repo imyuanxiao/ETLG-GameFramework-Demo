@@ -97,15 +97,18 @@ namespace ETLG
         private void OnYesButtonClick()
         {
             //如果点击Yes，当前提示框和对话页面一起关闭
-            if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT)
+            if (alertType == Constant.Type.ALERT_DIALOG_QUIT)
             {
-                GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
-                OnReturnButtonClick();
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm)); 
+            }else if (alertType == Constant.Type.ALERT_QUIZ_QUIT|| alertType == Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD)
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizForm));
             }
+            OnReturnButtonClick();
         }
         private void OnCancelButtonClick()
         {
-            if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT)
+            if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD)
             {
                 //Cancel仅仅起到对比Yes的作用，与直接close当前提示框作用相同
                 OnReturnButtonClick();
@@ -127,7 +130,7 @@ namespace ETLG
 
         private void OnReturnButtonClick()
         {
-            this.Close();
+            GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-07-31 01:20:45.294
+// 生成时间：2023-08-03 04:18:26.531
 //------------------------------------------------------------
 
 namespace ETLG
@@ -212,9 +212,9 @@ namespace ETLG
         UILoginForm = 1044,
 
         /// <summary>
-        /// 奖励界面
+        /// 考试奖励界面
         /// </summary>
-        UINPCRewardForm = 1045,
+        UINPCQuizRewardForm = 1045,
 
         /// <summary>
         /// 消息提示框
@@ -225,5 +225,10 @@ namespace ETLG
         /// 错误提示界面
         /// </summary>
         UIErrorMessageForm = 1047,
+
+        /// <summary>
+        /// 对话奖励界面
+        /// </summary>
+        UINPCDialogRewardForm = 1048,
     }
 }

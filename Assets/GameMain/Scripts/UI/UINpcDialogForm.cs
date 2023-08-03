@@ -34,12 +34,13 @@ namespace ETLG
         private Sprite NPCSprite;
         private Sprite playerSprite;
         private NPCData npcData;
+        private DataDialog dataDialog;
         private DataPlayer dataPlayer;
         private DataAlert dataAlert;
         private string npcAvatarPath;
         private string XMLPath;
-        private float playerInputBoxOriginalHeight=160f;
-        private float dialogScrollContentOriginalHeight=600f;
+        private float playerInputBoxOriginalHeight = 160f;
+        private float dialogScrollContentOriginalHeight = 600f;
         private RectTransform buttonScrollContentRectTransform;
         private RectTransform dialogScrollContentRectTransform;
 
@@ -53,6 +54,7 @@ namespace ETLG
         private int fontsizeChangePlusValue = 0;
         private int fontsizeChangeSubValue = 0;
         private int fontsizeStandardOffset = 2;
+
 
         protected override void OnInit(object userData)
         {
@@ -69,7 +71,8 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
-
+            dataDialog = GameEntry.Data.GetData<DataDialog>();
+            dataDialog.reset();
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
@@ -104,24 +107,23 @@ namespace ETLG
                     getCurrentNode();
                     showText();
                 }
-                dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id,UI_NPCDialogManager);
+                dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }
             else if (UI_NPCDialogManager.nextNodeID == "end" && UI_NPCDialogManager.isNext)
             {
-                Debug.Log(UI_NPCDialogManager.nextNodeID);
-                Debug.Log(buttonScrollContent.childCount);
-                Debug.Log(UI_NPCDialogManager.isNext);
                 removePlayerResponseInput();
-                //检测有没有得过奖励
-                if (!UI_NPCDialogManager.award)
-                {
-                    getAward();
-                }
+                dataDialog.finish = true;
+                triggerAwardForm();
                 UI_NPCDialogManager.isNext = false;
             }
-            else if(UI_NPCDialogManager.nextNodeID == "end"&& buttonScrollContent.childCount==0)
+            else if (UI_NPCDialogManager.nextNodeID == "end" && buttonScrollContent.childCount == 0)
             {
                 againButton();
+            }
+            if (dataDialog.clickGetButton)
+            {
+                getAward();
+                dataDialog.clickGetButton = false;
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)verticalLayoutGroup.transform);
             base.OnUpdate(elapseSeconds, realElapseSeconds);
@@ -144,6 +146,28 @@ namespace ETLG
                 playerTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
             }
             playerSprite = Sprite.Create(playerTexture, new Rect(0, 0, playerTexture.width, playerTexture.height), Vector2.one * 0.5f);
+        }
+
+        private void getAward()
+        {
+            Debug.Log("获取奖励中");
+            if (npcData.RewardArtifacts.Length > 1)
+            {
+                int[] rewardArtifacts = npcData.RewardArtifacts;
+                for (int i = 0; i < rewardArtifacts.Length; i += 2)
+                {
+                    int id = rewardArtifacts[i];
+                    int num = rewardArtifacts[i + 1];
+                    dataPlayer.GetPlayerData().AddArtifact(id, num);
+                }
+            }
+            if (npcData.RewardSkill != 0)
+            {
+                int id = npcData.RewardSkill;
+                dataPlayer.GetPlayerData().AddSkill(id);
+            }
+            UI_NPCDialogManager.award = true;
+            dataDialog.award = true;
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -291,7 +315,6 @@ namespace ETLG
 
             playerButton.onClick.AddListener(() =>
             {
-                Debug.Log("点击again");
                 UI_NPCDialogManager.reset();
                 removePlayerResponseInput();
                 removeConversations();
@@ -300,11 +323,11 @@ namespace ETLG
             });
 
             //选项文本加载
-            TextMeshProUGUI buttonText = playerButton.GetComponentInChildren<TextMeshProUGUI>();
+            Text buttonText = playerButton.GetComponentInChildren<Text>();
             buttonText.text = "Start Again";
         }
 
- 
+
 
         private void showText()
         {
@@ -330,7 +353,7 @@ namespace ETLG
                 });
 
                 //选项文本加载
-                TextMeshProUGUI buttonText = playerButton.GetComponentInChildren<TextMeshProUGUI>();
+                Text buttonText = playerButton.GetComponentInChildren<Text>();
                 buttonText.text = button.buttonText;
             }
         }
@@ -482,9 +505,14 @@ namespace ETLG
             notShownImage.color = tempColor;
         }
 
-        private void getAward()
+        private void triggerAwardForm()
         {
-            UI_NPCDialogManager.award = true;
+            dataDialog.award = UI_NPCDialogManager.award;
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogRewardForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogRewardForm);
         }
 
         private void OnfontPlus()

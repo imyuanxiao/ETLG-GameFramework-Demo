@@ -55,7 +55,18 @@ namespace ETLG
             }
             texturePath = AssetUtility.GetArtifactIcon(Id.ToString());
 
-
+            RectTransform showNameRectTransform = ShowName.GetComponentInChildren<RectTransform>();
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
+            {
+                Vector2 newSizeDelta = new Vector2(150f, showNameRectTransform.sizeDelta.y);
+                showNameRectTransform.sizeDelta = newSizeDelta;
+            }
+            else
+            {
+                
+                Vector2 newSizeDelta = new Vector2(250f, showNameRectTransform.sizeDelta.y);
+                showNameRectTransform.sizeDelta = newSizeDelta;
+            }
             ShowName.text = ShowNameText;
             ShowNum.text = Num.ToString();
 

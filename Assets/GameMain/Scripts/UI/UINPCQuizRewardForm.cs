@@ -24,12 +24,14 @@ namespace ETLG
         public Canvas AttributeList;
 
         private DataQuiz dataQuizReport;
+        private DataNPC dataNPC;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             CloseButton.onClick.AddListener(OnCloseButtonClick);
             OKButton.onClick.AddListener(OnOKButtonClick);
             BattleButton.onClick.AddListener(OnBattleButtonClick);
+            dataNPC = GameEntry.Data.GetData<DataNPC>();
         }
 
         protected override void OnOpen(object userData)
@@ -37,7 +39,6 @@ namespace ETLG
             base.OnOpen(userData);
             dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
             Score.text = dataQuizReport.getAccuracyText();
-            //����û�л�ý�����Ȼ��չʾ��ͬ��
             setAward();
             DisplayBoostInfo();
         }
@@ -56,6 +57,7 @@ namespace ETLG
                 Score.color = UIHexColor.HexToColor("1BA784");
                 AwardHint.text = "Here are your award!\n" + "Take them now!";
                 AwardList.gameObject.SetActive(true);
+                ShowRewards();
                 DownArrow.gameObject.SetActive(false);
                 OKButton.GetComponentInChildren<Text>().text = "GET AWARDS";
             }
@@ -69,20 +71,55 @@ namespace ETLG
             }
         }
 
-        private void OnCloseButtonClick()
+        private void ShowRewards()
         {
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+            Transform AwardListTransfrom = AwardList.GetComponentInChildren<Transform>();
+            NPCData npcData = dataNPC.GetCurrentNPCData();
+
+            if (npcData.RewardArtifacts.Length > 1)
             {
-                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+                int[] rewardArtifacts = npcData.RewardArtifacts;
+                for (int i = 0; i < rewardArtifacts.Length; i += 2)
+                {
+                    int id = rewardArtifacts[i];
+                    int num = rewardArtifacts[i + 1];
+                    ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+                    {
+                        item.transform.SetParent(AwardListTransfrom, false);
+                        item.transform.localScale = Vector3.one;
+                        item.transform.eulerAngles = Vector3.zero;
+                        item.transform.localPosition = Vector3.zero;
+                        item.GetComponent<ItemRewardPreview>().SetRewardData(id, num, Constant.Type.REWARD_TYPE_ARTIFACT);
+                    });
+                }
+            }
+
+            if (npcData.RewardSkill != 0)
+            {
+                int id = npcData.RewardSkill;
+                ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
+                {
+                    item.transform.SetParent(AwardListTransfrom, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.zero;
+                    item.GetComponent<ItemRewardPreview>().SetRewardData(id, 1, Constant.Type.REWARD_TYPE_SKILL);
+                });
+            }
+        }
+
+            private void OnCloseButtonClick()
+        {
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
             }
         }
 
         private void OnOKButtonClick()
         {
-            Debug.Log(OKButton.GetComponentInChildren<Text>().text);
             if (OKButton.GetComponentInChildren<Text>().text == "GET AWARDS")
             {
-                //��ʾ��������
                 if (!dataQuizReport.award)
                 {
                     AwardHint.text = "Collect awards succesfully!";
@@ -95,22 +132,21 @@ namespace ETLG
                 }
                 OKButton.GetComponentInChildren<Text>().text = "TRY AGAIN";
             }
+            //try again
             else
             {
                 dataQuizReport.again = true;
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
                 {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
                 }
             }
         }
 
         private void OnBattleButtonClick()
         {
-            //׼ȷ�ʣ�0-100����ֵ
             int accuracy = int.Parse(dataQuizReport.accuracyText);
             Debug.Log(accuracy);
-            //����,��ȡnpc��ʲô����ķ�������û�������ôд��������ֱ����DataQuiz.cs�Ľű��У���dataQuizReport.domainд���ˣ������Ҫ���Ų��ԣ�ֱ��ȥDataQuiz��domain��ֵ
             
             string planetType = "";
             switch (dataQuizReport.domain)
@@ -134,7 +170,6 @@ namespace ETLG
                     planetType = "IoT";
                     break;
             }
-            //�Ƿ�bossս
             Debug.Log("Is Boss Fight ? " + dataQuizReport.boss);
             if (dataQuizReport.boss)
             {

@@ -119,8 +119,8 @@ namespace ETLG
                 getAward();
                 dataQuizReport.clickGetButton = false;
             }
-            dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id,UIQuizManager);
-            
+            dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
+
         }
 
         private void updateProgress()
@@ -167,26 +167,43 @@ namespace ETLG
         {
             if (!UIQuizManager.award)
             {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
-                {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
-                }
-                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT;
+                openErrorMessage();
                 return;
             }
-            else if (!dataQuizReport.report&& !UIQuizManager.award)
+            else if(!(UIQuizManager.award&& dataQuizReport.report))
             {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
-                {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
-                }
-                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT;
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
+                openErrorMessage();
                 return;
+            }
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizForm));
+            }
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
             }
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            return;
+        }
+
+        private void openRewardForm()
+        {
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
+            }
+        }
+
+        private void openErrorMessage()
+        {
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
         }
 
         private void loadAvatar()
@@ -277,7 +294,22 @@ namespace ETLG
         private void getAward()
         {
             UIQuizManager.award = true;
-            //真进来了吗
+
+            if (npcData.RewardArtifacts.Length > 1)
+            {
+                int[] rewardArtifacts = npcData.RewardArtifacts;
+                for (int i = 0; i < rewardArtifacts.Length; i += 2)
+                {
+                    int id = rewardArtifacts[i];
+                    int num = rewardArtifacts[i + 1];
+                    dataPlayer.GetPlayerData().AddArtifact(id, num);
+                }
+            }
+            if (npcData.RewardSkill != 0)
+            {
+                int id = npcData.RewardSkill;
+                dataPlayer.GetPlayerData().AddSkill(id);
+            }
         }
 
         private void OnSubmitButtonClick()
@@ -302,11 +334,11 @@ namespace ETLG
                 dataQuizReport.accuracyText = rate;
 
 
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
                 {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
                 }
-                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizRewardForm);
 
                 //奖励
                 dataQuizReport.report = true;

@@ -47,7 +47,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
-            GameEntry.Event.Subscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
+            //GameEntry.Event.Subscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
             GameEntry.Event.Subscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
@@ -91,14 +91,14 @@ namespace ETLG
             if (ne == null)
                 return;
 
-            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCRewardForm))
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
             {
-                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCRewardForm));
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
             }
 
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCRewardForm);
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizRewardForm);
             }
         }
 
