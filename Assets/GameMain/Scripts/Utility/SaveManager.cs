@@ -172,6 +172,30 @@ namespace ETLG
             return result;
         }
 
+        public int DownloadSave(Dictionary<string, string> jsonDataStr)
+        {
+            int saveId = 0;
+            foreach (var item in jsonDataStr)
+            {
+                saveId = int.Parse(item.Key.Substring(item.Key.Length-1, 1));
+                PlayerPrefs.SetString(item.Key, item.Value);
+            }
+            string difficulty = jsonDataStr["Difficulty_" + saveId.ToString()];
+
+            if (savedGamesInfo.savedGamesDic.ContainsKey(saveId))
+            {
+                savedGamesInfo.savedGamesDic[saveId] = DateTime.Now.ToLongTimeString() + " | " + GetDifficultyStr(int.Parse(difficulty));
+            }
+            else
+            {
+                savedGamesInfo.savedGamesDic.Add(saveId, DateTime.Now.ToLongTimeString() + " | " + GetDifficultyStr(int.Parse(difficulty)));
+            }
+
+            Save("SavedGamesInfo", savedGamesInfo);
+
+            return saveId;
+        }
+
         public void DeleteSave(int SaveId)
         {
             if (SaveId < 0 || SaveId > 4)

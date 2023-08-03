@@ -15,6 +15,7 @@ namespace ETLG
     {
         public GameObject createNewSaveButtonObj;
         public Button createNewSaveButton;
+        public Button downloadSaveButton;
         public Button cancelButton;
         public SaveSlot[] saveSlots;
 
@@ -24,6 +25,7 @@ namespace ETLG
 
             cancelButton.onClick.AddListener(OnCancelButtonClick);
             createNewSaveButton.onClick.AddListener(OnCreateNewSave);
+            downloadSaveButton.onClick.AddListener(OnDownloadButtonClicked);
 
             foreach (SaveSlot saveSlot in this.saveSlots)
             {
@@ -42,6 +44,33 @@ namespace ETLG
             Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
 
             
+        }
+
+        private void OnDownloadButtonClicked()
+        {
+            Debug.Log("Download Button CLicked");
+            Dictionary<string, string> jsonStrDic = new Dictionary<string, string>(); // get the save from backend
+            if (jsonStrDic == null || jsonStrDic.Count ==0) { return; }
+            
+            int saveId = SaveManager.Instance.DownloadSave(jsonStrDic);
+
+            SavedGamesInfo savedData = SaveManager.Instance.LoadObject<SavedGamesInfo>("SavedGamesInfo");
+            
+            this.saveSlots[saveId].isFilled = true;
+            this.saveSlots[saveId].saveName.text = "Save-" + saveId.ToString();
+            this.saveSlots[saveId].saveTime.text = savedData.savedGamesDic[saveId];
+            this.saveSlots[saveId].saveSlotObj.SetActive(true);
+
+            if (GameEntry.Procedure.CurrentProcedure is ProcedureMenu)
+            {
+                this.saveSlots[saveId].loadBtnObj.SetActive(true);
+                this.saveSlots[saveId].overwriteBtnObj.SetActive(false);
+            }
+            else
+            {
+                this.saveSlots[saveId].loadBtnObj.SetActive(false);
+                this.saveSlots[saveId].overwriteBtnObj.SetActive(true);
+            }
         }
 
         private void OnDeleteButtonClicked(int saveId)
