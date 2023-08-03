@@ -1262,7 +1262,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 24
     m_Alignment: 4
@@ -2103,6 +2103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExitButton: {fileID: 7697442110010691023}
   GetButton: {fileID: 7317204664975950971}
+  CloseButton: {fileID: 1848420692456484175}
   AwardHint: {fileID: 313522045310506722}
   AwardList: {fileID: 8550582536092833659}
 --- !u!222 &9210263160410275552

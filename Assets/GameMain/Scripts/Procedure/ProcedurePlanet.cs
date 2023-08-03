@@ -47,7 +47,6 @@ namespace ETLG
             GameEntry.Event.Subscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Subscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Subscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
-            //GameEntry.Event.Subscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
             GameEntry.Event.Subscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
             GameEntry.Event.Fire(this, PlanetInfoEventArgs.Create(GameEntry.Data.GetData<DataPlanet>().currentPlanetID));
 
@@ -246,7 +245,6 @@ namespace ETLG
             GameEntry.Event.Unsubscribe(ArtifactInfoTradeUIChangeEventArgs.EventId, OnArtifactInfoTradeUIChange);
             GameEntry.Event.Unsubscribe(AchievementPopUpEventArgs.EventId, OnAchievementPoPUp);
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
-            // GameEntry.Event.Unsubscribe(UIAlertTriggerEventArgs.EventId, OnAlertUITrigger);
             GameEntry.Event.Unsubscribe(ToProcedureMapEventArgs.EventId, OnToProcedureMap);
 
             MapManager.Instance.focusedPlanet.GetComponent<PlanetBase>().isFocused = false;

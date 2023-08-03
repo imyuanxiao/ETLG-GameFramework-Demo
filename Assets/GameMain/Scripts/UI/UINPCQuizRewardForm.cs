@@ -10,7 +10,7 @@ using UnityGameFramework.Runtime;
 
 namespace ETLG
 {
-    public class UINPCRewardForm : UGuiFormEx
+    public class UINPCQuizRewardForm : UGuiFormEx
     {
         public Button CloseButton;
         public Button OKButton;
