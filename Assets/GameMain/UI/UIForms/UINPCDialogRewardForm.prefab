@@ -2015,6 +2015,8 @@ GameObject:
   - component: {fileID: 8472472458041209909}
   - component: {fileID: -3033843147712121295}
   - component: {fileID: 2617264864817333523}
+  - component: {fileID: 9210263160410275552}
+  - component: {fileID: 5825397265621295419}
   m_Layer: 5
   m_Name: UINPCDialogRewardForm
   m_TagString: Untagged
@@ -2101,9 +2103,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExitButton: {fileID: 7697442110010691023}
   GetButton: {fileID: 7317204664975950971}
-  Score: {fileID: 0}
   AwardHint: {fileID: 313522045310506722}
   AwardList: {fileID: 8550582536092833659}
+--- !u!222 &9210263160410275552
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147204563429847656}
+  m_CullTransparentMesh: 1
+--- !u!114 &5825397265621295419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147204563429847656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.3882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &8343744675824120066
 GameObject:
   m_ObjectHideFlags: 0

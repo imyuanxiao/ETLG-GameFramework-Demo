@@ -18,8 +18,10 @@ namespace ETLG
         private DataNPC dataNPC;
 
         public RectTransform UIContainer;
-
-        public RectTransform RewardsContainer;
+        public GameObject ArtifactsTitle;
+        public RectTransform ArtifactsContainer;
+        public GameObject SkillTitle;
+        public RectTransform SkillsContainer;
 
         public bool refresh;
 
@@ -57,7 +59,7 @@ namespace ETLG
         public void showContent()
         {
             UIContainer.position = dataNPC.RewardUIPosition;
-            ShowRewards(RewardsContainer);
+            ShowRewards(ArtifactsContainer, SkillsContainer);
         }
 
 
@@ -68,15 +70,20 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
         }
 
-        private void ShowRewards(Transform RewardsContainer)
+        private void ShowRewards(RectTransform ArtifactsContainer, RectTransform SkillsContainer)
         {
 
             HideAllItem();
 
             NPCData npcData = dataNPC.GetCurrentNPCData();
 
-            if(npcData.RewardArtifacts.Length > 1)
+
+            ArtifactsTitle.SetActive(false);
+            SkillTitle.SetActive(false);
+
+            if (npcData.RewardArtifacts.Length > 1)
             {
+                ArtifactsTitle.SetActive(true);
                 int[] rewardArtifacts = npcData.RewardArtifacts;
                 for(int i = 0; i <  rewardArtifacts.Length; i+=2)
                 {
@@ -84,7 +91,7 @@ namespace ETLG
                     int num = rewardArtifacts[i+1];
                     ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
                     {
-                        item.transform.SetParent(RewardsContainer, false);
+                        item.transform.SetParent(ArtifactsContainer, false);
                         item.transform.localScale = Vector3.one;
                         item.transform.eulerAngles = Vector3.zero;
                         item.transform.localPosition = Vector3.zero;
@@ -95,10 +102,11 @@ namespace ETLG
 
             if (npcData.RewardSkill != 0)
             {
+                SkillTitle.SetActive(true);
                 int id = npcData.RewardSkill;
                 ShowItem<ItemRewardPreview>(EnumItem.ItemRewardPreview, (item) =>
                 {
-                    item.transform.SetParent(RewardsContainer, false);
+                    item.transform.SetParent(SkillsContainer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero;
