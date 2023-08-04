@@ -1,8 +1,9 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true" video="1">Introduction</statement>
-			<statement font="1" >In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
+			<statement font="2" isBold="true" color="FCFF1A">“The cloud” is not a cloud!</statement>
+			<statement font="1" >Learn about the IBM Cloud in this video.</statement>
+			<statement font="1" isBold="true" color="59E1FE" video="1">THE IBM CLOUD IS THE CLOUD FOR ENTERPRISE. YOURS.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
@@ -11,11 +12,21 @@
 
 	<node id="2">
 		<npc>
-			<statement isBold="true" video="2">Why it matters? </statement> 
-			<statement>Since the rise of the internet in the late 1990s, companies under increasing pressure to stay ahead of the curve. Social media, big data, artificial intelligence, and cloud computing are just a few of the technologies at the forefront of the digital revolution. To remain competitive, organizations must continually adapt and innovate in order to meet customer expectations.</statement> 
+			<statement isBold="true">As you learned in this video, “the cloud” isn’t a fog of water droplets; it’s a vast collection of data. Schools, businesses, healthcare facilities, and even governments are moving their information to the cloud to safely store it and make it accessible online.</statement> 
 		</npc>
 		<player>
-			<response nextnode="end">Thank you for your teaching.</response>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true">But here’s a question for you to think about ...</statement> 
+			<statement>But here’s a question for you to think about ...</statement>
+			<statement  video="2" image="1">Keep your best guess in mind as you continue reading. You’ll find the answer a couple of topics from now, and it might surprise you!</statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
 		</player>
 	</node>
 </dialogue>

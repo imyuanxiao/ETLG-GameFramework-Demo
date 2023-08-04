@@ -91,7 +91,6 @@ namespace ETLG
 
                 ShowItem<ItemRewardIcon>(EnumItem.ItemRewardIcon, (item) =>
                 {
-                    Debug.Log("reward‘⁄œ‘ æ¡À");
                     item.transform.SetParent(RewardIconContainer, false);
                     item.transform.localScale = Vector3.one;
                     item.transform.eulerAngles = Vector3.zero;

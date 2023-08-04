@@ -1,0 +1,77 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>What does the term “cloud” in “cloud computing” reference?</statement>
+    <analysis></analysis>
+    <options>
+      <option id="A">Hosted applications</option>
+      <option id="B">The Internet</option>
+      <option id="C">On-premises computing</option>
+      <option id="D">Servers and storage</option>
+    </options>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which is a cloud environment that is operated solely for a single organization?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Multicloud</option>
+      <option id="B">Private cloud</option>
+      <option id="C">Public cloud</option>
+      <option id="D">Hybrid cloud</option>
+    </options>
+    <analysis>Servers can be hosted and managed either by that organization or by a provider. It’s for applications that require tight control over where the data is being held.</analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  
+  <question type="MCS" timelimit="30">
+    <statement>Which cloud service model refers to the delivery of a computing platform that allows users to develop, run, and manage new web-based (cloud) applications?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Platform as a service (PaaS)</option>
+      <option id="B">Software as a service (SaaS)</option>
+      <option id="C">Storage as a service(SaaS)</option>
+      <option id="D">Infrastructure as a service (IaaS)</option>
+    </options>
+    <analysis>The platform provides the infrastructure, operating systems, storage, and much of the code for development teams.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+    
+  <question type="MCS" timelimit="30">
+    <statement>What is cloud computing?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">The delivery of shared computing services over the internet</option>
+      <option id="B">Database management software available through the use of virtual servers</option>
+      <option id="C">Any part ofa company's server infrastructure</option>
+      <option id="D">A region of the internet that is available for application development</option>
+    </options>
+    <analysis>“Cloud computing” means a type of internet-based computing.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+    <question type="MCS" timelimit="30">
+    <statement>Complete this sentence: The server is the fundamental unit of cloud computing; a server can be physical or __________.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">virtual</option>
+      <option id="B">partitioned</option>
+      <option id="C">distant</option>
+      <option id="D">remote</option>
+    </options>
+    <analysis>A server can be shared by dividing one physical server into a number of virtual servers by a process called virtualization.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+</quiz>

@@ -38,6 +38,9 @@ namespace ETLG
         public Slider AccuracySlider;
         public TextMeshProUGUI LeftQuestionsText;
         public TextMeshProUGUI AccuracyRate;
+        public TextMeshProUGUI Analysis;
+        public Canvas AnalysisContainer;
+        public VerticalLayoutGroup ContentVerticalLayoutGroup;
 
         private int currentQuizIndex = 0;
         private UIQuiz currentQuiz;
@@ -101,6 +104,7 @@ namespace ETLG
             if (UIQuizManager.TotalSubmitQuestions == UIQuizManager.totalQuestion)
             {
                 SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text = "REPORT";
+                SubmitButton.enabled = true;
             }
             else
             {
@@ -123,7 +127,7 @@ namespace ETLG
                 dataQuizReport.clickGetButton = false;
             }
             dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
-
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ContentverticalLayoutGroup.transform);
         }
 
         private void updateProgress()
@@ -243,7 +247,8 @@ namespace ETLG
             {
                 instantiateShownChoices();
             }
-
+            Analysis.text = currentQuiz.analysis;
+            AnalysisContainer.gameObject.SetActive(false);
         }
         private void instantiateChoicesPrefab(string type)
         {
@@ -318,12 +323,17 @@ namespace ETLG
 
         private void OnSubmitButtonClick()
         {
+            if (!string.IsNullOrWhiteSpace(currentQuiz.analysis))
+            {
+                AnalysisContainer.gameObject.SetActive(true);
+            }
             if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
             {
                 currentQuiz.testOnToggleMCM();
                 currentQuiz.haveSubmitted = true;
                 updateProgress();
                 updateAccuracy();
+                SubmitButton.enabled = false;
             }
             else
             {

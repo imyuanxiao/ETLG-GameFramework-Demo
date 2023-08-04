@@ -54,7 +54,12 @@ namespace ETLG.Data
         //Player dialog and quiz Data
         private Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
         private Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
-
+        //Chapter
+        private Dictionary<int, bool> ChaptersSaveData = new Dictionary<int, bool>();
+        //Courses
+        private Dictionary<int, float> CoursesSaveData = new Dictionary<int, float>();
+        //Domians
+        private Dictionary<int, float> DomiansSaveData = new Dictionary<int, float>();
         //Learning Path
         private DataLearningPath dataLearningPath { get; set; }
 

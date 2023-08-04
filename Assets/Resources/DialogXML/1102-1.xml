@@ -1,0 +1,91 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">How does it work?</statement>
+			<statement font="1" >Here’s the short answer: cloud computing stores and processes information over the Internet instead of on a computer's hard drive.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement>Why do this? Because by sharing offline computing resources rather than relying on local storage and computers, the cloud can accomplish two things:</statement> 
+			<statement>1.It can store and process much larger amounts of information a lot faster.&#xA;2.It can deliver results to any device that can log onto the Internet, not just one phone, tablet, computer, or set of local terminals.</statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement>You work with cloud services every day, whenever you access providers or services, such as Netflix, Dropbox, Microsoft Office Online, iTunes, the list goes on and on ....</statement> 
+			<statement>As long as a service doesn’t require you to be physically close to the storage hardware, it can deliver information to you from the cloud. Deposit a check through your phone? Upload a photo for your friends?  You’re in the cloud!</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement>Make no mistake. The data still gets stored in hardware. But that hardware might have left the building. It can take two forms:</statement> 
+			<statement>1.A physical server is a hard drive or memory bank devoted to one group of users or one type of data.&#xA;A virtual server is a single slice of that pie: a software-controlled region on a physical server whose other regions are shared by other users. Because that sharing divides one physical server into a number of virtual servers, it’s called virtualization.</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="2"  isBold="true">Cloud services take three forms:</statement> 
+			<statement image="2">We all know the terms public, private, and hybrid, but they have special meanings when applied to cloud services.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Public clouds share storage and computing space</statement> 
+			<statement>Public clouds are owned and operated by companies that offer their customers rapid access to affordable computing resources. This is the classic cloud computing model, in which small businesses and individuals like you can access a lot of computing power over the Internet. It’s easy to scale when users need more power or storage. Because many users are working inside one large bank of information but their data must be kept separate and secure, this kind of cloud is organized by what’s called multi-tenant architecture.</statement>
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement font="1" isBold="true">Private clouds protect a single entity’s information</statement> 
+			<statement>A private cloud is operated for a single organization. It can be hosted and managed either by that organization or by a provider, and its servers can reside either inside or outside the organization itself. Of course, this privacy also means that as a private cloud’s data expands, the organization has to install more and more private servers. Organizations prefer a private cloud if they need tight control over where their data is being held, how it is organized, and how it is protected. Private clouds can be very secure—but they are expensive!</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement font="1" isBold="true">Hybrid clouds divide their storage into private slices</statement> 
+			<statement>What if a business needs the low cost and scalability of a public cloud, but also needs a secure environment for product development or confidential data? These organizations wind up spreading their workloads across data centers, private clouds, and public clouds—thereby creating hybrid clouds.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement>A hybrid cloud mixes public and private resources. It’s a bit of this and a bit of that, with some data in a public cloud, and some in a private cloud, provided by multiple vendors who offer different levels of cloud usage. A hybrid cloud’s combination of physical and virtual servers allows organizations to rent what they need, on demand, helping them control costs while providing some flexibility.</statement> 
+			<statement image="3">IBM has long believed that most enterprises need a hybrid cloud. We have shown leadership in helping clients on their cloud journey, no matter their starting point: private cloud, public cloud, or various kinds of hybrid connections between them.</statement>
+		</npc>
+		<player>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+</dialogue>

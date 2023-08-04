@@ -75,9 +75,6 @@
             public const int SKILL_ICON_SELECT_SPACESHIP = 2;
             public const int SKILL_SKILL_TREE_MAP = 3;
 
-
-
-
             // attributes
 
             public const float ATTR_MAX_VALUE = 500;

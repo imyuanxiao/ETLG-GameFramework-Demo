@@ -30,7 +30,7 @@ namespace ETLG.Data
             this.node = node;
             this.type = node.Attributes["type"].Value;
             //this.hint = node.SelectSingleNode("hint").InnerText;
-            //this.analysis = node.SelectSingleNode("analysis").InnerText;
+            this.analysis = node.SelectSingleNode("analysis").InnerText;
             this.statement = node.SelectSingleNode("statement").InnerText;
             //this.questionTime = int.Parse(node.Attributes["timelimit"].Value);
             getRightAnswers();

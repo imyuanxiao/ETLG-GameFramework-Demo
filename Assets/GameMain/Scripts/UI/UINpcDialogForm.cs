@@ -89,7 +89,6 @@ namespace ETLG
             UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
             if (tempDialogManager == null)
             {
-
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
                 UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
@@ -114,6 +113,7 @@ namespace ETLG
                     showText();
                 }
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
+
             }
             else if (UI_NPCDialogManager.nextNodeID == "end" && UI_NPCDialogManager.isNext)
             {
@@ -509,8 +509,9 @@ namespace ETLG
             videoPlayer.Play();
             //全局，待改进
             bool isPause = false;
-            playButton.onClick.AddListener(()=>{
-                
+            playButton.onClick.AddListener(() =>
+            {
+
                 if (isPause)
                 {
                     videoPlayer.Play();
