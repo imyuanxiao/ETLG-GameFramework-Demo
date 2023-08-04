@@ -47,7 +47,7 @@ namespace ETLG
             landingpoint_title.text = dataLandingPoint.GetLandingPointData(landingPointID).Title;
 
             exploreButton.onClick.AddListener(OnExploreButtonClick);
-           // combatButton.onClick.AddListener(OnCombatButtonClick);
+            // combatButton.onClick.AddListener(OnCombatButtonClick);
 
             // need to get study progress
             float percentage = 33.45f;

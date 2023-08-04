@@ -21,7 +21,7 @@ namespace ETLG.Data
 
         // keyword
         public string keyword { get; set; }
-        //public bool expandAll { get; set; }
+        public bool expandAll { get; set; }
 
         protected override void OnInit()
         {

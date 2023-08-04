@@ -20,21 +20,21 @@ namespace ETLG
         public RectTransform UIContainer;
 
         public Button playerMenuButton;
+        public Button expandAllButton;
+        public RawImage expandButtonIcon;
 
-        //public InputField searchField;
         public TMP_InputField tmpInputField;
-       // public TextMeshProUGUI displayText;
 
-       private bool refreshPlanetsContainer;
+        private bool refreshPlanetsContainer;
 
         private bool refresh;
-       // private bool expandedAll;
 
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
+            expandAllButton.onClick.AddListener(OnExpandAllButtonClick);
             tmpInputField.onEndEdit.AddListener(OnInputEndEdit);
         }
 
@@ -42,6 +42,24 @@ namespace ETLG
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
+        } 
+        
+        private void OnExpandAllButtonClick()
+        {
+
+
+            GameEntry.Data.GetData<DataPlanet>().expandAll = !GameEntry.Data.GetData<DataPlanet>().expandAll;
+
+            if (GameEntry.Data.GetData<DataPlanet>().expandAll)
+            {
+                SetArrowIcon(Constant.Type.ARROW_DOWN);
+            }
+            else
+            {
+                SetArrowIcon(Constant.Type.ARROW_RIGHT);
+            }
+
+            this.refresh = true;
         }
 
 
@@ -140,7 +158,7 @@ namespace ETLG
             PlanetExpandedEventArgs ne = (PlanetExpandedEventArgs)e;
             if (ne == null)
                 return;
-            //refresh = true;
+           // refresh = true;
             refreshPlanetsContainer = true;
         }
 
@@ -148,15 +166,17 @@ namespace ETLG
         {
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                // displayText.text = "You entered: " + inputText;
-                //Log.Debug(inputText);
                 GameEntry.Data.GetData<DataPlanet>().keyword = inputText;
-                //GameEntry.Data.GetData<DataPlanet>().expandAll = true;
-
+                GameEntry.Data.GetData<DataPlanet>().expandAll = true;
                 refresh = true;
-                //refreshPlanetsContainer = true;
-                //expandedAll = true;
             }
+        }
+
+        private void SetArrowIcon(int Type)
+        {
+            string texturePath = AssetUtility.GetArrowImg(Type);
+            Texture texture = Resources.Load<Texture>(texturePath);
+            expandButtonIcon.texture = texture;
         }
 
     }
