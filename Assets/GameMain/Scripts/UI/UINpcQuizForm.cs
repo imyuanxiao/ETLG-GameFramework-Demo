@@ -55,6 +55,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Sound.StopMusic();
 
             UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
@@ -162,6 +163,7 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             base.OnClose(isShutdown, userData);
         }
 
@@ -187,8 +189,6 @@ namespace ETLG
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
             }
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            return;
         }
 
         private void openRewardForm()
@@ -296,7 +296,7 @@ namespace ETLG
         private void getAward()
         {
             UIQuizManager.award = true;
-
+            GameEntry.Sound.PlaySound(EnumSound.ui_Award);
             if (npcData.RewardArtifacts.Length > 1)
             {
                 int[] rewardArtifacts = npcData.RewardArtifacts;

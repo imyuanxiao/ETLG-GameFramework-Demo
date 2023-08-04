@@ -32,7 +32,7 @@ namespace ETLG
         {
             base.OnOpen(userData);
             base.OnOpen(userData);
-
+            GameEntry.Sound.PlaySound(EnumSound.ui_Alert);
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             alertType = dataAlert.AlertType;
             //if is NPC error

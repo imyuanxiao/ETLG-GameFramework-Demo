@@ -69,11 +69,13 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Sound.StopMusic();
+
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataDialog = GameEntry.Data.GetData<DataDialog>();
-            dataLearningProgress= GameEntry.Data.GetData<DataLearningProgress>();
+            dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
             dataDialog.reset();
             dataDialog.report = false;
             npc_name.text = npcData.Name;
@@ -87,7 +89,7 @@ namespace ETLG
             UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
             if (tempDialogManager == null)
             {
-                
+
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
                 UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
@@ -154,6 +156,7 @@ namespace ETLG
 
         private void getAward()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_Award);
             if (npcData.RewardArtifacts.Length > 1)
             {
                 int[] rewardArtifacts = npcData.RewardArtifacts;
@@ -173,11 +176,12 @@ namespace ETLG
             dataDialog.award = true;
             dataLearningProgress.update = true;
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
-            
+
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             base.OnClose(isShutdown, userData);
         }
 
@@ -209,7 +213,7 @@ namespace ETLG
                     }
                 }
             }
-            GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
@@ -485,6 +489,7 @@ namespace ETLG
         {
             Canvas videoModule = Instantiate(VideoContainerPrefab, contentContainer);
             VideoPlayer videoPlayer = videoModule.GetComponentInChildren<VideoPlayer>();
+            Button playButton = videoModule.GetComponentInChildren<Button>();
             if (videoPlayer != null)
             {
                 Debug.Log(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath);
@@ -502,6 +507,21 @@ namespace ETLG
             rawImage.texture = renderTexture;
             videoPlayer.targetTexture = renderTexture;
             videoPlayer.Play();
+            //全局，待改进
+            bool isPause = false;
+            playButton.onClick.AddListener(()=>{
+                
+                if (isPause)
+                {
+                    videoPlayer.Play();
+                    isPause = false;
+                }
+                else
+                {
+                    videoPlayer.Pause();
+                    isPause = true;
+                }
+            });
             return videoModule;
         }
 

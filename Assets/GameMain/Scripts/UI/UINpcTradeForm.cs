@@ -58,7 +58,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            GameEntry.Sound.StopMusic();
             loadData();
             refresh = true;
         }
@@ -211,6 +211,7 @@ namespace ETLG
 
         private void tradeArtifact()
         {
+            GameEntry.Sound.PlaySound(EnumSound.ui_Trade);
             if (receivedType == Constant.Type.TRADE_NPC_PLAYER)
             {
                 if (!testArtifactExist(playerArtifacts, receivedArtifactID, Constant.Type.ADD))

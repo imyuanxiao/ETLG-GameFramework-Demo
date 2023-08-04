@@ -68,12 +68,12 @@ namespace ETLG.Data
         {
             get { return rightAnswers; }
         }
-       
+
         public SortedDictionary<string, string> Options
         {
             get { return options; }
         }
-        
+
         public SortedDictionary<string, Canvas> OptionsCanvas
         {
             get { return optionsCanvas; }
@@ -116,6 +116,11 @@ namespace ETLG.Data
             if (wrongAnswers.Count == 0 && selectAnswers.Count == rightAnswers.Count)
             {
                 isCorrect = true;
+                GameEntry.Sound.PlaySound(EnumSound.ui_quiz_correct);
+            }
+            else
+            {
+                GameEntry.Sound.PlaySound(EnumSound.ui_quiz_wrong);
             }
         }
 
