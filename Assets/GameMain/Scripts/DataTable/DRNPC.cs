@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-03 04:18:24.779
+// 生成时间：2023-08-04 00:12:08.916
 //------------------------------------------------------------
 
 using GameFramework;
@@ -118,18 +118,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取对话文本路径。
+        /// 获取对话文本id。
         /// </summary>
-        public string DialogXML
+        public int DialogXML
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取题库路径。
+        /// 获取题库文本id。
         /// </summary>
-        public string QuizXML
+        public int QuizXML
         {
             get;
             private set;
@@ -155,8 +155,8 @@ namespace ETLG
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
                 RewardArtifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             RewardSkill = int.Parse(columnStrings[index++]);
-            DialogXML = columnStrings[index++];
-            QuizXML = columnStrings[index++];
+            DialogXML = int.Parse(columnStrings[index++]);
+            QuizXML = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -178,8 +178,8 @@ namespace ETLG
                         Artifacts = binaryReader.ReadInt32Array();
                         RewardArtifacts = binaryReader.ReadInt32Array();
                     RewardSkill = binaryReader.Read7BitEncodedInt32();
-                    DialogXML = binaryReader.ReadString();
-                    QuizXML = binaryReader.ReadString();
+                    DialogXML = binaryReader.Read7BitEncodedInt32();
+                    QuizXML = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

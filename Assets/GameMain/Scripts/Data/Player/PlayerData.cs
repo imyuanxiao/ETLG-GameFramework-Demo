@@ -51,8 +51,12 @@ namespace ETLG.Data
         public int battleVictoryCount;
         public Dictionary<int, float> bossDefeatTime;
 
-        public Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
-        public Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
+        //Player dialog and quiz Data
+        private Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
+        private Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
+
+        //Learning Path
+        private DataLearningPath dataLearningPath { get; set; }
 
         public PlayerData(SpaceshipData spaceshipData)
         {
@@ -64,6 +68,7 @@ namespace ETLG.Data
             dataSkill = GameEntry.Data.GetData<DataSkill>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
+            dataLearningPath = GameEntry.Data.GetData<DataLearningPath>();
 
             playerArtifacts = new Dictionary<int, int>(); // id + number
             playerModules = new List<int>(); // 

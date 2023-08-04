@@ -85,7 +85,8 @@ namespace ETLG
             UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
             if (tempDialogManager == null)
             {
-                XMLPath = npcData.DialogXML;
+                
+                XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
                 UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }

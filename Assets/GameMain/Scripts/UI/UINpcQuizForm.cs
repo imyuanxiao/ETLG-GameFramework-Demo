@@ -72,7 +72,7 @@ namespace ETLG
             UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
             if (tempUIQuizManager == null)
             {
-                XMLPath = npcData.QuizXML;
+                XMLPath = AssetUtility.GetQuizXML(npcData.Id.ToString());
                 UIQuizManager = new UIQuizManager(XMLPath);
                 dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
             }

@@ -27,7 +27,6 @@ namespace ETLG.Data
         protected override void OnPreload()
         {
             LoadDataTable("NPC");
-
         }
 
         protected override void OnLoad()

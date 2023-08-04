@@ -14,28 +14,35 @@ namespace ETLG
     {
 
         public TextMeshProUGUI Description = null;
-
         public RectTransform PlanetsContainer;
-
         public Button playerMenuButton;
-
-
+        public Text Domian;
+        public Text Course;
+        public Text Chapter;
+        public Button GOButton;
+        public RawImage defaultTitle;
+        public Canvas defaultLearningPath;
+        public RectTransform RewardIconContainer;
+        public RawImage TalkIcon;
+        public RawImage QuizIcon;
 
         private bool refreshPlanetsContainer;
+        private DataLearningPath dataLearningPath;
+        private LearningPath recommendLearningPath;
 
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
-
+            GOButton.onClick.AddListener(OnGoButtonClick);
+            dataLearningPath = GameEntry.Data.GetData<DataLearningPath>();
         }
 
         private void OnPlayerMenuButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.PlayerMenu")));
-
         }
 
 
@@ -47,8 +54,6 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(PlanetExpandedEventArgs.EventId, OnPlanetExpanded);
 
-            ShowPlanets();
-
             if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
@@ -56,6 +61,40 @@ namespace ETLG
 
             // tutorial in spaceship menu
             GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(2);
+            recommendLearningPath = dataLearningPath.getCurrentPath();
+            
+        }
+
+        private void setDefaultLearningPath()
+        {
+            if (recommendLearningPath == null)
+            {
+                defaultTitle.gameObject.SetActive(false);
+                defaultLearningPath.gameObject.SetActive(false);
+            }
+            else
+            {
+                Domian.text = dataLearningPath.getCurrentPath().getCurrentDomian();
+                Course.text = dataLearningPath.getCurrentPath().getCurrentCourse();
+                Chapter.text = dataLearningPath.getCurrentPath().getCurrentChapter();
+
+                ShowItem<ItemRewardIcon>(EnumItem.ItemRewardIcon, (item) =>
+                {
+                    item.transform.SetParent(RewardIconContainer, false);
+                    item.transform.localScale = Vector3.one;
+                    item.transform.eulerAngles = Vector3.zero;
+                    item.transform.localPosition = Vector3.one;
+                    item.GetComponent<ItemRewardIcon>().SetData(dataLearningPath.getCurrentPath().NPCId);
+                });
+                if (dataLearningPath.getCurrentPath().getCurrentType() == "Teacher")
+                {
+                    QuizIcon.gameObject.SetActive(false);
+                }
+                else
+                {
+                    TalkIcon.gameObject.SetActive(false);
+                }
+            }
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -69,9 +108,8 @@ namespace ETLG
                 LayoutRebuilder.ForceRebuildLayoutImmediate(PlanetsContainer);
                 refreshPlanetsContainer = false;
             }
-
-
-
+            setDefaultLearningPath();
+            ShowPlanets();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -83,7 +121,7 @@ namespace ETLG
 
         private void ShowPlanets()
         {
-
+            HideAllItem();
             int[] PlanetIDs = GameEntry.Data.GetData<DataPlanet>().GetAllPlanetIDs();
 
             foreach (var PlanetID in PlanetIDs)
@@ -105,8 +143,28 @@ namespace ETLG
                 return;
 
             refreshPlanetsContainer = true;
+        }
 
-
+        private void OnGoButtonClick()
+        {
+            GameEntry.Data.GetData<DataNPC>().currentNPCId = dataLearningPath.getCurrentPath().NPCId;
+            if (dataLearningPath.getCurrentPath().getCurrentType() == "Teacher")
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
+                }
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCDialogForm);
+            }
+            else
+            {
+                if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizForm))
+                {
+                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizForm));
+                }
+                GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizForm);
+            }
+            
         }
 
 

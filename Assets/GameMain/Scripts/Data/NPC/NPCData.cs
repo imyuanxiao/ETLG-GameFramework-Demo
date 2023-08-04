@@ -54,7 +54,7 @@ namespace ETLG.Data
                     case Constant.Type.NPC_TYPE_TEACHER:
                         return "Teacher";
                     case Constant.Type.NPC_TYPE_EXAMINER:
-                        return "Teacher";
+                        return "Examiner";
                     default:
                         return "Others";
 
@@ -95,35 +95,37 @@ namespace ETLG.Data
             }
         }
 
-        public bool NoDialogXML
+        //public bool NoDialogXML
+        //{
+        //    get
+        //    {
+        //        return Constant.Type.NULL.Equals(dRNPC.DialogXML);
+        //    }
+        //}
+
+        public int DialogXML
         {
             get
             {
-                return Constant.Type.NULL.Equals(dRNPC.DialogXML);
+                return dRNPC.DialogXML;
+                //return AssetUtility.GetDialogXML(dRNPC.DialogXML);
             }
         }
 
-        public string DialogXML
-        {
-            get
-            {
-                return AssetUtility.GetDialogXML(dRNPC.DialogXML);
-            }
-        }
+        //public bool NoQuizXML
+        //{
+        //    get
+        //    {
+        //        return Constant.Type.NULL.Equals(dRNPC.QuizXML);
+        //    }
+        //}
 
-        public bool NoQuizXML
+        public int QuizXML
         {
             get
             {
-                return Constant.Type.NULL.Equals(dRNPC.QuizXML);
-            }
-        }
-
-        public string QuizXML
-        {
-            get
-            {
-                return AssetUtility.GetQuizXML(dRNPC.QuizXML);
+                return dRNPC.QuizXML;
+                //return AssetUtility.GetQuizXML(dRNPC.QuizXML);
             }
         }
 
