@@ -21,12 +21,17 @@ namespace ETLG
         public TextMeshProUGUI boss_5 = null;
         public TextMeshProUGUI boss_6 = null;
         public TextMeshProUGUI boss_7 = null;
+        public TextMeshProUGUI placeholder_name;
         public Button editNameButton;
         public Button editAvatarButton;
-        public Button editsPwdButton;
+        public Button editPwdButton;
         public Button showPwdButton;
         public Button avatarCancelButton;
         public Button avatarSubmitButton;
+        public Button nameCancelButton;
+        public Button nameSubmitButton;
+        public Button pwdCancelButton;
+        public Button pwdSubmitButton;
         public Button avatar1;
         public Button avatar2;
         public Button avatar3;
@@ -40,17 +45,22 @@ namespace ETLG
         private int selectedId;
         private Color normalColor;
         private Color selectedColor;
+        private string origionalName;
         public GameObject confirmPassword;
         public GameObject avatarChange;
         public GameObject editNameButtons;
         public GameObject editPwdButtons;
+        public GameObject editNameButtonObj;
+        public GameObject editPwdButtonObj;
         public GameObject playerInfo;
 
         public RawImage playerImage;
 
         private float shakeAmount = 5f;
         private float shakeDuration = 0.5f;
+        //nameReminder position
         private Vector3 originalPosition1;
+        //pwd reminder position
         private Vector3 originalPosition2;
 
         private DataPlayer dataPlayer;
@@ -73,6 +83,11 @@ namespace ETLG
             editAvatarButton.onClick.AddListener(OneEditAvatarButtonClick);
             avatarCancelButton.onClick.AddListener(OnAvatarCancelButtonClick);
             avatarSubmitButton.onClick.AddListener(OnAvatarSubmitButtonClick);
+            nameCancelButton.onClick.AddListener(OnNameCancelButtonClick);
+            nameSubmitButton.onClick.AddListener(OnNameSubmitButtonClick);
+            editPwdButton.onClick.AddListener(OnEditPwdButtonClick);
+            pwdCancelButton.onClick.AddListener(OnPwdCancelButtonClick);
+            pwdSubmitButton.onClick.AddListener(OnPwdSubmitButtonClick);
             avatar1.onClick.AddListener(OnAvatar1ButtonClick);
             avatar2.onClick.AddListener(OnAvatar2ButtonClick);
             avatar3.onClick.AddListener(OnAvatar3ButtonClick);
@@ -88,10 +103,13 @@ namespace ETLG
         {
             base.OnOpen(userData);
             Log.Debug("Open profile form");
-
+            //GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
             PwdReminder.text = null;
             NameReminder.text = null;
+
+            //placeholder_name.text = 
+
             if(BackendDataManager.Instance.avatorId!=0)
             {
                 playerAvatarId = BackendDataManager.Instance.avatorId;
@@ -134,12 +152,72 @@ namespace ETLG
 
         private void OnEditNameButtonClick()
         {
-
+            userName.interactable = true;
+            origionalName = placeholder_name.text;
+            SetTextMessage(placeholder_name, "Please Enter User Name");
+            placeholder_name.fontStyle = FontStyles.Bold | FontStyles.Italic;
+            editNameButtonObj.SetActive(false);
+            editNameButtons.SetActive(true);
+        }
+        private void OnNameCancelButtonClick()
+        {
+            NameReminder.text = null;
+            userName.interactable = false;
+            placeholder_name.text = origionalName;
+            placeholder_name.fontStyle = FontStyles.Bold;
+            editNameButtonObj.SetActive(true);
+            editNameButtons.SetActive(false);
+        }
+        private void OnNameSubmitButtonClick()
+        {
+            NameReminder.text = null;
+            userName.interactable = false;
+            placeholder_name.fontStyle = FontStyles.Bold;
+            editNameButtonObj.SetActive(true);
+            editNameButtons.SetActive(false);
+            //if it is unique
+            placeholder_name.text = userName.text;
+            //else
+            //SetTextMessage(NameReminder, "Name exists");
+           // ShakeText(NameReminder, originalPosition1);
         }
         private void OneEditAvatarButtonClick()
         {
             playerInfo.SetActive(false);
             avatarChange.SetActive(true);
+        }
+        private void OnEditPwdButtonClick()
+        {
+            pwd.interactable = true;
+            editPwdButtonObj.SetActive(false);
+            editPwdButtons.SetActive(true);
+            confirmPassword.SetActive(true);
+        }
+        private void OnPwdCancelButtonClick()
+        {
+            PwdReminder.text = null;
+            pwd.interactable = false;
+            editPwdButtonObj.SetActive(true);
+            editPwdButtons.SetActive(false);
+            confirmPassword.SetActive(false);
+        }
+        private void OnPwdSubmitButtonClick()
+        {
+            PwdReminder.text = null;
+            //&& != last passward && is valid
+            if(pwd.text == confirmPwd.text)
+            {
+                pwd.interactable = false;
+                editPwdButtonObj.SetActive(true);
+                editPwdButtons.SetActive(false);
+                confirmPassword.SetActive(false);
+            }
+            else
+            {
+                SetTextMessage(NameReminder, "Name exists");
+                ShakeText(PwdReminder, originalPosition2);
+            }
+            
         }
         private void OnReturnButtonClick()
         {
@@ -160,22 +238,22 @@ namespace ETLG
         }
         private void OnAvatar3ButtonClick()
         {
-            selectedId = 1003;
+            selectedId = 1002;
             SetSelectedButtonandColor(avatar3);
         }
         private void OnAvatar4ButtonClick()
         {
-            selectedId = 1004;
+            selectedId = 1003;
             SetSelectedButtonandColor(avatar4);
         }
         private void OnAvatar5ButtonClick()
         {
-            selectedId = 1005;
+            selectedId = 1004;
             SetSelectedButtonandColor(avatar5);
         }
         private void OnAvatar6ButtonClick()
         {
-            selectedId = 1006;
+            selectedId = 1005;
             SetSelectedButtonandColor(avatar6);
         }
         private void OnAvatarCancelButtonClick()
@@ -205,6 +283,10 @@ namespace ETLG
             {
                 text.text = ConvertFloatToTimeString( bossDefeatTime[bossId]);
             }
+        }
+        private void SetTextMessage(TextMeshProUGUI text, string message)
+        {
+            text.text = message;
         }
         private void SetSelectedButtonandColor(Button button)
         {

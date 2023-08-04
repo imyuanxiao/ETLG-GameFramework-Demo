@@ -48,7 +48,7 @@ namespace ETLG
             Log.Debug("Open Achievement");
             // open navigationform UI
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
-            GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+            
             showContent();
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
