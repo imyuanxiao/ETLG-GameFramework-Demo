@@ -19,6 +19,10 @@ namespace ETLG.Data
         // 目前调用的星球ID
         public int currentPlanetID;
 
+        // keyword
+        public string keyword { get; set; }
+        public bool expandAll { get; set; }
+
         protected override void OnInit()
         {
 

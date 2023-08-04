@@ -84,6 +84,8 @@ namespace ETLG
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
             entityLoader.HideEntity(bossEnemyEntity);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount++;
+            // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[6] = timeUsed;
+            SetBossDefeatTime(6, timeUsed);
             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6002, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount));
         }
 
@@ -205,6 +207,15 @@ namespace ETLG
             data.Firepower = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firepower.ToString());
             data.FireRate = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firerate.ToString());
             data.Shields = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Shields.ToString());
+        }
+
+        private void SetBossDefeatTime(int id, float timeUsed)
+        {
+            float currentTime = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[id];
+            if (currentTime < 0 || currentTime > timeUsed)
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[id] = timeUsed;
+            }
         }
     }
 }

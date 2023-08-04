@@ -28,7 +28,8 @@ namespace ETLG
         public TextMeshProUGUI planet_percentage = null;
 
         public GameObject planet_valueBar = null;
-        
+
+        public RectTransform UIContainer;
         public RectTransform LandingPointsContainer;
 
         private DataPlanet dataPlanet;
@@ -39,18 +40,40 @@ namespace ETLG
 
         private readonly float valueBarMaxWidth = 440f;
 
+        private bool refresh;
 
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
+            refresh = false;
             dataPlanet = GameEntry.Data.GetData<DataPlanet>();
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (refresh)
+            {
+                showContent();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+                GameEntry.Event.Fire(this, PlanetExpandedEventArgs.Create());
+                refresh = false;
+            }
+        }
 
+        private void showContent()
+        {
+            HideAllItem();
+            if (!Expanded)
+            {
+                SetArrowIcon(Constant.Type.ARROW_DOWN);
+                ShowLandingPoints(this.PlanetID);
+            }
+            else
+            {
+                SetArrowIcon(Constant.Type.ARROW_RIGHT);
+            }
+            Expanded = !Expanded;
         }
 
         public void SetData(int PlanetID)
@@ -69,9 +92,18 @@ namespace ETLG
 
             planet_percentage.text = (int)percentage + "%";
 
-            SetWidth(planet_valueBar, percentage/100);
+            SetWidth(planet_valueBar, percentage / 100);
 
-            SetArrowIcon(Constant.Type.ARROW_RIGHT);
+            this.Expanded = !dataPlanet.expandAll;
+            this.refresh = true;
+
+            string keyword = dataPlanet.keyword;
+            if (keyword != null && !keyword.Equals(""))
+            {
+                this.refresh = true;
+                this.Expanded = false;
+            }
+
         }
 
         protected override void OnHide(bool isShutdown, object userData)
@@ -124,19 +156,11 @@ namespace ETLG
 
         public void OnExpandButtonClick()
         {
-            if (!Expanded)
-            {
-                GameEntry.Data.GetData<DataPlanet>().currentPlanetID = PlanetID;
-                SetArrowIcon(Constant.Type.ARROW_DOWN);
-                ShowLandingPoints();
-            }
-            else
-            {
-                SetArrowIcon(Constant.Type.ARROW_RIGHT);
-                HideAllItem();
-            }
-            Expanded = !Expanded;
-            GameEntry.Event.Fire(this, PlanetExpandedEventArgs.Create());
+            //GameEntry.Data.GetData<DataPlanet>().currentPlanetID = PlanetID;
+            
+           // Expanded = !Expanded;
+            this.refresh = true;
+
 
         }
 
@@ -147,13 +171,24 @@ namespace ETLG
             expandButtonIcon.texture = texture;
         }
 
-        private void ShowLandingPoints()
+        private void ShowLandingPoints(int PlanetID)
         {
+            DataPlanet dataPlanet = GameEntry.Data.GetData<DataPlanet>();
 
-            int[] LandingPoints = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData().LandingPoints;
+            int[] LandingPoints = dataPlanet.GetPlanetData(PlanetID).LandingPoints;
+
+            string keyword = dataPlanet.keyword;
 
             foreach (var LandingPoint in LandingPoints)
             {
+                if (keyword != null && !keyword.Equals(""))
+                {
+                    string title =  GameEntry.Data.GetData<DataLandingPoint>().GetLandingPointData(LandingPoint).Title;
+                    if (!title.Contains(keyword))
+                    {
+                        continue;
+                    }
+                }
                 ShowItem<ItemLandingPointSelect>(EnumItem.ItemLandingPointSelect, (item) =>
                 {
                     item.transform.SetParent(LandingPointsContainer, false);
