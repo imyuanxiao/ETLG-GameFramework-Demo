@@ -120,32 +120,32 @@ namespace ETLG
                 case "CloudComputing":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EdgeComputing, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_CloudComputing, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.CloudComputingBoss] = timeUsed;
+                    SetBossDefeatTime(0, timeUsed);
                     break;
                 case "CyberSecurity":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.ElectronicWarfare, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_Cybersecurity, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.CybersecurityBoss] = timeUsed;
+                    SetBossDefeatTime(1, timeUsed);
                     break;
                 case "DataScience":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.EnergyBoost, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_DataScience, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.DataScienceBoss] = timeUsed;
+                    SetBossDefeatTime(2, timeUsed);
                     break;
                 case "AI":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.AdaptiveIntelligentDefense, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_AI, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.ArtificialIntelligenceBoss] = timeUsed;
+                    SetBossDefeatTime(3, timeUsed);
                     break;
                 case "Blockchain":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.BlockchainResurgence, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_Blockchain, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.BlockchainBoss] = timeUsed;
+                    SetBossDefeatTime(4, timeUsed);
                     break;
                 case "IoT":
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int) EnumSkill.MedicalSupport, 0);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact((int) EnumArtifact.KnowledgeFragments_IoT, 1);
-                    GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[(int) EnumEntity.InternetofThingsBoss] = timeUsed;
+                    SetBossDefeatTime(5, timeUsed);
                     break;
                 default:
                     break;
@@ -311,6 +311,15 @@ namespace ETLG
             data.Firepower = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firepower.ToString());
             data.FireRate = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Firerate.ToString());
             data.Shields = (float) this.procedureOwner.GetData<VarDouble>(Constant.Type.ATTR_Shields.ToString());
+        }
+
+        private void SetBossDefeatTime(int id, float timeUsed)
+        {
+            float currentTime = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[id];
+            if (currentTime < 0 || currentTime > timeUsed)
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[id] = timeUsed;
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace ETLG.Data
         private DataAchievement dataAchievement { get; set; }
 
         public int battleVictoryCount;
-        public Dictionary<int, float> bossDefeatTime;
+        public float[] bossDefeatTime;
 
         public Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
         public Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
@@ -80,8 +80,8 @@ namespace ETLG.Data
             // player can only equip 6 module, 0-weapon, 1-attack, 2-defense, 3-powerdrive, 4- support, 6-support
             equippedModules = new int[6];
 
-            bossDefeatTime = new Dictionary<int, float>();
-            initBossDefeatTime();
+            // 0-cloud computing, 1-CyberSecurity, 2-Data science, 3-AI, 4-blockchain, 5-IoT, 6-final boss
+            bossDefeatTime = new float[7]{-1f,-1f,-1f,-1f,-1f,-1f,-1f};
 
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
@@ -116,16 +116,6 @@ namespace ETLG.Data
             }
         }
 
-        private void initBossDefeatTime()
-        {
-            this.bossDefeatTime.Add((int)EnumEntity.CloudComputingBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.ArtificialIntelligenceBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.BlockchainBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.InternetofThingsBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.DataScienceBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.CybersecurityBoss, -1);
-            this.bossDefeatTime.Add((int)EnumEntity.FinalBoss, -1);
-        }
 
         // Call this method everytime skills change or initialSpaceship changes
         public void UpdateAttributeByType(int AttrType, float Change)

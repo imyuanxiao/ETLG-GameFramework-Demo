@@ -80,7 +80,7 @@ namespace ETLG
             LoadEquippedModules("EquippedModules" + saveIdStr);
             LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
-            Load("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
+            LoadBossDefeatTime("BossDefeatTime" + saveIdStr);
             LoadPlayedTutorialGroup("PlayedTutorialGroup" + saveIdStr);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
@@ -110,6 +110,15 @@ namespace ETLG
             for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules().Length; i++)
             {
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules()[i] = (int) jsonData[i];
+            }
+        }
+
+        private void LoadBossDefeatTime(string key)
+        {
+            JArray jsonData = LoadJsonArray(key);
+            for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime.Length; i++)
+            {
+                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[i] = (float) jsonData[i];
             }
         }
 
@@ -157,28 +166,27 @@ namespace ETLG
             Dictionary<string, string> result = new Dictionary<string, string>();
 
             string saveIdStr = "_" + SaveId.ToString();
-            result.Add("Difficulty" + saveIdStr, PlayerPrefs.GetString("Difficulty" + saveIdStr));
-            result.Add("InitialSpaceshipIdx" + saveIdStr, PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
-            result.Add("PlayerSkillData" + saveIdStr, PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
-            result.Add("PlayerArtifacts" + saveIdStr, PlayerPrefs.GetString("PlayerArtifacts" + saveIdStr));
-            result.Add("PlayerModules" + saveIdStr, PlayerPrefs.GetString("PlayerModules" + saveIdStr));
-            result.Add("EquippedModules" + saveIdStr, PlayerPrefs.GetString("EquippedModules" + saveIdStr));
-            result.Add("PlayerNPCs" + saveIdStr, PlayerPrefs.GetString("PlayerNPCs" + saveIdStr));
-            result.Add("PlayerAchievement" + saveIdStr, PlayerPrefs.GetString("PlayerAchievement" + saveIdStr));
-            result.Add("BattleVictoryCount" + saveIdStr, PlayerPrefs.GetString("BattleVictoryCount" + saveIdStr));
-            result.Add("BossDefeatTime" + saveIdStr, PlayerPrefs.GetString("BossDefeatTime" + saveIdStr));
-            result.Add("PlayedTutorialGroup" + saveIdStr, PlayerPrefs.GetString("PlayedTutorialGroup" + saveIdStr));
+            result.Add("Difficulty", PlayerPrefs.GetString("Difficulty" + saveIdStr));
+            result.Add("InitialSpaceshipIdx", PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
+            result.Add("PlayerSkillData", PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
+            result.Add("PlayerArtifacts", PlayerPrefs.GetString("PlayerArtifacts" + saveIdStr));
+            result.Add("PlayerModules", PlayerPrefs.GetString("PlayerModules" + saveIdStr));
+            result.Add("EquippedModules", PlayerPrefs.GetString("EquippedModules" + saveIdStr));
+            result.Add("PlayerNPCs", PlayerPrefs.GetString("PlayerNPCs" + saveIdStr));
+            result.Add("PlayerAchievement", PlayerPrefs.GetString("PlayerAchievement" + saveIdStr));
+            result.Add("BattleVictoryCount", PlayerPrefs.GetString("BattleVictoryCount" + saveIdStr));
+            result.Add("BossDefeatTime", PlayerPrefs.GetString("BossDefeatTime" + saveIdStr));
+            result.Add("PlayedTutorialGroup", PlayerPrefs.GetString("PlayedTutorialGroup" + saveIdStr));
 
             return result;
         }
 
         public int DownloadSave(Dictionary<string, string> jsonDataStr)
         {
-            int saveId = 0;
+            int saveId = this.savedGamesInfo.cloudSaveId;
             foreach (var item in jsonDataStr)
             {
-                saveId = int.Parse(item.Key.Substring(item.Key.Length-1, 1));
-                PlayerPrefs.SetString(item.Key, item.Value);
+                PlayerPrefs.SetString(item.Key + "_" + saveId.ToString(), item.Value);
             }
             string difficulty = jsonDataStr["Difficulty_" + saveId.ToString()];
 
