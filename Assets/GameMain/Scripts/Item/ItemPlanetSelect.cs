@@ -39,11 +39,11 @@ namespace ETLG
 
         private readonly float valueBarMaxWidth = 440f;
 
-
+        private bool refresh;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
+            refresh = false;
             dataPlanet = GameEntry.Data.GetData<DataPlanet>();
         }
 
@@ -51,6 +51,15 @@ namespace ETLG
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
+            /*    if (GameEntry.Data.GetData<DataPlanet>().expandAll)
+                {
+                    this.OnExpandButtonClick();
+                }*/
+            if (refresh)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(LandingPointsContainer);
+                refresh = false;
+            }
         }
 
         public void SetData(int PlanetID)
@@ -72,6 +81,17 @@ namespace ETLG
             SetWidth(planet_valueBar, percentage/100);
 
             SetArrowIcon(Constant.Type.ARROW_RIGHT);
+
+            string keyword = dataPlanet.keyword;
+            if (keyword != null && !keyword.Equals(""))
+            {
+                HideAllItem();
+                SetArrowIcon(Constant.Type.ARROW_DOWN);
+                ShowLandingPoints(this.PlanetID);
+                this.Expanded = true;
+                this.refresh = true;
+            }
+
         }
 
         protected override void OnHide(bool isShutdown, object userData)
@@ -124,11 +144,11 @@ namespace ETLG
 
         public void OnExpandButtonClick()
         {
+            //GameEntry.Data.GetData<DataPlanet>().currentPlanetID = PlanetID;
             if (!Expanded)
             {
-                GameEntry.Data.GetData<DataPlanet>().currentPlanetID = PlanetID;
                 SetArrowIcon(Constant.Type.ARROW_DOWN);
-                ShowLandingPoints();
+                ShowLandingPoints(this.PlanetID);
             }
             else
             {
@@ -136,6 +156,8 @@ namespace ETLG
                 HideAllItem();
             }
             Expanded = !Expanded;
+            this.refresh = true;
+
             GameEntry.Event.Fire(this, PlanetExpandedEventArgs.Create());
 
         }
@@ -147,13 +169,24 @@ namespace ETLG
             expandButtonIcon.texture = texture;
         }
 
-        private void ShowLandingPoints()
+        private void ShowLandingPoints(int PlanetID)
         {
+            DataPlanet dataPlanet = GameEntry.Data.GetData<DataPlanet>();
 
-            int[] LandingPoints = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData().LandingPoints;
+            int[] LandingPoints = dataPlanet.GetPlanetData(PlanetID).LandingPoints;
+
+            string keyword = dataPlanet.keyword;
 
             foreach (var LandingPoint in LandingPoints)
             {
+                if (keyword != null && !keyword.Equals(""))
+                {
+                    string title =  GameEntry.Data.GetData<DataLandingPoint>().GetLandingPointData(LandingPoint).Title;
+                    if (!title.Contains(keyword))
+                    {
+                        continue;
+                    }
+                }
                 ShowItem<ItemLandingPointSelect>(EnumItem.ItemLandingPointSelect, (item) =>
                 {
                     item.transform.SetParent(LandingPointsContainer, false);

@@ -72,9 +72,7 @@ namespace ETLG
 
         private void ShowLandingPoints()
         {
-
             int[] LandingPoints = GameEntry.Data.GetData<DataPlanet>().GetCurrentPlanetData().LandingPoints;
-
             foreach (var LandingPoint in LandingPoints)
             {
                 ShowItem<ItemLandingPointSelect>(EnumItem.ItemLandingPointSelect, (item) =>
