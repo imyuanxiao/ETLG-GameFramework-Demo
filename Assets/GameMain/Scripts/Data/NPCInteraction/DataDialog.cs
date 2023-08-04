@@ -8,6 +8,7 @@ namespace ETLG.Data
         public bool finish=false;
         public bool award=false;
         public bool clickGetButton=false;
+        public bool report=false;
 
         public void reset()
         {

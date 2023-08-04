@@ -14,6 +14,7 @@ namespace ETLG
     {
         public Button ExitButton;
         public Button GetButton;
+        public Button CloseButton;
         public TextMeshProUGUI AwardHint;
         public Canvas AwardList;
 
@@ -24,6 +25,7 @@ namespace ETLG
             base.OnInit(userData);
             ExitButton.onClick.AddListener(OnExitButtonClick);
             GetButton.onClick.AddListener(OnGetButtonClick);
+            CloseButton.onClick.AddListener(OnCloseButtonClick);
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             dataDialog = GameEntry.Data.GetData<DataDialog>();
         }
@@ -45,6 +47,7 @@ namespace ETLG
         {
             Text getButtonText = GetButton.GetComponentInChildren<Text>();
             getButtonText.text = "GET AWARDS";
+            getButtonText.fontSize = 24;
             Text exitButtonText = ExitButton.GetComponentInChildren<Text>();
             exitButtonText.text = "EXIT";
         }
@@ -123,7 +126,9 @@ namespace ETLG
                 {
                     AwardHint.text = "You have collected my awards before!\n" + "You can NOT collect one more.";
                 }
-                GetButton.GetComponentInChildren<Text>().text = "LEARN AGAIN";
+                GetButton.GetComponentInChildren<Text>().text = "GO BACK TO DIALOG";
+                GetButton.GetComponentInChildren<Text>().fontSize = 14;
+                dataDialog.report = true;
             }
             else
             {

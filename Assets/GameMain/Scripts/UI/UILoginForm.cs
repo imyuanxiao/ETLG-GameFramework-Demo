@@ -16,7 +16,6 @@ namespace ETLG
         public TextMeshProUGUI switchTitle = null;
         public TextMeshProUGUI submitTitle = null;
         public TextMeshProUGUI reminder = null;
-        public TextMeshProUGUI placeholderContent = null;
         //register success
         public TextMeshProUGUI placeholder_playerId = null;
         public TextMeshProUGUI placeholder_playerPasswaord = null;
@@ -24,12 +23,6 @@ namespace ETLG
         public Button switchButton;
         public Button submitButton;
         public Button closeButton;
-        public Button avatar1;
-        public Button avatar2;
-        public Button avatar3;
-        public Button avatar4;
-        public Button avatar5;
-        public Button avatar6;
 
         private Button selectedButton;
         private string playerAvatarId;
@@ -64,12 +57,7 @@ namespace ETLG
             switchButton.onClick.AddListener(OnSwitchButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
             closeButton.onClick.AddListener(OnCloseButtonClick);
-            avatar1.onClick.AddListener(OnAvatar1ButtonClick);
-            avatar2.onClick.AddListener(OnAvatar2ButtonClick);
-            avatar3.onClick.AddListener(OnAvatar3ButtonClick);
-            avatar4.onClick.AddListener(OnAvatar4ButtonClick);
-            avatar5.onClick.AddListener(OnAvatar5ButtonClick);
-            avatar6.onClick.AddListener(OnAvatar6ButtonClick);
+
         }
 
         protected override void OnOpen(object userData)
@@ -108,7 +96,6 @@ namespace ETLG
                 switchTitle.text = "Register";
                 confirmPassword.SetActive(false);
                 playerAvater.SetActive(false);
-                placeholderContent.text = "Please Enter ID";
             }
             else
             {
@@ -116,16 +103,32 @@ namespace ETLG
                 switchTitle.text = "Login";
                 confirmPassword.SetActive(true);
                 playerAvater.SetActive(true);
-                placeholderContent.text = "Please Enter UserName";
             }
         }
         private void OnLogIn()
         {
+            //BackendDataManager.Instance.GetUserById(long.Parse(userName.text));
+            //if (BackendDataManager.Instance.userData == null)
+            //{
+             //   SetReminderTextandColor("User does not exist.", RED);
+            //}
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
             {
                 if (PlayerPrefs.GetString(userName.text + "password") == pwd.text)
                 {
+                    
                     SetReminderTextandColor("Login successful!", GOLD);
+                    //登录成功之后....
+                    if(BackendDataManager.Instance.isSave)
+                    {
+                        //if is save
+                        BackendDataManager.Instance.HandleSave();
+                    }
+                    else
+                    {
+                        //if is load
+                        BackendDataManager.Instance.HandleLoad();
+                    }
                 }
                 else
                 {
@@ -159,6 +162,7 @@ namespace ETLG
                         PlayerPrefs.SetString(userName.text, userName.text);
                         PlayerPrefs.SetString(userName.text + "password", pwd.text);
                         SetReminderTextandColor("Register successful! Please login.", GOLD);
+                        
                         SetRegisterSeccessPanel();
                     }
                     else
@@ -199,56 +203,10 @@ namespace ETLG
                 OnLogIn();
             }
         }
-        private void OnAvatar1ButtonClick()
-        {
-            playerAvatarId = "1000";
-            SetSelectedButtonandColor(avatar1);
-        }
-        private void OnAvatar2ButtonClick()
-        {
-            playerAvatarId = "1001";
-            SetSelectedButtonandColor(avatar2);
-        }
-        private void OnAvatar3ButtonClick()
-        {
-            playerAvatarId = "1003";
-            SetSelectedButtonandColor(avatar3);
-        }
-        private void OnAvatar4ButtonClick()
-        {
-            playerAvatarId = "1004";
-            SetSelectedButtonandColor(avatar4);
-        }
-        private void OnAvatar5ButtonClick()
-        {
-            playerAvatarId = "1005";
-            SetSelectedButtonandColor(avatar5);
-        }
-        private void OnAvatar6ButtonClick()
-        {
-            playerAvatarId = "1006";
-            SetSelectedButtonandColor(avatar6);
-        }
+      
         private void OnCloseButtonClick()
         {
             this.Close();
-        }
-        private void SetSelectedButtonandColor(Button button)
-        {
-            ColorBlock colorBlock;
-            if (selectedButton != button)
-            {
-                if (selectedButton != null)
-                {
-                    colorBlock = selectedButton.colors;
-                    colorBlock.normalColor = normalColor;
-                    selectedButton.colors = colorBlock;
-                }
-            }
-            selectedButton = button;
-            colorBlock = selectedButton.colors;
-            colorBlock.normalColor = selectedColor;
-            selectedButton.colors = colorBlock;
         }
         private void SetRegisterSeccessPanel()
         {
@@ -277,11 +235,11 @@ namespace ETLG
             if(color==GOLD)
             {
                 Color gold = new Color(220f, 203f, 173f, 255f);
+                reminder.color = gold;
             }
         }
         public void ShakeText()
         {
-            // 开始协程来实现文本的震动效果
             StartCoroutine(ShakeTextCoroutine());
         }
 
@@ -291,20 +249,14 @@ namespace ETLG
 
             while (elapsed < shakeDuration)
             {
-                // 随机生成一个震动偏移
-                float offsetX = Random.Range(-shakeAmount, shakeAmount);
-                float offsetY = Random.Range(-shakeAmount, shakeAmount);
-
-                // 将文本组件的位置偏移一段距离，实现震动效果
-                reminder.rectTransform.localPosition = originalPosition + new Vector3(offsetX, offsetY, 0f);
-
+                reminder.rectTransform.localPosition = originalPosition + new Vector3(Random.Range(-shakeAmount, shakeAmount), Random.Range(-shakeAmount, shakeAmount), 0f);
                 elapsed += Time.deltaTime;
                 yield return null;
             }
 
-            // 恢复文本组件的原始位置
             reminder.rectTransform.localPosition = originalPosition;
         }
+        
         private void KeyboardControl()
         {
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))

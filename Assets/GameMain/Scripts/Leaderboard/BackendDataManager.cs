@@ -11,6 +11,8 @@ namespace ETLG
     public class BackendDataManager : Singleton<BackendDataManager>
     {
         public string responseData;
+        public int avatorId;
+        private UserData userData;
         private List<LeaderboardData> rankList;
         //排行榜
         private string leaderboard_url = "https://github.com/xw22087/rbac/tree/main/rbac-backend/src/main/java/com/imyuanxiao/rbac/controller/api/profile/getRank";
@@ -19,6 +21,8 @@ namespace ETLG
         private string Register_url;
         public int errorType;
         public bool isNewFetch;
+        public bool isSave;
+        Dictionary<string, string> jsonStrDic;
         protected override void Awake()
         {
             base.Awake();
@@ -29,8 +33,9 @@ namespace ETLG
             StartCoroutine(GetRankDataRoutine(pageNumber, pageSize, rankMode));
             return rankList;
         }
-        public void GetUserById(long id)
+        public void GetLogIn(long id)
         {
+            userData = null;
             string url = Login_url + id.ToString();
             StartCoroutine(GetLogInUserRoutine(id));
         }
@@ -77,7 +82,6 @@ namespace ETLG
                 }
                 else
                 {
-                    // API请求失败
                     HandleErrorMessages(www);
                     GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                 }
@@ -103,7 +107,9 @@ namespace ETLG
                     // 处理用户数据
                     long userId = userData.id;
                     string userPassword = userData.userPassword;
-
+                    userData = new UserData();
+                    userData.id = userId;
+                    userData.userPassword = userPassword;
                     Debug.Log("User ID: " + userId + ", User Password: " + userPassword);
                 }
                 else
@@ -114,13 +120,18 @@ namespace ETLG
                 }
             }
         }
-        private void HandleLogin()
+        public void SetSave(Dictionary<string, string> jsonStrDic)
         {
-
+            isSave = true;
+            this.jsonStrDic= jsonStrDic;
         }
-        private void HandleRegister()
+        public void HandleSave()
         {
-
+           //把数据传到后端
+        }
+        public void HandleLoad()
+        {
+            //从后端传数据过来
         }
         private void HandleErrorMessages(UnityWebRequest www)
         {
@@ -148,6 +159,12 @@ namespace ETLG
         {
             public long id;
             public string userPassword;
+        }
+        private class ErrorMessage
+        {
+            public int code;
+            public string message;
+            public string data;
         }
     }
 }

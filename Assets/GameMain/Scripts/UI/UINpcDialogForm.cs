@@ -73,6 +73,7 @@ namespace ETLG
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataDialog = GameEntry.Data.GetData<DataDialog>();
             dataDialog.reset();
+            dataDialog.report = false;
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
@@ -150,7 +151,6 @@ namespace ETLG
 
         private void getAward()
         {
-            Debug.Log("获取奖励中");
             if (npcData.RewardArtifacts.Length > 1)
             {
                 int[] rewardArtifacts = npcData.RewardArtifacts;
@@ -179,16 +179,36 @@ namespace ETLG
         {
             if (buttonScrollContent.childCount != 0)
             {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                if (!UI_NPCDialogManager.award)
                 {
-                    GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                    {
+                        GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                    }
+                    dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT;
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                    return;
                 }
-                dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT;
-                GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
-                return;
+                else
+                {
+                    Debug.Log("理论上应该report"+ dataDialog.report);
+                    if (!dataDialog.report)
+                    {
+                        if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
+                        {
+                            GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
+                        }
+                        dataAlert.AlertType = Constant.Type.ALERT_DIALOG_QUIT_GOTTENAWARD;
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UIErrorMessageForm);
+                        return;
+                    }
+                }
             }
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
-            GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm));
+            }
         }
 
         //页面最大化
