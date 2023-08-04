@@ -13,7 +13,7 @@ namespace ETLG
         public Button achievementButton;
         //public Button knowledgeBaseButton;
         public Button leaderboardButton;
-
+        public Button profileButton;
 
         private RawImage[] buttonImages;
 
@@ -35,6 +35,7 @@ namespace ETLG
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, (int)EnumUIForm.UISkillTreeForm));
             achievementButton.onClick.AddListener(() => OnButtonClick(achievementButton, (int)EnumUIForm.UIAchievementForm));
             leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UILeaderBoardForm));
+            profileButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UIpProfileForm));
         }
 
         protected override void OnOpen(object userData)
@@ -81,7 +82,6 @@ namespace ETLG
             {
                 index = 3;
             }
-
             foreach (var buttonImage in buttonImages)
             {
                 buttonImage.color = (buttonImage == buttonImages[index].GetComponent<RawImage>()) ? selectedColor : deselectedColor;
