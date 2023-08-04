@@ -13,7 +13,7 @@ namespace ETLG
     public class UIMapPlayerInfoForm : UGuiFormEx
     {
 
-        public TextMeshProUGUI Description = null;
+        //public TextMeshProUGUI Description = null;
         public RectTransform PlanetsContainer;
         public Button playerMenuButton;
         public Text Domian;
@@ -39,6 +39,13 @@ namespace ETLG
         private LearningPath recommendLearningPath;
         private DataLearningProgress dataLearningProgress;
 
+        public Button expandAllButton;
+        public RawImage expandButtonIcon;
+
+        public TMP_InputField tmpInputField;
+        private bool refresh;
+
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -48,6 +55,9 @@ namespace ETLG
             DefaultHeadButton.onClick.AddListener(OnDefaultHeadButtonClick);
             dataLearningPath = GameEntry.Data.GetData<DataLearningPath>();
             dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
+
+            expandAllButton.onClick.AddListener(OnExpandAllButtonClick);
+            tmpInputField.onEndEdit.AddListener(OnInputEndEdit);
         }
         private void OnPlayerMenuButtonClick()
         {
@@ -56,11 +66,33 @@ namespace ETLG
         }
 
 
+
+        private void OnExpandAllButtonClick()
+        {
+
+
+            GameEntry.Data.GetData<DataPlanet>().expandAll = !GameEntry.Data.GetData<DataPlanet>().expandAll;
+
+            if (GameEntry.Data.GetData<DataPlanet>().expandAll)
+            {
+                SetArrowIcon(Constant.Type.ARROW_DOWN);
+            }
+            else
+            {
+                SetArrowIcon(Constant.Type.ARROW_RIGHT);
+            }
+
+            this.refresh = true;
+        }
+
+
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
 
-            Description.text = GameEntry.Localization.GetString("Map_Welcome_Desc");
+            this.refresh = true;
+
+            //Description.text = GameEntry.Localization.GetString("Map_Welcome_Desc");
 
             GameEntry.Event.Subscribe(PlanetExpandedEventArgs.EventId, OnPlanetExpanded);
 
@@ -68,6 +100,8 @@ namespace ETLG
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
             }
+
+
             RecommendedChapterInfoScroll.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)DefaultLearningVerticalLayoutGroup.transform);
             // tutorial in spaceship menu
@@ -114,13 +148,32 @@ namespace ETLG
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(PlanetsContainer);
+
+            if (refresh)
+            {
+                HideAllItem();
+                ShowPlanets();
+
+               // LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
+
+                refresh = false;
+            }
 
             if (refreshPlanetsContainer)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(PlanetsContainer);
                 refreshPlanetsContainer = false;
             }
+
+
+           // LayoutRebuilder.ForceRebuildLayoutImmediate(PlanetsContainer);
+
+      /*      if (refreshPlanetsContainer)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(PlanetsContainer);
+                refreshPlanetsContainer = false;
+            }*/
+            
             recommendLearningPath = dataLearningPath.getCurrentPath();
             if (dataLearningProgress.update)
             {
@@ -147,6 +200,12 @@ namespace ETLG
 
             foreach (var PlanetID in PlanetIDs)
             {
+
+                if (!PlanetHasRelatedCourses(PlanetID))
+                {
+                    continue;
+                }
+
                 ShowItem<ItemPlanetSelect>(EnumItem.ItemPlanetSelect, (item) =>
                 {
                     item.transform.SetParent(PlanetsContainer, false);
@@ -156,6 +215,27 @@ namespace ETLG
                 });
             }
         }
+
+
+        private bool PlanetHasRelatedCourses(int PlanetID)
+        {
+            DataPlanet planet = GameEntry.Data.GetData<DataPlanet>();
+            string keyword = planet.keyword;
+            if (keyword == null || keyword.Equals(""))
+            {
+                return true;
+            }
+
+            int[] courseId = planet.GetPlanetData(PlanetID).LandingPoints;
+            foreach (var courseID in courseId)
+            {
+                string title = GameEntry.Data.GetData<DataLandingPoint>().GetLandingPointData(courseID).Title;
+                if (title.Contains(keyword)) { return true; }
+            }
+
+            return false;
+        }
+
 
         private void OnPlanetExpanded(object sender, GameEventArgs e)
         {
@@ -216,5 +296,25 @@ namespace ETLG
             Texture texture = Resources.Load<Texture>(texturePath);
             CollapseIcon.texture = texture;
         }
+
+        public void OnInputEndEdit(string inputText)
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                GameEntry.Data.GetData<DataPlanet>().keyword = inputText;
+                GameEntry.Data.GetData<DataPlanet>().expandAll = true;
+                refresh = true;
+            }
+        }
+
+        private void SetArrowIcon(int Type)
+        {
+            string texturePath = AssetUtility.GetArrowImg(Type);
+            Texture texture = Resources.Load<Texture>(texturePath);
+            expandButtonIcon.texture = texture;
+        }
+
+
+
     }
 }
