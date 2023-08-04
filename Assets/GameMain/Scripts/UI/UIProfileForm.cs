@@ -76,7 +76,7 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // »ñÈ¡Íæ¼ÒÊý¾Ý¹ÜÀíÆ÷
+            // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½
 
             editNameButton.onClick.AddListener(OnEditNameButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
@@ -132,13 +132,13 @@ namespace ETLG
             playerInfo.SetActive(true);
             SetPlayerAvatar();
 
-            SetBossTime(boss_1, 1100);
-            SetBossTime(boss_2, 1101);
-            SetBossTime(boss_3, 1102);
-            SetBossTime(boss_4, 1103);
-            SetBossTime(boss_5, 1104);
-            SetBossTime(boss_6, 1105);
-            SetBossTime(boss_7, 1106);
+            SetBossTime(boss_1, 3);  // AI
+            SetBossTime(boss_2, 2);  // Data Science
+            SetBossTime(boss_3, 5);  // IoT
+            SetBossTime(boss_4, 1);  // Cybersecurity
+            SetBossTime(boss_5, 0);  // Cloud Computing
+            SetBossTime(boss_6, 4);  // Blockchain
+            SetBossTime(boss_7, 6);  // Final
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -274,7 +274,8 @@ namespace ETLG
         }
         private void SetBossTime(TextMeshProUGUI text , int bossId)
         {
-            Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
+            // Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
+            float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
             if(bossDefeatTime[bossId] == -1)
             {
                 text.text = "Unchallenged";
