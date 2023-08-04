@@ -34,6 +34,7 @@ namespace ETLG
         private Sprite NPCSprite;
         private Sprite playerSprite;
         private NPCData npcData;
+        private DataLearningProgress dataLearningProgress;
         private DataDialog dataDialog;
         private DataPlayer dataPlayer;
         private DataAlert dataAlert;
@@ -72,6 +73,7 @@ namespace ETLG
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataDialog = GameEntry.Data.GetData<DataDialog>();
+            dataLearningProgress= GameEntry.Data.GetData<DataLearningProgress>();
             dataDialog.reset();
             dataDialog.report = false;
             npc_name.text = npcData.Name;
@@ -169,6 +171,9 @@ namespace ETLG
             }
             UI_NPCDialogManager.award = true;
             dataDialog.award = true;
+            dataLearningProgress.update = true;
+            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -192,7 +197,6 @@ namespace ETLG
                 }
                 else
                 {
-                    Debug.Log("理论上应该report"+ dataDialog.report);
                     if (!dataDialog.report)
                     {
                         if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))

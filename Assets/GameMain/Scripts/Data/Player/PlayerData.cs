@@ -1107,6 +1107,11 @@ namespace ETLG.Data
                 playerQuizes.Add(NPCId, UIQuizManager);
             }
         }
+
+        public DataLearningPath getLearningPath()
+        {
+            return dataLearningPath;
+        }
     }
 }
 

@@ -14,6 +14,7 @@ namespace ETLG
     {
         private NPCData npcData;
         private DataAlert dataAlert;
+        private DataLearningProgress dataLearningProgress;
         private DataQuiz dataQuizReport;
         private DataPlayer dataPlayer;
         private string npcAvatarPath;
@@ -61,6 +62,7 @@ namespace ETLG
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             dataQuizReport = GameEntry.Data.GetData<DataQuiz>();
             dataQuizReport.reset();
+            dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
 
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
@@ -310,6 +312,8 @@ namespace ETLG
                 int id = npcData.RewardSkill;
                 dataPlayer.GetPlayerData().AddSkill(id);
             }
+            dataLearningProgress.update = true;
+            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
         }
 
         private void OnSubmitButtonClick()
