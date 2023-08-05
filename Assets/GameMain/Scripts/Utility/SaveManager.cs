@@ -42,6 +42,9 @@ namespace ETLG
             Save("BattleVictoryCount" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount);
             Save("BossDefeatTime" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime);
             Save("PlayedTutorialGroup" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup);
+            Save("ChaptersSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().ChaptersSaveData);
+            Save("CoursesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().CoursesSaveData);
+            Save("DomiansSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -82,6 +85,9 @@ namespace ETLG
             Load("PlayerAchievement" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement());
             LoadBossDefeatTime("BossDefeatTime" + saveIdStr);
             LoadPlayedTutorialGroup("PlayedTutorialGroup" + saveIdStr);
+            Load("ChaptersSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().ChaptersSaveData);
+            Load("CoursesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().CoursesSaveData);
+            Load("DomiansSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
@@ -224,6 +230,9 @@ namespace ETLG
             Delete("BattleVictoryCount" + saveIdStr);
             Delete("BossDefeatTime" + saveIdStr);
             Delete("PlayedTutorialGroup" + saveIdStr);
+            Delete("ChaptersSaveData" + saveIdStr);
+            Delete("CoursesSaveData" + saveIdStr);
+            Delete("DomiansSaveData" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -374,6 +383,9 @@ namespace ETLG
                 PrintSavedData("BattleVictoryCount_0");
                 PrintSavedData("BossDefeatTime_0");
                 PrintSavedData("PlayedTutorialGroup_0");
+                PrintSavedData("ChaptersSaveData_0");
+                PrintSavedData("CoursesSaveData_0");
+                PrintSavedData("DomiansSaveData_0");
             }
         }
     }

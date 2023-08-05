@@ -55,11 +55,11 @@ namespace ETLG.Data
         private Dictionary<int, UINPCDialogManager> playerDialogs = new Dictionary<int, UINPCDialogManager>();
         private Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
         //Chapter
-        private Dictionary<int, bool> ChaptersSaveData = new Dictionary<int, bool>();
+        public Dictionary<int, bool> ChaptersSaveData;
         //Courses
-        private Dictionary<int, float> CoursesSaveData = new Dictionary<int, float>();
+        public Dictionary<int, float> CoursesSaveData;
         //Domians
-        private Dictionary<int, float> DomiansSaveData = new Dictionary<int, float>();
+        public Dictionary<int, float> DomiansSaveData;
         //Learning Path
         private DataLearningPath dataLearningPath { get; set; }
 
@@ -92,6 +92,11 @@ namespace ETLG.Data
 
             // 0-cloud computing, 1-CyberSecurity, 2-Data science, 3-AI, 4-blockchain, 5-IoT, 6-final boss
             bossDefeatTime = new float[7]{-1f,-1f,-1f,-1f,-1f,-1f,-1f};
+            
+            // Learning progress init
+            ChaptersSaveData = new Dictionary<int, bool>();
+            CoursesSaveData = new Dictionary<int, float>();
+            DomiansSaveData = new Dictionary<int, float>();
 
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
