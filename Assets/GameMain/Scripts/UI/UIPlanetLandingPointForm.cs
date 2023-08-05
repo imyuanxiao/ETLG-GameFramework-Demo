@@ -14,7 +14,7 @@ namespace ETLG
     public class UIPlanetLandingPointForm : UGuiFormEx
     {
 
-        public Transform NPCsContainer;
+        public RectTransform NPCsContainer;
 
         public Button closeButton;
        
