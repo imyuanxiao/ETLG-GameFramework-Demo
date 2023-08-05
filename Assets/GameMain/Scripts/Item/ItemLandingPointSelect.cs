@@ -42,7 +42,7 @@ namespace ETLG
         {
             this.landingPointID = landingPointID;
 
-            this.Type = Type; 
+            this.Type = Type;
 
             landingpoint_title.text = dataLandingPoint.GetLandingPointData(landingPointID).Title;
 

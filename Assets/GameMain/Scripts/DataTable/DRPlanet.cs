@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-04 13:14:16.919
+// 生成时间：2023-08-05 03:06:21.670
 //------------------------------------------------------------
 
 using GameFramework;
@@ -40,6 +40,15 @@ namespace ETLG
         /// 获取名字。
         /// </summary>
         public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取描述。
+        /// </summary>
+        public string Description
         {
             get;
             private set;
@@ -81,6 +90,24 @@ namespace ETLG
             private set;
         }
 
+        /// <summary>
+        /// 获取登录点IDString。
+        /// </summary>
+        public string LandingPointsString
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取VlookUP编号。
+        /// </summary>
+        public int VlookupId
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -94,10 +121,13 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             index++;
             Name = columnStrings[index++];
+            Description = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
                 Coordinates = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             AssetID = int.Parse(columnStrings[index++]);
                 LandingPoints = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+            LandingPointsString = columnStrings[index++];
+            VlookupId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -111,10 +141,13 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
+                    Description = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                         Coordinates = binaryReader.ReadInt32Array();
                     AssetID = binaryReader.Read7BitEncodedInt32();
                         LandingPoints = binaryReader.ReadInt32Array();
+                    LandingPointsString = binaryReader.ReadString();
+                    VlookupId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

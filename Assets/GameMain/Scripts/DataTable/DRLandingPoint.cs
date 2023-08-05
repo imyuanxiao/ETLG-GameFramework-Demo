@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-04 13:14:16.909
+// 生成时间：2023-08-05 03:06:21.656
 //------------------------------------------------------------
 
 using GameFramework;
@@ -37,6 +37,24 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取PlanetId。
+        /// </summary>
+        public int PlanetId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取领域名称。
+        /// </summary>
+        public string Domain
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取课程名称。
         /// </summary>
         public string Course
@@ -63,6 +81,24 @@ namespace ETLG
             private set;
         }
 
+        /// <summary>
+        /// 获取NPCsString。
+        /// </summary>
+        public string NPCsString
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取VlookUP编号。
+        /// </summary>
+        public int VlookupId
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -75,9 +111,13 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
+            PlanetId = int.Parse(columnStrings[index++]);
+            Domain = columnStrings[index++];
             Course = columnStrings[index++];
             Offset = int.Parse(columnStrings[index++]);
                 NPCsID = DataTableExtension.ParseInt32Array(columnStrings[index++]);
+            NPCsString = columnStrings[index++];
+            VlookupId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -90,9 +130,13 @@ namespace ETLG
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
+                    PlanetId = binaryReader.Read7BitEncodedInt32();
+                    Domain = binaryReader.ReadString();
                     Course = binaryReader.ReadString();
                     Offset = binaryReader.Read7BitEncodedInt32();
                         NPCsID = binaryReader.ReadInt32Array();
+                    NPCsString = binaryReader.ReadString();
+                    VlookupId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

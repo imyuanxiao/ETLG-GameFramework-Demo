@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-04 13:14:16.917
+// 生成时间：2023-08-05 03:06:21.667
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,9 +46,27 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取PlanetId。
+        /// </summary>
+        public int PlanetId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取领域名称。
         /// </summary>
         public string Domain
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取LandingPointId。
+        /// </summary>
+        public int LandingPointId
         {
             get;
             private set;
@@ -135,6 +153,33 @@ namespace ETLG
             private set;
         }
 
+        /// <summary>
+        /// 获取VlookupNPCId。
+        /// </summary>
+        public int VlookupNPCId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取VlookupLandingPointId。
+        /// </summary>
+        public int VlookupLandingPointId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取VlookupPlanetId。
+        /// </summary>
+        public int VlookupPlanetId
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -147,7 +192,9 @@ namespace ETLG
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             Name = columnStrings[index++];
+            PlanetId = int.Parse(columnStrings[index++]);
             Domain = columnStrings[index++];
+            LandingPointId = int.Parse(columnStrings[index++]);
             Course = columnStrings[index++];
             Chapter = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
@@ -157,6 +204,9 @@ namespace ETLG
             RewardSkill = int.Parse(columnStrings[index++]);
             DialogXML = int.Parse(columnStrings[index++]);
             QuizXML = int.Parse(columnStrings[index++]);
+            VlookupNPCId = int.Parse(columnStrings[index++]);
+            VlookupLandingPointId = int.Parse(columnStrings[index++]);
+            VlookupPlanetId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -170,7 +220,9 @@ namespace ETLG
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     Name = binaryReader.ReadString();
+                    PlanetId = binaryReader.Read7BitEncodedInt32();
                     Domain = binaryReader.ReadString();
+                    LandingPointId = binaryReader.Read7BitEncodedInt32();
                     Course = binaryReader.ReadString();
                     Chapter = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
@@ -180,6 +232,9 @@ namespace ETLG
                     RewardSkill = binaryReader.Read7BitEncodedInt32();
                     DialogXML = binaryReader.Read7BitEncodedInt32();
                     QuizXML = binaryReader.Read7BitEncodedInt32();
+                    VlookupNPCId = binaryReader.Read7BitEncodedInt32();
+                    VlookupLandingPointId = binaryReader.Read7BitEncodedInt32();
+                    VlookupPlanetId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 
