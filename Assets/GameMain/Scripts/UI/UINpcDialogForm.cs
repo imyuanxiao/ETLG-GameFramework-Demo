@@ -29,6 +29,8 @@ namespace ETLG
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
+        public TextMeshProUGUI ChapterDescription;
+        public GameObject DescriptionContainer;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -81,6 +83,15 @@ namespace ETLG
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
+            if (!string.IsNullOrEmpty(npcData.ChapterDescription))
+            {
+                ChapterDescription.text = "--------"+npcData.ChapterDescription+ "--------";
+                DescriptionContainer.SetActive(true);
+            }
+            else
+            {
+                DescriptionContainer.SetActive(false);
+            }
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
             dialogScrollContentRectTransform = dialogScrollContent.GetComponent<RectTransform>();

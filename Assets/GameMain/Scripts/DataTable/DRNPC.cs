@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-05 21:24:58.415
+// 生成时间：2023-08-05 22:13:45.322
 //------------------------------------------------------------
 
 using GameFramework;
@@ -94,6 +94,15 @@ namespace ETLG
         /// 获取章节名称。
         /// </summary>
         public string Chapter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取章节描述。
+        /// </summary>
+        public string ChapterDescription
         {
             get;
             private set;
@@ -207,6 +216,7 @@ namespace ETLG
             Course = columnStrings[index++];
             CourseDescription = columnStrings[index++];
             Chapter = columnStrings[index++];
+            ChapterDescription = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
@@ -236,6 +246,7 @@ namespace ETLG
                     Course = binaryReader.ReadString();
                     CourseDescription = binaryReader.ReadString();
                     Chapter = binaryReader.ReadString();
+                    ChapterDescription = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();

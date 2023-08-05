@@ -20,6 +20,8 @@ namespace ETLG
         public Text Course;
         public Text ChapterHead;
         public Text Chapter;
+        public Text CourseDescription;
+        public Text ChapterDescription;
         public Button GOButton;
         public RawImage defaultTitle;
         public Canvas defaultLearningPath;
@@ -33,6 +35,7 @@ namespace ETLG
         public VerticalLayoutGroup DefaultLearningVerticalLayoutGroup;
         public VerticalLayoutGroup Container2LayoutGroup;
         public HorizontalLayoutGroup DefaultButtonsHorizontalLayoutGroup;
+        public VerticalLayoutGroup CourseInfoVerticalLayoutGroup;
 
         private bool refreshPlanetsContainer;
         private DataLearningPath dataLearningPath;
@@ -118,10 +121,28 @@ namespace ETLG
             }
             else
             {
-                ChapterHead.text = dataLearningPath.getCurrentPath().getCurrentChapter();
-                Domian.text = dataLearningPath.getCurrentPath().getCurrentDomian();
-                Course.text = dataLearningPath.getCurrentPath().getCurrentCourse();
-                Chapter.text = dataLearningPath.getCurrentPath().getCurrentChapter();
+                ChapterHead.text = dataLearningPath.getCurrentPath().getPathNPCData().Chapter;
+                Domian.text = dataLearningPath.getCurrentPath().getPathNPCData().Domain;
+                Course.text = dataLearningPath.getCurrentPath().getPathNPCData().Course;
+                Chapter.text = dataLearningPath.getCurrentPath().getPathNPCData().Chapter;
+                if (!string.IsNullOrEmpty(dataLearningPath.getCurrentPath().getPathNPCData().CourseDescription))
+                {
+                    CourseDescription.gameObject.SetActive(true);
+                    CourseDescription.text = dataLearningPath.getCurrentPath().getPathNPCData().CourseDescription;
+                }
+                else
+                {
+                    CourseDescription.gameObject.SetActive(false);
+                }
+                if (!string.IsNullOrEmpty(dataLearningPath.getCurrentPath().getPathNPCData().ChapterDescription))
+                {
+                    ChapterDescription.gameObject.SetActive(true);
+                    ChapterDescription.text = dataLearningPath.getCurrentPath().getPathNPCData().ChapterDescription;
+                }
+                else
+                {
+                    ChapterDescription.gameObject.SetActive(false);
+                }
 
                 ShowItem<ItemRewardIcon>(EnumItem.ItemRewardIcon, (item) =>
                 {
@@ -142,6 +163,7 @@ namespace ETLG
                     QuizIcon.gameObject.SetActive(true);
                 }
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)CourseInfoVerticalLayoutGroup.transform);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

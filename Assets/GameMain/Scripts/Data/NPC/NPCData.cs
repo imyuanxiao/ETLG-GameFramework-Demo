@@ -29,6 +29,14 @@ namespace ETLG.Data
             }
         }
 
+        public int PlanetId
+        {
+            get
+            {
+                return dRNPC.PlanetId;
+            }
+        }
+
         public string Course
         {
             get
@@ -37,11 +45,35 @@ namespace ETLG.Data
             }
         }
 
+        public int LandingPointId
+        {
+            get
+            {
+                return dRNPC.LandingPointId;
+            }
+        }
+
         public string Chapter
         {
             get
             {
                 return dRNPC.Chapter;
+            }
+        }
+
+        public string CourseDescription
+        {
+            get
+            {
+                return dRNPC.CourseDescription;
+            }
+        }
+
+        public string ChapterDescription
+        {
+            get
+            {
+                return dRNPC.ChapterDescription;
             }
         }
 

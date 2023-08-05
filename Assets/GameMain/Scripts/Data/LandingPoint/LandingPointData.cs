@@ -14,6 +14,22 @@ namespace ETLG.Data
             }
         }
 
+        public int PlanetId
+        {
+            get
+            {
+                return dRLandingPoint.PlanetId;
+            }
+        }
+
+        public string Domain
+        {
+            get
+            {
+                return dRLandingPoint.Domain;
+            }
+        }
+
         public string Title
         {
             get

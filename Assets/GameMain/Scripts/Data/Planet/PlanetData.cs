@@ -23,6 +23,14 @@ namespace ETLG.Data
             }
         }
 
+        public string Description
+        {
+            get
+            {
+                return dRPlanet.Description;
+            }
+        }
+
         public string TypeStr
         {
             get
@@ -52,14 +60,6 @@ namespace ETLG.Data
             get
             {
                 return dRPlanet.AssetID;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return GameEntry.Localization.GetString(Constant.Key.PRE_PLANET + Id + Constant.Key.POST_DESC);
             }
         }
 
