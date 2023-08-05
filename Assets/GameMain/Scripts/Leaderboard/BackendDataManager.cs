@@ -318,7 +318,7 @@ namespace ETLG
                     UserProfileResponseData responseData = JsonUtility.FromJson<UserProfileResponseData>(responseJson);
                     if (responseData.success)
                     {
-                        if (responseData.data!=null)
+                        if (responseData.data!=null && !string.IsNullOrEmpty( responseData.data.achievement))
                         {
                             userProfile = responseData.data;
 
