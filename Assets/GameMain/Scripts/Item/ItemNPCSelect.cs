@@ -28,7 +28,7 @@ namespace ETLG
         public Button talkButton;
         public Button tradeButton;
         public Button quizButton;
-
+        public HorizontalLayoutGroup horizontalLayoutGroup;
 
         private DataNPC dataNPC;
         private NPCData npcData;
@@ -86,7 +86,7 @@ namespace ETLG
                 item.transform.localPosition = Vector3.zero;
                 item.GetComponent<ItemRewardIcon>().SetData(this.npcData.Id);
             });
-
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);
             // get finished chapters from playerData
             //RewardTick.SetActive(false);
             //FinishTick.SetActive(false);

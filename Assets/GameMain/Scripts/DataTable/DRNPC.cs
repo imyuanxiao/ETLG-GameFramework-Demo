@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-05 03:06:21.667
+// 生成时间：2023-08-05 21:24:58.415
 //------------------------------------------------------------
 
 using GameFramework;
@@ -76,6 +76,15 @@ namespace ETLG
         /// 获取课程名称。
         /// </summary>
         public string Course
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取课程描述。
+        /// </summary>
+        public string CourseDescription
         {
             get;
             private set;
@@ -196,6 +205,7 @@ namespace ETLG
             Domain = columnStrings[index++];
             LandingPointId = int.Parse(columnStrings[index++]);
             Course = columnStrings[index++];
+            CourseDescription = columnStrings[index++];
             Chapter = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
@@ -224,6 +234,7 @@ namespace ETLG
                     Domain = binaryReader.ReadString();
                     LandingPointId = binaryReader.Read7BitEncodedInt32();
                     Course = binaryReader.ReadString();
+                    CourseDescription = binaryReader.ReadString();
                     Chapter = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();

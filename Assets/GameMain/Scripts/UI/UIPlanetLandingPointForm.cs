@@ -15,8 +15,11 @@ namespace ETLG
     {
 
         public Transform NPCsContainer;
+        public TextMeshProUGUI Desc;
+        public TextMeshProUGUI Title;
 
         public Button closeButton;
+        public VerticalLayoutGroup containerVerticalLayoutGroup;
        
 
         // 初始化菜单数据
@@ -37,6 +40,7 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
             }
             ShowNPCSelectionButtonItems();
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -49,6 +53,8 @@ namespace ETLG
         {
 
             NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
+            Title.text = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Title;
+            Desc.text= GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Description;
             foreach (var npcData in npcDatas)
             {
                 ShowItem<ItemNPCSelect>(EnumItem.ItemNPCSelect, (item) =>

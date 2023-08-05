@@ -550,7 +550,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 40}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &495664480881037987
 CanvasRenderer:
@@ -686,7 +686,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 40}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3663819119091601760
 CanvasRenderer:
@@ -1580,6 +1580,7 @@ MonoBehaviour:
   talkButton: {fileID: 138278081928180770}
   tradeButton: {fileID: 5594594565942552198}
   quizButton: {fileID: 854648967163292967}
+  horizontalLayoutGroup: {fileID: 5452673038314045182}
 --- !u!1 &8247788040415392947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1644,7 @@ MonoBehaviour:
   talkButton: {fileID: 138278081928180770}
   tradeButton: {fileID: 5594594565942552198}
   quizButton: {fileID: 854648967163292967}
+  horizontalLayoutGroup: {fileID: 0}
 --- !u!222 &6026325230914497859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1669,7 +1671,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 20
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1752,6 +1754,7 @@ MonoBehaviour:
   talkButton: {fileID: 0}
   tradeButton: {fileID: 0}
   quizButton: {fileID: 0}
+  horizontalLayoutGroup: {fileID: 0}
 --- !u!222 &3773717677299554483
 CanvasRenderer:
   m_ObjectHideFlags: 0

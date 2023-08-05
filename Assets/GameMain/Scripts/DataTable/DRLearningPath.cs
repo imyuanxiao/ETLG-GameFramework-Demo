@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-05 03:06:21.659
+// 生成时间：2023-08-05 21:24:58.405
 //------------------------------------------------------------
 
 using GameFramework;
@@ -46,9 +46,18 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取网站（仅备注用）。
+        /// 获取章节网站（仅备注用）。
         /// </summary>
         public string Website
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取VlookUP编号。
+        /// </summary>
+        public int VlookupId
         {
             get;
             private set;
@@ -67,6 +76,7 @@ namespace ETLG
             m_Id = int.Parse(columnStrings[index++]);
             NPCID = int.Parse(columnStrings[index++]);
             Website = columnStrings[index++];
+            VlookupId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -81,6 +91,7 @@ namespace ETLG
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     NPCID = binaryReader.Read7BitEncodedInt32();
                     Website = binaryReader.ReadString();
+                    VlookupId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 
