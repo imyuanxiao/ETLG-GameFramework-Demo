@@ -131,6 +131,7 @@ namespace ETLG
         }
 
         private void MouseControl() {
+            if (MapManager.Instance.isOverUI) { return; }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // store the returned value into hitInfo
             Physics.Raycast(ray, out hitInfo);

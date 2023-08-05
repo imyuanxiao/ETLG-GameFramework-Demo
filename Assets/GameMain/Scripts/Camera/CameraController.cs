@@ -74,6 +74,7 @@ namespace ETLG
         private void DragCameraMove()
         {
             if (isFocused) { return; }
+            if (MapManager.Instance.isOverUI) { return; }
             if (Input.GetMouseButtonDown(0))
             {
                 lastMousePosition = Input.mousePosition;

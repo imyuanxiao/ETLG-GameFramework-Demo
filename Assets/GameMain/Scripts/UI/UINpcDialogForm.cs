@@ -594,6 +594,22 @@ namespace ETLG
 
         }
 
+        public void OnPointerEnter()
+        {
+            if (MapManager.Instance != null)
+            {
+                MapManager.Instance.isOverUI = true;
+            }
+        }
+
+        public void OnPointerExit()
+        {
+            if (MapManager.Instance != null)
+            {
+                MapManager.Instance.isOverUI = false;
+            }
+        }
+
     }
 }
 

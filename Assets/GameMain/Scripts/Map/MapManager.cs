@@ -8,6 +8,7 @@ namespace ETLG
     {
         [HideInInspector] public GameObject focusedPlanet;
         [HideInInspector] public int currentLandingPointID = -1;  // -1 means no landing point is being clicked
+        [HideInInspector] public bool isOverUI;
 
         public GameObject[] planetsObj;
 

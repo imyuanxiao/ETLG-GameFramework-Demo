@@ -314,7 +314,14 @@ namespace ETLG
             expandButtonIcon.texture = texture;
         }
 
+        public void OnPointerEnter()
+        {
+            MapManager.Instance.isOverUI = true;
+        }
 
-
+        public void OnPointerExit()
+        {
+            MapManager.Instance.isOverUI = false;
+        }
     }
 }
