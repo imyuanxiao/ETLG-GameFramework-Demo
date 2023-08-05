@@ -20,14 +20,14 @@ namespace ETLG
         private string Register_url = "http://localhost:9527/auth/register";
         private string currentUser_url = "http://localhost:9527/auth/currentUser";
         private string saveDownload_url = "http://localhost:9527/profile/saveDownload";
+        private string getProfileById_url = "http://localhost:9527/profile/";
         //Authorization token
         private string authorization;
-        public int errorType;
-        public bool isNewFetch;
+
         public bool isSave;
-        public bool isSuccess;
         public string message;
-        Dictionary<string, string> jsonStrDic;
+        public UserProfile userProfile;
+        public Dictionary<string, string> jsonStrDic;
 
         public UserData currentUser;
 
@@ -49,7 +49,6 @@ namespace ETLG
             form.AddField("pageNumber", pageNumber);
             form.AddField("pageSize", pageSize);
             form.AddField("rankMode", rankMode);
-            isNewFetch = true;
             using (UnityWebRequest www = UnityWebRequest.Post(leaderboard_url, form))
             {
                 yield return www.SendWebRequest();
@@ -60,7 +59,6 @@ namespace ETLG
                     // ...（原有代码不变）
                     if (www.result == UnityWebRequest.Result.Success)
                     {
-                        errorType = 0;
                         // 获取API响应数据
                         string responseJson = www.downloadHandler.text;
 
@@ -98,14 +96,14 @@ namespace ETLG
         }
         private void GetLogIn(string userName, string password)
         {
+
             currentUser = null;
             StartCoroutine(PostLogInUserRoutine(userName, password));
+
         }
         private IEnumerator PostLogInUserRoutine(string userName, string password)
         {
-            // 创建POST请求的表单数据
-            isNewFetch = true;
-            isSuccess = false;
+
             // 构建要发送的数据对象
             LoginData loginData = new LoginData
             {
@@ -122,7 +120,6 @@ namespace ETLG
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
-                isSuccess = true;
                 var asyncOperation = request.SendWebRequest();
 
                 yield return asyncOperation;
@@ -140,7 +137,7 @@ namespace ETLG
                     }
                     else
                     {
-                        ErrorResponseData erroResponseData = JsonUtility.FromJson<ErrorResponseData>(responseJson);
+                        ResponseData erroResponseData = JsonUtility.FromJson<ResponseData>(responseJson);
                         message = erroResponseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGIN_FAILED));
                     }
@@ -153,7 +150,14 @@ namespace ETLG
                 }
             }
         }
+        public void HandleProfileUpdate()
+        {
 
+        }
+        public void HandleProfilePassword()
+        {
+
+        }
         public void HandleSave(Dictionary<string, string> jsonStrDic)
         {
             this.jsonStrDic = jsonStrDic;
@@ -182,7 +186,6 @@ namespace ETLG
         public void HandleRegister(string userName, string password)
         {
             GetRegister(userName, password);
-            //先saveData，传到云端
         }
         private void GetRegister(string userName, string password)
         {
@@ -193,8 +196,6 @@ namespace ETLG
         }
         private IEnumerator GetRegisterRoutine(string userName, string password)
         {
-            isNewFetch = true;
-            isSuccess = false;
             LoginData loginData = new LoginData
             {
                 username = userName,
@@ -204,7 +205,6 @@ namespace ETLG
             // 将数据对象转换为 JSON 格式
             string jsonData = JsonUtility.ToJson(loginData);
 
-            // 创建一个 UnityWebRequest 对象，并设置相关属性
             UnityWebRequest request = new UnityWebRequest(Register_url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -220,8 +220,6 @@ namespace ETLG
             if (request.result == UnityWebRequest.Result.Success)
             {
                 // 请求成功，处理响应数据
-                isSuccess = true;
-                errorType = 0;
             }
             else
             {
@@ -250,7 +248,7 @@ namespace ETLG
         }
         private IEnumerator GetSaveDownloadRoutine()
         {
-            isNewFetch = true;
+            
 
             using (UnityWebRequest www = UnityWebRequest.Get(saveDownload_url))
             {
@@ -259,16 +257,15 @@ namespace ETLG
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    isSuccess = true;
-                    errorType = 0;
                     string responseJson = www.downloadHandler.text;
-                    ErrorResponseData errorData = JsonUtility.FromJson<ErrorResponseData>(responseJson);
-                    if(errorData.success)
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                    
+                    if (responseData.success)
                     {
-                        if(errorData.data!="null")
+                        if(!string.IsNullOrEmpty(responseData.data))
                         {
-                            SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseJson);
 
+                            SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
                             // Convert the data class properties into a Dictionary<string, int>
                             Dictionary<string, string> dictionary = new Dictionary<string, string>
                        {
@@ -276,15 +273,16 @@ namespace ETLG
                         { "achievementScore", data.achievementScore },
                         { "learningProgress", data.learningProgress },
                         { "BossDefeatTime",data.BossDefeatTime}
-                            // You can handle BossDefeatTime separately if needed
-                            // It is currently stored as a string, so you might need additional parsing.
                          };
                             jsonStrDic = dictionary;
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
                         else
                         {
-                            GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_NULL));
+                            //if it is null , tell player to upload data
+                            GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                            GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                         }
                         
                       
@@ -301,6 +299,53 @@ namespace ETLG
                 }
             }
         }
+        public void GetUserProfileByUserId()
+        {
+            StartCoroutine(GetUserProfileByUserIdRoutine());
+        }
+        private IEnumerator GetUserProfileByUserIdRoutine()
+        {
+            
+
+            using (UnityWebRequest www = UnityWebRequest.Get(getProfileById_url+currentUser.id))
+            {
+                www.SetRequestHeader("Authorization", authorization);
+                yield return www.SendWebRequest();
+                Debug.Log(www.result);
+                if (www.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = www.downloadHandler.text;
+                    UserProfileResponseData responseData = JsonUtility.FromJson<UserProfileResponseData>(responseJson);
+                    if (responseData.success)
+                    {
+                        if (responseData.data!=null)
+                        {
+                            userProfile = responseData.data;
+
+                            GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_SUCCESS));
+                        }
+                        else
+                        {
+                            //if it is null , tell player to upload data
+                            GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                            GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                        }
+                    }
+                    else
+                    {
+                        //if it is null , tell player to upload data
+                        GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                        GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                        GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                    }
+                }
+                else
+                {
+                    HandleErrorMessages(www);
+                }
+            }
+        }
         private void GetCurrentUser()
         {
             StartCoroutine(GetCurrentUserRoutine());
@@ -308,19 +353,16 @@ namespace ETLG
         private IEnumerator GetCurrentUserRoutine()
         {
             // 创建POST请求的表单数据
-            WWWForm form = new WWWForm();
-            isNewFetch = true;
-            using (UnityWebRequest www = UnityWebRequest.Post(currentUser_url, form))
+            using (UnityWebRequest www = UnityWebRequest.Get(currentUser_url))
             {
                 www.SetRequestHeader("Authorization", authorization);
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    errorType = 0;
                     // 获取API响应数据
                     string responseJson = www.downloadHandler.text;
-                    ErrorResponseData data = JsonUtility.FromJson<ErrorResponseData>(responseJson);
+                    ResponseData data = JsonUtility.FromJson<ResponseData>(responseJson);
                     if(data.data.Equals("Please log in"))
                     {
                         authorization = null;
@@ -342,16 +384,18 @@ namespace ETLG
             Debug.LogError("Error: " + www.error);
             if (www.result == UnityWebRequest.Result.ProtocolError)
             {
-                errorType = Constant.Type.ERROR_NETWORK;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_NETWORK;
+                
             }
             if (www.result == UnityWebRequest.Result.ConnectionError)
             {
-                errorType = Constant.Type.ERROR_SERVER;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_SERVER;
             }
             if (www.result == UnityWebRequest.Result.DataProcessingError)
             {
-                errorType = Constant.Type.ERROR_DATA;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
             }
+            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
             GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
         }
         [System.Serializable]
@@ -380,14 +424,21 @@ namespace ETLG
             public string password;
         }
         [System.Serializable]
-        public class ErrorResponseData
+        public class ResponseData
         {
             public bool success;
             public int errorCode;
             public string errorMessage;
             public string data;
         }
-
+        [System.Serializable]
+        public class UserProfileResponseData
+        {
+            public bool success;
+            public int errorCode;
+            public string errorMessage;
+            public UserProfile data;
+        }
         [System.Serializable]
         public class LoginResponseData
         {
@@ -409,10 +460,16 @@ namespace ETLG
             public string username;
             public string avatar;
             public string nickName;
-            public List<int> roleIds;
-            public List<int> permissionIds;
         }
-
+        [System.Serializable]
+        public class UserProfile
+        {
+            public int avatar;
+            public string nickName;
+            public string playerScore;
+            public string achievement;
+            public string learningProgress;
+        }
 
     }
 }

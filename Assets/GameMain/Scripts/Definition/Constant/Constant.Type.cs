@@ -168,8 +168,11 @@
             public const int BACK_REGISTER_SUCCESS = 3;
             public const int BACK_REGISTER_FAILED = 4;
             public const int BACK_LOGED_IN = 5;
-            public const int BACK_SAVE_DOWNLOAD_NULL = 6;
-            public const int BACK_SAVE_DOWNLOAD_SUCCESS = 7;
+            public const int BACK_SAVE_DOWNLOAD_SUCCESS = 6;
+            public const int BACK_SAVE_DOWNLOAD_FAILED = 7;
+            public const int BACK_PROFILE_SUCCESS = 8;
+            public const int BACK_PROFILE_FAILED = 9;
+
         }
     }
 }

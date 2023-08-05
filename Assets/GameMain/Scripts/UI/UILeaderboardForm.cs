@@ -78,12 +78,12 @@ namespace ETLG
                 isRefresh = false;
             }
             //if success
-            if (!isRefresh && isError && BackendDataManager.Instance.isNewFetch && BackendDataManager.Instance.errorType == 0)
+            /*if ()
             {
                 isError = false;
                 SetItemsStatus(true);
-                BackendDataManager.Instance.isNewFetch = false;
             }
+            */
         }
 
         protected override void OnClose(bool isShutdown, object userData)

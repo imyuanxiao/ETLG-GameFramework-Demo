@@ -86,7 +86,6 @@ namespace ETLG
                 {
                     OnRegister();
                 }
-                BackendDataManager.Instance.isNewFetch = false;
                 isRefresh = !isRefresh;
                 fetchedType = 0;
             }
@@ -147,16 +146,19 @@ namespace ETLG
             if(pwd.text==confirmPwd.text)
             {
                 BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
-                if(BackendDataManager.Instance.isSuccess)
+                //if success
+                /*if(BackendDataManager.Instance.isSuccess)
                 {
                     SetReminderTextandColor("Register successful! Please login.", GOLD);
 
                     SetRegisterSeccessPanel();
                 }
+                //if failed
                 else
                 {
                     SetReminderTextandColor(BackendDataManager.Instance.message, RED);
                 }
+                */
             }
             else
             {

@@ -35,9 +35,10 @@ namespace ETLG
             GameEntry.Sound.PlaySound(EnumSound.ui_Alert);
             dataAlert = GameEntry.Data.GetData<DataAlert>();
             alertType = dataAlert.AlertType;
-            //if is NPC error
+            
             switch (alertType)
             {
+                //if is NPC error
                 case Constant.Type.ALERT_TRADE_MONEYNOTENOUGH:
                     errorTitle.text = "Trade failed!";
                     errorMessage.text = "Your funds are insufficient!" + "\n" + "\n" + "Please adjust the trade quantity again.";
@@ -68,34 +69,29 @@ namespace ETLG
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error"));
                     ButtonsContainer.SetActive(true);
                     break;
+                    //if it is backend error
+                case Constant.Type.ERROR_NETWORK:
+                    errorTitle.text = "Network error";
+                    errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
+                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
+                    break;
+                case Constant.Type.ERROR_SERVER:
+                    errorTitle.text = "Server error";
+                    errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
+                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
+                    break;
+                case Constant.Type.ERROR_DATA:
+                    errorTitle.text = "Data error";
+                    errorMessage.text = "You have not uploaded your save data yet. Please upload it manually and try again.";
+                    icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
+                    break;
+                default:
+                    break;
             }
 
-            Debug.Log("errorType: " + BackendDataManager.Instance.errorType);
-            //if is backend error
-            if (BackendDataManager.Instance.isNewFetch)
+           if(dataAlert.isFromBackend)
             {
                 ButtonsContainer.SetActive(false);
-                switch (BackendDataManager.Instance.errorType)
-                {
-                    case Constant.Type.ERROR_NETWORK:
-                        errorTitle.text = "Network error";
-                        errorMessage.text = "Ops! Network connection failed, unable to load content. Please check your network connection and try again.";
-                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_network"));
-                        break;
-                    case Constant.Type.ERROR_SERVER:
-                        errorTitle.text = "Server error";
-                        errorMessage.text = "Oops! Something went wrong on our server. Please try again later.";
-                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
-                        break;
-                    case Constant.Type.ERROR_DATA:
-                        errorTitle.text = "Data error";
-                        errorMessage.text = "Oops! We encountered an issue while processing data. Please try again later.";
-                        icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
-                        break;
-                    default:
-                        break;
-                }
-                BackendDataManager.Instance.isNewFetch = false;
             }
 
         }
@@ -130,6 +126,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             dataAlert.AlertType = -1;
+            dataAlert.isFromBackend = false;
             base.OnClose(isShutdown, userData);
 
         }

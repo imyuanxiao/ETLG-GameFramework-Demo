@@ -12,8 +12,7 @@ namespace ETLG
     public class UIProfileForm : UGuiFormEx
     {
 
-        public TextMeshProUGUI PwdReminder = null;
-        public TextMeshProUGUI NameReminder = null;
+        public TextMeshProUGUI reminder = null;
         public TextMeshProUGUI boss_1 = null;
         public TextMeshProUGUI boss_2 = null;
         public TextMeshProUGUI boss_3 = null;
@@ -21,17 +20,17 @@ namespace ETLG
         public TextMeshProUGUI boss_5 = null;
         public TextMeshProUGUI boss_6 = null;
         public TextMeshProUGUI boss_7 = null;
+        public TextMeshProUGUI achievementScore;
+        public TextMeshProUGUI playerScore;
+        public TextMeshProUGUI learningPath;
+        public TextMeshProUGUI placeholder_userName;
         public TextMeshProUGUI placeholder_name;
-        public Button editNameButton;
-        public Button editAvatarButton;
+        public TextMeshProUGUI placeholder_pwd;
+        public Button editPlayerInfoButton;
         public Button editPwdButton;
         public Button showPwdButton;
-        public Button avatarCancelButton;
-        public Button avatarSubmitButton;
-        public Button nameCancelButton;
-        public Button nameSubmitButton;
-        public Button pwdCancelButton;
-        public Button pwdSubmitButton;
+        public Button cancelButton;
+        public Button saveButton;
         public Button avatar1;
         public Button avatar2;
         public Button avatar3;
@@ -46,32 +45,33 @@ namespace ETLG
         private Color normalColor;
         private Color selectedColor;
         private string origionalName;
-        public GameObject confirmPassword;
+        private string origionalPwd;
+        public GameObject newPasswords;
         public GameObject avatarChange;
-        public GameObject editNameButtons;
-        public GameObject editPwdButtons;
-        public GameObject editNameButtonObj;
-        public GameObject editPwdButtonObj;
-        public GameObject playerInfo;
+        public GameObject editButtons;
+        public GameObject submitButtons;
+ 
         public GameObject wholeContainer;
 
         public RawImage playerImage;
 
         private float shakeAmount = 5f;
         private float shakeDuration = 0.5f;
-        //nameReminder position
-        private Vector3 originalPosition1;
-        //pwd reminder position
-        private Vector3 originalPosition2;
+        //reminder position
+        private Vector3 originalPosition;
+
         private bool isRefresh;
+        private bool isEditInfo;
         private int fetchedType;
         private DataPlayer dataPlayer;
-        //login
+        //playerInfo
         [SerializeField]
-        private TMP_InputField userName;
+        private TMP_InputField nickName;
         [SerializeField]
         private TMP_InputField pwd;
         //register
+        [SerializeField]
+        private TMP_InputField newPwd;
         [SerializeField]
         private TMP_InputField confirmPwd;
 
@@ -80,16 +80,11 @@ namespace ETLG
             base.OnInit(userData);
             // 获取玩家数据管理器
 
-            editNameButton.onClick.AddListener(OnEditNameButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
-            editAvatarButton.onClick.AddListener(OneEditAvatarButtonClick);
-            avatarCancelButton.onClick.AddListener(OnAvatarCancelButtonClick);
-            avatarSubmitButton.onClick.AddListener(OnAvatarSubmitButtonClick);
-            nameCancelButton.onClick.AddListener(OnNameCancelButtonClick);
-            nameSubmitButton.onClick.AddListener(OnNameSubmitButtonClick);
+            editPlayerInfoButton.onClick.AddListener(OnEditPlayerInfoButtonClick);
             editPwdButton.onClick.AddListener(OnEditPwdButtonClick);
-            pwdCancelButton.onClick.AddListener(OnPwdCancelButtonClick);
-            pwdSubmitButton.onClick.AddListener(OnPwdSubmitButtonClick);
+            cancelButton.onClick.AddListener(OnCancelButtonClick);
+            saveButton.onClick.AddListener(OnSaveButtonClick);
             avatar1.onClick.AddListener(OnAvatar1ButtonClick);
             avatar2.onClick.AddListener(OnAvatar2ButtonClick);
             avatar3.onClick.AddListener(OnAvatar3ButtonClick);
@@ -117,9 +112,9 @@ namespace ETLG
             {
                 if (fetchedType == Constant.Type.BACK_LOGIN_SUCCESS || fetchedType == Constant.Type.BACK_LOGED_IN)
                 {
-                    BackendDataManager.Instance.GetSaveDownload();
+                    BackendDataManager.Instance.GetUserProfileByUserId();
                 }
-                if (fetchedType == Constant.Type.BACK_SAVE_DOWNLOAD_NULL || fetchedType == Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS)
+                if (fetchedType == Constant.Type.BACK_PROFILE_SUCCESS)
                 {
                     wholeContainer.SetActive(true);
                     ShowContent();
@@ -134,8 +129,7 @@ namespace ETLG
         }
         private void ShowContent()
         {
-            PwdReminder.text = null;
-            NameReminder.text = null;
+            reminder.text = null;
 
 
             if (BackendDataManager.Instance.currentUser.avatar != "1")
@@ -146,18 +140,20 @@ namespace ETLG
             {
                 playerAvatarId = "1000";
             }
+            placeholder_userName.text = BackendDataManager.Instance.currentUser.username;
+            placeholder_name.text = BackendDataManager.Instance.currentUser.nickName;
+            achievementScore.text = BackendDataManager.Instance.userProfile.achievement;
+            playerScore.text = BackendDataManager.Instance.userProfile.playerScore;
+            learningPath.text = BackendDataManager.Instance.userProfile.learningProgress;
+            originalPosition = reminder.rectTransform.localPosition;
 
-            originalPosition1 = NameReminder.rectTransform.localPosition;
-            originalPosition2 = PwdReminder.rectTransform.localPosition;
-
-            userName.interactable = false;
+            nickName.interactable = false;
             pwd.interactable = false;
 
-            editNameButtons.SetActive(false);
-            editPwdButtons.SetActive(false);
-            confirmPassword.SetActive(false);
+            editButtons.SetActive(true);
+            submitButtons.SetActive(false);
+            newPasswords.SetActive(false);
             avatarChange.SetActive(false);
-            playerInfo.SetActive(true);
             SetPlayerAvatar();
 
             SetBossTime(boss_1, 3);  // AI
@@ -168,75 +164,89 @@ namespace ETLG
             SetBossTime(boss_6, 4);  // Blockchain
             SetBossTime(boss_7, 6);  // Final
         }
-        private void OnEditNameButtonClick()
+        private void OnEditPlayerInfoButtonClick()
         {
-            userName.interactable = true;
+            isEditInfo = true;
+            nickName.interactable = true;
+
             origionalName = placeholder_name.text;
-            SetTextMessage(placeholder_name, "Please Enter User Name");
+
+            nickName.text = BackendDataManager.Instance.currentUser.nickName;
+
+            
             placeholder_name.fontStyle = FontStyles.Bold | FontStyles.Italic;
-            editNameButtonObj.SetActive(false);
-            editNameButtons.SetActive(true);
-        }
-        private void OnNameCancelButtonClick()
-        {
-            NameReminder.text = null;
-            userName.interactable = false;
-            placeholder_name.text = origionalName;
-            placeholder_name.fontStyle = FontStyles.Bold;
-            editNameButtonObj.SetActive(true);
-            editNameButtons.SetActive(false);
-        }
-        private void OnNameSubmitButtonClick()
-        {
-            NameReminder.text = null;
-            userName.interactable = false;
-            placeholder_name.fontStyle = FontStyles.Bold;
-            editNameButtonObj.SetActive(true);
-            editNameButtons.SetActive(false);
-            //if it is unique
-            placeholder_name.text = userName.text;
-            //else
-            //SetTextMessage(NameReminder, "Name exists");
-            // ShakeText(NameReminder, originalPosition1);
-        }
-        private void OneEditAvatarButtonClick()
-        {
-            playerInfo.SetActive(false);
+            
+            editButtons.SetActive(false);
+            submitButtons.SetActive(true);
             avatarChange.SetActive(true);
         }
-        private void OnEditPwdButtonClick()
+        private void OnCancelButtonClick()
         {
-            pwd.interactable = true;
-            editPwdButtonObj.SetActive(false);
-            editPwdButtons.SetActive(true);
-            confirmPassword.SetActive(true);
-        }
-        private void OnPwdCancelButtonClick()
-        {
-            PwdReminder.text = null;
+            reminder.text = null;
+            nickName.interactable = false;
             pwd.interactable = false;
-            editPwdButtonObj.SetActive(true);
-            editPwdButtons.SetActive(false);
-            confirmPassword.SetActive(false);
-        }
-        private void OnPwdSubmitButtonClick()
-        {
-            PwdReminder.text = null;
-            //&& != last passward && is valid
-            if (pwd.text == confirmPwd.text)
+            if(isEditInfo)
             {
-                pwd.interactable = false;
-                editPwdButtonObj.SetActive(true);
-                editPwdButtons.SetActive(false);
-                confirmPassword.SetActive(false);
+                placeholder_name.text = origionalName;
+                placeholder_name.fontStyle = FontStyles.Bold;
             }
             else
             {
-                SetTextMessage(NameReminder, "Name exists");
-                ShakeText(PwdReminder, originalPosition2);
+                placeholder_pwd.text = origionalPwd;
+                placeholder_pwd.fontStyle = FontStyles.Bold;
             }
-
+            editButtons.SetActive(true);
+            submitButtons.SetActive(false);
+            avatarChange.SetActive(false);
+            newPasswords.SetActive(false);
         }
+        private void OnSaveButtonClick()
+        {
+            if(!newPwd.text.Equals(confirmPwd.text))
+            {
+                reminder.text = "New password and confirmed password don't match.";
+                ShakeText(reminder, originalPosition);
+                return;
+            }
+            BackendDataManager.Instance.HandleProfileUpdate();
+            //if player info success: 重新getProfile
+            //BackendDataManager.Instance.GetUserProfileByUserId();
+            if(isEditInfo)
+            {
+                playerAvatarId = selectedId;
+                avatarChange.SetActive(false);
+                SetPlayerAvatar();
+                nickName.interactable = false;
+                placeholder_name.text = nickName.text;
+                placeholder_name.fontStyle = FontStyles.Bold;
+                avatarChange.SetActive(false);
+            }
+            else
+            {
+                pwd.interactable = false;
+                placeholder_pwd.text = newPwd.text;
+                placeholder_pwd.fontStyle = FontStyles.Bold;
+                newPasswords.SetActive(false);
+            }
+            editButtons.SetActive(true);
+            reminder.text = null;
+            
+            //if fail: reminder
+          
+        }
+
+        private void OnEditPwdButtonClick()
+        {
+            isEditInfo = false;
+            pwd.interactable = true;
+            origionalPwd = placeholder_pwd.text;
+            placeholder_pwd.text = "Please Enter Old Password.";
+            placeholder_pwd.fontStyle = FontStyles.Bold | FontStyles.Italic;
+            editButtons.SetActive(false);
+            submitButtons.SetActive(true);
+            newPasswords.SetActive(true);
+        }
+
         private void OnReturnButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
@@ -277,14 +287,11 @@ namespace ETLG
         private void OnAvatarCancelButtonClick()
         {
             avatarChange.SetActive(false);
-            playerInfo.SetActive(true);
+           
         }
         private void OnAvatarSubmitButtonClick()
         {
-            playerAvatarId = selectedId;
-            playerInfo.SetActive(true);
-            avatarChange.SetActive(false);
-            SetPlayerAvatar();
+            
         }
         private void SetPlayerAvatar()
         {
@@ -312,10 +319,7 @@ namespace ETLG
                 text.text = ConvertFloatToTimeString(bossDefeatTime[bossId]);
             }
         }
-        private void SetTextMessage(TextMeshProUGUI text, string message)
-        {
-            text.text = message;
-        }
+
         private void SetSelectedButtonandColor(Button button)
         {
             ColorBlock colorBlock;
