@@ -161,6 +161,15 @@
             public const int ALERT_QUIZ_QUIT = 6;
             public const int ALERT_QUIZ_QUIT_GOTTENAWARD = 7;
             public const int ALERT_DIALOG_QUIT_GOTTENAWARD = 8;
+
+            //backend data type
+            public const int BACK_LOGIN_SUCCESS = 1;
+            public const int BACK_LOGIN_FAILED = 2;
+            public const int BACK_REGISTER_SUCCESS = 3;
+            public const int BACK_REGISTER_FAILED = 4;
+            public const int BACK_LOGED_IN = 5;
+            public const int BACK_SAVE_DOWNLOAD_NULL = 6;
+            public const int BACK_SAVE_DOWNLOAD_SUCCESS = 7;
         }
     }
 }

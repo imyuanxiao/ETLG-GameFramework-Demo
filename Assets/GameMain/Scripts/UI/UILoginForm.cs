@@ -24,19 +24,18 @@ namespace ETLG
         public Button submitButton;
         public Button closeButton;
 
-        private Button selectedButton;
-        private string playerAvatarId;
-        private Color normalColor;
-        private Color selectedColor;
+        private bool isRefresh;
+
         public GameObject confirmPassword;
-        public GameObject playerAvater;
         public GameObject registerSuccess;
         public GameObject submitB;
+
         public RawImage playerImage;
         bool isRegister;
 
         private int RED = 0;
         private int GOLD = 1;
+        private int fetchedType;
         private float shakeAmount = 5f;
         private float shakeDuration = 0.5f;
         private Vector3 originalPosition;
@@ -66,26 +65,40 @@ namespace ETLG
             Log.Debug("Open login form");
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+
+            GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             registerSuccess.SetActive(false);
             submitTitle.text = "Submit";
-            normalColor = new Color32(55, 55, 55, 255);
-            selectedColor = new Color32(249, 230, 196, 255);
-            playerAvatarId = null;
             originalPosition = reminder.rectTransform.localPosition;
             showContent();
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             KeyboardControl();
+            //if success
+            if (isRefresh)
+            {
+                if(!isRegister)
+                {
+                    OnLogIn();
+                }
+                else
+                {
+                    OnRegister();
+                }
+                BackendDataManager.Instance.isNewFetch = false;
+                isRefresh = !isRefresh;
+                fetchedType = 0;
+            }
         }
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
 
         }
         private void showContent()
         {
-            playerAvatarId = null;
             userName.text = null;
             pwd.text = null;
             confirmPwd.text = null;
@@ -95,92 +108,59 @@ namespace ETLG
                 titleName.text = "Login";
                 switchTitle.text = "Register";
                 confirmPassword.SetActive(false);
-                playerAvater.SetActive(false);
             }
             else
             {
                 titleName.text = "Register";
                 switchTitle.text = "Login";
                 confirmPassword.SetActive(true);
-                playerAvater.SetActive(true);
             }
         }
         private void OnLogIn()
         {
-            //BackendDataManager.Instance.GetUserById(long.Parse(userName.text));
-            //if (BackendDataManager.Instance.userData == null)
-            //{
-             //   SetReminderTextandColor("User does not exist.", RED);
-            //}
-            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
-            {
-                if (PlayerPrefs.GetString(userName.text + "password") == pwd.text)
+            
+                if (fetchedType == Constant.Type.BACK_LOGIN_SUCCESS)
                 {
                     
                     SetReminderTextandColor("Login successful!", GOLD);
-                    //登录成功之后....
-                    if(BackendDataManager.Instance.isSave)
-                    {
-                        //if is save
-                        BackendDataManager.Instance.HandleSave();
-                    }
-                    else
-                    {
-                        //if is load
-                        BackendDataManager.Instance.HandleLoad();
-                    }
+                //登录成功之后....关闭？
+                this.Close();
                 }
-                else
+                else if(fetchedType == Constant.Type.BACK_LOGIN_FAILED)
                 {
-                    SetReminderTextandColor("Incorrect password", RED);
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(this.pwd.text))
+                if (string.IsNullOrEmpty(this.pwd.text))
                 {
-                    SetReminderTextandColor("User does not exist.", RED);
-                }
-                else
-                {
+                    //
                     SetReminderTextandColor("Please enter passward.", RED);
                 }
-            }
+                else
+                {
+                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
+                }
+                userName.text = null;
+                pwd.text = null;
+                }
+                
         }
         private void OnRegister()
         {
-            if (playerAvatarId == null)
+            if(pwd.text==confirmPwd.text)
             {
-                SetReminderTextandColor("Please choose an avatar.", RED);
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(PlayerPrefs.GetString(userName.text)))
+                BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
+                if(BackendDataManager.Instance.isSuccess)
                 {
-                    if (pwd.text == confirmPwd.text && IsValidPassword())
-                    {
-                        PlayerPrefs.SetString(userName.text, userName.text);
-                        PlayerPrefs.SetString(userName.text + "password", pwd.text);
-                        SetReminderTextandColor("Register successful! Please login.", GOLD);
-                        
-                        SetRegisterSeccessPanel();
-                    }
-                    else
-                    {
-                        if (!IsValidPassword())
-                        {
-                            SetReminderTextandColor("password must contain uppercase letters, lowercase letters, numbers, and special characters, and its length should be at least 8 characters.", RED);
-                        }
-                        else
-                        {
-                            SetReminderTextandColor("Passwords do not match.", RED);
-                        }
-                    }
+                    SetReminderTextandColor("Register successful! Please login.", GOLD);
+
+                    SetRegisterSeccessPanel();
                 }
                 else
                 {
-                    SetReminderTextandColor("Username exists.", RED);
+                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
                 }
+            }
+            else
+            {
+                SetReminderTextandColor("Passwords do not match.", RED);
             }
 
         }
@@ -189,7 +169,6 @@ namespace ETLG
             registerSuccess.SetActive(false);
             submitB.SetActive(true);
             isRegister = !isRegister;
-            playerAvatarId = null;
             showContent();
         }
         private void OnSubmitButtonClick()
@@ -200,7 +179,7 @@ namespace ETLG
             }
             else
             {
-                OnLogIn();
+                BackendDataManager.Instance.HandleLogIn(userName.text, pwd.text);
             }
         }
       
@@ -210,13 +189,12 @@ namespace ETLG
         }
         private void SetRegisterSeccessPanel()
         {
-            Debug.Log("playerAvatarId: " + playerAvatarId);
             registerSuccess.SetActive(true);
             submitB.SetActive(false);
             placeholder_playerName.text = userName.text;
             placeholder_playerPasswaord.text = pwd.text;
             placeholder_playerId.text = pwd.text;
-            playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(playerAvatarId));
+            playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar("1000"));
         }
         private bool IsValidPassword()
         {
@@ -263,6 +241,15 @@ namespace ETLG
             {
                 OnSubmitButtonClick();
             }
+        }
+        public void OnBackendFetchedEventArgs(object sender, GameEventArgs e)
+        {
+            BackendFetchedEventArgs ne = (BackendFetchedEventArgs)e;
+            if (ne == null)
+                return;
+            isRefresh = true;
+            fetchedType = ne.Type;
+
         }
     }
 }

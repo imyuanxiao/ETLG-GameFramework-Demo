@@ -41,8 +41,8 @@ namespace ETLG
         public Button returnButton;
 
         private Button selectedButton;
-        private int playerAvatarId;
-        private int selectedId;
+        private string playerAvatarId;
+        private string selectedId;
         private Color normalColor;
         private Color selectedColor;
         private string origionalName;
@@ -53,6 +53,7 @@ namespace ETLG
         public GameObject editNameButtonObj;
         public GameObject editPwdButtonObj;
         public GameObject playerInfo;
+        public GameObject wholeContainer;
 
         public RawImage playerImage;
 
@@ -62,7 +63,8 @@ namespace ETLG
         private Vector3 originalPosition1;
         //pwd reminder position
         private Vector3 originalPosition2;
-
+        private bool isRefresh;
+        private int fetchedType;
         private DataPlayer dataPlayer;
         //login
         [SerializeField]
@@ -76,7 +78,7 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // ��ȡ������ݹ�����
+            // 获取玩家数据管理器
 
             editNameButton.onClick.AddListener(OnEditNameButtonClick);
             returnButton.onClick.AddListener(OnReturnButtonClick);
@@ -103,20 +105,46 @@ namespace ETLG
         {
             base.OnOpen(userData);
             Log.Debug("Open profile form");
-            //GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
+            GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
+            BackendDataManager.Instance.HandleProfile();
+            wholeContainer.SetActive(false);
+        }
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (isRefresh)
+            {
+                if (fetchedType == Constant.Type.BACK_LOGIN_SUCCESS || fetchedType == Constant.Type.BACK_LOGED_IN)
+                {
+                    BackendDataManager.Instance.GetSaveDownload();
+                }
+                if (fetchedType == Constant.Type.BACK_SAVE_DOWNLOAD_NULL || fetchedType == Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS)
+                {
+                    wholeContainer.SetActive(true);
+                    ShowContent();
+                }
+                isRefresh = !isRefresh;
+            }
+        }
+        protected override void OnClose(bool isShutdown, object userData)
+        {
+            base.OnClose(isShutdown, userData);
+            GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
+        }
+        private void ShowContent()
+        {
             PwdReminder.text = null;
             NameReminder.text = null;
 
-            //placeholder_name.text = 
 
-            if(BackendDataManager.Instance.avatorId!=0)
+            if (BackendDataManager.Instance.currentUser.avatar != "1")
             {
-                playerAvatarId = BackendDataManager.Instance.avatorId;
+                playerAvatarId = BackendDataManager.Instance.currentUser.avatar;
             }
             else
             {
-                playerAvatarId = 1000;
+                playerAvatarId = "1000";
             }
 
             originalPosition1 = NameReminder.rectTransform.localPosition;
@@ -140,16 +168,6 @@ namespace ETLG
             SetBossTime(boss_6, 4);  // Blockchain
             SetBossTime(boss_7, 6);  // Final
         }
-        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
-        {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
-        }
-        protected override void OnClose(bool isShutdown, object userData)
-        {
-            base.OnClose(isShutdown, userData);
-
-        }
-
         private void OnEditNameButtonClick()
         {
             userName.interactable = true;
@@ -179,7 +197,7 @@ namespace ETLG
             placeholder_name.text = userName.text;
             //else
             //SetTextMessage(NameReminder, "Name exists");
-           // ShakeText(NameReminder, originalPosition1);
+            // ShakeText(NameReminder, originalPosition1);
         }
         private void OneEditAvatarButtonClick()
         {
@@ -205,7 +223,7 @@ namespace ETLG
         {
             PwdReminder.text = null;
             //&& != last passward && is valid
-            if(pwd.text == confirmPwd.text)
+            if (pwd.text == confirmPwd.text)
             {
                 pwd.interactable = false;
                 editPwdButtonObj.SetActive(true);
@@ -217,7 +235,7 @@ namespace ETLG
                 SetTextMessage(NameReminder, "Name exists");
                 ShakeText(PwdReminder, originalPosition2);
             }
-            
+
         }
         private void OnReturnButtonClick()
         {
@@ -228,37 +246,38 @@ namespace ETLG
         }
         private void OnAvatar1ButtonClick()
         {
-            selectedId = 1000;
+            selectedId = "1000";
             SetSelectedButtonandColor(avatar1);
         }
         private void OnAvatar2ButtonClick()
         {
-            selectedId = 1001;
+            selectedId = "1001";
             SetSelectedButtonandColor(avatar2);
         }
         private void OnAvatar3ButtonClick()
         {
-            selectedId = 1002;
+            selectedId = "1002";
             SetSelectedButtonandColor(avatar3);
         }
         private void OnAvatar4ButtonClick()
         {
-            selectedId = 1003;
+            selectedId = "1003";
             SetSelectedButtonandColor(avatar4);
         }
         private void OnAvatar5ButtonClick()
         {
-            selectedId = 1004;
+            selectedId = "1004";
             SetSelectedButtonandColor(avatar5);
         }
         private void OnAvatar6ButtonClick()
         {
-            selectedId = 1005;
+            selectedId = "1005";
             SetSelectedButtonandColor(avatar6);
         }
         private void OnAvatarCancelButtonClick()
         {
             avatarChange.SetActive(false);
+            playerInfo.SetActive(true);
         }
         private void OnAvatarSubmitButtonClick()
         {
@@ -269,20 +288,28 @@ namespace ETLG
         }
         private void SetPlayerAvatar()
         {
-            playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(playerAvatarId.ToString()));
-            BackendDataManager.Instance.avatorId = playerAvatarId;
+            if (playerAvatarId == null)
+            {
+                playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(BackendDataManager.Instance.currentUser.avatar));
+            }
+            else
+            {
+                playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(playerAvatarId));
+                BackendDataManager.Instance.avatorId = playerAvatarId;
+            }
+
         }
-        private void SetBossTime(TextMeshProUGUI text , int bossId)
+        private void SetBossTime(TextMeshProUGUI text, int bossId)
         {
             // Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
             float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
-            if(bossDefeatTime[bossId] == -1)
+            if (bossDefeatTime[bossId] == -1)
             {
                 text.text = "Unchallenged";
             }
             else
             {
-                text.text = ConvertFloatToTimeString( bossDefeatTime[bossId]);
+                text.text = ConvertFloatToTimeString(bossDefeatTime[bossId]);
             }
         }
         private void SetTextMessage(TextMeshProUGUI text, string message)
@@ -341,6 +368,15 @@ namespace ETLG
             }
 
             reminder.rectTransform.localPosition = originalPosition;
+        }
+        public void OnBackendFetchedEventArgs(object sender, GameEventArgs e)
+        {
+            BackendFetchedEventArgs ne = (BackendFetchedEventArgs)e;
+            if (ne == null)
+                return;
+            isRefresh = true;
+            fetchedType = ne.Type;
+
         }
     }
 }
