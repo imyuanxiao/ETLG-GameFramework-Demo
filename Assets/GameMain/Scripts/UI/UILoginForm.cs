@@ -143,27 +143,18 @@ namespace ETLG
         }
         private void OnRegister()
         {
-            if(pwd.text==confirmPwd.text)
-            {
-                BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
                 //if success
-                /*if(BackendDataManager.Instance.isSuccess)
+                if(fetchedType == Constant.Type.BACK_REGISTER_SUCCESS)
                 {
                     SetReminderTextandColor("Register successful! Please login.", GOLD);
 
                     SetRegisterSeccessPanel();
                 }
-                //if failed
-                else
+            //if failed
+                else if (fetchedType == Constant.Type.BACK_REGISTER_FAILED)
                 {
                     SetReminderTextandColor(BackendDataManager.Instance.message, RED);
                 }
-                */
-            }
-            else
-            {
-                SetReminderTextandColor("Passwords do not match.", RED);
-            }
 
         }
         private void OnSwitchButtonClick()
@@ -177,7 +168,23 @@ namespace ETLG
         {
             if (isRegister)
             {
-                OnRegister();
+                if(string.IsNullOrEmpty( userName.text))
+                {
+                    SetReminderTextandColor("Please enter user name.", RED);
+                    return;
+                }
+                if(string.IsNullOrEmpty(pwd.text))
+                {
+                    SetReminderTextandColor("Please enter password.", RED);
+                    return;
+                }
+                if(pwd.text != confirmPwd.text )
+                {
+                    SetReminderTextandColor("Passwords do not match.", RED);
+                    ShakeText();
+                    return;
+                }
+                BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
             }
             else
             {

@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5738063060785078150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -231,8 +231,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 43, y: 33}
-  m_SizeDelta: {x: -1359.5306, y: -831.4702}
+  m_AnchoredPosition: {x: 40.898743, y: 36.29248}
+  m_SizeDelta: {x: -1267.0764, y: -807.1581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5950434901054917930
 CanvasRenderer:
@@ -483,8 +483,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -127.54, y: 0}
-  m_SizeDelta: {x: 107.5, y: 50}
+  m_AnchoredPosition: {x: -131.62, y: -3.4656}
+  m_SizeDelta: {x: 108.9203, y: 56.9312}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5852325475075635273
 CanvasRenderer:
@@ -693,7 +693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.99999, y: 24.00004}
+  m_AnchoredPosition: {x: 78.79, y: 8.2}
   m_SizeDelta: {x: 362.5809, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5069702357025959084
@@ -830,8 +830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 224, y: -25.00009}
-  m_SizeDelta: {x: 232.9954, y: 30}
+  m_AnchoredPosition: {x: 221.7, y: -25}
+  m_SizeDelta: {x: 233, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5556484755097603813
 CanvasRenderer:
@@ -1058,7 +1058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.99999, y: -75.999985}
+  m_AnchoredPosition: {x: 78.79, y: -116.14}
   m_SizeDelta: {x: 362.5809, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1375025979515510351
@@ -1195,8 +1195,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 224, y: -25.000025}
-  m_SizeDelta: {x: 232.9954, y: 30}
+  m_AnchoredPosition: {x: 221.7, y: -28.466}
+  m_SizeDelta: {x: 233, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3091259998259675626
 CanvasRenderer:
@@ -1600,8 +1600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -167.14}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 118.56911, y: -177.53683}
+  m_SizeDelta: {x: 101.3212, y: 113.8624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3285931263439036087
 CanvasRenderer:
@@ -1690,8 +1690,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -142.69, y: 0}
-  m_SizeDelta: {x: 77.193, y: 50}
+  m_AnchoredPosition: {x: -142.18, y: 0.000077248}
+  m_SizeDelta: {x: 78.2129, y: 56.9312}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1075132345866689226
 CanvasRenderer:
@@ -3184,7 +3184,6 @@ MonoBehaviour:
   submitButton: {fileID: 6916617932763472874}
   closeButton: {fileID: 5645554448990640929}
   confirmPassword: {fileID: 969025721249269221}
-  playerAvater: {fileID: 0}
   registerSuccess: {fileID: 455451012590082035}
   submitB: {fileID: 6916617932763472872}
   playerImage: {fileID: 2074455244091280421}
@@ -4787,7 +4786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000032067, y: 93.524666}
+  m_AnchoredPosition: {x: 0.000030876, y: 108.29}
   m_SizeDelta: {x: 620.47, y: 90.0106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2056872387030644949
@@ -4821,7 +4820,7 @@ MonoBehaviour:
   m_text: '
 
     Congratulations! Register successful! Below is your user information.
-    You can change your avatar, name and passward in Player Menu -> Profile'
+    You can change your avatar, nick name and passward in Player Menu -> Profile'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5124,8 +5123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 224, y: -25.00009}
-  m_SizeDelta: {x: 232.9954, y: 30}
+  m_AnchoredPosition: {x: 221.7, y: -25}
+  m_SizeDelta: {x: 233, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9103443106043303303
 CanvasRenderer:
@@ -5300,8 +5299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 74, y: -26}
-  m_SizeDelta: {x: 362.5809, y: 50}
+  m_AnchoredPosition: {x: 81.185, y: -51.1}
+  m_SizeDelta: {x: 367.3712, y: 56.9312}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8682388013560644713
 CanvasRenderer:

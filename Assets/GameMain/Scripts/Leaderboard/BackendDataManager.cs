@@ -202,33 +202,40 @@ namespace ETLG
                 password = password
             };
 
-            // 将数据对象转换为 JSON 格式
             string jsonData = JsonUtility.ToJson(loginData);
 
-            UnityWebRequest request = new UnityWebRequest(Register_url, "POST");
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            // 发送请求并等待响应
-            var asyncOperation = request.SendWebRequest();
-
-            // 处理请求的响应
-            yield return asyncOperation;
-
-            if (request.result == UnityWebRequest.Result.Success)
+            using (UnityWebRequest request = new UnityWebRequest(Register_url, "POST"))
             {
-                // 请求成功，处理响应数据
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                var asyncOperation = request.SendWebRequest();
+
+                yield return asyncOperation;
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_SUCCESS));
+                    }
+                    else
+                    {
+                        message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_FAILED));
+                    }
+
+                }
+                else
+                {
+                    Debug.LogError("Error: " + request.error);
+                    HandleErrorMessages(request);
+                }
             }
-            else
-            {
-                // 请求失败，处理错误
-                Debug.LogError("Error: " + request.error);
-                HandleErrorMessages(request);
-                
-            }
-        }
+    }
         private void IsLoginDetection()
         {
             if (authorization == null)
@@ -248,8 +255,6 @@ namespace ETLG
         }
         private IEnumerator GetSaveDownloadRoutine()
         {
-            
-
             using (UnityWebRequest www = UnityWebRequest.Get(saveDownload_url))
             {
                 www.SetRequestHeader("Authorization", authorization);
