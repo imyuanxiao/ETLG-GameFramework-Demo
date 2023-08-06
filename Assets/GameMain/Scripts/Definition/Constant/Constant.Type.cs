@@ -175,6 +175,10 @@
             public const int BACK_PROFILE_UPDATE_SUCCESS = 10;
             public const int BACK_PROFILE_UPDATE_FAILED = 10;
 
+            //UINPC positionX
+            public const float POSITION_X_RIGHT = 550f;
+            public const float POSITION_X_LEFT = -550f;
+
         }
     }
 }

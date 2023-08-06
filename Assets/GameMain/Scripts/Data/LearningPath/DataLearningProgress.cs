@@ -10,6 +10,7 @@ namespace ETLG.Data
     public sealed class DataLearningProgress : DataBase
     {
         public bool update;
+        public bool open;
 
         public void reset()
         {

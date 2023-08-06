@@ -72,8 +72,6 @@ namespace ETLG
 
         private void OnExpandAllButtonClick()
         {
-
-
             GameEntry.Data.GetData<DataPlanet>().expandAll = !GameEntry.Data.GetData<DataPlanet>().expandAll;
 
             if (GameEntry.Data.GetData<DataPlanet>().expandAll)
@@ -110,6 +108,7 @@ namespace ETLG
             // tutorial in spaceship menu
             GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(2);
             dataLearningProgress.update = true;
+            dataLearningProgress.open = true;
         }
 
         private void setDefaultLearningPath()
@@ -210,6 +209,7 @@ namespace ETLG
 
         protected override void OnClose(bool isShutdown, object userData)
         {
+            dataLearningProgress.open = false;
             base.OnClose(isShutdown, userData);
             GameEntry.Event.Unsubscribe(PlanetExpandedEventArgs.EventId, OnPlanetExpanded);
 

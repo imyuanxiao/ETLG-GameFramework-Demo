@@ -30,6 +30,7 @@ namespace ETLG
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
+        public RectTransform ContainerRectTransform;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -56,7 +57,9 @@ namespace ETLG
         private int fontsizeChangePlusValue = 0;
         private int fontsizeChangeSubValue = 0;
         private int fontsizeStandardOffset = 2;
-
+        private bool isMax = false;
+        private float originalPositionX;
+        private Vector2 currentPosition;
 
         protected override void OnInit(object userData)
         {
@@ -71,7 +74,6 @@ namespace ETLG
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
-
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
@@ -100,6 +102,25 @@ namespace ETLG
                 UI_NPCDialogManager = tempDialogManager;
             }
             removeConversations();
+
+            currentPosition = ContainerRectTransform.anchoredPosition;
+            originalPositionX = currentPosition.x;
+            isMax = false;
+            resizeUI(); 
+            setPositionX(true);
+        }
+
+        private void ModifyPositionX(float newX)
+        {
+            currentPosition.x = currentPosition.x + newX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
+        }
+
+        private void ModifyPositionXToOrigin()
+        {
+            Debug.Log("位置返回");
+            currentPosition.x = originalPositionX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
         }
 
         private void setChapterDescription()
@@ -111,7 +132,6 @@ namespace ETLG
                 ChapterDescription.text = "--------" + npcData.ChapterDescription + "--------";
             }
         }
-
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -196,6 +216,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            ModifyPositionXToOrigin();
             base.OnClose(isShutdown, userData);
         }
 
@@ -234,15 +255,43 @@ namespace ETLG
             }
         }
 
+        private void setPositionX(bool UIopen)
+        {
+            if (dataLearningProgress.open)
+            {
+                if (UIopen)
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+                }
+                else if (!isMax)
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_LEFT);
+                }
+                else
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+                }
+            }
+            if (!UIopen)
+            {
+                isMax = !isMax;
+            }
+        }
+
         //页面最大化
         private void OnMaxButtonClick()
         {
-            //bgm
+            setPositionX(false);
+            resizeUI();
+        }
+
+        private void resizeUI()
+        {
             RectTransform dialogBGTransfrom = dialogBg.GetComponent<RectTransform>();
             float currentdialogUIWidth = dialogBGTransfrom.sizeDelta.x;
             float currentdialogUIHeight = dialogBGTransfrom.sizeDelta.y;
-            //1830f 1760 1540
-            if (currentdialogUIWidth == min_contentWidth)
+            //1830f 1760 1540 
+            if (isMax)
             {
                 dialogBGTransfrom.sizeDelta = new Vector2(max_contentWidth, currentdialogUIHeight);
                 resizeDialog(max_prefabWidth, max_textWidth);

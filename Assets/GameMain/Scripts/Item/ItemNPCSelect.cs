@@ -32,6 +32,7 @@ namespace ETLG
 
         private DataNPC dataNPC;
         private NPCData npcData;
+        private DataLearningProgress dataLearningProgress;
 
 
         protected override void OnInit(object userData)
@@ -39,6 +40,7 @@ namespace ETLG
             base.OnInit(userData);
 
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+            dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -106,6 +108,7 @@ namespace ETLG
             Log.Debug("{0}", this.GetInstanceID());
 
             dataNPC.currentNPCId = npcData.Id;
+            dataLearningProgress.open = false;
 
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_TALK_OPEN));
 
@@ -124,7 +127,7 @@ namespace ETLG
         {
 
             dataNPC.currentNPCId = npcData.Id;
-
+            dataLearningProgress.open = false;
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.NPC_UI_QUIZ_OPEN));
 
         }
