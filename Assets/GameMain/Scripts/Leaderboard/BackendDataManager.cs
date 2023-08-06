@@ -242,16 +242,20 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = UnityWebRequest.Post(Register_url, jsonData))
+            using (UnityWebRequest request = new UnityWebRequest(Register_url, "POST"))
             {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
-                yield return request.SendWebRequest();
+                var asyncOperation = request.SendWebRequest();
+
+                yield return asyncOperation;
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     string responseJson = request.downloadHandler.text;
                     ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
-
                     if (responseData.success)
                     {
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_SUCCESS));
@@ -261,6 +265,7 @@ namespace ETLG
                         message = responseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_FAILED));
                     }
+
                 }
                 else
                 {
@@ -270,7 +275,7 @@ namespace ETLG
             }
 
         }
-        private void IsLoginDetection()
+        public void IsLoginDetection()
         {
             if (authorization == null)
             {
@@ -391,7 +396,6 @@ namespace ETLG
         }
         private IEnumerator GetCurrentUserRoutine()
         {
-            // 创建POST请求的表单数据
             using (UnityWebRequest www = UnityWebRequest.Get(currentUser_url))
             {
                 www.SetRequestHeader("Authorization", authorization);
@@ -409,6 +413,8 @@ namespace ETLG
                     }
                     else
                     {
+                        CurrentUserResponseData responseData = JsonUtility.FromJson<CurrentUserResponseData>(responseJson);
+                        currentUser = responseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGED_IN));
                     }
                 }
@@ -471,6 +477,14 @@ namespace ETLG
             public string data;
         }
         [System.Serializable]
+        public class CurrentUserResponseData
+        {
+            public bool success;
+            public int errorCode;
+            public string errorMessage;
+            public UserData data;
+        }
+        [System.Serializable]
         public class UserProfileResponseData
         {
             public bool success;
@@ -508,6 +522,13 @@ namespace ETLG
             public string playerScore;
             public string achievement;
             public string learningProgress;
+            public float boss1;
+            public float boss2;
+            public float boss3;
+            public float boss4;
+            public float boss5;
+            public float boss6;
+            public float boss7;
         }
         [System.Serializable]
         public class UserInfo

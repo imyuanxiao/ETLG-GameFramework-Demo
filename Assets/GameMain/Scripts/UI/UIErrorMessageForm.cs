@@ -81,7 +81,7 @@ namespace ETLG
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_server"));
                     break;
                 case Constant.Type.ERROR_DATA:
-                    errorTitle.text = "Data error";
+                    errorTitle.text = "Data Not Found";
                     errorMessage.text = "You have not uploaded your save data yet. Please upload it manually and try again.";
                     icon.texture = Resources.Load<Texture>(AssetUtility.GetErrorIcon("error_data"));
                     break;

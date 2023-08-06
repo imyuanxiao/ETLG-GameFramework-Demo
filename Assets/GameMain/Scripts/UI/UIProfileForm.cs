@@ -173,13 +173,13 @@ namespace ETLG
             avatarChange.SetActive(false);
             SetPlayerAvatar();
 
-            SetBossTime(boss_1, 3);  // AI
-            SetBossTime(boss_2, 2);  // Data Science
-            SetBossTime(boss_3, 5);  // IoT
-            SetBossTime(boss_4, 1);  // Cybersecurity
-            SetBossTime(boss_5, 0);  // Cloud Computing
-            SetBossTime(boss_6, 4);  // Blockchain
-            SetBossTime(boss_7, 6);  // Final
+            SetBossTime(boss_1, BackendDataManager.Instance.userProfile.boss1);  // AI
+            SetBossTime(boss_2, BackendDataManager.Instance.userProfile.boss2);  // Data Science
+            SetBossTime(boss_3, BackendDataManager.Instance.userProfile.boss3);  // IoT
+            SetBossTime(boss_4, BackendDataManager.Instance.userProfile.boss4);  // Cybersecurity
+            SetBossTime(boss_5, BackendDataManager.Instance.userProfile.boss5);  // Cloud Computing
+            SetBossTime(boss_6, BackendDataManager.Instance.userProfile.boss6);  // Blockchain
+            SetBossTime(boss_7, BackendDataManager.Instance.userProfile.boss7);  // Final
         }
         private void OnEditPlayerInfoButtonClick()
         {
@@ -323,17 +323,17 @@ namespace ETLG
             }
 
         }
-        private void SetBossTime(TextMeshProUGUI text, int bossId)
+        private void SetBossTime(TextMeshProUGUI text, float bossDefeatTime)
         {
             // Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
-            float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
-            if (bossDefeatTime[bossId] == -1)
+            //float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
+            if (bossDefeatTime == -1)
             {
                 text.text = "Unchallenged";
             }
             else
             {
-                text.text = ConvertFloatToTimeString(bossDefeatTime[bossId]);
+                text.text = ConvertFloatToTimeString(bossDefeatTime);
             }
         }
 
