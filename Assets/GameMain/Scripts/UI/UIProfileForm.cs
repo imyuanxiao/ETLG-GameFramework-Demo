@@ -102,6 +102,8 @@ namespace ETLG
             Log.Debug("Open profile form");
             GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
             GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
+            normalColor = new Color32(55, 55, 55, 255);
+            selectedColor = new Color32(249, 230, 196, 255);
             BackendDataManager.Instance.HandleProfile();
             wholeContainer.SetActive(false);
         }
