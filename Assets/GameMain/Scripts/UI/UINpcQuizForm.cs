@@ -41,11 +41,14 @@ namespace ETLG
         public Transform AnalysisContainer;
         public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
+        public RectTransform ContainerRectTransform;
 
         private int currentQuizIndex = 0;
         private UIQuiz currentQuiz;
-
+        private float originalPositionX;
+        private Vector2 currentPosition;
         private bool isToggling = false;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -60,7 +63,7 @@ namespace ETLG
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
-
+   
             UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -69,11 +72,27 @@ namespace ETLG
             dataQuizReport.reset();
             dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
 
+            if (dataLearningProgress.open)
+            {
+                ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+            }
+
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
 
             loadAvatar();
+            setUIQuizManager();
+            dataQuizReport.boss = UIQuizManager.boss;
+            dataQuizReport.award = UIQuizManager.award;
+
+            loadQuestions();
+            updateProgress();
+            updateAccuracy();
+        }
+
+        private void setUIQuizManager()
+        {
             UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
             if (tempUIQuizManager == null)
             {
@@ -85,12 +104,12 @@ namespace ETLG
             {
                 UIQuizManager = tempUIQuizManager;
             }
-            dataQuizReport.boss = UIQuizManager.boss;
-            dataQuizReport.award = UIQuizManager.award;
+        }
 
-            loadQuestions();
-            updateProgress();
-            updateAccuracy();
+        private void ModifyPositionX(float newX)
+        {
+            currentPosition.x = currentPosition.x + newX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -167,6 +186,10 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            if (dataLearningProgress.open)
+            {
+                ModifyPositionX(Constant.Type.POSITION_X_LEFT);
+            }
             base.OnClose(isShutdown, userData);
         }
 
@@ -178,7 +201,7 @@ namespace ETLG
                 openErrorMessage();
                 return;
             }
-            else if(!(UIQuizManager.award&& dataQuizReport.report))
+            else if (!(UIQuizManager.award && dataQuizReport.report))
             {
                 dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
                 openErrorMessage();
@@ -242,7 +265,7 @@ namespace ETLG
             if (currentQuiz.OptionsCanvas.Count == 0)
             {
                 instantiateChoicesPrefab(currentQuiz.type);
-               
+
             }
             else
             {
