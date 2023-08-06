@@ -15,6 +15,7 @@ namespace ETLG
     public class UINpcDialogForm : UGuiFormEx
     {
         public Image dialogModulePrefab;
+        public Image descriptionModulePrefab;
         public Canvas ImageContainerPrefab;
         public Canvas VideoContainerPrefab;
         public Button playerButtonPrefab;
@@ -29,8 +30,6 @@ namespace ETLG
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
-        public TextMeshProUGUI ChapterDescription;
-        public GameObject DescriptionContainer;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -83,15 +82,6 @@ namespace ETLG
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
-            if (!string.IsNullOrEmpty(npcData.ChapterDescription))
-            {
-                ChapterDescription.text = "--------"+npcData.ChapterDescription+ "--------";
-                DescriptionContainer.SetActive(true);
-            }
-            else
-            {
-                DescriptionContainer.SetActive(false);
-            }
 
             buttonScrollContentRectTransform = buttonScrollContent.GetComponent<RectTransform>();
             dialogScrollContentRectTransform = dialogScrollContent.GetComponent<RectTransform>();
@@ -102,13 +92,26 @@ namespace ETLG
             {
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
                 UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
+                setChapterDescription();
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }
             else
             {
                 UI_NPCDialogManager = tempDialogManager;
             }
+            removeConversations();
         }
+
+        private void setChapterDescription()
+        {
+            if (!string.IsNullOrEmpty(npcData.ChapterDescription))
+            {
+                Image descriptionPrefab = Instantiate(descriptionModulePrefab, dialogScrollContent);
+                TextMeshProUGUI ChapterDescription = descriptionPrefab.GetComponentInChildren<TextMeshProUGUI>();
+                ChapterDescription.text = "--------" + npcData.ChapterDescription + "--------";
+            }
+        }
+
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -258,6 +261,7 @@ namespace ETLG
 
             if (UI_NPCDialogManager.currentNode == null)
             {
+                setChapterDescription();
                 UI_NPCDialogManager.currentNode = UI_NPCDialogManager.dialogueNodes["1"];
             }
             else
