@@ -173,7 +173,21 @@ namespace ETLG
                     SetReminderTextandColor("Please enter user name.", RED);
                     return;
                 }
-                if(string.IsNullOrEmpty(pwd.text))
+                //只能不能包含特殊字符和字数限制？？
+                /*
+                if (userName.text.Length>16))
+                {
+                    SetReminderTextandColor("The username can not longer than 16 characters.", RED);
+                    return;
+                }
+                if(!IsStringValid(userName.text))
+                {
+                    SetReminderTextandColor("The username can only contain letters and numbers.", RED);
+                    return;
+                }
+                
+                */
+                if (string.IsNullOrEmpty(pwd.text))
                 {
                     SetReminderTextandColor("Please enter password.", RED);
                     return;
@@ -243,7 +257,10 @@ namespace ETLG
 
             reminder.rectTransform.localPosition = originalPosition;
         }
-        
+        private static bool IsStringValid(string input)
+        {
+            return Regex.IsMatch(input, "^[a-zA-Z0-9]+$");
+        }
         private void KeyboardControl()
         {
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))

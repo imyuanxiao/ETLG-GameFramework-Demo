@@ -119,6 +119,21 @@ namespace ETLG
                     wholeContainer.SetActive(true);
                     ShowContent();
                 }
+                if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
+                {
+                    playerAvatarId = selectedId;
+                    avatarChange.SetActive(false);
+                    SetPlayerAvatar();
+                    nickName.interactable = false;
+                    placeholder_name.text = nickName.text;
+                    placeholder_name.fontStyle = FontStyles.Bold;
+                    avatarChange.SetActive(false);
+                }
+                if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_FAILED)
+                {
+                    reminder.text = BackendDataManager.Instance.message;
+                    ShakeText(reminder,originalPosition);
+                }
                 isRefresh = !isRefresh;
             }
         }
@@ -202,24 +217,33 @@ namespace ETLG
         }
         private void OnSaveButtonClick()
         {
-            if(!newPwd.text.Equals(confirmPwd.text))
-            {
-                reminder.text = "New password and confirmed password don't match.";
-                ShakeText(reminder, originalPosition);
-                return;
-            }
-            BackendDataManager.Instance.HandleProfileUpdate();
-            //if player info success: 重新getProfile
-            //BackendDataManager.Instance.GetUserProfileByUserId();
+            
             if(isEditInfo)
             {
-                playerAvatarId = selectedId;
-                avatarChange.SetActive(false);
-                SetPlayerAvatar();
-                nickName.interactable = false;
-                placeholder_name.text = nickName.text;
-                placeholder_name.fontStyle = FontStyles.Bold;
-                avatarChange.SetActive(false);
+                //if nothing changed return
+                if(selectedButton == null && nickName.text == origionalName)
+                {
+                    return;
+                }
+                if(selectedButton == null)
+                {
+                    selectedId = BackendDataManager.Instance.currentUser.avatar;
+                }
+                BackendDataManager.Instance.HandleProfileUpdate(int.Parse(selectedId), nickName.text);
+            }
+            else
+            {
+                if (!newPwd.text.Equals(confirmPwd.text))
+                {
+                    reminder.text = "New password and confirmed password don't match.";
+                    ShakeText(reminder, originalPosition);
+                    return;
+                }
+            }
+            //if player info success: 重新getProfile
+            if(isEditInfo)
+            {
+               
             }
             else
             {
@@ -284,15 +308,6 @@ namespace ETLG
             selectedId = "1005";
             SetSelectedButtonandColor(avatar6);
         }
-        private void OnAvatarCancelButtonClick()
-        {
-            avatarChange.SetActive(false);
-           
-        }
-        private void OnAvatarSubmitButtonClick()
-        {
-            
-        }
         private void SetPlayerAvatar()
         {
             if (playerAvatarId == null)
@@ -337,6 +352,7 @@ namespace ETLG
             colorBlock.normalColor = selectedColor;
             selectedButton.colors = colorBlock;
         }
+ 
         private string ConvertFloatToTimeString(float seconds)
         {
             int totalSeconds = Mathf.FloorToInt(seconds);

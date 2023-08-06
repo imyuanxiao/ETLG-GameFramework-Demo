@@ -21,6 +21,7 @@ namespace ETLG
         private string currentUser_url = "http://localhost:9527/auth/currentUser";
         private string saveDownload_url = "http://localhost:9527/profile/saveDownload";
         private string getProfileById_url = "http://localhost:9527/profile/";
+        private string profileUpdate_url = "http://localhost:9527/profile/update";
         //Authorization token
         private string authorization;
 
@@ -63,10 +64,10 @@ namespace ETLG
                         string responseJson = www.downloadHandler.text;
 
                         // 解析JSON响应数据
-                        List<List<object>> rankData = JsonUtility.FromJson<RankData>(responseJson).rankList;
+                        RankResponseData rankData = JsonUtility.FromJson<RankResponseData>(responseJson);
 
                         // 处理排行榜数据
-                        foreach (List<object> rowData in rankData)
+                        foreach (List<object> rowData in rankData.rankList)
                         {
                             LeaderboardData data = new LeaderboardData();
                             string userName = (string)rowData[0];
@@ -103,15 +104,12 @@ namespace ETLG
         }
         private IEnumerator PostLogInUserRoutine(string userName, string password)
         {
-
-            // 构建要发送的数据对象
             LoginData loginData = new LoginData
             {
                 username = userName,
                 password = password
             };
 
-            // 将数据对象转换为 JSON 格式
             string jsonData = JsonUtility.ToJson(loginData);
 
             using (UnityWebRequest request = new UnityWebRequest(Login_url, "POST"))
@@ -132,7 +130,7 @@ namespace ETLG
                     {
                         currentUser = responseData.data.userVO;
                         authorization = responseData.data.token;
-                        
+
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGIN_SUCCESS));
                     }
                     else
@@ -141,7 +139,7 @@ namespace ETLG
                         message = erroResponseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGIN_FAILED));
                     }
-                    
+
                 }
                 else
                 {
@@ -150,9 +148,49 @@ namespace ETLG
                 }
             }
         }
-        public void HandleProfileUpdate()
+        public void HandleProfileUpdate(int avatar, string nickName)
         {
+            StartCoroutine(PostProfileUpdateRoutine(avatar, nickName));
+        }
+        private IEnumerator PostProfileUpdateRoutine(int avatar, string nickName)
+        {
+            UserInfo updateData = new UserInfo
+            {
+                nickName = nickName,
+                avatar = avatar
+            };
 
+            string jsonData = JsonUtility.ToJson(updateData);
+
+            using (UnityWebRequest request = UnityWebRequest.Put(profileUpdate_url, jsonData))
+            {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                request.SetRequestHeader("Authorization", authorization);
+                var asyncOperation = request.SendWebRequest();
+                yield return asyncOperation;
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_UPDATE_SUCCESS));
+                    }
+                    else
+                    {
+                        message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_UPDATE_FAILED));
+                    }
+                }
+                else
+                {
+                    HandleErrorMessages(request);
+                }
+            }
         }
         public void HandleProfilePassword()
         {
@@ -192,9 +230,9 @@ namespace ETLG
             currentUser = null;
             message = null;
 
-            StartCoroutine(GetRegisterRoutine(userName, password));
+            StartCoroutine(PostRegisterRoutine(userName, password));
         }
-        private IEnumerator GetRegisterRoutine(string userName, string password)
+        private IEnumerator PostRegisterRoutine(string userName, string password)
         {
             LoginData loginData = new LoginData
             {
@@ -204,20 +242,16 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = new UnityWebRequest(Register_url, "POST"))
+            using (UnityWebRequest request = UnityWebRequest.Post(Register_url, jsonData))
             {
-                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-                request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
-                var asyncOperation = request.SendWebRequest();
-
-                yield return asyncOperation;
+                yield return request.SendWebRequest();
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     string responseJson = request.downloadHandler.text;
                     ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+
                     if (responseData.success)
                     {
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_SUCCESS));
@@ -227,7 +261,6 @@ namespace ETLG
                         message = responseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_FAILED));
                     }
-
                 }
                 else
                 {
@@ -235,7 +268,8 @@ namespace ETLG
                     HandleErrorMessages(request);
                 }
             }
-    }
+
+        }
         private void IsLoginDetection()
         {
             if (authorization == null)
@@ -404,7 +438,7 @@ namespace ETLG
             GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
         }
         [System.Serializable]
-        private class RankData
+        private class RankResponseData
         {
             public List<List<object>> rankList;
         }
@@ -475,6 +509,12 @@ namespace ETLG
             public string achievement;
             public string learningProgress;
         }
+        [System.Serializable]
+        public class UserInfo
+        {
+            public string nickName;
+            public int avatar;
 
+        }
     }
 }

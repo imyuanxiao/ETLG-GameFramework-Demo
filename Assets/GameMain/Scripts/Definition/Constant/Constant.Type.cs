@@ -172,7 +172,8 @@
             public const int BACK_SAVE_DOWNLOAD_FAILED = 7;
             public const int BACK_PROFILE_SUCCESS = 8;
             public const int BACK_PROFILE_FAILED = 9;
-
+            public const int BACK_PROFILE_UPDATE_SUCCESS = 10;
+            public const int BACK_PROFILE_UPDATE_FAILED = 10;
 
         }
     }
