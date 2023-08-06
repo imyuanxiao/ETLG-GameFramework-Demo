@@ -149,7 +149,7 @@ namespace ETLG
             Debug.Log(accuracy);
             
             string planetType = "";
-            switch (dataQuizReport.domain)
+            switch (dataQuizReport.getDomain())
             {
                 case Constant.Type.DOMAIN_CLOUD_COMPUTING:
                     planetType = "CloudComputing";
@@ -186,7 +186,7 @@ namespace ETLG
             int accuracy = int.Parse(dataQuizReport.accuracyText);
             UIAttributeList attrList = this.AttributeList.GetComponent<UIAttributeList>();
 
-            switch (dataQuizReport.domain)
+            switch (dataQuizReport.getDomain())
             {
                 case Constant.Type.DOMAIN_CLOUD_COMPUTING:
                     attrList.DisplayCloudComputingBoost(accuracy);

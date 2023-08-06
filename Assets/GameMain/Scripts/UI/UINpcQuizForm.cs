@@ -38,8 +38,8 @@ namespace ETLG
         public Slider AccuracySlider;
         public TextMeshProUGUI LeftQuestionsText;
         public TextMeshProUGUI AccuracyRate;
-        public TextMeshProUGUI Analysis;
-        public Canvas AnalysisContainer;
+        public Transform AnalysisContainer;
+        public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
 
         private int currentQuizIndex = 0;
@@ -53,6 +53,7 @@ namespace ETLG
             closeButton.onClick.AddListener(OnCloseButtonClick);
             LastButton.onClick.AddListener(OnLastButtonClick);
             NextButton.onClick.AddListener(OnNextButtonClick);
+            SubmitButton.onClick.AddListener(OnSubmitButtonClick);
         }
 
         protected override void OnOpen(object userData)
@@ -71,8 +72,6 @@ namespace ETLG
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
-
-            SubmitButton.onClick.AddListener(OnSubmitButtonClick);
 
             loadAvatar();
             UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
@@ -239,17 +238,30 @@ namespace ETLG
 
         private void multipleChoicesQuestionLoad()
         {
+            destroyAnalysisContainer();
             if (currentQuiz.OptionsCanvas.Count == 0)
             {
                 instantiateChoicesPrefab(currentQuiz.type);
+               
             }
             else
             {
                 instantiateShownChoices();
+                if (currentQuiz.analysisShown)
+                {
+                    setAnalysisPrefab();
+                }
             }
-            Analysis.text = currentQuiz.analysis;
-            AnalysisContainer.gameObject.SetActive(false);
         }
+
+        private void destroyAnalysisContainer()
+        {
+            for (int i = AnalysisContainer.childCount - 1; i >= 0; i--)
+            {
+                Destroy(AnalysisContainer.GetChild(i).gameObject);
+            }
+        }
+
         private void instantiateChoicesPrefab(string type)
         {
             foreach (KeyValuePair<string, string> option in currentQuiz.Options)
@@ -321,12 +333,20 @@ namespace ETLG
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
         }
 
-        private void OnSubmitButtonClick()
+        private void setAnalysisPrefab()
         {
             if (!string.IsNullOrWhiteSpace(currentQuiz.analysis))
             {
-                AnalysisContainer.gameObject.SetActive(true);
+                Canvas analysisPrefab = Instantiate(AnalysisPrefab, AnalysisContainer);
+                TextMeshProUGUI analysisText = analysisPrefab.GetComponentInChildren<TextMeshProUGUI>();
+                analysisText.text = currentQuiz.analysis;
+                currentQuiz.analysisShown = true;
             }
+        }
+
+        private void OnSubmitButtonClick()
+        {
+            setAnalysisPrefab();
             if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
             {
                 currentQuiz.testOnToggleMCM();
