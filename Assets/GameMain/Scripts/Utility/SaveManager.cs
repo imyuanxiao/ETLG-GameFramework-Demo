@@ -357,7 +357,7 @@ namespace ETLG
             {
                 // Save("PlayerSpaceshipData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
                 // Save("PlayerSkillData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
-                SaveGame();
+                // SaveGame();
             }
             if (Input.GetKeyDown(KeyCode.L))
             {
@@ -369,7 +369,7 @@ namespace ETLG
             {
                 // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower += 10;
                 // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int)EnumSkill.ElectronicWarfare, 0);
-                GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact(3010, 1);
+                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact(3010, 1);
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
