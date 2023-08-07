@@ -14,7 +14,9 @@ namespace ETLG
     public class UIPlanetLandingPointForm : UGuiFormEx
     {
 
-        public Transform NPCsContainer;
+        public RectTransform NPCsContainer;
+
+     //  public Transform NPCsContainer;
         public TextMeshProUGUI Desc;
         public TextMeshProUGUI Title;
 
@@ -71,6 +73,7 @@ namespace ETLG
             NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
             Title.text = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Title;
             Desc.text= GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Description;
+            Log.Debug(Desc.text);
             foreach (var npcData in npcDatas)
             {
                 ShowItem<ItemNPCSelect>(EnumItem.ItemNPCSelect, (item) =>

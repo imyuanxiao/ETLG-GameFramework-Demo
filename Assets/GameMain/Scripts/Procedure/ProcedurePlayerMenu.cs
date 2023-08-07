@@ -57,7 +57,7 @@ namespace ETLG
 
             GameEntry.UI.OpenUIForm(EnumUIForm.UISpaceshipCheckForm);
 
-            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_SPACESHIP);
 
 
         }
@@ -133,12 +133,12 @@ namespace ETLG
 
             if(ne.UIFormID == (int)EnumUIForm.UISpaceshipCheckForm)
             {
-                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(3);
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_MAP);
             }
 
             if (ne.UIFormID == (int)EnumUIForm.UISkillTreeForm)
             {
-                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(4);
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_SKILL);
             }
 
         }

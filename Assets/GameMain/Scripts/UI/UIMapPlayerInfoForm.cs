@@ -105,8 +105,8 @@ namespace ETLG
 
             RecommendedChapterInfoScroll.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)DefaultLearningVerticalLayoutGroup.transform);
-            // tutorial in spaceship menu
-            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(2);
+
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_MAP);
             dataLearningProgress.update = true;
             dataLearningProgress.open = true;
         }

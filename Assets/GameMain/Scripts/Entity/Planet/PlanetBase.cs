@@ -74,9 +74,10 @@ namespace ETLG
         private void updateProgress()
         {
             float progress = dataPlayer.GetPlayerData().DomiansSaveData[PlanetId];
-            RectTransform progressBarRectTransform = progressBar.GetComponentInChildren<RectTransform>();
-            float targetWidth = 5f * progress;
-            progressBarRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
+            string progressString = UIFloatString.FloatToString(progress);
+            //RectTransform progressBarRectTransform = progressBar.GetComponentInChildren<RectTransform>();
+            //float targetWidth = 5f * progress;
+            //progressBarRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
         }
 
         private void OnDisable() 
