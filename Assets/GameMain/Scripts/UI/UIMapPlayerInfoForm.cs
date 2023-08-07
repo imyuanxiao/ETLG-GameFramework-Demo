@@ -212,7 +212,6 @@ namespace ETLG
             dataLearningProgress.open = false;
             base.OnClose(isShutdown, userData);
             GameEntry.Event.Unsubscribe(PlanetExpandedEventArgs.EventId, OnPlanetExpanded);
-
         }
 
         private void ShowPlanets()

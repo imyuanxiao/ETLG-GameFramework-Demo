@@ -27,8 +27,9 @@ namespace ETLG.Data
             }
         }
 
-        public UIQuizManager(string XMLPath)
+        public UIQuizManager(string XMLPath,bool award)
         {
+            this.award = award;
             parseXMLFile(XMLPath);
         }
 

@@ -34,13 +34,14 @@ namespace ETLG
         private NPCData npcData;
         private DataLearningProgress dataLearningProgress;
 
-
+        private DataPlayer dataPlayer;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -86,6 +87,10 @@ namespace ETLG
                 item.transform.localScale = Vector3.one;
                 item.transform.eulerAngles = Vector3.zero;
                 item.transform.localPosition = Vector3.zero;
+                if (dataPlayer.GetPlayerData().getChapterFinish(npcData.Id))
+                {
+                    item.GetComponentInChildren<RawImage>().color = UIHexColor.HexToColor("990000");
+                }
                 item.GetComponent<ItemRewardIcon>().SetData(this.npcData.Id);
             });
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);

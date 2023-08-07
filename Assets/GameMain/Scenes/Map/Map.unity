@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.024951262, g: 0.022750102, b: 0.07044999, a: 1}
+  m_IndirectSpecularColor: {r: 0.02495846, g: 0.02274444, b: 0.07047759, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusedPlanet: {fileID: 0}
   currentLandingPointID: -1
+  isOverUI: 0
   planetsObj:
   - {fileID: 2041089922}
   - {fileID: 1156440362}
@@ -462,6 +463,7 @@ MonoBehaviour:
   landingPoints:
   - {fileID: 463500695}
   - {fileID: 590985761}
+  progressBar: {fileID: 5691016393357349469}
 --- !u!135 &298618203
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -555,6 +557,7 @@ MonoBehaviour:
   focusPoint: {fileID: 293217359}
   UIPlanetTag: {fileID: 2005405398}
   landingPoints: []
+  progressBar: {fileID: 1095169574}
 --- !u!135 &357352252
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -780,7 +783,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1288,7 +1291,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1501,6 +1504,7 @@ MonoBehaviour:
   focusPoint: {fileID: 694547467}
   UIPlanetTag: {fileID: 901933159}
   landingPoints: []
+  progressBar: {fileID: 850771613}
 --- !u!135 &1013888496
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1706,7 +1710,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1793,6 +1797,7 @@ MonoBehaviour:
   focusPoint: {fileID: 2021787038}
   UIPlanetTag: {fileID: 6803650458334496691}
   landingPoints: []
+  progressBar: {fileID: 8171607346025091046}
 --- !u!135 &1124636201
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1870,6 +1875,7 @@ MonoBehaviour:
   landingPoints:
   - {fileID: 1479782076}
   - {fileID: 1849280416}
+  progressBar: {fileID: 6275841141263269280}
 --- !u!135 &1156440365
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4092,6 +4098,7 @@ MonoBehaviour:
   landingPoints:
   - {fileID: 1676549838}
   - {fileID: 1074958852}
+  progressBar: {fileID: 491139740}
 --- !u!1 &2144842432
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,7 +5902,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -6700,7 +6707,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -7644,7 +7651,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

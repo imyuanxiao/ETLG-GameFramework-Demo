@@ -32,6 +32,9 @@ namespace ETLG.Data
 
         private DataArtifact dataArtifact { get; set; }
 
+        private DataLandingPoint dataLandingPoint;
+        private DataPlanet dataPlanet;
+
         // Player Skill - Skill ID, Skill Level,
         // unexists = locked, level = 0 = unlocked, >= 1 = upgraded 
         private Dictionary<int, int> playerSkills { get; set; }
@@ -91,12 +94,13 @@ namespace ETLG.Data
             equippedModules = new int[6];
 
             // 0-cloud computing, 1-CyberSecurity, 2-Data science, 3-AI, 4-blockchain, 5-IoT, 6-final boss
-            bossDefeatTime = new float[7]{-1f,-1f,-1f,-1f,-1f,-1f,-1f};
-            
+            bossDefeatTime = new float[7] { -1f, -1f, -1f, -1f, -1f, -1f, -1f };
+
             // Learning progress init
             ChaptersSaveData = new Dictionary<int, bool>();
             CoursesSaveData = new Dictionary<int, float>();
             DomiansSaveData = new Dictionary<int, float>();
+            KnowledgeSavedData();
 
             // add initial skills
             foreach (var id in spaceshipData.SkillIds)
@@ -120,7 +124,29 @@ namespace ETLG.Data
             battleVictoryCount = 0;
 
             UpdateAttrsByAllSkills(Constant.Type.ADD);
+        }
 
+        private void KnowledgeSavedData()
+        {
+            dataPlanet = GameEntry.Data.GetData<DataPlanet>();
+            int[] planets = dataPlanet.GetAllPlanetIDs();
+            foreach (int planetID in planets)
+            {
+                DomiansSaveData.Add(planetID, 0f);
+            }
+
+            dataLandingPoint = GameEntry.Data.GetData<DataLandingPoint>();
+            int[] DataLandingPoints = dataLandingPoint.GetAlLandingPointsIDs();
+            foreach (int landingPointID in DataLandingPoints)
+            {
+                CoursesSaveData.Add(landingPointID, 0f);
+            }
+
+            List<int> NPCIDs = dataNPC.getAllNPCsID();
+            foreach (int NPCId in NPCIDs)
+            {
+                ChaptersSaveData.Add(NPCId, false);
+            }
         }
 
         private void instantiatePlayerNPCs()
@@ -279,13 +305,13 @@ namespace ETLG.Data
             }
 
             //total artifacts for achievement
-            if (dataAchievement.isReset || (number<=0 && id!=(int)EnumArtifact.Money))
+            if (dataAchievement.isReset || (number <= 0 && id != (int)EnumArtifact.Money))
             {
                 return;
             }
 
-            AddTotalArtifact(id,number);
-            
+            AddTotalArtifact(id, number);
+
         }
         public void AddTotalArtifact(int id, int number)
         {
@@ -357,7 +383,7 @@ namespace ETLG.Data
                         }
                         else
                         {
-                            AddArtifact(id, number-playerArtifacts[id]);
+                            AddArtifact(id, number - playerArtifacts[id]);
                         }
                     }
                 }
@@ -454,12 +480,12 @@ namespace ETLG.Data
             }
             foreach (var playerArtifact in playerArtifacts)
             {
-                
-                Debug.Log("key"+playerArtifact.Key);
-                Debug.Log("value"+playerArtifact.Value);
+
+                Debug.Log("key" + playerArtifact.Key);
+                Debug.Log("value" + playerArtifact.Value);
                 if (dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
                 {
-                    
+
                     targetList.Add(playerArtifact.Key, playerArtifact.Value);
                 }
             }
@@ -937,11 +963,11 @@ namespace ETLG.Data
         {
             if (playerAchievement.ContainsKey(id))
             {
-                playerAchievement[id] = level-1;
+                playerAchievement[id] = level - 1;
             }
             else
             {
-                playerAchievement.Add(id, level-1);
+                playerAchievement.Add(id, level - 1);
             }
         }
         public int GetCurrentAchievementLevelById(int id)
@@ -951,15 +977,15 @@ namespace ETLG.Data
         public bool isAchievementAchieved(int count)
         {
             return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
-       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count)-1 == playerAchievement[dataAchievement.cuurrentPopUpId];
+       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) - 1 == playerAchievement[dataAchievement.cuurrentPopUpId];
         }
         public bool isAchievementAchieved(int id, int count)
         {
-            if(!playerAchievement.ContainsKey(id))
+            if (!playerAchievement.ContainsKey(id))
             {
                 return false;
             }
-            if(playerAchievement[id]>= dataAchievement.GetNextLevel(id, count)-1)
+            if (playerAchievement[id] >= dataAchievement.GetNextLevel(id, count) - 1)
             {
                 return true;
             }
@@ -1058,7 +1084,7 @@ namespace ETLG.Data
             {
                 if (number >= count && !isAchievementAchieved(achievementId, count))
                 {
-                    
+
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }
@@ -1111,6 +1137,79 @@ namespace ETLG.Data
         public DataLearningPath getLearningPath()
         {
             return dataLearningPath;
+        }
+
+        public void setFinishChapter(int NPCID)
+        {
+            ChaptersSaveData[NPCID] = true;
+            calcCourseProgress();
+            calcDomianProgress();
+        }
+
+        public void calcCourseProgress()
+        {
+            Dictionary<int, float> tempSaveData = new Dictionary<int, float>();
+
+            foreach (int landingPointId in CoursesSaveData.Keys)
+            {
+                int[] chapters = getChaptersIntArray(landingPointId);
+                int totalPassedChapters = chapters[0];
+                int totalChapters = chapters[1];
+                float progress = (float)totalPassedChapters / (float)totalChapters;
+                tempSaveData[landingPointId] = progress;
+            }
+
+            foreach (var kvp in tempSaveData)
+            {
+                CoursesSaveData[kvp.Key] = kvp.Value;
+            }
+        }
+
+        private int[] getChaptersIntArray(int landingPointId)
+        {
+            //0 passed 1 total
+            int[] chapters = { 0,0};
+            LandingpointData lpData = dataLandingPoint.GetLandingPointData(landingPointId);
+            foreach (int NPCId in lpData.NPCsID)
+            {
+                bool result = ChaptersSaveData[NPCId];
+                if (result)
+                {
+                    chapters[0]++;
+                }
+                chapters[1]++;
+            }
+            return chapters;
+        }
+
+        public void calcDomianProgress()
+        {
+            Dictionary<int, float> tempSaveData = new Dictionary<int, float>();
+
+            foreach (int planetId in DomiansSaveData.Keys)
+            {
+                int totalChapters = 0;
+                int totalPassedChapters = 0;
+                PlanetData planetData = dataPlanet.GetPlanetData(planetId);
+                foreach (int lpdata in planetData.LandingPoints)
+                {
+                    int[] chapters = getChaptersIntArray(lpdata);
+                    totalChapters += chapters[1];
+                    totalPassedChapters += chapters[0];
+                }
+                float progress = (float)totalPassedChapters / (float)totalChapters;
+                tempSaveData[planetId] = progress;
+            }
+
+            foreach (var kvp in tempSaveData)
+            {
+                DomiansSaveData[kvp.Key] = kvp.Value;
+            }
+        }
+
+        public bool getChapterFinish(int NPCID)
+        {
+            return ChaptersSaveData[NPCID];
         }
     }
 }

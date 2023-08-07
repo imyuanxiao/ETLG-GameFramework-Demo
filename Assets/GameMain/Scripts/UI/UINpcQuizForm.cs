@@ -95,7 +95,7 @@ namespace ETLG
             if (tempUIQuizManager == null)
             {
                 XMLPath = AssetUtility.GetQuizXML(npcData.Id.ToString());
-                UIQuizManager = new UIQuizManager(XMLPath);
+                UIQuizManager = new UIQuizManager(XMLPath, dataPlayer.GetPlayerData().getChapterFinish(npcData.Id));
                 dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
             }
             else
@@ -192,13 +192,13 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
-            if (!UIQuizManager.award)
+            if (!dataPlayer.GetPlayerData().getChapterFinish(npcData.Id))
             {
                 dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT;
                 openErrorMessage();
                 return;
             }
-            else if (!(UIQuizManager.award && dataQuizReport.report))
+            else if (!(dataPlayer.GetPlayerData().getChapterFinish(npcData.Id) && dataQuizReport.report))
             {
                 dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
                 openErrorMessage();
@@ -349,8 +349,10 @@ namespace ETLG
                 int id = npcData.RewardSkill;
                 dataPlayer.GetPlayerData().AddSkill(id);
             }
-            dataLearningProgress.update = true;
+            dataLearningProgress.getAward();
+
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
         }
 
         private void setAnalysisPrefab()

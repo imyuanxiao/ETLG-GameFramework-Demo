@@ -20,8 +20,9 @@ namespace ETLG
 
         public Button closeButton;
         public VerticalLayoutGroup containerVerticalLayoutGroup;
-       
+        public VerticalLayoutGroup scrollVerticalLayoutGroup;
 
+        private DataLearningProgress dataLearningProgress;
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
@@ -29,7 +30,7 @@ namespace ETLG
 
             // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
-
+            dataLearningProgress= GameEntry.Data.GetData<DataLearningProgress>();
         }
 
         protected override void OnOpen(object userData)
@@ -41,6 +42,21 @@ namespace ETLG
             }
             ShowNPCSelectionButtonItems();
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (dataLearningProgress.UIPlanetLandingPointsUpdate)
+            {
+                HideAllItem();
+                ShowNPCSelectionButtonItems();
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scrollVerticalLayoutGroup.transform);
+                dataLearningProgress.UIPlanetLandingPointsUpdate = false;
+            }
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scrollVerticalLayoutGroup.transform);
         }
 
         protected override void OnClose(bool isShutdown, object userData)

@@ -96,7 +96,7 @@ namespace ETLG
             if (tempDialogManager == null)
             {
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
-                UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
+                UI_NPCDialogManager = new UINPCDialogManager(XMLPath,dataPlayer.GetPlayerData().getChapterFinish(npcData.Id));
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }
             else
@@ -226,9 +226,10 @@ namespace ETLG
             }
             UI_NPCDialogManager.award = true;
             dataDialog.award = true;
-            dataLearningProgress.update = true;
-            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataLearningProgress.getAward();
 
+            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -242,7 +243,7 @@ namespace ETLG
         {
             if (buttonScrollContent.childCount != 0)
             {
-                if (!UI_NPCDialogManager.award)
+                if (!dataPlayer.GetPlayerData().getChapterFinish(npcData.Id))
                 {
                     if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
                     {

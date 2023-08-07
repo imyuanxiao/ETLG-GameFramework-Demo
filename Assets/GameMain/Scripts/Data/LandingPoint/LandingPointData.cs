@@ -38,6 +38,14 @@ namespace ETLG.Data
             }
         }
 
+        public int[] NPCsID
+        {
+            get
+            {
+                return dRLandingPoint.NPCsID;
+            }
+        }
+
         public string Description
         {
             get
