@@ -47,6 +47,9 @@ namespace ETLG
                 case Constant.Type.LB_SPACESHIP:
                     s_score.text = this.leaderboardData.data.ToString();
                     break;
+                case Constant.Type.LB_LEARNING_PROGRESS:
+                    s_score.text = this.leaderboardData.data.ToString();
+                    break;
                 case Constant.Type.LB_BOSS_AI:
                     s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;

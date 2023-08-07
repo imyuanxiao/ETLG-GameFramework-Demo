@@ -31,9 +31,11 @@ namespace ETLG
             };
 
             string jsonData = JsonUtility.ToJson(requestData);
-            using (UnityWebRequest www = new UnityWebRequest(GameEntry.Data.GetData<DataBackend>().leaderboard_url, "POST"))
-            {
+            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().leaderboard_url, jsonData))
+                {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                www.uploadHandler.Dispose();
+                www.downloadHandler.Dispose();
                 www.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 www.downloadHandler = new DownloadHandlerBuffer();
                 www.SetRequestHeader("Content-Type", "application/json");
@@ -42,7 +44,6 @@ namespace ETLG
                 {
                     string responseJson = www.downloadHandler.text;
 
-                    // 解析JSON响应数据
                     ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
 
                     if (responseData.success)
@@ -181,7 +182,6 @@ namespace ETLG
                 nickName = nickName,
                 avatar = avatar
             };
-
             string jsonData = JsonUtility.ToJson(updateData);
             using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profileUpdate_url, jsonData))
             {

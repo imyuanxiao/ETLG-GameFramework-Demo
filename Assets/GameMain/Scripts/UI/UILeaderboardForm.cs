@@ -30,7 +30,7 @@ namespace ETLG
         private int fetchedType;
         private int type;
         public Button returnButton;
-
+        public Button learningButton;
         private List<LeaderboardData> rankList;
 
         protected override void OnInit(object userData)
@@ -38,6 +38,7 @@ namespace ETLG
             base.OnInit(userData);
             // 获取玩家数据管理器
             achievementButton.onClick.AddListener(OnachievementButtonClick);
+            learningButton.onClick.AddListener(OnLearningButtonClick);
             spaceshipButton.onClick.AddListener(OnspaceshipButtonClick);
             bossButton.onClick.AddListener(OnBossButtonClick);
             bossButton_AI.onClick.AddListener(OnBossButtonAIClick);
@@ -70,8 +71,8 @@ namespace ETLG
                 //error
                 if (fetchedType == Constant.Type.BACK_RANK_FAILED)
                 {
-                    
-                    
+                    SetItemsStatus(false);
+
                 }
 
                 if (fetchedType == Constant.Type.BACK_RANK_SUCCESS)
@@ -103,6 +104,15 @@ namespace ETLG
            
             BackendDataManager.Instance.GetRankData(Constant.Type.LB_ACHIVEMENT, 1,10);
             
+        }
+        private void OnLearningButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            s_name.text = "Learning Progress Leaderboard";
+            type = Constant.Type.LB_LEARNING_PROGRESS;
+
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_LEARNING_PROGRESS, 1, 10);
+
         }
         private void OnspaceshipButtonClick()
         {
@@ -293,6 +303,8 @@ namespace ETLG
             switch(type)
             {
                 case Constant.Type.LB_ACHIVEMENT:
+                    return data2.data.CompareTo(data1.data);
+                case Constant.Type.LB_LEARNING_PROGRESS:
                     return data2.data.CompareTo(data1.data);
                 case Constant.Type.LB_SPACESHIP:
                     return data2.data.CompareTo(data1.data);

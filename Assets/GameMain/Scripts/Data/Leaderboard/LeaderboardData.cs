@@ -11,16 +11,9 @@ namespace ETLG.Data
         public float data { get; set; }
         public int ExploredChapter { get; set; }
 
-        public float bossTime;
-
         public LeaderboardData()
         {
 
-        }
-        public LeaderboardData(int Id)
-        {
-            this.Id = Id;
-            //
         }
         public LeaderboardData(int Id,string name,float data)
         {
