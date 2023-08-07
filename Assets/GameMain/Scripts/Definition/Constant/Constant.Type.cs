@@ -19,6 +19,7 @@
             public const int TUTORIAL_MAP = 2;
             public const int TUTORIAL_SPACESHIP = 3;
             public const int TUTORIAL_SKILL = 4;
+            public const int TUTORIAL_BATTLE = 9;
 
 
             // player menu title
