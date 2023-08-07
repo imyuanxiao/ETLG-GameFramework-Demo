@@ -587,7 +587,6 @@ namespace ETLG
             Button playButton = videoModule.GetComponentInChildren<Button>();
             if (videoPlayer != null)
             {
-                Debug.Log(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath);
                 VideoClip videoClip = Resources.Load<VideoClip>(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoPath);
 
                 // Load the video from the specified path

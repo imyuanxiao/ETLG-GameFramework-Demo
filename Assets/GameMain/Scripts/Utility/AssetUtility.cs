@@ -116,6 +116,18 @@ namespace ETLG
             return Utility.Text.Format("XMLVideo/{0}/{1}", NPCID, videoID);
         }
 
+        public static string GetVideoPlayerIcon(bool pause)
+        {
+            if (!pause)
+            {
+                return Utility.Text.Format("Others/videoplay");
+            }
+            else
+            {
+                return Utility.Text.Format("Others/videopause");
+            }
+
+        }
         public static string GetPlayerAvatar()
         {
             return Utility.Text.Format("Avatar/Player/1000");

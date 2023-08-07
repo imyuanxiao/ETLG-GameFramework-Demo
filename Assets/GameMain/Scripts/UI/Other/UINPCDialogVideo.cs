@@ -7,39 +7,77 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 using UnityEngine.Video;
+using UnityEngine.EventSystems;
 
 namespace ETLG
 {
-    public class UINPCDialogVideo : UGuiFormEx
+    public class UINPCDialogVideo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Button BgButton;
+        public Button CoverButton;
         public Canvas PauseCover;
         public VideoPlayer videoPlayer;
-        protected override void OnInit(object userData)
+        public Image PlayPauseIcon;
+        public Button PlayButton;
+        public Button FullScreenButton;
+        public Button CloseButton;
+
+        private bool isPause;
+        private Sprite playIcon;
+        private Sprite pauseIcon;
+        private DataVideo dataVideo;
+
+
+        private void Start()
         {
-            base.OnInit(userData);
-            bool isPause = false;
             PauseCover.gameObject.SetActive(false);
-            BgButton.onClick.AddListener(() =>
-            {
-                if (isPause)
-                {
-                    PauseCover.gameObject.SetActive(true);
-                    videoPlayer.Play();
-                    isPause = false;
-                }
-                else
-                {
-                    PauseCover.gameObject.SetActive(false);
-                    videoPlayer.Pause();
-                    isPause = true;
-                }
-            });
+            CoverButton.onClick.AddListener(OnPlayButtonClick);
+            PlayButton.onClick.AddListener(OnPlayButtonClick);
+            FullScreenButton.onClick.AddListener(OnFullScreen);
+            dataVideo = GameEntry.Data.GetData<DataVideo>();
+            dataVideo.isFullScreen = false;
+            //Sprite playIcon = Resources.Load<Sprite>(AssetUtility.GetVideoPlayerIcon(false));
+            //Sprite pauseIcon = Resources.Load<Sprite>(AssetUtility.GetVideoPlayerIcon(true));
         }
 
-        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            PauseCover.gameObject.SetActive(true);
         }
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            PauseCover.gameObject.SetActive(false);
+        }
+
+        private void OnPlayButtonClick()
+        {
+            if (isPause)
+            {
+                videoPlayer.Play();
+                isPause = false;
+                //PlayPauseIcon.sprite = pauseIcon;
+            }
+            else
+            {
+                videoPlayer.Pause();
+                isPause = true;
+                //PlayPauseIcon.sprite = playIcon;
+            }
+        }
+
+        private void OnFullScreen()
+        {
+            videoPlayer.Pause();
+            //dataVideo.clip = videoPlayer.clip;
+            dataVideo.renderTexture = videoPlayer.targetTexture;
+            //dataVideo.playbackTime= videoPlayer.time;
+            dataVideo.videoPlayerBase = videoPlayer;
+            dataVideo.isFullScreen = true;
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIVideoFullScreenForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIVideoFullScreenForm));
+            }
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIVideoFullScreenForm);
+        }
+
     }
 }
