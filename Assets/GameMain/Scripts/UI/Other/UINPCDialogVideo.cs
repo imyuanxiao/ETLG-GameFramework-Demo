@@ -19,7 +19,6 @@ namespace ETLG
         public Image PlayPauseIcon;
         public Button PlayButton;
         public Button FullScreenButton;
-        public Button CloseButton;
 
         private bool isPause;
         private Sprite playIcon;

@@ -45,7 +45,7 @@ namespace ETLG
         private string npcAvatarPath;
         private string XMLPath;
         private float playerInputBoxOriginalHeight = 160f;
-        private float dialogScrollContentOriginalHeight = 600f;
+        //private float dialogScrollContentOriginalHeight = 600f;
         private RectTransform buttonScrollContentRectTransform;
         private RectTransform dialogScrollContentRectTransform;
 

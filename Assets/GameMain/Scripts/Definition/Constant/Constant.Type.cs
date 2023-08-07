@@ -145,15 +145,18 @@
             public const int LP_IN_PLANET = 1;
 
             //leaderboard type
-            public const int LB_ACHIVEMENT = 1;
+            
             public const int LB_SPACESHIP = 0;
-            public const int LB_BOSS_AI = 2;
-            public const int LB_BOSS_CLOUDCOMPUTING = 6;
-            public const int LB_BOSS_BLOCKCHAIN = 7;
-            public const int LB_BOSS_CYBERSECURITY = 5;
-            public const int LB_BOSS_DATASCIENCE = 3;
-            public const int LB_BOSS_IOT = 4;
-            public const int LB_BOSS_FINAL = 8;
+            public const int LB_ACHIVEMENT = 1;
+            public const int LB_LEARNING_PROGRESS = 2;
+
+            public const int LB_BOSS_AI = 10;
+            public const int LB_BOSS_CLOUDCOMPUTING = 11;
+            public const int LB_BOSS_BLOCKCHAIN = 12;
+            public const int LB_BOSS_CYBERSECURITY = 13;
+            public const int LB_BOSS_DATASCIENCE = 14;
+            public const int LB_BOSS_IOT = 15;
+            public const int LB_BOSS_FINAL = 16;
 
             // reward
             public const int REWARD_TYPE_ARTIFACT = 0;
@@ -183,6 +186,8 @@
             public const int BACK_PROFILE_UPDATE_FAILED = 11;
             public const int BACK_PROFILE_PASSWORD_SUCCESS = 12;
             public const int BACK_PROFILE_PASSWORD_FAILED = 13;
+            public const int BACK_RANK_SUCCESS = 13;
+            public const int BACK_RANK_FAILED = 14;
             //login purpose
             public const int BACK_PROFILE = 1;
             public const int BACK_UPDATE = 2;

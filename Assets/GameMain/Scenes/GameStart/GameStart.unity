@@ -216,6 +216,10 @@ MonoBehaviour:
     dataTypeName: ETLG.Data.DataLearningPath
   - enable: 1
     dataTypeName: ETLG.Data.DataLearningProgress
+  - enable: 1
+    dataTypeName: ETLG.Data.DataBackend
+  - enable: 1
+    dataTypeName: ETLG.Data.DataVideo
 --- !u!1 &444730643
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,11 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d017ee6693db04d8ce6175fd275f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  responseData: 
-  avatorId: 0
-  errorType: 0
-  isNewFetch: 0
-  isSave: 0
 --- !u!4 &444730645
 Transform:
   m_ObjectHideFlags: 0

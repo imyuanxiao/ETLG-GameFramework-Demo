@@ -46,7 +46,6 @@ namespace ETLG
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;
-            LeaderboardManager.Instance.leaderboardData = null;
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataArtifact = GameEntry.Data.GetData<DataArtifact>();
             dataSkill = GameEntry.Data.GetData<DataSkill>();

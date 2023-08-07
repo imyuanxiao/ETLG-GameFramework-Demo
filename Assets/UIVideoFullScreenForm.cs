@@ -57,16 +57,15 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
         }
 
-        private IEnumerator HideCoversAfterDelay(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            Debug.Log("其实来了");
-            if (!isCoverHover)
-            {
-                TopCover.gameObject.SetActive(false);
-                ButtomCover.gameObject.SetActive(false);
-            }
-        }
+        //private IEnumerator HideCoversAfterDelay(float delay)
+        //{
+        //    yield return new WaitForSeconds(delay);
+        //    if (!isCoverHover)
+        //    {
+        //        TopCover.gameObject.SetActive(false);
+        //        ButtomCover.gameObject.SetActive(false);
+        //    }
+        //}
 
         //public void OnPointerEnter(PointerEventData eventData)
         //{
@@ -106,13 +105,13 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIVideoFullScreenForm));
             }
         }
-        private void HideTopCover()
-        {
-            if (!isCoverHover)
-            {
-                TopCover.gameObject.SetActive(false);
-                ButtomCover.gameObject.SetActive(false);
-            }
-        }
+        //private void HideTopCover()
+        //{
+        //    if (!isCoverHover)
+        //    {
+        //        TopCover.gameObject.SetActive(false);
+        //        ButtomCover.gameObject.SetActive(false);
+        //    }
+        //}
     }
 }

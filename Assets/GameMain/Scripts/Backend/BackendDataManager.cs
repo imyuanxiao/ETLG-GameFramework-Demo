@@ -16,61 +16,61 @@ namespace ETLG
         private void OnEnable()
         {
         }
-        public void GetRankData(int pageNumber, int pageSize, int rankMode)
+        public void GetRankData(int type, int current, int pageSize)
         {
-            StartCoroutine(GetRankDataRoutine(pageNumber, pageSize, rankMode));
+            StartCoroutine(GetRankDataRoutine(type, current, pageSize));
         }
        
-        private IEnumerator GetRankDataRoutine(int pageNumber, int pageSize, int rankMode)
+        private IEnumerator GetRankDataRoutine(int type, int current, int pageSize)
         {
-            // 创建POST请求的表单数据
-            WWWForm form = new WWWForm();
-            form.AddField("pageNumber", pageNumber);
-            form.AddField("pageSize", pageSize);
-            form.AddField("rankMode", rankMode);
-            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().leaderboard_url, form))
+            RankRequest requestData = new RankRequest
             {
-                yield return www.SendWebRequest();
+                type= type,
+                current = current,
+                pageSize = pageSize
+            };
 
-                // 处理请求完成后的逻辑
+            string jsonData = JsonUtility.ToJson(requestData);
+            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().leaderboard_url, jsonData))
+                {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                www.uploadHandler.Dispose();
+                www.downloadHandler.Dispose();
+                www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                www.downloadHandler = new DownloadHandlerBuffer();
+                www.SetRequestHeader("Content-Type", "application/json");
+                yield return www.SendWebRequest();
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    // ...（原有代码不变）
-                    if (www.result == UnityWebRequest.Result.Success)
+                    string responseJson = www.downloadHandler.text;
+
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+
+                    if (responseData.success)
                     {
-                        // 获取API响应数据
-                        string responseJson = www.downloadHandler.text;
-
-                        // 解析JSON响应数据
-                        RankResponseData rankData = JsonUtility.FromJson<RankResponseData>(responseJson);
-
-                        // 处理排行榜数据
-                        foreach (List<object> rowData in rankData.rankList)
+                        RankResponse rankResponse = JsonUtility.FromJson<RankResponse>(responseJson);
+                        List<LeaderboardData> list = new List<LeaderboardData>();
+                        foreach (RankRecord record in rankResponse.data.records)
                         {
-                            LeaderboardData data = new LeaderboardData();
-                            string userName = (string)rowData[0];
-                            data.Name = userName;
-                            int id = (int)rowData[1];
-                            data.Id = id;
-                            int spaceshipScore = (int)rowData[2];
-                            data.SpaceshipScore = spaceshipScore;
-                            int achievementPoint = (int)rowData[3];
-                            data.AchievementScore = achievementPoint;
-                            if (rankMode > 1)
-                            {
-                                float boss = (int)rowData[4];
-                                //data.boss
-                            }
-                            Debug.Log("User Name: " + userName + ", Spaceship Score: " + spaceshipScore);
+                            LeaderboardData data = new LeaderboardData(record.userId,record.nickName,record.data);
+                            list.Add(data);
                         }
+                        GameEntry.Data.GetData<DataBackend>().rankList = list;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_RANK_SUCCESS));
                     }
                     else
                     {
-                        HandleErrorMessages(www);
-                        GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                        GameEntry.Data.GetData<DataBackend>().message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_RANK_FAILED));
                     }
-                    www.Dispose();
                 }
+                else
+                {
+                    HandleErrorMessages(www);
+                    GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                }
+                www.Dispose();
+
             } 
 
         }
@@ -136,7 +136,7 @@ namespace ETLG
             switch (GameEntry.Data.GetData<DataBackend>().loginType)
             {
                 case Constant.Type.BACK_PROFILE:
-                    GetUserProfileByUserId();
+                    GetUserProfileByUserId(GameEntry.Data.GetData<DataBackend>().currentUser.id);
                     break;
                 case Constant.Type.BACK_UPDATE:
                     StartCoroutine(GetSaveDownloadRoutine());
@@ -182,7 +182,6 @@ namespace ETLG
                 nickName = nickName,
                 avatar = avatar
             };
-
             string jsonData = JsonUtility.ToJson(updateData);
             using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profileUpdate_url, jsonData))
             {
@@ -327,7 +326,7 @@ namespace ETLG
             {
                 if (isLoggedIn)
                 {
-                    GetUserProfileByUserId();
+                    GetUserProfileByUserId(GameEntry.Data.GetData<DataBackend>().currentUser.id);
                 }
                 else
                 {
@@ -470,15 +469,15 @@ namespace ETLG
                 www.Dispose();
             }
         }
-        public void GetUserProfileByUserId()
+        public void GetUserProfileByUserId(int id)
         {
-            StartCoroutine(GetUserProfileByUserIdRoutine());
+            StartCoroutine(GetUserProfileByUserIdRoutine(id));
         }
-        private IEnumerator GetUserProfileByUserIdRoutine()
+        private IEnumerator GetUserProfileByUserIdRoutine(int id)
         {
-            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().getProfileById_url + GameEntry.Data.GetData<DataBackend>().currentUser.id))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().getProfileById_url + id))
             {
-                www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                //www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
@@ -583,11 +582,7 @@ namespace ETLG
             GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
             GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
         }
-        [System.Serializable]
-        private class RankResponseData
-        {
-            public List<List<object>> rankList;
-        }
+  
         private class ErrorMessage
         {
             public int code;
@@ -682,6 +677,33 @@ namespace ETLG
             public string nickName;
             public int avatar;
 
+        }
+        [System.Serializable]
+        public class RankRecord
+        {
+            public int userId;
+            public string nickName;
+            public float data;
+        }
+        [System.Serializable]
+        public class RankDataWrapper
+        {
+            public List<RankRecord> records;
+        }
+        [System.Serializable]
+        public class RankRequest
+        {
+            public int type;
+            public int current;
+            public int pageSize;
+        }
+        [System.Serializable]
+        public class RankResponse
+        {
+            public bool success;
+            public int errorCode;
+            public string errorMessage;
+            public RankDataWrapper data;
         }
     }
 }

@@ -42,31 +42,34 @@ namespace ETLG
             switch (Type)
             {
                 case Constant.Type.LB_ACHIVEMENT:
-                    s_score.text = this.leaderboardData.AchievementScore.ToString();
+                    s_score.text = this.leaderboardData.data.ToString();
                     break;
                 case Constant.Type.LB_SPACESHIP:
-                    s_score.text = this.leaderboardData.SpaceshipScore.ToString();
+                    s_score.text = this.leaderboardData.data.ToString();
+                    break;
+                case Constant.Type.LB_LEARNING_PROGRESS:
+                    s_score.text = this.leaderboardData.data.ToString();
                     break;
                 case Constant.Type.LB_BOSS_AI:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_AI);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_BLOCKCHAIN:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Blockchain);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_CLOUDCOMPUTING:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_CloudComputing);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_CYBERSECURITY:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Cybersecurity);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_DATASCIENCE:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_DataScience);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_IOT:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_IoT);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
                 case Constant.Type.LB_BOSS_FINAL:
-                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.Boss_Final);
+                    s_score.text = ConvertFloatToTimeString(this.leaderboardData.data);
                     break;
             }
         }
@@ -87,10 +90,9 @@ namespace ETLG
 
         private void OnPlayerInfoClick()
         {
-                LeaderboardManager.Instance.leaderboardData=leaderboardData;
-                //œ»–¥≥…2
-                LeaderboardManager.Instance.planetNum = 2;
-                GameEntry.Event.Fire(this, PlayerZoneUIChangeEventArgs.Create(Constant.Type.UI_OPEN));
+            GameEntry.Data.GetData<DataBackend>().selectedRank = leaderboardData;
+            BackendDataManager.Instance.GetUserProfileByUserId(leaderboardData.Id);
+            
 
         }
 
@@ -99,6 +101,5 @@ namespace ETLG
             this.leaderboardData = leaderboardData;
             showContent(Type);
         }
-       
     }
 }
