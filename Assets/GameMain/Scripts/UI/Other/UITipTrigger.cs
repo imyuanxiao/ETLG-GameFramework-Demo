@@ -28,7 +28,7 @@ public class UITipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         if (position == Constant.Type.TIP_INFO_POSITION_DOWN)
         {
-            newPosition = itemPosition + new Vector3(0f, -100f, 0f);
+            newPosition = itemPosition + new Vector3(0f, -120f, 0f);
         }
 
         GameEntry.Data.GetData<DataPlayer>().tipUiPosition = newPosition;

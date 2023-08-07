@@ -10,36 +10,15 @@ namespace ETLG
 {
     public class BackendDataManager : Singleton<BackendDataManager>
     {
-        public string responseData;
-        public string avatorId;
-        private List<LeaderboardData> rankList;
-        //排行榜
-        private string leaderboard_url = "http://localhost:9527/profile/rank";
-        //登录注册
-        private string Login_url= "http://localhost:9527/auth/login";
-        private string Register_url = "http://localhost:9527/auth/register";
-        private string currentUser_url = "http://localhost:9527/auth/currentUser";
-        private string saveDownload_url = "http://localhost:9527/profile/saveDownload";
-        //Authorization token
-        private string authorization;
-        public int errorType;
-        public bool isNewFetch;
-        public bool isSave;
-        public bool isSuccess;
-        public string message;
-        Dictionary<string, string> jsonStrDic;
+        //用于回调函数
+        public delegate void IsLoginDetectionCallback(bool isLoggedIn);
 
-        public UserData currentUser;
-
-        protected override void Awake()
+        private void OnEnable()
         {
-            base.Awake();
-            rankList = new List<LeaderboardData>();
         }
-        public List<LeaderboardData> GetRankData(int pageNumber, int pageSize, int rankMode)
+        public void GetRankData(int pageNumber, int pageSize, int rankMode)
         {
             StartCoroutine(GetRankDataRoutine(pageNumber, pageSize, rankMode));
-            return rankList;
         }
        
         private IEnumerator GetRankDataRoutine(int pageNumber, int pageSize, int rankMode)
@@ -49,8 +28,7 @@ namespace ETLG
             form.AddField("pageNumber", pageNumber);
             form.AddField("pageSize", pageSize);
             form.AddField("rankMode", rankMode);
-            isNewFetch = true;
-            using (UnityWebRequest www = UnityWebRequest.Post(leaderboard_url, form))
+            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().leaderboard_url, form))
             {
                 yield return www.SendWebRequest();
 
@@ -60,15 +38,14 @@ namespace ETLG
                     // ...（原有代码不变）
                     if (www.result == UnityWebRequest.Result.Success)
                     {
-                        errorType = 0;
                         // 获取API响应数据
                         string responseJson = www.downloadHandler.text;
 
                         // 解析JSON响应数据
-                        List<List<object>> rankData = JsonUtility.FromJson<RankData>(responseJson).rankList;
+                        RankResponseData rankData = JsonUtility.FromJson<RankResponseData>(responseJson);
 
                         // 处理排行榜数据
-                        foreach (List<object> rowData in rankData)
+                        foreach (List<object> rowData in rankData.rankList)
                         {
                             LeaderboardData data = new LeaderboardData();
                             string userName = (string)rowData[0];
@@ -92,37 +69,33 @@ namespace ETLG
                         HandleErrorMessages(www);
                         GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                     }
+                    www.Dispose();
                 }
             } 
 
         }
         private void GetLogIn(string userName, string password)
         {
-            currentUser = null;
+
             StartCoroutine(PostLogInUserRoutine(userName, password));
+
         }
         private IEnumerator PostLogInUserRoutine(string userName, string password)
         {
-            // 创建POST请求的表单数据
-            isNewFetch = true;
-            isSuccess = false;
-            // 构建要发送的数据对象
             LoginData loginData = new LoginData
             {
                 username = userName,
                 password = password
             };
 
-            // 将数据对象转换为 JSON 格式
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = new UnityWebRequest(Login_url, "POST"))
+            using (UnityWebRequest request = new UnityWebRequest(GameEntry.Data.GetData<DataBackend>().Login_url, "POST"))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
-                isSuccess = true;
                 var asyncOperation = request.SendWebRequest();
 
                 yield return asyncOperation;
@@ -133,142 +106,336 @@ namespace ETLG
                     LoginResponseData responseData = JsonUtility.FromJson<LoginResponseData>(responseJson);
                     if (responseData.success)
                     {
-                        currentUser = responseData.data.userVO;
-                        authorization = responseData.data.token;
-                        
+                        GameEntry.Data.GetData<DataBackend>().currentUser.avatar = responseData.data.userVO.avatar;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.id = responseData.data.userVO.id;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.nickName = responseData.data.userVO.nickName;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.username = responseData.data.userVO.username;
+                        GameEntry.Data.GetData<DataBackend>().authorization = responseData.data.token;
+
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGIN_SUCCESS));
+                        OnLoginSuccess();
                     }
                     else
                     {
-                        ErrorResponseData erroResponseData = JsonUtility.FromJson<ErrorResponseData>(responseJson);
-                        message = erroResponseData.data;
+                        ResponseData erroResponseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                        GameEntry.Data.GetData<DataBackend>().message = erroResponseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGIN_FAILED));
                     }
-                    
+
                 }
                 else
                 {
                     Debug.LogError("Error: " + request.error);
                     HandleErrorMessages(request);
                 }
+                request.Dispose();
             }
         }
+        private void OnLoginSuccess()
+        {
+            switch (GameEntry.Data.GetData<DataBackend>().loginType)
+            {
+                case Constant.Type.BACK_PROFILE:
+                    GetUserProfileByUserId();
+                    break;
+                case Constant.Type.BACK_UPDATE:
+                    StartCoroutine(GetSaveDownloadRoutine());
+                    break;
+                case Constant.Type.BACK_PROFILE_PASSWORD:
+                    StartCoroutine(GetSaveDownloadRoutine());
+                    break;
+                case Constant.Type.BACK_SAVE_DOWNLOAD:
+                    StartCoroutine(GetSaveDownloadRoutine());
+                    break;
+                case Constant.Type.BACK_SAVE_UPLOAD:
+                    StartCoroutine(GetSaveDownloadRoutine());
+                    break;
+            }
+        }
+        public void HandleProfileUpdate(int avatar, string nickName)
+        {
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    StartCoroutine(PutProfileUpdateRoutine(avatar, nickName));
+                }
+                else
+                {
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
+                    {
+                        GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                    else
+                    {
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                }
+            });
+            
+        }
+        private IEnumerator PutProfileUpdateRoutine(int avatar, string nickName)
+        {
+            UserInfo updateData = new UserInfo
+            {
+                nickName = nickName,
+                avatar = avatar
+            };
 
+            string jsonData = JsonUtility.ToJson(updateData);
+            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profileUpdate_url, jsonData))
+            {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler.Dispose();
+                request.downloadHandler.Dispose();
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                request.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+
+                yield return request.SendWebRequest();
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    // Process the response data
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_UPDATE_SUCCESS));
+                    }
+                    else
+                    {
+                        GameEntry.Data.GetData<DataBackend>().message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_UPDATE_FAILED));
+                    }
+
+                    Debug.Log("PUT Request Successful: " + responseJson);
+                }
+                else
+                {
+                    // HandleErrorMessages(request);
+                    Debug.LogError("PUT Request Failed: " + request.error);
+                }
+                
+                request.disposeDownloadHandlerOnDispose = true;
+                request.disposeUploadHandlerOnDispose = true;
+            }
+        }
+        public void HandleProfilePassword(string oldPassword, string newPassword)
+        {
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    StartCoroutine(PutProfilePasswordRoutine(oldPassword, newPassword));
+                }
+                else
+                {
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
+                    {
+                        GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                    else
+                    {
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                }
+            });
+        }
+        private IEnumerator PutProfilePasswordRoutine(string oldPassword, string newPassword)
+        {
+            ProfilePassword updatePwd = new ProfilePassword
+            {
+                oldPassword = oldPassword,
+                newPassword = newPassword
+            };
+
+            string jsonData = JsonUtility.ToJson(updatePwd);
+
+            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profilePassword_url, jsonData))
+            {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                //
+                request.uploadHandler.Dispose();
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler.Dispose();
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                request.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                var asyncOperation = request.SendWebRequest();
+                yield return asyncOperation;
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_PASSWORD_SUCCESS));
+                    }
+                    else
+                    {
+                        GameEntry.Data.GetData<DataBackend>().message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_PASSWORD_FAILED));
+                    }
+                }
+                else
+                {
+                    HandleErrorMessages(request);
+                }
+                request.disposeDownloadHandlerOnDispose = true;
+                request.disposeUploadHandlerOnDispose = true;
+            }
+        }
         public void HandleSave(Dictionary<string, string> jsonStrDic)
         {
-            this.jsonStrDic = jsonStrDic;
+            GameEntry.Data.GetData<DataBackend>().jsonStrDic = jsonStrDic;
         }
         public void HandleLoad()
         {
             //先判断是否登录
             //如果没登陆就开登录UI
-            IsLoginDetection();
-            GetSaveDownload();
-            
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    StartCoroutine(GetSaveDownloadRoutine());
+                }
+                else
+                {
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
+                    {
+                        GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                    else
+                    {
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                }
+            });
         }
         public void HandleProfile()
         {
-            //登录
-            IsLoginDetection();
-            
-            
+            GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_PROFILE;
+            //登录之后再查userprofile
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    GetUserProfileByUserId();
+                }
+                else
+                {
+                    if(GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
+                    {
+                        GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                    else
+                    {
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                    }
+                }
+            });
+
+
         }
         public void HandleLogIn(string userName, string password)
         {
             GetLogIn(userName, password);
-            //load data
 
         }
         public void HandleRegister(string userName, string password)
         {
             GetRegister(userName, password);
-            //先saveData，传到云端
         }
         private void GetRegister(string userName, string password)
         {
-            currentUser = null;
-            message = null;
+            GameEntry.Data.GetData<DataBackend>().message = null;
 
-            StartCoroutine(GetRegisterRoutine(userName, password));
+            StartCoroutine(PostRegisterRoutine(userName, password));
         }
-        private IEnumerator GetRegisterRoutine(string userName, string password)
+        private IEnumerator PostRegisterRoutine(string userName, string password)
         {
-            isNewFetch = true;
-            isSuccess = false;
             LoginData loginData = new LoginData
             {
                 username = userName,
                 password = password
             };
 
-            // 将数据对象转换为 JSON 格式
             string jsonData = JsonUtility.ToJson(loginData);
 
-            // 创建一个 UnityWebRequest 对象，并设置相关属性
-            UnityWebRequest request = new UnityWebRequest(Register_url, "POST");
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            // 发送请求并等待响应
-            var asyncOperation = request.SendWebRequest();
-
-            // 处理请求的响应
-            yield return asyncOperation;
-
-            if (request.result == UnityWebRequest.Result.Success)
+            using (UnityWebRequest request = new UnityWebRequest(GameEntry.Data.GetData<DataBackend>().Register_url, "POST"))
             {
-                // 请求成功，处理响应数据
-                isSuccess = true;
-                errorType = 0;
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                var asyncOperation = request.SendWebRequest();
+
+                yield return asyncOperation;
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_SUCCESS));
+                    }
+                    else
+                    {
+                        GameEntry.Data.GetData<DataBackend>().message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_REGISTER_FAILED));
+                    }
+
+                }
+                else
+                {
+                    Debug.LogError("Error: " + request.error);
+                    HandleErrorMessages(request);
+                }
+                request.disposeDownloadHandlerOnDispose = true;
+                request.disposeUploadHandlerOnDispose = true;
+            }
+
+        }
+        public void IsLoginDetection(IsLoginDetectionCallback callback)
+        {
+            if (GameEntry.Data.GetData<DataBackend>().authorization == null)
+            {
+                GameEntry.Data.GetData<DataBackend>().authorization = null;
+                callback(false);
             }
             else
             {
-                // 请求失败，处理错误
-                Debug.LogError("Error: " + request.error);
-                HandleErrorMessages(request);
-                
+                GetCurrentUser(callback);
             }
-        }
-        private void IsLoginDetection()
-        {
-            if (authorization == null)
-            {
-                authorization = null;
-                GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-            }
-            else
-            {
-                GetCurrentUser();
-            }
-           
-        }
-        public void GetSaveDownload()
-        {
-            StartCoroutine(GetSaveDownloadRoutine());
+            
         }
         private IEnumerator GetSaveDownloadRoutine()
         {
-            isNewFetch = true;
-
-            using (UnityWebRequest www = UnityWebRequest.Get(saveDownload_url))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().saveDownload_url))
             {
-                www.SetRequestHeader("Authorization", authorization);
+                www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    isSuccess = true;
-                    errorType = 0;
                     string responseJson = www.downloadHandler.text;
-                    ErrorResponseData errorData = JsonUtility.FromJson<ErrorResponseData>(responseJson);
-                    if(errorData.success)
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                    
+                    if (responseData.success)
                     {
-                        if(errorData.data!="null")
+                        if(!string.IsNullOrEmpty(responseData.data))
                         {
-                            SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseJson);
 
+                            SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
                             // Convert the data class properties into a Dictionary<string, int>
                             Dictionary<string, string> dictionary = new Dictionary<string, string>
                        {
@@ -276,15 +443,16 @@ namespace ETLG
                         { "achievementScore", data.achievementScore },
                         { "learningProgress", data.learningProgress },
                         { "BossDefeatTime",data.BossDefeatTime}
-                            // You can handle BossDefeatTime separately if needed
-                            // It is currently stored as a string, so you might need additional parsing.
                          };
-                            jsonStrDic = dictionary;
+                            GameEntry.Data.GetData<DataBackend>().jsonStrDic = dictionary;
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
                         else
                         {
-                            GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_NULL));
+                            //if it is null , tell player to upload data
+                            GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                            GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                         }
                         
                       
@@ -299,41 +467,100 @@ namespace ETLG
                 {
                     HandleErrorMessages(www);
                 }
+                www.Dispose();
             }
         }
-        private void GetCurrentUser()
+        public void GetUserProfileByUserId()
         {
-            StartCoroutine(GetCurrentUserRoutine());
+            StartCoroutine(GetUserProfileByUserIdRoutine());
         }
-        private IEnumerator GetCurrentUserRoutine()
+        private IEnumerator GetUserProfileByUserIdRoutine()
         {
-            // 创建POST请求的表单数据
-            WWWForm form = new WWWForm();
-            isNewFetch = true;
-            using (UnityWebRequest www = UnityWebRequest.Post(currentUser_url, form))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().getProfileById_url + GameEntry.Data.GetData<DataBackend>().currentUser.id))
             {
-                www.SetRequestHeader("Authorization", authorization);
+                www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    errorType = 0;
-                    // 获取API响应数据
                     string responseJson = www.downloadHandler.text;
-                    ErrorResponseData data = JsonUtility.FromJson<ErrorResponseData>(responseJson);
-                    if(data.data.Equals("Please log in"))
+                    UserProfileResponseData responseData = JsonUtility.FromJson<UserProfileResponseData>(responseJson);
+                    if (responseData.success)
                     {
-                        authorization = null;
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                        if (responseData.data!=null && !string.IsNullOrEmpty( responseData.data.achievement))
+                        {
+                            GameEntry.Data.GetData<DataBackend>().userProfile.achievement = responseData.data.achievement;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress = responseData.data.learningProgress;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.nickName = responseData.data.nickName;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.playerScore = responseData.data.playerScore;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.avatar = responseData.data.avatar;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss1 = responseData.data.boss1;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss2 = responseData.data.boss2;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss3 = responseData.data.boss3;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss4 = responseData.data.boss4;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss5 = responseData.data.boss5;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss6 = responseData.data.boss6;
+                            GameEntry.Data.GetData<DataBackend>().userProfile.boss7 = responseData.data.boss7;
+                            GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_SUCCESS));
+                        }
+                        else
+                        {
+                            //if it is null , tell player to upload data
+                            GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                            GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                        }
                     }
                     else
                     {
-                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGED_IN));
+                        //if it is null , tell player to upload data
+                        GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
+                        GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
+                        GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                     }
                 }
                 else
                 {
                     HandleErrorMessages(www);
+                }
+                www.Dispose();
+            }
+        }
+        private void GetCurrentUser(IsLoginDetectionCallback callback)
+        {
+            StartCoroutine(GetCurrentUserRoutine(callback));
+        }
+        private IEnumerator GetCurrentUserRoutine(IsLoginDetectionCallback callback)
+        {
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().currentUser_url))
+            {
+                www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                yield return www.SendWebRequest();
+                Debug.Log(www.result);
+                if (www.result == UnityWebRequest.Result.Success)
+                {
+                    // 获取API响应数据
+                    string responseJson = www.downloadHandler.text;
+                    ResponseData data = JsonUtility.FromJson<ResponseData>(responseJson);
+                    if(data.data.Equals("Please log in"))
+                    {
+                        GameEntry.Data.GetData<DataBackend>().authorization = null;
+                        callback(false);
+                    }
+                    else
+                    {
+                        CurrentUserResponseData responseData = JsonUtility.FromJson<CurrentUserResponseData>(responseJson);
+                        GameEntry.Data.GetData<DataBackend>().currentUser.avatar = responseData.data.avatar;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.id = responseData.data.id;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.nickName = responseData.data.nickName;
+                        GameEntry.Data.GetData<DataBackend>().currentUser.username = responseData.data.username;
+                        callback(true);
+                    }
+                }
+                else
+                {
+                    HandleErrorMessages(www);
+                    callback(false);
                 }
             }
         }
@@ -342,20 +569,22 @@ namespace ETLG
             Debug.LogError("Error: " + www.error);
             if (www.result == UnityWebRequest.Result.ProtocolError)
             {
-                errorType = Constant.Type.ERROR_NETWORK;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_NETWORK;
+                
             }
             if (www.result == UnityWebRequest.Result.ConnectionError)
             {
-                errorType = Constant.Type.ERROR_SERVER;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_SERVER;
             }
             if (www.result == UnityWebRequest.Result.DataProcessingError)
             {
-                errorType = Constant.Type.ERROR_DATA;
+                GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
             }
+            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
             GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
         }
         [System.Serializable]
-        private class RankData
+        private class RankResponseData
         {
             public List<List<object>> rankList;
         }
@@ -374,22 +603,43 @@ namespace ETLG
             public string learningProgress;
         }
         [System.Serializable]
-        public class LoginData
+        private class LoginData
         {
             public string username;
             public string password;
         }
         [System.Serializable]
-        public class ErrorResponseData
+        private class ProfilePassword
+        {
+            public string oldPassword;
+            public string newPassword;
+        }
+        [System.Serializable]
+        private class ResponseData
         {
             public bool success;
             public int errorCode;
             public string errorMessage;
             public string data;
         }
-
         [System.Serializable]
-        public class LoginResponseData
+        private class CurrentUserResponseData
+        {
+            public bool success;
+            public int errorCode;
+            public string errorMessage;
+            public UserData data;
+        }
+        [System.Serializable]
+        private class UserProfileResponseData
+        {
+            public bool success;
+            public int errorCode;
+            public string errorMessage;
+            public UserProfile data;
+        }
+        [System.Serializable]
+        private class LoginResponseData
         {
             public bool success;
             public int errorCode;
@@ -397,7 +647,7 @@ namespace ETLG
             public DataWrapper data;
         }
         [System.Serializable]
-        public class DataWrapper
+        private class DataWrapper
         {
             public UserData userVO;
             public string token;
@@ -409,10 +659,29 @@ namespace ETLG
             public string username;
             public string avatar;
             public string nickName;
-            public List<int> roleIds;
-            public List<int> permissionIds;
         }
+        [System.Serializable]
+        public class UserProfile
+        {
+            public int avatar;
+            public string nickName;
+            public string playerScore;
+            public string achievement;
+            public string learningProgress;
+            public float boss1;
+            public float boss2;
+            public float boss3;
+            public float boss4;
+            public float boss5;
+            public float boss6;
+            public float boss7;
+        }
+        [System.Serializable]
+        private class UserInfo
+        {
+            public string nickName;
+            public int avatar;
 
-
+        }
     }
 }

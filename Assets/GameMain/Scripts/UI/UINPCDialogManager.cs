@@ -32,8 +32,9 @@ namespace ETLG.Data
             playerButtons = null;
             isNext = false;
         }
-        public UINPCDialogManager(string XMLPath)
+        public UINPCDialogManager(string XMLPath,bool award)
         {
+            this.award = award;
             textModules = new List<Image>();
             parseXMLFile(XMLPath);
         }

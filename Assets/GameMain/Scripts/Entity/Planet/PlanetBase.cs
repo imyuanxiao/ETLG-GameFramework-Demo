@@ -5,6 +5,8 @@ using GameFramework.Fsm;
 using GameFramework.Event;
 using UnityGameFramework.Runtime;
 using System;
+using UnityEngine.UI;
+using ETLG.Data;
 
 namespace ETLG
 {
@@ -15,15 +17,20 @@ namespace ETLG
         public Transform focusPoint;
         public GameObject UIPlanetTag;
         public GameObject[] landingPoints;
+        public Image progressBar;
+        private DataLearningProgress dataLearningProgress;
+        private DataPlayer dataPlayer;
 
         private void OnEnable() 
         {
             GameEntry.Event.Subscribe(FocusOnPlanetEventArgs.EventId, OnFocused);
             GameEntry.Event.Subscribe(UnFocusOnPlanetEventArgs.EventId, OnUnFocused);
-
+            dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             isFocused = false;
             ActiveLandingPoint(false);
             GetComponent<DragRotate>().enabled = false;
+            updateProgress();
         }
 
         private void OnUnFocused(object sender, GameEventArgs e)
@@ -62,6 +69,14 @@ namespace ETLG
             {
                 landingPoint.SetActive(state);
             }
+        }
+
+        private void updateProgress()
+        {
+            float progress = dataPlayer.GetPlayerData().DomiansSaveData[PlanetId];
+            RectTransform progressBarRectTransform = progressBar.GetComponentInChildren<RectTransform>();
+            float targetWidth = 5f * progress;
+            progressBarRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
         }
 
         private void OnDisable() 

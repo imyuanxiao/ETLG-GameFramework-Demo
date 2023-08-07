@@ -14,12 +14,35 @@ namespace ETLG.Data
             }
         }
 
+        public int PlanetId
+        {
+            get
+            {
+                return dRLandingPoint.PlanetId;
+            }
+        }
+
+        public string Domain
+        {
+            get
+            {
+                return dRLandingPoint.Domain;
+            }
+        }
+
         public string Title
         {
             get
             {
                 return dRLandingPoint.Course;
-               // return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_TITLE);
+            }
+        }
+
+        public int[] NPCsID
+        {
+            get
+            {
+                return dRLandingPoint.NPCsID;
             }
         }
 
@@ -27,8 +50,7 @@ namespace ETLG.Data
         {
             get
             {
-                // return dRPlanet.Description;
-                return GameEntry.Localization.GetString(Constant.Key.PRE_LANDING_POINT + Id + Constant.Key.POST_DESC);
+                return dRLandingPoint.Description;
             }
         }
 

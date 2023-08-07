@@ -17,19 +17,9 @@ namespace ETLG.Data
             finish = false;        
         }
 
-        public string getCurrentDomian()
+        public NPCData getPathNPCData()
         {
-            return NPCData.Domain;
-        }
-
-        public string getCurrentCourse()
-        {
-            return NPCData.Course;
-        }
-
-        public string getCurrentChapter()
-        {
-            return NPCData.Chapter;
+            return NPCData;
         }
 
         public string getCurrentType()

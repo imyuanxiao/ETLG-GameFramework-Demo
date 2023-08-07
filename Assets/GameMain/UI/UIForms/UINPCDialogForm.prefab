@@ -1577,6 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogModulePrefab: {fileID: 4353108771914833441, guid: 80a6da65192c3e542a07520dcfbaae02, type: 3}
+  descriptionModulePrefab: {fileID: 4353108771914833441, guid: 5663f9e057d91374b9c2fff98cd09fd4, type: 3}
   ImageContainerPrefab: {fileID: 8357149314738620422, guid: 20a1219ce1f6d974b9f5621c2f181aef, type: 3}
   VideoContainerPrefab: {fileID: 6144663979346337424, guid: 169f87cebb3ea394a9d9aa4e2f276729, type: 3}
   playerButtonPrefab: {fileID: 8335911349086156544, guid: 02bcc5af03680c749aafc78ff8e8b7e6, type: 3}
@@ -1591,6 +1592,7 @@ MonoBehaviour:
   npc_description: {fileID: 3713430131617289854}
   npc_avatar: {fileID: 197448465680156007}
   verticalLayoutGroup: {fileID: 200854511685163775}
+  ContainerRectTransform: {fileID: 501271159417683672}
 --- !u!222 &6863211748191235110
 CanvasRenderer:
   m_ObjectHideFlags: 0

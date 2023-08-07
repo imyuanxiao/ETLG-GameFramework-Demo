@@ -168,8 +168,25 @@
             public const int BACK_REGISTER_SUCCESS = 3;
             public const int BACK_REGISTER_FAILED = 4;
             public const int BACK_LOGED_IN = 5;
-            public const int BACK_SAVE_DOWNLOAD_NULL = 6;
-            public const int BACK_SAVE_DOWNLOAD_SUCCESS = 7;
+            public const int BACK_SAVE_DOWNLOAD_SUCCESS = 6;
+            public const int BACK_SAVE_DOWNLOAD_FAILED = 7;
+            public const int BACK_PROFILE_SUCCESS = 8;
+            public const int BACK_PROFILE_FAILED = 9;
+            public const int BACK_PROFILE_UPDATE_SUCCESS = 10;
+            public const int BACK_PROFILE_UPDATE_FAILED = 11;
+            public const int BACK_PROFILE_PASSWORD_SUCCESS = 12;
+            public const int BACK_PROFILE_PASSWORD_FAILED = 13;
+            //login purpose
+            public const int BACK_PROFILE = 1;
+            public const int BACK_UPDATE = 2;
+            public const int BACK_PROFILE_PASSWORD = 3;
+            public const int BACK_SAVE_DOWNLOAD = 4;
+            public const int BACK_SAVE_UPLOAD = 5;
+
+            //UINPC positionX
+            public const float POSITION_X_RIGHT = 550f;
+            public const float POSITION_X_LEFT = -550f;
+
         }
     }
 }

@@ -183,6 +183,9 @@ namespace ETLG
             result.Add("BattleVictoryCount", PlayerPrefs.GetString("BattleVictoryCount" + saveIdStr));
             result.Add("BossDefeatTime", PlayerPrefs.GetString("BossDefeatTime" + saveIdStr));
             result.Add("PlayedTutorialGroup", PlayerPrefs.GetString("PlayedTutorialGroup" + saveIdStr));
+            result.Add("ChaptersSaveData", PlayerPrefs.GetString("ChaptersSaveData" + saveIdStr));
+            result.Add("CoursesSaveData", PlayerPrefs.GetString("CoursesSaveData" + saveIdStr));
+            result.Add("DomiansSaveData", PlayerPrefs.GetString("DomiansSaveData" + saveIdStr));
 
             return result;
         }

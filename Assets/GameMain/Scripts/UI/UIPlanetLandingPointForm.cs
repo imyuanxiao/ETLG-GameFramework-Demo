@@ -14,11 +14,19 @@ namespace ETLG
     public class UIPlanetLandingPointForm : UGuiFormEx
     {
 
+<<<<<<< HEAD
         public RectTransform NPCsContainer;
+=======
+        public Transform NPCsContainer;
+        public TextMeshProUGUI Desc;
+        public TextMeshProUGUI Title;
+>>>>>>> 22a46b37710f61ba8c7c436cb988908807c7c829
 
         public Button closeButton;
-       
+        public VerticalLayoutGroup containerVerticalLayoutGroup;
+        public VerticalLayoutGroup scrollVerticalLayoutGroup;
 
+        private DataLearningProgress dataLearningProgress;
         // 初始化菜单数据
         protected override void OnInit(object userData)
         {
@@ -26,7 +34,7 @@ namespace ETLG
 
             // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
-
+            dataLearningProgress= GameEntry.Data.GetData<DataLearningProgress>();
         }
 
         protected override void OnOpen(object userData)
@@ -37,6 +45,22 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
             }
             ShowNPCSelectionButtonItems();
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+        }
+
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (dataLearningProgress.UIPlanetLandingPointsUpdate)
+            {
+                HideAllItem();
+                ShowNPCSelectionButtonItems();
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scrollVerticalLayoutGroup.transform);
+                dataLearningProgress.UIPlanetLandingPointsUpdate = false;
+            }
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)containerVerticalLayoutGroup.transform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scrollVerticalLayoutGroup.transform);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -49,6 +73,8 @@ namespace ETLG
         {
 
             NPCData[] npcDatas = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().npcs;
+            Title.text = GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Title;
+            Desc.text= GameEntry.Data.GetData<DataLandingPoint>().GetCurrentLandingPointData().Description;
             foreach (var npcData in npcDatas)
             {
                 ShowItem<ItemNPCSelect>(EnumItem.ItemNPCSelect, (item) =>

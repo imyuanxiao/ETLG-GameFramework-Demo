@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-05 03:06:21.656
+// 生成时间：2023-08-06 23:52:04.001
 //------------------------------------------------------------
 
 using GameFramework;
@@ -64,6 +64,15 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取课程描述。
+        /// </summary>
+        public string Description
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取偏移量。
         /// </summary>
         public int Offset
@@ -91,9 +100,9 @@ namespace ETLG
         }
 
         /// <summary>
-        /// 获取VlookUP编号。
+        /// 获取VlookupLandingPoint编号。
         /// </summary>
-        public int VlookupId
+        public int VlookupLandingPointId
         {
             get;
             private set;
@@ -114,10 +123,11 @@ namespace ETLG
             PlanetId = int.Parse(columnStrings[index++]);
             Domain = columnStrings[index++];
             Course = columnStrings[index++];
+            Description = columnStrings[index++];
             Offset = int.Parse(columnStrings[index++]);
                 NPCsID = DataTableExtension.ParseInt32Array(columnStrings[index++]);
             NPCsString = columnStrings[index++];
-            VlookupId = int.Parse(columnStrings[index++]);
+            VlookupLandingPointId = int.Parse(columnStrings[index++]);
 
             GeneratePropertyArray();
             return true;
@@ -133,10 +143,11 @@ namespace ETLG
                     PlanetId = binaryReader.Read7BitEncodedInt32();
                     Domain = binaryReader.ReadString();
                     Course = binaryReader.ReadString();
+                    Description = binaryReader.ReadString();
                     Offset = binaryReader.Read7BitEncodedInt32();
                         NPCsID = binaryReader.ReadInt32Array();
                     NPCsString = binaryReader.ReadString();
-                    VlookupId = binaryReader.Read7BitEncodedInt32();
+                    VlookupLandingPointId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

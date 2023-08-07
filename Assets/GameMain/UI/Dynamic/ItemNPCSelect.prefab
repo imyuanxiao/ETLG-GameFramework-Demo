@@ -550,7 +550,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 40}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &495664480881037987
 CanvasRenderer:
@@ -686,7 +686,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 40}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3663819119091601760
 CanvasRenderer:
@@ -1481,7 +1481,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5350509902426962785}
-  - component: {fileID: 5198361460227886299}
   - component: {fileID: 6618789922519675262}
   - component: {fileID: 4237940226288489418}
   - component: {fileID: 1947936011664847068}
@@ -1515,27 +1514,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 630, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!223 &5198361460227886299
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147204563429847656}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!222 &6618789922519675262
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1602,6 +1580,7 @@ MonoBehaviour:
   talkButton: {fileID: 138278081928180770}
   tradeButton: {fileID: 5594594565942552198}
   quizButton: {fileID: 854648967163292967}
+  horizontalLayoutGroup: {fileID: 5452673038314045182}
 --- !u!1 &8247788040415392947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1644,7 @@ MonoBehaviour:
   talkButton: {fileID: 138278081928180770}
   tradeButton: {fileID: 5594594565942552198}
   quizButton: {fileID: 854648967163292967}
+  horizontalLayoutGroup: {fileID: 0}
 --- !u!222 &6026325230914497859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1691,7 +1671,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 20
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1774,6 +1754,7 @@ MonoBehaviour:
   talkButton: {fileID: 0}
   tradeButton: {fileID: 0}
   quizButton: {fileID: 0}
+  horizontalLayoutGroup: {fileID: 0}
 --- !u!222 &3773717677299554483
 CanvasRenderer:
   m_ObjectHideFlags: 0

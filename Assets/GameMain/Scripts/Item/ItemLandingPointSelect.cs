@@ -24,11 +24,11 @@ namespace ETLG
         private int landingPointID;
 
         private int Type;
-
+        private DataPlayer dataPlayer;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataLandingPoint = GameEntry.Data.GetData<DataLandingPoint>();
         }
 
@@ -50,9 +50,9 @@ namespace ETLG
             // combatButton.onClick.AddListener(OnCombatButtonClick);
 
             // need to get study progress
-            float percentage = 33.45f;
+            float percentage = dataPlayer.GetPlayerData().CoursesSaveData[landingPointID];
 
-            planet_percentage.text = (int)percentage + "%";
+            planet_percentage.text = UIFloatString.FloatToString(percentage);
 
 
         }

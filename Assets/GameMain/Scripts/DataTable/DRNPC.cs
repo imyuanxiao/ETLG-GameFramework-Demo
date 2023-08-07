@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-05 03:06:21.667
+// 生成时间：2023-08-06 23:52:04.017
 //------------------------------------------------------------
 
 using GameFramework;
@@ -82,9 +82,27 @@ namespace ETLG
         }
 
         /// <summary>
+        /// 获取课程描述。
+        /// </summary>
+        public string CourseDescription
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取章节名称。
         /// </summary>
         public string Chapter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取章节描述。
+        /// </summary>
+        public string ChapterDescription
         {
             get;
             private set;
@@ -196,7 +214,9 @@ namespace ETLG
             Domain = columnStrings[index++];
             LandingPointId = int.Parse(columnStrings[index++]);
             Course = columnStrings[index++];
+            CourseDescription = columnStrings[index++];
             Chapter = columnStrings[index++];
+            ChapterDescription = columnStrings[index++];
             Type = int.Parse(columnStrings[index++]);
             Money = int.Parse(columnStrings[index++]);
                 Artifacts = DataTableExtension.ParseInt32Array(columnStrings[index++]);
@@ -224,7 +244,9 @@ namespace ETLG
                     Domain = binaryReader.ReadString();
                     LandingPointId = binaryReader.Read7BitEncodedInt32();
                     Course = binaryReader.ReadString();
+                    CourseDescription = binaryReader.ReadString();
                     Chapter = binaryReader.ReadString();
+                    ChapterDescription = binaryReader.ReadString();
                     Type = binaryReader.Read7BitEncodedInt32();
                     Money = binaryReader.Read7BitEncodedInt32();
                         Artifacts = binaryReader.ReadInt32Array();

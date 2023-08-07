@@ -12,7 +12,15 @@ namespace ETLG.Data
         public bool award = false;
         public bool clickGetButton = false;
         public bool boss = false;
-        public int domain=1;
+        private int domain=1;
+
+        public int getDomain()
+        {
+            DataNPC dataNPC= GameEntry.Data.GetData<DataNPC>();
+            int domainInt = dataNPC.GetCurrentNPCData().PlanetId;
+            domain = domainInt - 100;
+            return domain;
+        }
 
         public string getAccuracyText()
         {

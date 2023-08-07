@@ -56,7 +56,6 @@ namespace ETLG
             switchButton.onClick.AddListener(OnSwitchButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
             closeButton.onClick.AddListener(OnCloseButtonClick);
-
         }
 
         protected override void OnOpen(object userData)
@@ -86,7 +85,6 @@ namespace ETLG
                 {
                     OnRegister();
                 }
-                BackendDataManager.Instance.isNewFetch = false;
                 isRefresh = !isRefresh;
                 fetchedType = 0;
             }
@@ -135,7 +133,7 @@ namespace ETLG
                 }
                 else
                 {
-                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
+                    SetReminderTextandColor(GameEntry.Data.GetData<DataBackend>().message, RED);
                 }
                 userName.text = null;
                 pwd.text = null;
@@ -144,24 +142,18 @@ namespace ETLG
         }
         private void OnRegister()
         {
-            if(pwd.text==confirmPwd.text)
-            {
-                BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
-                if(BackendDataManager.Instance.isSuccess)
+                //if success
+                if(fetchedType == Constant.Type.BACK_REGISTER_SUCCESS)
                 {
                     SetReminderTextandColor("Register successful! Please login.", GOLD);
 
                     SetRegisterSeccessPanel();
                 }
-                else
+            //if failed
+                else if (fetchedType == Constant.Type.BACK_REGISTER_FAILED)
                 {
-                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
+                    SetReminderTextandColor(GameEntry.Data.GetData<DataBackend>().message, RED);
                 }
-            }
-            else
-            {
-                SetReminderTextandColor("Passwords do not match.", RED);
-            }
 
         }
         private void OnSwitchButtonClick()
@@ -175,7 +167,37 @@ namespace ETLG
         {
             if (isRegister)
             {
-                OnRegister();
+                if(string.IsNullOrEmpty( userName.text))
+                {
+                    SetReminderTextandColor("Please enter user name.", RED);
+                    return;
+                }
+                //只能不能包含特殊字符和字数限制？？
+                /*
+                if (userName.text.Length>16))
+                {
+                    SetReminderTextandColor("The username can not longer than 16 characters.", RED);
+                    return;
+                }
+                if(!IsStringValid(userName.text))
+                {
+                    SetReminderTextandColor("The username can only contain letters and numbers.", RED);
+                    return;
+                }
+                
+                */
+                if (string.IsNullOrEmpty(pwd.text))
+                {
+                    SetReminderTextandColor("Please enter password.", RED);
+                    return;
+                }
+                if(pwd.text != confirmPwd.text )
+                {
+                    SetReminderTextandColor("Passwords do not match.", RED);
+                    ShakeText();
+                    return;
+                }
+                BackendDataManager.Instance.HandleRegister(userName.text, pwd.text);
             }
             else
             {
@@ -234,7 +256,10 @@ namespace ETLG
 
             reminder.rectTransform.localPosition = originalPosition;
         }
-        
+        private static bool IsStringValid(string input)
+        {
+            return Regex.IsMatch(input, "^[a-zA-Z0-9]+$");
+        }
         private void KeyboardControl()
         {
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))

@@ -6,7 +6,7 @@ namespace ETLG.Data
     public class DataAlert : DataBase
     {
         public int AlertType;
-        
+        public bool isFromBackend;
 
         public void clearData()
         {

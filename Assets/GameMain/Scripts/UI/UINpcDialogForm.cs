@@ -15,6 +15,7 @@ namespace ETLG
     public class UINpcDialogForm : UGuiFormEx
     {
         public Image dialogModulePrefab;
+        public Image descriptionModulePrefab;
         public Canvas ImageContainerPrefab;
         public Canvas VideoContainerPrefab;
         public Button playerButtonPrefab;
@@ -29,6 +30,8 @@ namespace ETLG
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
+        public VerticalLayoutGroup DialogScrollVerticalLayoutGroup;
+        public RectTransform ContainerRectTransform;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -55,7 +58,9 @@ namespace ETLG
         private int fontsizeChangePlusValue = 0;
         private int fontsizeChangeSubValue = 0;
         private int fontsizeStandardOffset = 2;
-
+        private bool isMax = false;
+        private float originalPositionX;
+        private Vector2 currentPosition;
 
         protected override void OnInit(object userData)
         {
@@ -70,7 +75,6 @@ namespace ETLG
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
-
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataAlert = GameEntry.Data.GetData<DataAlert>();
@@ -86,16 +90,64 @@ namespace ETLG
             dialogScrollContentRectTransform = dialogScrollContent.GetComponent<RectTransform>();
 
             loadAvatar();
+            removeALLConversations();
+
             UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
             if (tempDialogManager == null)
             {
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
-                UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
+                UI_NPCDialogManager = new UINPCDialogManager(XMLPath,dataPlayer.GetPlayerData().getChapterFinish(npcData.Id));
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }
             else
             {
                 UI_NPCDialogManager = tempDialogManager;
+                showTextModules();
+            }
+
+            currentPosition = ContainerRectTransform.anchoredPosition;
+            originalPositionX = currentPosition.x;
+            isMax = false;
+            resizeUI();
+            setPositionX(true);
+        }
+
+        private void showTextModules()
+        {
+            //dialogScrollContentTransform = dialogScrollContentCanvas.GetComponentInChildren<Transform>();
+            //foreach (Image textModule in UI_NPCDialogManager.textModules)
+            //{
+            //    textModule.transform.SetParent(dialogScrollContentTransform, false);
+            //}
+            foreach (Image textModule in UI_NPCDialogManager.textModules)
+            {
+                textModule.gameObject.SetActive(true);
+                Debug.Log("实例化一次");
+            }
+
+        }
+
+        private void ModifyPositionX(float newX)
+        {
+            currentPosition.x = currentPosition.x + newX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
+        }
+
+        private void ModifyPositionXToOrigin()
+        {
+            currentPosition.x = originalPositionX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
+        }
+
+        private void setChapterDescription()
+        {
+            Image descriptionPrefab;
+            if (!string.IsNullOrEmpty(npcData.ChapterDescription))
+            {
+                descriptionPrefab = Instantiate(descriptionModulePrefab, dialogScrollContent);
+                TextMeshProUGUI ChapterDescription = descriptionPrefab.GetComponentInChildren<TextMeshProUGUI>();
+                ChapterDescription.text = "--------" + npcData.ChapterDescription + "--------";
+                UI_NPCDialogManager.textModules.Add(descriptionPrefab);
             }
         }
 
@@ -174,14 +226,16 @@ namespace ETLG
             }
             UI_NPCDialogManager.award = true;
             dataDialog.award = true;
-            dataLearningProgress.update = true;
-            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataLearningProgress.getAward();
 
+            dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            ModifyPositionXToOrigin();
             base.OnClose(isShutdown, userData);
         }
 
@@ -189,7 +243,7 @@ namespace ETLG
         {
             if (buttonScrollContent.childCount != 0)
             {
-                if (!UI_NPCDialogManager.award)
+                if (!dataPlayer.GetPlayerData().getChapterFinish(npcData.Id))
                 {
                     if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
                     {
@@ -220,15 +274,43 @@ namespace ETLG
             }
         }
 
+        private void setPositionX(bool UIopen)
+        {
+            if (dataLearningProgress.open)
+            {
+                if (UIopen)
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+                }
+                else if (!isMax)
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_LEFT);
+                }
+                else
+                {
+                    ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+                }
+            }
+            if (!UIopen)
+            {
+                isMax = !isMax;
+            }
+        }
+
         //页面最大化
         private void OnMaxButtonClick()
         {
-            //bgm
+            setPositionX(false);
+            resizeUI();
+        }
+
+        private void resizeUI()
+        {
             RectTransform dialogBGTransfrom = dialogBg.GetComponent<RectTransform>();
             float currentdialogUIWidth = dialogBGTransfrom.sizeDelta.x;
             float currentdialogUIHeight = dialogBGTransfrom.sizeDelta.y;
-            //1830f 1760 1540
-            if (currentdialogUIWidth == min_contentWidth)
+            //1830f 1760 1540 
+            if (isMax)
             {
                 dialogBGTransfrom.sizeDelta = new Vector2(max_contentWidth, currentdialogUIHeight);
                 resizeDialog(max_prefabWidth, max_textWidth);
@@ -247,6 +329,7 @@ namespace ETLG
 
             if (UI_NPCDialogManager.currentNode == null)
             {
+                setChapterDescription();
                 UI_NPCDialogManager.currentNode = UI_NPCDialogManager.dialogueNodes["1"];
             }
             else
@@ -346,7 +429,7 @@ namespace ETLG
             {
                 UI_NPCDialogManager.reset();
                 removePlayerResponseInput();
-                removeConversations();
+                removeConversationsAgain();
                 getCurrentNode();
                 showText();
             });
@@ -397,14 +480,25 @@ namespace ETLG
             buttonScrollContentRectTransform.sizeDelta = new Vector2(buttonScrollContentRectTransform.sizeDelta.x, playerInputBoxOriginalHeight);
         }
 
-        //清除所有聊天记录
-        private void removeConversations()
+        private void removeConversationsAgain()
+        {
+            removeALLConversations();
+
+            //foreach (Image textModule in UI_NPCDialogManager.textModules)
+            //{
+            //    Destroy(textModule.gameObject);
+            //}
+            UI_NPCDialogManager.textModules = new List<Image>();
+        }
+
+        // 清除所有聊天记录
+        private void removeALLConversations()
         {
             for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
             {
-                Destroy(dialogScrollContentRectTransform.GetChild(i).gameObject);
+                dialogScrollContentRectTransform.GetChild(i).gameObject.SetActive(false);
             }
-            dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
+            //dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
         }
 
         //分别实例化NPC和玩家的聊天记录prefab,并加载文本

@@ -38,14 +38,15 @@ namespace ETLG
         public Slider AccuracySlider;
         public TextMeshProUGUI LeftQuestionsText;
         public TextMeshProUGUI AccuracyRate;
-        public TextMeshProUGUI Analysis;
-        public Canvas AnalysisContainer;
+        public Transform AnalysisContainer;
+        public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
+        public RectTransform ContainerRectTransform;
 
-        private int currentQuizIndex = 0;
         private UIQuiz currentQuiz;
-
+        private Vector2 currentPosition;
         private bool isToggling = false;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -53,13 +54,14 @@ namespace ETLG
             closeButton.onClick.AddListener(OnCloseButtonClick);
             LastButton.onClick.AddListener(OnLastButtonClick);
             NextButton.onClick.AddListener(OnNextButtonClick);
+            SubmitButton.onClick.AddListener(OnSubmitButtonClick);
         }
 
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
-
+   
             UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -68,30 +70,44 @@ namespace ETLG
             dataQuizReport.reset();
             dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
 
+            if (dataLearningProgress.open)
+            {
+                ModifyPositionX(Constant.Type.POSITION_X_RIGHT);
+            }
+
             npc_name.text = npcData.Name;
             npcAvatarPath = AssetUtility.GetNPCAvatar(npcData.Id.ToString());
             npc_description.text = npcData.Domain + "\n" + npcData.Course + "\n" + npcData.Chapter;
 
-            SubmitButton.onClick.AddListener(OnSubmitButtonClick);
-
             loadAvatar();
-            UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
-            if (tempUIQuizManager == null)
-            {
-                XMLPath = AssetUtility.GetQuizXML(npcData.Id.ToString());
-                UIQuizManager = new UIQuizManager(XMLPath);
-                dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
-            }
-            else
-            {
-                UIQuizManager = tempUIQuizManager;
-            }
+            setUIQuizManager();
             dataQuizReport.boss = UIQuizManager.boss;
             dataQuizReport.award = UIQuizManager.award;
 
             loadQuestions();
             updateProgress();
             updateAccuracy();
+        }
+
+        private void setUIQuizManager()
+        {
+            UIQuizManager tempUIQuizManager = dataPlayer.GetPlayerData().getUIQuizManager(npcData.Id);
+            if (tempUIQuizManager == null)
+            {
+                XMLPath = AssetUtility.GetQuizXML(npcData.Id.ToString());
+                UIQuizManager = new UIQuizManager(XMLPath, dataPlayer.GetPlayerData().getChapterFinish(npcData.Id));
+                dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
+            }
+            else
+            {
+                UIQuizManager = tempUIQuizManager;
+            }
+        }
+
+        private void ModifyPositionX(float newX)
+        {
+            currentPosition.x = currentPosition.x + newX;
+            ContainerRectTransform.anchoredPosition = currentPosition;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -112,7 +128,6 @@ namespace ETLG
             }
             if (dataQuizReport.again)
             {
-                currentQuizIndex = 0;
                 UIQuizManager.reset();
                 dataQuizReport.reset();
                 destroyAllOptions();
@@ -168,18 +183,22 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            if (dataLearningProgress.open)
+            {
+                ModifyPositionX(Constant.Type.POSITION_X_LEFT);
+            }
             base.OnClose(isShutdown, userData);
         }
 
         private void OnCloseButtonClick()
         {
-            if (!UIQuizManager.award)
+            if (!dataPlayer.GetPlayerData().getChapterFinish(npcData.Id))
             {
                 dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT;
                 openErrorMessage();
                 return;
             }
-            else if(!(UIQuizManager.award&& dataQuizReport.report))
+            else if (!(dataPlayer.GetPlayerData().getChapterFinish(npcData.Id) && dataQuizReport.report))
             {
                 dataAlert.AlertType = Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD;
                 openErrorMessage();
@@ -224,7 +243,7 @@ namespace ETLG
 
         private void getCurrentQuiz()
         {
-            currentQuiz = UIQuizManager.quizArray[currentQuizIndex];
+            currentQuiz = UIQuizManager.quizArray[UIQuizManager.currentQuizIndex];
         }
 
         private void loadQuestions()
@@ -239,17 +258,30 @@ namespace ETLG
 
         private void multipleChoicesQuestionLoad()
         {
+            destroyAnalysisContainer();
             if (currentQuiz.OptionsCanvas.Count == 0)
             {
                 instantiateChoicesPrefab(currentQuiz.type);
+
             }
             else
             {
                 instantiateShownChoices();
+                if (currentQuiz.analysisShown)
+                {
+                    setAnalysisPrefab();
+                }
             }
-            Analysis.text = currentQuiz.analysis;
-            AnalysisContainer.gameObject.SetActive(false);
         }
+
+        private void destroyAnalysisContainer()
+        {
+            for (int i = AnalysisContainer.childCount - 1; i >= 0; i--)
+            {
+                Destroy(AnalysisContainer.GetChild(i).gameObject);
+            }
+        }
+
         private void instantiateChoicesPrefab(string type)
         {
             foreach (KeyValuePair<string, string> option in currentQuiz.Options)
@@ -317,16 +349,26 @@ namespace ETLG
                 int id = npcData.RewardSkill;
                 dataPlayer.GetPlayerData().AddSkill(id);
             }
-            dataLearningProgress.update = true;
+            dataLearningProgress.getAward();
+
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
+            dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
+        }
+
+        private void setAnalysisPrefab()
+        {
+            if (!string.IsNullOrWhiteSpace(currentQuiz.analysis))
+            {
+                Canvas analysisPrefab = Instantiate(AnalysisPrefab, AnalysisContainer);
+                TextMeshProUGUI analysisText = analysisPrefab.GetComponentInChildren<TextMeshProUGUI>();
+                analysisText.text = currentQuiz.analysis;
+                currentQuiz.analysisShown = true;
+            }
         }
 
         private void OnSubmitButtonClick()
         {
-            if (!string.IsNullOrWhiteSpace(currentQuiz.analysis))
-            {
-                AnalysisContainer.gameObject.SetActive(true);
-            }
+            setAnalysisPrefab();
             if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
             {
                 currentQuiz.testOnToggleMCM();
@@ -363,14 +405,14 @@ namespace ETLG
         {
             if (LastButton.enabled)
             {
-                currentQuizIndex--;
+                UIQuizManager.currentQuizIndex--;
                 loadQuestions();
             }
         }
 
         private void updateLastButtonStatus()
         {
-            if (currentQuizIndex > 0)
+            if (UIQuizManager.currentQuizIndex > 0)
             {
                 LastButton.enabled = true;
             }
@@ -384,14 +426,14 @@ namespace ETLG
         {
             if (NextButton.enabled)
             {
-                currentQuizIndex++;
+                UIQuizManager.currentQuizIndex++;
                 loadQuestions();
             }
         }
 
         private void updateNextButtonStatus()
         {
-            if (currentQuizIndex < UIQuizManager.totalQuestion - 1)
+            if (UIQuizManager.currentQuizIndex < UIQuizManager.totalQuestion - 1)
             {
                 NextButton.enabled = true;
             }
@@ -414,15 +456,21 @@ namespace ETLG
 
         private void destroyAllOptions()
         {
-            for (int i = 0; i < ChoicesContainer.childCount; i++)
-            {
-                Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
-                if (canvasComponent != null)
-                {
-                    Transform option = ChoicesContainer.GetChild(i);
-                    Destroy(option.gameObject);
-                }
-            }
+            removeAllOptions();
+            //for (int i = UIQuizManager.quizArray.Count - 1; i >= 0; i--)
+            //{
+            //    //Destroy(UIQuizManager.quizArray[i].OptionsCanvas.);
+            //}
+           // UIQuizManager.quizArray = new List<UIQuiz>();
+            //for (int i = 0; i < ChoicesContainer.childCount; i++)
+            //{
+            //    Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
+            //    if (canvasComponent != null)
+            //    {
+            //        Transform option = ChoicesContainer.GetChild(i);
+            //        Destroy(option.gameObject);
+            //    }
+            //}
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
         }
 

@@ -20,7 +20,7 @@ namespace ETLG
 
         public Button overviewButton;
         public Button combatButton;
-
+        public TextMeshProUGUI progress;
 
        // public TextMeshProUGUI planet_name = null;
         public TextMeshProUGUI planet_domain = null;
@@ -42,11 +42,14 @@ namespace ETLG
 
         private bool refresh;
 
+        private DataPlayer dataPlayer;
+
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
             refresh = false;
             dataPlanet = GameEntry.Data.GetData<DataPlanet>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -88,9 +91,9 @@ namespace ETLG
             planet_domain.text = dataPlanet.GetPlanetData(PlanetID).TypeStr;
 
             // need to get study progress
-            float percentage = 33.45f;
+            float percentage = dataPlayer.GetPlayerData().DomiansSaveData[PlanetID];
 
-            planet_percentage.text = (int)percentage + "%";
+            planet_percentage.text = UIFloatString.FloatToString(percentage);
 
             SetWidth(planet_valueBar, percentage / 100);
 

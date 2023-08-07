@@ -10,11 +10,25 @@ namespace ETLG.Data
     public sealed class DataLearningProgress : DataBase
     {
         public bool update;
+        public bool UIPlanetLandingPointsUpdate;
+        public bool UIPlanetOverviewUpdate;
+        public bool PlanetsUpdate;
+        public bool ItemPlanetSelect;
+        public bool open;
 
         public void reset()
         {
             update = false;
 
+        }
+
+        public void getAward()
+        {
+            update = true;
+            UIPlanetLandingPointsUpdate = true;
+            UIPlanetOverviewUpdate = true;
+            PlanetsUpdate = true;
+            ItemPlanetSelect = true;
         }
     }
 

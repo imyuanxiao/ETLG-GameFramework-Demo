@@ -18,6 +18,7 @@ namespace ETLG.Data
         public bool haveShown { get; set; }
         public string hint { get; }
         public string analysis { get; }
+        public bool analysisShown = false;
         public string statement { get; }
         private SortedDictionary<string, string> options = new SortedDictionary<string, string>();
         private SortedDictionary<string, Canvas> optionsCanvas = new SortedDictionary<string, Canvas>();
@@ -45,6 +46,7 @@ namespace ETLG.Data
             haveShown = false;
             optionsCanvas = new SortedDictionary<string, Canvas>();
             selectAnswers = new List<string>();
+            analysisShown = false;
         }
 
         private void getAllOptions()

@@ -20,12 +20,14 @@ namespace ETLG
 
         public TextMeshProUGUI planetName;
         public TextMeshProUGUI planetType;
-
+        public TextMeshProUGUI planetProgress;
         public TextMeshProUGUI Desription;
-
+        
         public Image progressBar;
 
         private PlanetBase currentPlanet = null;
+        private DataLearningProgress dataLearningProgress;
+        private DataPlayer dataPlayer;
 
         protected override void OnInit(object userData)
         {
@@ -94,7 +96,8 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-
+            dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
+            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             currentPlanet = (PlanetBase) userData;
 
             if (currentPlanet == null)
@@ -107,7 +110,7 @@ namespace ETLG
             planetName.text = data.Name;
             planetType.text = data.TypeStr;
             Desription.text = data.Description;
-            progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
+            updateProgress();
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
 
@@ -116,6 +119,21 @@ namespace ETLG
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
+            if (dataLearningProgress.UIPlanetOverviewUpdate)
+            {
+                updateProgress();
+                dataLearningProgress.UIPlanetOverviewUpdate = false;
+            }
+        }
+
+        private void updateProgress()
+        {
+            float progress=dataPlayer.GetPlayerData().DomiansSaveData[currentPlanet.PlanetId];
+
+            RectTransform progressBarRectTransform = progressBar.GetComponentInChildren<RectTransform>();
+            float targetWidth = 510f * progress;
+            progressBarRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
+            planetProgress.text = UIFloatString.FloatToString(progress);
         }
 
         protected override void OnClose(bool isShutdown, object userData)

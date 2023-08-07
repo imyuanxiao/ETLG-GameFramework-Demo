@@ -4,6 +4,7 @@ using UnityEngine;
 using GameFramework.Data;
 using GameFramework.DataTable;
 using UnityGameFramework.Runtime;
+using System.Linq;
 
 namespace ETLG.Data
 {
@@ -26,6 +27,11 @@ namespace ETLG.Data
         {
             LoadDataTable("LandingPoint");
 
+        }
+
+        public int[] GetAlLandingPointsIDs()
+        {
+            return dicLandingPointData.Keys.ToArray();
         }
 
         protected override void OnLoad()
