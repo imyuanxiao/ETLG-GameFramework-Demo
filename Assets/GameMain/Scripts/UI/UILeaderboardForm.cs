@@ -97,8 +97,8 @@ namespace ETLG
             s_name.text = "Achievement Leaderboard";
             leaderboardData.Sort((a, b) => b.AchievementScore.CompareTo(a.AchievementScore));
             type = Constant.Type.LB_ACHIVEMENT;
-            if(BackendDataManager.IsInitialized)
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_ACHIVEMENT);
+            
+         //   rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_ACHIVEMENT);
             showLeaderBoardInfo();
         }
         private void OnspaceshipButtonClick()
@@ -109,7 +109,7 @@ namespace ETLG
             type = Constant.Type.LB_SPACESHIP;
             showLeaderBoardInfo();
            
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_SPACESHIP);
+        //    rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_SPACESHIP);
         }
         private void OnBossButtonClick()
         {
@@ -137,7 +137,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_AI;
             showLeaderBoardInfo();
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_AI);
+          //  rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_AI);
         }
         private void OnBossButtonCloudComputingClick()
         {
@@ -147,7 +147,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_CLOUDCOMPUTING;
             showLeaderBoardInfo();
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CLOUDCOMPUTING);
+           // rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CLOUDCOMPUTING);
         }
         private void OnBossButtonBlockchainClick()
         {
@@ -157,7 +157,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_BLOCKCHAIN;
             
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_BLOCKCHAIN);
+           // rankList = backendDataManager.GetRankData(1, 10, Constant.Type.LB_BOSS_BLOCKCHAIN);
             showLeaderBoardInfo();
         }
         private void OnBossButtonCybersecurityClick()
@@ -168,7 +168,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_CYBERSECURITY;
             
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CYBERSECURITY);
+         //   rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_CYBERSECURITY);
             showLeaderBoardInfo();
         }
         private void OnBossButtonDataScienceClick()
@@ -179,7 +179,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_DATASCIENCE;
             
            
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_DATASCIENCE);
+         //   rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_DATASCIENCE);
             showLeaderBoardInfo();
         }
         private void OnBossButtonIoTClick()
@@ -190,7 +190,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_IOT;
             
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_IOT);
+          //  rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_IOT);
             showLeaderBoardInfo();
         }
         private void OnBossButtonFinalClick()
@@ -201,7 +201,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_FINAL;
             
             
-            rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_FINAL);
+          //  rankList = BackendDataManager.Instance.GetRankData(1, 10, Constant.Type.LB_BOSS_FINAL);
             showLeaderBoardInfo();
         }
         private void AddMockPlayers()

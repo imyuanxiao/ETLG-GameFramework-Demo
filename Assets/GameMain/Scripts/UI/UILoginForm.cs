@@ -56,7 +56,6 @@ namespace ETLG
             switchButton.onClick.AddListener(OnSwitchButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
             closeButton.onClick.AddListener(OnCloseButtonClick);
-
         }
 
         protected override void OnOpen(object userData)
@@ -134,7 +133,7 @@ namespace ETLG
                 }
                 else
                 {
-                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
+                    SetReminderTextandColor(GameEntry.Data.GetData<DataBackend>().message, RED);
                 }
                 userName.text = null;
                 pwd.text = null;
@@ -153,7 +152,7 @@ namespace ETLG
             //if failed
                 else if (fetchedType == Constant.Type.BACK_REGISTER_FAILED)
                 {
-                    SetReminderTextandColor(BackendDataManager.Instance.message, RED);
+                    SetReminderTextandColor(GameEntry.Data.GetData<DataBackend>().message, RED);
                 }
 
         }
