@@ -11,7 +11,6 @@ namespace ETLG
 {
     public class UIProfileForm : UGuiFormEx
     {
-
         public TextMeshProUGUI reminder = null;
         public TextMeshProUGUI boss_1 = null;
         public TextMeshProUGUI boss_2 = null;
@@ -91,7 +90,6 @@ namespace ETLG
             avatar4.onClick.AddListener(OnAvatar4ButtonClick);
             avatar5.onClick.AddListener(OnAvatar5ButtonClick);
             avatar6.onClick.AddListener(OnAvatar6ButtonClick);
-
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
@@ -109,19 +107,14 @@ namespace ETLG
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(elapseSeconds, realElapseSeconds);
             if (isRefresh)
             {
-                if (fetchedType == Constant.Type.BACK_LOGIN_SUCCESS || fetchedType == Constant.Type.BACK_LOGED_IN)
-                {
-                    BackendDataManager.Instance.GetUserProfileByUserId();
-                }
                 if (fetchedType == Constant.Type.BACK_PROFILE_SUCCESS)
                 {
                     wholeContainer.SetActive(true);
                     ShowContent();
                 }
-                if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
+                else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
                 {
                     playerAvatarId = selectedId;
                     avatarChange.SetActive(false);
@@ -130,11 +123,31 @@ namespace ETLG
                     placeholder_name.text = nickName.text;
                     placeholder_name.fontStyle = FontStyles.Bold;
                     avatarChange.SetActive(false);
+                    editButtons.SetActive(true);
+                    submitButtons.SetActive(false);
+                    //update info
+                    GameEntry.Data.GetData<DataBackend>().currentUser.avatar = playerAvatarId;
+                    GameEntry.Data.GetData<DataBackend>().currentUser.nickName = nickName.text;
+
                 }
-                if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_FAILED)
+                else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_FAILED)
                 {
-                    reminder.text = BackendDataManager.Instance.message;
+                    reminder.text = GameEntry.Data.GetData<DataBackend>().message;
                     ShakeText(reminder,originalPosition);
+                }
+                else if (fetchedType == Constant.Type.BACK_PROFILE_PASSWORD_SUCCESS)
+                {
+                    pwd.interactable = false;
+                    placeholder_pwd.text = newPwd.text;
+                    placeholder_pwd.fontStyle = FontStyles.Bold;
+                    newPasswords.SetActive(false);
+                    editButtons.SetActive(true);
+                    submitButtons.SetActive(false);
+                }
+                else if (fetchedType == Constant.Type.BACK_PROFILE_PASSWORD_FAILED)
+                {
+                    reminder.text = GameEntry.Data.GetData<DataBackend>().message;
+                    ShakeText(reminder, originalPosition);
                 }
                 isRefresh = !isRefresh;
             }
@@ -149,19 +162,19 @@ namespace ETLG
             reminder.text = null;
 
 
-            if (BackendDataManager.Instance.currentUser.avatar != "1")
+            if (GameEntry.Data.GetData<DataBackend>().currentUser.avatar != "1")
             {
-                playerAvatarId = BackendDataManager.Instance.currentUser.avatar;
+                playerAvatarId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
             }
             else
             {
                 playerAvatarId = "1000";
             }
-            placeholder_userName.text = BackendDataManager.Instance.currentUser.username;
-            placeholder_name.text = BackendDataManager.Instance.currentUser.nickName;
-            achievementScore.text = BackendDataManager.Instance.userProfile.achievement;
-            playerScore.text = BackendDataManager.Instance.userProfile.playerScore;
-            learningPath.text = BackendDataManager.Instance.userProfile.learningProgress;
+            placeholder_userName.text = GameEntry.Data.GetData<DataBackend>().currentUser.username;
+            placeholder_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
+            achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
+            playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
+            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
             originalPosition = reminder.rectTransform.localPosition;
 
             nickName.interactable = false;
@@ -173,13 +186,13 @@ namespace ETLG
             avatarChange.SetActive(false);
             SetPlayerAvatar();
 
-            SetBossTime(boss_1, BackendDataManager.Instance.userProfile.boss1);  // AI
-            SetBossTime(boss_2, BackendDataManager.Instance.userProfile.boss2);  // Data Science
-            SetBossTime(boss_3, BackendDataManager.Instance.userProfile.boss3);  // IoT
-            SetBossTime(boss_4, BackendDataManager.Instance.userProfile.boss4);  // Cybersecurity
-            SetBossTime(boss_5, BackendDataManager.Instance.userProfile.boss5);  // Cloud Computing
-            SetBossTime(boss_6, BackendDataManager.Instance.userProfile.boss6);  // Blockchain
-            SetBossTime(boss_7, BackendDataManager.Instance.userProfile.boss7);  // Final
+            SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
+            SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
+            SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT
+            SetBossTime(boss_4, GameEntry.Data.GetData<DataBackend>().userProfile.boss4);  // Cybersecurity
+            SetBossTime(boss_5, GameEntry.Data.GetData<DataBackend>().userProfile.boss5);  // Cloud Computing
+            SetBossTime(boss_6, GameEntry.Data.GetData<DataBackend>().userProfile.boss6);  // Blockchain
+            SetBossTime(boss_7, GameEntry.Data.GetData<DataBackend>().userProfile.boss7);  // Final
         }
         private void OnEditPlayerInfoButtonClick()
         {
@@ -188,7 +201,7 @@ namespace ETLG
 
             origionalName = placeholder_name.text;
 
-            nickName.text = BackendDataManager.Instance.currentUser.nickName;
+            nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
 
             
             placeholder_name.fontStyle = FontStyles.Bold | FontStyles.Italic;
@@ -202,20 +215,15 @@ namespace ETLG
             reminder.text = null;
             nickName.interactable = false;
             pwd.interactable = false;
-            if(isEditInfo)
-            {
-                placeholder_name.text = origionalName;
-                placeholder_name.fontStyle = FontStyles.Bold;
-            }
-            else
-            {
-                placeholder_pwd.text = origionalPwd;
-                placeholder_pwd.fontStyle = FontStyles.Bold;
-            }
+            placeholder_name.text = origionalName;
+            placeholder_name.fontStyle = FontStyles.Bold;
+            placeholder_pwd.text = origionalPwd;
+            placeholder_pwd.fontStyle = FontStyles.Bold;
             editButtons.SetActive(true);
             submitButtons.SetActive(false);
             avatarChange.SetActive(false);
             newPasswords.SetActive(false);
+           
         }
         private void OnSaveButtonClick()
         {
@@ -229,7 +237,7 @@ namespace ETLG
                 }
                 if(selectedButton == null)
                 {
-                    selectedId = BackendDataManager.Instance.currentUser.avatar;
+                    selectedId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
                 }
                 BackendDataManager.Instance.HandleProfileUpdate(int.Parse(selectedId), nickName.text);
             }
@@ -241,24 +249,14 @@ namespace ETLG
                     ShakeText(reminder, originalPosition);
                     return;
                 }
+                if(newPwd.text.Length<4 || newPwd.text.Length>20)
+                {
+                    reminder.text = "Password should between 4-20 length.";
+                    ShakeText(reminder, originalPosition);
+                    return;
+                }
+                BackendDataManager.Instance.HandleProfilePassword(pwd.text, newPwd.text);
             }
-            //if player info success: 重新getProfile
-            if(isEditInfo)
-            {
-               
-            }
-            else
-            {
-                pwd.interactable = false;
-                placeholder_pwd.text = newPwd.text;
-                placeholder_pwd.fontStyle = FontStyles.Bold;
-                newPasswords.SetActive(false);
-            }
-            editButtons.SetActive(true);
-            reminder.text = null;
-            
-            //if fail: reminder
-          
         }
 
         private void OnEditPwdButtonClick()
@@ -266,6 +264,9 @@ namespace ETLG
             isEditInfo = false;
             pwd.interactable = true;
             origionalPwd = placeholder_pwd.text;
+            pwd.text = null;
+            newPwd.text = null;
+            confirmPwd.text = null;
             placeholder_pwd.text = "Please Enter Old Password.";
             placeholder_pwd.fontStyle = FontStyles.Bold | FontStyles.Italic;
             editButtons.SetActive(false);
@@ -314,12 +315,12 @@ namespace ETLG
         {
             if (playerAvatarId == null)
             {
-                playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(BackendDataManager.Instance.currentUser.avatar));
+                playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(GameEntry.Data.GetData<DataBackend>().currentUser.avatar));
             }
             else
             {
                 playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(playerAvatarId));
-                BackendDataManager.Instance.avatorId = playerAvatarId;
+                GameEntry.Data.GetData<DataBackend>().avatorId = playerAvatarId;
             }
 
         }
