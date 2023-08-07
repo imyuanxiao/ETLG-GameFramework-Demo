@@ -13,7 +13,6 @@ namespace ETLG.Data
     {
         public string responseData;
         public string avatorId;
-        private List<LeaderboardData> rankList;
         //ÅÅÐÐ°ñ
         public string leaderboard_url = "http://localhost:9527/profile/rank";
         //µÇÂ¼×¢²á
@@ -21,7 +20,7 @@ namespace ETLG.Data
         public string Register_url = "http://localhost:9527/auth/register";
         public string currentUser_url = "http://localhost:9527/auth/currentUser";
         public string saveDownload_url = "http://localhost:9527/profile/saveDownload";
-        public string getProfileById_url = "http://localhost:9527/profile/";
+        public string getProfileById_url = "http://localhost:9527/profile/user/";
         public string profileUpdate_url = "http://localhost:9527/profile/update";
         public string profilePassword_url = "http://localhost:9527/profile/password";
         //Authorization token
@@ -37,80 +36,15 @@ namespace ETLG.Data
 
         public int loginType;
 
+        public LeaderboardData selectedRank;
+        public List<LeaderboardData> rankList;
         protected override void OnInit()
         {
             userProfile = new UserProfile();
             currentUser = new UserData();
+            rankList = new List<LeaderboardData>();
         }
-        [System.Serializable]
-        private class RankResponseData
-        {
-            public List<List<object>> rankList;
-        }
-        private class ErrorMessage
-        {
-            public int code;
-            public string message;
-            public string data;
-        }
-        [System.Serializable]
-        private class SaveDataClass
-        {
-            public string playerScore;
-            public string BossDefeatTime;
-            public string achievementScore;
-            public string learningProgress;
-        }
-        [System.Serializable]
-        private class LoginData
-        {
-            public string username;
-            public string password;
-        }
-        [System.Serializable]
-        private class ProfilePassword
-        {
-            public string oldPassword;
-            public string newPassword;
-        }
-        [System.Serializable]
-        private class ResponseData
-        {
-            public bool success;
-            public int errorCode;
-            public string errorMessage;
-            public string data;
-        }
-        [System.Serializable]
-        private class CurrentUserResponseData
-        {
-            public bool success;
-            public int errorCode;
-            public string errorMessage;
-            public UserData data;
-        }
-        [System.Serializable]
-        private class UserProfileResponseData
-        {
-            public bool success;
-            public int errorCode;
-            public string errorMessage;
-            public UserProfile data;
-        }
-        [System.Serializable]
-        private class LoginResponseData
-        {
-            public bool success;
-            public int errorCode;
-            public string errorMessage;
-            public DataWrapper data;
-        }
-        [System.Serializable]
-        private class DataWrapper
-        {
-            public UserData userVO;
-            public string token;
-        }
+       
         [System.Serializable]
         public class UserData
         {
@@ -134,13 +68,6 @@ namespace ETLG.Data
             public float boss5;
             public float boss6;
             public float boss7;
-        }
-        [System.Serializable]
-        private class UserInfo
-        {
-            public string nickName;
-            public int avatar;
-
         }
     }
 }

@@ -29,17 +29,16 @@ namespace ETLG
         {
             base.OnOpen(userData);
             Log.Debug("Open Player Zone");
+            BackendDataManager.Instance.GetUserProfileByUserId(GameEntry.Data.GetData<DataBackend>().selectedRank.Id) ;
             showContent();
         }
         private void showContent()
         {
             leaderboardData = LeaderboardManager.Instance.leaderboardData;
-            planetNum = LeaderboardManager.Instance.planetNum;
-            s_achievement.text = leaderboardData.AchievementScore.ToString();
-            s_spaceship.text = leaderboardData.SpaceshipScore.ToString();
-            s_planetNum.text = planetNum.ToString();
-            s_name.text = leaderboardData.Name;
-            s_ID.text = leaderboardData.Id.ToString();
+            s_achievement.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
+            s_spaceship.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
+            s_planetNum.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+            s_name.text = GameEntry.Data.GetData<DataBackend>().userProfile.nickName;
         }
         protected override void OnClose(bool isShutdown, object userData)
         {
