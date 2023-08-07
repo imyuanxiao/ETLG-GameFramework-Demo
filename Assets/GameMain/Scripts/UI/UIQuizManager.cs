@@ -27,6 +27,24 @@ namespace ETLG.Data
             }
         }
 
+        public int[] getQuizResult()
+        {
+            //0 correct 1 wrong
+            int[] results = { 0, 0 };
+            foreach(UIQuiz quiz in quizArray)
+            {
+                if (quiz.isCorrect)
+                {
+                    results[0]++;
+                }
+                else
+                {
+                    results[1]++;
+                }
+            }
+            return results;
+        }
+
         public UIQuizManager(string XMLPath,bool award)
         {
             this.award = award;

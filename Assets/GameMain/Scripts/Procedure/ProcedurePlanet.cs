@@ -324,6 +324,14 @@ namespace ETLG
                 GameEntry.UI.GetUIForm(EnumUIForm.UINPCTradeForm).Close();
             if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
                 GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm).Close();
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizForm))
+                GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizForm).Close();
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCQuizRewardForm))
+                GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm).Close();
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogRewardForm))
+                GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogRewardForm).Close();
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIVideoFullScreenForm))
+                GameEntry.UI.GetUIForm(EnumUIForm.UIVideoFullScreenForm).Close();
         }
         public void OnAchievementPoPUp(object sender, GameEventArgs e)
         {

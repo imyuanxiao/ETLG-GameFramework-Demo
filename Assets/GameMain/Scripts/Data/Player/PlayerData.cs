@@ -59,6 +59,8 @@ namespace ETLG.Data
         private Dictionary<int, UIQuizManager> playerQuizes = new Dictionary<int, UIQuizManager>();
         //Chapter
         public Dictionary<int, bool> ChaptersSaveData;
+        //0 correct 1 wrong
+        public Dictionary<int, int[]> QuizesSaveData;
         //Courses
         public Dictionary<int, float> CoursesSaveData;
         //Domians
@@ -146,6 +148,8 @@ namespace ETLG.Data
             foreach (int NPCId in NPCIDs)
             {
                 ChaptersSaveData.Add(NPCId, false);
+                int[] emptyResults = { 0, 0 };
+                QuizesSaveData.Add(NPCId, emptyResults);
             }
         }
 
@@ -1168,7 +1172,7 @@ namespace ETLG.Data
         private int[] getChaptersIntArray(int landingPointId)
         {
             //0 passed 1 total
-            int[] chapters = { 0,0};
+            int[] chapters = { 0, 0 };
             LandingpointData lpData = dataLandingPoint.GetLandingPointData(landingPointId);
             foreach (int NPCId in lpData.NPCsID)
             {
@@ -1210,6 +1214,46 @@ namespace ETLG.Data
         public bool getChapterFinish(int NPCID)
         {
             return ChaptersSaveData[NPCID];
+        }
+
+        public int[] getQuizResult()
+        {
+            //0 correct 1 wrong
+            int[] totalResults = { 0, 0 };
+            foreach(int[] result in QuizesSaveData.Values)
+            {
+                totalResults[0] += result[0];
+                totalResults[1] += result[1];
+            }
+            return totalResults;
+        }
+
+        public int getTotalPassChapterQuiz()
+        {
+            int totalPassChapterQuiz = 0;
+            foreach (bool pass in ChaptersSaveData.Values)
+            {
+                if (pass)
+                {
+                    totalPassChapterQuiz++;
+                }
+            }
+            return totalPassChapterQuiz;
+        }
+
+        public void updateAchievement_CorrectWrongNumber()
+        {
+
+        }
+
+        public void updateAchievement_QuizNumber()
+        {
+
+        }
+
+        public void updateAchievement_DialogNumber()
+        {
+
         }
     }
 }

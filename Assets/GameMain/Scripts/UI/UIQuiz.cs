@@ -115,14 +115,21 @@ namespace ETLG.Data
 
         private void testCorrect()
         {
+            DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
+            NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             if (wrongAnswers.Count == 0 && selectAnswers.Count == rightAnswers.Count)
             {
                 isCorrect = true;
                 GameEntry.Sound.PlaySound(EnumSound.ui_quiz_correct);
+                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id][0]++;
+
+
             }
             else
             {
+                isCorrect = false;
                 GameEntry.Sound.PlaySound(EnumSound.ui_quiz_wrong);
+                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id][1]++;
             }
         }
 

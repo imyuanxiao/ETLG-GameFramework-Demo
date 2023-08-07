@@ -102,6 +102,8 @@ namespace ETLG
             {
                 UIQuizManager = tempUIQuizManager;
             }
+            int[] newIntArray = { 0, 0 };
+            dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id] = newIntArray;
         }
 
         private void ModifyPositionX(float newX)
