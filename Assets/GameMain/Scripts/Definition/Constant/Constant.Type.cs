@@ -14,6 +14,12 @@
             public const int NPC_UI_TRADE_OPEN = 3;
             public const int NPC_UI_QUIZ_OPEN = 4;
 
+            // tutorial group id
+            public const int TUTORIAL_NEW_GAME = 1;
+            public const int TUTORIAL_MAP = 2;
+            public const int TUTORIAL_SPACESHIP = 3;
+            public const int TUTORIAL_SKILL = 4;
+
 
             // player menu title
 /*            public const int PLAYERMENU_SPACESHIP = 1011;
