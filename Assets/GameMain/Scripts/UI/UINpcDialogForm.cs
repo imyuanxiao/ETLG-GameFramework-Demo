@@ -32,6 +32,7 @@ namespace ETLG
         public VerticalLayoutGroup verticalLayoutGroup;
         public VerticalLayoutGroup DialogScrollVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
+        public Canvas VideoCover;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -601,22 +602,7 @@ namespace ETLG
             rawImage.texture = renderTexture;
             videoPlayer.targetTexture = renderTexture;
             videoPlayer.Play();
-            //全局，待改进
-            bool isPause = false;
-            playButton.onClick.AddListener(() =>
-            {
-
-                if (isPause)
-                {
-                    videoPlayer.Play();
-                    isPause = false;
-                }
-                else
-                {
-                    videoPlayer.Pause();
-                    isPause = true;
-                }
-            });
+            
             return videoModule;
         }
 

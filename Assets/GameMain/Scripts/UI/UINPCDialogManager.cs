@@ -55,7 +55,5 @@ namespace ETLG.Data
                 dialogueNodes.Add(nodeId, node);
             }
         }
-
-        
     }
 }

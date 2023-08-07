@@ -13,7 +13,7 @@
     </answers>
   </question>
 
-  <question type="MCM" timelimit="30">
+  <question type="MCS" timelimit="30">
     <statement>Which is a cloud environment that is operated solely for a single organization?</statement>
     <hint></hint>
     <options>
@@ -25,7 +25,6 @@
     <analysis>Servers can be hosted and managed either by that organization or by a provider. It’s for applications that require tight control over where the data is being held.</analysis>
     <answers>
       <answer>B</answer>
-      <answer>D</answer>
     </answers>
   </question>
 
@@ -42,9 +41,6 @@
     <analysis>The platform provides the infrastructure, operating systems, storage, and much of the code for development teams.</analysis>
     <answers>
       <answer>A</answer>
-      <answer>B</answer>
-      <answer>C</answer>
-      <answer>D</answer>
     </answers>
   </question>
 
