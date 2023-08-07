@@ -15,6 +15,7 @@ namespace ETLG
     {
         private ProcedureOwner procedureOwner;
         private bool changeScene = false;
+        private Dictionary<string, string> battleData;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -39,12 +40,18 @@ namespace ETLG
                 BattleManager.Instance.bossType = procedureOwner.GetData<VarString>("BossType");
             }
 
-            Dictionary<string, string> battleData = new Dictionary<string, string>();
+            battleData = new Dictionary<string, string>();
             battleData.Add("BattleType", battleType);
             battleData.Add("BossType", bossType);
             battleData.Add("Accuracy", accuracy.ToString());
+
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_BATTLE);
+
             // show battle introduction UI, pass in the battle type and boss type
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleIntro, battleData);
+            if (!GameEntry.UI.HasUIForm(EnumUIForm.UITutorialForm))
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleIntro, battleData);
+            }
 
             GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
         }
@@ -92,12 +99,18 @@ namespace ETLG
             {
                 ChangeState<ProcedureLoadingScene>(procedureOwner);
             }
+
+            if (!GameEntry.UI.HasUIForm(EnumUIForm.UITutorialForm) && !GameEntry.UI.HasUIForm(EnumUIForm.UIBattleIntro))
+            {
+                GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleIntro, battleData);
+            }
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
         {
             base.OnLeave(procedureOwner, isShutdown);
 
+            battleData = null;
             GameEntry.Event.Unsubscribe(EnterBattleEventArgs.EventId, OnEnterBattle);
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
 
