@@ -30,6 +30,7 @@ namespace ETLG
         public TextMeshProUGUI npc_description;
         public RawImage npc_avatar;
         public VerticalLayoutGroup verticalLayoutGroup;
+        public VerticalLayoutGroup DialogScrollVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
 
         private UINPCDialogManager UI_NPCDialogManager;
@@ -89,25 +90,41 @@ namespace ETLG
             dialogScrollContentRectTransform = dialogScrollContent.GetComponent<RectTransform>();
 
             loadAvatar();
+            removeALLConversations();
+
             UINPCDialogManager tempDialogManager = dataPlayer.GetPlayerData().getUINPCDialogById(npcData.Id);
             if (tempDialogManager == null)
             {
                 XMLPath = AssetUtility.GetDialogXML(npcData.Id.ToString());
                 UI_NPCDialogManager = new UINPCDialogManager(XMLPath);
-                setChapterDescription();
                 dataPlayer.GetPlayerData().setUINPCDialogById(npcData.Id, UI_NPCDialogManager);
             }
             else
             {
                 UI_NPCDialogManager = tempDialogManager;
+                showTextModules();
             }
-            removeConversations();
 
             currentPosition = ContainerRectTransform.anchoredPosition;
             originalPositionX = currentPosition.x;
             isMax = false;
-            resizeUI(); 
+            resizeUI();
             setPositionX(true);
+        }
+
+        private void showTextModules()
+        {
+            //dialogScrollContentTransform = dialogScrollContentCanvas.GetComponentInChildren<Transform>();
+            //foreach (Image textModule in UI_NPCDialogManager.textModules)
+            //{
+            //    textModule.transform.SetParent(dialogScrollContentTransform, false);
+            //}
+            foreach (Image textModule in UI_NPCDialogManager.textModules)
+            {
+                textModule.gameObject.SetActive(true);
+                Debug.Log("实例化一次");
+            }
+
         }
 
         private void ModifyPositionX(float newX)
@@ -118,18 +135,19 @@ namespace ETLG
 
         private void ModifyPositionXToOrigin()
         {
-            Debug.Log("位置返回");
             currentPosition.x = originalPositionX;
             ContainerRectTransform.anchoredPosition = currentPosition;
         }
 
         private void setChapterDescription()
         {
+            Image descriptionPrefab;
             if (!string.IsNullOrEmpty(npcData.ChapterDescription))
             {
-                Image descriptionPrefab = Instantiate(descriptionModulePrefab, dialogScrollContent);
+                descriptionPrefab = Instantiate(descriptionModulePrefab, dialogScrollContent);
                 TextMeshProUGUI ChapterDescription = descriptionPrefab.GetComponentInChildren<TextMeshProUGUI>();
                 ChapterDescription.text = "--------" + npcData.ChapterDescription + "--------";
+                UI_NPCDialogManager.textModules.Add(descriptionPrefab);
             }
         }
 
@@ -410,7 +428,7 @@ namespace ETLG
             {
                 UI_NPCDialogManager.reset();
                 removePlayerResponseInput();
-                removeConversations();
+                removeConversationsAgain();
                 getCurrentNode();
                 showText();
             });
@@ -461,14 +479,25 @@ namespace ETLG
             buttonScrollContentRectTransform.sizeDelta = new Vector2(buttonScrollContentRectTransform.sizeDelta.x, playerInputBoxOriginalHeight);
         }
 
-        //清除所有聊天记录
-        private void removeConversations()
+        private void removeConversationsAgain()
+        {
+            removeALLConversations();
+
+            //foreach (Image textModule in UI_NPCDialogManager.textModules)
+            //{
+            //    Destroy(textModule.gameObject);
+            //}
+            UI_NPCDialogManager.textModules = new List<Image>();
+        }
+
+        // 清除所有聊天记录
+        private void removeALLConversations()
         {
             for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
             {
-                Destroy(dialogScrollContentRectTransform.GetChild(i).gameObject);
+                dialogScrollContentRectTransform.GetChild(i).gameObject.SetActive(false);
             }
-            dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
+            //dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
         }
 
         //分别实例化NPC和玩家的聊天记录prefab,并加载文本

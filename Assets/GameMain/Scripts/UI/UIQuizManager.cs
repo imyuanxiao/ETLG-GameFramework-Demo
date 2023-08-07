@@ -14,12 +14,14 @@ namespace ETLG.Data
         public int totalQuestion { get; set; }
         private int totalSubmitQuestions;
         private int correctQuestions;
+        public int currentQuizIndex=0;
 
         public void reset()
         {
             totalSubmitQuestions = 0;
             correctQuestions = 0;
-            foreach(UIQuiz quiz in quizArray)
+            currentQuizIndex = 0;
+            foreach (UIQuiz quiz in quizArray)
             {
                 quiz.reset();
             }

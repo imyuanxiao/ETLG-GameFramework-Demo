@@ -43,9 +43,7 @@ namespace ETLG
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
 
-        private int currentQuizIndex = 0;
         private UIQuiz currentQuiz;
-        private float originalPositionX;
         private Vector2 currentPosition;
         private bool isToggling = false;
 
@@ -130,7 +128,6 @@ namespace ETLG
             }
             if (dataQuizReport.again)
             {
-                currentQuizIndex = 0;
                 UIQuizManager.reset();
                 dataQuizReport.reset();
                 destroyAllOptions();
@@ -246,7 +243,7 @@ namespace ETLG
 
         private void getCurrentQuiz()
         {
-            currentQuiz = UIQuizManager.quizArray[currentQuizIndex];
+            currentQuiz = UIQuizManager.quizArray[UIQuizManager.currentQuizIndex];
         }
 
         private void loadQuestions()
@@ -406,14 +403,14 @@ namespace ETLG
         {
             if (LastButton.enabled)
             {
-                currentQuizIndex--;
+                UIQuizManager.currentQuizIndex--;
                 loadQuestions();
             }
         }
 
         private void updateLastButtonStatus()
         {
-            if (currentQuizIndex > 0)
+            if (UIQuizManager.currentQuizIndex > 0)
             {
                 LastButton.enabled = true;
             }
@@ -427,14 +424,14 @@ namespace ETLG
         {
             if (NextButton.enabled)
             {
-                currentQuizIndex++;
+                UIQuizManager.currentQuizIndex++;
                 loadQuestions();
             }
         }
 
         private void updateNextButtonStatus()
         {
-            if (currentQuizIndex < UIQuizManager.totalQuestion - 1)
+            if (UIQuizManager.currentQuizIndex < UIQuizManager.totalQuestion - 1)
             {
                 NextButton.enabled = true;
             }
@@ -457,15 +454,21 @@ namespace ETLG
 
         private void destroyAllOptions()
         {
-            for (int i = 0; i < ChoicesContainer.childCount; i++)
-            {
-                Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
-                if (canvasComponent != null)
-                {
-                    Transform option = ChoicesContainer.GetChild(i);
-                    Destroy(option.gameObject);
-                }
-            }
+            removeAllOptions();
+            //for (int i = UIQuizManager.quizArray.Count - 1; i >= 0; i--)
+            //{
+            //    //Destroy(UIQuizManager.quizArray[i].OptionsCanvas.);
+            //}
+           // UIQuizManager.quizArray = new List<UIQuiz>();
+            //for (int i = 0; i < ChoicesContainer.childCount; i++)
+            //{
+            //    Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
+            //    if (canvasComponent != null)
+            //    {
+            //        Transform option = ChoicesContainer.GetChild(i);
+            //        Destroy(option.gameObject);
+            //    }
+            //}
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
         }
 
