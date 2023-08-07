@@ -40,6 +40,7 @@ namespace ETLG
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
 
             MapManager.Instance.focusedPlanet = null;
+            MapManager.Instance.isOverUI = false;
 
             this.procedureOwner = procedureOwner;
             this.changeScene = false;

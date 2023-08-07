@@ -251,6 +251,7 @@ namespace ETLG
             MapManager.Instance.focusedPlanet.GetComponent<DragRotate>().enabled = false;
             MapManager.Instance.focusedPlanet = null;
             MapManager.Instance.currentLandingPointID = -1;
+            MapManager.Instance.isOverUI = false;
 
             GameEntry.UI.CloseAllLoadedUIForms();
 

@@ -26,7 +26,8 @@ namespace ETLG
             transform.rotation = Quaternion.Euler(90, 180, 0);
             planetTitle.text = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(planetBase.PlanetId).Name;
             planetType.text = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(planetBase.PlanetId).TypeStr;
-            progressBar.fillAmount = 0.4f;  // change this to the progress of the planet
+            progressBar.fillAmount = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData[planetBase.PlanetId];  // change this to the progress of the planet
+            Debug.Log("Progress Bar: " + planetBase.PlanetId + " | " + progressBar.fillAmount);
         }
 
         private void Update() 
