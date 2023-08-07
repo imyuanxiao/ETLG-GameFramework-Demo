@@ -14,6 +14,7 @@ namespace ETLG
         public TextMeshProUGUI planetType;
         public Image progressBar;
         private PlanetBase planetBase;
+        private PlayerData playerData;
 
         private void Awake() 
         {
@@ -22,17 +23,17 @@ namespace ETLG
 
         private void OnEnable() 
         {
+            playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             transform.forward = mainCamera.transform.forward;
             transform.rotation = Quaternion.Euler(90, 180, 0);
             planetTitle.text = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(planetBase.PlanetId).Name;
             planetType.text = GameEntry.Data.GetData<DataPlanet>().GetPlanetData(planetBase.PlanetId).TypeStr;
-            progressBar.fillAmount = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData[planetBase.PlanetId];  // change this to the progress of the planet
-            Debug.Log("Progress Bar: " + planetBase.PlanetId + " | " + progressBar.fillAmount);
+            progressBar.fillAmount = playerData.DomiansSaveData[planetBase.PlanetId];
         }
 
         private void Update() 
         {
-            
+            progressBar.fillAmount = playerData.DomiansSaveData[planetBase.PlanetId];
         }
 
         private void OnDisable() 
