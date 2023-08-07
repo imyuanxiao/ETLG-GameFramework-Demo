@@ -34,7 +34,6 @@ namespace ETLG
         }
         private void showContent()
         {
-            leaderboardData = LeaderboardManager.Instance.leaderboardData;
             s_achievement.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             s_spaceship.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
             s_planetNum.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
