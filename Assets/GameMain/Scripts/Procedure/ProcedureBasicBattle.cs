@@ -19,6 +19,8 @@ namespace ETLG
         private bool isWinning = false;
         private float startTime = 0f;
 
+        private Queue<AchievementPopUpEventArgs> popupQueue = new Queue<AchievementPopUpEventArgs>();
+        private bool isAchievementShowing;
 
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
@@ -153,7 +155,6 @@ namespace ETLG
                 GameEntry.Event.Fire(this, BasicBattleWinEventArgs.Create(basicEnemyKilled, basicEnemyPassed));
             }
         }
-
         public void OnAchievementPoPUp(object sender, GameEventArgs e)
         {
             AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;
@@ -161,21 +162,34 @@ namespace ETLG
                 return;
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = ne.achievementId;
                 if (!GameEntry.Data.GetData<DataPlayer>().GetPlayerData().isAchievementAchieved(ne.count))
                 {
+                    popupQueue.Enqueue(ne);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, 
-                                                                                GameEntry.Data.GetData<DataAchievement>().GetNextLevel(ne.achievementId, ne.count));
-                    GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
-
+                        GameEntry.Data.GetData<DataAchievement>().GetNextLevel(ne.achievementId, ne.count));
+                    if (!isAchievementShowing)
+                    {
+                        isAchievementShowing = true;
+                        ne = popupQueue.Dequeue();
+                        GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = ne.achievementId;
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                    }
                 }
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
+                if (popupQueue.Count == 0 && GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
                 }
+                if (popupQueue.Count > 0)
+                {
+                    AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
+                    GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = popupArgs.achievementId;
+                    // ¸üÐÂUI
+                    GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
+                }
+
             }
         }
 
