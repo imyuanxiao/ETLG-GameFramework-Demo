@@ -46,6 +46,10 @@ namespace ETLG
             Save("CoursesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().CoursesSaveData);
             Save("DomiansSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData);
             Save("QuizesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().QuizesSaveData);
+            // only for save, not load (can be calculated)
+            Save("PlayerScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerScore());
+            Save("AchievementScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievementPoints());
+            // Save("LearningProgress" + saveIdStr, );
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -197,6 +201,10 @@ namespace ETLG
             result.Add("CoursesSaveData", PlayerPrefs.GetString("CoursesSaveData" + saveIdStr));
             result.Add("DomiansSaveData", PlayerPrefs.GetString("DomiansSaveData" + saveIdStr));
             result.Add("QuizesSaveData", PlayerPrefs.GetString("QuizesSaveData" + saveIdStr));
+
+            result.Add("PlayerScore",      PlayerPrefs.GetString("PlayerScore" + saveIdStr));
+            result.Add("AchievementScore", PlayerPrefs.GetString("AchievementScore" + saveIdStr));
+            result.Add("LearningProgress", PlayerPrefs.GetString("LearningProgress" + saveIdStr));
 
             return result;
         }
@@ -402,6 +410,8 @@ namespace ETLG
                 PrintSavedData("CoursesSaveData_0");
                 PrintSavedData("DomiansSaveData_0");
                 PrintSavedData("QuizesSaveData_0");
+                PrintSavedData("PlayerScore_0");
+                PrintSavedData("AchievementScore_0");
             }
         }
     }
