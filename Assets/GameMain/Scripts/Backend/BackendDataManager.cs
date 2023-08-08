@@ -6,6 +6,7 @@ using UnityGameFramework.Runtime;
 using ETLG.Data;
 using UnityEngine.Networking;
 using ETLG;
+using Newtonsoft.Json;
 namespace ETLG
 {
     public class BackendDataManager : Singleton<BackendDataManager>
@@ -13,6 +14,7 @@ namespace ETLG
         //用于回调函数
         public delegate void IsLoginDetectionCallback(bool isLoggedIn);
 
+        private Dictionary<string, string> upLoadJsonStrDic;
         private void OnEnable()
         {
         }
@@ -90,9 +92,11 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = new UnityWebRequest(GameEntry.Data.GetData<DataBackend>().Login_url, "POST"))
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().Login_url, jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler.Dispose();
+                request.downloadHandler.Dispose();
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
@@ -128,6 +132,8 @@ namespace ETLG
                     Debug.LogError("Error: " + request.error);
                     HandleErrorMessages(request);
                 }
+                request.disposeDownloadHandlerOnDispose = true;
+                request.disposeUploadHandlerOnDispose = true;
                 request.Dispose();
             }
         }
@@ -148,7 +154,7 @@ namespace ETLG
                     StartCoroutine(GetSaveDownloadRoutine());
                     break;
                 case Constant.Type.BACK_SAVE_UPLOAD:
-                    StartCoroutine(GetSaveDownloadRoutine());
+                    StartCoroutine(PostSaveUpLoadRoutine(this.upLoadJsonStrDic)) ;
                     break;
             }
         }
@@ -163,14 +169,8 @@ namespace ETLG
                 else
                 {
                     if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
-                    {
                         GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
-                    else
-                    {
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
                 }
             });
             
@@ -265,8 +265,7 @@ namespace ETLG
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
                 request.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
-                var asyncOperation = request.SendWebRequest();
-                yield return asyncOperation;
+                yield return request.SendWebRequest(); ;
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     string responseJson = request.downloadHandler.text;
@@ -290,14 +289,70 @@ namespace ETLG
                 request.disposeUploadHandlerOnDispose = true;
             }
         }
-        public void HandleSave(Dictionary<string, string> jsonStrDic)
+        public void HandleSaveUpLoad(Dictionary<string, string> jsonStrDic)
         {
-            GameEntry.Data.GetData<DataBackend>().jsonStrDic = jsonStrDic;
+            this.upLoadJsonStrDic = jsonStrDic;
+            GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_SAVE_UPLOAD;
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    StartCoroutine(PostSaveUpLoadRoutine(jsonStrDic));
+                }
+                else
+                {
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
+                        GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
+                }
+            });
+            jsonStrDic = null;
+        }
+        private IEnumerator PostSaveUpLoadRoutine(Dictionary<string, string> jsonStrDic)
+        {
+            //还是空的....
+            string jsonData = JsonConvert.SerializeObject(jsonStrDic);
+
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().saveUpload_url, jsonData))
+            {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler.Dispose();
+                request.downloadHandler.Dispose();
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                request.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                yield return request.SendWebRequest();
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string responseJson = request.downloadHandler.text;
+                    ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
+                    if (responseData.success)
+                    {
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_UPLOAD_SUCCESS));
+                    }
+                    else
+                    {
+                        GameEntry.Data.GetData<DataBackend>().message = responseData.data;
+                        GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_UPLOAD_FAILED));
+                    }
+
+                }
+                else
+                {
+                    Debug.LogError("Error: " + request.error);
+                    HandleErrorMessages(request);
+                }
+                request.disposeDownloadHandlerOnDispose = true;
+                request.disposeUploadHandlerOnDispose = true;
+            }
         }
         public void HandleLoad()
         {
             //先判断是否登录
             //如果没登陆就开登录UI
+            GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_SAVE_DOWNLOAD;
             IsLoginDetection((isLoggedIn) =>
             {
                 if (isLoggedIn)
@@ -307,14 +362,8 @@ namespace ETLG
                 else
                 {
                     if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
-                    {
                         GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
-                    else
-                    {
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
                 }
             });
         }
@@ -330,15 +379,9 @@ namespace ETLG
                 }
                 else
                 {
-                    if(GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
-                    {
+                    if (GameEntry.UI.HasUIForm(EnumUIForm.UILoginForm))
                         GameEntry.UI.CloseUIForm((int)EnumUIForm.UILoginForm);
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
-                    else
-                    {
-                        GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
-                    }
+                    GameEntry.UI.OpenUIForm(EnumUIForm.UILoginForm);
                 }
             });
 
@@ -369,9 +412,11 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = new UnityWebRequest(GameEntry.Data.GetData<DataBackend>().Register_url, "POST"))
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().Register_url,jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler.Dispose();
+                request.downloadHandler.Dispose();
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
@@ -433,7 +478,8 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-
+                            //看看这个能不能成功convert
+                            upLoadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
                             // Convert the data class properties into a Dictionary<string, int>
                             Dictionary<string, string> dictionary = new Dictionary<string, string>
@@ -705,5 +751,6 @@ namespace ETLG
             public string errorMessage;
             public RankDataWrapper data;
         }
+
     }
 }

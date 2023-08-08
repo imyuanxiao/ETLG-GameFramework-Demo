@@ -42,8 +42,9 @@ namespace ETLG
             UpdateUploadButton(saveId);
 
             Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
+            BackendDataManager.Instance.HandleSaveUpLoad(jsonStrDic);
 
-            
+
         }
 
         private void OnDownloadButtonClicked()
@@ -217,6 +218,7 @@ namespace ETLG
         {
             Debug.Log("SaveId = " + id);
             SaveManager.Instance.LoadGame(id);
+
         }
 
         private void OnOverwriteClicked(int id) 
