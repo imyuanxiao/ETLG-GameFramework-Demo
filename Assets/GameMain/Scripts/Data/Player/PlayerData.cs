@@ -1217,6 +1217,45 @@ namespace ETLG.Data
             {
                 DomiansSaveData[kvp.Key] = kvp.Value;
             }
+            updateAchievement_DomianFinish();
+        }
+        private void updateAchievement_DomianFinish()
+        {
+            foreach(KeyValuePair<int,float> kvp in DomiansSaveData)
+            {
+                int count = 1;
+                if (kvp.Value == 1f && !isAchievementAchieved(getDomainAchievementId(kvp.Key), count))
+                {
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(getDomainAchievementId(kvp.Key), count));
+                }
+            }
+        }
+
+        private int getDomainAchievementId(int planetId)
+        {
+            int achievementId;
+            switch (planetId)
+            {
+                case Constant.Type.DOMAIN_CLOUD_COMPUTING:
+                    achievementId= Constant.Type.ACHV_DOMIAN_CLOUD;
+                    break;
+                case Constant.Type.DOMAIN_ARTIFICIAL_INTELLIGENCE:
+                    achievementId = Constant.Type.ACHV_DOMIAN_AI;
+                    break;
+                case Constant.Type.DOMAIN_CYBERSECURITY:
+                    achievementId = Constant.Type.ACHV_DOMIAN_CYBERS;
+                    break;
+                case Constant.Type.DOMAIN_BLOCKCHAIN:
+                    achievementId = Constant.Type.ACHV_DOMIAN_BC;
+                    break;
+                case Constant.Type.DOMAIN_DATA_SCIENCE:
+                    achievementId = Constant.Type.ACHV_DOMIAN_DS;
+                    break;
+                default:
+                    achievementId = Constant.Type.ACHV_DOMIAN_IOT;
+                    break;
+            }
+            return achievementId;
         }
 
         public bool getChapterFinish(int NPCID)
@@ -1238,7 +1277,6 @@ namespace ETLG.Data
                 getCorrectWrongQuiz();
                 updateAchievement_WrongNumber();
             }
-
         }
 
         public int getTotalPassChapterQuiz()
@@ -1337,6 +1375,7 @@ namespace ETLG.Data
             {
                 if (finishedDialog >= count && !isAchievementAchieved(achievementId, finishedDialog))
                 {
+                    Debug.Log("完成的对话数" + finishedDialog);
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }

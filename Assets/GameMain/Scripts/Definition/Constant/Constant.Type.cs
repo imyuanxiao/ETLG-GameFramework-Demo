@@ -116,6 +116,14 @@
             public const int ACHV_PASSEDQUIZ= 1003;
             public const int ACHV_FINISHEDDIALOG= 1004;
             public const int ACHV_LEARN = 101;
+
+            public const int ACHV_DOMIAN_CLOUD = 3001;
+            public const int ACHV_DOMIAN_AI= 3002;
+            public const int ACHV_DOMIAN_BC= 3003;
+            public const int ACHV_DOMIAN_CYBERS= 3004;
+            public const int ACHV_DOMIAN_DS= 3005;
+            public const int ACHV_DOMIAN_IOT= 3006;
+
             public const int ACHV_KNOWLEDGE_BASE = 102;
             public const int ACHV_INTERSTELLAR = 103;
             public const int ACHV_SPACESHIP = 104;
