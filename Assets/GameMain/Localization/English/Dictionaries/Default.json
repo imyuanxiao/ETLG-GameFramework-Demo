@@ -1,0 +1,406 @@
+[
+    {
+      "language": "English",
+      "dic": {
+        "GAME TITLE": "ExplorTech: Learning Galaxy",
+        "SPACESHIP SELECT": "SPACESHIP SELECT",
+        "OPTIONS": "OPTIONS",
+        "QUIT": "QUIT",
+        "MUSIC VOLUME": "MUSIC VOLUME",
+        "SFX VOLUME": "SFX VOLUME",
+        "UI VOLUME": "UI VOLUME",
+        "LANGUAGES": "LANGUAGES",
+        "CHINESE SIMPLIFIED": "CHINESE SIMPLIFIED",
+        "ENGLISH": "ENGLISH",
+        "CHANGE LANGUAGE NEED RESTART": "CHANGE LANGUAGE NEED RESTART",
+        "Confirm": "Confirm",
+        "Cancel": "Cancel",
+
+        "Map_Welcome_Desc":"Welcome to XXXX ! You can explore your learning journal by chossing one of following planet!",
+
+        "Tip_Tmp_Reward" : "In development",
+        "Tip_Durability" : "Increases survivability in combat.",
+        "Tip_Shields" : "Provides better defense against enemy attacks.",
+        "Tip_Firepower" : "Boosts attack capabilities and damage-dealing abilities.",
+        "Tip_Energy" : "Every 100 points increase in energy grants an additional use of skills.",
+        "Tip_Agility" : "Enhances movement speed in combat.",
+        "Tip_Speed" : "Enhances movement speed for faster navigation.",
+        "Tip_Detection" : "Improves scanning range and reconnaissance capabilities.",
+        "Tip_Capacity" : "Enhances cargo-carrying capacity and trading abilities.",
+        "Tip_FireRate" : "Every 100 points of attack speed reduce the cooldown of normal attacks by 10%.",
+        "Tip_Dogde" : "Increases the likelihood of evading enemy attacks.",
+        "Tip_Skill Layer" : "Higher-layer skill upgrades require more resources.",
+        "Tip_Overall Combat Power" : "Calculated based on spaceship attributes, skills, modules, achievements, props, etc.",
+
+
+        "Tutorial_1001_Title" : "Spaceship Panel",
+        "Tutorial_1002_Title" : "Package",
+        "Tutorial_1003_Title" : "Spaceship Module",
+        "Tutorial_1004_Title" : "Skill Tree",
+
+        "InterstellarExplorer": "Interstellar Explorer",
+        "InterstellarExplorerDescription": "The Interstellar Explorer is an advanced spaceship designed for exploring the unknown universe. It was developed due to humanity's urgent desire to uncover hidden secrets and discover new resources in the cosmos. Equipped with advanced detection equipment and navigation systems, the spacecraft can swiftly travel through space and explore various unknown galaxies, planets, and cosmic phenomena. The crew of the Interstellar Explorer comes from different scientific fields, working together to unravel the mysteries and secrets of the universe.",
+        "Thunderwing": "Thunderwing",
+        "ThunderwingDescription": "Thunderwing is a powerful and deadly combat spaceship widely used in cosmic conflicts and defense missions. It represents the pinnacle of military technology, designed to survive and gain an advantage in intense combat environments. Thunderwing boasts robust armor and advanced weapon systems capable of obliterating enemies with impressive firepower and maneuverability. This ship is often chosen by ambitious military organizations and adventurous warriors.",
+        "StellarMerchant": "Stellar Merchant",
+        "StellarMerchantDescription": "The Stellar Merchant is a spaceship specifically designed for trade and resource transportation. It is built to swiftly and safely transport goods and resources throughout the cosmos. Equipped with spacious cargo holds and automated logistics systems, the Stellar Merchant ensures efficient and reliable trade and commerce. This ship is often chosen by entrepreneurs and trading corporations to establish prosperous trade networks between star systems.",
+        "Guardian": "Guardian",
+        "GuardianDescription": "The Guardian is a spaceship specifically designed for support and rescue missions. Its mission is to protect and assist other ships by providing aid and support in hazardous environments. The Guardian is equipped with advanced medical facilities, repair systems, and energy field generators to provide emergency repairs and healing for injured ships. The crew of this ship typically consists of professionals with medical, engineering, and rescue backgrounds.",
+        
+        "ARTIFACT_TYPE_1" : "Trade",
+        "ARTIFACT_TYPE_2" : "Special",
+        "ARTIFACT_TYPE_3" : "Module",
+
+        "Artifact_Money": "Money",
+        "Artifact_Money_Desc": "Primary currency used for transactions and purchases in the game.",
+        
+        "Artifact_KnowledgePoint": "Knowledge Point",
+        "Artifact_KnowledgePoint_Desc": "Used to unlock or enhance skills, earned through learning or solving quiz. Knowledge Points are .",
+        
+        "Artifact_RareOre": "Rare Ore",
+        "Artifact_RareOre_Desc": "Rare Ore is a valuable and scarce resource. Tradeable.",
+        
+        "Artifact_FuelRefillUnit": "Fuel Refill Unit",
+        "Artifact_FuelRefillUnit_Desc": "Fuel Refill Unit is a consumable item used to replenish the energy of ship. Tradeable.",
+        
+        "Artifact_LowLevelUpgradeUnit": "Low-Level Upgrade Unit",
+        "Artifact_LowLevelUpgradeUnit_Desc": "Basic enhancement component used to upgrade skills.",
+        
+        "Artifact_IntermediateUpgradeUnit": "Intermediate Upgrade Unit",
+        "Artifact_IntermediateUpgradeUnit_Desc": "More advanced enhancement component used to upgrade skills.",
+        
+        "Artifact_AdvancedUpgradeUnit": "Advanced Upgrade Unit",
+        "Artifact_AdvancedUpgradeUnit_Desc": "Top-tier enhancement component used to upgrade skills.",
+        
+        "Artifact_KnowledgeFragments_CloudComputing": "Cloud Computing Knowledge Fragment",
+        "Artifact_KnowledgeFragments_CloudComputing_Desc": "This contains valuable insights and information related to cloud computing technologies. Collecting and assembling these fragments can lead to a deeper understanding of cloud-based services and applications. Collect all the fragments to unlock the final BOSS battle.",
+        
+        "Artifact_KnowledgeFragments_AI": "Artificial Intelligence Knowledge Fragment",
+        "Artifact_KnowledgeFragments_AI_Desc": "This encompasses valuable knowledge and data about artificial intelligence techniques and applications. Collecting and studying these fragments can enhance AI capabilities and foster innovation in the field. Collect all the fragments to unlock the final BOSS battle.",
+        
+        "Artifact_KnowledgeFragments_Blockchain": "Blockchain Knowledge Fragment",
+        "Artifact_KnowledgeFragments_Blockchain_Desc": "This contains essential knowledge about blockchain technology, including its principles and applications. Gathering these fragments can facilitate the development and implementation of secure and decentralized systems. Collect all the fragments to unlock the final BOSS battle.",
+        
+        "Artifact_KnowledgeFragments_Cybersecurity": "Cybersecurity Knowledge Fragment",
+        "Artifact_KnowledgeFragments_Cybersecurity_Desc": "This encompasses crucial information about safeguarding systems and networks from cyber threats. Assembling these fragments can fortify digital defenses and protect against various security risks. Collect all the fragments to unlock the final BOSS battle.",
+        
+        "Artifact_KnowledgeFragments_DataScience": "Data Science Knowledge Fragment",
+        "Artifact_KnowledgeFragments_DataScience_Desc": "This comprises valuable insights and techniques for extracting meaningful information from data. Accumulating these fragments can boost data analysis capabilities and foster data-driven decision-making. Collect all the fragments to unlock the final BOSS battle.",
+        
+        "Artifact_KnowledgeFragments_IoT": "Internet of Things Knowledge Fragment",
+        "Artifact_KnowledgeFragments_IoT_Desc": "This contains essential knowledge about IoT technologies and their applications. Studying these fragments can enable the creation and optimization of interconnected smart systems. Collect all the fragments to unlock the final BOSS battle.",
+
+        "Artifact_ReinforcedHullPlating": "Reinforced Hull Plating",
+        "Artifact_ReinforcedHullPlating_Desc": "Reinforced Hull Plating is a durable module that fortifies the spacecraft's hull, providing exceptional protection against various types of damage. It strengthens the vessel's structural integrity, allowing it to withstand harsh environments and enemy assaults with increased resilience.",
+        
+        "Artifact_ResilientShieldMatrix": "Resilient Shield Matrix",
+        "Artifact_ResilientShieldMatrix_Desc": "Resilient Shield Matrix is an advanced shield module designed to enhance the effectiveness of the spacecraft's shields. It optimizes shield regeneration rates and energy distribution, making the shield system more robust and capable of withstanding prolonged engagements.",
+        
+        "Artifact_EnergyDeflectionField": "Energy Deflection Field",
+        "Artifact_EnergyDeflectionField_Desc": "Energy Deflection Field creates an energetic barrier around the spacecraft, deflecting incoming energy-based attacks. This cutting-edge module adds an extra layer of defense, reducing the impact of energy weapons and enhancing the overall survivability of the vessel.",
+        
+        "Artifact_ShieldRegenerationModule": "Shield Regeneration Module",
+        "Artifact_ShieldRegenerationModule_Desc": "Shield Regeneration Module enables swift and efficient shield repairs during combat or exploration. It enhances the shield system's self-healing capabilities, ensuring the spacecraft can rapidly recover from shield damage and remain well-protected in hazardous situations.",
+        
+        "Artifact_ThrustVectoringSystem": "Thrust Vectoring System",
+        "Artifact_ThrustVectoringSystem_Desc": "Thrust Vectoring System improves the spacecraft's agility and maneuverability by adjusting the direction of the thrust. This advanced module enables the vessel to execute precise and responsive movements, making it more adept at evasive maneuvers and tactical positioning.",
+        
+        "Artifact_AgileManeuveringThrusters": "Agile Maneuvering Thrusters",
+        "Artifact_AgileManeuveringThrusters_Desc": "Agile Maneuvering Thrusters are specialized propulsion units that enhance the spacecraft's ability to execute agile movements and swift turns. This module empowers the vessel to perform intricate maneuvers, allowing it to outmaneuver adversaries and gain a tactical advantage.",
+        
+        "Artifact_EnhancedSensorGyros": "Enhanced Sensor Gyros",
+        "Artifact_EnhancedSensorGyros_Desc": "Enhanced Sensor Gyros upgrade the spacecraft's sensor system, improving its scanning and detection capabilities. This module enhances situational awareness, enabling the pilot to gather valuable data, identify threats, and navigate through challenging environments with precision.",
+        
+        "Artifact_HighCapacityPowerCore": "High-Capacity Power Core",
+        "Artifact_HighCapacityPowerCore_Desc": "High-Capacity Power Core is an advanced energy storage unit that boosts the spacecraft's energy reserves. This module provides sustained power supply, supporting energy-intensive systems and ensuring uninterrupted operation during prolonged missions or high-energy demand scenarios.",
+        
+        "Artifact_AdvancedEnergyStabilizer": "Advanced Energy Stabilizer",
+        "Artifact_AdvancedEnergyStabilizer_Desc": "Advanced Energy Stabilizer optimizes energy flow and distribution within the spacecraft, minimizing energy fluctuations and enhancing system efficiency. This module ensures stable energy output, allowing for more precise control of various energy-dependent components.",
+        
+        "Artifact_EfficientEnergyRedistributionArray": "Efficient Energy Redistribution Array",
+        "Artifact_EfficientEnergyRedistributionArray_Desc": "Efficient Energy Redistribution Array facilitates dynamic energy redistribution among different systems, enabling flexible allocation based on real-time demands. This module maximizes energy utilization, improving overall performance and adaptability in changing situations.",
+        
+        "Artifact_AdvancedSelfRepairSystem": "Advanced Self-Repair System",
+        "Artifact_AdvancedSelfRepairSystem_Desc": "Advanced Self-Repair System equips the spacecraft with autonomous repair mechanisms that can swiftly mend damage to the hull and critical systems. This module ensures the vessel can endure extended engagements and recover quickly from adverse conditions.",
+        
+        "Artifact_ParticleBarrierProjector": "Particle Barrier Projector",
+        "Artifact_ParticleBarrierProjector_Desc": "Particle Barrier Projector generates a formidable defensive barrier around the spacecraft. It deflects incoming projectiles and energy attacks, providing an additional layer of protection during combat. This module enhances the vessel's survivability in intense battles.",
+        
+        "Artifact_AdvancedWeaponTargetingSystem": "Advanced Weapon Targeting System",
+        "Artifact_AdvancedWeaponTargetingSystem_Desc": "Advanced Weapon Targeting System significantly improves the spacecraft's weapon accuracy and targeting capabilities. This module employs sophisticated algorithms and sensor data to enhance the precision of weapon systems, enabling more effective strikes against enemy forces.",
+        
+        "Artifact_EnhancedPlasmaCannonArray": "Enhanced Plasma Cannon Array",
+        "Artifact_EnhancedPlasmaCannonArray_Desc": "Enhanced Plasma Cannon Array upgrades the spacecraft's plasma-based weaponry, increasing their damage output and energy efficiency. This module makes the plasma cannons more potent and reliable in combat situations, dealing devastating blows to adversaries.",
+        
+        "Artifact_PrecisionRailgunGuidanceModule": "Precision Railgun Guidance Module",
+        "Artifact_PrecisionRailgunGuidanceModule_Desc": "Precision Railgun Guidance Module enhances the spacecraft's railgun accuracy and projectile trajectory control. This module ensures pinpoint accuracy, allowing the railgun to deliver highly precise and powerful shots, even over long distances.",
+        
+        "Artifact_RapidFireCapacitors": "Rapid Fire Capacitors",
+        "Artifact_RapidFireCapacitors_Desc": "Rapid Fire Capacitors enable rapid and sustained firing of the spacecraft's weapons. This module increases the rate of fire, enabling the vessel to unleash a barrage of attacks and overwhelm enemy defenses with a continuous stream of firepower.",
+        
+        "Artifact_RateofFireModulator": "Rate-of-Fire Modulator",
+        "Artifact_RateofFireModulator_Desc": "Rate-of-Fire Modulator enhances the spacecraft's weapon systems by adjusting the firing rate for different situations. This module allows the pilot to adapt the rate of fire, providing greater tactical flexibility and conserving ammunition when necessary.",
+        
+        "Artifact_HyperResponsiveTriggerMechanism": "Hyper-Responsive Trigger Mechanism",
+        "Artifact_HyperResponsiveTriggerMechanism_Desc": "Hyper-Responsive Trigger Mechanism enhances the spacecraft's weapon response time, reducing the delay between triggering the weapon and firing the shot. This module ensures rapid weapon responsiveness, enabling the pilot to swiftly engage targets with precision and efficiency.",
+
+        
+        "Artifact_MissileLauncher": "Missile Launcher",
+        "Artifact_MissileLauncher_Desc": "Missile Launcher equips the entity with a sophisticated weapon system capable of launching guided missiles. These projectiles offer precision targeting and substantial damage, making them effective against a variety of targets.",
+        "Module_Effect_MissileLauncher": "Right-clicking the mouse during battles will allow you to fire missiles.",
+
+        "Artifact_BeamEmitter": "Beam Emitter",
+        "Artifact_BeamEmitter_Desc": "Beam Emitter integrates advanced energy weapons that emit focused and powerful energy beams. These beams can penetrate shields and armor, delivering intense damage to the target.",
+        "Module_Effect_BeamEmitter": "Right-clicking the mouse during battles will allow you to fire lasers.",
+
+        "Artifact_IonAccelerator": "Ion Accelerator",
+        "Artifact_IonAccelerator_Desc": "Ion Accelerator is an energy weapon system that propels ionized particles at high velocities. These ions disrupt electronic systems and shields, making it an effective weapon against advanced technologies and energy-based defenses.",
+        "Module_Effect_IonAccelerator": "Right-clicking the mouse during battles will allow you to fire ion cannons.",
+
+        "Artifact_RailgunMount": "Railgun Mount",
+        "Artifact_RailgunMount_Desc": "Railgun Mount equips the entity with an electromagnetic railgun, capable of firing high-velocity projectiles at incredible speeds. The railgun's kinetic impact delivers devastating damage to heavily armored targets.",
+        "Module_Effect_RailgunMount": "Right-clicking the mouse during battles will allow you to fire railguns.",
+
+        "Skill_AlienLinguistics": "Alien Linguistics",
+        "Skill_AlienLinguistics_Desc": "Alien Linguistics is a skill that allows you to achieve barrier-free communication across various star systems.",
+        "Skill_AlienLinguistics_Level_1": "No special effect.",
+
+        "Skill_MedicalSupport": "Medical Support",
+        "Skill_MedicalSupport_Desc": "The Internet of Things (IoT) connects and empowers everyday objects with intelligence and interconnectivity. In your spaceship, the wonders of IoT bring to life the extraordinary skill known as \"Medical Support.\" Through this advanced capability, you can harness the power of interconnected devices to restore your spaceship's life force and continue your epic journey through the stars.",
+        "Skill_MedicalSupport_Level_1": "Restore <color=yellow> 50 </color> HP",
+
+        "Skill_AutomatedContainerOrchestration": "Automated Container Orchestration",
+        "Skill_AutomatedContainerOrchestration_Desc": "Automated Container Orchestration refers to the process of automatically managing the deployment, scaling, and operation of containers within a cloud computing environment. It utilizes tools like Kubernetes, Docker Swarm, or Amazon ECS to efficiently manage containerized applications, ensuring seamless deployment and resource optimization across multiple cloud platforms.",
+        
+        "Skill_MultiCloudArchitecture": "Multi-Cloud Architecture",
+        "Skill_MultiCloudArchitecture_Desc": "Multi-Cloud Architecture involves the strategic use of multiple cloud service providers to distribute workloads and resources across different cloud environments. This approach enhances reliability, minimizes downtime, and provides greater flexibility and cost optimization by avoiding vendor lock-in. It requires efficient data synchronization, load balancing, and security measures to seamlessly operate across various clouds.",
+        
+        "Skill_EnergyBoost": "Energy Boost",
+        "Skill_EnergyBoost_Desc": "Data science is the art of extracting valuable insights and knowledge from vast volumes of information. In your spaceship, you wield the unparalleled skill known as \"Energy Boost\" By harnessing the prowess of data analytics, you can swiftly restore your spaceship's protective shields and pave the way to victory in interstellar battles.",
+        "Skill_EnergyBoost_Level_1": "Restore <color=yellow> 50 </color> points of shield durability",
+
+        "Skill_NeuralNetworkAmplification": "Neural Network Amplification",
+        "Skill_NeuralNetworkAmplification_Desc": "Neural Network Amplification aims to enhance the performance and capabilities of neural networks. It involves techniques like model distillation, knowledge transfer, and neural architecture search. By amplifying neural networks, we can improve their efficiency, accuracy, and adaptability for various tasks, making them more powerful and versatile in the field of artificial intelligence.",
+        
+        "Skill_IntelligentPerception": "Intelligent Perception",
+        "Skill_IntelligentPerception_Desc": "Intelligent Perception focuses on empowering AI systems to gather and interpret information from the surrounding environment. It involves computer vision, natural language processing, and sensor data analysis to enable machines to understand, recognize, and respond to their surroundings intelligently. This field plays a crucial role in developing applications such as autonomous vehicles, facial recognition, and smart assistants.",
+        
+        "Skill_SuperIntelligentSystem": "Super-Intelligent System",
+        "Skill_SuperIntelligentSystem_Desc": "Super-Intelligent System refers to an advanced artificial intelligence with capabilities surpassing human intelligence in various aspects. While still theoretical and in the realm of science fiction, researchers are exploring the potential implications and challenges of creating such highly intelligent systems. Ensuring safety, ethics, and control over such systems is a critical concern in AI research.",
+
+        "Skill_QuantumEncryption": "Quantum Encryption",
+        "Skill_QuantumEncryption_Desc": "Quantum Encryption is a cutting-edge technique in the field of network security that leverages the principles of quantum mechanics to secure communication channels. Unlike traditional cryptographic methods, which rely on mathematical complexity, quantum encryption uses quantum key distribution (QKD) to ensure the confidentiality and integrity of data. It offers a high level of security by detecting any eavesdropping attempts, making it highly resistant to hacking and interception.",
+        
+        "Skill_AdaptiveIntelligentDefense": "Adaptive Intelligent Defense",
+        "Skill_AdaptiveIntelligentDefense_Desc": "AI is a groundbreaking technology that enables machines to simulate human-like intelligence, allowing them to process data, learn from experience, and make intelligent decisions. In your spaceship, this advanced AI system empowers you with the remarkable skill of \"Adaptive Intelligent Defense\".",
+        "Skill_AdaptiveIntelligentDefense_Level_1": "Summon <color=yellow> 3 </color> AI spaceships for <color=yellow> 10 </color> seconds",
+        
+        "Skill_ElectronicWarfare": "Electronic Warfare",
+        "Skill_ElectronicWarfare_Desc": "Cybersecurity plays a pivotal role in safeguarding vital systems and data from malicious cyber threats. In your spaceship, you wield the game-changing skill called \"Electronic Warfare\", a potent defensive ability that disrupts enemy attacks with unrivaled precision.",
+        "Skill_ElectronicWarfare_Level_1": "Pause enemy attack for <color=yellow> 5 </color> seconds",
+
+        "Skill_IntelligentDataMining": "Intelligent Data Mining",
+        "Skill_IntelligentDataMining_Desc": "Intelligent Data Mining is a data science approach that involves the use of advanced algorithms and machine learning techniques to extract valuable insights and patterns from large datasets. It goes beyond traditional data mining by employing artificial intelligence to analyze complex data structures, recognize trends, and make predictions. Intelligent data mining helps businesses and researchers in making informed decisions and discovering hidden knowledge from their data.",
+        
+        "Skill_HolographicDataVisualization": "Holographic Data Visualization",
+        "Skill_HolographicDataVisualization_Desc": "This is description for Holographic Data Visualization",
+
+        "Skill_PerceptiveIntelligentDecision": "Perceptive Intelligent Decision",
+        "Skill_PerceptiveIntelligentDecision_Desc": "Perceptive Intelligent Decision refers to the capability of AI systems to make informed decisions by considering not only data-driven insights but also human-like perceptions and reasoning. These systems leverage natural language processing, computer vision, and sentiment analysis to understand human emotions, preferences, and context. By incorporating perceptual intelligence, AI systems can interact more effectively with humans and make decisions that align with human values and expectations.",
+        
+        "Skill_DistributedSmartContract": "Distributed Smart Contract",
+        "Skill_DistributedSmartContract_Desc": "Distributed Smart Contract is a key concept in blockchain technology. It refers to self-executing contracts with the terms and conditions written in code and stored on a decentralized blockchain network. These contracts automatically execute when predefined conditions are met, removing the need for intermediaries and enhancing transparency and security in transactions and agreements.",        
+
+        "Skill_CrossChainInteroperability": "Cross-Chain Interoperability",
+        "Skill_CrossChainInteroperability_Desc": "Cross-Chain Interoperability is the ability of different blockchain networks to communicate, share data, and conduct transactions with each other seamlessly. It addresses the challenge of enabling data and asset transfer between disparate blockchain ecosystems. Interoperability allows users and applications to access and utilize assets and functionalities from multiple blockchains, promoting a more connected and versatile blockchain ecosystem.",
+        
+        "Skill_BlockchainResurgence": "Blockchain Resurgence",
+        "Skill_BlockchainResurgence_Desc": "Blockchain is a decentralized, immutable ledger that ensures transparent and tamper-proof transactions. The essence of blockchain technology is that every action is recorded, and no data can be altered without consensus. In your spaceship, the awe-inspiring skill called \"Blockchain Resurgence\" empowers you to rise from the ashes once, leveraging the power of blockchain to restore your spaceship's health to 100% after facing a near-fatal encounter.",
+        "Skill_BlockchainResurgence_Level_1": "Respawn <color=yellow> once </color>",
+
+        "Skill_SensorArray": "Sensor Array",
+        "Skill_SensorArray_Desc": "Sensor Array refers to a network of interconnected sensors deployed in the Internet of Things (IoT) ecosystem. These sensors can be of various types, such as temperature sensors, motion sensors, or environmental sensors, and they collect data from the physical world. A sensor array enables comprehensive data gathering, real-time monitoring, and data-driven decision-making in IoT applications.",
+
+        "Skill_EdgeComputing": "Edge Computing",
+        "Skill_EdgeComputing_Desc": "Cloud computing is a cutting-edge technology that leverages the collective power of interconnected servers and networks to store, process, and analyze vast amounts of data. In your spaceship, cloud computing brings forth the awe-inspiring skill known as \"Edge Computing\".",
+        "Skill_EdgeComputing_Level_1": "Attack power is doubled for <color=yellow> 5 </color> seconds",
+
+        "Skill_IntelligentLinkage": "Intelligent Linkage",
+        "Skill_IntelligentLinkage_Desc": "Intelligent Linkage in the context of the Internet of Things (IoT) involves the seamless integration and communication between interconnected devices and systems. Through intelligent linkage, IoT devices can share data, collaborate on tasks, and respond collaboratively to changes in the environment. This enables IoT applications to achieve higher levels of automation, efficiency, and responsiveness.",
+        
+        "BasicBattle Intro" : "Oops! You encounter several enemy ships while traveling to the next planet. \n\nGet ready to fight!",
+        
+        "IntermidateBattle CloudComputing Intro": "This is the boss enemy in Cloud Computing Domain. \n\nBe careful, this enemy will constantly regenerate health. Destroy it as soon as possible before it recovers",
+        "IntermidateBattle CyberSecurity Intro": "This is the boss enemy in CyberSecurity Domain.\n\nIts firewall will try to protect itself. Let's smash its shield first!",
+        "IntermidateBattle AI Intro" : "This is the boss enemy in Artificial Intelligence Domain. \n\nWhen the battle is against it, it will summon 3 AI ships to save the day.",
+        "IntermidateBattle DataScience Intro" : "This is the boss enemy in Data Science Domain. \n\nIts data analysis module will continue to scan your spaceship to find your spaceship's weaknesses. Pay attention to avoid its crit attack!",
+        "IntermidateBattle Blockchain Intro" : "This is the boss enemy in Blockchain Domain. \n\nWhen it is defeated, it can retrieve data from the blockchain to restore its own ship's durability. Don't celebrate prematurely, prepare for its resurrection!",
+        "IntermidateBattle IoT Intro" : "This is the boss enemy in Internet of Things Domain. \n\nIt can teleport to dodge your attacks. Keep an eye on it, don't let it escape your eyes!",
+
+        "FinalBattle Intro" : "This is the final boss! Defeat it so you can recover your home planet!",
+        
+        "Landing_Point_101_Title" : "[Course1] Define the Cloud: The Cloud and Why People Use It",
+        "Landing_Point_101_Desc" : "This topic introduces the concepts of the cloud and why people use it. You will explore concepts related to the cloud and review the characteristics and benefits of cloud computing.",
+        "NPC_1101_Title" : "The Cloud",
+        "NPC_1101_Desc" : "In this lesson, you will explore cloud computing.",
+        
+        "Domain_0": "Common",
+        "Domain_1": "Cloud Computing",
+        "Domain_2": "Artificial Intelligence",
+        "Domain_3": "CyberSecurity",
+        "Domain_4": "Data Science",
+        "Domain_5": "Blockchain",
+        "Domain_6": "Internet of Things",
+
+        "Planet_101_Desc" : "The Cloud Computing Path provides the training necessary for an individual to gain the knowledge and skills related to Cloud and Cloud Computing. \n\nMajor topics in this curriculum: \n\n - Introduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
+        "Planet_102_Desc" : "Artificial Intelligence_Desc",
+        "Planet_103_Desc" : "The CyberSecurity_Desc Path provides the training necessary for an individual to gain the knowledge and skills related to Cloud and Cloud Computing. \n\nMajor topics in this curriculum: \n\n - Introduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
+        "Planet_104_Desc" : " toloud and Cloud Computing. \n\nMajor topics in this curriculum: \n\n - Introduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
+        "Planet_105_Desc" : "ntroduction to Cloud Computing \n - Cloud Services and Deployment Models \n - Fundamentals of IBM Cloud \n - Services Available on IBM Cloud",
+        "Planet_106_Desc" : "The Cloud C-n - Services Available on IBM Cloud",
+
+        "Achieve_1001_Title" :"Knowledge is Power",
+        "Achieve_1001_Level_0":"First victory in a quiz.",
+        "Achieve_1001_Level_1":"Complete and win 10 quiz.",
+        "Achieve_1001_Level_2":"Complete and win 50 quiz.",
+        "Achieve_1001_Level_3":"Complete and win 100 quiz.",
+        "Achieve_1001_Level_4":"Complete and win 200 quiz.",
+
+        "Achieve_1002_Title" :"Failure is the Mother of Success",
+        "Achieve_1002_Level_0":"Fail a quiz game.",
+        "Achieve_1002_Level_1":"Accumulate 10 failed quiz games.",
+        "Achieve_1002_Level_2":"Accumulate 50 failed quiz games.",
+        "Achieve_1002_Level_3":"Accumulate 100 failed quiz games.",
+        "Achieve_1002_Level_4":"Accumulate 500 failed quiz games.",
+
+
+        "Achieve_1003_Title" :"Masterful domination",
+        "Achieve_1003_Level_0":"Win 1 consecutive quiz.",
+        "Achieve_1003_Level_1":"Win 3 consecutive quiz.",
+        "Achieve_1003_Level_2":"Win 10 consecutive quiz.",
+        "Achieve_1003_Level_3":"Win 25 consecutive quiz.",
+        "Achieve_1003_Level_4":"Win 50 consecutive quiz.",
+
+        "Achieve_1004_Title" :"Interstellar Communicator",
+        "Achieve_1004_Level_0":"Engaged in meaningful whole conversations with 1 NPC.",
+        "Achieve_1004_Level_1":"Engaged in meaningful whole conversations with 3 NPC.",
+        "Achieve_1004_Level_2":"Engaged in meaningful whole conversations with 10 NPC.",
+        "Achieve_1004_Level_3":"Engaged in meaningful whole conversations with 25 NPC.",
+        "Achieve_1004_Level_4":"Engaged in meaningful whole conversations with 50 NPC.",
+
+        "Achieve_2001_Title" :"Wings of the Clouds",
+        "Achieve_2001_Level_0" :"Illuminate Cloud Computing knowledge for the first time.",
+
+        "Achieve_2002_Title" :"AI Enthusiast",
+        "Achieve_2002_Level_0" :"Illuminate Artificial Intelligence knowledge for the first time.",
+
+        "Achieve_2003_Title" :"Security Guardian",
+        "Achieve_2003_Level_0" :"Illuminate Cybersecurity knowledge for the first time.",
+
+        "Achieve_2004_Title" :"Rookie Data Scientist",
+        "Achieve_2004_Level_0" :"Illuminate Data Science knowledge for the first time.",
+
+        "Achieve_2005_Title" :"Encrypted World",
+        "Achieve_2005_Level_0" :"Illuminate Cloud Blockchain for the first time.",
+
+        "Achieve_2006_Title" :"IoT Pioneer",
+        "Achieve_2006_Level_0" :"Illuminate Internet of Things knowledge for the first time.",
+
+        "Achieve_3001_Title" :"Setting sail towards the Cloud Computing planet!",
+        "Achieve_3001_Level_0" :"First landing on Cloud Computing planet.",
+
+        "Achieve_3002_Title" :"Setting sail towards the AI planet!",
+        "Achieve_3002_Level_0" :"First landing on AI planet.",
+
+        "Achieve_3003_Title" :"Setting sail towards the Blockchain planet!",
+        "Achieve_3003_Level_0" :"First landing on Blockchain planet.",
+
+        "Achieve_3004_Title" :"Setting sail towards the Cybersecurity planet!",
+        "Achieve_3004_Level_0" :"First landing on Cybersecurity planet.",
+
+        "Achieve_3005_Title" :"Setting sail towards the  Data Science planet!",
+        "Achieve_3005_Level_0" :"First landing on Data Science planet.",
+
+        "Achieve_3006_Title" :"Setting sail towards the IoT planet!",
+        "Achieve_3006_Level_0" :"First landing on IoT planet.",
+
+        "Achieve_4001_Title" :"Source of Power",
+        "Achieve_4001_Level_0" :"Maximize the energy attribute of the spaceship.",
+
+        "Achieve_4002_Title" :"Indestructible",
+        "Achieve_4002_Level_0" :"Maximize the durability attribute of the spaceship.",
+
+        "Achieve_4003_Title" :"Unbreakable",
+        "Achieve_4003_Level_0" :"Maximize the shield attribute of the spaceship.",
+
+        "Achieve_4004_Title" :"Full Firepower",
+        "Achieve_4004_Level_0" :"Maximize the firepower attribute of the spaceship.",
+
+        "Achieve_4005_Title" :"Speed Demon",
+        "Achieve_4005_Level_0" :"Maximize the agility attribute of the spaceship.",
+
+        "Achieve_4006_Title" :"Exceptional Perception",
+        "Achieve_4006_Level_0" :"Maximize the detection attribute of the spaceship.",
+
+        "Achieve_4007_Title" :"Infinite Capacity",
+        "Achieve_4007_Level_0" :"Maximize the capacity attribute of the spaceship.",
+
+        "Achieve_4008_Title" :"Master of Advancement",
+        "Achieve_4008_Level_0" :"Maximize all skills.",
+
+        "Achieve_4009_Title" :"Exceptional Pilot",
+        "Achieve_4009_Level_0" :"Unlock all skills.",
+
+        "Achieve_4010_Title" :"Module Collector",
+        "Achieve_4010_Level_0" :"Collect all spaceship modules.",
+
+        "Achieve_5001_Title" :"Road to Riches",
+        "Achieve_5001_Level_0" :"Accumulate 1000 coins.",
+        "Achieve_5001_Level_1" :"Accumulate 5000 coins.",
+        "Achieve_5001_Level_2" :"Accumulate 10000 coins.",
+        "Achieve_5001_Level_3" :"Accumulate 20000 coins.",
+
+        "Achieve_5002_Title" :"Big Spender",
+        "Achieve_5002_Level_0" :"Spend 1000 coins.",
+        "Achieve_5002_Level_1" :"Spend 5000 coins.",
+        "Achieve_5002_Level_2" :"Spend 10000 coins.",
+        "Achieve_5002_Level_3" :"Spend 20000 coins.",
+
+        "Achieve_5003_Title" :"Fragment Collector",
+        "Achieve_5003_Level_0" :"Obtain the first knowledge fragment.",
+        "Achieve_5003_Level_1" :"Obtain 3 knowledge fragments.",
+        "Achieve_5003_Level_2" :"Obtain 6 knowledge fragments.",
+
+        "Achieve_5004_Title" :"Seeker of Knowledge",
+        "Achieve_5004_Level_0" :"Obtain the first knowledge point.",
+        "Achieve_5004_Level_1" :"Obtain 50 knowledge points.",
+        "Achieve_5004_Level_2" :"Obtain 100 knowledge points. ",
+        "Achieve_5004_Level_3" :"Obtain 500 knowledge points.",
+
+        "Achieve_5005_Title" :"Mining Expert",
+        "Achieve_5005_Level_0" :"Obtain First mineral for the first time.",
+        "Achieve_5005_Level_1" :" Accumulate 100 mineral.",
+        "Achieve_5005_Level_2" :" Accumulate 500 mineral.",
+        "Achieve_5005_Level_3" :" Accumulate 1000 mineral.",
+
+        "Achieve_5006_Title" :"Fuel Explorer",
+        "Achieve_5006_Level_0" :"Obtain liquid methane or plasma fuel for the first time.",
+        "Achieve_5006_Level_1" :"Accumulate 100 instances of liquid methane or plasma fuel.",
+        "Achieve_5006_Level_2" :"Accumulate 500 instances of liquid methane or plasma fuel.",
+        "Achieve_5006_Level_3" :"Accumulate 1000 instances of liquid methane or plasma fuel.",
+
+        "Achieve_6001_Title" :"Taste of Victory",
+        "Achieve_6001_Level_0" :"Achieve the first successful battle.",
+
+        "Achieve_6002_Title" :"Road to Conquest",
+        "Achieve_6002_Level_0" :"Accumulate 100 victories in battles.",
+        "Achieve_6002_Level_1" :"Accumulate 500 victories in battles.",
+
+        "Achieve_6003_Title" :"First Encounter with Failure",
+        "Achieve_6003_Level_0" :"Experience the first battle defeat.",
+
+        "Achieve_6005_Title" :"Narrow Escape",
+        "Achieve_6005_Level_0" :"Have only 10 HP or less remaining at the end of a battle."
+      }
+    }
+  ] 

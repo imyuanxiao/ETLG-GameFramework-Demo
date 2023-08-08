@@ -42,7 +42,7 @@ namespace ETLG
         public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
-
+      
         private UIQuiz currentQuiz;
         private Vector2 currentPosition;
         private bool isToggling = false;
@@ -131,6 +131,8 @@ namespace ETLG
             if (dataQuizReport.again)
             {
                 UIQuizManager.reset();
+                int[] newIntArray = { 0, 0 };
+                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id] = newIntArray;
                 dataQuizReport.reset();
                 destroyAllOptions();
                 loadQuestions();
@@ -355,6 +357,8 @@ namespace ETLG
 
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
             dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
+            dataPlayer.GetPlayerData().getPassQuizAndFinishDialog();
+            dataPlayer.GetPlayerData().updateAchievement_QuizNumber();
         }
 
         private void setAnalysisPrefab()

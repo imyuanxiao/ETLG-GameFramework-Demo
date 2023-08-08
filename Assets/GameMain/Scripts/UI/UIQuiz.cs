@@ -120,17 +120,14 @@ namespace ETLG.Data
             if (wrongAnswers.Count == 0 && selectAnswers.Count == rightAnswers.Count)
             {
                 isCorrect = true;
-                GameEntry.Sound.PlaySound(EnumSound.ui_quiz_correct);
-                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id][0]++;
-
-
+                GameEntry.Sound.PlaySound(EnumSound.ui_quiz_correct);  
             }
             else
             {
                 isCorrect = false;
                 GameEntry.Sound.PlaySound(EnumSound.ui_quiz_wrong);
-                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id][1]++;
             }
+            dataPlayer.GetPlayerData().addQuizResult(npcData.Id, isCorrect);
         }
 
         public void colorAnswers()

@@ -68,6 +68,13 @@ namespace ETLG.Data
         //Learning Path
         private DataLearningPath dataLearningPath { get; set; }
 
+        private int[] totalQuizResults = { 0, 0 };
+        //learn achievement record
+        // private Dictionary<int, int> AchiLearnRecord = new Dictionary<int, int>();
+
+        private int passedQuiz = 0;
+        private int finishedDialog = 0;
+
         public PlayerData(SpaceshipData spaceshipData)
         {
             initialSpaceship = spaceshipData;
@@ -102,6 +109,7 @@ namespace ETLG.Data
             ChaptersSaveData = new Dictionary<int, bool>();
             CoursesSaveData = new Dictionary<int, float>();
             DomiansSaveData = new Dictionary<int, float>();
+            QuizesSaveData = new Dictionary<int, int[]>();
             KnowledgeSavedData();
 
             // add initial skills
@@ -1216,16 +1224,21 @@ namespace ETLG.Data
             return ChaptersSaveData[NPCID];
         }
 
-        public int[] getQuizResult()
+        public void addQuizResult(int NPCId, bool correct)
         {
-            //0 correct 1 wrong
-            int[] totalResults = { 0, 0 };
-            foreach(int[] result in QuizesSaveData.Values)
+            if (correct)
             {
-                totalResults[0] += result[0];
-                totalResults[1] += result[1];
+                QuizesSaveData[NPCId][0]++;
+                getCorrectWrongQuiz();
+                updateAchievement_CorrecNumber();
             }
-            return totalResults;
+            else
+            {
+                QuizesSaveData[NPCId][1]++;
+                getCorrectWrongQuiz();
+                updateAchievement_WrongNumber();
+            }
+
         }
 
         public int getTotalPassChapterQuiz()
@@ -1241,20 +1254,122 @@ namespace ETLG.Data
             return totalPassChapterQuiz;
         }
 
-        public void updateAchievement_CorrectWrongNumber()
+        private void getCorrectWrongQuiz()
         {
+            int[] newEmpty = { 0, 0 };
+            totalQuizResults = newEmpty;
+            foreach (int[] result in QuizesSaveData.Values)
+            {
+                totalQuizResults[0] += result[0];
+                totalQuizResults[1] += result[1];
+            }
+        }
 
+        public void updateAchievement_CorrecNumber()
+        {
+            int achievementId = Constant.Type.ACHV_CORRECTQUIZ;
+            //0 correct 1 wrong
+            int[] counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                Debug.Log(count);
+                Debug.Log(count + totalQuizResults[0] >= count);
+
+                if (totalQuizResults[0] >= count && !isAchievementAchieved(achievementId, totalQuizResults[0]))
+                {
+                    //addAchievementLearn(achievementId, count);
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                }
+            }
+        }
+
+        public void updateAchievement_WrongNumber()
+        {
+            int achievementId = Constant.Type.ACHV_WRONGQUIZ;
+            //0 correct 1 wrong
+            int[] counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                Debug.Log(count);
+                if (totalQuizResults[1] >= count && !isAchievementAchieved(achievementId, totalQuizResults[1]))
+                {
+                    //addAchievementLearn(achievementId,count);
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                }
+            }
+        }
+
+        public void getPassQuizAndFinishDialog()
+        {
+            finishedDialog = 0;
+            passedQuiz = 0;
+            foreach (int NPCId in ChaptersSaveData.Keys)
+            {
+                if (ChaptersSaveData[NPCId] && dataNPC.GetNPCData(NPCId).Type == Constant.Type.NPC_TYPE_TEACHER)
+                {
+                    finishedDialog++;
+                }
+                else if (ChaptersSaveData[NPCId] && dataNPC.GetNPCData(NPCId).Type == Constant.Type.NPC_TYPE_EXAMINER)
+                {
+                    passedQuiz++;
+                }
+            }
         }
 
         public void updateAchievement_QuizNumber()
         {
-
+            int achievementId = Constant.Type.ACHV_PASSEDQUIZ;
+            int[] counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                if (passedQuiz >= count && !isAchievementAchieved(achievementId, passedQuiz))
+                {
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                }
+            }
         }
 
         public void updateAchievement_DialogNumber()
         {
-
+            int achievementId = Constant.Type.ACHV_FINISHEDDIALOG;
+            int[] counts = dataAchievement.GetDataById(achievementId).Count;
+            foreach (int count in counts)
+            {
+                if (finishedDialog >= count && !isAchievementAchieved(achievementId, finishedDialog))
+                {
+                    GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
+                }
+            }
         }
+
+        //private void addAchievementLearn(int achievementId, int standardCount)
+        //{
+        //    if (!AchiLearnRecord.ContainsKey(achievementId))
+        //    {
+        //        AchiLearnRecord.Add(achievementId, standardCount);
+        //    }
+        //    else
+        //    {
+        //        AchiLearnRecord[achievementId] = standardCount;
+        //    }
+        //}
+
+        //private bool testAchievement(int achievementId, int count)
+        //{
+        //    if (!AchiLearnRecord.ContainsKey(achievementId))
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        int currentStandardCount = AchiLearnRecord[achievementId];
+        //        if (currentStandardCount>= count)
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
     }
 }
 

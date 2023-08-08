@@ -77,21 +77,11 @@ namespace ETLG.Data
             }
         }
 
-        public string Type
+        public int Type
         {
             get
             {
-                switch (dRNPC.Type)
-                {
-                    case Constant.Type.NPC_TYPE_TEACHER:
-                        return "Teacher";
-                    case Constant.Type.NPC_TYPE_EXAMINER:
-                        return "Examiner";
-                    default:
-                        return "Others";
-
-                }
-
+                return dRNPC.Type;
             }
         }
 

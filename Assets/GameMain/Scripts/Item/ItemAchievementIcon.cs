@@ -69,7 +69,7 @@ namespace ETLG
             this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
             switch (type)
             {
-                case Constant.Type.ACHV_QUIZ:
+                case Constant.Type.ACHV_LEARN:
                     //player data
                     this.progress.text = "0";
                     break;

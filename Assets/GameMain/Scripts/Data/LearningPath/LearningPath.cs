@@ -22,7 +22,7 @@ namespace ETLG.Data
             return NPCData;
         }
 
-        public string getCurrentType()
+        public int getCurrentType()
         {
             return NPCData.Type;
         }

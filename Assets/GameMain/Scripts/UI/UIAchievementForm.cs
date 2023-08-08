@@ -120,7 +120,7 @@ namespace ETLG
         {
             switch (data.TypeId)
             {
-                case Constant.Type.ACHV_QUIZ:
+                case Constant.Type.ACHV_LEARN:
                     showAchievements(content_1, data.Id);
                     break;
                 case Constant.Type.ACHV_RESOURCE:

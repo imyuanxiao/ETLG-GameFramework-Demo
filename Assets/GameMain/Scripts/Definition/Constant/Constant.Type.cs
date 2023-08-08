@@ -111,7 +111,11 @@
             public const int MODULE_TYPE_SUPPORT = 5;
 
             //achievement type
-            public const int ACHV_QUIZ = 101;
+            public const int ACHV_CORRECTQUIZ = 1001;
+            public const int ACHV_WRONGQUIZ = 1002;
+            public const int ACHV_PASSEDQUIZ= 1003;
+            public const int ACHV_FINISHEDDIALOG= 1004;
+            public const int ACHV_LEARN = 101;
             public const int ACHV_KNOWLEDGE_BASE = 102;
             public const int ACHV_INTERSTELLAR = 103;
             public const int ACHV_SPACESHIP = 104;

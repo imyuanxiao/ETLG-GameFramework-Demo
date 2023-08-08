@@ -151,7 +151,7 @@ namespace ETLG
                     item.transform.localPosition = Vector3.zero;
                     item.GetComponent<ItemRewardIcon>().SetData(dataLearningPath.getCurrentPath().NPCId);
                 });
-                if (dataLearningPath.getCurrentPath().getCurrentType() == "Teacher")
+                if (dataLearningPath.getCurrentPath().getCurrentType() == Constant.Type.NPC_TYPE_TEACHER)
                 {
                     TalkIcon.gameObject.SetActive(true);
                     QuizIcon.gameObject.SetActive(false);
@@ -270,7 +270,7 @@ namespace ETLG
         private void OnGoButtonClick()
         {
             GameEntry.Data.GetData<DataNPC>().currentNPCId = dataLearningPath.getCurrentPath().NPCId;
-            if (dataLearningPath.getCurrentPath().getCurrentType() == "Teacher")
+            if (dataLearningPath.getCurrentPath().getCurrentType() == Constant.Type.NPC_TYPE_TEACHER)
             {
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UINPCDialogForm))
                 {

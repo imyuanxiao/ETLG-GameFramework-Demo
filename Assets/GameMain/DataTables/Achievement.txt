@@ -3,10 +3,10 @@
 #	int		string	int	int	int[]	int[]
 #	配置编号	策划备注	成就名称	成就类型Id	解锁条件Id	解锁条件	成就点数
 #答题							
-	1001	知识就是力量	Knowledge is Power	101	1001	"1,10,50,100,200"	"5,10,15,20,25"
-	1002	失败是成功之母	Failure is the Mother of Success 	101	1002	"1,10,50,100,200"	"5,10,15,20,25"
-	1003	掌控全场	Masterful domination	101	1003	"1,3,10,25,50"	"10,15,20,50"
-	1004	星际交流家	Interstellar Communicator	101	1008	"1,3,10,25,50"	"5,10,15,20,25"
+	1001	知识就是力量	Knowledge is Power	101	1001	"1,2,3,100,200"	"5,10,15,20,25"
+	1002	失败是成功之母	Failure is the Mother of Success 	101	1002	"1,2,3,100,200"	"5,10,15,20,25"
+	1003	掌控全场	Masterful domination	101	1003	"1,2,3,25,50"	"5,10,15,20,25"
+	1004	星际交流家	Interstellar Communicator	101	1008	"1,2,3,25,50"	"5,10,15,20,25"
 #星际							
 	3001	向着Cloud Computing星出发！	Setting sail towards the Cloud Computing planet!	103	3002	1	10
 	3002	向着AI星出发！	Setting sail towards the AI planet!	103	3003	1	10

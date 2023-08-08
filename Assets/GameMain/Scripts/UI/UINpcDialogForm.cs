@@ -231,6 +231,8 @@ namespace ETLG
 
             dataPlayer.GetPlayerData().getLearningPath().finishLeantPathByNPCId(npcData.Id);
             dataPlayer.GetPlayerData().setFinishChapter(npcData.Id);
+            dataPlayer.GetPlayerData().getPassQuizAndFinishDialog();
+            dataPlayer.GetPlayerData().updateAchievement_DialogNumber();
         }
 
         protected override void OnClose(bool isShutdown, object userData)
