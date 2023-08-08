@@ -106,6 +106,8 @@ namespace ETLG
             selectedColor = new Color32(249, 230, 196, 255);
             BackendDataManager.Instance.HandleProfile();
             wholeContainer.SetActive(false);
+            origionalPwd = "******";
+            
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -128,6 +130,7 @@ namespace ETLG
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
                 {
+                    origionalName = placeholder_name.text;
                     playerAvatarId = selectedId;
                     avatarChange.SetActive(false);
                     SetPlayerAvatar();
@@ -149,8 +152,9 @@ namespace ETLG
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_PASSWORD_SUCCESS)
                 {
+                    origionalPwd = newPwd.text;
                     pwd.interactable = false;
-                    placeholder_pwd.text = newPwd.text;
+                    placeholder_pwd.text = origionalPwd;
                     placeholder_pwd.fontStyle = FontStyles.Bold;
                     newPasswords.SetActive(false);
                     editButtons.SetActive(true);
@@ -184,9 +188,9 @@ namespace ETLG
             }
             placeholder_userName.text = GameEntry.Data.GetData<DataBackend>().currentUser.username;
             placeholder_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
-
+            origionalName = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             originalPosition = reminder.rectTransform.localPosition;
-
+            nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             nickName.interactable = false;
             pwd.interactable = false;
 
@@ -221,8 +225,6 @@ namespace ETLG
             isEditInfo = true;
             nickName.interactable = true;
 
-            origionalName = placeholder_name.text;
-
             nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
 
             
@@ -235,17 +237,23 @@ namespace ETLG
         private void OnCancelButtonClick()
         {
             reminder.text = null;
-            nickName.interactable = false;
-            pwd.interactable = false;
-            placeholder_name.text = origionalName;
-            placeholder_name.fontStyle = FontStyles.Bold;
-            placeholder_pwd.text = origionalPwd;
-            placeholder_pwd.fontStyle = FontStyles.Bold;
+            if(isEditInfo)
+            {
+                nickName.interactable = false;
+                placeholder_name.text = origionalName;
+                placeholder_name.fontStyle = FontStyles.Bold;
+                avatarChange.SetActive(false);
+            }
+            else
+            {
+                pwd.interactable = false;
+                placeholder_pwd.text = origionalPwd;
+                placeholder_pwd.fontStyle = FontStyles.Bold;
+                newPasswords.SetActive(false);
+            }
+            
             editButtons.SetActive(true);
             submitButtons.SetActive(false);
-            avatarChange.SetActive(false);
-            newPasswords.SetActive(false);
-           
         }
         private void OnSaveButtonClick()
         {
@@ -255,6 +263,9 @@ namespace ETLG
                 //if nothing changed return
                 if(selectedButton == null && nickName.text == origionalName)
                 {
+                    avatarChange.SetActive(false);
+                    editButtons.SetActive(true);
+                    submitButtons.SetActive(false);
                     return;
                 }
                 if(selectedButton == null)
@@ -284,8 +295,9 @@ namespace ETLG
         private void OnEditPwdButtonClick()
         {
             isEditInfo = false;
+            
             pwd.interactable = true;
-            origionalPwd = placeholder_pwd.text;
+            
             pwd.text = null;
             newPwd.text = null;
             confirmPwd.text = null;

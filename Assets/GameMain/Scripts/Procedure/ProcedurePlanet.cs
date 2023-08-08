@@ -360,6 +360,7 @@ namespace ETLG
                 if (popupQueue.Count == 0 && GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
+                    isAchievementShowing = false;
                 }
                 if(popupQueue.Count>0)
                 {
