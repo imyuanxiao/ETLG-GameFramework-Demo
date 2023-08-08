@@ -45,6 +45,7 @@ namespace ETLG
             Save("ChaptersSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().ChaptersSaveData);
             Save("CoursesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().CoursesSaveData);
             Save("DomiansSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData);
+            Save("QuizesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().QuizesSaveData);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -88,6 +89,7 @@ namespace ETLG
             Load("ChaptersSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().ChaptersSaveData);
             Load("CoursesSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().CoursesSaveData);
             Load("DomiansSaveData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData);
+            LoadQuizesSaveData("QuizesSaveData" + saveIdStr);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount = LoadObject<int>("BattleVictoryCount" + saveIdStr);
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Map")));
@@ -142,10 +144,6 @@ namespace ETLG
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
                 }
             }
-            // for (int i=0; i < GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL).Count; i++)
-            // {
-            //     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL)[i] = (int) jsonData[i];
-            // }
         }
 
         private void LoadPlayedTutorialGroup(string key)
@@ -160,6 +158,18 @@ namespace ETLG
                 else
                 {
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().PlayedTutorialGroup[i] = (int) jsonData[i];
+                }
+            }
+        }
+
+        private void LoadQuizesSaveData(string key)
+        {
+            JObject jsonData = LoadJsonObject(key);
+            foreach (var item in GameEntry.Data.GetData<DataPlayer>().GetPlayerData().QuizesSaveData)
+            {
+                for (int i=0; i < ((JArray) jsonData[item.Key.ToString()]).Count; i++)
+                {
+                    item.Value[i] = (int)((JArray)jsonData[item.Key.ToString()])[i];
                 }
             }
         }
@@ -186,6 +196,7 @@ namespace ETLG
             result.Add("ChaptersSaveData", PlayerPrefs.GetString("ChaptersSaveData" + saveIdStr));
             result.Add("CoursesSaveData", PlayerPrefs.GetString("CoursesSaveData" + saveIdStr));
             result.Add("DomiansSaveData", PlayerPrefs.GetString("DomiansSaveData" + saveIdStr));
+            result.Add("QuizesSaveData", PlayerPrefs.GetString("QuizesSaveData" + saveIdStr));
 
             return result;
         }
@@ -236,6 +247,7 @@ namespace ETLG
             Delete("ChaptersSaveData" + saveIdStr);
             Delete("CoursesSaveData" + saveIdStr);
             Delete("DomiansSaveData" + saveIdStr);
+            Delete("QuizesSaveData" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -389,6 +401,7 @@ namespace ETLG
                 PrintSavedData("ChaptersSaveData_0");
                 PrintSavedData("CoursesSaveData_0");
                 PrintSavedData("DomiansSaveData_0");
+                PrintSavedData("QuizesSaveData_0");
             }
         }
     }
