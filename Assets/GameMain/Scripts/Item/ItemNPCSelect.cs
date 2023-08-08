@@ -91,6 +91,10 @@ namespace ETLG
                 {
                     item.GetComponentInChildren<RawImage>().color = UIHexColor.HexToColor("990000");
                 }
+                else
+                {
+                    item.GetComponentInChildren<RawImage>().color = UIHexColor.HexToColor("FFFFFF");
+                }
                 item.GetComponent<ItemRewardIcon>().SetData(this.npcData.Id);
             });
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)horizontalLayoutGroup.transform);
