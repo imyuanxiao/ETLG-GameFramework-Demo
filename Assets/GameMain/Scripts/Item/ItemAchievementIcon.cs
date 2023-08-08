@@ -72,6 +72,25 @@ namespace ETLG
                 case Constant.Type.ACHV_LEARN:
                     //player data
                     this.progress.text = "0";
+                    switch(conditionId)
+                    {
+                        //正确作答题目
+                        case 1001:
+                            this.progress.text = "0";
+                            break;
+                        //错误作答题目
+                        case 1002:
+                            this.progress.text = "0";
+                            break;
+                        //通过考试数目
+                        case 1003:
+                            this.progress.text = "0";
+                            break;
+                        //完整对话NPC个数
+                        case 1008:
+                            this.progress.text = "0";
+                            break;
+                    }
                     break;
                 case Constant.Type.ACHV_RESOURCE:
                     //money
