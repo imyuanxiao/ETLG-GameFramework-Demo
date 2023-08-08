@@ -71,7 +71,7 @@ namespace ETLG
         private void showContent()
         {
             //加载成就名称
-            s_name_1.text = "Quiz";
+            s_name_1.text = "Learning";
             s_name_2.text = "Resource";
             s_name_4.text = "Interstellar";
             s_name_5.text = "Battle";

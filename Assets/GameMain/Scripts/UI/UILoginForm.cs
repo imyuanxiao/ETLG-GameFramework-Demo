@@ -17,9 +17,9 @@ namespace ETLG
         public TextMeshProUGUI submitTitle = null;
         public TextMeshProUGUI reminder = null;
         //register success
-        public TextMeshProUGUI placeholder_playerId = null;
-        public TextMeshProUGUI placeholder_playerPasswaord = null;
-        public TextMeshProUGUI placeholder_playerName = null;
+        public TextMeshProUGUI p_playerUserName = null;
+        public TextMeshProUGUI p_playerPasswaord = null;
+        public TextMeshProUGUI p_playerNickName = null;
         public Button switchButton;
         public Button submitButton;
         public Button closeButton;
@@ -213,9 +213,9 @@ namespace ETLG
         {
             registerSuccess.SetActive(true);
             submitB.SetActive(false);
-            placeholder_playerName.text = userName.text;
-            placeholder_playerPasswaord.text = pwd.text;
-            placeholder_playerId.text = pwd.text;
+            p_playerNickName.text = userName.text;
+            p_playerPasswaord.text = pwd.text;
+            p_playerUserName.text = pwd.text;
             playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar("1000"));
         }
         private bool IsValidPassword()
