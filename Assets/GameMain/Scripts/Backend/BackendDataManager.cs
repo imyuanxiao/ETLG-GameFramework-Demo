@@ -14,7 +14,7 @@ namespace ETLG
         //用于回调函数
         public delegate void IsLoginDetectionCallback(bool isLoggedIn);
 
-        private Dictionary<string, string> upLoadJsonStrDic;
+        private Dictionary<string, string> uploadJsonStrDic;
         private void OnEnable()
         {
         }
@@ -154,7 +154,7 @@ namespace ETLG
                     StartCoroutine(GetSaveDownloadRoutine());
                     break;
                 case Constant.Type.BACK_SAVE_UPLOAD:
-                    StartCoroutine(PostSaveUpLoadRoutine(this.upLoadJsonStrDic)) ;
+                    StartCoroutine(PostSaveUpLoadRoutine()) ;
                     break;
             }
         }
@@ -291,13 +291,13 @@ namespace ETLG
         }
         public void HandleSaveUpLoad(Dictionary<string, string> jsonStrDic)
         {
-            this.upLoadJsonStrDic = jsonStrDic;
+            this.uploadJsonStrDic = jsonStrDic;
             GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_SAVE_UPLOAD;
             IsLoginDetection((isLoggedIn) =>
             {
                 if (isLoggedIn)
                 {
-                    StartCoroutine(PostSaveUpLoadRoutine(jsonStrDic));
+                    StartCoroutine(PostSaveUpLoadRoutine());
                 }
                 else
                 {
@@ -308,10 +308,10 @@ namespace ETLG
             });
             jsonStrDic = null;
         }
-        private IEnumerator PostSaveUpLoadRoutine(Dictionary<string, string> jsonStrDic)
+        private IEnumerator PostSaveUpLoadRoutine()
         {
             //还是空的....
-            string jsonData = JsonConvert.SerializeObject(jsonStrDic);
+            string jsonData = JsonConvert.SerializeObject(uploadJsonStrDic);
 
             using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().saveUpload_url, jsonData))
             {
@@ -479,7 +479,7 @@ namespace ETLG
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
                             //看看这个能不能成功convert
-                            upLoadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
+                           // uploadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
                             // Convert the data class properties into a Dictionary<string, int>
                             Dictionary<string, string> dictionary = new Dictionary<string, string>
@@ -750,6 +750,17 @@ namespace ETLG
             public int errorCode;
             public string errorMessage;
             public RankDataWrapper data;
+        }
+        [System.Serializable]
+        public class KeyValuePair
+        {
+            string key;
+            string value;
+            public KeyValuePair(string key,string value)
+            {
+                this.key = key;
+                this.value = value;
+            }
         }
 
     }
