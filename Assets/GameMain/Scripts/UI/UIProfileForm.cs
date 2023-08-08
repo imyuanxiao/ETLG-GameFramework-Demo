@@ -52,6 +52,8 @@ namespace ETLG
  
         public GameObject wholeContainer;
 
+        public GameObject unkownPanel;
+
         public RawImage playerImage;
 
         private float shakeAmount = 5f;
@@ -112,7 +114,17 @@ namespace ETLG
                 if (fetchedType == Constant.Type.BACK_PROFILE_SUCCESS)
                 {
                     wholeContainer.SetActive(true);
+                    unkownPanel.SetActive(false);
                     ShowContent();
+                }
+                if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
+                {
+                    wholeContainer.SetActive(true);
+                    ShowPlayerInfo();
+                    achievementScore.text = "Unknown";
+                    playerScore.text = "Unknown";
+                    learningPath.text = "Unknown";
+                    unkownPanel.SetActive(true);
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
                 {
@@ -157,7 +169,7 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
             GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
         }
-        private void ShowContent()
+        private void ShowPlayerInfo()
         {
             reminder.text = null;
 
@@ -172,9 +184,7 @@ namespace ETLG
             }
             placeholder_userName.text = GameEntry.Data.GetData<DataBackend>().currentUser.username;
             placeholder_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
-            achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
-            playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+
             originalPosition = reminder.rectTransform.localPosition;
 
             nickName.interactable = false;
@@ -185,7 +195,12 @@ namespace ETLG
             newPasswords.SetActive(false);
             avatarChange.SetActive(false);
             SetPlayerAvatar();
-
+        }
+        private void ShowProfileInfo()
+        {
+            achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
+            playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
+            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
             SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
             SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
             SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT
@@ -193,6 +208,13 @@ namespace ETLG
             SetBossTime(boss_5, GameEntry.Data.GetData<DataBackend>().userProfile.boss5);  // Cloud Computing
             SetBossTime(boss_6, GameEntry.Data.GetData<DataBackend>().userProfile.boss6);  // Blockchain
             SetBossTime(boss_7, GameEntry.Data.GetData<DataBackend>().userProfile.boss7);  // Final
+        }
+        private void ShowContent()
+        {
+
+            ShowPlayerInfo();
+            ShowProfileInfo();
+           
         }
         private void OnEditPlayerInfoButtonClick()
         {
