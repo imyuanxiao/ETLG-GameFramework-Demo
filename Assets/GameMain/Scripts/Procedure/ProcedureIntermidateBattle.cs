@@ -150,7 +150,7 @@ namespace ETLG
                 default:
                     break;
             }
-            GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6001, 1));
+            //GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6001, 1));
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount++;
             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6002, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount));
         }
