@@ -66,14 +66,15 @@ namespace ETLG
             if (ne.Type == Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS)
             {
                 this.jsonStrDic = GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic;
+                DownloadSaveUpdate();
             }
-            else 
+            else if(ne.Type == Constant.Type.BACK_SAVE_DOWNLOAD_FAILED)
             {
                 Log.Error("Download save from cloud failed");
                 return;
             }
 
-            DownloadSaveUpdate();
+            
         }
 
         private void DownloadSaveUpdate()
