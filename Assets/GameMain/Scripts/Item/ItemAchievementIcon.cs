@@ -200,8 +200,6 @@ namespace ETLG
                             this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firerate).ToString();
                             break;
                         default:
-                            Debug.Log(GameEntry.Data.GetData<DataSkill>().skillCount);
-                            Debug.Log(GameEntry.Data.GetData<DataSkill>().levelCount);
                             if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                             {
                                 this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();

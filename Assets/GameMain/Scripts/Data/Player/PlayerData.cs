@@ -597,6 +597,11 @@ namespace ETLG.Data
 
             GameEntry.Event.Fire(this, EquippedModuleChangesEventArgs.Create());
 
+            //modules achievement 
+            if(playerModules.Count == dataArtifact.AllModuleCount)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4010,1));
+            }
         }
 
         public void UpdateAttrsByAllModules(int Type)
@@ -816,11 +821,10 @@ namespace ETLG.Data
             //if unlock all skills
             if(GetUnlockedSkillsNum() == dataSkill.skillCount)
             {
-                Debug.Log("GetUnlockedSkillsNum: " + GetUnlockedSkillsNum());
                 GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4009, 1));
             }
             //if all skills are max level
-            if(GetUnlockedSkillsNum() == dataSkill.skillCount && GetUnlockedLevelsNum() == dataSkill.levelCount)
+            if (GetUnlockedSkillsNum() == dataSkill.skillCount && GetUnlockedLevelsNum() == dataSkill.levelCount)
             {
                 GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4008, 1));
             }
