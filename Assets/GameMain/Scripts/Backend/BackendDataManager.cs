@@ -14,9 +14,13 @@ namespace ETLG
         //用于回调函数
         public delegate void IsLoginDetectionCallback(bool isLoggedIn);
 
+        public int connectType;
+
         private Dictionary<string, string> uploadJsonStrDic;
         private void OnEnable()
         {
+            connectType = Constant.Type.BACK_LOCAL;
+            //connectType = Constant.Type.BACK_REOMTE;
         }
         public void GetRankData(int type, int current, int pageSize)
         {
@@ -33,7 +37,7 @@ namespace ETLG
             };
 
             string jsonData = JsonUtility.ToJson(requestData);
-            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().leaderboard_url, jsonData))
+            using (UnityWebRequest www = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().GetLeaderboardUrl(), jsonData))
                 {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 www.uploadHandler.Dispose();
@@ -92,7 +96,7 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().Login_url, jsonData))
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().GetLoginUrl(), jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 request.uploadHandler.Dispose();
@@ -177,7 +181,7 @@ namespace ETLG
                 avatar = avatar
             };
             string jsonData = JsonUtility.ToJson(updateData);
-            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profileUpdate_url, jsonData))
+            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().GetProfileUpdateUrl(), jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 request.uploadHandler.Dispose();
@@ -249,7 +253,7 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(updatePwd);
 
-            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().profilePassword_url, jsonData))
+            using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().GeProfilePasswordUrl(), jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 //
@@ -307,7 +311,7 @@ namespace ETLG
 
             string jsonData = JsonConvert.SerializeObject(uploadJsonStrDic);
 
-            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().saveUpload_url, jsonData))
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().GetSaveUploadUrl(), jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 request.uploadHandler.Dispose();
@@ -408,7 +412,7 @@ namespace ETLG
 
             string jsonData = JsonUtility.ToJson(loginData);
 
-            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().Register_url,jsonData))
+            using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().GetRegisterUrl(),jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 request.uploadHandler.Dispose();
@@ -460,7 +464,7 @@ namespace ETLG
         }
         private IEnumerator GetSaveDownloadRoutine()
         {
-            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().saveDownload_url))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().GetSaveDownloadUrl()))
             {
                 www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
@@ -507,7 +511,7 @@ namespace ETLG
         }
         private IEnumerator GetUserProfileByUserIdRoutine(int id)
         {
-            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().getProfileById_url + id))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().GetGetProfileByIdUrl() + id))
             {
                 //www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
@@ -560,7 +564,7 @@ namespace ETLG
         }
         private IEnumerator GetCurrentUserRoutine(IsLoginDetectionCallback callback)
         {
-            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().currentUser_url))
+            using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().GetCurrentUserUrl()))
             {
                 www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
                 yield return www.SendWebRequest();
