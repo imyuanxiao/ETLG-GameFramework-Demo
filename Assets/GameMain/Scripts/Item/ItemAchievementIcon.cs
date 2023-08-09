@@ -67,6 +67,8 @@ namespace ETLG
                 this.image.sprite = sprite;
             }
             this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
+            dataPlayer.GetPlayerData().getPassQuizAndFinishDialog();
+            dataPlayer.GetPlayerData().getCorrectWrongQuiz();
             switch (type)
             {
                 case Constant.Type.ACHV_LEARN:
@@ -76,19 +78,19 @@ namespace ETLG
                     {
                         //正确作答题目
                         case 1001:
-                            this.progress.text = "0";
+                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().totalQuizResults[0]); 
                             break;
                         //错误作答题目
                         case 1002:
-                            this.progress.text = "0";
+                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().totalQuizResults[1]);
                             break;
                         //通过考试数目
                         case 1003:
-                            this.progress.text = "0";
+                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().passedQuiz);
                             break;
                         //完整对话NPC个数
                         case 1008:
-                            this.progress.text = "0";
+                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().finishedDialog);
                             break;
                     }
                     break;

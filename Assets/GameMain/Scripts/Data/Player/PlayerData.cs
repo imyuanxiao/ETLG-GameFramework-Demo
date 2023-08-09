@@ -68,12 +68,12 @@ namespace ETLG.Data
         //Learning Path
         private DataLearningPath dataLearningPath { get; set; }
 
-        private int[] totalQuizResults = { 0, 0 };
+        public int[] totalQuizResults = { 0, 0 };
         //learn achievement record
         // private Dictionary<int, int> AchiLearnRecord = new Dictionary<int, int>();
 
-        private int passedQuiz = 0;
-        private int finishedDialog = 0;
+        public int passedQuiz = 0;
+        public int finishedDialog = 0;
 
         public PlayerData(SpaceshipData spaceshipData)
         {
@@ -1292,7 +1292,7 @@ namespace ETLG.Data
             return totalPassChapterQuiz;
         }
 
-        private void getCorrectWrongQuiz()
+        public void getCorrectWrongQuiz()
         {
             int[] newEmpty = { 0, 0 };
             totalQuizResults = newEmpty;
@@ -1335,6 +1335,7 @@ namespace ETLG.Data
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }
+            
         }
 
         public void getPassQuizAndFinishDialog()
