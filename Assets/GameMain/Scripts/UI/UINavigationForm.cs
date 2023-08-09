@@ -9,9 +9,7 @@ namespace ETLG
     {
         public Button spaceshipButton;
         public Button skillButton;
-        //public Button missionButton;
         public Button achievementButton;
-        //public Button knowledgeBaseButton;
         public Button leaderboardButton;
         public Button profileButton;
 
@@ -29,7 +27,8 @@ namespace ETLG
                 spaceshipButton.GetComponent<RawImage>(),
                 skillButton.GetComponent<RawImage>(),
                 achievementButton.GetComponent<RawImage>(),
-                leaderboardButton.GetComponent<RawImage>()
+                leaderboardButton.GetComponent<RawImage>(),
+                profileButton.GetComponent<RawImage>()
             };
             spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, (int)EnumUIForm.UISpaceshipCheckForm));
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, (int)EnumUIForm.UISkillTreeForm));
