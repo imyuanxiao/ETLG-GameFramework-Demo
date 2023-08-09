@@ -63,8 +63,11 @@ namespace ETLG
             playerTotalArtifact = dataPlayer.GetPlayerData().playerTotalArtifacts;
             if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
             {
-                Sprite sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon());
-                this.image.sprite = sprite;
+                image.sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon("unlocked_treasure_chest"));
+            }
+            else
+            {
+                image.sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon("locked_treasure_chest"));
             }
             this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
             dataPlayer.GetPlayerData().getPassQuizAndFinishDialog();
@@ -78,19 +81,19 @@ namespace ETLG
                     {
                         //正确作答题目
                         case 1001:
-                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().totalQuizResults[0]); 
+                            this.progress.text = dataPlayer.GetPlayerData().totalQuizResults[0].ToString(); 
                             break;
                         //错误作答题目
                         case 1002:
-                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().totalQuizResults[1]);
+                            this.progress.text = dataPlayer.GetPlayerData().totalQuizResults[1].ToString();
                             break;
                         //通过考试数目
                         case 1003:
-                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().passedQuiz);
+                            this.progress.text = dataPlayer.GetPlayerData().passedQuiz.ToString();
                             break;
                         //完整对话NPC个数
                         case 1008:
-                            this.progress.text = UIFloatString.FloatToString(dataPlayer.GetPlayerData().finishedDialog);
+                            this.progress.text =dataPlayer.GetPlayerData().finishedDialog.ToString();
                             break;
                     }
                     break;
