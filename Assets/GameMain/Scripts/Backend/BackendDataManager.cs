@@ -310,7 +310,7 @@ namespace ETLG
         }
         private IEnumerator PostSaveUpLoadRoutine()
         {
-            //还是空的....
+
             string jsonData = JsonConvert.SerializeObject(uploadJsonStrDic);
 
             using (UnityWebRequest request = UnityWebRequest.Post(GameEntry.Data.GetData<DataBackend>().saveUpload_url, jsonData))
@@ -330,10 +330,12 @@ namespace ETLG
                     ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
                     if (responseData.success)
                     {
+                        Debug.Log("upload success");
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_UPLOAD_SUCCESS));
                     }
                     else
                     {
+                        Debug.Log(responseData.data);
                         GameEntry.Data.GetData<DataBackend>().message = responseData.data;
                         GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_UPLOAD_FAILED));
                     }
