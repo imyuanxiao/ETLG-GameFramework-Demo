@@ -186,6 +186,7 @@ namespace ETLG
             Dictionary<string, string> result = new Dictionary<string, string>();
 
             string saveIdStr = "_" + SaveId.ToString();
+            result.Add("SaveId", SaveId.ToString());
             result.Add("Difficulty", PlayerPrefs.GetString("Difficulty" + saveIdStr));
             result.Add("InitialSpaceshipIdx", PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
             result.Add("PlayerSkillData", PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
@@ -211,7 +212,9 @@ namespace ETLG
 
         public int DownloadSave(Dictionary<string, string> jsonDataStr)
         {
-            int saveId = this.savedGamesInfo.cloudSaveId;
+            // int saveId = this.savedGamesInfo.cloudSaveId;
+            int saveId = int.Parse(jsonDataStr["SaveId"]);
+            this.savedGamesInfo.cloudSaveId = saveId;
             foreach (var item in jsonDataStr)
             {
                 PlayerPrefs.SetString(item.Key + "_" + saveId.ToString(), item.Value);
@@ -265,10 +268,10 @@ namespace ETLG
             {
                 savedGamesInfo.savedGamesDic.Remove(SaveId);
             }
-            if (savedGamesInfo.cloudSaveId == SaveId)
-            {
-                savedGamesInfo.cloudSaveId = -1;
-            }
+            // if (savedGamesInfo.cloudSaveId == SaveId)
+            // {
+            //     savedGamesInfo.cloudSaveId = -1;
+            // }
 
             Save("SavedGamesInfo", savedGamesInfo);
         }
