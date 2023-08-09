@@ -73,15 +73,22 @@ namespace ETLG
                 index = 1;
             }
 
-            if (selectedButton == (int)(int)EnumUIForm.UIAchievementForm)
+            if (selectedButton == (int)EnumUIForm.UIAchievementForm)
             {
                 index = 2;
             }
 
-            if (selectedButton == (int)(int)EnumUIForm.UILeaderBoardForm)
+            if (selectedButton == (int)EnumUIForm.UILeaderBoardForm)
             {
                 index = 3;
             }
+
+            if(selectedButton == (int)EnumUIForm.UIpProfileForm)
+            {
+                index = 4;
+            }
+
+
             foreach (var buttonImage in buttonImages)
             {
                 buttonImage.color = (buttonImage == buttonImages[index].GetComponent<RawImage>()) ? selectedColor : deselectedColor;

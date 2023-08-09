@@ -52,7 +52,10 @@ namespace ETLG
         {
             base.OnOpen(userData);
             refresh = true;
-
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UITipForm));
+            }
         }
         
         public void showContent()
