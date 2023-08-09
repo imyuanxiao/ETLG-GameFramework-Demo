@@ -823,6 +823,11 @@ namespace ETLG.Data
             {
                 int skillId = playerSkill.Key;
 
+                if(playerSkill.Value <= 0)
+                {
+                    continue;
+                }
+
                 int[] costs = dataSkill.GetSkillData(skillId).GetAllLevelsCosts(playerSkill.Value);
 
                 for (int i = 0; i < costs.Length; i += 2)
