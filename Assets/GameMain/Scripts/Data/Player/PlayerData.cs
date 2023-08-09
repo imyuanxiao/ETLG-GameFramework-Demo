@@ -816,6 +816,7 @@ namespace ETLG.Data
             //if unlock all skills
             if(GetUnlockedSkillsNum() == dataSkill.skillCount)
             {
+                Debug.Log("GetUnlockedSkillsNum: " + GetUnlockedSkillsNum());
                 GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4009, 1));
             }
             //if all skills are max level

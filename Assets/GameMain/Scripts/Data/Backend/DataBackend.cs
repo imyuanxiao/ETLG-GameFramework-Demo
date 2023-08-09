@@ -14,16 +14,16 @@ namespace ETLG.Data
         public string responseData;
         public string avatorId;
         //排行榜
-        public string leaderboard_url = "http://localhost:9527/profile/rank";
+        public string leaderboard_url = "http://16.170.243.113:9527/profile/rank";
         //登录注册
-        public string Login_url = "http://localhost:9527/auth/login";
-        public string Register_url = "http://localhost:9527/auth/register";
-        public string currentUser_url = "http://localhost:9527/auth/currentUser";
-        public string saveDownload_url = "http://localhost:9527/profile/saveDownload";
-        public string saveUpload_url = "http://localhost:9527/profile/saveUpload";
-        public string getProfileById_url = "http://localhost:9527/profile/user/";
-        public string profileUpdate_url = "http://localhost:9527/profile/update";
-        public string profilePassword_url = "http://localhost:9527/profile/password";
+        public string Login_url = "http://16.170.243.113:9527/auth/login";
+        public string Register_url = "http://16.170.243.113:9527/auth/register";
+        public string currentUser_url = "http://16.170.243.113:9527/auth/currentUser";
+        public string saveDownload_url = "http://16.170.243.113:9527/profile/saveDownload";
+        public string saveUpload_url = "http://16.170.243.113:9527/profile/saveUpload";
+        public string getProfileById_url = "http://16.170.243.113:9527/profile/user/";
+        public string profileUpdate_url = "http://16.170.243.113:9527/profile/update";
+        public string profilePassword_url = "http://16.170.243.113:9527/profile/password";
         //Authorization token
         public string authorization;
         //用于回调函数
