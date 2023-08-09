@@ -474,17 +474,8 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-                            uploadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
-                            SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
-                            // Convert the data class properties into a Dictionary<string, int>
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>
-                       {
-                        { "playerScore", data.playerScore },
-                        { "achievementScore", data.achievementScore },
-                        { "learningProgress", data.learningProgress },
-                        { "BossDefeatTime",data.BossDefeatTime}
-                         };
-                            GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = uploadJsonStrDic;
+                           
+                            GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
                         else
