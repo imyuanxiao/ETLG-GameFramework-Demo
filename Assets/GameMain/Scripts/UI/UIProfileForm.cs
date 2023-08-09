@@ -178,7 +178,7 @@ namespace ETLG
             reminder.text = null;
 
             
-            if (!GameEntry.Data.GetData<DataBackend>().currentUser.avatar.Equals( "1"))
+            if (int.Parse( GameEntry.Data.GetData<DataBackend>().currentUser.avatar)>=1000)
             {
                 playerAvatarId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
             }
