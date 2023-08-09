@@ -97,13 +97,13 @@ namespace ETLG
                 XMLPath = AssetUtility.GetQuizXML(npcData.Id.ToString());
                 UIQuizManager = new UIQuizManager(XMLPath, dataPlayer.GetPlayerData().getChapterFinish(npcData.Id));
                 dataPlayer.GetPlayerData().setUIQuizManagerById(npcData.Id, UIQuizManager);
+                int[] newIntArray = { 0, 0 };
+                dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id] = newIntArray;
             }
             else
             {
                 UIQuizManager = tempUIQuizManager;
             }
-            int[] newIntArray = { 0, 0 };
-            dataPlayer.GetPlayerData().QuizesSaveData[npcData.Id] = newIntArray;
         }
 
         private void ModifyPositionX(float newX)

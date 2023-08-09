@@ -1269,7 +1269,7 @@ namespace ETLG.Data
             {
                 QuizesSaveData[NPCId][0]++;
                 getCorrectWrongQuiz();
-                updateAchievement_CorrecNumber();
+                updateAchievement_CorrectNumber();
             }
             else
             {
@@ -1303,18 +1303,16 @@ namespace ETLG.Data
             }
         }
 
-        public void updateAchievement_CorrecNumber()
+        public void updateAchievement_CorrectNumber()
         {
             int achievementId = Constant.Type.ACHV_CORRECTQUIZ;
             //0 correct 1 wrong
             int[] counts = dataAchievement.GetDataById(achievementId).Count;
             foreach (int count in counts)
             {
-                Debug.Log(count);
-                Debug.Log(count + totalQuizResults[0] >= count);
-
                 if (totalQuizResults[0] >= count && !isAchievementAchieved(achievementId, totalQuizResults[0]))
                 {
+                    Debug.Log("count"+count+"correct"+ totalQuizResults[0]);
                     //addAchievementLearn(achievementId, count);
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
@@ -1328,7 +1326,6 @@ namespace ETLG.Data
             int[] counts = dataAchievement.GetDataById(achievementId).Count;
             foreach (int count in counts)
             {
-                Debug.Log(count);
                 if (totalQuizResults[1] >= count && !isAchievementAchieved(achievementId, totalQuizResults[1]))
                 {
                     //addAchievementLearn(achievementId,count);
