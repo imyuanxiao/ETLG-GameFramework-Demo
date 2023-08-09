@@ -233,6 +233,31 @@ namespace ETLG.Data
                     break;
             }
 
+            //update achievements
+            if(playerCalculatedSpaceshipData.Durability == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4002, 500));
+            }
+            if (playerCalculatedSpaceshipData.Shields == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4003, 500));
+            }
+            if (playerCalculatedSpaceshipData.Firepower == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4004, 500));
+            }
+            if (playerCalculatedSpaceshipData.Energy == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4001, 500));
+            }
+            if (playerCalculatedSpaceshipData.Agility == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4005, 500));
+            }
+            if (playerCalculatedSpaceshipData.FireRate == Constant.Type.ATTR_MAX_VALUE)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4006, 500));
+            }
         }
 
         public float GetSpaceshipScore()
@@ -786,7 +811,18 @@ namespace ETLG.Data
 
             //dataSkill.lockCurrentSkillID = false;
             GameEntry.Event.Fire(this, SkillUpgradedEventArgs.Create());
-
+            
+            //update skill achievement
+            //if unlock all skills
+            if(GetUnlockedSkillsNum() == dataSkill.skillCount)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4009, 1));
+            }
+            //if all skills are max level
+            if(GetUnlockedSkillsNum() == dataSkill.skillCount && GetUnlockedLevelsNum() == dataSkill.levelCount)
+            {
+                GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(4008, 1));
+            }
         }
 
         private void UpdateAttributes(int[] AttrIDs, int Type)
@@ -986,10 +1022,20 @@ namespace ETLG.Data
         {
             return playerAchievement.ContainsKey(id) ? playerAchievement[id] : 0;
         }
-        public bool isAchievementAchieved(int count)
+        public bool isAchievementShouldAchieved(int id,int count)
         {
-            return playerAchievement.ContainsKey(dataAchievement.cuurrentPopUpId) &&
-       dataAchievement.GetNextLevel(dataAchievement.cuurrentPopUpId, count) - 1 == playerAchievement[dataAchievement.cuurrentPopUpId];
+            AchievementData achievementData = dataAchievement.GetDataById(id);
+            if(!playerAchievement.ContainsKey(id))
+            {
+                if(achievementData.Count[0]<=count)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return !isAchievementAchieved(id, count);
+
+
         }
         public bool isAchievementAchieved(int id, int count)
         {
