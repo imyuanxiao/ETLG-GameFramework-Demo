@@ -1382,6 +1382,12 @@ namespace ETLG.Data
             }
         }
 
+        public float getTotalProgress()
+        {
+            float totalProgress = getTotalPassChapterQuiz() / (float)ChaptersSaveData.Count;
+            return totalProgress;
+        }
+
         //private void addAchievementLearn(int achievementId, int standardCount)
         //{
         //    if (!AchiLearnRecord.ContainsKey(achievementId))
