@@ -1,0 +1,71 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Blockchain overview</statement>
+            <statement>Blockchain technology is an immutable shared ledger that facilitates the process of recording transactions and tracking assets in a business network. You can track and trade anything of value. Blockchain is cost-effective and secure.  </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Business case for blockchain</statement>
+            <statement image = "2">Blockchain resolves transaction systems limitations, including the following:
+1. Cash is useful only in local transactions.
+2. Third-party validation increases transaction overhead.
+3. Fraud, cyber attacks, and mistakes add to the cost and complexity of doing business, and expose network participants to risk if a system is compromised.
+4. People without access to banks require parallel payment systems. </statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+        <npc>
+            <statement font="1" isBold="true">Key features of a blockchain</statement>
+            <statement image = "3-1">Distributed ledger technology:
+All network participants have access to the distributed ledger and its immutable record of transactions.
+With this shared ledger, transactions are recorded only once, eliminating the duplication of effort that is typical of traditional business networks.</statement>
+            <statement image = "3-2">Records are immutable:
+No participant can change or tamper with a transaction after it’s been recorded to the shared ledger. If a transaction record includes an error, a new transaction must be added to reverse the error, and both transactions are then visible.</statement>
+            <statement image = "3-3">Smart contracts:
+To speed transactions, a set of rules – called a smart contract – is stored on the blockchain and executed automatically. </statement>
+        </npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="1" isBold="true">Types of blockchain networks</statement>
+            <statement>There are four types of blockchain network - Public, private, permissioned, or consortium.</statement>
+            <statement image = "4-1">Public blockchain networks:
+A public blockchain is one that anyone can join and participate in, such as Bitcoin.
+Drawbacks might include substantial computational power required, little or no privacy for transactions, and weak security. These are important considerations for enterprise use cases of blockchain.</statement>
+            <statement image = "4-2">Private blockchain networks:
+A private blockchain network, similar to a public blockchain network, is a decentralized peer-to-peer network, with the significant difference that one organization governs the network. That organization controls who is allowed to participate in the network, execute a consensus protocol and maintain the shared ledger. Depending on the use case, this can significantly boost trust and confidence between participants. A private blockchain can be run behind a corporate firewall and hosted on-premises.</statement>
+            <statement image = "4-3">Permissioned blockchain networks:
+Businesses configuring a private blockchain will generally configure a permissioned blockchain network. It is important to note that public blockchain networks can also be a permissioned. This places restrictions on who is allowed to participate in the network, and in which transactions. Participants need to obtain an invitation or permission to join.</statement>
+            <statement image = "4-4">Consortium blockchains:
+Multiple organizations share the responsibilities of maintaining a blockchain. These pre-selected organizations determine who may submit transactions or access the data. A consortium blockchain is ideal for business when all participants need to be permissioned and have a shared responsibility for the blockchain.</statement>
+        </npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> <!--2 VIDEOS HERE LACK-->
+        <npc>
+            <statement></statement>
+            <statement>One of the concepts in the previous video is that a blockchain network is a secure digital ledger system. The following video elaborates on the shared ledger.</statement>
+        </npc>
+        <player>
+           <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

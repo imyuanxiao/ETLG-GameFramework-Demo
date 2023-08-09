@@ -1,0 +1,28 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Blockchain component deployment</statement>
+            <statement font="1" isBold="true">The following diagram shows how the IBM Blockchain Platform components are deployed to the Kubernetes cluster, assuming Hyperledger Fabric v2.x images are used by the peer. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> <!--1 Video Lack Here-->
+        <npc>
+            <statement image = "2"/>
+            <statement>Pod:
+Each Fabric component(Certificate Authority, Peer, Ordering Service, and Smart Contract) is deployed into an individual pod.
+The new pod is created in a Worker node in your cluster.</statement>
+            <statement>App containers:
+Containers are created inside the pods for each node that is deployed.</statement>
+            <statement>Persistent storage:
+Storage for each node is dynamically provisioned from the Kubernetes cluster default storage class every time a node is deployed.</statement>
+        </npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

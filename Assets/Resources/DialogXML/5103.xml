@@ -1,0 +1,53 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">What’s the difference between blockchain and Bitcoin?</statement>
+            <statement>Bitcoin is an unregulated, digital currency. Bitcoin uses blockchain technology as its transaction ledger.</statement>
+            <statement font="1" isBold="true">How are the IBM Blockchain Platform and Hyperledger related?</statement>
+            <statement>The IBM Blockchain Platform is powered by Hyperledger technology.
+This blockchain solution can help turn any developer into a blockchain developer.</statement>
+            <statement font="1" isBold="true">Can I deploy on any cloud I want?</statement>
+            <statement>IBM Blockchain Platform Software is optimized to deploy on Red Hat® OpenShift®, Red Hat’s state-of-the-art enterprise Kubernetes platform.
+This means you have more flexibility when choosing where to deploy your blockchain network components, whether on-premises, in public clouds, or in hybrid cloud architectures.</statement>
+            <statement font="1" isBold="true">I need more detailed information. Where is it?</statement>
+            <statement>For a more detailed look at how a blockchain network operates and how you can use it, read Introduction to distributed ledgers.
+Explore the capabilities of the IBM Blockchain Platform, the only fully integrated enterprise-ready blockchain platform designed to help you accelerate the development, governance and operation of a multi-institution business network.
+Get the details on Hyperledger Fabric and discover what’s unique about it, why it matters to business networks and how to start using it.
+The quick-start guide for developers explains how to build a kick-starter blockchain network and start coding with the IBM Blockchain Platform Starter Plan.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="2" isBold="true">Blockchain solutions</statement>
+            <statement font="1" isBold="true">IBM Blockchain solutions</statement>
+            <statement>Technical innovators turn to the IBM Blockchain Platform, the leading Hyperledger Fabric platform, to build, operate, govern and grow blockchain solutions across any computing environment through Red Hat® OpenShift®.</statement>
+            <statement font="1" isBold="true">Blockchain consulting</statement>
+            <statement>As the top-ranked blockchain services provider, IBM Blockchain Services has the expertise to help you build powerful solutions, based on the best technology. More than 1,600 blockchain experts use insights from 100+ live networks to help you build and grow.</statement>
+            <statement font="1" isBold="true">All IBM Blockchain solutions</statement>
+            <statement>Embracing an IBM Blockchain solution is the fastest way to blockchain success. IBM has convened networks that make onboarding easy as you join others in transforming the food supply, supply chains, trade finance, financial services, insurance, and media and advertising.</statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+        <npc>
+            <statement font="2" isBold="true">Blockchain resources</statement>
+            <statement font="1" isBold="true">Blockchain explained through art</statement>
+            <statement image = "3-1">We asked five artists — all new to blockchain — to create art about its key benefits. See what they made, then learn more from IBM clients and business partners in Blockparty, our new webinar series.</statement>
+            <statement font="1" isBold="true">Use cases</statement>
+            <statement image = "3-2">Be inspired by how innovators are transforming their businesses using the IBM Blockchain Platform. You can join an existing blockchain network or work with us to create your own.</statement>
+            <statement font="1" isBold="true">Client success stories</statement>
+            <statement image = "3-3">Learn how our clients are revolutionizing their organizations by using IBM Blockchain to gain tangible business outcomes.</statement>
+        </npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

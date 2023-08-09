@@ -1,0 +1,97 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">
+"In the future Al will be diffused into every aspect of the economy"
+Nils J. Nilsson
+Founding researcher, Artiticial Intelligence & Computer Science, Stantord University.</statement>
+            <statement image = "1"/>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement image="2">Mainstream press confirms AI as a key part of the disruptive forces in business today.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+            <statement font="1" isBold="true">We are now at the brink of the 4th Industrial Revolution.</statement>
+			<statement image = "3">
+SiX Key A rechnologies of the biggest facets of this revolution.
+It will affect almost all sectors, as did previous Industrial Revolutions.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement>Common areas where AI provides business value</statement>
+            <statement image = "4"/>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement image = "5"/>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+
+	<node id="6">
+        <npc>
+            <statement image = "6"/>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">Bringing it all together.
+AI can tackle city-wide issues.</statement>
+            <statement>
+• Installing new real-time traffic speed detectors
+• Identifying bottlenecks and continuously tweaking the signal timing, making each intersection efficient and increasing the number of cars throughput</statement>
+            <statement image = "7"/>
+        </npc>
+        <player>
+            <response nextnode="8" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="8">
+        <npc>
+            <statement image = "8"/>
+        </npc>
+        <player>
+            <response nextnode="9" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="9">
+        <npc>
+            <statement font="1" isBold="true">Lets understand in detail these technologies</statement>
+            <statement image = "9"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+
+</dialogue>

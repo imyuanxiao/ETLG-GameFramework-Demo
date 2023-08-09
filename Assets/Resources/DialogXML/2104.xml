@@ -1,0 +1,104 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">Al systems are underpinned by advanced technologies</statement>
+            <statement image = "1">Cognitive/AI Technologies</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement image="2">Difference between AI, Machine Learning and Deep Learning</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement image = "3">Artificial Intelligence: Definition</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement font="1" isBold="true">Machine Learning</statement>
+            <statement>
+Machine Learning algorithms iteratively learn from data, thus allowing computers to find hidden insights without being explicitly programmed where to look.
+Machine Learning is essentially teaching the computer to solve problems.</statement>
+            <statement image = "4"/>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement font="1" isBold="true">1. Supervised Learning</statement>
+            <statement>
+Supervised learning trains on large volumes of historical data and then builds general rules to be applied to future problems.
+Example: Voter details labeled with their votes (label) in the previous years.</statement>
+            <statement image = "5"/>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+
+	<node id="6">
+        <npc>
+            <statement font="1" isBold="true">2. Unsupervised Learning</statement>
+            <statement>
+While supervised learning relies on labeled or structured data (think rows in a database), unsupervised learning trains on unlabeled or unstructured data (the text of a book).
+These algorithms explore the data and try to find structure.</statement>
+            <statement image = "6"/>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">3. Reinforcement Learning</statement>
+            <statement>
+It is not given a specific goal, but rather learns from trial and error.
+Reinforcement learning rewards the algorithm when it performs the correct action (behavior), and assigns a penalty when incorrect.</statement>
+            <statement image = "7"/>
+        </npc>
+        <player>
+            <response nextnode="8" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="8">
+        <npc>
+            <statement image = "8"/>
+        </npc>
+        <player>
+            <response nextnode="9" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="9">
+        <npc>
+            <statement font="1" isBold="true">Transfer Learning</statement>
+            <statement>
+Transfer learning is the method of starting with a pre-trained model and training it for a new - related - problem domain.
+The pre-trained network serves as transferred knowledge to be applied in another domain.</statement>
+            <statement image = "9"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+
+</dialogue>

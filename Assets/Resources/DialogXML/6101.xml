@@ -1,9 +1,14 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true" color="FCFF1A">“The cloud” is not a cloud!</statement>
-			<statement font="1" >Learn about the IBM Cloud in this video.</statement>
-			<statement font="1" isBold="true" color="59E1FE">THE IBM CLOUD IS THE CLOUD FOR ENTERPRISE. YOURS.</statement>
+			<statement font="3" isBold="true">Internet of Things (IoT)</statement>
+            <statement font="2" isBold="true">What is IoT?</statement>
+            <statement font="2" isBold="true">The Internet of Things refers to the growing range of connected devices that send data across the Internet. </statement>
+            <statement font="1" isBold="true">What is a "thing"?</statement>
+            <statement image = "1">A “thing” is any object with embedded electronics that can transfer data over a network — without any human interaction.
+Examples are:
+Check the current temperature and humidity using sensors without the need to any external connectivity.
+Turn on the radio automatically in your car while you are driving.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
@@ -11,22 +16,60 @@
 	</node>
 
 	<node id="2">
-		<npc>
-			<statement isBold="true">As you learned in this video, “the cloud” isn’t a fog of water droplets; it’s a vast collection of data. Schools, businesses, healthcare facilities, and even governments are moving their information to the cloud to safely store it and make it accessible online.</statement> 
-		</npc>
+        <npc>
+            <statement font="2" isBold="true">Analysts project by 2025, data from connected devices will yield insights driving potential economic value of as much as US$ 11 trillion*.</statement>
+            <statement>* What's new with the Internet of Things? McKinsey & Company, May 2017.</statement>
+            <statement font="2" isBold="true">What does IoT mean for business?</statement>
+            <statement>As almost everything — from cars to crops to conveyor belts — becomes connected, IoT is changing the way businesses operate. By combining IoT data with cognitive computing, business can extract valuable insights to improve virtually every aspect of their operations and enable innovative, new business models.</statement>
+            <statement image = "2">For instance, in a connected building, data can be used to save energy and for predictive maintenance. Sensors on the production line can increase efficiency. In-store devices can help retailers improve the customer experience. And medical data from wearable devices can be used to save lives.</statement>
+        </npc>
 		<player>
 			<response nextnode="3" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="3">
-		<npc>
-			<statement font="2" isBold="true">But here’s a question for you to think about ...</statement> 
-			<statement>But here’s a question for you to think about ...</statement>
-			<statement>Keep your best guess in mind as you continue reading. You’ll find the answer a couple of topics from now, and it might surprise you!</statement>
-		</npc>
+	<node id="3"> <!--1 Video Lack Here-->
+        <npc>
+            <statement font="2" isBold="true">How does it work?</statement>
+            <statement></statement>
+        </npc>
 		<player>
-			<response nextnode="end" isShown="false">Thank you.</response>
+			<response nextnode="4" isShown="false">Continue</response>
 		</player>
 	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="2" isBold="true">How can I make my environment IoT-driven?</statement>
+            <statement>The first step is to define your IoT industry by examining your infrastructure and service model.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Buildings</statement>
+            <statement image = "4-1">IoT is restructuring every aspect of a building, from construction to habitation to management. Use IoT data to make informed decisions to optimize the experience of occupants, staff and management. With asset optimization, better facilities management and occupant safety, smarter buildings can streamline business processes and expand profits.
+1. Commercial buildings - Optimize your maintenance processes, reduce your energy footprint and better manage your building space, providing an improved tenant experience.
+2. Industrial facilities - Upgrade your plant performance with real-time insights, predict equipment failure and improve production quality and efficiency, while keeping your workers safe.
+3. Hotels - Make the most of your hotels, now and in the future. From capital projects and lease management to space and energy optimization, let IoT-enhanced solutions help you succeed. </statement>
+            <statement/>
+            <statement font="1" isBold="true">Factories</statement>
+            <statement image = "4-2">Prevent building equipment downtime, optimize space, reduce costs, and improve sustainability. Expand profitability with a centralized platform for corporate real estate transactions and capital projects.
+Building information modeling (BIM), green buildings, and intelligent prefabrication are radically changing design and construction. Now IoT connectivity needs to be planned for, from the onset.
+Transform your occupants' experience by delivering new features and services. These include AI assistants, weather alerts, and location-specific safety insights.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Stores</statement>
+            <statement image = "4-3">Optimize total cost of ownership, reduce costs, and improve safety and sustainability. Expand profitability with a centralized platform for corporate real estate transactions and capital projects.
+Learn more from your building by leveraging a broad range of sensor data to optimize building operations, improve energy usage, and lower costs.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Vehicles</statement>
+            <statement image = "4-4">Create vehicles that engage with people, infrastructure, and surrounding environments. Use AI and real-time analytics to gain insights from your IoT data — and bring innovative solutions to market faster, reducing maintenance and support costs, while keeping your investment aligned to market opportunities.
+1. Automobiles - Deliver new service models to your customers and transform their experience by developing, manufacturing, and maintaining connected cars.
+2. Aircraft - Achieve a competitive edge with systems development, and optimize fleet operations for safer, more connected planes and superior in-flight experiences.
+3. Railcars- Take performance and efficiency to another level by turning trains into intelligent communications hubs for high-speed rail systems that connect and engage.
+Watson IoT™ solutions for vehicles help you address complex engineering and lifecycle requirements, analyze onboard vehicle data in real-time, and integrate with other data sources.
+Improve maintenance, fleet compliance, and provide new contextual services, creating compelling in-vehicle experiences for operators and passengers — your customers.</statement>
+            <statement/>
+        </npc>
+        <player>
+           <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
 </dialogue>

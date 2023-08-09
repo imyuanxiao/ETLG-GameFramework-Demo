@@ -1,0 +1,70 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">History and Evolution of Al</statement>
+			<statement image="1">From 1906~1950</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement image="2">From 1956~1969</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement image = "3">From 1974~1992</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement image = "4">From 1987~1997</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+            <statement image = "5">From 2006~2011</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+            <statement image = "6">From 2015~2018</statement>
+        </npc>
+		<player>
+			<response nextnode="7" isShown = "false">Continue</response>
+		</player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement>Watson beyond Jeopardy!</statement>
+            <statement image = "7"/>
+            <statement>IBM WATSON
+Watson is augmented intelligence:
+helping people and machine work together to create knowledge from data thatenhances human expertise.</statement>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+
+</dialogue>

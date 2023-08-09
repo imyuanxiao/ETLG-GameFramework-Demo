@@ -1,0 +1,45 @@
+<dialogue>
+	<node id="1"> <!-- 6 Videos Here Lack-->
+		<npc>
+			<statement font="2" isBold="true">Blockchain use cases and applications</statement>
+            <statement>BTracing fresh seafood from the moment it’s caught:
+IBM Food Trust is helping Raw Seafoods increase trust across the food supply chain by tracing every catch right from the water — all the way to supermarkets and restaurants.</statement>
+            <statement>Improving cryptocurrency security in financial services:
+INBLOCK issues Metacoin cryptocurrency, which is based on Hyperledger Fabric, to help make digital asset transactions faster, more convenient and safer.</statement>
+            <statement>Transforming healthcare outcomes with blockchain:
+The IBM Blockchain Platform can change the way your ecosystem ensures trust, data provenance and efficiency to improve patient care and profitability.</statement>
+            <statement>Fresh thinking in blockchain, AI and IoT for supply chain:
+Learn how Golden State Foods is using the immutability of blockchain to trace goods through its supply chain and help ensure food quality.</statement>
+            <statement>Fueling innovation in the oil and gas industry:
+Vertrax and Chateau Software launched the first multicloud blockchain solution built on IBM Blockchain Platform to help prevent supply chain disruptions in bulk oil and gas distribution.</statement>
+            <statement>Increasing trust in retailer-supplier relationships:
+The Home Depot is using IBM Blockchain to gain shared and trusted information on shipped and received goods, reducing vendor disputes and accelerating dispute resolution.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Blockchain for industries</statement>
+            <statement>Industry leaders are using IBM Blockchain to remove friction, build trust and unlock new value. Select your segment to see how.</statement>
+            <statement>
+1. Supply chain
+2. Healthcare
+3. Government
+4. Retail
+5. Media and advertising
+6. Oil and gas
+7. Telecommunications
+8. Manufacturing
+9. Insurance
+10. Financial services
+11. Travel and transportation</statement>
+        </npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

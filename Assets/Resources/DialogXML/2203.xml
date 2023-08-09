@@ -1,0 +1,113 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">What Is a Virtual Agent or Chatbot?</statement>
+            <statement image = "1">A chatbot is a way to expose a business's service or data via a natural language interface.
+• A virtual customer support agent can reduce headcount and exponentially scale real-time customer support capabilities.
+• A conversational commerce chatbot gives business a whole new channel to engage with customers via messaging platforms.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement font="1" isBold="true">Factors in the Rise of Chatbots</statement>
+            <statement image = "2"/>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+            <statement font="1" isBold="true">How to Build a Chatbot</statement>
+			<statement image = "3"/>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="1" isBold="true">Chatbot: Intent
+    An intent is the purpose of a user's input</statement>
+            <statement>This can be a question about your business hours or a complaint about the registration process.
+• To train your chatbot, first determine the action you'd like to map to this intent-for example, provide information on business hours.
+• Then supply the framework with examples of user inputs that would require this action.</statement>
+            <statement image = "4"/>
+        </npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement font="1" isBold="true">Chatbot: Entities</statement>
+            <statement>If intents are the verbs for a chatbot to act on, then entities are the nouns.
+If a user asks, "What are the hours for the Austin branch?"
+Provide business hours would be the intent and Austin would be the entity.</statement>
+            <statement image = "5"/>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+
+	<node id="6">
+        <npc>
+            <statement font="1" isBold="true">Chatbot: Dialog</statement>
+            <statement>Dialog is the conversation flow
+Together, it is the combined structure ot all your possible conversations.
+Most chatbot platforms provide a UI to help you visualize the process.</statement>
+            <statement image = "6"/>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">Challenges of Building a Successful Chatbot</statement>
+            <statement image = "7">Define the project scope correctly
+• Broad enough for the chatbot to be helpful
+• Narrow enough so you're not wasting time building artificial general intelligence.
+This means capturing as many user requests as possible, yet still being able to reconcile the nuanced differences between each one.</statement>
+        </npc>
+        <player>
+            <response nextnode="8" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="8">
+        <npc>
+            <statement font="1" isBold="true">Best Practices</statement>
+            <statement image = "8">• Tip #1: Introduce Your Chatbot to First-Time Users
+• Tip #2:Add Variations to Your Responses
+• Tip #3: Make a Main Menu That's Accessible Anywhere
+• Tip #4:Have Context Awareness
+• Tip #5:Be Able to Fix Incorrect Inputs
+• Tip #6: Handle the "I Do Not Understand" Case
+• Tip #7: Be Careful About Creating a Personality</statement>
+        </npc>
+        <player>
+            <response nextnode="9" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="9">
+        <npc>
+            <statement font="1" isBold="true">Industry Case Studies</statement>
+            <statement image = "9"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

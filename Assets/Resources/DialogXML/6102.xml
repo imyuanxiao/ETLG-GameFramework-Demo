@@ -1,9 +1,12 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true" color="FCFF1A">“The cloud” is not a cloud!</statement>
-			<statement font="1" >Learn about the IBM Cloud in this video.</statement>
-			<statement font="1" isBold="true" color="59E1FE">THE IBM CLOUD IS THE CLOUD FOR ENTERPRISE. YOURS.</statement>
+			<statement font="3" isBold="true">Watson IoT Platform Key Features and Capabilities</statement>
+            <statement font="1" isBold="true">About Watson IoT Platform</statement>
+            <statement image = "1">Simply register and connect a sensor, a gateway, or another device to the IBM Watson IoT Platform and start sending data securely to the cloud using the open, lightweight Message Queuing Telemetry Transport (MQTT) messaging protocol.
+When authenticating to the IBM Watson IoT Platform HTTP Messaging API, devices use Basic Authentication. The API sends device events to the IBM Watson IoT Platform.
+Set up and manage your devices using an online dashboard or our secure APIs, so that apps can access and use live and historical data.
+To find out more about the overall architecture of the Watson IoT Platform offering, see the Product architecture topic in the full Watson IoT Platform documentation.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
@@ -11,22 +14,93 @@
 	</node>
 
 	<node id="2">
-		<npc>
-			<statement isBold="true">As you learned in this video, “the cloud” isn’t a fog of water droplets; it’s a vast collection of data. Schools, businesses, healthcare facilities, and even governments are moving their information to the cloud to safely store it and make it accessible online.</statement> 
-		</npc>
+        <npc>
+            <statement font="2" isBold="true">Product Overview</statement>
+            <statement>The IBM Watson IoT Platform solution provides a set of IBM Cloud services as a single IBM-managed software as a service (SaaS) offering that enables the collection and analysis of relevant product performance and usage data for IoT-enabled assets. </statement>
+        </npc>
 		<player>
 			<response nextnode="3" isShown="false">Continue</response>
 		</player>
 	</node>
 
 	<node id="3">
-		<npc>
-			<statement font="2" isBold="true">But here’s a question for you to think about ...</statement> 
-			<statement>But here’s a question for you to think about ...</statement>
-			<statement>Keep your best guess in mind as you continue reading. You’ll find the answer a couple of topics from now, and it might surprise you!</statement>
-		</npc>
+        <npc>
+            <statement font="2" isBold="true">Solution Features</statement>
+            <statement font="1" isBold="true">Connect</statement>
+            <statement>Use Platform Service to register, connect, and control IoT devices and ingest IoT data in the form of MQTT events from any source. In addition, the Connect feature lets applications and IBM Cloud® services subscribe to those events to process event data. Also included are rest APIs for device registration, management, and more.
+Important: The Platform Service Service Level Agreements pertain to MQTT connectivity only, not to general API connectivity. </statement>
+            <statement font="1" isBold="true">Capture</statement>
+            <statement>Capture IoT data for the short term in the Cloudant NoSQL DB solution, which gives direct access to the last 30 days’ worth of data for your devices. In the same way, use IBM® Event Streams for IBM Cloud for direct access to recent data.</statement>
+            <statement font="1" isBold="true">Monitor</statement>
+            <statement>Get an overview of assets and entities with built-in monitoring dashboards. Use the monitoring dashboards to enable line of business users to monitor the state of IoT entities.</statement>
+            <statement font="1" isBold="true">Analyze</statement>
+            <statement>Use built-in and external tools for data wrangling, summarization, machine learning, and more. Use the Analytics Service add-on to enable line of business users to easily enrich and interact with the raw metrics data coming from IoT entities by using built-in configurable analytics functions.</statement>
+            <statement font="1" isBold="true">Archive</statement>
+            <statement>Scale storage options and data lifecycle management by using the included long-term storage solution, IBM Cloud® Object Storage.</statement>
+            <statement font="1" isBold="true">Manage</statement>
+            <statement>The Watson IoT Platform SaaS solution is managed as a unit, with full status and connection through the Watson IoT Platform dashboard. Access services at the user level with system-level security.
+            </statement><statement font="1" isBold="true">Monitor Usage</statement>
+            <statement>Use the Watson IoT Platform dashboard to monitor data consumption and usage for each included service in the account to correctly size solution needs. Work with the IBM IoT Solutions DevOps team to tailor the solution to suit organizational needs.</statement>
+        </npc>
 		<player>
-			<response nextnode="end" isShown="false">Thank you.</response>
+			<response nextnode="4" isShown="false">Continue</response>
 		</player>
 	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="2" isBold="true">Solution Plans</statement>
+            <statement>Depending on the organization's needs, solutions can subscribe to the following entity groups.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Sensor Entities</statement>
+            <statement image = "4-1">The sensor type device typically has a very low data frequency, with just a few data points per hour or day. Examples include thermostats, badge readers, and parking meters.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Consumer Entities</statement>
+            <statement image = "4-2">The consumer class electronics and appliances generally cost less and have relatively low data flow and storage requirements per unit. The number of units at this end of the scale tend to be high. Examples include consumer electronics and appliances.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Enterprise Entities</statement>
+            <statement image = "4-3">With enterprise electronics and equipment, we are now entering the field of medium cost, data flow, and storage requirements per unit. Examples include office products and computers, medical devices, network equipment, and drones.</statement>
+            <statement/>
+            <statement font="1" isBold="true">Industrial Entities</statement>
+            <statement image = "4-4">At the industrial end of the scale, the cost is now very high. Here, the number of units is small, but the data flow and storage requirements per unit can be very high. Examples include industrial products and equipment, trains and ships, and farming gear.</statement>
+            <statement/>
+        </npc>
+        <player>
+            <response nextnode="5" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="5">
+        <npc>
+            <statement font="2" isBold="true">Non-Production Environments</statement>
+            <statement>To test how Watson IoT Platform fits into a given IoT environment, each solution plan can run as a non-production environment.
+A non-production environment is not intended for production-level data traffic and has the following limitations:</statement>
+            <statement image = "5"></statement>
+            <statement>A non-production environment includes the same services as an Watson IoT Platform production environment.</statement>
+            <statement font="1" isBold="true">IMPORTANT:</statement>
+            <statement>A non-production environment plan cannot be converted to a regular plan. To go from a non-production to a production environment, you must set up a new solution plan.</statement>
+            <statement font="2" isBold="true">Watson IoT Platform Service Plans</statement>
+            <statement font="1" isBold="true">IMPORTANT:</statement>
+            <statement>This IBM Cloud documentation collection pertains to the IBM Watson IoT Platform Lite pricing plan and includes basic getting-started information, API references, and general troubleshooting information.
+For the full Watson IoT Platform feature documentation, see the Watson IoT Platform product documentation on IBM Documentation.
+Several IBM Watson IoT Platform service plans are available to help your organization meet its IoT needs. With a free Lite plan, you can try out Watson IoT Platform with a limited number of devices and transactions. Different paid plan options are available to extend service capacity and features.</statement>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    
+    <node id="6">
+        <npc>
+            <statement font="2" isBold="true">Plan Descriptions</statement>
+            <statement image = "6"></statement>
+            <statement font="2" isBold="true">How the Watson IoT Platform Works with IBM Cloud</statement>
+            <statement>Instances of the Watson IoT Platform can be created in the IBM Cloud dashboard. The Watson IoT Platform can be integrated with other IBM Cloud services and accessed by using the IBM Cloud dashboard; however, Watson IoT Platform does not run on IBM Cloud hardware, which allows for continual data collection by your Watson IoT Platform service.
+When writing an application on the IBM Cloud using Watson IoT Platform, you can register each device definition individually as a physical device so users can easily access devices.</statement>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
 </dialogue>

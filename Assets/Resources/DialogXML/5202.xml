@@ -1,0 +1,45 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Blockchain use case - IBM Food Trust™</statement>
+            <statement>IBM Food Trust™ is a permissioned blockchain network.  It connects food industry participants throughout the food supply chain through a permissioned, permanent, and shared record of food system data.
+IBM Food Trust™ applications provide authorized users with product data, such as location, end-to-end route, chain of custody, temperature and remaining shelf-life. By sharing food data on a common blockchain network, IBM Food Trust business partners collaborate to solve problems with greater speed and cost-effectiveness compared to persistent manual, paper-based methods. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Consider a blueberry grower.</statement>
+            <statement image = "2">In the field, farm personnel enter data about the weight of the blueberries gathered, the fields from which the blueberries were gathered, and the conditions at the time of harvest.
+Using this information, the distribution center can prioritize shipments and minimize waste while management can understand and implement supply chain efficiencies such as sourcing and locating tainted produce, monitoring the freshness of perishable foods, and providing food origin and authenticity data.</statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+        <npc>
+            <statement font="1" isBold="true">Sample data authorized users can access</statement>
+            <statement image = "3">IBM Food Trust™ consumer apps give consumers access to information about the ingredients in their food. For example, consumers with the app can scan the QC code on participating produces and see detailed information about the blueberries provided by the blueberry grower in their pancake mix.</statement>
+        </npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> <!--1 Video Lack Here-->
+        <npc>
+            <statement font="1" isBold="true">What consumer app users see</statement>
+            <statement image = "4">There are four types of blockchain network - Public, private, permissioned, or consortium.</statement>
+            <statement/>
+        </npc>
+        <player>
+           <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>
