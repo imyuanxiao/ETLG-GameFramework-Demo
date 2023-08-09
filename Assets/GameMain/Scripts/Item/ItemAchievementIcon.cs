@@ -72,6 +72,25 @@ namespace ETLG
                 case Constant.Type.ACHV_LEARN:
                     //player data
                     this.progress.text = "0";
+                    switch(conditionId)
+                    {
+                        //正确作答题目
+                        case 1001:
+                            this.progress.text = "0";
+                            break;
+                        //错误作答题目
+                        case 1002:
+                            this.progress.text = "0";
+                            break;
+                        //通过考试数目
+                        case 1003:
+                            this.progress.text = "0";
+                            break;
+                        //完整对话NPC个数
+                        case 1008:
+                            this.progress.text = "0";
+                            break;
+                    }
                     break;
                 case Constant.Type.ACHV_RESOURCE:
                     //money
@@ -126,7 +145,7 @@ namespace ETLG
                     //level
                     if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                     {
-                        this.progress.text = dataPlayer.GetPlayerData().GetPlayerAchievement()[id].ToString();
+                        this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id]+1).ToString();
                     }
                     else
                     {
@@ -135,17 +154,56 @@ namespace ETLG
                     break;
                 case Constant.Type.ACHV_BATTLE:
                     //player data
-                    this.progress.text = "0";
+                    switch(conditionId)
+                    {
+                        case 6001:
+                            this.progress.text = dataPlayer.GetPlayerData().battleVictoryCount.ToString();
+                            break;
+                        default:
+                            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                            {
+                                this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
+                            }
+                            else
+                            {
+                                this.progress.text = "0";
+                            }
+                            break;
+                    }
+                   
                     break;
                 case Constant.Type.ACHV_SPACESHIP:
-                    //level
-                    if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                    //playerdata
+                    switch(conditionId)
                     {
-                        this.progress.text = dataPlayer.GetPlayerData().GetPlayerAchievement()[id].ToString();
-                    }
-                    else
-                    {
-                        this.progress.text = "0";
+                        case 4001:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Energy).ToString();
+                            break;
+                        case 4002:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Durability).ToString();
+                            break;
+                        case 4003:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Shields).ToString();
+                            break;
+                        case 4004:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firepower).ToString();
+                            break;
+                        case 4005:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Agility).ToString();
+                            break;
+                        case 4006:
+                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firerate).ToString();
+                            break;
+                        default:
+                            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                            {
+                                this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
+                            }
+                            else
+                            {
+                                this.progress.text = "0";
+                            }
+                            break;
                     }
                     break;
             }

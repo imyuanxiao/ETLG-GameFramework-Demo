@@ -550,10 +550,7 @@ namespace ETLG
                         }
                         else
                         {
-                            //if it is null , tell player to upload data
-                            GameEntry.Data.GetData<DataAlert>().AlertType = Constant.Type.ERROR_DATA;
-                            GameEntry.Data.GetData<DataAlert>().isFromBackend = true;
-                            GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
+                            GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_PROFILE_FAILED));
                         }
                     }
                     else

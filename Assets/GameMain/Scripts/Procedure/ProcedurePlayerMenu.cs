@@ -21,6 +21,8 @@ namespace ETLG
         private DataSkill dataSkill;
         private DataAchievement dataAchievement;
 
+        private Queue<AchievementPopUpEventArgs> popupQueue = new Queue<AchievementPopUpEventArgs>();
+        private bool isAchievementShowing;
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -310,23 +312,37 @@ namespace ETLG
                 return;
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                dataAchievement.cuurrentPopUpId = ne.achievementId;
                 if (!dataPlayer.GetPlayerData().isAchievementAchieved(ne.count))
                 {
+                    popupQueue.Enqueue(ne);
                     dataPlayer.GetPlayerData().UpdatePlayerAchievementData(ne.achievementId, dataAchievement.GetNextLevel(ne.achievementId, ne.count));
-                    GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
-                     
+                    if (!isAchievementShowing)
+                    {
+                        isAchievementShowing = true;
+                        ne = popupQueue.Dequeue();
+                        dataAchievement.cuurrentPopUpId = ne.achievementId;
+                        GameEntry.UI.OpenUIForm(EnumUIForm.UIAchievementPopUp);
+                    }
                 }
             }
             if (ne.Type == Constant.Type.UI_CLOSE)
             {
-                if (GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
+                if (popupQueue.Count == 0 && GameEntry.UI.HasUIForm(EnumUIForm.UIAchievementPopUp))
                 {
                     GameEntry.UI.GetUIForm(EnumUIForm.UIAchievementPopUp).Close();
+                    isAchievementShowing = false;
                 }
+                if (popupQueue.Count > 0)
+                {
+                    AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
+                    dataAchievement.cuurrentPopUpId = popupArgs.achievementId;
+                    // 更新UI
+                    GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
+                }
+
             }
         }
-            public void OnPlayerZoneUIChange(object sender, GameEventArgs e)
+        public void OnPlayerZoneUIChange(object sender, GameEventArgs e)
         {
             PlayerZoneUIChangeEventArgs ne = (PlayerZoneUIChangeEventArgs)e;
             if (ne == null)

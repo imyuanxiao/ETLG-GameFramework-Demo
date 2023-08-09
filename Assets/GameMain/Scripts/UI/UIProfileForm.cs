@@ -52,6 +52,8 @@ namespace ETLG
  
         public GameObject wholeContainer;
 
+        public GameObject unkownPanel;
+
         public RawImage playerImage;
 
         private float shakeAmount = 5f;
@@ -104,6 +106,8 @@ namespace ETLG
             selectedColor = new Color32(249, 230, 196, 255);
             BackendDataManager.Instance.HandleProfile();
             wholeContainer.SetActive(false);
+            origionalPwd = "******";
+            
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
@@ -112,10 +116,21 @@ namespace ETLG
                 if (fetchedType == Constant.Type.BACK_PROFILE_SUCCESS)
                 {
                     wholeContainer.SetActive(true);
+                    unkownPanel.SetActive(false);
                     ShowContent();
+                }
+                if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
+                {
+                    wholeContainer.SetActive(true);
+                    ShowPlayerInfo();
+                    achievementScore.text = "Unknown";
+                    playerScore.text = "Unknown";
+                    learningPath.text = "Unknown";
+                    unkownPanel.SetActive(true);
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
                 {
+                    origionalName = placeholder_name.text;
                     playerAvatarId = selectedId;
                     avatarChange.SetActive(false);
                     SetPlayerAvatar();
@@ -137,8 +152,9 @@ namespace ETLG
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_PASSWORD_SUCCESS)
                 {
+                    origionalPwd = newPwd.text;
                     pwd.interactable = false;
-                    placeholder_pwd.text = newPwd.text;
+                    placeholder_pwd.text = origionalPwd;
                     placeholder_pwd.fontStyle = FontStyles.Bold;
                     newPasswords.SetActive(false);
                     editButtons.SetActive(true);
@@ -157,7 +173,7 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
             GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
         }
-        private void ShowContent()
+        private void ShowPlayerInfo()
         {
             reminder.text = null;
 
@@ -172,11 +188,9 @@ namespace ETLG
             }
             placeholder_userName.text = GameEntry.Data.GetData<DataBackend>().currentUser.username;
             placeholder_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
-            achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
-            playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+            origionalName = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             originalPosition = reminder.rectTransform.localPosition;
-
+            nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             nickName.interactable = false;
             pwd.interactable = false;
 
@@ -185,7 +199,12 @@ namespace ETLG
             newPasswords.SetActive(false);
             avatarChange.SetActive(false);
             SetPlayerAvatar();
-
+        }
+        private void ShowProfileInfo()
+        {
+            achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
+            playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
+            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
             SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
             SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
             SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT
@@ -194,12 +213,17 @@ namespace ETLG
             SetBossTime(boss_6, GameEntry.Data.GetData<DataBackend>().userProfile.boss6);  // Blockchain
             SetBossTime(boss_7, GameEntry.Data.GetData<DataBackend>().userProfile.boss7);  // Final
         }
+        private void ShowContent()
+        {
+
+            ShowPlayerInfo();
+            ShowProfileInfo();
+           
+        }
         private void OnEditPlayerInfoButtonClick()
         {
             isEditInfo = true;
             nickName.interactable = true;
-
-            origionalName = placeholder_name.text;
 
             nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
 
@@ -213,17 +237,23 @@ namespace ETLG
         private void OnCancelButtonClick()
         {
             reminder.text = null;
-            nickName.interactable = false;
-            pwd.interactable = false;
-            placeholder_name.text = origionalName;
-            placeholder_name.fontStyle = FontStyles.Bold;
-            placeholder_pwd.text = origionalPwd;
-            placeholder_pwd.fontStyle = FontStyles.Bold;
+            if(isEditInfo)
+            {
+                nickName.interactable = false;
+                placeholder_name.text = origionalName;
+                placeholder_name.fontStyle = FontStyles.Bold;
+                avatarChange.SetActive(false);
+            }
+            else
+            {
+                pwd.interactable = false;
+                placeholder_pwd.text = origionalPwd;
+                placeholder_pwd.fontStyle = FontStyles.Bold;
+                newPasswords.SetActive(false);
+            }
+            
             editButtons.SetActive(true);
             submitButtons.SetActive(false);
-            avatarChange.SetActive(false);
-            newPasswords.SetActive(false);
-           
         }
         private void OnSaveButtonClick()
         {
@@ -233,6 +263,9 @@ namespace ETLG
                 //if nothing changed return
                 if(selectedButton == null && nickName.text == origionalName)
                 {
+                    avatarChange.SetActive(false);
+                    editButtons.SetActive(true);
+                    submitButtons.SetActive(false);
                     return;
                 }
                 if(selectedButton == null)
@@ -262,8 +295,9 @@ namespace ETLG
         private void OnEditPwdButtonClick()
         {
             isEditInfo = false;
+            
             pwd.interactable = true;
-            origionalPwd = placeholder_pwd.text;
+            
             pwd.text = null;
             newPwd.text = null;
             confirmPwd.text = null;

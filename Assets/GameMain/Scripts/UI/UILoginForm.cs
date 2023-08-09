@@ -19,7 +19,6 @@ namespace ETLG
         //register success
         public TextMeshProUGUI p_playerUserName = null;
         public TextMeshProUGUI p_playerPasswaord = null;
-        public TextMeshProUGUI p_playerNickName = null;
         public Button switchButton;
         public Button submitButton;
         public Button closeButton;
@@ -29,7 +28,7 @@ namespace ETLG
         public GameObject confirmPassword;
         public GameObject registerSuccess;
         public GameObject submitB;
-
+        public GameObject middleContainer;
         public RawImage playerImage;
         bool isRegister;
 
@@ -67,6 +66,7 @@ namespace ETLG
 
             GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             registerSuccess.SetActive(false);
+            middleContainer.SetActive(true);
             submitTitle.text = "Submit";
             originalPosition = reminder.rectTransform.localPosition;
             showContent();
@@ -211,11 +211,11 @@ namespace ETLG
         }
         private void SetRegisterSeccessPanel()
         {
+            middleContainer.SetActive(false);
             registerSuccess.SetActive(true);
             submitB.SetActive(false);
-            p_playerNickName.text = userName.text;
             p_playerPasswaord.text = pwd.text;
-            p_playerUserName.text = pwd.text;
+            p_playerUserName.text = userName.text;
             playerImage.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar("1000"));
         }
         private bool IsValidPassword()
