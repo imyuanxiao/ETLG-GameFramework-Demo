@@ -31,7 +31,7 @@ namespace ETLG.Data
 
         public string message;
         public UserProfile userProfile;
-        public Dictionary<string, string> jsonStrDic;
+        public Dictionary<string, string> downLoadjsonStrDic;
 
         public UserData currentUser;
 

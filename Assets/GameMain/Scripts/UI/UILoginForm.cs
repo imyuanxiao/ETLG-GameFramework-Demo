@@ -158,6 +158,7 @@ namespace ETLG
         }
         private void OnSwitchButtonClick()
         {
+            middleContainer.SetActive(true);
             registerSuccess.SetActive(false);
             submitB.SetActive(true);
             isRegister = !isRegister;

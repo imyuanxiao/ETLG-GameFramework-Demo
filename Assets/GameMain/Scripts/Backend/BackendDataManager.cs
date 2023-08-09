@@ -144,12 +144,6 @@ namespace ETLG
                 case Constant.Type.BACK_PROFILE:
                     GetUserProfileByUserId(GameEntry.Data.GetData<DataBackend>().currentUser.id);
                     break;
-                case Constant.Type.BACK_UPDATE:
-                    StartCoroutine(GetSaveDownloadRoutine());
-                    break;
-                case Constant.Type.BACK_PROFILE_PASSWORD:
-                    StartCoroutine(GetSaveDownloadRoutine());
-                    break;
                 case Constant.Type.BACK_SAVE_DOWNLOAD:
                     StartCoroutine(GetSaveDownloadRoutine());
                     break;
@@ -480,8 +474,7 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-                            //看看这个能不能成功convert
-                           // uploadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
+                            uploadJsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             SaveDataClass data = JsonUtility.FromJson<SaveDataClass>(responseData.data);
                             // Convert the data class properties into a Dictionary<string, int>
                             Dictionary<string, string> dictionary = new Dictionary<string, string>
@@ -491,7 +484,7 @@ namespace ETLG
                         { "learningProgress", data.learningProgress },
                         { "BossDefeatTime",data.BossDefeatTime}
                          };
-                            GameEntry.Data.GetData<DataBackend>().jsonStrDic = dictionary;
+                            GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = uploadJsonStrDic;
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
                         else
