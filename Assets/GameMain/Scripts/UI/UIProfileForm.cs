@@ -270,7 +270,12 @@ namespace ETLG
                 }
                 if(selectedButton == null)
                 {
+                    if(int.Parse(GameEntry.Data.GetData<DataBackend>().currentUser.avatar)>=1000)
                     selectedId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
+                    else
+                    {
+                        selectedId = "1000";
+                    }
                 }
                 BackendDataManager.Instance.HandleProfileUpdate(int.Parse(selectedId), nickName.text);
             }
