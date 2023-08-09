@@ -213,6 +213,9 @@
             public const float POSITION_X_RIGHT = 550f;
             public const float POSITION_X_LEFT = -550f;
 
+            //backend connect type
+            public const int BACK_LOCAL = 1;
+            public const int BACK_REOMTE = 2;
         }
     }
 }
