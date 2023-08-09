@@ -28,7 +28,7 @@ namespace ETLG
             dataLearningProgress = GameEntry.Data.GetData<DataLearningProgress>();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             isFocused = false;
-            ActiveLandingPoint(false);
+            //ActiveLandingPoint(false);
             GetComponent<DragRotate>().enabled = false;
             updateProgress();
         }
@@ -40,10 +40,10 @@ namespace ETLG
             {
                 Log.Error("Invalid Event [UnFocusOnPlanetEventArgs]");
             }
-            if (ne.PlanetBase.PlanetId == this.PlanetId)
+           /* if (ne.PlanetBase.PlanetId == this.PlanetId)
             {
                 ActiveLandingPoint(false);
-            }
+            }*/
             if (UIPlanetTag != null)
                 UIPlanetTag.SetActive(true);
         }
@@ -55,21 +55,21 @@ namespace ETLG
             {
                 Log.Error("Invalid Event [FocusOnPlanetEventArgs]");
             }
-            if (ne.PlanetBase.PlanetId == this.PlanetId)
+/*            if (ne.PlanetBase.PlanetId == this.PlanetId)
             {
                 ActiveLandingPoint(true);
-            }
+            }*/
             if (UIPlanetTag != null)
                 UIPlanetTag.SetActive(false);
         }
 
-        private void ActiveLandingPoint(bool state)
+ /*       private void ActiveLandingPoint(bool state)
         {
             foreach (var landingPoint in landingPoints)
             {
                 landingPoint.SetActive(state);
             }
-        }
+        }*/
 
         private void updateProgress()
         {
@@ -83,7 +83,7 @@ namespace ETLG
         private void OnDisable() 
         {
             isFocused = false;
-            ActiveLandingPoint(false);
+            //ActiveLandingPoint(false);
             GetComponent<DragRotate>().enabled = false;
             GameEntry.Event.Unsubscribe(FocusOnPlanetEventArgs.EventId, OnFocused);
             GameEntry.Event.Unsubscribe(UnFocusOnPlanetEventArgs.EventId, OnUnFocused);

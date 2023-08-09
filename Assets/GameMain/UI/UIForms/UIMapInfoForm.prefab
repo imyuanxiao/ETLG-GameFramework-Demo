@@ -624,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
+  m_AnchoredPosition: {x: -60, y: 0}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &254947008610653294
@@ -655,7 +655,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End game
+  m_text: 'Exit to
+
+    Menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -880,7 +882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Load
+  m_text: Help
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1303,6 +1305,8 @@ MonoBehaviour:
   continueButton: {fileID: 5119951838107303455}
   saveGameButton: {fileID: 8212366284100051322}
   settingButton: {fileID: 7751552705511935006}
+  exitToDesktopButton: {fileID: 774806964316535052}
+  tutorialButton: {fileID: 3522993098855394306}
 --- !u!1 &4983218842853567956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,7 +1520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 1f9f80aad2a104a4280ef1920621c99b, type: 3}
+  m_Texture: {fileID: 2800000, guid: 743d36b0152a3c3498577852e1e8b118, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1534,7 +1538,7 @@ GameObject:
   - component: {fileID: 805547629085179269}
   - component: {fileID: 3522993098855394306}
   m_Layer: 5
-  m_Name: Load
+  m_Name: Null
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

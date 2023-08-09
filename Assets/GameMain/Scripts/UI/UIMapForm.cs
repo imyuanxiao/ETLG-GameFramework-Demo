@@ -14,30 +14,24 @@ namespace ETLG
     {
         public Button menuButton;
         public Button continueButton;
-       /* public Button playerMenuButton;
-        public Button selectSpaceshipButton;
-        public Button planetLandingPointButton;*/
         public Button saveGameButton;
         public Button settingButton;
 
-       // public Button planetInfoButton;
 
+        public Button exitToDesktopButton;
 
+        public Button tutorialButton;
 
-        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
 
-            // 绑定按钮点击事件
             menuButton.onClick.AddListener(OnMenuButtonClick);
-  /*          playerMenuButton.onClick.AddListener(OnPlayerMenuButtonClick);
-            selectSpaceshipButton.onClick.AddListener(OnSelectSpaceshipButtonClick);
-            planetLandingPointButton.onClick.AddListener(OnPlanetLandingPointButtonClick);
-            planetInfoButton.onClick.AddListener(OnPlanetInfoButtonClick);*/
             saveGameButton.onClick.AddListener(OnSaveGameButtonClick);
             continueButton.onClick.AddListener(OnContinueButtonClick);
             settingButton.onClick.AddListener( OnSettingsButtonClick);
+            exitToDesktopButton.onClick.AddListener(OnExitToDesktopButtonClick);
+            tutorialButton.onClick.AddListener(OnTutorialButtonClick);
 
         }
 
@@ -87,6 +81,19 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
 
+        }
+
+        private void OnExitToDesktopButtonClick()
+        {
+            GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+            UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit);
+        }
+
+        private void OnTutorialButtonClick()
+        {
+            //GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
+
+           // GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_NEW_GAME);
         }
 
     }
