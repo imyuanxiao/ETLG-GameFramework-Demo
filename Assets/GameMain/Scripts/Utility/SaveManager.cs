@@ -49,7 +49,7 @@ namespace ETLG
             // only for save, not load (can be calculated)
             Save("PlayerScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerScore());
             Save("AchievementScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievementPoints());
-            // Save("LearningProgress" + saveIdStr, );
+            Save("LearningProgress" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getTotalProgress());
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -256,6 +256,10 @@ namespace ETLG
             Delete("CoursesSaveData" + saveIdStr);
             Delete("DomiansSaveData" + saveIdStr);
             Delete("QuizesSaveData" + saveIdStr);
+
+            Delete("PlayerScore" + saveIdStr);
+            Delete("AchievementScore" + saveIdStr);
+            Delete("LearningProgress" + saveIdStr);
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {

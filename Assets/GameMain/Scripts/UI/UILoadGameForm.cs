@@ -7,7 +7,7 @@ using GameFramework.Localization;
 using System;
 using TMPro;
 using GameFramework.Event;
-
+using ETLG.Data;
 
 namespace ETLG
 {
@@ -18,6 +18,8 @@ namespace ETLG
         public Button downloadSaveButton;
         public Button cancelButton;
         public SaveSlot[] saveSlots;
+
+        private Dictionary<string, string> jsonStrDic;
 
         protected override void OnInit(object userData)
         {
@@ -51,7 +53,31 @@ namespace ETLG
         private void OnDownloadButtonClicked()
         {
             Debug.Log("Download Button CLicked");
-            Dictionary<string, string> jsonStrDic = new Dictionary<string, string>(); // get the save from backend
+
+            BackendDataManager.Instance.HandleLoad();
+        }
+
+        private void OnBackendFetched(object sender, GameEventArgs e)
+        {
+            BackendFetchedEventArgs ne = (BackendFetchedEventArgs) e;
+            if (ne == null) { return; }
+            Debug.Log("OnBackendFetched");
+
+            if (ne.Type == Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS)
+            {
+                this.jsonStrDic = GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic;
+            }
+            else 
+            {
+                Log.Error("Download save from cloud failed");
+                return;
+            }
+
+            DownloadSaveUpdate();
+        }
+
+        private void DownloadSaveUpdate()
+        {
             if (jsonStrDic == null || jsonStrDic.Count ==0) { return; }
             
             int saveId = SaveManager.Instance.DownloadSave(jsonStrDic);
@@ -114,9 +140,9 @@ namespace ETLG
             base.OnOpen(userData);
 
             GameEntry.Event.Subscribe(SaveGameEventArgs.EventId, OnGameSave);
+            GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetched);
 
-
-
+            this.jsonStrDic = null;
             InitSaveSlot();
             
             // Player should not be able to create new save slot when they are in ProcedureMenu, since
@@ -179,6 +205,8 @@ namespace ETLG
             base.OnClose(isShutdown, userData);
 
             GameEntry.Event.Unsubscribe(SaveGameEventArgs.EventId, OnGameSave);
+            GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetched);
+            this.jsonStrDic = null;
         }
 
         private void OnGameSave(object sender, GameEventArgs e)
