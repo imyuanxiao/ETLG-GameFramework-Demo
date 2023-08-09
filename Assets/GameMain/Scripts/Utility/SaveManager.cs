@@ -216,7 +216,7 @@ namespace ETLG
             {
                 PlayerPrefs.SetString(item.Key + "_" + saveId.ToString(), item.Value);
             }
-            string difficulty = jsonDataStr["Difficulty_" + saveId.ToString()];
+            string difficulty = jsonDataStr["Difficulty"];
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(saveId))
             {
