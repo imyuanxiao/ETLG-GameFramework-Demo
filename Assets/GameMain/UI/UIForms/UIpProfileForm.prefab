@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '******'
+  m_text: Please Enter Old Password.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3014,8 +3014,6 @@ MonoBehaviour:
   playerScore: {fileID: 3294663248628272084}
   learningPath: {fileID: 3294663247774066091}
   placeholder_userName: {fileID: 5114046590199383699}
-  placeholder_name: {fileID: 3534800164322013309}
-  placeholder_pwd: {fileID: 5540955954170727136}
   editPlayerInfoButton: {fileID: 6129433993819041132}
   editPwdButton: {fileID: 8135458751986623444}
   showPwdButton: {fileID: 7085355312317739640}
