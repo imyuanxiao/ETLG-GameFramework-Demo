@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IScrollHandler
 {
     private bool isDragging;
-    private Vector2 startPosition;
     private Vector2 previousMousePosition;
-
     public RectTransform rectTransform;
 
     private void Start()
@@ -19,7 +17,6 @@ public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDown
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             isDragging = true;
-            startPosition = rectTransform.anchoredPosition;
             previousMousePosition = eventData.position;
         }
     }
@@ -32,10 +29,18 @@ public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDown
             Vector2 mouseDelta = currentMousePosition - previousMousePosition;
             previousMousePosition = currentMousePosition;
 
-            rectTransform.anchoredPosition += new Vector2(0f, mouseDelta.y);
-
-//            rectTransform.anchoredPosition += mouseDelta;
+            Vector2 newPosition = rectTransform.anchoredPosition + new Vector2(0f, mouseDelta.y);
+            rectTransform.anchoredPosition = newPosition;
+            ClampPosition();
         }
+    }
+
+    public void OnScroll(PointerEventData eventData)
+    {
+        float scrollDelta = eventData.scrollDelta.y * 30;
+        Vector2 newPosition = rectTransform.anchoredPosition + new Vector2(0f, scrollDelta);
+        rectTransform.anchoredPosition = newPosition;
+        ClampPosition();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -44,5 +49,12 @@ public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDown
         {
             isDragging = false;
         }
+    }
+
+    private void ClampPosition()
+    {
+        Vector2 clampedPosition = rectTransform.anchoredPosition;
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -300f, 300f);
+        rectTransform.anchoredPosition = clampedPosition;
     }
 }
