@@ -1,0 +1,69 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">IBM Blockchain Platform elements</statement>
+            <statement font="1" >IBM® Blockchain Platform for IBM Cloud includes the IBM Blockchain Platform Console (UI), a Hyperledger Fabric, and IBM VS Code extension. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement image = "2"></statement>
+            <statement>IBM Blockchain Platform Console (UI):
+This is the console that allows you to create and manage your blockchain components.
+After you provision a service instance in IBM Cloud™', you can deploy an instance of the IBM Blockchain console and link it to your Kubernetes cluster on IBM Cloud™.
+Then you can use the console to create and manage your blockchain components in your Kubernetes cluster. There is no charge for the console.</statement>
+            <statement>Hyperledger Fabric Components
+The console is used to create and manage blockchain components that are based on Hyperledger Fabric v1.4.7 and v2.x - Certificate Authority, peer, and ordering service images.
+These components are deployed into your Kubernetes cluster and storage is provisioned for them using the default storage class when they are deployed.
+Additional components that are not shown here include applications, smart contracts, and channels.</statement>
+            <statement>IBM VS Code Extension (Development Tools)
+Download the VS Code extension from the VS Code marketplace in order to get started with developing, packaging, and testing client applications and smart contracts.</statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"><!--1 Video Lack Here-->
+        <npc>
+            <statement font="1" isBold="true">IBM Blockchain Platform components</statement>
+            <statement video = "3" />
+        </npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="1" isBold="true">Example blockchain network</statement>
+            <statement image = "4"/>
+            <statement>Org A
+Org A can access only Channel X.
+It has its own Certificate Authority that is responsible for distributing cryptographic identity material.</statement>
+            <statement>Channel X
+Channel X (in gold) includes all four organizations.</statement>
+            <statement>Org B
+Org B can access only Channel X.
+It has its own Certificate Authority that is responsible for distributing cryptographic identity material.</statement>
+            <statement>Channel Y
+Channel Y (in red) is restricted to Org C and Org D.</statement>
+            <statement>Ordering Service
+The ordering service consists of five Raft nodes that defines policies and network participants.</statement>
+            <statement>Org C
+Org C can access both Channel X and Channel Y.
+It has its own Certificate Authority that is responsible for distributing cryptographic identity material.</statement>
+            <statement>Org D
+Org D can access both Channel X and Channel Y.
+It has its own Certificate Authority that is responsible for distributing cryptographic identity material.</statement>
+        </npc>
+        <player>
+           <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

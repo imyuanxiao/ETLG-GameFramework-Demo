@@ -1,0 +1,100 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Cloud computing—at your service!</statement>
+			<statement>Any traditional service can be delivered through the cloud. This concept is called anything as a service, or XaaS.</statement>
+			<statement image="1">Let’s compare the three most popular service models of cloud computing: software as a service (SaaS), platform as a service (PaaS), and infrastructure as a service (IaaS). Here’s a diagram that shows you the kinds of tools and data that fit into each model.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement>Click each section to learn more about the three service models.</statement> 
+		</npc>
+		<player>
+			<response nextnode="2.1">Software as a service (SaaS)</response>
+			<response nextnode="2.2">Platform as a service (PaaS)</response>
+			<response nextnode="2.3">Infrastructure as a service (IaaS)</response>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.1">
+		<npc>
+			<statement image="2">With SaaS, software and data both reside online. Users can log in on a browser from almost any kind of device on almost any operating system, enter what they need, and out pops their result. Since their organization doesn’t need special software to use SaaS, it doesn’t have to buy applications. Instead it pays for yearly or per-user subscriptions to the service.</statement>
+			<statement>You can visualize SaaS as someone else's kitchen. You go online and place your order. They provide the recipe, cook the food, and deliver it to you.</statement>
+			<statement color="59E1FE">When you hear SaaS, think of uses like email or online shopping.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.2">
+		<npc>
+			<statement image="3">With PaaS, a vendor provides only the platform—meaning the infrastructure, operating systems, storage, and much of the code. The user’s organization manages the application’s resources and the data. (For more on the infrastructure, refer to the next section.)</statement>
+			<statement>You can visualize PaaS as someone else’s kitchen. But you provide the raw food and the recipe, and you do the cooking.</statement>
+			<statement color="59E1FE">When you hear PaaS, think of containers, databases, runtime, and integration.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.3">
+		<npc>
+			<statement image="4">Companies turn to IaaS when they want to build their own applications from the ground up, or move existing applications from a data center into the organization to cut down on IT costs. With IaaS, a vendor provides the infrastructure and architecture like hardware, software, servers, and storage, and also handles expensive support systems like backup, security, and maintenance. This leaves the organization’s computing architecture on the web so that teams in different locations can work together, while keeping application development inside the company’s own online structure.</statement>
+			<statement>You can think of IaaS as your own kitchen, where you provide the recipe and do the cooking. But someone else maintains your appliances and manages your utilities.</statement>
+			<statement color="59E1FE">When you hear IaaS, think of computing, storage, and networking resources.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true">There’s buzz around multicloud!</statement> 
+			<statement>Multicloud is the use of more than one public cloud. It lets a company choose different services from different public clouds. For example, the company might mix several public IaaS environments like IBM Cloud, Amazon Web Services, and Microsoft Azure, so they’re not locked into one cloud provider. Multicloud requires careful planning! Organizations considering it must look for a provider whose architecture can scale and integrate with the company’s existing systems.</statement>
+			<statement>What does this look like? A company might use separate cloud providers for infrastructure (IaaS) and software (SaaS) services, or even use several infrastructure (IaaS) providers. That company might use different infrastructure providers for different workloads, balance a single workload load across several providers, or use a single workload on one provider that’s backed up on another.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement font="2" isBold="true">Clouds and premises, what’s the difference?</statement>
+			<statement>Often people talk about private and public cloud and confuse it with premises. For example, they might think that public cloud is off premises (true), while private cloud is always on premises (false).</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> 
+		<npc>
+			<statement>Off premises is a solution that runs on hardware in a different location than the end users. That’s because most cloud vendors run their own data centers off premises from the organizations whose data they store.  Their customers’ system administrators have the same access to the data as they would on premises.</statement>
+			<statement>On premises is a solution installed and hosted in-house, usually supported by a third party. Often the on-premises private cloud, also known as an “internal cloud,” is hosted inside an organization’s own data center. It can be easier to protect and maintain, but more limited in size and harder to scale up as the organization grows.</statement>
+			<statement>Some cloud vendors offer a hybrid solution. This means they allow companies to mix on premises at the company’s data center with off premises at the vendor’s data center. This can be helpful if a company’s business comes in bursts. The company can depend on its own data center most of the time, but expand onto the vendor’s data center when the load is high.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6"> 
+		<npc>
+			<statement>Here’s what confuses people: an organization can have a private cloud either on premises or off premises. Take a moment to work through the following graphic to see how a company might have both PaaS and IaaS capabilities:</statement>
+			<statement>·An on-premises private cloud (2 and 3 in the graphic)&#xA;· An off-premises private cloud (4 and 5)&#xA;· A public cloud (6 and 7)</statement>
+			<statement image="5">IBM sellers refer to these environments as local, dedicated, and public. Take a moment to wrap your mind around these combinations now.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

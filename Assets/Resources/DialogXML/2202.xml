@@ -1,0 +1,132 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">
+Natural language processing (NLP) is the parsing and semantic interpretation of text, which allows systems to learn, analyze, and understand human language. With LP, you can surface concepts, categories, sentiment, and emotion, and apply knowledge of unique entities in your industry to your data, no matter where it lives.
+LP is one of the most important subfields of machine learning for a variety of reasons. Natural language is the most natural interface between a user and a machine. In the ideal case, this involves speech recognition and voice generation. Even Alan Turing recognized this in his "intelligence" article, in which he defined the "Turing test" as a way to test a machine's ability to exhibit intelligent behavior through a natural language conversation.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement font="1" isBold="true">Natural Language Processing (NLP): Definition</statement>
+            <statement image = "2"/>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+            <statement font="1" isBold="true">Natural Language Challenge:
+Human vs Computer</statement>
+			<statement image = "3"/>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement>NLP Components</statement>
+            <statement image = "4"/>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement font="1" isBold="true">Natural Language Processing</statement>
+            <statement image = "5"/>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+
+	<node id="6">
+        <npc>
+            <statement font="1" isBold="true">Natural language processing: a classification problem</statement>
+            <statement image = "6"/>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">Enterprise Applications of LP</statement>
+            <statement image = "7"/>
+        </npc>
+        <player>
+            <response nextnode="8" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="8">
+        <npc>
+            <statement font="1" isBold="true">Social Media Analysis</statement>
+            <statement image = "8">How can we extract valuable insights from social media posts?
+What are the relevant trending topics and hashtags for a business?
+LP can deliver this information and more.</statement>
+        </npc>
+        <player>
+            <response nextnode="9" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="9">
+        <npc>
+            <statement font="1" isBold="true">Customer Support</statement>
+            <statement image = "9">Each support ticket can be analyzed to obtain its sentiment, keywords, and a categorization.
+This process can be used to route the customer to the correct representative and in some cases to automatically respond to the request.</statement>
+        </npc>
+        <player>
+            <response nextnode="10" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="10">
+        <npc>
+            <statement font="1" isBold="true">Business Intelligence</statement>
+            <statement image = "10">How does a company etficiently access unstructured data?
+How can this data be queried on an ad hoc basis without the need for developers to write complex queries?
+NLP allows all users to ask questions of the data without developer assistance.</statement>
+        </npc>
+        <player>
+            <response nextnode="11" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="11">
+        <npc>
+            <statement font="1" isBold="true">Content Marketing and Recommendation</statement>
+            <statement image = "11">Companies also want better ways to recommend more relevant content to their readers.
+LP enables companies publishing content to understand what to write about as well as produce more interesting and relevant topics to readers.</statement>
+        </npc>
+        <player>
+            <response nextnode="12" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="12">
+        <npc>
+            <statement font="1" isBold="true">Additional NLP Domains</statement>
+            <statement image = "12">• Market intelligence
+• Brand management
+• Legal industry</statement>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

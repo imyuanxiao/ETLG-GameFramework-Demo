@@ -1,0 +1,46 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">IBM Blockchain Platform deployment considerations</statement>
+            <statement>Before you deploy the IBM Blockchain Platform, consider the regional availability of deployment sites, the applications you will use, your administrative responsibilities, and product availability. </statement>
+            <statement font="1" isBold="true">Consider regional availability</statement>
+            <statement>Deploying the IBM Blockchain Platform for IBM Cloud requires two locations.</statement>
+            <statement image = "1-1">A location to deploy a Kubernetes cluster on IBM Cloud. You can deploy the cluster to any geography supported by the IBM Kubernetes service or OpenShift on IBM Cloud.</statement>
+            <statement image = "1-2">After you deploy a cluster on IBM Cloud, you must deploy an instance of the IBM Blockchain Platform. The IBM Blockchain Platform operational tooling can be deployed in each of the regions in the table below: </statement>
+            <statement>You can link an instance of the IBM Blockchain Platform operational tooling to a cluster that is deployed at any location. However, all nodes provisioned by the console will be deployed in the location of the cluster.
+For example, if the Kubernetes cluster is located in Toronto and the linked console is in Washington, D.C., any peer deployed using the linked console will reside in Toronto.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="2" isBold="true">Other considerations</statement>
+            <statement font="1" isBold="true">Configuration Considerations</statement>
+            <statement image = "2-1">Consider the following:
+Built with Hyperledger Fabric v1.4.7 and v2.x
+Compatible with a Kubernetes cluster on IBM Cloud running Kubernetes v1.15 - v1.18.
+You can link your IBM Blockchain Platform service instance to a free Kubernetes cluster to evaluate the offering, however capacity and performance are limited, none of your data can be migrated, and the cluster is deleted after 30 days.</statement>
+            <statement font="1" isBold="true">Support Consideration</statement>
+            <statement image = "2-2">1. Supported:
+Kubernetes cluster "Classic" infrastructure
+2. Not Supported:
+Kubernetes clusters configured with private VLANs
+Virtual Private Clouds (VPC) </statement>
+            <statement font="1" isBold="true">Your Responsibilities include</statement>
+            <statement image = "2-3">Manage the health monitoring, security, and logging of your Kubernetes cluster.
+Monitor the resource usage of your Kubernetes cluster using the Kubernetes dashboard.
+Manage and secure your certificates and private keys. IBM does not store your certificates in the Kubernetes cluster.
+If you decide to include IBM Cloud multi-zone support in your Kubernetes cluster, you must provision your own storage.</statement>
+            <statement font="1" isBold="true">Additional options include</statement>
+            <statement image = "2-4">If you do not want to use the default Bronze File storage, you can provision storage of your choice.
+When your Kubernetes cluster is configured to use any of the IBM Cloud storage classes, the smallest storage amount that can be allocated to a node is 20Gi.</statement>
+        </npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

@@ -1,0 +1,58 @@
+<quiz boss="true">
+  <question type="MCM" timelimit="30">
+    <statement>A complete IoT solution can help in which three of the following situations? Select all that apply.</statement>
+    <analysis></analysis>
+    <options>
+      <option id="A">Improve business outcomes through connected operations and connected products.</option>
+      <option id="B">Grow a business by using new services and business models.</option>
+      <option id="C">Create and connect IT devices and analyze data.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+        <answer>A</answer>
+        <answer>B</answer>
+        <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Watson IoT Platform does not support open standards like HTTPS and MQTT.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">True</option>
+      <option id="B">False</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  
+  <question type="MCS" timelimit="30">
+    <statement>MQTT is the primary protocol that devices and applications use to communicate with Watson IoT Platform.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">True</option>
+      <option id="B">False</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+    
+  <question type="MCS" timelimit="30">
+    <statement>Your Watson IoT Platform organization may be created without registering with IBM Cloud.</statement>
+    <hint></hint>
+    <options>
+        <option id="A">True</option>
+        <option id="B">False</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+</quiz>

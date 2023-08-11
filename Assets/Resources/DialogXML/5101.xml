@@ -1,0 +1,144 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Blockchain overview.</statement>
+            <statement>Blockchain defined:
+Blockchain is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a business network. An asset can be tangible (a house, car, cash, land) or intangible (intellectual property, patents, copyrights, branding). Virtually anything of value can be tracked and traded on a blockchain network, reducing risk and cutting costs for all involved.</statement>
+            <statement>Why blockchain is important:
+Business runs on information. The faster it’s received and the more accurate it is, the better. Blockchain is ideal for delivering that information because it provides immediate, shared and completely transparent information stored on an immutable ledger that can be accessed only by permissioned network members. A blockchain network can track orders, payments, accounts, production and much more. And because members share a single view of the truth, you can see all details of a transaction end to end, giving you greater confidence, as well as new efficiencies and opportunities.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Key elements of a blockchain</statement>
+            <statement image = "2-1">Distributed ledger technology:
+All network participants have access to the distributed ledger and its immutable record of transactions. With this shared ledger, transactions are recorded only once, eliminating the duplication of effort that’s typical of traditional business networks.</statement>
+            <statement image = "2-2">Immutable records:
+No participant can change or tamper with a transaction after it’s been recorded to the shared ledger. If a transaction record includes an error, a new transaction must be added to reverse the error, and both transactions are then visible.</statement>
+            <statement image = "2-3">Smart contracts:
+To speed transactions, a set of rules — called a smart contract — is stored on the blockchain and executed automatically. A smart contract can define conditions for corporate bond transfers, include terms for travel insurance to be paid and much more.</statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+        <npc>
+            <statement font="1" isBold="true">How blockchain works</statement>
+            <statement image = "3-1">As each transaction occurs, it is recorded as a “block” of data:
+Those transactions show the movement of an asset that can be tangible (a product) or intangible (intellectual). The data block can record the information of your choice: who, what, when, where, how much and even the condition — such as the temperature of a food shipment.</statement>
+            <statement image = "3-2">Each block is connected to the ones before and after it:
+These blocks form a chain of data as an asset moves from place to place or ownership changes hands. The blocks confirm the exact time and sequence of transactions, and the blocks link securely together to prevent any block from being altered or a block being inserted between two existing blocks.</statement>
+            <statement image = "3-3">Transactions are blocked together in an irreversible chain: a blockchain:
+Each additional block strengthens the verification of the previous block and hence the entire blockchain. This renders the blockchain tamper-evident, delivering the key strength of immutability. This removes the possibility of tampering by a malicious actor — and builds a ledger of transactions you and other network members can trust.</statement>
+        </npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="1" isBold="true">Benefits of blockchain</statement>
+            <statement>What needs to change:
+Operations often waste effort on duplicate record keeping and third-party validations. Record-keeping systems can be vulnerable to fraud and cyberattacks. Limited transparency can slow data verification. And with the arrival of IoT, transaction volumes have exploded. All of this slows business, drains the bottom line — and means we need a better way. Enter blockchain.</statement>
+            <statement image = "4-1">Greater trust:
+With blockchain, as a member of a members-only network, you can rest assured that you are receiving accurate and timely data, and that your confidential blockchain records will be shared only with network members to whom you have specifically granted access.</statement>
+            <statement image = "4-2">Greater security:
+Consensus on data accuracy is required from all network members, and all validated transactions are immutable because they are recorded permanently. No one, not even a system administrator, can delete a transaction.</statement>
+            <statement image = "4-3">More efficiencies:
+With a distributed ledger that is shared among members of a network, time-wasting record reconciliations are eliminated. And to speed transactions, a set of rules — called a smart contract — can be stored on the blockchain and executed automatically.</statement>
+        </npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> <!--4 VIDEOS HERE LACK-->
+        <npc>
+            <statement>Click each section to learn more.</statement>
+        </npc>
+        <player>
+            <response nextnode="5.1">What is blockchain?</response>
+            <response nextnode="5.2">Blockchain expanded</response>
+            <response nextnode="5.3">A traceable supply chain</response>
+            <response nextnode="5.4">Blockchain builds trust</response>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="5.1">
+        <npc>
+            <statement font = "1" isBold = "true" video = "5-1">What is blockchain?</statement>
+            <statement>Step inside the basics of blockchain technology: how blocks contain data representing anything of value, how they’re chronologically connected in an immutable chain, and the differences between blockchain and cryptocurrencies such as Bitcoin.</statement>
+        </npc>
+            <player>
+                <response nextnode="2" >Back</response>
+            </player>
+    </node>
+    
+    <node id="5.2">
+        <npc>
+            <statement font = "1" isBold = "true" video = "5-2">Blockchain expanded</statement>
+            <statement>Learn how the decentralized nature of blockchain sets it apart from traditional record-keeping, the value of a permissioned blockchain for business transactions, and how blockchain promotes new levels of trust and transparency.</statement>
+        </npc>
+            <player>
+                <response nextnode="2" >Back</response>
+            </player>
+    </node>
+    
+    <node id="5.3">
+        <npc>
+            <statement font = "1" isBold = "true" video = "5-3">A traceable supply chain</statement>
+            <statement>The food industry is just one of many being transformed through blockchain technology. Learn how it can trace when, where and how food has been grown, picked, shipped and processed — all while protecting network-participant data.</statement>
+        </npc>
+            <player>
+                <response nextnode="2" >Back</response>
+            </player>
+    </node>
+    
+    <node id="5.4">
+        <npc>
+            <statement font = "1" isBold = "true" video = "5-4">Blockchain builds trust</statement>
+            <statement>Blockchain creates trust because it represents a shared record of the truth. Data that everyone can believe in will help power other new technologies that dramatically increase efficiency, transparency and confidence.</statement>
+        </npc>
+            <player>
+                <response nextnode="2" >Back</response>
+            </player>
+    </node>
+    
+    <node id="6">
+        <npc>
+            <statement font="2" isBold="true">Types of blockchain networks</statement>
+            <statement font="1" isBold="true">There are several ways to build a blockchain network. They can be public, private, permissioned or built by a consortium.</statement>
+            <statement>Public blockchain networks
+A public blockchain is one that anyone can join and participate in, such as Bitcoin. Drawbacks might include substantial computational power required, little or no privacy for transactions, and weak security. These are important considerations for enterprise use cases of blockchain.</statement>
+            <statement>Private blockchain networks
+A private blockchain network, similar to a public blockchain network, is a decentralized peer-to-peer network. However, one organization governs the network, controlling who is allowed to participate, execute a consensus protocol and maintain the shared ledger. Depending on the use case, this can significantly boost trust and confidence between participants. A private blockchain can be run behind a corporate firewall and even be hosted on premises.</statement>
+            <statement>Permissioned blockchain networks
+Businesses who set up a private blockchain will generally set up a permissioned blockchain network. It is important to note that public blockchain networks can also be permissioned. This places restrictions on who is allowed to participate in the network and in what transactions. Participants need to obtain an invitation or permission to join.</statement>
+            <statement>Consortium blockchains
+Multiple organizations can share the responsibilities of maintaining a blockchain. These pre-selected organizations determine who may submit transactions or access the data. A consortium blockchain is ideal for business when all participants need to be permissioned and have a shared responsibility for the blockchain.</statement>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="7">
+        <npc>
+            <statement font="2" isBold="true">Blockchain security</statement>
+            <statement font="1" isBold="true">Risk management systems for blockchain networks</statement>
+            <statement>When building an enterprise blockchain application, it’s important to have a comprehensive security strategy that uses cybersecurity frameworks, assurance services and best practices to reduce risks against attacks and fraud.</statement>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

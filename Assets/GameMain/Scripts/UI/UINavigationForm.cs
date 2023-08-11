@@ -9,9 +9,7 @@ namespace ETLG
     {
         public Button spaceshipButton;
         public Button skillButton;
-        //public Button missionButton;
         public Button achievementButton;
-        //public Button knowledgeBaseButton;
         public Button leaderboardButton;
         public Button profileButton;
 
@@ -29,7 +27,8 @@ namespace ETLG
                 spaceshipButton.GetComponent<RawImage>(),
                 skillButton.GetComponent<RawImage>(),
                 achievementButton.GetComponent<RawImage>(),
-                leaderboardButton.GetComponent<RawImage>()
+                leaderboardButton.GetComponent<RawImage>(),
+                profileButton.GetComponent<RawImage>()
             };
             spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, (int)EnumUIForm.UISpaceshipCheckForm));
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, (int)EnumUIForm.UISkillTreeForm));
@@ -73,15 +72,22 @@ namespace ETLG
                 index = 1;
             }
 
-            if (selectedButton == (int)(int)EnumUIForm.UIAchievementForm)
+            if (selectedButton == (int)EnumUIForm.UIAchievementForm)
             {
                 index = 2;
             }
 
-            if (selectedButton == (int)(int)EnumUIForm.UILeaderBoardForm)
+            if (selectedButton == (int)EnumUIForm.UILeaderBoardForm)
             {
                 index = 3;
             }
+
+            if(selectedButton == (int)EnumUIForm.UIpProfileForm)
+            {
+                index = 4;
+            }
+
+
             foreach (var buttonImage in buttonImages)
             {
                 buttonImage.color = (buttonImage == buttonImages[index].GetComponent<RawImage>()) ? selectedColor : deselectedColor;

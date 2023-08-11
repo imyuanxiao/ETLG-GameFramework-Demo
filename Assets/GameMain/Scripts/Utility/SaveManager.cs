@@ -49,7 +49,7 @@ namespace ETLG
             // only for save, not load (can be calculated)
             Save("PlayerScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerScore());
             Save("AchievementScore" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievementPoints());
-            // Save("LearningProgress" + saveIdStr, );
+            Save("LearningProgress" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getTotalProgress());
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
@@ -186,6 +186,7 @@ namespace ETLG
             Dictionary<string, string> result = new Dictionary<string, string>();
 
             string saveIdStr = "_" + SaveId.ToString();
+            result.Add("SaveId", SaveId.ToString());
             result.Add("Difficulty", PlayerPrefs.GetString("Difficulty" + saveIdStr));
             result.Add("InitialSpaceshipIdx", PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
             result.Add("PlayerSkillData", PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
@@ -211,12 +212,14 @@ namespace ETLG
 
         public int DownloadSave(Dictionary<string, string> jsonDataStr)
         {
-            int saveId = this.savedGamesInfo.cloudSaveId;
+            // int saveId = this.savedGamesInfo.cloudSaveId;
+            int saveId = int.Parse(jsonDataStr["SaveId"]);
+            this.savedGamesInfo.cloudSaveId = saveId;
             foreach (var item in jsonDataStr)
             {
                 PlayerPrefs.SetString(item.Key + "_" + saveId.ToString(), item.Value);
             }
-            string difficulty = jsonDataStr["Difficulty_" + saveId.ToString()];
+            string difficulty = jsonDataStr["Difficulty"];
 
             if (savedGamesInfo.savedGamesDic.ContainsKey(saveId))
             {
@@ -257,14 +260,18 @@ namespace ETLG
             Delete("DomiansSaveData" + saveIdStr);
             Delete("QuizesSaveData" + saveIdStr);
 
+            Delete("PlayerScore" + saveIdStr);
+            Delete("AchievementScore" + saveIdStr);
+            Delete("LearningProgress" + saveIdStr);
+
             if (savedGamesInfo.savedGamesDic.ContainsKey(SaveId))
             {
                 savedGamesInfo.savedGamesDic.Remove(SaveId);
             }
-            if (savedGamesInfo.cloudSaveId == SaveId)
-            {
-                savedGamesInfo.cloudSaveId = -1;
-            }
+            // if (savedGamesInfo.cloudSaveId == SaveId)
+            // {
+            //     savedGamesInfo.cloudSaveId = -1;
+            // }
 
             Save("SavedGamesInfo", savedGamesInfo);
         }

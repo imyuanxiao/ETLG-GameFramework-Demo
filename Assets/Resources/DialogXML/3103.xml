@@ -1,0 +1,19 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement video="1">This video discusses some classic examples of the ways that hackers break into computer systems. Jump into the fascinating, fast-paced world of cybersecurity with this deep-dive into “Black Hat” and “White Hat” hackers, and the strategies they use for evil and for good.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>· Hackers use their technical knowledge to break into computer systems. Black Hat hackers have malicious intentions to steal, exploit, and sell computer vulnerabilities and data.&#xA;· White Hat hackers are hired by companies and governments to perform security evaluations, hunt for bugs, and try to close security holes in software to make systems safer and more resilient.&#xA;· Some hack for amusement and curiosity, while cybercriminals hack most often for monetary gain. Hacktivist community members use their skills to promote a social or political goal.&#xA;· Attackers find and take advantage of a bug in a system to gain access to computer systems to overwrite data, steal user data, crash systems, or even use that exploitable bug to hijack the whole system.&#xA;· A new exploitable bug that software creators are not aware of is called a zero-day vulnerability. Black Hat hackers rush to use the exploit for maximum benefit before White Hat programmers can release a patch for the bug.&#xA;· It is important to keep computer software up to date, especially with security patches. Bugs left open on enough systems allow hackers to write a program called a “worm” that automatically jumps from computer to computer.</statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

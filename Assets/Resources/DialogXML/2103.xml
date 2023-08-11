@@ -1,0 +1,73 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>The foundation of human intelligence is our ability to learn. All human progress has been the result of learning from our past efforts, evolving our understanding and inventing new solutions.
+Computer scientists have been trying to get machines to learn like humans for decades. In machine learning, computers analyze data, find patterns in the data and use those patterns to find the best route to a goal. Advancements in data and computation have transformed machine learning.
+Artificial Intelligence is teaching us things we never would have been able to find on our own.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement image="2">AI Evolution Factors</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement image = "3"></statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement image = "4">How to provide insights on complex and volatile data?</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+            <statement image = "5-1">WHAT IS THE SOLUTION?
+AI systems can transform unstructured data into knowledge</statement>
+            <statement image = "5-2"/>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+            <statement image = "6-1">How does an AI system learn?</statement>
+            <statement image = "6-2">AI enables a partnership between humans and technology.</statement>
+            <statement image = "6-3">AI systems can go beyond knowledge, they understand, reason, learn, and interact.</statement>
+        </npc>
+		<player>
+			<response nextnode="7" isShown = "false">Continue</response>
+		</player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">AI systems features</statement>
+            <statement>We can take the best experts and make them better by introducing man and machine.</statement>
+            <statement image = "7"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+
+</dialogue>

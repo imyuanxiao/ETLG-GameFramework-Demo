@@ -1,0 +1,12 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Welcome to cybersecurity for beginners!</statement>
+			<statement>Your goal is to learn key terminology, concepts, and roles in the cybersecurity field including topics such as encryption, cryptography, and cyberattacks.</statement>
+			<statement>This course includes three videos to help you get up to speed on these topics. At the end, you'll test your knowledge with a quiz.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">OK let's get started!</response>
+		</player>
+	</node>
+</dialogue>

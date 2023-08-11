@@ -22,11 +22,11 @@
 	<node id="3">
 		<npc>
 			<statement font="2" isBold="true">But here’s a question for you to think about ...</statement> 
-			<statement>But here’s a question for you to think about ...</statement>
-			<statement  video="2" image="1">Keep your best guess in mind as you continue reading. You’ll find the answer a couple of topics from now, and it might surprise you!</statement>
+			<statement>Yes or no? If an organization puts something in the cloud, does that mean the data is off its premises somewhere?</statement>
+			<statement>Keep your best guess in mind as you continue reading. You’ll find the answer a couple of topics from now, and it might surprise you!</statement>
 		</npc>
 		<player>
-			<response nextnode="end" isShown="false">Thank you.</response>
+			<response nextnode="end">Thank you.</response>
 		</player>
 	</node>
 </dialogue>

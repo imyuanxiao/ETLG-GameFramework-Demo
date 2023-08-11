@@ -81,10 +81,10 @@ namespace ETLG
 
             return Utility.Text.Format("Artifacts/{0}", iconName);
         }
-        public static string GetUnLockAchievementIcon()
+        public static string GetUnLockAchievementIcon(string iconName)
         {
 
-            return Utility.Text.Format("Achievement/{0}", "unlocked_treasure_chest");
+            return Utility.Text.Format("Achievement/{0}", iconName);
         }
         public static string GetErrorIcon(string iconName)
         {

@@ -1,0 +1,20 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>While computers have become interconnected and allow us to communicate across the globe, not everyone who uses these networks plays by the rules or has our best interests in mind. Learn about passwords, biometrics, hacking, and more!</statement>
+			<statement video="1-3102">Dive head-first into the fascinating, fast-paced world of cybersecurity with this video from Crash Course.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>· Cybersecurity helps minimize crime and harm in the virtual world. Think of it as a set of techniques to protect the secrecy, integrity, and availability of computer systems and data against threats.&#xA;· Authentication refers to the process by which a computer understands who it is interacting with. There are three types of authentication: what you know, what you have, and what you are.&#xA;· Often, security experts suggest using two or more forms of authentication (two-factor or multi-factor authentication) for important accounts.&#xA;· Permissions or Access Control Lists (ACLs) describe the access each user has to view or modify any file, folder, or program on a computer.&#xA;· Malicious software called malware can make a program or computing system vulnerable to attacks that copy user data and allow hackers to disguise as the user.</statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

@@ -1,0 +1,94 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>You might recall that cloud comes in three forms:</statement>
+			<statement>· SaaS (software as a service)&#xA;· PaaS (platform as a service)&#xA;· IaaS (infrastructure as a service)</statement>
+			<statement image="1">All three service models impact our lives.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>Click the sections to find out how each service model changes the way we live, communicate, buy things, and do our work.</statement>
+		</npc>
+		<player>
+			<response nextnode="2.1.1">Software as a service (SaaS)</response>
+			<response nextnode="2.2.1">Platform as a service (PaaS)</response>
+			<response nextnode="2.3.1">Infrastructure as a service (IaaS)</response>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.1.1"> 
+		<npc>
+			<statement>Remember, SaaS is a software distribution model in which a third-party provider hosts applications and makes them available to customers over the internet.</statement>
+		 	<statement>In the SaaS model, cloud computing allows consumers and businesses to use applications without installing them locally, and to access personal files through the internet from any computer. This makes computing more efficient because it centralizes storage, memory, processing, and bandwidth.</statement>
+		</npc>
+		<player>
+			<response nextnode="2.1.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.1.2"> 
+		<npc>
+			<statement font="1" isBold="true">How does this change your life?</statement>
+			<statement>You check Gmail for email, upload pictures to DropBox, buy music from iTunes, store files on Google Drive, create with software such as Office 365 or Photoshop, attend video meetings with Webex, or arrange travel with Expedia. These services connect consumers (that’s you!) to businesses.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.2.1"> 
+		<npc>
+			<statement>A PaaS vendor provides hardware and software tools over the internet, and people use these tools to develop applications. PaaS is most important for developers who build software applications. PaaS frees them from having to install in-house hardware and software on which to develop or run their new applications.</statement>
+			<statement font="1" isBold="true">PaaS has less impact on you personally—in the sense that you'll use it less frequently.</statement>
+
+		</npc>
+		<player>
+			<response nextnode="2.2.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.2.2"> 
+		<npc>
+			<statement>But companies like IBM, Google, Amazon, and Microsoft all have PaaS offerings that developers can use to quickly develop and deploy apps in the cloud. Developers love this not only because it makes access and testing much easier, but because they don’t have to invest in or learn how to manage the infrastructure that runs those applications. And the things these companies develop, from the Internet of Things to shopping to electronics to creative software? You’re experiencing them right now as you read this text.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.3.1"> 
+		<npc>
+			<statement>IaaS offers services such as pay-as-you-go storage, networking, servers, and virtualization. IaaS gives users cloud-based alternatives to on-premises infrastructure, so businesses can avoid investing in expensive on-site resources.</statement>
+			<statement>This is particularly useful for small and mid-sized businesses! It enables them to pay for a hosting plan that meets their own needs, without the high cost of maintaining their own physical servers.</statement>
+		</npc>
+		<player>
+			<response nextnode="2.3.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.3.2"> 
+		<npc>
+			<statement font="1" isBold="true">How does this affect you personally?</statement>
+			<statement>Try wandering into a neighborhood business where you know a part-time or full-time employee. Ask them what part of their operation involves a connection to the internet. Then ask yourself how that business touches the lives of you or people you know.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+
+	<node id="3"> 
+		<npc>
+			<statement>Hope that you have successfully found out how each service model changes the way we live, communicate, buy things, and do our work.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

@@ -50,7 +50,6 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // 获取玩家数据管理器
 
             switchButton.onClick.AddListener(OnSwitchButtonClick);
             submitButton.onClick.AddListener(OnSubmitButtonClick);
@@ -62,7 +61,6 @@ namespace ETLG
             base.OnOpen(userData);
             Log.Debug("Open login form");
 
-            GameEntry.UI.OpenUIForm(EnumUIForm.UINavigationForm);
 
             GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             registerSuccess.SetActive(false);
@@ -128,7 +126,7 @@ namespace ETLG
                 {
                 if (string.IsNullOrEmpty(this.pwd.text))
                 {
-                    //
+                    
                     SetReminderTextandColor("Please enter passward.", RED);
                 }
                 else
@@ -158,6 +156,7 @@ namespace ETLG
         }
         private void OnSwitchButtonClick()
         {
+            middleContainer.SetActive(true);
             registerSuccess.SetActive(false);
             submitB.SetActive(true);
             isRegister = !isRegister;

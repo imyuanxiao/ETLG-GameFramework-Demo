@@ -1,0 +1,22 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Careers in data science</statement>
+			<statement image="1">Data science is a rapidly-growing field with plenty of opportunities for curious minds. Now you might be wondering what industries focus most on data science, what technical skills might be in demand, or what the interesting jobs in the field are. The answer to these questions, plus a few more facts, are included in the following infographic.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement image="2"></statement>		
+			<statement image="3"></statement>	
+			<statement image="4"></statement>	
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

@@ -1,0 +1,75 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Which type of encryption uses two different encryption keys, a public key for the sender and a private key for the recipient?</statement>
+    <options>
+      <option id="A">Symmetric encryption</option>
+      <option id="B">Ciphertext</option>
+      <option id="C">Asymmetric encryption</option>
+      <option id="D">Modular exponentiation</option>
+    </options>
+    <analysis>Knowing the public key only lets you encrypt the data, but not decrypt. It has two sides (public and private) that do not match.</analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which encryption method replaces every letter in a message with something else according to a translation key?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Public-key cryptography</option>
+      <option id="B">Substitution ciphers</option>
+      <option id="C">Key exchange</option>
+      <option id="D">Secret temporary key cryptography</option>
+    </options>
+    <analysis>The Caesar cipher is one example of this class of technique.</analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which option refers to the process of making text secret?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Encryption</option>
+      <option id="B">Permutation</option>
+      <option id="C">Defense in depth</option>
+      <option id="D">Decryption</option>
+    </options>
+    <analysis>This area of cryptography converts plain text to secret writing. The reverse process is called decryption.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>What is the term for a new exploitable bug that software creators are not aware of yet?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Brute-force attack</option>
+      <option id="B">Zero-day vulnerability</option>
+      <option id="C">Botnet</option>
+      <option id="D">Denial of service</option>
+    </options>
+    <analysis>Black Hat hackers rush to use these exploits for maximum benefit before White Hat programmers release a patch for the bug.</analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>What is the term for a hacker who hunt for bugs and tries to close security holes in software to make systems safer and more resilient?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Red Hat hacker</option>
+      <option id="B">Black Hat hacker</option>
+      <option id="C">White Coat hacker</option>
+      <option id="D">White Hat hacker</option>
+    </options>
+    <analysis>They are often hired by companies and governments to perform security evaluations.</analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+</quiz>

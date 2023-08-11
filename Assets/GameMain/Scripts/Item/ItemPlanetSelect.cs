@@ -187,7 +187,7 @@ namespace ETLG
                 if (keyword != null && !keyword.Equals(""))
                 {
                     string title =  GameEntry.Data.GetData<DataLandingPoint>().GetLandingPointData(LandingPoint).Title;
-                    if (!title.Contains(keyword))
+                    if (!title.ContainsInsensitive(keyword))
                     {
                         continue;
                     }

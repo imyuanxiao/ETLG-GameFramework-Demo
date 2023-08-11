@@ -156,7 +156,7 @@ namespace ETLG
                 return;
             if (ne.Type == Constant.Type.UI_OPEN)
             {
-                if (!GameEntry.Data.GetData<DataPlayer>().GetPlayerData().isAchievementAchieved(ne.count))
+                if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().isAchievementShouldAchieved(ne.achievementId,ne.count))
                 {
                     popupQueue.Enqueue(ne);
                     GameEntry.Data.GetData<DataPlayer>().GetPlayerData().UpdatePlayerAchievementData(ne.achievementId,

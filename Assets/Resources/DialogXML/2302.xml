@@ -1,0 +1,136 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">Click the Assistants icon.</statement>
+            <statement image = "1"></statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Click Create assistant.</statement>
+            <statement image = "2"></statement>
+        </npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+        <npc>
+            <statement font="1" isBold="true">Name the assistant: my new assistant. Click Create assistant.</statement>
+            <statement image = "3"></statement>
+        </npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+        <npc>
+            <statement font="1" isBold="true">You have successfully finished this milestone. When you are ready, click in the forward arrow to return to the landing page.</statement>
+            <statement image = "4"></statement>
+        </npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement font="1" isBold="true">Click Add dialog skill.</statement>
+            <statement image = "5"></statement>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+    
+    <node id="6">
+        <npc>
+            <statement font="1" isBold="true">Click Create skill.</statement>
+            <statement image = "6"></statement>
+        </npc>
+        <player>
+            <response nextnode="7" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="7">
+        <npc>
+            <statement font="1" isBold="true">Give vour skill the name My new skill. Click Create dialog skill.</statement>
+            <statement image = "7"></statement>
+        </npc>
+        <player>
+            <response nextnode="8" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="8">
+        <npc>
+            <statement font="1" isBold="true">The skill is created, and you return to the assistant page. Click to open the skill you just created.</statement>
+            <statement image = "8"></statement>
+        </npc>
+        <player>
+            <response nextnode="9" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    <node id="9">
+        <npc>
+            <statement font="1" isBold="true">Congratulations! You have finished this milestone. Click in the next arrow when you are ready.</statement>
+            <statement image = "9"></statement>
+        </npc>
+        <player>
+            <response nextnode="10" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    
+    <node id="10">
+        <npc>
+            <statement font="1" isBold="true">In the Watson Assistant tool, click the Content Catalog tab.</statement>
+            <statement image = "10"></statement>
+        </npc>
+        <player>
+            <response nextnode="11" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    
+    <node id="11">
+        <npc>
+            <statement font="1" isBold="true">Find General in the list, and then click Add to skill.</statement>
+            <statement image = "11"></statement>
+        </npc>
+        <player>
+            <response nextnode="12" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    
+    <node id="12">
+        <npc>
+            <statement font="1" isBold="true">Open the Intents tab to review the intents and associated example utterances that were added to your training data. You can recognize them because each intent name begins with the prefix #General_.</statement>
+            <statement image = "12"></statement>
+        </npc>
+        <player>
+            <response nextnode="13" isShown="false">Continue</response>
+        </player>
+    </node>
+    
+    
+    <node id="13">
+        <npc>
+            <statement font="1" isBold="true">You successfully started to build your training data by adding prebuilt content from IBM. Click in the next arrow when you are ready.</statement>
+            <statement image = "13"></statement>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

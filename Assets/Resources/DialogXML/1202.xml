@@ -1,0 +1,68 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>The benefits of cloud computing vary by how individual business uses it. Every company wants to control costs. Beyond that, different businesses have different requirements. We can summarize cloud’s benefits with three phrases: flexibility, efficiency, and strategic value:</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>1.Flexibility  &#xA; 2.Efficiency  &#xA; 3.Strategic value</statement>
+		</npc>
+		<player>
+			<response nextnode="2.1">Flexibility</response>
+			<response nextnode="2.2">Efficiency</response>
+			<response nextnode="2.3">Strategic value</response>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2.1"> 
+		<npc>
+			<statement>Users can scale cloud services to fit their needs, customize applications, and access the internet to work at any time, anywhere.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.2"> 
+		<npc>
+			<statement>Enterprise users can bring applications to market quickly, without worrying about the high cost of infrastructure or maintenance.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="2.3"> 
+		<npc>
+			<statement>Cloud services help business compete with the most up-to-date technology.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Go Back</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement font="2" isBold="true">Cloud enhances innovation</statement>
+			<statement>Innovation keeps companies ahead of the technology curve! Think of the innovations that have transformed your own life: phones that put computers in your pocket, cars that guide you down unfamiliar roads, artificial intelligence (AI) that helps doctors choose better treatments for your family.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement image="1">Technical innovations depend on the cloud, making it the gateway to AI, blockchain, the Internet of Things (IoT), and even quantum computing. To stay ahead, businesses need the cloud and its rapid, easy-to-update information management.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

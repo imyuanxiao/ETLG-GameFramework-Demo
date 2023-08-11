@@ -1,0 +1,105 @@
+<dialogue>
+	<node id="1"> <!-- 6 Videos Here Lack-->
+		<npc>
+			<statement font="2" isBold="true">Blockchain use cases and applications</statement>
+            <statement>Click each section to learn more.</statement>
+		</npc>
+		<player>
+            <response nextnode="1.1">BTracing fresh seafood from the moment it’s caught</response>
+            <response nextnode="1.2">Improving cryptocurrency security in financial services</response>
+            <response nextnode="1.3">Transforming healthcare outcomes with blockchain</response>
+            <response nextnode="1.4">Fresh thinking in blockchain, AI and IoT for supply chain</response>
+            <response nextnode="1.5">Fueling innovation in the oil and gas industry</response>
+            <response nextnode="1.6">Increasing trust in retailer-supplier relationships</response>
+            <response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+    
+    <node id="1.1">
+        <npc>
+            <statement font = "1" isBold = "true" video = "1-1">BTracing fresh seafood from the moment it’s caught</statement>
+            <statement>IBM Food Trust is helping Raw Seafoods increase trust across the food supply chain by tracing every catch right from the water — all the way to supermarkets and restaurants.</statement>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+    <node id="1.2">
+        <npc>
+            <statement font = "1" isBold = "true" video = "1-2">Improving cryptocurrency security in financial services</statement>
+            <statement>INBLOCK issues Metacoin cryptocurrency, which is based on Hyperledger Fabric, to help make digital asset transactions faster, more convenient and safer.</statement>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+    <node id="1.3">
+        <npc>
+            <statement font = "1" isBold = "true">Transforming healthcare outcomes with blockchain</statement>
+            <statement>The IBM Blockchain Platform can change the way your ecosystem ensures trust, data provenance and efficiency to improve patient care and profitability.</statement>
+            <statement image = "1-1"/>
+            <statement image = "1-2"/>
+            <statement image = "1-3"/>
+            <statement image = "1-4"/>
+            <statement image = "1-5"/>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+    <node id="1.4">
+        <npc>
+            <statement font = "1" isBold = "true" video = "1-4">Fresh thinking in blockchain, AI and IoT for supply chain</statement>
+            <statement>Learn how Golden State Foods is using the immutability of blockchain to trace goods through its supply chain and help ensure food quality.</statement>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+    <node id="1.5">
+        <npc>
+            <statement font = "1" isBold = "true" video = "1-5">Fueling innovation in the oil and gas industry</statement>
+            <statement>Vertrax and Chateau Software launched the first multicloud blockchain solution built on IBM Blockchain Platform to help prevent supply chain disruptions in bulk oil and gas distribution.</statement>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+    <node id="1.6">
+        <npc>
+            <statement font = "1" isBold = "true" video = "1-6">Increasing trust in retailer-supplier relationships</statement>
+            <statement>The Home Depot is using IBM Blockchain to gain shared and trusted information on shipped and received goods, reducing vendor disputes and accelerating dispute resolution.</statement>
+        </npc>
+            <player>
+                <response nextnode="1" >Back</response>
+            </player>
+    </node>
+    
+	<node id="2">
+        <npc>
+            <statement font="1" isBold="true">Blockchain for industries</statement>
+            <statement>Industry leaders are using IBM Blockchain to remove friction, build trust and unlock new value. Select your segment to see how.</statement>
+            <statement>
+1. Supply chain
+2. Healthcare
+3. Government
+4. Retail
+5. Media and advertising
+6. Oil and gas
+7. Telecommunications
+8. Manufacturing
+9. Insurance
+10. Financial services
+11. Travel and transportation</statement>
+        </npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

@@ -1,0 +1,40 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">It’s a search for understanding</statement>
+			<statement video="1">The following video provides a strong point of view about the qualities that a data scientist should have, including curiosity, passion, and the ability to tell a story.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement font="2" isBold="true">Could you be a data scientist?</statement>		
+			<statement>Now that you know more about data science and what the work is like, is this a career you’d like to explore?</statement>	
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement>Find out by answering a few questions on your paper.</statement>		
+			<statement>1.What are you passionate about? Write down a field of study, a hobby, or some other topic that you’re interested in learning more about. Remember, from soccer to astrophysics to music to hurricane relief, there’s data in everything.&#xA;2.What data might relate to your interests? Write down examples of what you think is out there.&#xA;3.Is that data mostly structured, so you could list it in neat rows and columns? Or is it mostly unstructured, like text or multimedia files?&#xA;4.Try asking a question (or two, or three!) that relates to your area of interest and the data that might describe it.</statement>	
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement>Writing an answer is a good way to process your thoughts.</statement>		
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

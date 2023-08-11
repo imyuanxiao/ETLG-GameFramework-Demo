@@ -27,14 +27,13 @@ namespace ETLG.Data
         public Vector3 artifactInfoPosition;
 
         //public PlayerArtifactData currentPlayerArtifactData;
-
         public int CurrentArtifactID { get; set; }
-
-
 
         public int CurrentModuleID { get; private set; }
 
         public bool lockCurrentModuleID { get; set; }
+
+        public int AllModuleCount { get; set; }
 
         public void SetCurrentModuleID(int currentModuleID)
         {
@@ -84,6 +83,8 @@ namespace ETLG.Data
             DRModule[] dRModules = dtModules.GetAllDataRows();
             if (dtModules == null)
                 throw new System.Exception("Can not get data table Module");
+
+            AllModuleCount = dtModules.Count;
 
             // 把所有 ArtifactModule 存到键值对数据结构中
 

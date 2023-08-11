@@ -1,0 +1,52 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">You can organize data in two different ways</statement>
+			<statement>Data is raw information. It might be facts, statistics, opinions—any kind of content that’s recorded in some format. Numbers? Sure. Facts? Sure. Voices, photos, names, dance moves? Also data.</statement>
+			<statement>So when data scientists handle raw information to uncover its story, they start by organizing it into one of two forms: structured data or unstructured data. The difference between these forms changes how we work with them.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>Structured data is information that can be laid out in rows and columns. You might already have worked with structured data using a spreadsheet like Microsoft Excel. For complex information, data scientists use more powerful tools like SQL, Apache, or R, which can sort through vast amounts of data stored in many connected tables. Can you organize information within the data into groups based on specific characteristics? Those groups are structured data.</statement>		
+			<statement image="1">Here’s a sample of structured data from your local hardware store.</statement>	
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement>This table organizes customer information from the hardware store by characteristics such as customer number or name. Each row shows information related to a particular customer, while each column shows one customer characteristic that spans a group of customers.</statement>		
+			<statement>As you can see, structured data tends to be well-organized, making it easier for data scientists to discover its treasure using common data analysis tools. Spreadsheets are based on tables like this, so they handle structured data very well.</statement>	
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement>Then there’s unstructured data, which is a fancy way of saying “everything else.” We use this term when there's no built-in organization (or structure) to the data. Unstructured data can be a collection of audio files, or social media posts, or essay texts, or even song lyrics.</statement>		
+			<statement>Here are two examples to help you see the difference:</statement>	
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> 
+		<npc>
+			<statement>1.Your Department of Motor Vehicles takes photographs of everyone who gets a driver’s license. A collection of those images is unstructured data. (But the table of peoples’ names, addresses, and licence numbers that indexes those photos is structured data.)&#xA;2.A downloadable library might offer text from thousands of different books. The catalog listing names, authors and dates of those books is structured data. (But the text of those books is unstructured data.)</statement>		
+			<statement>Unstructured data can be harder to work with than structured data, but it’s still useful! Suppose a video game company is getting a lot of email bug reports about a new release. The text of those emails is unstructured data. By examining those texts (and perhaps by converting some of their contents to structured data), a data scientist can figure out patterns and identify the problem so the company can fix it!</statement>	
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

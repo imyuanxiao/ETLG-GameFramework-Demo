@@ -1,0 +1,77 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">The Client: NYC Restaurant and Bakery chain.</statement>
+            <statement image = "1">One of the clients of Global Law Firm LLC is a large Restaurant company with base of operations in
+Manhattan, NYC
+Intent - they are looking to provide a personalized experience, and increased client engagement on the wake of COVID-19.
+Approach - Increase capabilities of their online channels to ensure touchless interactions on reservations and orders, using conversation agents.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <statement>- Adam works with Ana from the client's team; they have a first virtual meeting where he lays down the foundation of AI ethics.
+Then, they go over the recently approved Ethical Guide: Advanced Conversation Agents
+- Adam encourages Ana to work with her Designers and Domain experts to put a plan in place before starting to work on the Virtual Agent, including a strong focus on aligning the intent of the client to avoid known-pitfalls.</statement>
+            <statement image = "2"/>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+            <statement font="1" isBold="true">The Guide: Building a conversational agent</statement>
+			<statement image = "3"/>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+            <statement font="1" isBold="true">How does a bot interpret conversation?</statement>
+            <statement>A bot interprets our conversation digitally by identifying the intents and entities in our utterances, which in turn will give it the information it needs to craft a proper response.</statement>
+            <statement image = "4"/>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+        <npc>
+            <statement image = "5-1">-Alia recommends IBM Watson Assistant as the tool to use for this task
+- Watson Assistant is made for conversation builders, not coders
+- Includes intuitive dialog builder and content library.</statement>
+            <statement image = "5-2"/>
+        </npc>
+        <player>
+            <response nextnode="6" isShown="false">Continue</response>
+        </player>
+	</node>
+
+	<node id="6">
+        <npc>
+            <statement image = "6-1">Follow now Adam as he builds his first virtual agent with the help of Alia:
+• Create Watson Assistant Service
+• Create an assistant
+• Create a dialog skill
+• Add intents from a content catalog
+• Build a Dialog
+• Add Your Skill to Your Assistant
+• Integrate the Assistants</statement>
+            <statement image = "6-2"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+    
+</dialogue>

@@ -251,7 +251,7 @@ namespace ETLG
             foreach (var courseID in courseId)
             {
                 string title = GameEntry.Data.GetData<DataLandingPoint>().GetLandingPointData(courseID).Title;
-                if (title.Contains(keyword)) { return true; }
+                if (title.ContainsInsensitive(keyword)) { return true; }
             }
 
             return false;

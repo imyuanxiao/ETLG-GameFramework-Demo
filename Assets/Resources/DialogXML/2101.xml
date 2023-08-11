@@ -1,0 +1,82 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="1" isBold="true">Al Impact on the World Today</statement>
+			<statement>What is vour definition of Artificial Intelligence?</statement>
+			<statement image="1"></statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+            <!--1 Video Lack Here-->
+			<statement video = "1">AI in the World Today</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement image = "3">Where Are We Today in AI</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement>Narrow Intelligence:
+Narrow AI is focused on addressing very focused tasks
+Example:
+Buying a book with a voice-based device based on "common knowledge".</statement>
+            <statement image = "4"/>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement image = "5-1">Broad AI:
+Broad AI is about integrating AI within a specific industry knowledge and data to train this type of system.
+Example:
+Self-driving cars are a collection of narrow AI systems that can make decisions.</statement>
+            <statement image = "5-2"></statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement>General AI:
+General AI refers to machines that can perform any intellectual task a human can.
+Currently AI does not have the ability to use previous experiences to come up with new creative ideas.</statement>
+            <statement image = "6"/>
+        </npc>
+		<player>
+			<response nextnode="7" isShown = "false">Continue</response>
+		</player>
+	</node>
+    
+    <node id="7">
+        <npc>
+            <statement>"Our technology, our machines are part of our humanity. We create them to extend ourselves and that is what is unique about human beings"
+Ray Kurzweil
+Futurist</statement>
+            <statement image = "7"/>
+        </npc>
+        <player>
+            <response nextnode="end">Thank you.</response>
+        </player>
+    </node>
+
+</dialogue>

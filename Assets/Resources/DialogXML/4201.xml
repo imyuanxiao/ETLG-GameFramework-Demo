@@ -1,0 +1,177 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">How does the scientific method apply to the field of data science? </statement>
+			<statement>A pandemic is taking lives and livelihoods. Climate change threatens to drown cities and disrupt food supplies. Economic growth widens inequalities. These are some of the urgent problems society is wrestling with, where science, guided by our values, is critical to our progress.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement font="1" isBold="true">Humanity is facing great uncertainty.</statement>		
+			<statement font="1" >Rather than guessing at solutions—especially with so much at stake—we, as a society, need to implement scientific thinking at all scales—from our daily lives to corporate innovation to government policymaking.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement isBold="true">We as a society need to implement scientific thinking at all scales.</statement>		
+			<statement image="1">While great progress has been made, there are great risks to our future. We must find new methods and solutions to the world’s most pressing challenges. The need to take a scientific approach to these problems is more urgent than ever.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement isBold="true">Scientific thinking isn’t just for scientists</statement>		
+			<statement>Scientists may seem to occupy a rarefied world apart, with their PhDs and high-tech equipment, and stylish lab coats. But scientific thinking is within everyone's reach.</statement>
+			<statement>Textbooks may change as we update our ideas about geology, medicine, and physics, but the method used to update them hasn't changed all that much.</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> 
+		<npc>
+			<statement image="2">New discoveries nearly all rely on some version of the scientific method. Applying this method and the technological transformation we’re bringing to it will be key to the next breakthroughs.</statement>		
+			<statement>Scientists may seem to occupy a rarefied world apart, with their PhDs and high-tech equipment, and stylish lab coats. But scientific thinking is within everyone's reach.</statement>
+			<statement>Textbooks may change as we update our ideas about geology, medicine, and physics, but the method used to update them hasn't changed all that much.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6"> 
+		<npc>
+			<statement isBold="true">What is the Scientific Method?</statement>		
+			<statement>The Scientific Method is the practice of science as a way of thinking about knowledge. &#xA;· It means asking how we know things. &#xA;· It means coming up with new ideas and making careful observations that can refute or support them so that we know even more. &#xA;· It means poking at the world to see what happens. &#xA;· It means describing your methods of inquiry in such a way that others can repeat them independently, and communicating outcomes in a way that other scientists can interpret and understand them; &#xA;· and it means updating our knowledge when the unexpected happens.</statement>
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7"> 
+		<npc>
+			<statement isBold="true">Using an example</statement>		
+			<statement>1.You might read about fertilizers and wonder what kind would help your vegetables grow the fastest.&#xA;The more expensive of the two fertilizer brands will make your vegetables grow taller&#xA;Use each fertilizer on half of your garden, then collect and analyze the data to see which plants grew taller.</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8"> 
+		<npc>
+			<statement isBold="true">Trust in Science</statement>		
+			<statement>Thinking scientifically also means being aware of what others have already tried and discovered. Any given scientific paper might reference hundreds of others, which shows how science constantly builds on what came before.</statement>
+			<statement>This reliance on and trust in scientific knowledge comes from science’s commitment to transparency in a way that allows any scientist to challenge any idea at any time. Decisions should be informed by data and evidence.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9"> 
+		<npc>
+			<statement isBold="true">Science Can’t Be Contained</statement>		
+			<statement>When you imagine the domain of a scientist, you might think of the natural sciences—physics, chemistry, biology, ecology, geology, astronomy, and so on. </statement>
+		</npc>
+		<player>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="10"> 
+		<npc>
+			<statement>But the scientific method can help us to think about how discovery in the natural sciences can influence or be influenced by critical social decisions—involving psychology, politics, and business. To answer some of these questions</statement>		
+			<statement>· Can we design molecules to pull carbon dioxide out of smog? &#xA;· Do we have already-approved drugs that might help COVID-19 patients? &#xA;· Where should we look to spot the next pandemic-causing bug?</statement>
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11"> 
+		<npc>
+			<statement>We need to better understand the world we live in</statement>		
+			<statement image="4">· The effect of natural sciences on the broader issues &#xA;· How policy and economic trends affect the natural sciences? &#xA;· How do societal decisions affect societal outcomes?</statement>
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12"> 
+		<npc>
+			<statement isBold="true">Few questions we might ask about the effect of the natural sciences on broader issues</statement>		
+			<statement>· How will changes in climate affect supply chains? &#xA;· How might the COVID-19 pandemic influence return-to-work practices? &#xA;· What effect does emerging health problems have on telehealth programs?</statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13"> 
+		<npc>
+			<statement isBold="true">And now, the data scientist who works with data begins to ask questions that start with why.</statement>		
+			<statement>Why did life move from the primordial oceans to land? Did the moon and the tides have something to do with it?</statement>
+			<statement>Why is life based on carbon? After all, it is right next to silicon on the periodic table and has the same electron valance.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14"> 
+		<npc>
+			<statement>Our sun is a G-type star. 4 billion years down and 4.5 billion years to go. It will turn into a white giant and then a red dwarf. So how long do we have on Earth?</statement>		
+			<statement>One of the key attributes of the scientist that works with data (Data Scientist) is an eternal curiosity factor. Always asking why. Data is a commodity, but without ways to process it, its value is questionable. Data science is a multidisciplinary field whose goal is to extract value from data in all its forms. Throughout this course, we will explore the field of science through data and its structure, as well as the high-level process that you can use to transform data into value. </statement>
+			<statement>Data science is a process. That's not to say it's mechanical and void of creativity. But, when you dig into the stages of processing data, from munging data sources and data cleansing to machine learning and eventually visualization, you see that unique steps are involved in transforming raw data into insight.</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15"> 
+		<npc>
+			<statement isBold="true">So, what is the relationship between Science and Data Science?</statement>		
+			<statement>You may wonder, what does science has to do with data? Well, the starting point of science is collecting data. We collect data on animals, plans; we collect data on minerals, elements, and even stars. Once we have ample data, we classify them:</statement>
+			<statement>· Data collected from animals and plans go into phylogenetic trees&#xA;· Those gathered from minerals go into crystal groups&#xA;· Data collected from elements finds its way into the periodic table&#xA;· Data collected from  stars are plotted in the Hertzsprung-Russel diagram</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16"> 
+		<npc>
+			<statement isBold="true">What is Data Science?</statement>		
+			<statement>It is the understanding the world through the scientific analysis of the digital representation of data.</statement>		
+		</npc>
+		<player>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17"> 
+		<npc>
+			<statement isBold="true">Bringing it all together</statement>		
+			<statement video="1">In the video below your instructor will guide you through these concepts:</statement>		
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

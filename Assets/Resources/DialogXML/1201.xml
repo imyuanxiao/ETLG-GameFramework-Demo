@@ -1,0 +1,22 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>This course will help you understand how cloud computing is put to work every day. You’ll review cloud’s benefits and its real-world applications, and be introduced to ways you might begin your own career in cloud computing. But first, a question.</statement>
+			<statement isBold="true">Imagine that you have a job developing online game software for a company like Rockstar or Valve. Which cloud service model do you think you’d use?</statement>
+			 <statement>1.Saas &#xA; 2.PaaS &#xA; 3.IaaS</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>Keep your best guess in mind as you continue. You’ll find the answer in an upcoming topic.</statement>
+			<statement video="1-1201">Now, watch a short video about how IBM Cloud helps companies respond more effectively to their customers.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

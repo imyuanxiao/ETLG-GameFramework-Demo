@@ -1,0 +1,46 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Which cloud service model allows companies to rent both the architecture and infrastructure, with the cloud vendor responsible for managing the entire infrastructure?</statement>
+    <analysis>This is particularly useful for small and mid-sized businesses! It enables them to pay for a hosting plan that meets their own needs.</analysis>
+    <options>
+      <option id="A">Software as a service (SaaS)</option>
+      <option id="B">Storage as a service (SaaS)</option>
+      <option id="C">Platform as a service (PaaS)</option>
+      <option id="D">Infrastructure as a service (IaaS)</option>
+    </options>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which cloud service model refers to software deployment where software, including business processes, enterprise applications, and collaboration tools, is provided as a service to customers?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Platform as a service (Paas)</option>
+      <option id="B">Infrastructure as a service (IaaS)</option>
+      <option id="C">Software as a service (SaaS)</option>
+      <option id="D">Storage as a service (SaaS)</option>
+    </options>
+    <analysis>Cloud computing allows consumers and businesses to use applications without installing them locally.</analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  
+  <question type="MCS" timelimit="30">
+    <statement>In the SaaS model, cloud computing allows consumers and businesses to use applications without installation and access their personal files at any computer with internet access. Which is an example of a SaaS application?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Using cloud tools to build and deploy apps in the cloud</option>
+      <option id="B">Buying from an online website</option>
+      <option id="C">Pay-as-you-go access to networking and virtualization services</option>
+      <option id="D">Uploading pictures to Dropbox</option>
+    </options>
+    <analysis>The SaaS model helps consumers to access personal files through the internet from any computer.</analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+</quiz>

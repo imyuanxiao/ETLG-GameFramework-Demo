@@ -23,8 +23,6 @@ namespace ETLG
         public TextMeshProUGUI playerScore;
         public TextMeshProUGUI learningPath;
         public TextMeshProUGUI placeholder_userName;
-        public TextMeshProUGUI placeholder_name;
-        public TextMeshProUGUI placeholder_pwd;
         public Button editPlayerInfoButton;
         public Button editPwdButton;
         public Button showPwdButton;
@@ -130,13 +128,11 @@ namespace ETLG
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_UPDATE_SUCCESS)
                 {
-                    origionalName = placeholder_name.text;
+                    origionalName = nickName.text;
                     playerAvatarId = selectedId;
                     avatarChange.SetActive(false);
                     SetPlayerAvatar();
                     nickName.interactable = false;
-                    placeholder_name.text = nickName.text;
-                    placeholder_name.fontStyle = FontStyles.Bold;
                     avatarChange.SetActive(false);
                     editButtons.SetActive(true);
                     submitButtons.SetActive(false);
@@ -152,10 +148,9 @@ namespace ETLG
                 }
                 else if (fetchedType == Constant.Type.BACK_PROFILE_PASSWORD_SUCCESS)
                 {
-                    origionalPwd = newPwd.text;
                     pwd.interactable = false;
-                    placeholder_pwd.text = origionalPwd;
-                    placeholder_pwd.fontStyle = FontStyles.Bold;
+                    origionalPwd = newPwd.text;
+                    pwd.text = origionalPwd;
                     newPasswords.SetActive(false);
                     editButtons.SetActive(true);
                     submitButtons.SetActive(false);
@@ -177,8 +172,8 @@ namespace ETLG
         {
             reminder.text = null;
 
-
-            if (GameEntry.Data.GetData<DataBackend>().currentUser.avatar != "1")
+            
+            if (int.Parse( GameEntry.Data.GetData<DataBackend>().currentUser.avatar)>=1000)
             {
                 playerAvatarId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
             }
@@ -187,12 +182,13 @@ namespace ETLG
                 playerAvatarId = "1000";
             }
             placeholder_userName.text = GameEntry.Data.GetData<DataBackend>().currentUser.username;
-            placeholder_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             origionalName = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             originalPosition = reminder.rectTransform.localPosition;
             nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
             nickName.interactable = false;
             pwd.interactable = false;
+
+            pwd.text = origionalPwd;
 
             editButtons.SetActive(true);
             submitButtons.SetActive(false);
@@ -226,9 +222,6 @@ namespace ETLG
             nickName.interactable = true;
 
             nickName.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
-
-            
-            placeholder_name.fontStyle = FontStyles.Bold | FontStyles.Italic;
             
             editButtons.SetActive(false);
             submitButtons.SetActive(true);
@@ -240,15 +233,14 @@ namespace ETLG
             if(isEditInfo)
             {
                 nickName.interactable = false;
-                placeholder_name.text = origionalName;
-                placeholder_name.fontStyle = FontStyles.Bold;
+                Debug.Log(origionalName);
+                nickName.text = origionalName;
                 avatarChange.SetActive(false);
             }
             else
             {
                 pwd.interactable = false;
-                placeholder_pwd.text = origionalPwd;
-                placeholder_pwd.fontStyle = FontStyles.Bold;
+                pwd.text = origionalPwd;
                 newPasswords.SetActive(false);
             }
             
@@ -270,7 +262,12 @@ namespace ETLG
                 }
                 if(selectedButton == null)
                 {
+                    if(int.Parse(GameEntry.Data.GetData<DataBackend>().currentUser.avatar)>=1000)
                     selectedId = GameEntry.Data.GetData<DataBackend>().currentUser.avatar;
+                    else
+                    {
+                        selectedId = "1000";
+                    }
                 }
                 BackendDataManager.Instance.HandleProfileUpdate(int.Parse(selectedId), nickName.text);
             }
@@ -301,8 +298,6 @@ namespace ETLG
             pwd.text = null;
             newPwd.text = null;
             confirmPwd.text = null;
-            placeholder_pwd.text = "Please Enter Old Password.";
-            placeholder_pwd.fontStyle = FontStyles.Bold | FontStyles.Italic;
             editButtons.SetActive(false);
             submitButtons.SetActive(true);
             newPasswords.SetActive(true);

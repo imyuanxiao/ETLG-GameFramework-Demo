@@ -18,6 +18,7 @@ namespace ETLG
         public TextMeshProUGUI s_ID = null;
         public LeaderboardData leaderboardData;
         public Button closeButton;
+        public RawImage avatar;
         public int planetNum;
         protected override void OnInit(object userData)
         {
@@ -38,6 +39,13 @@ namespace ETLG
             s_spaceship.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
             s_planetNum.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
             s_name.text = GameEntry.Data.GetData<DataBackend>().userProfile.nickName;
+            Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.avatar);
+            if (GameEntry.Data.GetData<DataBackend>().userProfile.avatar >= 1000)
+                avatar.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar(GameEntry.Data.GetData<DataBackend>().userProfile.avatar.ToString()));
+            else
+            {
+                avatar.texture = Resources.Load<Texture>(AssetUtility.GetPlayerAvatar("1000"));
+            }
         }
         protected override void OnClose(bool isShutdown, object userData)
         {

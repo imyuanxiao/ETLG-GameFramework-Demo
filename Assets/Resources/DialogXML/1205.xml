@@ -1,0 +1,63 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement>Cloud computing is a hot technology with a high demand for qualified professionals. This could include you! To land a job in this field, you need specific skills. Let’s see what can help you prepare for a cloud computing career.</statement>
+			<statement>Right now, on your own or in a computer club, you can start learning a programming language that’s important for work in cloud. Python, Perl, and Ruby are open source and becoming more popular every year. Other “old favorites” include PHP, Java, and .NET.</statement>
+			<statement>Do you already have programming experience? Major vendors like Amazon and Microsoft run training and certification programs that can make you attractive to tech companies. Consider earning credentials in subjects like AWS Certification, Azure Certification, and Google Cloud Certified.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>As your career gathers momentum, you’ll build on your certifications with practical experience on some of the most common cloud platforms:</statement>
+			<statement>· Amazon Web Services&#xA;· IBM Cloud&#xA;· Google Cloud Platform&#xA;· Microsoft Azure</statement>
+			<statement>You can start now, even if that just means searching online for more information about cloud technology. Then you reach out to a teacher or someone who works in a tech business, then you join a computer club ... and from there, the sky’s the limit to your development!</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement font="2" isBold="true">Ready to learn more?</statement>
+			<statement>Begin by learning a programming language or a specific technology in which you can earn certification. Online and college courses are a great way to skill up. Think about doing an internship—a great way to see if this technology is right for you.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement font="2" isBold="true">Look ahead to a cloud career path</statement>
+			<statement>Technology roles evolve as the technology and applications evolve. But a career in cloud at IBM can lead you down many exciting career paths and technical specialties. Imagine working on artificial intelligence (AI), the Internet of Things (IoT), or blockchain! All of these technologies use the power of cloud. Consider some of these cloud computing roles:</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5"> 
+		<npc>
+			<statement>· A cloud architect oversees a company’s cloud computing approach.&#xA;· A cloud engineer is a multidisciplinary role responsible for managing a company’s cloud capabilities. The role usually involves implementation and management of the cloud service delivery models (IaaS, PaaS, and SaaS).&#xA;· A cloud software developer or engineer is responsible for designing and developing secure cloud applications, products, and services.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6"> 
+		<npc>
+			<statement font="2" isBold="true">What more can you do to develop your cloud computing skills?</statement>
+			<statement>IBM bloggers are a great resource for a deeper perspective on cloud computing. Check back from time to time to see cloud computing in action across the globe. Review the Thoughts on Cloud site to learn more about cloud computing and examples of IBM Cloud services at work.</statement>
+			<statement>Review the Thoughts on Cloud site to learn more about cloud computing and examples of IBM Cloud services at work.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>
