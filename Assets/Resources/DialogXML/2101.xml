@@ -13,7 +13,7 @@
 	<node id="2">
 		<npc>
             <!--1 Video Lack Here-->
-			<statement>="1">AI in the World Today</statement>
+			<statement video = "1">AI in the World Today</statement>
 		</npc>
 		<player>
 			<response nextnode="3" isShown="false">Continue</response>

@@ -60,8 +60,9 @@ Multiple organizations share the responsibilities of maintaining a blockchain. T
 
 	<node id="5"> <!--2 VIDEOS HERE LACK-->
         <npc>
-            <statement></statement>
+            <statement video = "5-1"/>
             <statement>One of the concepts in the previous video is that a blockchain network is a secure digital ledger system. The following video elaborates on the shared ledger.</statement>
+            <statement video = "5-2"/>
         </npc>
         <player>
            <response nextnode="end">Thank you.</response>

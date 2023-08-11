@@ -31,7 +31,7 @@ Download the VS Code extension from the VS Code marketplace in order to get star
 	<node id="3"><!--1 Video Lack Here-->
         <npc>
             <statement font="1" isBold="true">IBM Blockchain Platform components</statement>
-            <statement></statement>
+            <statement video = "3" />
         </npc>
 		<player>
 			<response nextnode="4" isShown="false">Continue</response>

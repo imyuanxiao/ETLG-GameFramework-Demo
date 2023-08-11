@@ -3,6 +3,7 @@
 		<npc>
 			<statement font="2" isBold="true">Blockchain component deployment</statement>
             <statement font="1" isBold="true">The following diagram shows how the IBM Blockchain Platform components are deployed to the Kubernetes cluster, assuming Hyperledger Fabric v2.x images are used by the peer. </statement>
+            <statement video = "1"/>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>

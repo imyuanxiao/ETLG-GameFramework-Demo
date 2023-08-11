@@ -1,0 +1,79 @@
+<quiz boss="true">
+ <question type="MCS" timelimit="30">
+     <statement>Choose the correct sequence of the following blockchain network types to its description.
+Network Types: Private, Permissioned, Public, Consortium.
+1. One organization governs the network;
+2. Anyone can join and participate in the network;
+3. Participation in network and certain transactions is restrictive;
+4. Multiple organizations share the blockchain maintenance responsibilities.
+     </statement>
+   <analysis></analysis>
+   <options>
+     <option id="A">1, 3, 2, 4</option>
+     <option id="B">1, 3, 4, 2</option>
+     <option id="C">1, 2, 4, 3</option>
+     <option id="D">1, 2, 3, 4</option>
+   </options>
+   <analysis></analysis>
+   <answers>
+     <answer>A</answer>
+   </answers>
+ </question>
+    
+  <question type="MCS" timelimit="30">
+    <statement>Bitcoin and Blockchain are the same technology.</statement>
+    <analysis></analysis>
+    <options>
+      <option id="A">True</option>
+      <option id="B">False</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>How is trust established in a blockchain network?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Data is decentralized and stored on multiple computers to discourage tampering.</option>
+      <option id="B">Data storage is based on the written ledger system that has been in use for centuries.</option>
+      <option id="C">Data storage locations do not synchronize, thus reducing the threat of security violations.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  
+  <question type="MCS" timelimit="30">
+    <statement>Ordering Services uses the Raft protocol. Click the statement that most accurately describes the Raft protocol.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">The system can withstand the loss of nodes as long as one leader node remains and is active.</option>
+      <option id="B">The system can withstand the loss of nodes as long as a majority of ordering nodes remain.</option>
+      <option id="C">The system cannot withstand the loss of the leader node, but it can withstand the loss of follower nodes.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+    
+  <question type="MCS" timelimit="30">
+    <statement>Where would your peer be deployed if your Kubernetes cluster is located in Denver, your main office is in Philadelphia, and your linked console is in Seattle?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Denver</option>
+      <option id="B">Philadelphia</option>
+      <option id="C">Seattle</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+</quiz>
