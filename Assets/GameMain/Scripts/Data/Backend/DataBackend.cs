@@ -13,28 +13,30 @@ namespace ETLG.Data
     {
         public string responseData;
         public string avatorId;
+        public static string remoteUrl = "http://13.53.206.7:9527";
+        public static string localUrl = "http://localhost:9527";
         //ÅÅÐÐ°ñ
-        public string leaderboard_url = "http://16.170.243.113:9527/profile/rank";
+        public string leaderboard_url = remoteUrl+ "/profile/rank";
         //µÇÂ¼×¢²á
-        public string Login_url = "http://16.170.243.113:9527/auth/login";
-        public string Register_url = "http://16.170.243.113:9527/auth/register";
-        public string currentUser_url = "http://16.170.243.113:9527/auth/currentUser";
-        public string saveDownload_url = "http://16.170.243.113:9527/profile/saveDownload";
-        public string saveUpload_url = "http://16.170.243.113:9527/profile/saveUpload";
-        public string getProfileById_url = "http://16.170.243.113:9527/profile/user/";
-        public string profileUpdate_url = "http://16.170.243.113:9527/profile/update";
-        public string profilePassword_url = "http://16.170.243.113:9527/profile/password";
+        public string Login_url = remoteUrl + "/auth/login";
+        public string Register_url = remoteUrl + "/auth/register";
+        public string currentUser_url = remoteUrl + "/auth/currentUser";
+        public string saveDownload_url = remoteUrl + "/profile/saveDownload";
+        public string saveUpload_url = remoteUrl + "/profile/saveUpload";
+        public string getProfileById_url = remoteUrl + "/profile/user/";
+        public string profileUpdate_url = remoteUrl + "/profile/update";
+        public string profilePassword_url = remoteUrl + "/profile/password";
 
-        public string local_leaderboard_url = "http://localhost:9527/profile/rank";
+        public string local_leaderboard_url = localUrl + "/profile/rank";
         //µÇÂ¼×¢²á
-        public string local_Login_url = "http://localhost:9527/auth/login";
-        public string local_Register_url = "http://localhost:9527/auth/register";
-        public string local_currentUser_url = "http://localhost:9527/auth/currentUser";
-        public string local_saveDownload_url = "http://localhost:9527/profile/saveDownload";
-        public string local_saveUpload_url = "http://localhost:9527/profile/saveUpload";
-        public string local_getProfileById_url = "http://localhost:9527/profile/user/";
-        public string local_profileUpdate_url = "http://localhost:9527/profile/update";
-        public string local_profilePassword_url = "http://localhost:9527/profile/password";
+        public string local_Login_url = localUrl + "/auth/login";
+        public string local_Register_url = localUrl + "/auth/register";
+        public string local_currentUser_url = localUrl + "/auth/currentUser";
+        public string local_saveDownload_url = localUrl + "/profile/saveDownload";
+        public string local_saveUpload_url = localUrl + "/profile/saveUpload";
+        public string local_getProfileById_url = localUrl + "/profile/user/";
+        public string local_profileUpdate_url = localUrl + "/profile/update";
+        public string local_profilePassword_url = localUrl + "/profile/password";
         //Authorization token
         public string authorization;
         //ÓÃÓÚ»Øµ÷º¯Êý
