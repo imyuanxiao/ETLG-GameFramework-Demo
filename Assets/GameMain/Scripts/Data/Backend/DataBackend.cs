@@ -13,7 +13,7 @@ namespace ETLG.Data
     {
         public string responseData;
         public string avatorId;
-        public static string remoteUrl = "http://13.53.206.7:9527";
+        public static string remoteUrl = "http://16.171.129.241:9527";
         public static string localUrl = "http://localhost:9527";
         //≈≈––∞Ò
         public string leaderboard_url = remoteUrl+ "/profile/rank";
