@@ -183,7 +183,7 @@ namespace ETLG
                 if (!GameEntry.UI.HasUIForm(EnumUIForm.UISkillUpgradeInfoForm))
                 {
                     GameEntry.UI.OpenUIForm(EnumUIForm.UISkillUpgradeInfoForm);
-                };
+                }
                 
             }
             if (ne.Type == Constant.Type.UI_CLOSE)

@@ -63,6 +63,7 @@ namespace ETLG
                 LayoutRebuilder.ForceRebuildLayoutImmediate(UIContainer);
                 UIContainer.position = dataSkill.skillInfoPosition;
                 refresh = false;
+
             }
 
             base.OnUpdate(elapseSeconds, realElapseSeconds);
@@ -164,6 +165,7 @@ namespace ETLG
 
                 if (hasNum < needNum) {
                     dataSkill.CanUpgradeCurrentSkill = false;
+                    GameEntry.Event.Fire(this, SkillUpgradedLackCostEventArgs.Create());
                 }
 
                 ShowItem<ItemCostResBar>(EnumItem.ItemCostResBar, (item) =>

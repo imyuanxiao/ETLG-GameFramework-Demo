@@ -240,7 +240,7 @@ namespace ETLG
                 ShowItem<ItemSkillIcon>(EnumItem.ItemSkillIcon, (item) =>
                 {
                     item.transform.SetParent(container, false);
-                    item.transform.localScale = Vector3.one * 0.5f;
+                    item.transform.localScale = Vector3.one * 0.7f;
                     item.transform.eulerAngles = Vector3.zero;
                     item.transform.localPosition = Vector3.zero + (i++) * offset;
                     item.GetComponent<ItemSkillIcon>().SetSkillData(SkillIds, Constant.Type.SKILL_ICON_SELECT_SPACESHIP);

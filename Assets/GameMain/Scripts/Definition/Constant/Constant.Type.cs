@@ -54,6 +54,11 @@
             public const string SKILL_TYPE_ACTIVE_STR = "Active";
             public const string SKILL_TYPE_PASSIVE_STR = "Passive";
 
+
+            public const int SKILL_UPGRADED_PLAYERDATA = 1;
+            public const int SKILL_UPGRADED_INFOFORM = 2;
+
+
             public const string ICON_LOST = "iconLost";
 
 

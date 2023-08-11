@@ -948,37 +948,35 @@ namespace ETLG.Data
             // add artifacts
             List<int> artifactsIds = new List<int>
             {
-                1001,1002,1003, 1004, 1101, 1102, 1103, 2001, 2002, 2003, 2004, 2005,
-                2006
+                1001,1002,1003, 1004, 1101, 1102, 1103
             };
-            int i = 0;
             foreach (var id in artifactsIds)
             {
-                AddArtifact(id, i++ * 100);
+                AddArtifact(id, 30);
             }
 
 
             // add skills
             List<int> skillIds = new List<int>
             {
+                101, 102, 201, 202, 203, 301, 302, 303
+            };
+/*            List<int> skillIds = new List<int>
+            {
                 101, 102, 201, 202, 203, 301, 302, 303,
                 401, 402, 403, 501, 502, 503, 601, 602,
                 603, 701, 702, 703
-            };
+            };*/
             foreach (var id in skillIds)
             {
-                AddSkill(id);
-                AddSkill(id);
-                AddSkill(id);
                 AddSkill(id);
             }
 
             // add modules
             List<int> moduleIds = new List<int>
             {
-                3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009, 3010,
-                3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020,
-                3021, 3022
+                3001, 3002, 3005, 3006,  3009, 3010,
+                3011, 3012, 3013, 3014, 3017, 3018, 3019
             };
 
             foreach (var id in moduleIds)
@@ -1059,6 +1057,7 @@ namespace ETLG.Data
             }
             return false;
         }
+
         public int GetNextLevel(int Id)
         {
             AchievementData achievementData = dataAchievement.GetDataById(Id);

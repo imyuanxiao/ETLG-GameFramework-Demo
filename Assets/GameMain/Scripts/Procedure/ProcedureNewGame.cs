@@ -30,7 +30,7 @@ namespace ETLG
             base.OnEnter(procedureOwner);
 
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-
+            dataPlayer.inNewGame = true;
             GameEntry.Event.Subscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Subscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Subscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);
@@ -61,7 +61,7 @@ namespace ETLG
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
         {
             base.OnLeave(procedureOwner, isShutdown);
-
+            dataPlayer.inNewGame = false;
             GameEntry.Event.Unsubscribe(ChangeSceneEventArgs.EventId, OnChangeScene);
             GameEntry.Event.Unsubscribe(SkillInfoUIChangeEventArgs.EventId, OnSkillInfoUIChange);
             GameEntry.Event.Unsubscribe(TipUIChangeEventArgs.EventId, OnTipUIChange);

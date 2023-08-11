@@ -14,6 +14,9 @@ namespace ETLG.Data
         public string tipTitle { get ; set; }
         public string tipContent { get ; set; }
         public int currentSelectedPlayerMenu { get; set; }
+
+        public bool inNewGame { get; set; }
+
         protected override void OnInit()
         {
                currentSelectedPlayerMenu = (int)EnumUIForm.UISpaceshipCheckForm;
