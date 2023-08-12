@@ -91,21 +91,19 @@ namespace ETLG
 
         private void loadPlayerData()
         {
-            if (backendRefresh)
+            if (fetchedType == Constant.Type.BACK_LOGED_IN)
             {
-                if (fetchedType == Constant.Type.BACK_LOGED_IN)
-                {
-                    player_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
-                    Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar(GameEntry.Data.GetData<DataBackend>().currentUser.avatar));
-                    player_avatar.texture = playerTexture;
-                }
-                else if (fetchedType == Constant.Type.BACK_NOT_LOG_IN)
-                {
-                    player_name.text = "NOT Login";
-                    Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
-                    player_avatar.texture = playerTexture;
-                }
+                player_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
+                Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar(GameEntry.Data.GetData<DataBackend>().currentUser.avatar));
+                player_avatar.texture = playerTexture;
             }
+            else if (fetchedType == Constant.Type.BACK_NOT_LOG_IN)
+            {
+                player_name.text = "NOT Login";
+                Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
+                player_avatar.texture = playerTexture;
+            }
+           
             backendRefresh = false;
         }
 
@@ -138,7 +136,11 @@ namespace ETLG
                 updateArtifactData();
                 refresh = false;
             }
-            loadPlayerData();
+            if (backendRefresh)
+            {
+                loadPlayerData();
+            }
+            
             base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
@@ -308,8 +310,11 @@ namespace ETLG
             BackendFetchedEventArgs ne = (BackendFetchedEventArgs)e;
             if (ne == null)
                 return;
-            backendRefresh = true;
-            fetchedType = ne.Type;
+            if(ne.Type == Constant.Type.BACK_NOT_LOG_IN || ne.Type == Constant.Type.BACK_LOGED_IN)
+            {
+                backendRefresh = true;
+                fetchedType = ne.Type;
+            }
         }
     }
 }

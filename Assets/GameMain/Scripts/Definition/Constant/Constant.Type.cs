@@ -208,7 +208,7 @@
             public const int BACK_RANK_FAILED = 14;
             public const int BACK_SAVE_UPLOAD_SUCCESS = 15;
             public const int BACK_SAVE_UPLOAD_FAILED = 16;
-            public const int BACK_NOT_LOG_IN = 5;
+            public const int BACK_NOT_LOG_IN = 17;
             //login purpose
             public const int BACK_PROFILE = 1;
             public const int BACK_UPDATE = 2;
