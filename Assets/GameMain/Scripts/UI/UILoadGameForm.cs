@@ -20,6 +20,7 @@ namespace ETLG
         public SaveSlot[] saveSlots;
 
         private Dictionary<string, string> jsonStrDic;
+        private int tempCloudSaveId = -1;
 
         protected override void OnInit(object userData)
         {
@@ -41,8 +42,8 @@ namespace ETLG
         private void OnUploadButtonClicked(int saveId)
         {
             Debug.Log("Upload Button Clicked : " + saveId);
-            UpdateUploadButton(saveId);
-
+            // UpdateUploadButton(saveId);
+            tempCloudSaveId = saveId;
             Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
           
             BackendDataManager.Instance.HandleSaveUpLoad(jsonStrDic);
@@ -72,6 +73,11 @@ namespace ETLG
             {
                 Log.Error("Download save from cloud failed");
                 return;
+            }
+            else if (ne.Type == Constant.Type.BACK_SAVE_UPLOAD_SUCCESS)
+            {
+                SaveManager.Instance.savedGamesInfo.cloudSaveId = tempCloudSaveId;
+                UpdateUploadButton(SaveManager.Instance.savedGamesInfo.cloudSaveId);
             }
 
             
@@ -134,6 +140,7 @@ namespace ETLG
 
             this.saveSlots[saveId].loadBtnObj.SetActive(false);
             this.saveSlots[saveId].overwriteBtnObj.SetActive(true);
+            this.saveSlots[saveId].uploadBtn.transform.parent.GetChild(0).GetComponent<RawImage>().color =  new Color(249f, 230f, 196f, 255f);
         }
 
         protected override void OnOpen(object userData)
