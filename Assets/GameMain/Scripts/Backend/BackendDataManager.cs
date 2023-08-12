@@ -513,7 +513,7 @@ namespace ETLG
         {
             using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().GetGetProfileByIdUrl() + id))
             {
-                //www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
@@ -595,6 +595,20 @@ namespace ETLG
                     callback(false);
                 }
             }
+        }
+        public void HandleTrade()
+        {
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGED_IN));
+                }
+                else
+                {
+                    GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_NOT_LOG_IN));
+                }
+            });
         }
         private void HandleErrorMessages(UnityWebRequest www)
         {

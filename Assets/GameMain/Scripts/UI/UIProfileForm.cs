@@ -117,7 +117,7 @@ namespace ETLG
                     unkownPanel.SetActive(false);
                     ShowContent();
                 }
-                if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
+                else if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
                 {
                     wholeContainer.SetActive(true);
                     ShowPlayerInfo();
