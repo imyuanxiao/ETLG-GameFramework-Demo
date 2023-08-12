@@ -1,4 +1,5 @@
 ﻿using ETLG.Data;
+using GameFramework.Event;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -22,6 +23,7 @@ namespace ETLG
 
         public TextMeshProUGUI npc_name = null;
         public TextMeshProUGUI npc_money = null;
+        public TextMeshProUGUI player_name = null;
         public TextMeshProUGUI player_money = null;
         public ScrollRect NPCScrollView;
         public ScrollRect PlayerScrollView;
@@ -34,6 +36,8 @@ namespace ETLG
         private DataTrade dataTrade = null;
 
         private bool refresh;
+        private bool backendRefresh;
+        private int fetchedType;
 
         //可买卖数量
         private int totalNum;
@@ -59,8 +63,10 @@ namespace ETLG
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
+            GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             loadData();
             refresh = true;
+            BackendDataManager.Instance.HandleTrade();
         }
 
         private void loadData()
@@ -68,7 +74,6 @@ namespace ETLG
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
             NPCData npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
-            Debug.Log("到这里都ok");
             playerArtifacts = dataPlayer.GetPlayerData().GetTradeableArtifacts();
             dataTrade = GameEntry.Data.GetData<DataTrade>();
             npcArtifacts = dataPlayer.GetPlayerData().GetNpcArtifactsByNpcId(dataNPC.currentNPCId);
@@ -82,10 +87,26 @@ namespace ETLG
                 NPCTexture = Resources.Load<Texture2D>(AssetUtility.GetAvatarMissing());
             }
             npc_avatar.texture = NPCTexture;
+        }
 
-            //TODO player Name 输入
-            Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
-            player_avatar.texture = playerTexture;
+        private void loadPlayerData()
+        {
+            if (backendRefresh)
+            {
+                if (fetchedType == Constant.Type.BACK_LOGED_IN)
+                {
+                    player_name.text = GameEntry.Data.GetData<DataBackend>().currentUser.nickName;
+                    Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar(GameEntry.Data.GetData<DataBackend>().currentUser.avatar));
+                    player_avatar.texture = playerTexture;
+                }
+                else if (fetchedType == Constant.Type.BACK_NOT_LOG_IN)
+                {
+                    player_name.text = "NOT Login";
+                    Texture2D playerTexture = Resources.Load<Texture2D>(AssetUtility.GetPlayerAvatar());
+                    player_avatar.texture = playerTexture;
+                }
+            }
+            backendRefresh = false;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -117,6 +138,7 @@ namespace ETLG
                 updateArtifactData();
                 refresh = false;
             }
+            loadPlayerData();
             base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
@@ -165,6 +187,7 @@ namespace ETLG
 
         private void OnCloseButtonClick()
         {
+            GameEntry.Event.Unsubscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             GameEntry.Event.Fire(this, NPCUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));
         }
 
@@ -278,6 +301,15 @@ namespace ETLG
                     item.GetComponent<ItemArtifactIcon>().SetArtifactData(ArtifactID, Num, Constant.Type.TRADE_NPC_PLAYER);
                 });
             }
+        }
+
+        public void OnBackendFetchedEventArgs(object sender, GameEventArgs e)
+        {
+            BackendFetchedEventArgs ne = (BackendFetchedEventArgs)e;
+            if (ne == null)
+                return;
+            backendRefresh = true;
+            fetchedType = ne.Type;
         }
     }
 }
