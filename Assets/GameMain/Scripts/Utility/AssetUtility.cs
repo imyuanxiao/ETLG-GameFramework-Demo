@@ -164,6 +164,10 @@ namespace ETLG
         }
         public static string GetPlayerAvatar(string avatarId)
         {
+            if(int.Parse(avatarId)<1000)
+            {
+                return Utility.Text.Format("Avatar/Player/{0}", "1000");
+            }
             return Utility.Text.Format("Avatar/Player/{0}", avatarId);
         }
 
