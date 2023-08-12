@@ -17,6 +17,7 @@ namespace ETLG
         public Button CloseButton;
         public TextMeshProUGUI AwardHint;
         public Canvas AwardList;
+        public VerticalLayoutGroup AwardListVerticalLayoutGroup;
 
         private DataNPC dataNPC;
         private DataDialog dataDialog;
@@ -36,6 +37,7 @@ namespace ETLG
             setButtons();
             ShowRewards();
             AwardHint.text = "Congratulation!\n" + "Here are your awards!";
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)AwardListVerticalLayoutGroup.transform);
         }
 
         protected override void OnClose(bool isShutdown, object userData)
@@ -136,6 +138,7 @@ namespace ETLG
                 dataDialog.reset();
                 OnCloseButtonClick();
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)AwardListVerticalLayoutGroup.transform);
         }
     }
 }

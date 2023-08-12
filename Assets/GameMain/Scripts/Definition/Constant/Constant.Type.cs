@@ -152,6 +152,7 @@
             public const string QUIZ_MULTIPLE_ANSWERS_CHOICES  = "MCM";
             public const string QUIZ_SINGLE_ANSWERS_CHOICES  = "MCS";
             public const string QUIZ_MATCHING_CHOICES  = "MAT";
+            public const string QUIZ_TRUEORFALSE  = "TF";
 
             //arrow icon type
             public const int ARROW_RIGHT = 0;
