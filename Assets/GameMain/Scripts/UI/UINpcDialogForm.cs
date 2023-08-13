@@ -32,7 +32,6 @@ namespace ETLG
         public VerticalLayoutGroup verticalLayoutGroup;
         public VerticalLayoutGroup DialogScrollVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
-        public Canvas VideoCover;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;

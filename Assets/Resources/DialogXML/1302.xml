@@ -1,0 +1,128 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll take a look at the six key benefits of cloud adoption as an operational model. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1. How do organizations benefit from adopting cloud as an operating model?</statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true">After you complete the up-front tasks of translating a business problem into an AI and data science solution and understanding the data needs in support of your business problem, it’s time to prepare the data.</statement> 
+			<statement font="1" isBold="true">Tapping the power of cloud</statement>
+			<statement font="1" image="1">The world is experiencing a digital and mobile transformation, with more information available more quickly in more mediums than ever before. As part of this, consumers have jumped on the social media bandwagon, with many relying on it as their primary collaboration format.  </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement>Add to this the advent of new analytics capabilities and the results are sweeping changes in almost every aspect of daily business and consumer life. But how does cloud play into all of this?</statement> 
+			<statement>Cloud provides a way for businesses to harness the capabilities borne of these digital trends to better meet customers’ needs and drive future growth. In fact, IBM research illuminated six key cloud attributes being used to power business model innovation, which we’ve dubbed business enablers:</statement>
+		</npc>
+		<player>
+			<response nextnode="4.1">Cost flexibility</response>
+			<response nextnode="4.2">Business scalability</response>
+			<response nextnode="4.3">Market adaptability</response>
+			<response nextnode="4.4">Masked complexity </response>
+			<response nextnode="4.5">Context-driven variability</response>
+			<response nextnode="4.6">Ecosystem connectivity</response> 
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4.1">
+		<npc>
+			<statement>Cost flexibility is a key reason many companies consider cloud adoption in the first place. More than 31 percent of executives surveyed cited cloud’s ability to reduce fixed IT costs and shift to a more variable “pay as you go” cost structure as a top benefit. Cloud can help an organization reduce fixed IT costs by enabling a shift from capital expenses to operational expenses. IT capital expenses – which typically include enterprise software licenses, servers, and networking equipment – tend to be less fluid, more expensive, and harder to forecast than routine IT operating expenses. With cloud applications, there is no longer a need to build hardware, install software or pay dedicated software license fees. By adopting cloud services, an organization can shift costs from capital to operational – or from fixed to variable. The organization pays for what it needs when it needs it.</statement> 
+			<statement image="2">This pay-per-use model provides greater flexibility and eliminates the need for significant capital expenditures. Cost flexibility is certainly an appealing cloud attribute for Etsy, an online marketplace for handmade goods. In addition to bringing buyers and sellers together, Etsy also provides recommendations for buyers. Using cloud-based capabilities, the company is able to cost-effectively analyze data from the approximately one billion monthly views of its Web site and use the information to create product recommendations. The cost flexibility afforded through cloud provides Etsy access to tools and computing power that might typically only be affordable for larger retailers.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2">
+		<npc>
+			<statement>IT scalability is recognized by many as a major benefit of cloud adoption. However, cloud offers more than just IT scalability – it allows an organization to easily scale its business operations as well. By allowing for rapid provisioning of resources without scale limitations, cloud enables a company to benefit from economies of scale without achieving large volumes on its own. Recognizing cloud’s ability to facilitate efficient growth and expanded options, approximately a third of our survey view business scalability as a top cloud benefit.</statement> 
+			<statement image="3">To demonstrate this concept in action, consider Netflix, an Internet subscription service for movies and TV shows. Because it streams many movies and shows on-demand, the company faces large surges of capacity at peak times. As Netflix began to outgrow its data center capabilities, the company made a decision to migrate its Web site and streaming service from a traditional data center implementation to a cloud environment. This move allowed the company to grow and expand its customer base without having to build and support a data center footprint to meet its growth requirements.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.3">
+		<npc>
+			<statement>In today’s economic environment, the ability to respond to rapidly changing customer needs is a key competitive differentiator. As such, companies continuously seek ways to improve their agility to adjust to market demands. A third of the executives we surveyed believe cloud can assist in this respect, citing market adaptability among cloud’s top benefits. By enabling businesses to rapidly adjust processes, products, and services to meet the changing needs of the market, cloud in turn facilitates rapid prototyping and innovation and helps speed time to market.</statement> 
+			<statement image="6">The power of cloud ActiveVideo certainly recognized cloud’s power to enhance market adaptability when it created CloudTV, a cloud-based platform that unifies all forms of content – Web, television, mobile, social, video-on-demand, etc. – onto any video screen. Content and applications from Web content creators, television networks, advertisers, set-top, and other media entities can be developed quickly for CloudTV using standard Web tools. CloudTV leverages content stored and processed in the network cloud to significantly expand the reach and availability of Web-based user experiences, as well as to allow operators to quickly deploy a consistent user interface across diverse set-top boxes and connected devices. The CloudTV approach of placing the intelligence in the network, rather than the device, enables content creators, service providers, and consumer electronics manufacturers to create new television experiences for their viewers.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.4">
+		<npc>
+			<statement>In addition to business scalability and market adaptability, cloud also offers the advantage of masking complexity. Cloud provides a way for organizations to “hide” some of the intricacies of their operations from end-users, which can help attract a broader range of consumers. Because complexity is veiled from the end-user, a company can expand its product and service sophistication without also increasing the level of user knowledge necessary to utilize or maintain the product or service. For example, upgrades and maintenance can be done in the “background” without the end-user having to participate.</statement> 
+			<statement image="4">Masked complexity is perhaps less recognized than some of the other enablers, as 20 percent of the business leaders in our survey cited it as a top benefit. Xerox definitely recognizes this cloud attribute, however, as evidenced by its Xerox Cloud Print solution. With Xerox Cloud Print, workers can get their desired content in printed form wherever they might be by using Xerox’s cloud to access printers outside their own organization. While printing from the cloud requires quite a bit of data management – with numerous files to be stored, converted to print-ready format, and distributed to printers – the complexity is hidden from users.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.5">
+		<npc>
+			<statement>Because of its expanded computing power and capacity, cloud can store information about user preferences, which can enable product or service customization. The context-driven variability provided via cloud allows businesses to offer users personal experiences that adapt to subtle changes in user-defined context, allowing for a more user-centric experience. This is a significant cloud attribute, as evidenced by the more than 50 percent of respondents who cited “addressing fragmented user preferences” as important for their organizations.</statement> 
+			<statement image="5">Because of its expanded computing power and capacity, cloud can store information about user preferences, which can enable product or service customization. The context-driven variability provided via cloud allows businesses to offer users personal experiences that adapt to subtle changes in user-defined context, allowing for a more user-centric experience. This is a significant cloud attribute, as evidenced by the more than 50 percent of respondents who cited “addressing fragmented user preferences” as important for their organizations.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.6">
+		<npc>
+			<statement>Another business enabler powered by cloud is ecosystem connectivity, which is recognized by a third of our respondents as a major benefit. Cloud facilitates external collaboration with partners and customers, which can lead to improvements in productivity and increased innovation. Cloud-based platforms can bring together disparate groups of people who can collaborate and share resources, information and processes.</statement> 
+			<statement image="7">HealthHiway is a great example of how cloud can enable ecosystem connectivity. A cloud-based health information network, HealthHiway enables the exchange of information and transactions among healthcare providers, employers, payers, practitioners, third-party administrators, and patients in India. By connecting more than 1,100 hospitals and 10,000 doctors, the company’s software-as-a-service solution facilitates better collaboration and information sharing, helping deliver improved care at a low cost, particularly important in growing markets, such as India.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true" video="1">The benefits of Cloud Computing for Business </statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Why it matters?</statement> 
+			<statement>Cloud computing provides numerous benefits for subscribers. Because cloud services are often purchased 'on-demand', businesses can easily scale up or down. This flexibility allows businesses to free up time and resources that would otherwise be dedicated to maintaining their own servers and software. </statement> 
+			<statement>Cloud is everywhere. This means more connections to other services and customers, allowing organizations easier access to data in order to offer a more cohesive user-driven experience. Another benefit of the ubiquitous nature of cloud is that team collaboration can more easily be facilitated through cloud-based software than on-prem. </statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

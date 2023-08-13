@@ -1,116 +1,389 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true">What is a database?</statement>
-			<statement image="1">Almost every data scientist will spend time working in a database, which is an organized collection of structured data in a computer system. (Remember, structured data is usually organized in a table format with rows and columns, like the following example.)</statement>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll define what data science is as well as its emergence as a field of study. </statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="2"> 
+	<node id="2">
 		<npc>
-			<statement>Most databases today are organized as relational databases, which are collections of multiple data sets or tables that link together. For example, one table might list names and addresses, while the other might list properties and their owners. If some of the owners also appear in the name-and-address table, the two tables can be linked, creating a relational database. Relational Database Management Systems (RDMSs) help data scientists correlate information from all the tables within the database, change related data, or add and delete data in the database without breaking its structure.</statement>		
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.What factors have led to the explosive growth of data in the 21st Century?&#xA;2.How have cognitive systems fueled the need for more efficient methods of data collection and analysis? &#xA;3.Explain the five characteristics of data and why each is important in a business context? &#xA;4.Explain the five characteristics of data and why each is important in a business context? </statement> 
 		</npc>
 		<player>
 			<response nextnode="3" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="3"> 
+	<node id="3">
 		<npc>
-			<statement font="2" isBold="true">Use a database to store and sort data</statement>
-			<statement>Most database management systems use some form of Structured Query Language, or SQL, to ask questions or “query” the database or to modify its contents. SQL is incredibly useful, and it’s something you can learn through a book, an online course, or a computer club. Let’s see how it works.</statement>
+			<statement font="2" isBold="true" color="FCFF1A">1. What factors have led to the explosive growth of data in the 21st Century? </statement> 
+			<statement font="2" isBold="true">The Internet of Things (IoT) is a giant network of connected things and people – all of which collect and share data about the way they are used and about the environment around them. </statement>
+			<statement font="2">That includes an extraordinary number of objects of all shapes and sizes – from smart microwaves, which automatically cook your food for the right length of time, to self-driving cars, whose complex sensors detect objects in their path, to wearable fitness devices that measure your heart rate and the number of steps you’ve taken that day, then use that information to suggest exercise plans tailored to you. There are even connected footballs that can track how far and fast they are thrown and record those statistics via an app for future training purposes. </statement>
 		</npc>
 		<player>
 			<response nextnode="4" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="4"> 
+	<node id="4">
 		<npc>
-			<statement image="2">Suppose you have a million rows of data in a table of registered voters in your state. (Many databases are this big, or even larger!) The table contains information about each voter’s polling place, party affiliation, and age. If you wanted to just get the information for all the voters under the age of 21, you could write a query in SQL instead that performs a simple search. That would look like this:</statement>
-			<statement>Yes, a simple search might have answered this particular question. However, if you want to uncover voters who live in a particular geographic area so you can study how frequently people of different ages in that group show up at the polls, your query will overwhelm a simple search. But SQL can do the job!</statement>
+			<statement font="1" isBold="true" image="1">We are all digitally connected in real - time, anywhere in the world</statement> 
+			<statement isBold="true">How does it work?</statement> 
+			<statement>Devices and objects with built-in sensors are connected to an Internet of Things platform, which integrates data from the different devices and applies analytics to share the most valuable information with applications built to address specific needs. These powerful IoT platforms can pinpoint exactly what information is useful and what can safely be ignored. This information can be used to detect patterns, make recommendations, and detect possible problems before they occur.</statement>
 		</npc>
 		<player>
 			<response nextnode="5" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="5"> 
+	<node id="5">
 		<npc>
-			<statement>While SQL is the underlying language that drives most work done in relational databases, there are many RDBMSs in which you can do that work. As you venture into this field, you’ll run into names like these:</statement>
-			<statement>· MySQL&#xA;· Microsoft Access&#xA;· PostgreSQL&#xA;· Oracle&#xA;· IBM DB2&#xA;· MongoDB</statement>
+			<statement isBold="true">How does it work?</statement> 
+			<statement>Devices and objects with built-in sensors are connected to an Internet of Things platform, which integrates data from the different devices and applies analytics to share the most valuable information with applications built to address specific needs. These powerful IoT platforms can pinpoint exactly what information is useful and what can safely be ignored. This information can be used to detect patterns, make recommendations, and detect possible problems before they occur.</statement> 
 		</npc>
 		<player>
 			<response nextnode="6" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="6"> 
+	<node id="6">
 		<npc>
-			<statement font="2" isBold="true">Choose the right tools to manage data</statement>
-			<statement>Where do you begin? There are dozens of useful data science tools and platforms! Here’s a list of some popular and open source platforms that you can use to begin your own data science journey.</statement>
+			<statement isBold="true">For example</statement> 
+			<statement>If I own a car manufacturing business, I might want to know which optional components (leather seats or alloy wheels, for example) are the most popular. Using Internet of Things technology, I can:</statement> 
+			<statement>1.Use sensors to detect which areas in a showroom are the most popular and where customers linger longest&#xA;Drill down into the available sales data to identify which components are selling fastest&#xA;Automatically align sales data with supply so that popular items don’t go out of stock&#xA;The information picked up by connected devices enables me to make smart decisions about which components to stock up on based on real-time information, which helps me save time and money.</statement>
 		</npc>
 		<player>
 			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7"> 
+	<node id="7">
 		<npc>
-			<statement>Click the following sections to learn more about tools to manage data.</statement>
+			<statement>With the insight provided by advanced analytics comes the power to make processes more efficient. Smart objects and systems mean you can automate certain tasks, particularly when these are repetitive, mundane, time-consuming, or even dangerous. </statement> 
+			<statement>Let’s look at some examples to see what this looks like in real life.</statement> 
+			<statement isBold="true" image="2">Collecting huge amounts of data about how the world works</statement>
+			<statement>From traffic patterns and music downloads to web history and medical records, data is recorded, stored, and analyzed to enable the technology and services that the world relies on every day.</statement>
 		</npc>
 		<player>
-			<response nextnode="7.1">R is a good place to start</response>
-			<response nextnode="7.2">Python works for general purposes</response>
-			<response nextnode="7.3">MATLAB helps crunch numbers</response>
-			<response nextnode="7.4">Apache Spark supports big data and machine learning</response>
 			<response nextnode="8" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.1"> 
+	<node id="8">
 		<npc>
-			<statement>R is a programming language and free software environment often used for statistical analysis and data science. Many would-be data scientists start with this tool or with one of the popular R interfaces, and there are hundreds of useful packages in R that help with data visualization such as ggplot2.</statement>
-			<statement image="3">Here’s what RStudio looks like. It’s a popular interface for working in R.</statement>
+			<statement isBold="true">Consider these statistics:</statement> 
+			<statement>2.5 Quintillion bytes of data created every day. (That’s 2,500,000,000,000,000, 000 bytes)90% of the data in the world today has been created in the last two years alone.</statement> 
+			<statement>Every minute 1.7 MB of data is created for every person on the planet. All 7.3 billion of us.</statement>
+			<statement>We were trying to build a system that can deal with this massive amount of data because human intelligence is not scaling in the way that data is scaling.</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="9" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.2"> 
+	<node id="9">
 		<npc>
-			<statement>Python is a popular, general-purpose programming language that can also be used for data science. Pair it with a library like pandas library and with a useful interface, and Python can help you create new insights and data visualizations.</statement>
-			<statement image="4">Here’s what Python looks like in a notebook interface.</statement>
+			<statement isBold="true">Creating a digital representation of the physical world</statement> 
+			<statement>Industry and science now can come together to explore new solutions to existing challenges</statement> 
+			<statement isBold="true">The price of not knowing</statement>
+			<statement image="3">· What is the price of not curing cancer?&#xA;· What is the price of not discovering alternative energy?</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="10" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.3"> 
+	<node id="10">
 		<npc>
-			<statement image="5">MATLAB was built to focus on numerical computing. It is often used in higher education.</statement>
+			<statement font="2" isBold="true" color="FCFF1A">2. How have cognitive systems fueled the need for more efficient methods of data collection and analysis?   </statement> 
+			<statement font="2" isBold="true">Cognitive Computing are systems that learn at scale, reason with purpose, and interact with humans naturally.</statement>
+			<statement font="2">It is a mixture of computer science and cognitive science – that is, the understanding of the human brain and how it works. By means of self-teaching algorithms that use data mining, visual recognition, and natural language processing, the computer is able to solve problems and thereby optimize human processes.</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="11" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.4"> 
+	<node id="11">
 		<npc>
-			<statement image="6"></statement>
+			<statement>Cognitive systems have the potential to reshape computing and are an area of computing that you should not ignore. It’s very easy when we get into areas of Cognitive Computing and Artificial intelligence to rapidly drop down to Deep Machine Learning and algorithms. These are exciting and fascinating areas of technology, but I think the thing we must keep in mind is “Towards what end?”</statement> 
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="12" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="8"> 
+	<node id="12">
 		<npc>
+			<statement isBold="true">What is it that we are trying to do?</statement> 
+			<statement>It’s all about the outcomes:&#xA;· Changing the world&#xA;· Changing entire industries&#xA;· Seeing things and getting insights that we have never been able to grasp before.</statement>
+			<statement>I encourage you to think about what we can do with this technology as well as how can we impact society in ways that we’ve never been able to before?</statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement isBold="true">What are we after here?</statement> 
+			<statement>It’s also very tempting to talk about what we’re trying to do as replicating what human brain does, but that is not at all what this is about. We were not trying to do what previous AI researchers were trying to do. We were not trying to mimic the human brain. We were trying to do something very simple -- to analyze and garner insight from this massive amount of data.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement isBold="true">These devices will need to be cognitive.</statement> 
+			<statement>They will need to make real-time decisions about the environment based on learning about the environment and learning about driver behavior. Every single industry is being swamped with data. Every industry is trying to access that 80-90% of dark data and get insights to differentiate. We are at an industry inflection point.</statement>
+		</npc>
+		<player>
+			<response nextnode="14.1">Oil and Gas</response>
+			<response nextnode="14.2">Retail</response>
+			<response nextnode="14.3">Internet of Things</response>
+			<response nextnode="14.4">Security</response>
+			<response nextnode="14.5">Energy</response>
+			<response nextnode="14.6">Healthcare</response>
+			<response nextnode="14.7">Transportation</response>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.1">
+		<npc>
+			<statement>Modern facilities have more than 80,000 sensors in place, and a single reservoir will produce more than 15 petabytes of data in its lifetime.</statement> 
+			<statement>Cognitive computing can:&#xA;· Help companies prevent drilling in the wrong place.&#xA;· Help with flow optimization (pumping too much or too little).&#xA;· Facilities generate more data than current technology can deal with. This is a huge opportunity. </statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.2">
+		<npc>
+			<statement>Consumers post 500 million tweets, and 55 million Facebook updates each day.From our partnership with Twitter, we now have direct access to tap into this “big hose” of data. This data can help identify buying patterns, preferences, insights, and where society is moving – Insights that can be moved across every form of commerce. </statement> 
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.3">
+		<npc>
+			<statement>IoT is one of the next great frontiers. Watson is unmatched in natural language processing. Watson also can handle images and vision. Think about signal processing.Machine-to-machine data will dominate the market in just a few years. That is noisy, unstructured data, perfect for cognitive computing.</statement> 
+			<statement>Smart connected appliances will grow from less than 1% of the market today to more than half in 2020. These could be appliances or could be smart connected cities. Think of the implications of city security or traffic management. New York City surveillance cameras and sensors generate 520 TB of data per day, largely unstructured and untapped.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.4">
+		<npc>
+			<statement>In 2014, more than 1 billion personal data records were compromised by cyber attacks.Security is no longer about firewalls. Security is now about the behavioral analysis of people and systems. Systems can predict abnormalities and react in real-time.</statement> 
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.5">
+		<npc>
+			<statement>More than 680 million smart meters will be installed globally by 2017 – producing more than 280 PB of new data to be analyzed and acted upon. Digital meters are in many countries around the world, but the data is dark. It is difficult to integrate renewables without understanding demands.</statement> 
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.6">
+		<npc>
+			<statement>One of the biggest opportunities, of course, is healthcare. Healthcare is an enormous industry, prime for disruption and new forms of insight. This is one of the industries where we (IBM) have doubled down, not only through electronic medical records, patient population healthcare, but also medical imaging.</statement> 
+			<statement>Each person will generate 1 million GB of health-related data in their lifetime – equivalent to about 300 million books. In that data is really the secret to our own health and well-being.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14.7">
+		<npc>
+			<statement>By 2020, 75% of the world’s cars will be connected, and they will produce 350 MB of data per second to be assessed and acted upon.</statement> 
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">3. Explain the five characteristics of data and why each is important in a business context?  </statement> 
+			<statement font="2" isBold="true">Characteristics of data</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement>The 5 Vs</statement> 
+		</npc>
+		<player>
+			<response nextnode="16.1">Volume</response>
+			<response nextnode="16.2">Variety</response>
+			<response nextnode="16.3">Velocity</response>
+			<response nextnode="16.4">Veracity</response>
+			<response nextnode="16.5">Value</response>
+			<response nextnode="17">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.1">
+		<npc>
+			<statement>Refers to the vastamounts of data generated every second.</statement> 
+			<statement>If we take all the data generated in the world between the beginning of time and 2008, the same amount of data will soon be generated every minute. This makes most data sets too large to store and analyze using traditional database technology. Partner volume with value: To gain the most intrinsic value from your business data, your data team must carry out sampling on specific datasets. But now, thanks to the volume of information provided by big data and the techniques required to manage this, your company should have the capability to perform analysis on data collected in real-time. The more data you collect in your business, the more insight you can offer to stakeholders, which should speed up the decision-making process, lead to improved customer relationships, and more monetary value gained from your data.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.2">
+		<npc>
+			<statement>Refers to the differenttypes of data we can now use.</statement> 
+			<statement>In the past, we only focused on structured data that neatly fitted into tables or relational databases, such as financial data. In fact, 80% of the world’s data is unstructured (text, images, video, voice, etc.). With big data technology, we can now analyze and bring together data of different types such as messages, social media conversations, photos, sensor data, video or voice recordings. Partner variety with value: Structured and unstructured data of all types will be flowing into your business, but to gain the most value from these different varieties, it’s all about having the right data management plan in place. The numerous varieties of data you collect allow your business to become more diverse. During the collection process, you will no longer encounter just one specific stream for each customer or client. When successfully collected, these different varieties of data can be amalgamated together to form one large dataset, which your business can use to create customer journey maps, improve engagement and increase retention.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.3">
+		<npc>
+			<statement>Refers to the speed at which new data is generated and the speed at which data moves around.</statement> 
+			<statement>Just think of social media messages going viral in seconds. Technology allows us now to analyze the data while it is being generated (sometimes referred to as in-memory analytics) without ever putting it into databases.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.4">
+		<npc>
+			<statement>Refers to the messinessor trustworthiness of the data.</statement> 
+			<statement>It’s crucial when presenting your data that you have complete confidence in what’s on the page in front of you. When showcasing the findings in your data to stakeholders, it could mean the difference between new investment or the dismissal of your conclusions.%0D%0A%0D%0A%0D%0A%0D%0AWhile it may not be an essential task to dot the i’s and cross the t’s in the early stages of data conceptualization, the further you move into the analysis and visualization process, the more people will see the data you have collected. %0D%0A%0D%0A%0D%0A%0D%0AThe added trust in your data will allow for better differentiation and provide the chance to show stakeholders how you can gain an edge over your competitors.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.5">
+		<npc>
+			<statement>Refers to having access to big data is no good unless we can turn it intovalue.</statement> 
+			<statement>Companies are starting to generate amazing value from their big data. If you decide to push ahead with your implementation, detailed knowledge of how to get the most value of your data will help impress shareholders, lead to increased productivity and better business growth.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">4. What's the difference between structured and unstructured data? </statement> 
+			<statement font="2" isBold="true">All data is not created equal. Some data is structured, but most of it is unstructured. </statement>
+			<statement font="2">Structured and unstructured data is sourced, collected and scaled in different ways, and each one resides in a different type of database. </statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18">
+		<npc>
+			<statement isBold="true" >Data in the world today</statement> 
+			<statement image="4">· Every industry problem and societal challenge can now be addressed by understanding its underlying data &#xA;· 80% of the world’s data is dark data</statement>
+		</npc>
+		<player>
+			<response nextnode="18.1.1">Unstructured data</response>
+			<response nextnode="18.2.1">Structured data</response>
+			<response nextnode="19" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18.1.1">
+		<npc>
+			<statement>Unstructured data, typically categorized as qualitative data, cannot be processed and analyzed via conventional data tools and methods. Since unstructured data does not have a predefined data model, it is best managed in non-relational (NoSQL) databases. Another way to manage unstructured data is to use data lakes to preserve it in raw form.</statement> 
+			<statement>The importance of unstructured data is rapidly increasing. Recent projections indicate that unstructured data is over 80% of all enterprise data, while 95% of businesses prioritize unstructured data management.</statement>
+			<statement>Examples of unstructured data include text, mobile activity, social media posts, Internet of Things (IoT) sensor data, etc. Their benefits involve advantages in format, speed and storage, while liabilities revolve around expertise and available resources:</statement>
+		</npc>
+		<player>
+			<response nextnode="18.1.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18.1.2">
+		<npc>
+			<statement isBold="true">Pros</statement> 
+			<statement>· Native format: Unstructured data, stored in its native format, remains undefined until needed. Its adaptability increases file formats in the database, which widens the data pool and enables data scientists to prepare and analyze only the data they need.&#xA;· Fast accumulation rates: Since there is no need to predefine the data, it can be collected quickly and easily.&#xA;· Data lake storage: Allows for massive storage and pay-as-you-use pricing, which cuts costs and eases scalability.</statement>
+		</npc>
+		<player>
+			<response nextnode="18.1.3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18.1.3">
+		<npc>
+			<statement isBold="true">Cons</statement> 
+			<statement>· Requires expertise: Due to its undefined/non-formatted nature, data science expertise is required to prepare and analyze unstructured data. This is beneficial to data analysts but alienates unspecialized business users who may not fully understand specialized data topics or how to utilize their data.&#xA;· Specialized tools: Specialized tools are required to manipulate unstructured data, which limits product choices for data managers.</statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="18.2.1">
+		<npc>
+			<statement>Structured data — typically categorized as quantitative data — is highly organized and easily decipherable by machine learning algorithms. Developed by IBM in 1974, structured query language (SQL) is the programming language used to manage structured data. By using a relational (SQL) database, business users can quickly input, search and manipulate structured data.</statement> 
+			<statement>Examples of structured data include dates, names, addresses, credit card numbers, etc. Their benefits are tied to ease of use and access, while liabilities revolve around data inflexibility:</statement>
+		</npc>
+		<player>
+			<response nextnode="18.2.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18.2.2">
+		<npc>
+			<statement isBold="true">Pros</statement> 
+			<statement>· Easily used by machine learning (ML) algorithms: The specific and organized architecture of structured data eases manipulation and querying of ML data.  &#xA;· Easily used by business users: Structured data does not require an in-depth understanding of different types of data and how they function. With a basic understanding of the topic relative to the data, users can easily access and interpret the data.&#xA;· Accessible by more tools: Since structured data predates unstructured data, there are more tools available for using and analyzing structured data.</statement>
+		</npc>
+		<player>
+			<response nextnode="18.2.3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18.2.3">
+		<npc>
+			<statement isBold="true">Cons</statement> 
+			<statement>· Limited usage: Data with a predefined structure can only be used for its intended purpose, which limits its flexibility and usability.&#xA;· Limited storage options: Structured data is generally stored in data storage systems with rigid schemas (e.g., “data warehouses”). Therefore, changes in data requirements necessitate an update of all structured data, which leads to a massive expenditure of time and resources.</statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="19">
+		<npc>
+			<statement isBold="true">Bringing it all together</statement> 
+			<statement video="1">In the video below your instructor will guide you through these concepts:</statement>
 		</npc>
 		<player>
 			<response nextnode="end">Thank you.</response>

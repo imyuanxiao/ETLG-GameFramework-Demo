@@ -1,0 +1,73 @@
+<quiz boss="true">
+  <question type="TF" timelimit="30">
+    <statement>Structured data can be effectively analyzed using spreadsheets.</statement>
+    <options>
+      <option id="A">TRUE</option>
+      <option id="B">FALSE</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="TF" timelimit="30">
+    <statement>Unstructured data is difficult to work with and doesn't have any potential use.</statement>
+    <options>
+      <option id="A">TRUE</option>
+      <option id="B">FALSE</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following examples represents unstructured data?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">A spreadsheet with customer names and purchase amounts</option>
+      <option id="B">A collection of images from a Department of Motor Vehicles.</option>
+      <option id="C">A catalog listing book titles, authors, and publication dates.</option>
+      <option id="D">A database of financial transactions.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>How would you define data science based on the provided content?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Data science is primarily focused on structured data analysis.</option>
+      <option id="B">Data science involves creating knowledge from data through analysis.</option>
+      <option id="C">Data science is exclusively related to computer programming.</option>
+      <option id="D">Data science is the study of multimedia content.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCM" timelimit="30">
+    <statement>Which of the following should you consider when determining if you could be a data scientist?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Your current job title.</option>
+      <option id="B">Your ability to create multimedia files.</option>
+      <option id="C">Identifying data related to your interests.</option>
+      <option id="D">The structured or unstructured nature of the data.</option>
+      <option id="E">Asking questions about your area of interest.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+      <answer>D</answer>
+      <answer>E</answer>
+    </answers>
+  </question>
+</quiz>

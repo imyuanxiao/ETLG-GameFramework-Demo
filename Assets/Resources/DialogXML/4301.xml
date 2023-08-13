@@ -1,0 +1,93 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll talk about a few of the drivers, as well as the benefits, of adopting a cloud-based data science strategy. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.In what ways would cloud services benefit a data science team?&#xA;2.What are the challenges of closing the gap for data science adoption? </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. In what ways would cloud services benefit a data science team? </statement> 
+			<statement font="2" isBold="true">Cloud computing is bringing many data science benefits within reach of even small and midsized organizations.</statement>
+			<statement font="2">Data science’s foundation is the manipulation and analysis of extremely large data sets; the cloud provides access to storage infrastructures capable of handling large amounts of data with ease. Data science also involves running machine learning algorithms that demand massive processing power; the cloud makes available the high-performance computing that’s necessary for the task. To purchase equivalent on-site hardware would be far too expensive for many enterprises and research teams, but the cloud makes access affordable with per-use or subscription-based pricing.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement>Cloud infrastructures can be accessed from anywhere in the world, making it possible for multiple groups of data scientists to share access to the data sets they’re working within the cloud—even if they’re located in different countries.</statement> 
+			<statement>Open source technologies are widely used in data science tool sets. When they’re hosted in the cloud, teams don’t need to install, configure, maintain, or update them locally. Several cloud providers also offer prepackaged tool kits that enable data scientists to build models without coding, further democratizing access to the innovations and insights that this discipline is making available.</statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true">Why are enterprises struggling to capture the value of data? </statement> 
+			<statement image="1">They are collecting or sitting on vast amounts of data about their customers, suppliers, equipment, etc. They should be able to use this data to make better decisions, differentiated customer experiences, and better products and services. They also realize that they need to provide their frontline data users access to the data to get the speed that is needed in decision making, interactions, product recommendations, validation, etc. to be competitive.</statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement isBold="true">The challenge that data science companies are facing is that:</statement> 
+			<statement>· Data is in silos, hard to find, and difficult to use&#xA;· Much of the data is not accessible to the frontline data users because the CDO/Compliance folks have it locked down to ensure it is used properly&#xA;· Skills are a challenge&#xA;· Infrastructure/Environments to get up and running aren’t there</statement> 
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement isBold="true">What is the solution?</statement> 
+			<statement>An integrated development environment for Data Science Projects &#xA;· Data &#xA;· Governance &#xA;· Skills&#xA;· Tools and Infrastructure</statement> 
+			<statement image="2">An integrated development environment provides a suite of tools for data scientists, application developers, and subject matter experts, allowing them to collaboratively connect to data, wrangle that data and use it to build, train and deploy models at scale. Successful AI projects require a combination of algorithms + data + teamwork, and a very powerful compute infrastructure.  </statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. What are the challenges of closing the gap for data science adoption? </statement> 
+			<statement font="2" isBold="true">Data Science Cloud Platforms close the gap with a unified experience to create new insights from knowledge contained in the data, enabling multidisciplinary teams across the organization to collaborate.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement>The problem is a gap between data experts and domain experts.</statement> 
+			<statement video="1">· Only highly technical professionals in IT could organize and make sense of the vast amounts of data.&#xA;· Only domain experts could successfully convert data into the rich knowledge needed by AI.&#xA;· But domain experts and IT professionals worked in silos, with different tools and no visibility to each others’ work.&#xA;· But domain experts and IT professionals worked in silos, with different tools and no visibility to each others’ work.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

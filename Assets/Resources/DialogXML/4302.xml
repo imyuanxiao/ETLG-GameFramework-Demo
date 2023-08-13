@@ -1,0 +1,218 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll explore the reasons for using data cleaning tools such as IBM Watson Data Refinery. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.Why might a data scientist use a data cleansing tool?&#xA;2.What are the capabilities of data cleansing tools such as IBM Watson Data Refinery? </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. Why might a data scientist use a data cleansing tool?</statement> 
+			<statement font="2" isBold="true">In order to apply AI, the first step of the workflow starts with connecting and accessing data. </statement>
+			<statement font="2">Data scientists spend up to 80% of their time finding and preparing data, and 57% of data scientists said that cleaning and organizing data is the least enjoyable part of their job. The problem isn’t just limited to data scientists. Business analysts face similar struggles obtaining the data they need to build reports — often having to wait weeks for their IT team to extract data from the source systems.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="2" isBold="true">Watson Studio – tools for supporting the end-to-end data science workflow</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.1">Big Data and Data Analytics</response>
+			<response nextnode="4.2">AI methodologies and tools = Data Science</response>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4.1">
+		<npc></npc>
+		<player>
+			<response nextnode="4.1.1">Connect and Access Data</response>
+			<response nextnode="4.1.2">Search and Find Relevant Data</response>
+			<response nextnode="4.1.3">Prepare Data for Analysis</response>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.1.1">
+		<npc>
+			<statement>Connect and discover content from multipledata sources in the cloud or on-premises. Bring structured and unstructured data to one toolkit.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.1" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.1.2">
+		<npc>
+			<statement>Find data (structured, unstructured) and AIassets(e.g., ML/DL models, notebooks, WatsonData Kits) in the Knowledge Catalog withintelligent search and giving the right access tothe right users.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.1" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.1.3">
+		<npc>
+			<statement>Clean and prepare your data with Data Refinery;a tool to create data preparation pipelinesvisually. Use popular open-source librariesto prepare unstructured data</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.1" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2">
+		<npc></npc>
+		<player>
+			<response nextnode="4.2.1">Build and Train ML/DL Models</response>
+			<response nextnode="4.2.2">Monitor, Analyze and Manage</response>
+			<response nextnode="4.2.3">Deploy Models</response>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2.1">
+		<npc>
+			<statement>Democratize the creation of ML and DL models.Design your AI models programmatically orvisually with the most popular open source andIBM ML/DL frameworks or leverage transferlearning on pre-trained models using Watsontools to adapt to your business domain. Train atscale on GPUs and distributed computing.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.2" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2.2">
+		<npc>
+			<statement>Monitor the performance of the models inproduction and trigger automatic retraining andredeployment of models. Build Enterprise Trustwith Bias Detection, Mitigation ModelRobustness and Testing Service Model Security.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.2" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2.3">
+		<npc>
+			<statement>Deploy your models easily and have them scaleautomatically for the online, batch or streaminguse cases.</statement> 
+		</npc>
+		<player>
+			<response nextnode="4.2" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement>To address the issue, we provide the integrated capability to refine and wrangle data with Data Refinery, a tool that makes fast, self-service data preparation a reality. Watson Studio comes with more than 35 data connectors to the most popular data sources, whether they are in the IBM Cloud, 3rd party Clouds or application, or on-premises. </statement> 
+			<statement isBold="true" image="1">Watson Studio – tools for supporting the end-to-end data science workflow</statement>
+			<statement>Organizations are now tapping data science and artificial intelligence (AI) as a technology-enabled business strategy. Experimentation is accelerating across multiple clouds. The need for speeding through data preparation and exploration, modeling, and training has never been higher. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement isBold="true">To succeed in enterprise AI, a business must:</statement> 
+			<statement>· Bring your algorithms to wherever data resides.&#xA;· Increase productivity of data scientists, analysts, developers, and subject matter experts.&#xA;· Operationalize the data science lifecycle from insight to prediction and optimization.  </statement> 
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement>Together with IBM Watson Machine Learning, IBM Watson Studio is a leading data science and machine learning platform built from the ground up for an AI-powered business. It helps enterprises simplify the process of experimentation to deployment, speed data exploration, and model development and training, and scale data science operations across the lifecycle. </statement> 
+			<statement>IBM Watson Studio empowers organizations to tap into data assets and inject predictions into business processes and modern applications and then optimize business value with visual data science and decision optimization. It's suited for hybrid multi-cloud environments that demand mission-critical performance, security, and governance — in public clouds, in private clouds, on-premises, and on the desktop, including IBM Cloud Pak™ for Data. </statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. What are the capabilities of data cleansing tools such as IBM Watson Data Refinery? </statement> 
+			<statement font="2" isBold="true">Watson Studio – differentiating capabilities</statement>
+		</npc>
+		<player>
+			<response nextnode="8.1">Integrated collaboration environment</response>
+			<response nextnode="8.2">Choice of Tools for the full AI lifecycle</response>
+			<response nextnode="8.3">Support for all levels of expertise</response>
+			<response nextnode="8.4">Experiment centric DL workflow</response>
+			<response nextnode="8.5">Model lifecycle and management</response>
+			<response nextnode="8.6">Integrated with knowledgecatalog</response>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+	<node id="8.1">
+		<npc>
+			<statement>· Data Scientists, Subject Matter experts,Business Analysts and Developers all in oneenvironment to accelerate innovation,collaboration and productivity&#xA;· Built-in learning to get started or go thedistance with advanced tutorials.</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="8.2">
+		<npc>
+			<statement>· Best-in-breed open source and IBM toolsthat support the end-to-end AI lifecycle&#xA;· Choice of code or no-code tools to buildand train your own ML/DL models or easilytrain and customize pre-trained Watson APIs.</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="8.3">
+		<npc>
+			<statement>· Use Watson smarts and recommendationsfor the best algorithms to use given your data, OR&#xA;· Use the rich capabilities and controls tofine tune your models</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="8.4">
+		<npc>
+			<statement>· Monitor batch training experiments thencompare cross-model performance withoutworrying about log transfers and scripts tovisualize results.&#xA;· You focus on designing your neuralnetworks.We'll manage and track yourassets.</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="8.5">
+		<npc>
+			<statement>· Deploy models into production thenmonitor them to evaluate performance&#xA;· Capture new data for continuous learningand retrain models so they continuallyadapt to changing conditions.</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="8.6">
+		<npc>
+			<statement>· Intelligent discovery of data and AI assetsthat enables reuse and improves productivity&#xA;· Seamlessly integrated for productive usewith Machine Learning and Data Science &#xA;· Powerful governance tools to control andprotect access to data</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Go back.</response>
+		</player>
+	</node>
+</dialogue>

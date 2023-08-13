@@ -1,8 +1,8 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true" video="1">Introduction</statement>
-			<statement font="1" >In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement font="1">In this topic, we will In this topic, we'll explore what digital transformation is, the key transformation drivers, and the technologies at the forefront of enterprise digital transformation.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
@@ -148,7 +148,7 @@
 			<response nextnode="16">Artificial intelligence and automation</response>
 			<response nextnode="17">Cloud Computing</response>
 			<response nextnode="18">Microservices</response>
-v			<response nextnode="19">Internet of Things</response>
+			<response nextnode="19">Internet of Things</response>
 			<response nextnode="20">Blockchain</response>
 			<response nextnode="21" isShown="false">Continue</response>
 
