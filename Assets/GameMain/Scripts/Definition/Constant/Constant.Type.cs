@@ -20,15 +20,15 @@
             public const int TUTORIAL_SPACESHIP = 3;
             public const int TUTORIAL_SKILL = 4;
             public const int TUTORIAL_BATTLE = 9;
-
+            public const int TUTORIAL_ACHIEVEMENT = 5;
 
             // player menu title
-/*            public const int PLAYERMENU_SPACESHIP = 1011;
-            public const int PLAYERMENU_SKILL = 1012;
-            public const int PLAYERMENU_MISSION = 2;
-            public const int PLAYERMENU_ACHIEVEMENT = 1027;
-            public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 1032;*/
+            /*            public const int PLAYERMENU_SPACESHIP = 1011;
+                        public const int PLAYERMENU_SKILL = 1012;
+                        public const int PLAYERMENU_MISSION = 2;
+                        public const int PLAYERMENU_ACHIEVEMENT = 1027;
+                        public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
+                        public const int PLAYERMENU_LEADERBOARD = 1032;*/
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;

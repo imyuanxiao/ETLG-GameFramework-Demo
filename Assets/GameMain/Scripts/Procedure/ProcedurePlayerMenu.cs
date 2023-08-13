@@ -141,7 +141,10 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_SKILL);
             }
-
+            if (ne.UIFormID == (int)EnumUIForm.UIAchievementForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_ACHIEVEMENT);
+            }
         }
 
         private void ResetStates()
