@@ -122,7 +122,7 @@
 			<statement>The arrival of the pandemic forced us to reconsider the capabilities we had at our fingertips and adapt them to the circumstances we now face daily. Take video conferencing, for example. We’ve had this capability for years, but we never quite realized its full potential. Now, video calls are an essential part of our day, proving their worth far beyond hosting meetings remotely. &#xA;Patients can have a video consultation with their doctor and have their prescription made available at their closest pharmacy. It benefits the doctor, the patient, and everyone who may come into contact with the patient. This highlights the rapid acceleration of digital transformation out of necessity – but also how the right technology can enhance employee and customer safety.  </statement> 
 		</npc>
 		<player>
-			<response nextnode="13">OK! I have known how industries have benefitted from adopting digital transformation practices.  </response>
+			<response nextnode="13" isShown="false">Continue</response>
 		</player>
 	</node>
 

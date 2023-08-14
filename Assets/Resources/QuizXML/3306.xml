@@ -1,0 +1,75 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Fill in the blank: An Advanced Persistent Threat __________ .</statement>
+    <options>
+      <option id="A">always uses a Trojan horse to attack different organizations</option>
+      <option id="B">relies exclusively on phishing attacks</option>
+      <option id="C">does not involve computer hacking</option>
+      <option id="D">is created by a well-funded, highly-skilled organizations or nation state</option>
+    </options>
+    <analysis>APTs are sets of stealthy and continuous computer hacking that may remain dormant for months and use state-of-the-art exploitation techniques.</analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following is an umbrella term that describes all forms of malicious software?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Malware</option>
+      <option id="B">Beware</option>
+      <option id="C">Badware</option>
+      <option id="D">Failware</option>
+    </options>
+    <analysis>Malware is intentionally designed to cause damage to a computer or network.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Phishing, watering holes, and Trojan horses are examples of which of the following?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Advanced Persistent Threat (APT)</option>
+      <option id="B">Zero-day attack</option>
+      <option id="C">Social engineering attack</option>
+      <option id="D">Botnet</option>
+    </options>
+    <analysis>Social engineering attacks can be used to gain remote access to a computer and obtain legitimate user passwords by stealing password databases.</analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>How is a Denial of Service (DoS) attack triggered?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">By an authorized user that has forgotten their password</option>
+      <option id="B">By any authorized user who refuses to log in with their own credentials</option>
+      <option id="C">By multiple failed login attempts by an authorized user</option>
+      <option id="D">By massive quantities of network traffic that overwhelm a network host</option>
+    </options>
+    <analysis>To prevent the host from serving legitimate users, attackers direct massive quantities of network traffic to a network host.</analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>What is a botnet?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">A grouping of geographically dispersed computer systems infected by malicious software</option>
+      <option id="B">A group of physical, co-located mechanical robots that performs rudimentary tasks</option>
+      <option id="C">A contingent of mechanical robot designers and developers</option>
+      <option id="D">A distributed group of robot competition enthusiasts</option>
+    </options>
+    <analysis>The software allows a group of computer systems to be networked together by a hacker.</analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+</quiz>

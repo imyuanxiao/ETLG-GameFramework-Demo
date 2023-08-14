@@ -218,7 +218,6 @@
 		<npc>
 			<statement font="2" isBold="true" color="FCFF1A">2. Why do cyber attackers, attack? </statement> 
 			<statement font="2" isBold="true">Cyber attacks are perpetrated for financial gain through crimes like fraud or extortion, as with ransomware. There are cases where sabotage or revenge are factors. Think disgruntled employee. Cyber attacks also have a political dimension and are used in cyber-warfare. </statement>
-			<statement isBold="true"></statement>
 		</npc>
 		<player>
 			<response nextnode="8" isShown="false">Continue</response>
@@ -332,7 +331,7 @@
 			<statement>Fraudsters will be forced to abandon the field for lack of profit. </statement>
 		</npc>
 		<player>
-			<response nextnode="14" isShown="false">Continue</response>
+			<response nextnode="end">Thank you.</response>
 		</player>
 	</node>
 

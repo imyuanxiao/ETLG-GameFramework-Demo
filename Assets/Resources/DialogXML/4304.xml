@@ -23,6 +23,14 @@
 		<npc>
 			<statement font="2" isBold="true" color="FCFF1A">1. Describe the three main steps of the production phase within the data science lifecycle. </statement> 
 			<statement font="2" isBold="true">The production phase includes the model implementation, model deployment, and model management stages. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
 			<statement font="2">This phase in the data science project is focused on model testing through environmental exposure. Here is where the data science team can validate the level of accuracy of the model developed and trigger a loop-back event for model optimization. </statement>
 		</npc>
 		<player>
@@ -50,7 +58,7 @@
 			<statement>Data scientists may also assign statistical significance tests to the model as further proof of its quality. This additional proof may be instrumental in justifying model implementation or taking actions when the stakes are high-such as an expensive medical protocol or a critical airplane flight system.</statement>
 		</npc>
 		<player>
-			<response nextnode="3" isShown="false">Go back.</response>
+			<response nextnode="4" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -80,7 +88,7 @@
 			<statement>· What data does the model expect to ingest and produce?&#xA;· What infrastructure is required to run this model at scale?&#xA;· Does the model have everything it needs to execute?&#xA;· How easy is it to identify points of failure if the model is not running properly?&#xA;· What is the feedback process from the production users to the Data Science Team?</statement>
 		</npc>
 		<player>
-			<response nextnode="3" isShown="false">Go back.</response>
+			<response nextnode="4" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -100,7 +108,7 @@
 			<statement>Model version control, which includes event logging and change tracking to understand how the model evolves over time, is another critical requirement.Data science must also be concerned with model decay and continuously gather metrics to determine when a model should be refreshed or replaced. For example, a model deployed to increase customer retention among high-value customers will need to be revised once a level of retention is reached.</statement>
 		</npc>
 		<player>
-			<response nextnode="3" isShown="false">Go back.</response>
+			<response nextnode="4" isShown="false">Go back.</response>
 		</player>
 	</node>
 </dialogue>

@@ -84,7 +84,7 @@
 	<node id="9">
 		<npc>
 			<statement font="2" isBold="true" color="FCFF1A">2. What differentiates Public and Private, and Hybrid cloud delivery models? </statement> 
-			<statement font="2" isBold="true" image="3">Comparing Cloud Delivery Models </statement>
+			<statement font="2" isBold="true">Comparing Cloud Delivery Models </statement>
 		</npc>
 		<player>
 			<response nextnode="9.1.1">PUBLIC CLOUD</response>
@@ -189,7 +189,7 @@
 	<node id="15">
 		<npc>
 			<statement font="2" isBold="true" color="FCFF1A">4. What considerations need to be made (in terms of security, storage, and pricing) before choosing a cloud delivery model? </statement> 
-			<statement font="2" isBold="true" image="5">Things to Consider When Choosing a CDM </statement>
+			<statement font="2" isBold="true">Things to Consider When Choosing a CDM </statement>
 		</npc>
 		<player>
 			<response nextnode="15.1">Cloud Computing - Storage</response>

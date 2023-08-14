@@ -42,7 +42,9 @@
 	</node>
 
 	<node id="4.1">
-		<npc></npc>
+		<npc>
+			<statement>Please click one of these.</statement>
+		</npc>
 		<player>
 			<response nextnode="4.1.1">Connect and Access Data</response>
 			<response nextnode="4.1.2">Search and Find Relevant Data</response>
@@ -79,7 +81,9 @@
 	</node>
 
 	<node id="4.2">
-		<npc></npc>
+		<npc>
+			<statement>Please click one of these.</statement>
+		</npc>
 		<player>
 			<response nextnode="4.2.1">Build and Train ML/DL Models</response>
 			<response nextnode="4.2.2">Monitor, Analyze and Manage</response>
@@ -152,6 +156,15 @@
 			<statement font="2" isBold="true">Watson Studio – differentiating capabilities</statement>
 		</npc>
 		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement>Please click one of these.</statement>
+		</npc>
+		<player>
 			<response nextnode="8.1">Integrated collaboration environment</response>
 			<response nextnode="8.2">Choice of Tools for the full AI lifecycle</response>
 			<response nextnode="8.3">Support for all levels of expertise</response>
@@ -167,7 +180,7 @@
 			<statement>· Data Scientists, Subject Matter experts,Business Analysts and Developers all in oneenvironment to accelerate innovation,collaboration and productivity&#xA;· Built-in learning to get started or go thedistance with advanced tutorials.</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -176,7 +189,7 @@
 			<statement>· Best-in-breed open source and IBM toolsthat support the end-to-end AI lifecycle&#xA;· Choice of code or no-code tools to buildand train your own ML/DL models or easilytrain and customize pre-trained Watson APIs.</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -185,7 +198,7 @@
 			<statement>· Use Watson smarts and recommendationsfor the best algorithms to use given your data, OR&#xA;· Use the rich capabilities and controls tofine tune your models</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -194,7 +207,7 @@
 			<statement>· Monitor batch training experiments thencompare cross-model performance withoutworrying about log transfers and scripts tovisualize results.&#xA;· You focus on designing your neuralnetworks.We'll manage and track yourassets.</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -203,7 +216,7 @@
 			<statement>· Deploy models into production thenmonitor them to evaluate performance&#xA;· Capture new data for continuous learningand retrain models so they continuallyadapt to changing conditions.</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 
@@ -212,7 +225,7 @@
 			<statement>· Intelligent discovery of data and AI assetsthat enables reuse and improves productivity&#xA;· Seamlessly integrated for productive usewith Machine Learning and Data Science &#xA;· Powerful governance tools to control andprotect access to data</statement> 
 		</npc>
 		<player>
-			<response nextnode="8" isShown="false">Go back.</response>
+			<response nextnode="9" isShown="false">Go back.</response>
 		</player>
 	</node>
 </dialogue>

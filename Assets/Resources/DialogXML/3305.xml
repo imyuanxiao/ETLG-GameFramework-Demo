@@ -1,0 +1,109 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">What motivates a cyberattack?</statement>
+			<statement image="1">There are many possible reasons for a cyberattack. These might include political, financial, or personal motives related to international or military conflicts, trade secret acquisitions, cyber activism, or even revenge or notoriety. There is even the possibility that cyberattacks could be based on legitimate research from “White Hat” organizations or individuals (“the good guys”) seeking to defeat “Black Hat” cybercriminals. However, the majority of cyberattacks are intended to identify and exploit weaknesses in systems and technology.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">Common cyberattack methods</statement>
+			<statement>Cybercriminals use many methods to deliver a cyberattack.</statement>
+		</npc>
+		<player>
+			<response nextnode="3">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement>Click the sections to learn about some of the commonly used cyberattack methods. Here are part 1 options.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.1">Social engineering attacks</response>
+			<response nextnode="3.2">Svstem breaches and malware infections</response>
+			<response nextnode="3.3">Man-in-the-Middle (MitM) attacks</response>
+			<response nextnode="3.4">Internet protocol (IP) spoofing</response>
+			<response nextnode="4">Go to part 2.</response>
+		</player>
+	</node>
+
+	<node id="3.1"> 
+		<npc>
+			<statement>Social engineering attacks can be used to obtain legitimate user passwords by stealing password databases. Social engineering attack methods include phishing, watering holes, and Trojan horses.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.2"> 
+		<npc>
+			<statement>“Bugs” in programming code present opportunities for attackers to breach (hack) and “own” a system. Configuration errors, such as default passwords and open file shares, also create major security issues. Network design and protocol weaknesses can create entry points for malware infections and initial “latch on” attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.3"> 
+		<npc>
+			<statement>A Man-in-the-Middle (MitM) attack is used to intercept, capture, and then release network traffic. MitM attacks may include using Internet domain names or mobile apps to spoof legitimate websites, or use physical devices, such as point-of-sale (POS) skimmers, to capture or “skim” sensitive data.&#xA;MitM attacks are an advanced variation of phishing and pharming attacks. In these attacks, a criminal uses an intermediate website to view private information and alter transactions. So, when users log in to a website and start working, they are unaware that all the information exchanged between them and the website is passing to a criminal.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.4"> 
+		<npc>
+			<statement>Internet protocol (IP) spoofing involves circumventing security systems that limit access to known IP and media access control (MAC) addresses. With this method, an attacker pretends to be a legitimate endpoint in order to gain access to systems.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement>Click the sections to learn about some of the commonly used cyberattack methods. Here are part 2 options.</statement>
+		</npc>
+		<player>
+			<response nextnode="4.1">Stealing and exploiting system access credentials</response>
+			<response nextnode="4.2">Denial of Service (DoS) attacks</response>
+			<response nextnode="4.3">Advanced Persistent Threats (APTs)</response>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+	<node id="4.1"> 
+		<npc>
+			<statement>By stealing legitimate system administration credentials, an unauthorized user can gain access to one or more systems. In this scenario, an attacker steals administration credentials for System A, and then uses them “downstream” to gain access to System B. The result is that the attacker is able to exploit the “trust relationship” between the two systems.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2"> 
+		<npc>
+			<statement>An attacker may direct massive quantities of network traffic to a network host to prevent the host from serving legitimate users. When attackers successfully overwhelm the hosts, they can potentially restrict system access, denying access to other users. This is known as Denial of Service (DoS) or Distributed DoS (DDoS).</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.3"> 
+		<npc>
+			<statement>Advanced Persistent Threats (APTs) are created by well-funded, highly-skilled organizations and nation-states, and often to target specific organizations. APTs are sets of stealthy and continuous computer hacking processes. APTs can remain dormant for months, but when they are active, they typically use state-of-the-art exploitation techniques.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+</dialogue>

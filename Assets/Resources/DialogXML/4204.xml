@@ -157,7 +157,7 @@
 			<statement font="2">These data infrastructures can include databases – relational and NoSQL, Big Data repositories and processing engines – such as Hadoop and Spark, as well as data pipelines – for transforming and moving data between these data platforms.</statement>	
 		</npc>
 		<player>
-			<response nextnode="11" isShown="false">Continue</response>
+			<response nextnode="16" isShown="false">Continue</response>
 		</player>
 	</node>
 
@@ -232,8 +232,8 @@
 		</npc>
 		<player>
 			<response nextnode="22.1">PRODUCT OWNER</response>
-			<response nextnode="22.1">DEVELOPER</response>
-			<response nextnode="22.1">THE BUSINESS ANALYST</response>
+			<response nextnode="22.2">DEVELOPER</response>
+			<response nextnode="22.3">THE BUSINESS ANALYST</response>
 			<response nextnode="end">Thank you.</response>
 		</player>
 	</node>

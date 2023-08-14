@@ -40,6 +40,12 @@ namespace ETLG
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)AwardListVerticalLayoutGroup.transform);
         }
 
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)AwardListVerticalLayoutGroup.transform);
+        }
+
         protected override void OnClose(bool isShutdown, object userData)
         {
             base.OnClose(isShutdown, userData);
