@@ -1,0 +1,106 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll explore the 3 stages that make up the production phase of the data science lifecycle.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>Describe each of the following steps within the production phase of the data science lifecycle</statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. Describe the three main steps of the production phase within the data science lifecycle. </statement> 
+			<statement font="2" isBold="true">The production phase includes the model implementation, model deployment, and model management stages. </statement>
+			<statement font="2">This phase in the data science project is focused on model testing through environmental exposure. Here is where the data science team can validate the level of accuracy of the model developed and trigger a loop-back event for model optimization. </statement>
+		</npc>
+		<player>
+			<response nextnode="3.1.1">Model implementation</response>
+			<response nextnode="3.2.1">Model deployment</response>
+			<response nextnode="3.3.1">Model management</response>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+	<node id="3.1.1">
+		<npc>
+			<statement>Once you've built and chosen your model, this stage helps you evaluate and understand its quality to ensure it fully addresses the business problem.</statement>
+			<statement image="1">Improve your model's performance by visualizing the fit between the model and data using the model visualization capabilities of IBM SPSS® Modeler.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.1.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3.1.2">
+		<npc>
+			<statement>Your models have been built, and you've selected the best one. Before actual deployment, however, you need to evaluate your model to understand its quality and ensure that it fully addresses the business problem. Model implementation entails computing various diagnostic measures and other outputs such as tables and graphs, enabling the data scientist to interpret the model's quality and its efficacy in solving the problem.</statement>
+			<statement>For a predictive model, data scientists use a testing set that is independent of the training set but follows the same probability distribution and has a known outcome. The testing set is used to evaluate the model so it can be refined as needed. Sometimes the final model is applied also to a validation set for a final assessment.</statement>
+			<statement>Data scientists may also assign statistical significance tests to the model as further proof of its quality. This additional proof may be instrumental in justifying model implementation or taking actions when the stakes are high-such as an expensive medical protocol or a critical airplane flight system.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.2.1">
+		<npc>
+			<statement>Upon development and approval by business sponsors, you're ready to deploy your model into the production environment or a comparable test environment.</statement>
+			<statement image="2">Once your model is ready, deploy and score it with the available Watson Machine Learning service.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.2.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3.2.2">
+		<npc>
+			<statement>Once a satisfactory model has been developed and is approved by the business sponsors, you are ready to deploy it into the production environment or a comparable test environment. </statement>
+			<statement>Deploying a model into an operational business process is usually an IT function, although it can involve additional groups. IT departments often have development, testing, and staging environments. However, the process is not as simple as handing the model off to your IT team. Testing the model first is necessary to identify any dependencies in the production environment. In addition, data science teams need to ensure models receive the correct production data and send the scores to the right place and that the system must be set up for monitoring and scalability.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.2.3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3.2.3">
+		<npc>
+			<statement font="1" isBold="true">Questions to ask at this stage of the process include: </statement>
+			<statement>· What data does the model expect to ingest and produce?&#xA;· What infrastructure is required to run this model at scale?&#xA;· Does the model have everything it needs to execute?&#xA;· How easy is it to identify points of failure if the model is not running properly?&#xA;· What is the feedback process from the production users to the Data Science Team?</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.3.1">
+		<npc>
+			<statement>Model management must be a continuous process to ensure optimal performance over time. This stage helps you monitor model creation, use and decay.</statement>
+			<statement image="3">Compare runs and conduct model hyperparameter optimization easily with deep learning experiments.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.3.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3.3.2">
+		<npc>
+			<statement>During deployment and integration of modeling results, model management must be a continuous process to ensure optimal performance over time. This means knowing exactly where each model is in the lifecycle, how old the model is, who developed it, and who is using it for which application. </statement>
+			<statement>Model version control, which includes event logging and change tracking to understand how the model evolves over time, is another critical requirement.Data science must also be concerned with model decay and continuously gather metrics to determine when a model should be refreshed or replaced. For example, a model deployed to increase customer retention among high-value customers will need to be revised once a level of retention is reached.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+</dialogue>

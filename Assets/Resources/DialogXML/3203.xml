@@ -1,0 +1,447 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we will cover in detail the impact of the activities of cybercriminals attacks on our industries and regional societies. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.What are the main attack trends by industry? &#xA;2.What is the impact of cyber attacks per geography? </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. What are the main attack trends by industry?</statement> 
+			<statement font="2" isBold="true">Cyber attacks this year targeted most of our industries, with 23% of attacks against the finance and insurance industries, 17.7% against manufacturing, closely followed by energy 11.1%, and retail 10.2%. The rest of the top 10 industries were targeted by under 10% of attacks each. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="1" isBold="true">Top 10 industries cyber attack breakdown </statement> 
+			<statement font="1">For the fifth year in a row, the finance and insurance industry was the most-attacked industry, underscoring the significant interest threat actors have in these organizations.  </statement>
+			<statement  image="1">The figure below portrays the top attacks on each industry from X-Force incident response data. </statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true">Key findings </statement> 
+			<statement>Attackers also focused on industries connected to operational technology </statement>
+			<statement>· Manufacturing moved from the eighth position to the second most attacked. This may be driven by the interest malicious actors have in targeting infrastructure with connections to operational technology (OT). &#xA;· Similarly, energy jumped from ninth place to third place, further underscoring attackers’ focus on OT-connected organizations.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">COVID-19 drove attackers focus</statement> 
+			<statement>· Healthcare jumped from last place to seventh place probably driven by COVID-related healthcare attacks and a barrage of ransomware attacks against hospitals.&#xA;· Transportation targeting continued to drop, falling from third to ninth place, potentially related to less transportation utilization during the pandemic.</statement> 
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement font="2" isBold="true">1/10 - Financial sector</statement> 
+			<statement>Financial institutions experienced 23% of all attacks we analyzed, up from the 17% of attacks the sector experienced in the past.</statement> 
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement isBold="true">Malware for mobile banking fraud</statement> 
+			<statement>Financial malware in the cybercrime arena continues to pose a threat to financial and other organizations, as threat actors continue to innovate and new threats emerge.</statement>
+			<statement image="2">Recently IBM Trusteer observed cybercrime gangs use a highly automated process to empty bank accounts via mobile banking fraud, and we are seen remote overlay attacks become even more common, particularly in Europe.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement isBold="true">High volume of server attacks</statement> 
+			<statement>Of all industries, finance and insurance experienced the highest number of server access attacks — primarily related to Citrix vulnerability CVE-2019-19781 — when compared to other industries. Server access attacks made up 28% of all attacks on finance and insurance, and the industry tied with manufacturing for the highest percentage of attacks that exploited CVE-2019-19781, at 22%. The highly regulated nature of the finance and insurance sector and finance organizations’ proactive approach to identifying and addressing server access attacks probably contributed to the high percentage of attacks on this sector.</statement>
+		</npc>
+		<player>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>
+			<statement isBold="true">Lower rate of ransomware attacks</statement> 
+			<statement>In addition, finance and insurance experienced fewer ransomware attacks when compared to other industries, such as manufacturing, professional services and government.</statement>
+			<statement>Only 10% of attacks on this industry were ransomware. Ransomware attackers have probably found non-finance organizations to be more profitable for ransomware attacks, potentially because of strong security controls in place at finance and insurance organizations, or because attackers assess that industries such as manufacturing and professional services have a lower tolerance for downtime related to ransomware attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11">
+		<npc>
+			<statement font="2" isBold="true">2/10 - Manufacturing</statement> 
+			<statement image="3">Manufacturing ranked as the second-most attacked industry.</statement> 
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>
+			<statement isBold="true">21% of attacks were from ransomware</statement> 
+			<statement>Threat actors find manufacturing to be a profitable sector for ransomware attacks. And, in pure numbers, manufacturing experienced more ransomware attacks than any other sector. This sector’s low tolerance for downtime — often amounting to millions of dollars in losses for each hour of downtime—is probably a contributing factor in its high profitability for threat actors.</statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement isBold="true">4x times more BEC attacks than any other industry</statement> 
+			<statement>BEC made up 17% of attacks on manufacturing. Manufacturing organizations often need to procure multiple parts from several different suppliers, creating multiple avenues for threat actors to insert themselves into email conversations and redirect funds meant to pay for manufacturing supplies. Many attacks on manufacturing appear to be targeting money through social engineering, rather than targeting operational technology.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement font="2" isBold="true">3/10 - Energy</statement> 
+			<statement image="4">Energy ranked as the third- most attacked industry, up from ninth place the year prior. </statement> 
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement isBold="true">Server access attacks</statement> 
+			<statement>Particularly those exploiting CVE-2019-19781—hit energy organizations hard, and this industry came in fourth place after healthcare for the highest number of such attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement isBold="true">Data theft and leak is #1 attack type</statement> 
+			<statement>Accounting for 35% of all attacks in this sector, and underscoring the threat from information-stealing malware and phishing attacks. Many of these attacks were against oil and gas companies in particular.</statement>
+		</npc>
+		<player>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement isBold="true">BEC attacks, digital currency mining, ransomware, remote access trojans</statement> 
+			<statement>Affected this industry but not notably more than other sectors. In fact, ransomware attacks against energy accounted for only 6% of all attacks against the industry—considerably lower than many of the other top attacked verticals.</statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18">
+		<npc>
+			<statement font="2" isBold="true">4/10 - Retail</statement> 
+			<statement>As a hub of credit card payments and other financial transactions, retail has long been a target of choice for malicious threat actors.</statement> 
+			<statement image="5">The retail industry ranked as fourth-most attacked industry, down from second place last year, and received 10.2% of all attacks on the top 10 industries, down from 16% last year.</statement>
+		</npc>
+		<player>
+			<response nextnode="19" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="19">
+		<npc>
+			<statement isBold="true">Retail experienced more credential theft attacks than any other attack type</statement> 
+			<statement>Credential theft makes up 36% of the attacks and surpasses in pure numbers all other sectors for credential theft attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="20" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="20">
+		<npc>
+			<statement isBold="true">Ransomware Sodinokibi attacks</statement> 
+			<statement>The industry also suffered from ransomware attacks — making up 18% of total attacks on retail. Nearly all of these ransomware attacks came from Sodinokibi attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="21" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="21">
+		<npc>
+			<statement isBold="true">DDoS attacks, fraud, misconfiguration, RATs and server access attacks</statement> 
+			<statement>To a lesser extent, DDoS attacks, fraud, misconfiguration, RATs and server access attacks also affected the retail industry, indicating that threat actors are using a range of attack types to infiltrate retail organizations for financial gain.</statement>
+		</npc>
+		<player>
+			<response nextnode="22" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="22">
+		<npc>
+			<statement font="2" isBold="true">5/10 - Professional services </statement> 
+			<statement>Professional services organizations are particularly attractive to attackers because of the avenue they provide to additional victims.</statement> 
+			<statement image="6">Ranked as the fifth-most attacked industry receiving 8.7% of all attacks—holding its same rank as in previous years, when it received 10% of all attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="23" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="23">
+		<npc>
+			<statement isBold="true">Ransomware Sodinokibi attacks</statement> 
+			<statement>Ransomware made up 35% of incidents at professional services firms—the highest percentage out of all industries—and in terms of raw numbers of ransomware attacks, the professional services sector came in second only to manufacturing.</statement>
+			<statement>Sodinokibi went after professional services firms aggressively, including law firms.</statement>
+		</npc>
+		<player>
+			<response nextnode="24" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="24">
+		<npc>
+			<statement>The sensitive data these firms hold on their clients, and in some cases celebrity clients, possibly led threat actors to believe these firms would be more likely to pay a ransom to prevent the leak of sensitive data.</statement>
+			<statement>One law firm’s data was put up for auction for $40 million dollars, underscoring the high price ransomware attackers perceive they can obtain for professional services firms’ data.</statement>
+		</npc>
+		<player>
+			<response nextnode="25" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="25">
+		<npc>
+			<statement isBold="true">Data theft and server access</statement> 
+			<statement>In addition to ransomware attacks, data theft and server access attacks hit professional services hard, accounting for 13% of attacks each on the industry. These trends suggest that injection attacks and vulnerability exploitation on professional services firms are common as threat actors seek access to sensitive data.</statement>
+		</npc>
+		<player>
+			<response nextnode="26" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="26">
+		<npc>
+			<statement font="2" isBold="true">6/10 - Government </statement> 
+			<statement>The public sector—including defense, public administration, and government-provided services—ranked as the sixth most attacked in the ranking, receiving 7.9% of all attacks on the top ten industries.</statement> 
+			<statement image="7">From IBM Security X-Force incident response data, it appears that ransomware attacks plagued government organizations the most in 2020, followed closely by data theft.</statement>
+		</npc>
+		<player>
+			<response nextnode="27" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="27">
+		<npc>
+			<statement isBold="true">Ransomware Sodinokibi attacks</statement> 
+			<statement>Ransomware attacks accounted for 33% of the total attacks on government organizations—the second highest only after professional services.&#xA;X-Force Incident Response observed government judicial systems and government transportation entities in the crosshairs of ransomware. Nearly 50% of ransomware attacks are from Sodinokibi threat actors, following on a trend the group began in September 2019 with a barrage of ransomware attacks against 23 municipalities in Texas, US.</statement>
+		</npc>
+		<player>
+			<response nextnode="28" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="28">
+		<npc>
+			<statement isBold="true">Data theft and leak</statement>
+			<statement>The second most common attack type was data theft and leak accounting for 25% of attacks against government in, underscoring the threat of data theft and espionage for government entities.&#xA;Foreign governments, cybercriminals, and even hacktivists have all demonstrated an interest in stealing data from government organizations.</statement>
+		</npc>
+		<player>
+			<response nextnode="29" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="29">
+		<npc>
+			<statement font="2" isBold="true">7/10 - Healthcare </statement> 
+			<statement>Healthcare ranked as the seventh most attacked industry, receiving 6.6% of all attacks on the top ten industries—up from the tenth place and 3% of attacks in previous years. </statement> 
+			<statement image="8">This is an appreciable jump, and reflects the heavy targeting that healthcare received during the COVID-19 pandemic, from ransomware attacks to threat actors targeting COVID- related research and treatments.</statement>
+		</npc>
+		<player>
+			<response nextnode="30" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="30">
+		<npc>
+			<statement isBold="true">Ransomware Sodinokibi and Ryuk attacks</statement> 
+			<statement>Nearly 28% of attacks on healthcare were ransomware. Ransomware attacks on healthcare can be particularly devastating—grimly illustrated by the story of a ransomware attack below:</statement>
+		</npc>
+		<player>
+			<response nextnode="31" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="31">
+		<npc>
+			<statement>In a German hospital in September 2020 a ransomware attack forced an ambulance to take a patient to a different hospital 20 miles away, after which the patient died. While German authorities determined that the ransomware attack did not play a decisive role in the death, in the future such attacks might directly lead to deaths.</statement>
+			<statement>When security researchers became aware of Ryuk cybercriminals’ plans to attack over 400 US hospitals in late October, US law enforcement and several security companies—including IBM Security X-Force—rushed to notify potential victims and identify mitigation measures. Thankfully, only seven of potentially over 400 hospitals were hit by Ryuk within the following week.</statement>
+		</npc>
+		<player>
+			<response nextnode="32" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="32">
+		<npc>
+			<statement isBold="true">Scanning and exploiting vulnerabilities</statement> 
+			<statement>In addition to ransomware, exploitation of CVE-2019-19781 to gain access to healthcare networks is very common. Healthcare was the third-most exploited industry through this CVE, making up 17% of such attacks on all industries.</statement>
+			<statement>In at least one instance involving this CVE on a healthcare network, threat actors combined their activity with PowerShell and Cobalt Strike for lateral movement and executing on objectives. </statement>
+		</npc>
+		<player>
+			<response nextnode="33" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="33">
+		<npc>
+			<statement font="2" isBold="true">8/10 - Media and information communications</statement> 
+			<statement>This sector includes telecommunications and mobile communications providers, as well as media and social media outlets that can play a critical role in political outcomes, especially during election years.</statement> 
+			<statement image="9">This industry became the eight most attacked, receiving 5.7% of all attacks on the top ten industries—down from fourth place last year, when it received 10% of attacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="34" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="34">
+		<npc>
+			<statement isBold="true">Misconfigurations</statement> 
+			<statement>X-Force data identifies misconfiguration as the most common attack type on media, underscoring the importance of correctly configuring cloud instances to prevent unintended data leakage.</statement>
+		</npc>
+		<player>
+			<response nextnode="35" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="35">
+		<npc>
+			<statement isBold="true">Spoofing</statement>
+			<statement>Quad9 data indicates that media was the top industry that malicious actors attempted to spoof by creating similar URLs to legitimate media outlets. Nearly 90% of all malicious DNS squatting—where a domain name is misleadingly similar to a legitimate webpage—involved media outlets.</statement>
+			<statement>This trend follows from the top brand spoofing trends noted earlier in this course and demonstrates that threat actors are seeking to capitalize on the popularity and trust consumers have in media organizations.</statement>
+		</npc>
+		<player>
+			<response nextnode="36" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="36">
+		<npc>
+			<statement font="2" isBold="true">9/10 - Transportation</statement> 
+			<statement>Transportation experienced 5.1% of all attacks, down from 10% in previous years.</statement> 
+			<statement image="10">Reasons for this decrease could be attributed to the COVID-19 pandemic and stay-at-home orders may have decreased the profitability of this sector for threat actors—both cybercriminals attempting to capture financial information and nation-states tracking persons of interest.</statement>
+		</npc>
+		<player>
+			<response nextnode="37" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="37">
+		<npc>
+			<statement isBold="true">Key attack trends</statement> 
+			<statement>Malicious insider and misconfiguration incidents had a disproportionately significant impact on transportation, particularly when compared with other industries. Together, these two attack types accounted for nearly 25% of the attacks on transportation last year.</statement>
+			<statement>The threat of insider attacks against transportation is significant, particularly given that some of the most damaging cyber attacks—including those that might lead to loss of life — become most feasible when an insider is involved.</statement>
+			<statement>Ransomware and server access attacks accounted for another 26% of attacks on transportation in 2020. </statement>
+		</npc>
+		<player>
+			<response nextnode="38" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="38">
+		<npc>
+			<statement font="2" isBold="true">10/10 - Education </statement> 
+			<statement image="11">The education sector ranked as tenth-most attacked, receiving 4.0% of all attacks on the top ten industries. This moves education down from the seventh-most attacked position, when it received 8% of all attacks.</statement> 
+		</npc>
+		<player>
+			<response nextnode="39" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="39">
+		<npc>
+			<statement isBold="true">Spam and adware</statement> 
+			<statement>Spam and adware were common attack types against education, together making up 50% of all attacks in the education sector. Approximately half of these originated from spam—a higher percentage than any other industry—highlighting the threat to education organizations from phishing-related threats.</statement>
+		</npc>
+		<player>
+			<response nextnode="40" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="40">
+		<npc>
+			<statement isBold="true">Ransomware</statement> 
+			<statement>Ransomware accounted for 10% of attacks on Education. Public breach data indicates that several schools and universities were hit with ransomware, with several of these opting to pay the ransom.</statement>
+		</npc>
+		<player>
+			<response nextnode="41" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="41">
+		<npc>
+			<statement isBold="true">Botnets, fraud, and RATs</statement> 
+			<statement>Botnets, fraud, and RATs also contributed to attacks on the education sector. Common cybercriminal attack techniques, phishing, and commodity malware appeared to be frequent threats to education organizations.</statement>
+		</npc>
+		<player>
+			<response nextnode="42" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="42">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. What is the impact of cyber attacks per geography? </statement> 
+			<statement font="2" isBold="true">Every geography and industry faces a unique attack landscape, as different threat actors, motivations, assets and geopolitical events drive activity in each region and industry.</statement>
+		</npc>
+		<player>
+			<response nextnode="43" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="43">
+		<npc>
+			<statement isBold="true">Geographic impact </statement> 
+			<statement>Europe, North America and Asia suffer the bulk of attacks, attracting threat actor activity probably due to the high percentage of the world’s wealth that circulates on these continents—over 89% of the world’s gross domestic product (GDP). Of these three, attacks on European organizations grew the most, driven by ransomware, insider and server access attacks. </statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
+		</player>
+	</node>
+
+</dialogue>
