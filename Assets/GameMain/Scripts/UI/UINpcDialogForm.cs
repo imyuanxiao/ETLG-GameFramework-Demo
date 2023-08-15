@@ -505,6 +505,7 @@ namespace ETLG
             //共享池
             for (int i = dialogScrollContent.childCount - 1; i >= 0; i--)
             {
+                //dialogScrollContent.GetChild(i).gameObject.SetActive(false);
                 Transform textModuleTransform = dialogScrollContent.GetChild(i).GetComponent<Transform>();
                 textModuleTransform.SetParent(Pool);
             }
