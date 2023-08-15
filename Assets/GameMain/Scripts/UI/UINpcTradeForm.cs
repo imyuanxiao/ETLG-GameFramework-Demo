@@ -36,6 +36,7 @@ namespace ETLG
         private DataTrade dataTrade = null;
 
         private bool refresh;
+        private bool isOpen;
         private bool backendRefresh;
         private int fetchedType;
 
@@ -66,6 +67,7 @@ namespace ETLG
             GameEntry.Event.Subscribe(BackendFetchedEventArgs.EventId, OnBackendFetchedEventArgs);
             loadData();
             refresh = true;
+            isOpen = true;
             BackendDataManager.Instance.HandleTrade();
         }
 
@@ -133,7 +135,15 @@ namespace ETLG
             {
                 HideAllItem();
                 showContent();
-                updateArtifactData();
+                if (!isOpen)
+                {
+                    updateArtifactData();
+                }
+                else
+                {
+                    isOpen = false;
+                }
+                
                 refresh = false;
             }
             if (backendRefresh)
