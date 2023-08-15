@@ -136,6 +136,7 @@ namespace ETLG
                     avatarChange.SetActive(false);
                     editButtons.SetActive(true);
                     submitButtons.SetActive(false);
+                    resetAvatarButtons();
                     //update info
                     GameEntry.Data.GetData<DataBackend>().currentUser.avatar = playerAvatarId;
                     GameEntry.Data.GetData<DataBackend>().currentUser.nickName = nickName.text;
@@ -201,7 +202,8 @@ namespace ETLG
             achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
             Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
-            learningPath.text = UIFloatString.FloatToString(float.Parse(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress));
+            Debug.Log(GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getTotalProgress());
+            learningPath.text = UIFloatString.FloatToString(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
             SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
             SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
             SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT
@@ -237,6 +239,7 @@ namespace ETLG
                 Debug.Log(origionalName);
                 nickName.text = origionalName;
                 avatarChange.SetActive(false);
+                resetAvatarButtons();
             }
             else
             {
@@ -356,8 +359,6 @@ namespace ETLG
         }
         private void SetBossTime(TextMeshProUGUI text, float bossDefeatTime)
         {
-            // Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
-            //float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
             if (bossDefeatTime == -1)
             {
                 text.text = "Unchallenged";
@@ -402,6 +403,15 @@ namespace ETLG
             string millisecondsString = milliseconds.ToString().PadLeft(3, '0');
 
             return $"{hoursString}:{minutesString}:{secondsString}.{millisecondsString}";
+
+        }
+        private void resetAvatarButtons()
+        {
+            ColorBlock colorBlock;
+            colorBlock = selectedButton.colors;
+            colorBlock.normalColor = normalColor;
+            selectedButton.colors = colorBlock;
+            selectedButton = null;
 
         }
         private void ShakeText(TextMeshProUGUI reminder, Vector3 originalPosition)

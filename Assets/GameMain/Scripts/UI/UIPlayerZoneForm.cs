@@ -36,7 +36,7 @@ namespace ETLG
         {
             s_achievement.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             s_spaceship.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            s_learningProgress.text = UIFloatString.FloatToString( float.Parse(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress));
+            s_learningProgress.text = UIFloatString.FloatToString(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
             s_name.text = GameEntry.Data.GetData<DataBackend>().userProfile.nickName;
             Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.avatar);
             if (GameEntry.Data.GetData<DataBackend>().userProfile.avatar >= 1000)

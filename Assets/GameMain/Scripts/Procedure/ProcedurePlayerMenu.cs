@@ -149,6 +149,10 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_RANK);
             }
+            if (ne.UIFormID == (int)EnumUIForm.UIpProfileForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_PROFILE);
+            }
         }
 
         private void ResetStates()

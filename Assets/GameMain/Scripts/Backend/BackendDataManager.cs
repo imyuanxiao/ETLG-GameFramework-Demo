@@ -478,7 +478,7 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-                           
+                           Dictionary<string,string> download = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseData.data);
                             GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
@@ -525,6 +525,7 @@ namespace ETLG
                         if (responseData.data!=null && !string.IsNullOrEmpty( responseData.data.achievement))
                         {
                             GameEntry.Data.GetData<DataBackend>().userProfile.achievement = responseData.data.achievement;
+                            Debug.Log("responseData.data.learningProgress :" + responseData.data.learningProgress);
                             GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress = responseData.data.learningProgress;
                             GameEntry.Data.GetData<DataBackend>().userProfile.nickName = responseData.data.nickName;
                             GameEntry.Data.GetData<DataBackend>().userProfile.playerScore = responseData.data.playerScore;
@@ -709,7 +710,7 @@ namespace ETLG
             public string nickName;
             public string playerScore;
             public string achievement;
-            public string learningProgress;
+            public float learningProgress;
             public float boss1;
             public float boss2;
             public float boss3;

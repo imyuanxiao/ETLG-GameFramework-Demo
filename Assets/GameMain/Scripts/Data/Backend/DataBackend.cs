@@ -146,7 +146,7 @@ namespace ETLG.Data
             public string nickName;
             public string playerScore;
             public string achievement;
-            public string learningProgress;
+            public float learningProgress;
             public float boss1;
             public float boss2;
             public float boss3;
