@@ -73,7 +73,6 @@ namespace ETLG
                 else
                 {
                     HandleErrorMessages(www);
-                    GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                 }
                 www.Dispose();
 
