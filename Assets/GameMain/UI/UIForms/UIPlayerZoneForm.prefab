@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spaceship Score
+  m_text: Learning Progress
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 4822370176464632080}
   - component: {fileID: 5114631968813355102}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 6068369536706781104}
   - component: {fileID: 109962217264044304}
   m_Layer: 5
-  m_Name: PlanetNumber
+  m_Name: SpaceshipScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Explored Chapters
+  m_text: Spaceship Score
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 7143054209952688730}
   - component: {fileID: 8918432808895585028}
   m_Layer: 5
-  m_Name: SpaceshipData
+  m_Name: Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,7 +1042,7 @@ GameObject:
   - component: {fileID: 8885261678154928182}
   - component: {fileID: 7511646779499185369}
   m_Layer: 5
-  m_Name: SpaceshipScore
+  m_Name: LearningProgress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1055,7 +1055,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4920701082362523210}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1354,11 +1354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad78c0f514ff8843bc5245525e80ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s_spaceship: {fileID: 8918432808895585028}
+  s_spaceship: {fileID: 4838839743717144399}
   s_achievement: {fileID: 5114631968813355102}
-  s_planetNum: {fileID: 4838839743717144399}
+  s_learningProgress: {fileID: 8918432808895585028}
   s_name: {fileID: 3903703936333322494}
-  s_ID: {fileID: 0}
   closeButton: {fileID: 5901327613766724040}
   avatar: {fileID: 4245650873363395822}
   planetNum: 0
@@ -1584,7 +1583,7 @@ GameObject:
   - component: {fileID: 8090165036743075835}
   - component: {fileID: 4838839743717144399}
   m_Layer: 5
-  m_Name: PlanetNum
+  m_Name: Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

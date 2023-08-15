@@ -200,7 +200,8 @@ namespace ETLG
         {
             achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+            Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
+            learningPath.text = UIFloatString.FloatToString(float.Parse(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress));
             SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
             SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
             SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT

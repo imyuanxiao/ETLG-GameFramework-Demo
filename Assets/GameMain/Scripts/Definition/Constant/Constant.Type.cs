@@ -21,6 +21,8 @@
             public const int TUTORIAL_SKILL = 4;
             public const int TUTORIAL_BATTLE = 9;
             public const int TUTORIAL_ACHIEVEMENT = 5;
+            public const int TUTORIAL_RANK = 6;
+            public const int TUTORIAL_PROFILE = 7;
 
             // player menu title
             /*            public const int PLAYERMENU_SPACESHIP = 1011;
