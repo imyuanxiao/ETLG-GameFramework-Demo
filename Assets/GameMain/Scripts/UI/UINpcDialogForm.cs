@@ -32,6 +32,7 @@ namespace ETLG
         public VerticalLayoutGroup verticalLayoutGroup;
         public VerticalLayoutGroup DialogScrollVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
+        public Transform Pool;
 
         private UINPCDialogManager UI_NPCDialogManager;
         private Sprite NPCSprite;
@@ -121,8 +122,9 @@ namespace ETLG
             //}
             foreach (Image textModule in UI_NPCDialogManager.textModules)
             {
-                textModule.gameObject.SetActive(true);
-                Debug.Log("实例化一次");
+                //textModule.gameObject.SetActive(true);
+                Transform textModuleTransform = textModule.GetComponent<Transform>();
+                textModuleTransform.SetParent(dialogScrollContent);
             }
 
         }
@@ -496,9 +498,15 @@ namespace ETLG
         // 清除所有聊天记录
         private void removeALLConversations()
         {
-            for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
+            //for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
+            //{
+            //    //dialogScrollContentRectTransform.GetChild(i).gameObject.SetActive(false);
+            //}
+            //共享池
+            for (int i = dialogScrollContent.childCount - 1; i >= 0; i--)
             {
-                dialogScrollContentRectTransform.GetChild(i).gameObject.SetActive(false);
+                Transform textModuleTransform = dialogScrollContent.GetChild(i).GetComponent<Transform>();
+                textModuleTransform.SetParent(Pool);
             }
             //dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
         }

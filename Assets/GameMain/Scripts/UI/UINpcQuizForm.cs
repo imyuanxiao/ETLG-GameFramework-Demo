@@ -43,6 +43,7 @@ namespace ETLG
         public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
+        public Transform Pool;
 
         private UIQuiz currentQuiz;
         private Vector2 currentPosition;
@@ -331,6 +332,7 @@ namespace ETLG
             {
                 Transform option = optionCanvas.Value.transform;
                 option.gameObject.SetActive(true);
+                //option.SetParent(ChoicesContainer);
             }
         }
 
@@ -469,10 +471,11 @@ namespace ETLG
 
         private void removeAllOptions()
         {
-            for (int i = 0; i < ChoicesContainer.childCount; i++)
+            for (int i = ChoicesContainer.childCount-1; i >=0; i--)
             {
                 Transform option = ChoicesContainer.GetChild(i);
                 option.gameObject.SetActive(false);
+                //option.SetParent(Pool);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
 
