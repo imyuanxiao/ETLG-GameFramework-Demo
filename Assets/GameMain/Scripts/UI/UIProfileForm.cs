@@ -236,7 +236,6 @@ namespace ETLG
             if(isEditInfo)
             {
                 nickName.interactable = false;
-                Debug.Log(origionalName);
                 nickName.text = origionalName;
                 avatarChange.SetActive(false);
                 resetAvatarButtons();
@@ -407,11 +406,14 @@ namespace ETLG
         }
         private void resetAvatarButtons()
         {
-            ColorBlock colorBlock;
-            colorBlock = selectedButton.colors;
-            colorBlock.normalColor = normalColor;
-            selectedButton.colors = colorBlock;
-            selectedButton = null;
+            if (selectedButton == null)
+            {
+                return;
+            }
+                ColorBlock colorBlock;
+                colorBlock = selectedButton.colors;
+                colorBlock.normalColor = normalColor;
+                selectedButton.colors = colorBlock;
 
         }
         private void ShakeText(TextMeshProUGUI reminder, Vector3 originalPosition)
