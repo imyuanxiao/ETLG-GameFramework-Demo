@@ -37,7 +37,7 @@ public class UISkillTreeMapDraggable : MonoBehaviour, IDragHandler, IPointerDown
 
     public void OnScroll(PointerEventData eventData)
     {
-        float scrollDelta = eventData.scrollDelta.y * 30;
+        float scrollDelta = eventData.scrollDelta.y * -30;
         Vector2 newPosition = rectTransform.anchoredPosition + new Vector2(0f, scrollDelta);
         rectTransform.anchoredPosition = newPosition;
         ClampPosition();

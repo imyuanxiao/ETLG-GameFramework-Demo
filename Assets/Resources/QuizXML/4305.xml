@@ -1,0 +1,76 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Data Exploration can be best summarized as the process of ___________.</statement>
+    <options>
+      <option id="A">Cleaning and organizing data into a usable format</option>
+      <option id="B">Examining and visualizing data to find undiscovered patterns and relationships</option>
+      <option id="C">Importing data into a machine learning model </option>
+      <option id="D">All the above </option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Data Modeling can best be summarized as the process of ______________.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Creating a visualization to communicate connections between data points and structures.</option>
+      <option id="B">Cleaning and munging data into a usable format</option>
+      <option id="C">Examining data for hidden patterns</option>
+      <option id="D">All the above</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following is a Data Model?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Entity-Relationship model</option>
+      <option id="B">Relational data model</option>
+      <option id="C">Object-oriented data model</option>
+      <option id="D">Hierarchical data model</option>
+      <option id="E">All the above</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>E</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>_____________ is the stage whereby a data model is analyzed for its quality and efficiency in solving a problem.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Data Cleansing</option>
+      <option id="B">Data Modeling</option>
+      <option id="C">Model Implementation</option>
+      <option id="D">Model Deployment</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>_____________ is the stage whereby a data model is tested for its quality and put into production.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Data Cleansing</option>
+      <option id="B">Data Modeling</option>
+      <option id="C">Model Implementation</option>
+      <option id="D">Model Deployment</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+</quiz>

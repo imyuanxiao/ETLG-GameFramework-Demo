@@ -1,0 +1,22 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">What do you already know about IBM Security?</statement>
+			<statement>You might be surprised by how much you already know. Which of the following statements do you think might be true?</statement>
+			<statement>A. IBM Security protects 25 percent of the Fortune 100 companies.&#xA;B. IBM is a global leader in enterprise security.&#xA;C. IBM holds 1000 security patents.&#xA;D. IBM has built the largest security start-up through IBM Security.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Click here to reveal the answer!</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>If you guessed that B and D are true, you’re right!</statement>
+			<statement>Here's why: As a global leader in enterprise security, IBM Security protects 80 percent of Fortune 100 companies and has been granted over 3500 security-related patents.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

@@ -1,0 +1,253 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement font="1" >In this topic, we'll identify the main cloud delivery models and explore some key considerations when choosing a CDM. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement font="1" isBold="true">Throughout this topic, we will attempt to answer the following questions: </statement>
+			<statement>1.What defines Traditional IT Architecture and what are the pros and cons of continuing to keep operations on-premise?&#xA;2.What differentiates Public and Private delivery models?&#xA;3.How does Hybrid Cloud solve many of the problems posed by Public and Private cloud deployment models?&#xA;4.What considerations need to be made (in terms of security, storage, and pricing) before choosing a cloud service model?</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. What defines Traditional IT Architecture and what are the pros and cons of continuing to keep operations on-premise?</statement> 
+			<statement font="2" isBold="true" >Within the next three years, 75 percent of existing non-cloud apps will move to the cloud. Today’s computing landscape shows companies not only adopting cloud but using more than one cloud environment. Even then, the cloud journey for many has only just begun, moving beyond low-end infrastructure as a service to establish higher business value. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="2" isBold="true">Choosing a Cloud Deployment Model   </statement> 
+			<statement image="1">Cloud computing represents a massive paradigm shift in the way IT resources are created, delivered, and consumed. Cloud computing technology also serves as a core foundational driver of growth and innovation across the global IT landscape. However, the cloud computing solution space can indeed be confusing with a lot of new terms and technologies. Even organizations that have been using the Internet and cloud computing for basic tasks like mobile email, can go a little deeper and take a broader view of cloud computing. </statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement>Enterprises that are eager to undergo digital transformations and modernize their applications are quick to see the value of adopting a cloud computing platform. They are increasingly finding business agility or cost savings by renting software. Each cloud computing service and deployment model type provides you with different levels of control, flexibility, and management. Therefore, it’s important to understand the differences between them.</statement> 
+			<statement>The right model depends on your workload and budget. You should understand the advantages and disadvantages of each cloud deployment model and take a methodical approach to determine which workloads to move to which type of cloud for the maximum benefit. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Traditional infrastructure </statement> 
+			<statement image="2">Before we dive into cloud, it's important to understand the foundations upon which cloud arose. Prior to cloud computing, companies stored their data, software, and operations on-premise, using their own IT servers. This increasingly outdated model is called Traditional Infrastructure, and sometimes referred to as 'legacy'  or 'heritage' IT architecture. </statement>
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement>A traditional IT infrastructure is made up of the usual hardware and software components: facilities, data centers, servers, networking hardware desktop computers, and enterprise application software solutions. Typically, this infrastructure setup requires more power, physical space, and money than other infrastructure types. Traditional infrastructure is typically installed on-premises for company-only, or private, use.</statement> 
+			<statement>Organizations can have compelling reasons for keeping a legacy system, such as the system works satisfactorily and the owner sees no reason to change it, or certain data is seen as being too sensitive to store on a public cloud environment. Often the cost is one of the biggest concerns for companies unsure of whether to migrate some or all of their operations to the cloud. The costs of redesigning or replacing the system are prohibitive because it is large, monolithic, and/or complex. Retraining on a new system would be costly in lost time and money, compared to the anticipated appreciable benefits of replacing it (which may be zero).</statement>
+			<statement>Even if it is no longer used, a legacy system may continue to impact the organization due to its historical role. Historic data may not have been converted into the new system format and may exist within the new system with the use of a customized schema crosswalk, or may exist only in a data warehouse. In either case, the effect on business intelligence and operational reporting can be significant. A legacy system may include procedures or terminology which are no longer relevant in the current context and may hinder or confuse understanding of the methods or technologies used.</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement>A traditional IT infrastructure is made up of the usual hardware and software components: facilities, data centers, servers, networking hardware desktop computers, and enterprise application software solutions. Typically, this infrastructure setup requires more power, physical space, and money than other infrastructure types. Traditional infrastructure is typically installed on-premises for company-only, or private, use.</statement> 
+			<statement>Organizations can have compelling reasons for keeping a legacy system, such as the system works satisfactorily and the owner sees no reason to change it, or certain data is seen as being too sensitive to store on a public cloud environment. Often the cost is one of the biggest concerns for companies unsure of whether to migrate some or all of their operations to the cloud. The costs of redesigning or replacing the system are prohibitive because it is large, monolithic, and/or complex. Retraining on a new system would be costly in lost time and money, compared to the anticipated appreciable benefits of replacing it (which may be zero).</statement>
+			<statement>Even if it is no longer used, a legacy system may continue to impact the organization due to its historical role. Historic data may not have been converted into the new system format and may exist within the new system with the use of a customized schema crosswalk, or may exist only in a data warehouse. In either case, the effect on business intelligence and operational reporting can be significant. A legacy system may include procedures or terminology which are no longer relevant in the current context and may hinder or confuse understanding of the methods or technologies used.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. What differentiates Public and Private, and Hybrid cloud delivery models? </statement> 
+			<statement font="2" isBold="true">Comparing Cloud Delivery Models </statement>
+		</npc>
+		<player>
+			<response nextnode="9.1.1">PUBLIC CLOUD</response>
+			<response nextnode="9.2.1">PRIVATE CLOUD</response>
+			<response nextnode="10">Public Cloud or Private Cloud? </response>
+		</player>
+	</node>
+
+	<node id="9.1.1">
+		<npc>
+			<statement>A public cloud is perhaps the simplest of all cloud deployments: A client needing more resources, platforms, or services simply pays a public cloud provider by the hour or byte to have access to what’s needed when it’s needed. Infrastructure, raw processing power, storage, or cloud-based applications are virtualized from hardware owned by the vendor, pooled into data lakes, orchestrated by management and automation software, and transmitted across the internet—or through a dedicated network connection—to the client.</statement> 
+			<statement>Public cloud architectures are multi-tenant environments—users share a pool of virtual resources that are automatically provisioned for and allocated to individual tenants through a self-service interface. This means that multiple tenants’ workloads might be running CPU instances running on a shared physical server at the same time. Each cloud tenant’s data is logically isolated from that of other tenants, however.</statement>
+			<statement>Think about it like this. Cloud computing is the result of a meticulously developed infrastructure, kind of like today’s electric, water, and gas utilities are the result of years of infrastructural development. Cloud computing is made available through network connections in the same way that utilities have been made available through networks of underground pipes.</statement>
+		</npc>
+		<player>
+			<response nextnode="9.1.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9.1.2">
+		<npc>
+			<statement>Homeowners and tenants don’t necessarily own the water the comes from their pipes; don’t oversee operations at the plant generating the electricity that powers their appliances, and don’t determine how the gas that heats their home is acquired. These homeowners and tenants simply make an agreement, use the resources, and pay for what’s used within a certain amount of time.</statement> 
+			<statement>Public cloud computing is very similar. The clients don’t own the gigabytes of storage of the data they use; don’t manage operations at the server farm where the hardware lives; and don’t determine how their cloud-based platforms, applications, or services are secured or maintained. Public cloud users simply make an agreement, use the resources, and pay for what’s used.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="9.2.1">
+		<npc>
+			<statement>Private cloud is a single-tenant (one user) cloud infrastructure operated exclusively for one company; it’s managed by the company or a third party (or both) and is hosted primarily on-premises, but can also be hosted on dedicated cloud-provider or third-party infrastructure. Private cloud enables a company to take advantage of cloud efficiencies while providing greater control over resources, governance, data security and regulatory compliance, and avoiding the potential impact of sharing resources with another cloud customer. </statement> 
+			<statement>Many companies choose private cloud over public cloud because private cloud is an easier way (or the only way) to meet their regulatory compliance requirements. Others choose private cloud because their workloads deal with confidential documents, intellectual property, personally identifiable information (PII), medical records, financial data, or other sensitive data.</statement>
+			<statement>Private cloud typically involves higher up-front and ongoing costs than public cloud. But emerging public cloud offerings such as virtual private clouds (VPCs) bring many of the same benefits as private cloud computing without imposing the same cost or management burdens. And new private cloud offerings such as managed private cloud services—in which a third-party vendor steps in to deploy, configure, and manage the private cloud on the customer’s behalf—are also making private cloud-like services easier to consume.</statement>
+		</npc>
+		<player>
+			<response nextnode="9.2.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9.2.2">
+		<npc>
+			<statement>By building private cloud architecture according to cloud-native principles, an organization gives itself the flexibility to easily move workloads to public cloud or run them within a hybrid cloud (mixed public and private cloud) environment whenever they’re ready.</statement> 
+			<statement>Building a private cloud makes it possible for all enterprises—even those in highly regulated industries—to avail themselves of many of the benefits of cloud computing without sacrificing security, control, and customization.</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>
+			<statement>In general, public cloud is a better choice if the following are true:</statement> 
+			<statement>· Scalability and elasticity—the ability to add capacity instantly or automatically in response to unexpected surges in traffic—are important to you. &#xA;· You’d like to avoid upfront capital expenses and prefer more predictable ongoing operating expenses.&#xA;· You want unlimited access to particular resources that are available through a public cloud provider.</statement>
+			<statement>However, if you have highly specialized security, regulatory, or infrastructure needs, want maximum control over your cloud environment, and find that your workloads have predictable usage patterns, a private cloud or private cloud-like service could better a good fit. </statement>
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">3. How does Hybrid Cloud solve many of the problems posed by Public and Private cloud deployment models? </statement> 
+			<statement font="2" isBold="true">Hybrid cloud integrates private and public clouds, using technologies and management tools that allow workloads to move seamlessly between both as needed for optimal performance, security, compliance, and cost-effectiveness.</statement>
+			<statement font="2">For example, hybrid cloud enables a company to keep sensitive data and mission-critical legacy applications (which can’t easily be migrated to the cloud) on-premises, while leveraging public cloud for SaaS applications, PaaS for rapid deployment of new applications, and IaaS for additional storage or compute capacity on demand.</statement>
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>
+			<statement font="1" isBold="true" image="4">Hybrid Cloud</statement>
+			<statement>Today’s hybrid clouds are architected differently. Instead of connecting the environments themselves, modern IT teams build hybrid clouds by focusing on the portability of the apps that run in the environments.</statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement>Think about it like this: Instead of building a local two-lane road (fixed middleware instances) to connect two interstate highways (a public cloud and a private cloud), you could instead focus on creating an all-purpose vehicle that can drive, fly, and float. Either strategy still gets you from one place to another, but there's a lot less permitting, construction, permanency, and ecological impact if you focus on a universally capable vehicle.</statement>
+			<statement>Modern IT teams build hybrid clouds by focusing on the car—the app. They develop and deploy apps as collections of small, independent, and loosely coupled services. By running the same operating system in every IT environment and managing everything through a unified platform, the app's universality is extended to the environments below it. </statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement font="1" isBold="true" video="1">Hybrid Cloud Explained</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">4. What considerations need to be made (in terms of security, storage, and pricing) before choosing a cloud delivery model? </statement> 
+			<statement font="2" isBold="true">Things to Consider When Choosing a CDM </statement>
+		</npc>
+		<player>
+			<response nextnode="15.1">Cloud Computing - Storage</response>
+			<response nextnode="15.2">Cloud Computing - Pricing</response>
+			<response nextnode="15.3">Security Issues in Cloud Computing</response>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15.1">
+		<npc>
+			<statement>Storage growth continues at a significant rate, driven by new workloads like analytics, video, and mobile applications. While storage demand is increasing, most IT organizations are under continued pressure to lower the cost of their IT infrastructure through the use of shared cloud computing resources. It’s vital for software designers and solution architects to match the specific requirements of their workloads to the appropriate storage solution or, in many enterprise cases, a mix.</statement>
+			<statement>One of the biggest advantages of cloud storage is flexibility. A company that has your data or data you want will be able to manage, analyze, add to and transfer it all from a single dashboard — something impossible to do today on storage hardware that sits alone in a data center.The other major benefit of storage software is that it can access and analyze any kind of data wherever it lives, no matter the hardware, platform, or format. So, from mobile devices linked to your bank to servers full of unstructured social media information, data can be understood via the cloud.</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15.2">
+		<npc>
+			<statement>Like any other business-critical decision, selecting a cloud service requires due diligence and research beyond published per-unit rates. It requires an in-depth understanding of workload performance characteristics and needs and the ability to match those needs to the actual offerings of multiple cloud vendors.</statement>
+			<statement>Cloud service providers have no shared standard “units” for cloud capacity or common pricing structures, nor are there common specifications for the underlying hardware that runs the cloud applications. As a result, an assumption of total workload cost based on a provider’s basic “per unit” rate can easily be off by orders of magnitude.</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15.3">
+		<npc>
+			<statement>Your cloud infrastructure is only as secure as you make it. Responsibility for securing the cloud lies not only with security teams but also with DevOps and operations teams that are charged with ensuring appropriate security controls are used. Businesses are eager to bring more regulated workloads to the cloud, including any application that manages or contains personal identifying information, financial information or healthcare information.</statement>
+			<statement>To avoid cloud computing risks, a cloud managed services provider (CSP) should incorporate built-in security layers at every level — from the data center to the operating system — delivering a fully configured solution with industry-leading physical security and regular vulnerability scans performed by highly skilled specialists.</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement image="6">10 Tips for Choosing the Right Cloud Delivery Model</statement> 
+			<statement>1.Do your homework. Don’t assume that the provider that’s currently in the news with price decreases will be the best-priced provider for your workload.&#xA;2.Understand all workload requirements that will impact cloud workload costs and operations (not just compute and storage). Consider costs associated with licensing software for each core, data transfer to the internet or private network, and persistent storage.&#xA;3.Understand how the provider will support geographically-dispersed workloads. If your application must move data throughout the globe, ensure that the provider not only has data centers in the regions where you do business, but also a high-performance, private global network. Also consider whether the provider charges data transfer fees between and among cloud centers — any such fees can considerably add to costs if your company expands globally.&#xA;4.Consider your business requirements, including the “agility” tradeoff. Can you afford to lock into a specific provider, unit type, volume or time frame, even if it means a discount?&#xA;5.Consider the “net present value of money” when you evaluate long-term pricing options. Seek input from your finance department, especially if you are considering an upfront payment option. This will ensure your comparisons are valid and adhere to your company’s accounting rules for net present value.</statement>
+			<statement>6.Factor in the non-workload-specific costs your business will need to run the workload optimally, including technical support, engineering, and even professional services.&#xA;7.Allow for changing workload needs. You should be able to move workloads as needed from, for example, bare metal to virtualized servers without a major effort.&#xA;8.Consider the big picture. Each cloud workload should fit into a holistic cloud strategy, one that will likely comprise multiple deployment models, geographies, and vendors.&#xA;9.Even as you consider price performance based on the individual cloud workload, consider the provider’s ability to support your broader hybrid IT strategy via OpenStack-compatible platforms, integrated solutions, and seamless migration across models.&#xA;10.Finally, don’t just look at the price for the workload. Instead, consider price-performance to be your base unit of comparison as you consider cloud options or any type of IT option.</statement>
+		</npc>
+		<player>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement font="1" isBold="true">Why it matters? </statement> 
+			<statement>One of the most important features of cloud computing is that it gives you the ability to customize a cloud solution to your business needs. Choosing a cloud delivery model, however, involves careful consideration of factors such as cost, speed, security, and maintaining compliance with government regulations. </statement>
+		</npc>
+		<player>
+			<response nextnode="end" isShown="false">Thank you.</response>
+		</player>
+	</node>
+
+</dialogue>

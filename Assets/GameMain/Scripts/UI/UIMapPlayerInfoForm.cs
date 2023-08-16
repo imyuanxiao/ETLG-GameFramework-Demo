@@ -7,6 +7,7 @@ using TMPro;
 using ETLG.Data;
 using Unity.VisualScripting;
 using GameFramework.Event;
+using System;
 
 namespace ETLG
 {
@@ -48,6 +49,8 @@ namespace ETLG
         public TMP_InputField tmpInputField;
         private bool refresh;
 
+        public Button finalBossButton;
+
 
         protected override void OnInit(object userData)
         {
@@ -61,7 +64,15 @@ namespace ETLG
 
             expandAllButton.onClick.AddListener(OnExpandAllButtonClick);
             tmpInputField.onEndEdit.AddListener(OnInputEndEdit);
+
+            finalBossButton.onClick.AddListener(OnFinalBossButtonClicked);
         }
+
+        private void OnFinalBossButtonClicked()
+        {
+            GameEntry.Event.Fire(this, EnterBattleEventArgs.Create("FinalBattle", "FinalBoss"));
+        }
+
         private void OnPlayerMenuButtonClick()
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
@@ -109,6 +120,16 @@ namespace ETLG
             GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_MAP);
             dataLearningProgress.update = true;
             dataLearningProgress.open = true;
+
+            if (CanEnterFinalBattle())
+            {
+                finalBossButton.transform.parent.gameObject.SetActive(true);
+            }
+        }
+
+        private bool CanEnterFinalBattle()
+        {
+            return false;
         }
 
         private void setDefaultLearningPath()

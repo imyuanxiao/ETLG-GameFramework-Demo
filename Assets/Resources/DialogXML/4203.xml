@@ -1,0 +1,92 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll explore the 3 main skill sets needed to be a data scientist.   </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. What skills are needed to be an effective data scientist? </statement> 
+			<statement font="2" isBold="true">A data scientist must possess three skills : hacking skills, math/statistics knowledge, and substantive expertise. </statement>
+			<statement font="2">Each of these skills on their own is very valuable, but when combined with only one other is at best simply not data science, or at worst downright dangerous. </statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" image="1">Science, Technology, and Data are intrinsically connected</statement> 
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="1" isBold="true">Three topics have Data Science and AI available for many companies right now</statement> 
+			<statement>·The evolution of data: A factor contributing to the massive adoption of AI is the exponential growth of available data. With the introduction of the Internet, social media, the proliferation of sensors and smart devices, combined with the fact that data storage became cheaper, it became more accessible than ever before.&#xA;· The mechanization of scientific advances into applicable algorithms: Algorithms have been around since we could write. Recently, the development of more advanced algorithms has helped AI and Machine Learning become more powerful and efficient.&#xA;· The evolution of technology: Another major factor in AI’s current success is its computing power. Back when AI was just beginning to be developed, the computing power was minimal. Computers nowadays can take much more data and heavier algorithms than in the 1950s. </statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement isBold="true">Bringing it all together</statement> 
+			<statement video="1">In the video below your instructor will guide you through these concepts:</statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement isBold="true" image="2">Three domains involved in a Data Science project</statement> 
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement image="3">Categories behind data science</statement> 
+			<statement>Data Science &#xA;· Machine learning&#xA;· Statistical modeling&#xA;· Experiment design&#xA;· Statistics, research, mathematics </statement> 
+			<statement>Data Analysis&#xA;· Domain expertise&#xA;· Strategic problem solving&#xA;· Business acumen&#xA;· Communication skills&#xA;· Visualization skills&#xA;· Decision making based on insights </statement>
+			<statement>Data Engineering&#xA;· Database and data storage &#xA;· Scripting language&#xA;· Artificial Intelligence&#xA;· Cloud Infrastructure&#xA;· Statistical computing</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement isBold="true">A data scientist must possess all three skills. Let me explain why.</statement> 
+			<statement>For better or worse, data is a commodity traded electronically; therefore, in order to be in this market, you need to speak hacker. This, however, does not require a background in computer science—in fact—many of the most impressive hackers I have met never took a single CS course. Being able to manipulate text files at the command-line, understanding vectorized operations, thinking algorithmically; are the hacking skills that make for a successful data hacker. Once you have acquired and cleaned the data, the next step is to extract insight from it. In order to do this, you need to apply appropriate mathematical and statistical methods, which require at least a baseline familiarity with these tools. This is not to say that a Ph.D in statistics is required to be a competent data scientist, but it does require knowing what an ordinary least squares regression is and how to interpret it.</statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement>For better or worse, data is a commodity traded electronically; therefore, in order to be in this market, you need to speak hacker. This, however, does not require a background in computer science—in fact—many of the most impressive hackers I have met never took a single CS course. Being able to manipulate text files at the command-line, understanding vectorized operations, thinking algorithmically; are the hacking skills that make for a successful data hacker. Once you have acquired and cleaned the data, the next step is to extract insight from it. In order to do this, you need to apply appropriate mathematical and statistical methods, which require at least a baseline familiarity with these tools. This is not to say that a Ph.D in statistics is required to be a competent data scientist, but it does require knowing what an ordinary least squares regression is and how to interpret it.</statement> 
+			<statement>Finally, a word on the hacking skills plus substantive expertise "danger zone". This is where I place people who, "know enough to be dangerous," and is the most problematic area of the diagram. In this area, people who are perfectly capable of extracting and structuring data, likely related to a field they know quite a bit about and probably even know enough R to run a linear regression and report the coefficients; but they lack any understanding of what those coefficients mean. It is from this part of the diagram that the phrase "lies, damned lies, and statistics" emanates, because either through ignorance, or malice this overlap of skills gives people the ability to create what appears to be a legitimate analysis without any understanding of how they got there or what they have created. Fortunately, it requires near - willful ignorance to acquire hacking skills and substantive expertise without also learning some math and statistics along the way. As such, the danger zone is sparsely populated, however, it does not take many to produce a lot of damage.</statement> 
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

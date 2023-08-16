@@ -23,6 +23,7 @@ namespace ETLG
         private UIQuizManager UIQuizManager = null;
         public VerticalLayoutGroup ChoicesContainerverticalLayoutGroup;
         public VerticalLayoutGroup ContentverticalLayoutGroup;
+        public TextMeshProUGUI QuestionType;
 
         public TextMeshProUGUI npc_name;
         public TextMeshProUGUI npc_description;
@@ -42,7 +43,8 @@ namespace ETLG
         public Canvas AnalysisPrefab;
         public VerticalLayoutGroup ContentVerticalLayoutGroup;
         public RectTransform ContainerRectTransform;
-      
+        public Transform Pool;
+
         private UIQuiz currentQuiz;
         private Vector2 currentPosition;
         private bool isToggling = false;
@@ -61,7 +63,7 @@ namespace ETLG
         {
             base.OnOpen(userData);
             GameEntry.Sound.StopMusic();
-   
+
             UIQuizManager = null;
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -276,6 +278,23 @@ namespace ETLG
                     setAnalysisPrefab();
                 }
             }
+            showQuestionType();
+        }
+
+        private void showQuestionType()
+        {
+            if (currentQuiz.type == Constant.Type.QUIZ_MULTIPLE_ANSWERS_CHOICES)
+            {
+                QuestionType.text = "Multiple-choice with multiple answers";
+            }
+            else if (currentQuiz.type == Constant.Type.QUIZ_SINGLE_ANSWERS_CHOICES)
+            {
+                QuestionType.text = "Multiple-choice with single answer";
+            }
+            else if (currentQuiz.type == Constant.Type.QUIZ_TRUEORFALSE)
+            {
+                QuestionType.text = "True or False";
+            }
         }
 
         private void destroyAnalysisContainer()
@@ -294,7 +313,7 @@ namespace ETLG
                 Toggle toggle = newChoicePrefab.GetComponentInChildren<Toggle>();
                 toggle.isOn = false;
 
-                if (type == Constant.Type.QUIZ_SINGLE_ANSWERS_CHOICES)
+                if (type == Constant.Type.QUIZ_SINGLE_ANSWERS_CHOICES|| type == Constant.Type.QUIZ_TRUEORFALSE)
                 {
                     toggle.onValueChanged.AddListener(delegate { OnToggleValueChanged(toggle); });
                 }
@@ -313,6 +332,7 @@ namespace ETLG
             {
                 Transform option = optionCanvas.Value.transform;
                 option.gameObject.SetActive(true);
+                //option.SetParent(ChoicesContainer);
             }
         }
 
@@ -451,10 +471,11 @@ namespace ETLG
 
         private void removeAllOptions()
         {
-            for (int i = 0; i < ChoicesContainer.childCount; i++)
+            for (int i = ChoicesContainer.childCount-1; i >=0; i--)
             {
                 Transform option = ChoicesContainer.GetChild(i);
                 option.gameObject.SetActive(false);
+                //option.SetParent(Pool);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
 
@@ -467,7 +488,7 @@ namespace ETLG
             //{
             //    //Destroy(UIQuizManager.quizArray[i].OptionsCanvas.);
             //}
-           // UIQuizManager.quizArray = new List<UIQuiz>();
+            // UIQuizManager.quizArray = new List<UIQuiz>();
             //for (int i = 0; i < ChoicesContainer.childCount; i++)
             //{
             //    Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();

@@ -15,7 +15,7 @@
     </answers>
   </question>
 
-  <question type="MCS" timelimit="30">
+  <question type="TF" timelimit="30">
     <statement>Watson IoT Platform does not support open standards like HTTPS and MQTT.</statement>
     <hint></hint>
     <options>
@@ -29,7 +29,7 @@
   </question>
 
   
-  <question type="MCS" timelimit="30">
+  <question type="TF" timelimit="30">
     <statement>MQTT is the primary protocol that devices and applications use to communicate with Watson IoT Platform.</statement>
     <hint></hint>
     <options>
@@ -43,7 +43,7 @@
   </question>
 
     
-  <question type="MCS" timelimit="30">
+  <question type="TF" timelimit="30">
     <statement>Your Watson IoT Platform organization may be created without registering with IBM Cloud.</statement>
     <hint></hint>
     <options>

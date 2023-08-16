@@ -141,7 +141,18 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_SKILL);
             }
-
+            if (ne.UIFormID == (int)EnumUIForm.UIAchievementForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_ACHIEVEMENT);
+            }
+            if (ne.UIFormID == (int)EnumUIForm.UILeaderBoardForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_RANK);
+            }
+            if (ne.UIFormID == (int)EnumUIForm.UIpProfileForm)
+            {
+                GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_PROFILE);
+            }
         }
 
         private void ResetStates()

@@ -1,0 +1,161 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">Back to basics</statement>
+			<statement>To have conversations about cybersecurity threats, attacks, defenses, and more, you need to understand the terminology.</statement>
+			<statement image="1">The landscape of cybersecurity is expansive, so we won’t cover all applicable terms. But we will review a useful subset of common terms like the ones in this word cloud:</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">Cybersecurity terms and examples</statement>
+			<statement>Do you recognize any of the terms in the word cloud? If not, no problem! Take some time to review the definitions of the following terms to establish a foundation for upcoming topics.</statement>
+		</npc>
+		<player>
+			<response nextnode="3">Continue</response>
+		</player>
+	</node>
+
+	<node id="3"> 
+		<npc>
+			<statement>Click each term for a brief definition and an example.Here are part 1 options.</statement>
+		</npc>
+		<player>
+			<response nextnode="3.1">Advanced Persistent Threat (APT)</response>
+			<response nextnode="3.2">Botnet</response>
+			<response nextnode="3.3">Breach</response>
+			<response nextnode="3.4">Cyberattack</response>
+			<response nextnode="3.5">Cybersecurity</response>
+			<response nextnode="3.6">Exploit</response>
+			<response nextnode="4">Go to part 2.</response>
+		</player>
+	</node>
+
+	<node id="3.1"> 
+		<npc>
+			<statement>An Advanced Persistent Threat (APT) is a multi-phase, long-term network attack in which unauthorized users gain access to, and harvest, valuable enterprise data.&#xA;The Stuxnet Worm, launched in 2010, is an example of an APT.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.2"> 
+		<npc>
+			<statement>A botnet is a group of computer systems, anywhere in the world, that has been infected by a malicious piece of software. The software allows these computers to be networked together by a hacker. The hacker gains full control of all the bots in the network and can conduct malicious tasks.&#xA;An example of a botnet is the “Star Wars” Twitter Botnet, launched in 2017.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.3"> 
+		<npc>
+			<statement>A breach is the moment an unauthorized user or intruder (hacker) successfully exploits a vulnerability in a computer or device, and gains access to its files and network.&#xA;An example of a breach is the Yahoo! data breach in September 2016, in which 3 billion user accounts were comprised.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.4"> 
+		<npc>
+			<statement>A cyberattack is a malicious attempt to damage, disrupt, or gain unauthorized access to computer systems, networks, or devices, through cyber means.&#xA; An example of a cyberattack is the 2013 cyberattack launched against Target department stores. The cyberattack affected 40 million credit and debit card accounts of Target customers.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.5"> 
+		<npc>
+			<statement>Cybersecurity involves the preservation of information's confidentiality, integrity, and availability in cyberspace.&#xA;IBM Security is an example of an organization dedicated to cybersecurity.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="3.6"> 
+		<npc>
+			<statement>A computer exploit involves the use of a malicious application or script to take advantage of a computer’s vulnerability.&#xA;An example of a computer exploit is the September 2017 Equifax data breach that resulted from a vulnerability in the company’s web application infrastructure.</statement>
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4"> 
+		<npc>
+			<statement>Click each term for a brief definition and an example.Here are part 2 options.</statement>
+		</npc>
+		<player>
+			<response nextnode="4.1">Malware</response>
+			<response nextnode="4.2">Man-in-the-Middle(MitM)</response>
+			<response nextnode="4.3">Phishing</response>
+			<response nextnode="4.4">Ransomware</response>
+			<response nextnode="4.5">Virus</response>
+			<response nextnode="4.6">Zero-day attack</response>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+	<node id="4.1"> 
+		<npc>
+			<statement>Malware is an umbrella term that describes all forms of malicious software designed to cause havoc on a computer.&#xA;The WannaCry attacks in May 2017 and January 2018 are examples of malware used to conduct cyberattacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.2"> 
+		<npc>
+			<statement>In an MitM attack, an attacker intercepts messages between a user and a website in order to observe and record transactions.&#xA;An example of a response to an MitM attack is the June 2015 arrest of 49 multi-national European suspects for intercepting email payment requests.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.3"> 
+		<npc>
+			<statement>Phishing is a technique used by hackers to obtain sensitive information, such as passwords, bank accounts, or credit card data. It often begins as an unexpected email disguised as coming from a legitimate source. It commonly takes two forms, trying  to trick the recipient into replying with the information they seek, like bank details, or tempting the recipient to click a malicious link or run an attachment.&#xA;An example of phishing is an email received unexpectedly requesting “urgent action” to click a hyperlink and provide sensitive personal information, update a password or credit card account, and so on.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.4"> 
+		<npc>
+			<statement>Ransomware is a form of malware that deliberately prevents people from accessing files on their computer. When ransomware infects a computer, it typically encrypts files and requests that a “ransom” be paid in order to have the files decrypted.&#xA;An example of a ransomware attack is the September 2013 CryptoLocker attack that infected computers running the Microsoft Windows operating system.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.5"> 
+		<npc>
+			<statement>A virus is a type of malware for personal computers, that dates back to the days of floppy disks. Viruses typically aim to corrupt, erase, or modify information on a computer, and then spread to others.&#xA;In recent years, viruses like Stuxnet have also caused physical damage.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="4.6"> 
+		<npc>
+			<statement>A zero-day attack is a particular form of software exploit, usually malware.&#xA;A zero-day exploit is unique and unknown to the public or a software vendor. Because few people are aware of the vulnerability, victims have “zero days” to protect themselves from its use.&#xA;An example of a zero-day exploit is the 2014 zero-day attack on Sony Pictures Entertainment, in which their corporate network was compromised and sensitive corporate data was released.</statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+</dialogue>

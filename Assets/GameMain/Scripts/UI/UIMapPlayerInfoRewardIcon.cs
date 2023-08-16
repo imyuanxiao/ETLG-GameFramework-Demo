@@ -18,21 +18,27 @@ namespace ETLG
         private DataNPC dataNPC;
         private DataLearningPath dataLearningPath;
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public void Start()
         {
             dataLearningPath = GameEntry.Data.GetData<DataLearningPath>();
             dataNPC = GameEntry.Data.GetData<DataNPC>();
+        }
 
+        public void OnPointerEnter(PointerEventData eventData)
+        {
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
             Vector3 offset = new Vector3(400f, -30f, 0);
             Vector3 newPosition = itemPosition + offset;
 
             dataNPC.currentNPCId = dataLearningPath.getCurrentPath().NPCId;
-            
             dataNPC.RewardUIPosition = newPosition;
+            Debug.Log(dataNPC.currentNPCId);
 
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UIRewardPreviewForm))
+            {
+                GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIRewardPreviewForm));
+            }
             GameEntry.UI.OpenUIForm(EnumUIForm.UIRewardPreviewForm);
-
         }
 
         public void OnPointerExit(PointerEventData eventData)

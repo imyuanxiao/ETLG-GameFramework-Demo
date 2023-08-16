@@ -1,0 +1,11 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">Cybersecurity ... a  lot more fun than you might have thought!</statement>
+			<statement video="1">Maybe you're wondering about the roles in cybersecurity, and the skills required to work in this field?&#xA;Meet some of the faces of IBM Security in this video, and hear about why they love what they do.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

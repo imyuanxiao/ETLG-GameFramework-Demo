@@ -13,9 +13,8 @@ namespace ETLG
     {
         public TextMeshProUGUI s_spaceship = null;
         public TextMeshProUGUI s_achievement = null;
-        public TextMeshProUGUI s_planetNum = null;
+        public TextMeshProUGUI s_learningProgress = null;
         public TextMeshProUGUI s_name = null;
-        public TextMeshProUGUI s_ID = null;
         public LeaderboardData leaderboardData;
         public Button closeButton;
         public RawImage avatar;
@@ -37,7 +36,7 @@ namespace ETLG
         {
             s_achievement.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             s_spaceship.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            s_planetNum.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+            s_learningProgress.text = UIFloatString.FloatToString(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
             s_name.text = GameEntry.Data.GetData<DataBackend>().userProfile.nickName;
             Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.avatar);
             if (GameEntry.Data.GetData<DataBackend>().userProfile.avatar >= 1000)

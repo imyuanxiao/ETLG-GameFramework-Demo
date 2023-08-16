@@ -1,0 +1,280 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we will investigate the trail of attacks led by cybercriminals organizations around the world. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.What is the current status of the global threat landscape? &#xA;2.What are the current trends on ransomware attacks? &#xA;3.Which are the top infection vectors? </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. What is the current status of the global threat landscape? </statement> 
+			<statement font="2" isBold="true">Understanding the attack landscape can assist security teams in prioritizing resources, drilling for the most likely scenarios, and identifying shifts in attacker techniques. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="1" isBold="true">IBM X-Force Exchange Global Trends Report </statement> 
+			<statement font="1">IBM X-Force research teams analyze data from hundreds of millions of protected endpoints and servers, along with data derived from non-customer assets such as spam sensors and honeynets. </statement>
+			<statement font="1">IBM Security Research also runs spam traps around the world and monitors tens of millions of spam and phishing attacks daily, analyzing billions of web pages and images to detect attack campaigns, fraudulent activity, and brand abuse, to better protect our customers and the connected world we live in.</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true">Global Landscape </statement> 
+			<statement>Last year a global pandemic, economic turmoil impacting millions of people’s lives, and social and political unrest. The reverberations from these events affected businesses in profound ways, with many making a major shift to distributed workforces.</statement>
+			<statement>In the cyber realm, these extraordinary circumstances handed cyber adversaries opportunities to exploit the necessities of communication networks and provided rich targets in supply chains and critical infrastructure.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Top attack trends </statement> 
+			<statement>· Bring your algorithms to wherever data resides.&#xA;· Increase productivity of data scientists, analysts, developers, and subject matter experts.&#xA;· Operationalize the data science lifecycle from insight to prediction and optimization.  </statement> 
+		</npc>
+		<player>
+			<response nextnode="6.1">Ransomware #1 threat type</response>
+			<response nextnode="6.2">Spear phishing campaigns - COVID-19 vaccine supply chain</response>
+			<response nextnode="6.3">Linux malware - affecting critical cloud infrastructure</response>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6.1">
+		<npc>
+			<statement>Among the trends that we tracked, ransomware continued its surge to become the number one threat type, representing 23% of security events X-Force responded to. </statement> 
+			<statement>Ransomware attackers increased the pressure to extort payment by combining data encryption with threats to leak the data on public sites.</statement>
+			<statement>The success of these schemes helped just one ransomware gang reap profits of over $123 million annually, according to X-Force estimates.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.2">
+		<npc>
+			<statement>The manufacturing industry overall was the second-most targeted, after finance and insurance. IBM X-Force discovered sophisticated attackers using targeted spear phishing campaigns in attacks against manufacturing businesses and NGOs involved in the COVID-19 vaccine supply chain.</statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.3">
+		<npc>
+			<statement image="1">Threat actors were also innovating their malware, particularly malware that targeted Linux, the open source code that supports business-critical cloud infrastructure and data storage. Analysis by Intezer discovered 56 new families of Linux malware, far more than the level of innovation found in other threat types.</statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement font="2" isBold="true">Attack Trends Analysis </statement> 
+			<statement>The following sub-sections will provide insights on the top attack trends X-Force identified. Ransomware is undeniably the top attack type, followed distantly by data theft and server access attacks. </statement> 
+			<statement image="2">· Ransomware: 23% of total attacks &#xA;· Data theft: shown 160% increase&#xA;· Server access: shown 233% increase</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement>In terms of initial attack vectors, scan and exploit rose to first place, followed by phishing and credential theft. </statement> 
+			<statement image="3">· Scan-and-exploit: 35% of attacks vs. 30% in previous years &#xA;· Phishing: 33% of attacks vs. 31% in previous years &#xA;· Credential theft: 18% of attacks vs. 29% in previous years</statement>
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. What are the current trends on ransomware attacks? </statement> 
+			<statement font="2" isBold="true">2. What are the current trends on ransomware attacks? </statement>	
+		</npc>
+		<player>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>
+			<statement font="1" isBold="true">Ransomware business boomed </statement>
+			<statement font="1" >Most successful ransomware groups created ransomware-as-a-service (RaaS) cartels, outsourcing key aspects of their operations to cybercriminals that specialize in different aspects of an attack. </statement>
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11">
+		<npc>
+			<statement isBold="true">Why do they succeed? </statement>
+			<statement>Ransomware actors are finding greater success in attacks by expanding their attack chain.</statement>
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>
+			<statement>Threat actors carried out ransomware attacks predominantly by gaining access to victim environments via remote desktop protocol, credential theft, or phishing—attack vectors that have been similarly exploited to install ransomware in prior years.</statement>
+			<statement>Double-extorsion strategy&#xA;Since organizations can opt to recover from backups and not pay the ransom, 59% of ransomware attacks used a double extortion strategy where attackers have shifted tactics to not only encrypt data and render it impossible to access. They also stole it, and then threatened to leak sensitive data if a ransom was not paid. Certain ransomware providers even held auctions on the dark web to sell their victims’ stolen sensitive information.</statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement isBold="true" >What is the business impact?</statement>
+			<statement>The threat of reputational loss due to sensitive data being leaked has the potential to cause significant damage to the business and its customers, which could lead to lawsuits and hefty regulatory fines in addition to the costs of a lengthy recovery. </statement>
+			<statement image="4">When ransomware attackers publicly disclose sensitive data on leak sites, these the breaches are often picked up by press, further adding to the reputational harm associated with these attacks. X-Force analysis of public breach data indicates that ransomware-related data leaks make up 36% of public breaches.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement isBold="true" >Sodinokibi most common ransomware type</statement>
+			<statement>The top two ransomware types observed included Sodinokibi (22% of ransomware incidents) and Nefilim (11%) – both of which blend data theft with ransomware attacks. Conservative estimates places total Sodinokibi ransom revenue at $123 million yearly through the use of extortion tactics.</statement>
+			<statement>Additional ransomware types frequently seen by X-Force were RagnarLocker (7%), Netwalker (7%), Maze (7%), Ryuk (7%) and EKANS (4%), while the remaining 42% of ransomware attacks were comprised of small samples of other types such as Egregor, CLOP, Medusa and others.</statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement isBold="true" >Attack patterns identified from our research:</statement>
+			<statement>· Most attacked geographies: Top target USA with 58% of cases, next the UK with 8% of attack cases.&#xA;· Most targeted industries: Manufacturing, professional services and wholesale, potentially because Sodinokibi actors assessed organizations in these industries have a low tolerance for downtime—perhaps especially during the pandemic—or house especially sensitive data.&#xA;· Ransom demands from Sodinokibi tended to be around 1% - 5% of the victim organization’s total yearly revenue, and in one case was $42 million.&#xA;· Nearly two-thirds of Sodinokibi victims paid a ransom and around 43% had their data leaked, according to X-Force estimates.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement isBold="true" >What are the recommendations for responding to a ransomware attack? </statement>
+			<statement>Three key practices in preparation for a potential ransomware attack</statement>
+		</npc>
+		<player>
+			<response nextnode="16.1">Preparation is key</response>
+			<response nextnode="16.2">Safely store data backups offline</response>
+			<response nextnode="16.3">Implement defense-in-depth</response>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16.1">
+		<npc>
+			<statement>Implement and practice a response plan for aransomware attack including blendedransomware and data theft.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="16.2">
+		<npc>
+			<statement>Backups can enable your organization to quicklyand independently recover from aransomwareattack.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="16.3">
+		<npc>
+			<statement>Use a multi-faceted approach, such as: employing multifactor authentication on</statement>
+			<statement>· every access point into a network, ensuring endpoint&#xA;· visibility&#xA;· proactive threat hunting &#xA;· performing regular penetration tests toidentify weak points in a network&#xA;·quickly patching and mitigating known vulnerabilities</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">3. Which are the top infection vectors? </statement> 
+			<statement font="2" isBold="true">15% of incidents were directly related to Citrix vulnerability CVE-2019-19781 – over 15 times more than any other vulnerability – which allows an attacker to perform arbitrary code execution on a vulnerable Citrix server.</statement>
+		</npc>
+		<player>
+			<response nextnode="21" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="21">
+		<npc>
+			<statement font="1" isBold="true">Scanning and exploiting vulnerabilities jumped into first place </statement> 
+			<statement font="1">Driven by the heavy exploitation of CVE-2019-19781 they became the most common initial infection vector employed by threat actors, at 35% of all incidents. </statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18">
+		<npc>
+			<statement font="1" isBold="true">Why do they succeed?</statement> 
+			<statement>Scan and exploit attacks generally require few resources and can be automated and scaled to target a wide variety of victims, which may account for why this vector saw such a high volume.</statement>
+		</npc>
+		<player>
+			<response nextnode="19" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="19">
+		<npc>
+			<statement>Other ways attackers used this infection vector included:</statement> 
+			<statement>· Citrix vulnerability &#xA;· Heartbleed vulnerability&#xA;· Vulnerable or misconfigured management protocols&#xA;· and, exploitation of the cryptographic vulnerability CVE-2017-9248.</statement>
+		</npc>
+		<player>
+			<response nextnode="20" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="20">
+		<npc>
+			<statement isBold="true">Scan and Exploit connection with Ransomware</statement> 
+			<statement>X-Force was aware of multiple threat actor groups taking advantage of CVE-2019-19781, including state-sponsored threat groups as well as financially motivated cybercriminals. These include:</statement>
+			<statement>· Hive0088 (AKA APT41; suspected Chinese state-affiliated)&#xA;· Sodinokibi (AKA REvil) ransomware actors&#xA;· Maze ransomware actors </statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

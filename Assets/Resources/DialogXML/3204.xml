@@ -1,0 +1,184 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we will be exploring the framework for cybersecurity for the enterprise. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>What are the enterprise security domains? </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">What are the enterprise security domains? </statement> 
+			<statement font="2" isBold="true">There is reason to hope that next year will shape up to be a better year. Trends are notoriously hard to predict, but the one constant thing we can rely on is change. Resilience in the face of rising and falling challenges in cybersecurity requires actionable intelligence and a strategic vision for the future of a more open, connected security. </statement>
+			<statement font="1">It’s not a complete integrated security domain until these capabilities can interact, communicate, and integrate with one another across your hybrid IT environments; Extending beyond your company walls across your entire ecosystem. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="1" isBold="true">Integrated Security Domains </statement> 
+			<statement>Security in a more organized fashion is structured around domains with security intelligence in the middle to make sense of threats using logs, data flows, packets, and different layers of defense start working together sending critical details and providing intelligence necessary to block threats. The collaboration across companies and competitors is critical to understand global threats and capture threat data, which we can use to adapt our security systems to defend our organizations from new threats.</statement>
+			<statement image="1">The graphic below depicts the different domains included within the security enterprise framework.</statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true">Network security </statement> 
+			<statement>Network security serves as the first line of defense for governments and organizations. They support our global economy and communications infrastructure in which our society relies on today, that's why they are the most common entry point for every cyber attack</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement isBold="true">Targets:&#xA;· Targeting from mobile devices and IoT unprotected WIFI&#xA;· To complex mega server farms supporting our internet backbone.</statement> 
+			<statement isBold="true">Attacks:&#xA;DDoS, Misconfiguration, and Physical Access</statement> 
+		</npc>
+		<player>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement font="1" isBold="true">Endpoint security </statement> 
+			<statement>Protecting the entry point for billions of users and things connected globally. There we stored our personal data and sense the events happening in real-time in the world we live in.</statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement isBold="true">Targets:&#xA;· Organizations – That rely on sensor data to drive logistics and operations &#xA;· People – Consumers and their personal data&#xA;· Things – Planes, elevators, cars, homes</statement> 
+			<statement isBold="true">Attacks:&#xA;Physical access, Misconfiguration, Malvertising, Malware, Phishing</statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement font="1" isBold="true">Application security </statement> 
+			<statement>Ensuring safe use and operation of all applications (mobile, web, backend). Applications rule all the access points to data and transactions required to interact with different systems.</statement>
+		</npc>
+		<player>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>
+			<statement isBold="true">Targets:&#xA;· Involving the most sophisticated types of attacks &#xA;· Organizations using websites that provide online services &#xA;· Development teams creating in-company applications</statement> 
+			<statement isBold="true">Attacks:&#xA;Malware, SQLi, Watering Hole, Misconfiguration</statement> 
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11">
+		<npc>
+			<statement font="1" isBold="true">Data Security, Identity, Access and Fraud  </statement> 
+			<statement>Protecting the access and usage of Data is the most valuable digital asset today.  It contains confidential information that could be sold, or leveraged as intelligence to commit crimes and financial fraud.  </statement>
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>
+			<statement isBold="true">Targets:&#xA;· Large organizations that store valuable information: Financial institutions, hospitals, government agencies. &#xA;· Social media giants that store vast amounts of customer personal data </statement> 
+			<statement isBold="true">Attacks:&#xA;Misconfigurations, Phishing, Ransomworms</statement> 
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement font="1" isBold="true">Cloud security </statement> 
+			<statement>Safety cloud mechanisms integrate networks, applications, data and access. Cloud environments help organizations simplify and automate the integration between networks, endpoints, applications, data and establish identify validation and access gateways, and provide powerful management and visualization tools. </statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement isBold="true">Targets:&#xA;· Unskilled IT teams starting their cloud adoption journey  &#xA;· Companies hosting valuable data in the cloud</statement> 
+			<statement isBold="true">Attacks:&#xA;Misconfiguration, Ransomware, Malware</statement> 
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement font="1" isBold="true">Security Intelligence with A.I. </statement> 
+			<statement>Using Analytics and A.I. to respond in real-time to attacks finding patterns in thousands of concurrent incidents. Identifying high-risk threats in near real-time. Detecting vulnerabilities, managing risks, and identifying high-priority incidents among billions of data points. Gaining full visibility into the network, application, and user activity. </statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement isBold="true">Targets:&#xA;Government and corporate multinational organizations are challenged to interpret billions of events each day to uncover attacks.</statement> 
+			<statement isBold="true">Tools:&#xA;SIEM - Security Information and Event Management</statement> 
+		</npc>
+		<player>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement font="1" isBold="true">Threat Hunting </statement> 
+			<statement>Focuses on cybercrime detection, hunting and investigation The act of proactively and aggressively identifying, intercepting, tracking, investigating and eliminating cyber adversaries as early as possible in the Cyber Kill Chain. The earlier you locate and track your adversaries Tactics, Techniques and Procedures (TTPs) the less impact these adversaries will have on your business.</statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18">
+		<npc>
+			<statement isBold="true">Targets:&#xA;Every industry is impacted by cybercrime and affects everything that we do in our lives today, so it is the responsibility of everyone to be part of the solution.  </statement> 
+			<statement isBold="true">Tools:&#xA;Threat intelligence, human analyst, threat analytics, visualization, and prediction tools</statement> 
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+</dialogue>

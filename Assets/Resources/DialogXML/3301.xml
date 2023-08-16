@@ -1,0 +1,21 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">Let’s dig deeper into cybersecurity!</statement>
+			<statement>This topic will help you master basic cybersecurity terminology and understand how IBM Security helps clients defend against cyberattacks and respond to broader security threats.&#xA;Begin with a video and a list of cybersecurity terms worth knowing. Then, learn common methods of cyberattacks.</statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2"> 
+		<npc>
+			<statement>But first, get to know IBM Security</statement>
+			<statement video="1">Take a minute to watch this quick introduction to IBM Security, and learn how IBM Security protects the people behind data.</statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+</dialogue>

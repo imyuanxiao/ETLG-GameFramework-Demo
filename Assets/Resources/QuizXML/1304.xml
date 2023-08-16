@@ -1,0 +1,124 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>The ability for businesses to rent computing services and software from a cloud service provider on a per unit or per month basis is best encapsulated by which of the following cloud business enablers?</statement>
+    <options>
+      <option id="A">Business Scalability</option>
+      <option id="B">Cost Flexibility</option>
+      <option id="C">Masked Complexity</option>
+      <option id="D">Market Adaptability</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Collaboration software such as Zoom, Mural, and Slack are all cloud services that facilitate team communication and information sharing in real-time. This benefit of cloud is best encapsulated by which of the following cloud business enablers?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Market Adaptability</option>
+      <option id="B">Masked Complexity</option>
+      <option id="C">Context-driven Variability</option>
+      <option id="D">Ecosystem Connectivity</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  
+  <question type="MCS" timelimit="30">
+    <statement>Company X owns and manages all its hardware and software, which are housed in an onsite Data Center. Which of the following describes the IT infrastructure that Company X employs?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Traditional Infrastructure</option>
+      <option id="B">Public Cloud Infrastructure</option>
+      <option id="C">Private Cloud Infrastructure</option>
+      <option id="D">Hybrid Cloud Infrastructure</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+    
+  <question type="MCS" timelimit="30">
+    <statement>What is cloud computing?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">The delivery of shared computing services over the internet</option>
+      <option id="B">Database management software available through the use of virtual servers</option>
+      <option id="C">Any part ofa company's server infrastructure</option>
+      <option id="D">A region of the internet that is available for application development</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCM" timelimit="30">
+    <statement>An organization using Traditional IT infrastructure may choose not to adopt a cloud deployment model for all of the following reasons EXCEPT:</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Although it can be free or inexpensive to access, it may be offered on a pay-per-usage model.</option>
+      <option id="B">The cloud service provider is responsible for setting up the hardware, software, applications, and networking resources.</option>
+      <option id="C">Multi-tenant environment where users share a pool of virtual resources that are automatically provisioned for and allocated to individual tenants.</option>
+      <option id="D">It is often the best model for organizations concerned with securing highly sensitive data or adhering to compliance regulation</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+      <answer>B</answer>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following cloud delivery models provides sophisticated security and governance designed for a company’s specific requirements?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Public Cloud</option>
+      <option id="B">Hybrid Cloud</option>
+      <option id="C">Private Cloud</option>
+      <option id="D">Edge Cloud</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Acme Hospital is looking to migrate some of its workloads to the cloud. After consulting with a cloud development team, they decide on a model where general information apps will be hosted on a public cloud but sensitive data such as patient records will be stored on a private cloud. Which cloud deployment model has Acme Hospital chosen?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Public Cloud</option>
+      <option id="B">Hybrid Cloud</option>
+      <option id="C">Private Cloud</option>
+      <option id="D">Edge Cloud</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Acme Hospital is looking to migrate some of its workloads to the cloud. After consulting with a cloud development team, they decide on a model where general information apps will be hosted on a public cloud but sensitive data such as patient records will be stored on a private cloud. Which cloud deployment model has Acme Hospital chosen?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Public Cloud</option>
+      <option id="B">Hybrid Cloud</option>
+      <option id="C">Private Cloud</option>
+      <option id="D">Edge Cloud</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+</quiz>

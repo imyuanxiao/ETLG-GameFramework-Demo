@@ -1,0 +1,126 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following examples best illustrates a cyber threat?</statement>
+    <options>
+      <option id="A">A friend uses your Netflix login information without your knowledge</option>
+      <option id="B">You receive an email from an unknown account asking you to click on a link to claim a prize. </option>
+      <option id="C">Hackers infiltrate a banking website and obtain customer account information</option>
+      <option id="D">Options B and C Only</option>
+      <option id="E">All of the Above </option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Based on the IBM X-Force report “The shifting panorama of global cybercrime”, what is the biggest motivation for cybercriminals to attack companies around the world?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Terrorism</option>
+      <option id="B">Hacktivism</option>
+      <option id="C">Financial gain</option>
+      <option id="D">Espionage</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>The use of a cyber-attack for research purposes, such as probing potential vulnerabilities within a company’s network or conducting penetration testing, is known as:</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Code Red Hacking</option>
+      <option id="B">Hacktivism</option>
+      <option id="C">White Hat Hacking</option>
+      <option id="D">Benign Hacking</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>Which of the following motivators explain why cyber criminals carry out cyber-attacks?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Financial Gain</option>
+      <option id="B">Hacktivism</option>
+      <option id="C">Espionage</option>
+      <option id="D">Options A and C Only</option>
+      <option id="E">All of the Above </option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>E</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>What is true about misconfiguration as one of the most challenging types of cyber threats?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Incidents where attackers gain access to vulnerable systems left exposed by inexperienced administrators or users (e.g., default factory settings)</option>
+      <option id="B">Employees and insiders falling for phishing emails that resulted in account takeover or access to sensitive data.</option>
+      <option id="C">Employees and insiders falling for phishing emails that resulted in account takeover or access to sensitive data.</option>
+      <option id="D">Options A and C Only</option>
+      <option id="E">All of the Above </option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+   <question type="MCM" timelimit="30">
+    <statement>Why is it important to create an integrated security domain system?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Until recently, organizations have responded to security concerns by deploying a new tool to address each new risk. We’ve observed one company was using 85 tools from 45 different software vendors! Now they have to install, configure, manage, patch, upgrade, and pay for dozens of non-integrated solutions with limited views of the landscape. </option>
+      <option id="B">Costly and complex fragmented security capabilities provide the visibility and coordination needed to stop today’s sophisticated attacks.</option>
+      <option id="C">The security portfolio structured around domains presents a less organized fashion to make sense of threats using logs, data, threats, flows, packets, etc.</option>
+      <option id="D">Because it involves the partner ecosystem that allows collaboration across companies and competitors, to understand global threats and data, and adapt to new threats.</option>
+      <option id="E">Because the traditional defense strategy is not to layer on another point-product tool or technology to an already fragmented and disjointed IT environment.</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>What is the chief weapon of a cyber attacker?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Malware</option>
+      <option id="B">SQLi</option>
+      <option id="C">Phishing</option>
+      <option id="D">Brute Force</option>
+      <option id="E">Physical Access</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Why are cyber-attacks significant for established companies?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">The cost to businesses from cyber-attacks and their consequences, such as data breaches, are always affordable but exposes the company to internal inefficiencies which causes delays.</option>
+      <option id="B">Enhances the brand reputation and increases customer loyalty.</option>
+      <option id="C">Invites regulatory penalties.</option>
+      <option id="D">All the above</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+</quiz>

@@ -117,7 +117,7 @@ namespace ETLG
                     unkownPanel.SetActive(false);
                     ShowContent();
                 }
-                if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
+                else if (fetchedType == Constant.Type.BACK_PROFILE_FAILED)
                 {
                     wholeContainer.SetActive(true);
                     ShowPlayerInfo();
@@ -136,6 +136,7 @@ namespace ETLG
                     avatarChange.SetActive(false);
                     editButtons.SetActive(true);
                     submitButtons.SetActive(false);
+                    resetAvatarButtons();
                     //update info
                     GameEntry.Data.GetData<DataBackend>().currentUser.avatar = playerAvatarId;
                     GameEntry.Data.GetData<DataBackend>().currentUser.nickName = nickName.text;
@@ -200,7 +201,9 @@ namespace ETLG
         {
             achievementScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.achievement;
             playerScore.text = GameEntry.Data.GetData<DataBackend>().userProfile.playerScore;
-            learningPath.text = GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress;
+            Debug.Log(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
+            Debug.Log(GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getTotalProgress());
+            learningPath.text = UIFloatString.FloatToString(GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress);
             SetBossTime(boss_1, GameEntry.Data.GetData<DataBackend>().userProfile.boss1);  // AI
             SetBossTime(boss_2, GameEntry.Data.GetData<DataBackend>().userProfile.boss2);  // Data Science
             SetBossTime(boss_3, GameEntry.Data.GetData<DataBackend>().userProfile.boss3);  // IoT
@@ -233,9 +236,9 @@ namespace ETLG
             if(isEditInfo)
             {
                 nickName.interactable = false;
-                Debug.Log(origionalName);
                 nickName.text = origionalName;
                 avatarChange.SetActive(false);
+                resetAvatarButtons();
             }
             else
             {
@@ -355,8 +358,6 @@ namespace ETLG
         }
         private void SetBossTime(TextMeshProUGUI text, float bossDefeatTime)
         {
-            // Dictionary<int, float> bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
-            //float[] bossDefeatTime = dataPlayer.GetPlayerData().bossDefeatTime;
             if (bossDefeatTime == -1)
             {
                 text.text = "Unchallenged";
@@ -401,6 +402,18 @@ namespace ETLG
             string millisecondsString = milliseconds.ToString().PadLeft(3, '0');
 
             return $"{hoursString}:{minutesString}:{secondsString}.{millisecondsString}";
+
+        }
+        private void resetAvatarButtons()
+        {
+            if (selectedButton == null)
+            {
+                return;
+            }
+                ColorBlock colorBlock;
+                colorBlock = selectedButton.colors;
+                colorBlock.normalColor = normalColor;
+                selectedButton.colors = colorBlock;
 
         }
         private void ShakeText(TextMeshProUGUI reminder, Vector3 originalPosition)

@@ -32,9 +32,9 @@ namespace ETLG
             
             Save("Difficulty" + saveIdStr, this.difficulty);
             Save("InitialSpaceshipIdx" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().initialSpaceship.Id);
-            // Save("PlayerCalculatedSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Save("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Save("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
+            Save("PlayerTotalArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerTotalArtifacts);
             Save("PlayerModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetModulesByType(Constant.Type.MODULE_TYPE_ALL));
             Save("EquippedModules" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetEquippedModules());
             Save("PlayerNPCs" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerNPCsData());
@@ -81,9 +81,9 @@ namespace ETLG
             
             GameEntry.Data.GetData<DataPlayer>().LoadGame(GameEntry.Data.GetData<DataSpaceship>().GetSpaceshipData(initialSpaceshipId));
 
-            // Load("PlayerSpaceshipData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
             Load("PlayerSkillData" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
             Load("PlayerArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetArtifactsByType(Constant.Type.ARTIFACT_ALL));
+            Load("PlayerTotalArtifacts" + saveIdStr, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerTotalArtifacts);
             LoadPlayerModules("PlayerModules" + saveIdStr);
             LoadEquippedModules("EquippedModules" + saveIdStr);
             LoadPlayerNPCs("PlayerNPCs" + saveIdStr);
@@ -180,7 +180,7 @@ namespace ETLG
 
         public Dictionary<string, string> UploadSave(int SaveId)
         {
-            this.savedGamesInfo.cloudSaveId = SaveId;
+            // this.savedGamesInfo.cloudSaveId = SaveId;
             Save("SavedGamesInfo", savedGamesInfo);
 
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -191,6 +191,7 @@ namespace ETLG
             result.Add("InitialSpaceshipIdx", PlayerPrefs.GetString("InitialSpaceshipIdx" + saveIdStr));
             result.Add("PlayerSkillData", PlayerPrefs.GetString("PlayerSkillData" + saveIdStr));
             result.Add("PlayerArtifacts", PlayerPrefs.GetString("PlayerArtifacts" + saveIdStr));
+            result.Add("PlayerTotalArtifacts", PlayerPrefs.GetString("PlayerTotalArtifacts" + saveIdStr));
             result.Add("PlayerModules", PlayerPrefs.GetString("PlayerModules" + saveIdStr));
             result.Add("EquippedModules", PlayerPrefs.GetString("EquippedModules" + saveIdStr));
             result.Add("PlayerNPCs", PlayerPrefs.GetString("PlayerNPCs" + saveIdStr));
@@ -248,6 +249,7 @@ namespace ETLG
             Delete("Difficulty" + saveIdStr);
             Delete("PlayerSkillData" + saveIdStr);
             Delete("PlayerArtifacts" + saveIdStr);
+            Delete("PlayerTotalArtifacts" + saveIdStr);
             Delete("PlayerModules" + saveIdStr);
             Delete("EquippedModules" + saveIdStr);
             Delete("PlayerNPCs" + saveIdStr);
@@ -400,25 +402,25 @@ namespace ETLG
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
-                PrintSavedData("Difficulty_0");
-                PrintSavedData("InitialSpaceshipIdx_0");
-                // PrintSavedData("PlayerCalculatedSpaceshipData_0");
-                PrintSavedData("PlayerSkillData_0");
+                // PrintSavedData("Difficulty_0");
+                // PrintSavedData("InitialSpaceshipIdx_0");
+                // PrintSavedData("PlayerSkillData_0");
                 PrintSavedData("PlayerArtifacts_0");
-                PrintSavedData("PlayerModules_0");
-                PrintSavedData("EquippedModules_0");
-                PrintSavedData("PlayerAchievement_0");
-                PrintSavedData("SavedGamesInfo");
-                PrintSavedData("PlayerNPCs_0");
-                PrintSavedData("BattleVictoryCount_0");
-                PrintSavedData("BossDefeatTime_0");
-                PrintSavedData("PlayedTutorialGroup_0");
-                PrintSavedData("ChaptersSaveData_0");
-                PrintSavedData("CoursesSaveData_0");
-                PrintSavedData("DomiansSaveData_0");
-                PrintSavedData("QuizesSaveData_0");
-                PrintSavedData("PlayerScore_0");
-                PrintSavedData("AchievementScore_0");
+                PrintSavedData("PlayerTotalArtifacts_0");
+                // PrintSavedData("PlayerModules_0");
+                // PrintSavedData("EquippedModules_0");
+                // PrintSavedData("PlayerAchievement_0");
+                // PrintSavedData("SavedGamesInfo");
+                // PrintSavedData("PlayerNPCs_0");
+                // PrintSavedData("BattleVictoryCount_0");
+                // PrintSavedData("BossDefeatTime_0");
+                // PrintSavedData("PlayedTutorialGroup_0");
+                // PrintSavedData("ChaptersSaveData_0");
+                // PrintSavedData("CoursesSaveData_0");
+                // PrintSavedData("DomiansSaveData_0");
+                // PrintSavedData("QuizesSaveData_0");
+                // PrintSavedData("PlayerScore_0");
+                // PrintSavedData("AchievementScore_0");
             }
         }
     }

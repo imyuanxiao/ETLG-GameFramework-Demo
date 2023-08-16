@@ -1,116 +1,233 @@
 <dialogue>
 	<node id="1"> 
 		<npc>
-			<statement font="2" isBold="true">What is a database?</statement>
-			<statement image="1">Almost every data scientist will spend time working in a database, which is an organized collection of structured data in a computer system. (Remember, structured data is usually organized in a table format with rows and columns, like the following example.)</statement>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we'll introduce you to the data science lifecycle and walk you through the three stages of the data exploration phase: exploration, preparation, model development.</statement>
 		</npc>
 		<player>
 			<response nextnode="2" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="2"> 
+	<node id="2">
 		<npc>
-			<statement>Most databases today are organized as relational databases, which are collections of multiple data sets or tables that link together. For example, one table might list names and addresses, while the other might list properties and their owners. If some of the owners also appear in the name-and-address table, the two tables can be linked, creating a relational database. Relational Database Management Systems (RDMSs) help data scientists correlate information from all the tables within the database, change related data, or add and delete data in the database without breaking its structure.</statement>		
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.Describe the three main steps of the exploration phase within the data science lifecycle (Data exploration, Data preparation ). &#xA;2.What are the tasks involved in data exploration? </statement> 
 		</npc>
 		<player>
 			<response nextnode="3" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="3"> 
+	<node id="3">
 		<npc>
-			<statement font="2" isBold="true">Use a database to store and sort data</statement>
-			<statement>Most database management systems use some form of Structured Query Language, or SQL, to ask questions or “query” the database or to modify its contents. SQL is incredibly useful, and it’s something you can learn through a book, an online course, or a computer club. Let’s see how it works.</statement>
+			<statement font="2" isBold="true" color="FCFF1A">1. Describe the three main steps of the exploration phase within the data science lifecycle. </statement> 
+			<statement font="2" isBold="true">It's difficult for today's data science teams to respond fast enough to the demands of their business. With the explosion of data from multiple sources and formats, trying to develop models and putting them into production quickly is a huge challenge for many teams.  </statement>
+			<statement font="2">This guide provides an overview of the typical data science lifecycle, common challenges organizations encounter, and how IBM® Watson Studio can address them-enabling your data science team to accelerate and optimize the value of analytics results throughout your organization.</statement>
 		</npc>
 		<player>
 			<response nextnode="4" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="4"> 
+	<node id="4">
 		<npc>
-			<statement image="2">Suppose you have a million rows of data in a table of registered voters in your state. (Many databases are this big, or even larger!) The table contains information about each voter’s polling place, party affiliation, and age. If you wanted to just get the information for all the voters under the age of 21, you could write a query in SQL instead that performs a simple search. That would look like this:</statement>
-			<statement>Yes, a simple search might have answered this particular question. However, if you want to uncover voters who live in a particular geographic area so you can study how frequently people of different ages in that group show up at the polls, your query will overwhelm a simple search. But SQL can do the job!</statement>
+			<statement font="1" isBold="true">Bringing the Data Science methodology, roles, and tools into a Data Science lifecycle</statement> 
+			<statement image="1">The data science lifecycle—also called the data science pipeline—includes anywhere from five to sixteen (depending on whom you ask) overlapping, continuing processes. </statement>
 		</npc>
 		<player>
 			<response nextnode="5" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="5"> 
+	<node id="5">
 		<npc>
-			<statement>While SQL is the underlying language that drives most work done in relational databases, there are many RDBMSs in which you can do that work. As you venture into this field, you’ll run into names like these:</statement>
-			<statement>· MySQL&#xA;· Microsoft Access&#xA;· PostgreSQL&#xA;· Oracle&#xA;· IBM DB2&#xA;· MongoDB</statement>
+			<statement>The processes common to just about everyone’s definition of the lifecycle include the following:</statement> 
 		</npc>
 		<player>
+			<response nextnode="5.1">Capture</response>
+			<response nextnode="5.2">Prepare and maintain</response>
+			<response nextnode="5.3">Preprocess or process</response>
+			<response nextnode="5.4">Analyze</response>
+			<response nextnode="5.5">Communicate</response>
 			<response nextnode="6" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="6"> 
+	<node id="5.1">
 		<npc>
-			<statement font="2" isBold="true">Choose the right tools to manage data</statement>
-			<statement>Where do you begin? There are dozens of useful data science tools and platforms! Here’s a list of some popular and open source platforms that you can use to begin your own data science journey.</statement>
+			<statement>This is the gathering of raw structured and unstructured data from all relevant sources via just about any method—from manual entry and web scraping to capturing data from systems and devices in real time.</statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5.2">
+		<npc>
+			<statement>This involves putting the raw data into a consistent format for analytics or machine learning or deep learning models. This can include everything from cleansing, deduplicating, and reformatting the data, to using ETL (extract, transform, load) or other data integration technologies to combine the data into a data warehouse, data lake, or other unified store for analysis. </statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5.3">
+		<npc>
+			<statement>Here, data scientists examine biases, patterns, ranges, and distributions of values within the data to determine the data’s suitability for use with predictive analytics, machine learning, and/or deep learning algorithms (or other analytical methods).</statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5.4">
+		<npc>
+			<statement>This is where the discovery happens—where data scientists perform statistical analysis, predictive analytics, regression, machine learning and deep learning algorithms, and more to extract insights from the prepared data.</statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="5.5">
+		<npc>
+			<statement>Finally, the insights are presented as reports, charts, and other data visualizations that make the insights—and their impact on the business—easier for decision-makers to understand. A data science programming language such as R or Python (see below) includes components for generating visualizations; alternatively, data scientists can use dedicated visualization tools.</statement> 
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Exploration phase : Big Data and Analytics</statement> 
+			<statement isBold="true">Data Exploration</statement> 
+			<statement image="2">Once your data is in the right format to work with, you can conduct the next phase in the data analysis process. This initial exploration of the dataset is critical.</statement> 
 		</npc>
 		<player>
 			<response nextnode="7" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7"> 
+	<node id="7">
 		<npc>
-			<statement>Click the following sections to learn more about tools to manage data.</statement>
+			<statement>After you complete the up-front tasks of translating a business problem into an AI and data science solution, and understanding the data needs in support of your business problem, it’s time to prepare the data. You need to prepare the data in a format that can be used for model development, measurement, and training a machine learning model.</statement> 
+			<statement>Most AI and data science models require data to be combined and denormalized into one large analytical record before data mining, feature selection, model development and optimization, and training can occur.</statement> 
 		</npc>
 		<player>
-			<response nextnode="7.1">R is a good place to start</response>
-			<response nextnode="7.2">Python works for general purposes</response>
-			<response nextnode="7.3">MATLAB helps crunch numbers</response>
-			<response nextnode="7.4">Apache Spark supports big data and machine learning</response>
 			<response nextnode="8" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.1"> 
+	<node id="8">
 		<npc>
-			<statement>R is a programming language and free software environment often used for statistical analysis and data science. Many would-be data scientists start with this tool or with one of the popular R interfaces, and there are hundreds of useful packages in R that help with data visualization such as ggplot2.</statement>
-			<statement image="3">Here’s what RStudio looks like. It’s a popular interface for working in R.</statement>
+			<statement font="1" isBold="true">Data Preparation</statement> 
+			<statement>Uncover hidden insights in your data with the Data Refinery tool, which provides built-in data cleaning and transformations. </statement>
+			<statement image="3">Gain access to a tabular view of your data, including visualizations and summary statistics that can help you uncover hidden insights by asking the right business questions of your data.</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="9" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.2"> 
+	<node id="9">
 		<npc>
-			<statement>Python is a popular, general-purpose programming language that can also be used for data science. Pair it with a library like pandas library and with a useful interface, and Python can help you create new insights and data visualizations.</statement>
-			<statement image="4">Here’s what Python looks like in a notebook interface.</statement>
+			<statement font="1" isBold="true">Data preparation involves these tasks:</statement> 
+			<statement>· Select a sample subset of data&#xA;· Filter on rows that target particular customers or products that help answer the data analysis and business goals. Also, filter on attributes that are relevant to data analysis and business goals. Some data science patterns, such as Fraud Detection, AML Anti-Money Laundering, and Log Analysis might require full-volume, unsampled data.&#xA;· Merge data sets or records&#xA;· To join data sets, you need a common key. Aggregate records, and merge based on group by like operations.&#xA;· Derive new attributes</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="10" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.3"> 
+	<node id="10">
 		<npc>
-			<statement image="5">MATLAB was built to focus on numerical computing. It is often used in higher education.</statement>
+			<statement>· When you merge data sets, especially when you have many relationships, it can be useful to derive new attributes. For example, if you have a customer data set and a customer purchases data set, you might condense the purchases to a new derived attribute with mean or total spending.&#xA;· Format and sort the data for modeling&#xA;· Sequence and temporal algorithms might need data to be presorted into a particular order. Categorical data fields might need to be converted from textual categories to numerical ones.&#xA;· Remove or replace blank or missing values&#xA;· Exclude rows where the missing attribute is key in making the decision. Fill in missing attributes with 0 or estimated values where the rest of the row adds value to the analysis.</statement>
+			<statement>· If your data is sparse or you have many attributes, consider reducing the number of features. Principle Component Analysis can show you which attributes have the biggest impact on the data. Linear regression can show you that two attributes are correlated, so you need to use only one of those attributes and remove the other.&#xA;· Normalize numeric fields to use the same range. Features with large values compared to features with small values can be given more weight by various algorithms. Normalization eliminates the unit of measurement by rescaling data, often to a value in the range 0 - 1.&#xA;· Replace or correct data and measurement errors</statement>
+			<statement>Don't worry if these terms seem a bit heavy, we will dive deeper into these in the intermediate and advanced courses. </statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="11" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="7.4"> 
+	<node id="11">
 		<npc>
-			<statement image="6"></statement>
+			<statement font="1" isBold="true">Data Refinery</statement> 
+			<statement image="4">Data Refinery is an essential and early-on task that a data wrangler will undertake to cleanse and transform their data.</statement>
 		</npc>
 		<player>
-			<response nextnode="7" isShown="false">Continue</response>
+			<response nextnode="12" isShown="false">Continue</response>
 		</player>
 	</node>
 
-	<node id="8"> 
+	<node id="12">
 		<npc>
+			<statement>The Data Refinery tool, available via Watson Studio and Watson Knowledge Catalog, saves data preparation time by quickly transforming large amounts of raw data into consumable, quality information that’s ready for analytics.</statement> 
+			<statement>The Data Refinery service reduces the amount of time it takes to prepare data. Use pre-defined operations that you can use in your data flows to transform large amounts of raw data into consumable, quality data that’s ready for analysis. </statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement font="1" isBold="true">With Data preparation tools like IBM's Data Refinery, you can:</statement> 
+			<statement>· Interactively discover, cleanse, and transform your data with over 100 built-in operations. No coding is required.&#xA;· Understand the quality and distribution of your data using dozens of built-in charts, graphs, and statistics.&#xA;· Automatically detect data types and business classifications.&#xA;· Schedule data flow executions for repeatable outcomes.</statement>
+		</npc>
+		<player>
+			<response nextnode="14" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="14">
+		<npc>
+			<statement font="1" isBold="true" color="FCFF1A">2. What are the tasks involved in data exploration?</statement> 
+			<statement font="2" isBold="true">Once your data is in the right format to work with, you can conduct the next step in the data analysis process: data exploration.</statement>
+			<statement font="2">This initial exploration of the dataset is critical because it helps data scientists illuminate previously unknown patterns, relationships, or other actionable findings. </statement>
+		</npc>
+		<player>
+			<response nextnode="15" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="15">
+		<npc>
+			<statement font="1" isBold="true">Data Exploration</statement> 
+			<statement>Using the included dashboarding service, produce stunning visualizations directly from your data in real-time. </statement>
+			<statement image="5">This allows you to illuminate previously unknown patterns, relationships, or other actionable findings, and easily share them with your team.</statement>
+		</npc>
+		<player>
+			<response nextnode="16" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="16">
+		<npc>
+			<statement>Exploratory data analysis (EDA) is a technique used for data exploration to analyze and investigate data sets and summarize their main characteristics, often employing data visualization methods. It helps determine how best to manipulate data sources to get the answers you need, making it easier for data scientists to discover patterns, spot anomalies, test a hypothesis, or check assumptions.</statement> 
+			<statement>EDA is primarily used to see what data can reveal beyond the formal modeling or hypothesis testing task and provides a better understanding of data set variables and the relationships between them. It can also help determine if the statistical techniques you are considering for data analysis are appropriate.</statement>
+		</npc>
+		<player>
+			<response nextnode="17" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="17">
+		<npc>
+			<statement font="1" isBold="true">Some helpful questions to ask at this point include:</statement> 
+			<statement>· Which attributes seem promising for further analysis?&#xA;· Has the exploration revealed new characteristics about the data?&#xA;· How have these explorations changed any initial hypotheses?&#xA;· Can a specific subset of the data be used later?&#xA;· Has the data exploration altered the project goals?</statement>
+		</npc>
+		<player>
+			<response nextnode="18" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="18">
+		<npc>
+			<statement>The main purpose of EDA is to help look at data before making any assumptions. It can help identify obvious errors, as well as better understand patterns within the data, detect outliers or anomalous events, find interesting relations among the variables.</statement> 
+			<statement video="1">Data scientists can use exploratory analysis to ensure the results they produce are valid and applicable to any desired business outcomes and goals. EDA also helps stakeholders by confirming they are asking the right questions. EDA can help answer questions about standard deviations, categorical variables, and confidence intervals. Once EDA is complete and insights are drawn, its features can then be used for more sophisticated data analysis or modeling, including machine learning (Artificial Intelligence) programs.</statement>
 		</npc>
 		<player>
 			<response nextnode="end">Thank you.</response>

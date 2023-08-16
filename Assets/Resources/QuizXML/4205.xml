@@ -1,0 +1,93 @@
+<quiz boss="true">
+  <question type="MCS" timelimit="30">
+    <statement>Which of the following is one of the most fundamental characteristics of a data scientist?</statement>
+    <options>
+      <option id="A">Being proficient in R or Python</option>
+      <option id="B">Having a sense of curiosity about all things</option>
+      <option id="C">Using open-source software libraries and packages</option>
+      <option id="D">Having a strong background in high power computing (HPC)</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+    </answers>
+  </question>
+
+  <question type="MCM" timelimit="30">
+    <statement>The field of data science is the process of _____________.</statement>
+    <hint></hint>
+    <options>
+      <option id="A">preparing data for analysis and processing</option>
+      <option id="B">working exclusively with spreadsheets and table</option>
+      <option id="C">performing advanced data analysis </option>
+      <option id="D">visualizing the results to reveal patterns </option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+      <answer>B</answer>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>When thinking about the 5 main Vs of data, what does Veracity refer to?</statement>
+    <hint></hint>
+    <options>
+      <option id="A">Refers to the vast amounts of data generated every second</option>
+      <option id="B">Refers to the different types of data we can now use.</option>
+      <option id="C">Refers to the speed at which new data is generated and the speed at which data moves around</option>
+      <option id="D">Refers to the trustworthiness of the data</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+  <question type="MCS" timelimit="30">
+    <statement>Data in all of its forms, both structured and unstructured, would be the focus of which of the following 5 V’s of data? </statement>
+    <hint></hint>
+    <options>
+      <option id="A">Volume</option>
+      <option id="B">Velocity</option>
+      <option id="C">Variety</option>
+      <option id="D">Veracity</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question type="MCM" timelimit="30">
+    <statement>Which of the following are examples of unstructured data? </statement>
+    <hint></hint>
+    <options>
+      <option id="A">CSV files</option>
+      <option id="B">Facebook images</option>
+      <option id="C">Records in IBM DB2 database</option>
+      <option id="D">Twitter feeds</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>B</answer>
+      <answer>D</answer>
+    </answers>
+  </question>
+
+   <question type="MCS" timelimit="30">
+    <statement>A data analyst is reviewing an Excel spreadsheet from an insurance company. The customer data that she is analyzing is sorted by name, home address, policy number, etc. What type of data is she most likely working with? </statement>
+    <hint></hint>
+    <options>
+      <option id="A">Structured data</option>
+      <option id="B">Unstructured data </option>
+      <option id="C">Bilaterally structured data </option>
+      <option id="D">Unilaterally structured data</option>
+    </options>
+    <analysis></analysis>
+    <answers>
+      <answer>A</answer>
+    </answers>
+  </question>
+</quiz>

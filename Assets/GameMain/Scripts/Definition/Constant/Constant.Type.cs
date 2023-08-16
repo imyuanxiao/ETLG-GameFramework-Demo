@@ -20,15 +20,17 @@
             public const int TUTORIAL_SPACESHIP = 3;
             public const int TUTORIAL_SKILL = 4;
             public const int TUTORIAL_BATTLE = 9;
-
+            public const int TUTORIAL_ACHIEVEMENT = 5;
+            public const int TUTORIAL_RANK = 6;
+            public const int TUTORIAL_PROFILE = 7;
 
             // player menu title
-/*            public const int PLAYERMENU_SPACESHIP = 1011;
-            public const int PLAYERMENU_SKILL = 1012;
-            public const int PLAYERMENU_MISSION = 2;
-            public const int PLAYERMENU_ACHIEVEMENT = 1027;
-            public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
-            public const int PLAYERMENU_LEADERBOARD = 1032;*/
+            /*            public const int PLAYERMENU_SPACESHIP = 1011;
+                        public const int PLAYERMENU_SKILL = 1012;
+                        public const int PLAYERMENU_MISSION = 2;
+                        public const int PLAYERMENU_ACHIEVEMENT = 1027;
+                        public const int PLAYERMENU_KNOWLEDGE_BASE = 4;
+                        public const int PLAYERMENU_LEADERBOARD = 1032;*/
 
             // tip info position
             public const int TIP_INFO_POSITION_DEFAULT = 0;
@@ -152,6 +154,7 @@
             public const string QUIZ_MULTIPLE_ANSWERS_CHOICES  = "MCM";
             public const string QUIZ_SINGLE_ANSWERS_CHOICES  = "MCS";
             public const string QUIZ_MATCHING_CHOICES  = "MAT";
+            public const string QUIZ_TRUEORFALSE  = "TF";
 
             //arrow icon type
             public const int ARROW_RIGHT = 0;
@@ -207,6 +210,7 @@
             public const int BACK_RANK_FAILED = 14;
             public const int BACK_SAVE_UPLOAD_SUCCESS = 15;
             public const int BACK_SAVE_UPLOAD_FAILED = 16;
+            public const int BACK_NOT_LOG_IN = 17;
             //login purpose
             public const int BACK_PROFILE = 1;
             public const int BACK_UPDATE = 2;

@@ -1,0 +1,338 @@
+<dialogue>
+	<node id="1"> 
+		<npc>
+			<statement font="2" isBold="true">Introduction</statement>
+			<statement>In this topic, we will explore what is a cyber threat, why do they happen, and which methods do 'bad actors' use to carry out attacks on organizations. </statement>
+		</npc>
+		<player>
+			<response nextnode="2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="2">
+		<npc>
+			<statement isBold="true">Throughout this topic, we will attempt to answer the following questions:</statement> 
+			<statement>1.Why are cyber threats so important? &#xA;2.Why do cyber attackers, attack?  </statement> 
+		</npc>
+		<player>
+			<response nextnode="3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="3">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">1. Why are cyber threats so important?</statement> 
+			<statement font="2" isBold="true">Cyber threats are deliberate exploitations of computer systems and networks using malicious software (malware) to compromise data or disable operations.</statement>
+			<statement font="2">Cyber attacks enable cyber-crimes like information theft, fraud and ransomware schemes. </statement>
+		</npc>
+		<player>
+			<response nextnode="4" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="4">
+		<npc>
+			<statement font="1" isBold="true">Why does this matter? </statement> 
+			<statement>Your intelligent building or the entire city could be hacked today.</statement>
+			<statement>Given that most modern office buildings have switched to electronic access controls, hackers could simply deactivate all locks across the building, instantly rendering the entire facility unsecured, doors flapping in the breeze, and causing mass panic among his guards.</statement>
+			<statement>Or, they could move to paralyze the entire city, cutting power to every major building, while activating fire alarms across the city and manipulating traffic signals to cause massive traffic accidents and trap first responders helplessly across the city and preventing them from reaching their next appointments. </statement>
+		</npc>
+		<player>
+			<response nextnode="5" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="5">
+		<npc>
+			<statement font="1" isBold="true">Yet, here’s where things get far more worrying.</statement> 
+			<statement>When they step on the elevator to change floors, those hackers could disable the elevator system and trap them, disrupting his visit and generating media images of him being helplessly dragged up a ladder to safety.</statement>
+			<statement>Or they could trigger the fire alarms or overheat a piece of equipment to cause a real fire and activate the sprinkler system, leading to images of a soaked and miserable leader cutting their visit short.</statement>
+			<statement>Now imagine that happening in a hospital, in your children's school, in a nearby prison or other critical buildings such as airports, dams or nuclear plants.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6">
+		<npc>
+			<statement font="1" isBold="true">Types of Attacks </statement> 
+			<statement>· Bring your algorithms to wherever data resides.&#xA;· Increase productivity of data scientists, analysts, developers, and subject matter experts.&#xA;· Operationalize the data science lifecycle from insight to prediction and optimization.  </statement> 
+		</npc>
+		<player>
+			<response nextnode="6.1">Physical Access</response>
+			<response nextnode="6.2">Brute Force </response>
+			<response nextnode="6.3">Misconfiguration or Human Error</response>
+			<response nextnode="6.4">Misconfigured Clouds, Phishing and Other Insider-inflicted Weaknesses</response>
+			<response nextnode="6.5">Misconfigured clouds</response>
+			<response nextnode="6.6">Malvertising </response>
+			<response nextnode="6.7">Watering Hole </response>
+			<response nextnode="6.8">Phishing </response>
+			<response nextnode="6.9">SQL Injection  </response>
+			<response nextnode="6.10">Denial of Service (DDoS)  </response>
+			<response nextnode="6.11">Malware </response>
+			<response nextnode="7" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6.1">
+		<npc>
+			<statement image="1">Incidents where the attacker acquires access to the physical system, this could include from phones, computers or servers, to ATMs, elevators, cars, airplanes, CCTV, homes, and health monitors.</statement> 
+			<statement>When Cybersecurity meets Physical Security, hackers could monitor all of the traffic cameras in the area to watch the head of state’s movements in real-time and monitor his or her schedule second by second. As they enter a building, the local CCTV cameras throughout that building could be used to surveil their movements and compile an intelligence list of everyone they meet with. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.2">
+		<npc>
+			<statement image="2">Use of trial and error to obtain a username and password for a valid account on an application to access sensitive data such as credit card numbers.</statement> 
+			<statement>A brute force attack can manifest itself in many different ways but primarily consists of an attacker configuring predetermined values, making requests to a server using those values, and then analyzing the response. For the sake of efficiency, an attacker may use a dictionary attack (with or without mutations) or a traditional brute-force attack (with given classes of characters e.g.: alphanumerical, special, case (in) sensitive). Considering a given method, the number of tries, the efficiency of the system which conducts the attack, and the estimated efficiency of the system which is attacked the attacker is able to calculate approximately how long it will take to submit all chosen predetermined values. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.3">
+		<npc>
+			<statement image="3">Incidents where attackers gain access to vulnerable systems, left exposed by inexperienced administrators or users (e.g., default factory settings).  </statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.4">
+		<npc>
+			<statement>With mobility and bring-your-own-device (BYOD) trends being the norm in today’s workplace and productivity, many say that everyone is an insider threat. Does this outlook materialize in real-world security incidents? The numbers paint a grim picture.</statement> 
+			<statement>As gleaned from information on publicly disclosed breaches, there were several high-profile breaches eventually attributed to the errors of inadvertent insiders.</statement>
+		</npc>
+		<player>
+			<response nextnode="6.4.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6.4.2">
+		<npc>
+			<statement>Some of the most common scenarios included basic misjudgment. These include employees storing intellectual property on their own insecure personal devices and end systems and employees and insiders falling for phishing emails that resulted in account takeover or access to sensitive data. In addition, erroneous permission-level attribution on cloud services and networked backups exposed sensitive data through weak or non-existent authentication.</statement> 
+			<statement>The following sections provide further details on the most prominent incident types attributed to inadvertent insiders affecting organizations</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.5">
+		<npc>
+			<statement>Misconfigured cloud servers, networked backup incidents and other improperly configured systems were responsible for the exposure of more than 2 billion records, or nearly 70 percent of the total number of compromised records tracked by X-Force. There were 424% more records compromised as a result of these types of incidents year on year.  </statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.6">
+		<npc>
+			<statement image="4">Using sophisticated tools to conceal malware within objects or images in advertising network ads, getting into user’s computer, even if they don’t click on the ad. </statement> 
+			<statement>In most cases, threat actors create fake advertisements laden with malware and try to slip them past security checks at large ad networks. These infected ads can then sneak malware onto a web user’s computer, even if he or she doesn’t click on the ad. These so-called drive-by downloads are particularly effective against users who don’t regularly update their software.</statement>
+			<statement>The cost of malvertising is huge: A report from ad verification vendor GeoEdge estimated that the threat costs the online advertising industry more than $1.1 billion a year, and anticipated the cost rising another 20–30 percent in the upcoming years. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.7">
+		<npc>
+			<statement image="5">A cyber attack in which the attacker seeks to compromise a specific group of end users by infecting websites that members of the group are known to visit. </statement> 
+			<statement>For example - recent reports surfaced indicating that attackers used a watering-hole attack by compromising the web servers of a Polish financial regulator, the website of the National Banking and Securities Commission of Mexico, and the website of a state-owned bank in Uruguay. With suspected links to the threat actor known as the Lazarus Group, attackers targeted more than 100 entities and successfully infected at least 30 organizations with malware that was used to exfiltrate data and money from their internal networks over an encrypted tunnel. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.8">
+		<npc>
+			<statement image="6">Tricking a user into providing protected information or downloading malware by typically using the email that appears to be from a trusted or reputable source. </statement> 
+			<statement>Losses due to cybercrime are a growing issue for financial organizations across the globe, and seeing this sector top the chart is not a surprise. Attackers are committing direct monetary theft from bank accounts by using phishing and credential-stealing malware, as well as running malicious code to intercept online transactions. Attacks on the financial sector more commonly target bank customers, but organized crime gangs are also after the enterprise networks of those organizations. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.9">
+		<npc>
+			<statement image="7">The attack inserts database (where data is stored) commands in client applications, allowing the hacker to read and modify sensitive data, execute database administration operations. </statement> 
+			<statement>A SQL injection attack consists of the insertion or "injection" of a SQL (Structured Query Language is a language used to manipulate data) request via the input data from the client to the application. A successful SQL injection exploit can read sensitive data from the database, modify database data (Insert/Update/Delete), execute administration operations on the database (such as shutdown the DBMS, acronym for Database Management System), recover the content of a given file present on the DBMS file system and in some cases issue commands to the operating system. SQL injection attacks are a type of injection attack, in which SQL commands are injected into data-plane input in order to affect the execution of predefined SQL commands. </statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.10">
+		<npc>
+			<statement image="8">These attacks overload online networks and systems with massive traffic consuming resources and bandwidth, eventually shutting down their online capabilities. </statement> 
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="6.11">
+		<npc>
+			<statement image="9">Malicious software programmed to attack a target computer. It can block access, steal data, make systems inoperable, and even physically destroy them. </statement> 
+			<statement>Malware is the chief weapon of a cyber attack and includes viruses, worms, trojans, ransomware, adware, spyware bots, bugs and rootkits.</statement>
+		</npc>
+		<player>
+			<response nextnode="6.11.2" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6.11.2">
+		<npc>
+			<statement>It installs when a user clicks a link or takes an action, once inside, malware can block access to data and programs, steal information and make systems inoperable.</statement> 
+			<statement>Ransomware is malware used to blackmail victims by threatening to publish sensitive information or locking users out until a ransom is paid — often in cryptocurrency such as Bitcoin. IBM estimates ransomware attacks cost companies more than $8 billion globally.</statement>
+			<statement>Zero-day exploits introduce malware through vulnerabilities unknown to the maker or user of software or systems. It is “zero-day” because developers have had zero-time to address or patch the vulnerability. </statement>
+		</npc>
+		<player>
+			<response nextnode="6.11.3" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="6.11.3">
+		<npc>
+			<statement isBold="true" >There are also sub-types of malware based on their lifecycle.</statement> 
+			<statement>· Malware offspring - A new version of malware that is thought to be created by the same developer as another type of malware.&#xA;· Overlay malware - A type of mobile malware designed to mimic the look and feel of a legitimate, target application.&#xA;· Malware family - Malware is thought to be linked to botnets and other malware operators.&#xA;· Malware hybrid - New malware incorporating characteristics of two types of malware.</statement>
+		</npc>
+		<player>
+			<response nextnode="6" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="7">
+		<npc>
+			<statement font="2" isBold="true" color="FCFF1A">2. Why do cyber attackers, attack? </statement> 
+			<statement font="2" isBold="true">Cyber attacks are perpetrated for financial gain through crimes like fraud or extortion, as with ransomware. There are cases where sabotage or revenge are factors. Think disgruntled employee. Cyber attacks also have a political dimension and are used in cyber-warfare. </statement>
+		</npc>
+		<player>
+			<response nextnode="8" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="8">
+		<npc>
+			<statement font="2" isBold="true">Reasons behind cyber attacks </statement> 
+			<statement font="2" image="10">Reasons for the attack can range from politics to bragging rights. Military and government targets include power grids and military bases. Civil and private sector corporations are targeted on their web servers and databases. </statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9">
+		<npc>
+			<statement>Some of the main reasons for cyber attacks are listed below: </statement> 
+		</npc>
+		<player>
+			<response nextnode="9.1">Military</response>
+			<response nextnode="9.2">Civil/private sector</response>
+			<response nextnode="9.3">Hacktivism</response>
+			<response nextnode="9.4">Legitimate research</response>
+			<response nextnode="9.5">Bragging rights</response>
+			<response nextnode="10" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="9.1">
+		<npc>
+			<statement>Countries and nation-states attacking targets for offensive and defensive reasons.&#xA;Potential targets: power grids, battlefield systems, military bases, government organizations.&#xA;Example: Stuxnet believed to have been a joint American-Israeli operation targeted at the Iranian nuclear program </statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="9.2">
+		<npc>
+			<statement>"Classic" internet sabotage, targeting enterprises and individuals. &#xA;Targets include the Internet backbone, web servers, databases, PCs, network devices Motivations include money, acquisition of trade secrets (cyber espionage), revenge.&#xA;Example: Attacks can be highly targeted to specific organizations (Home Depot, Sony) or widespread (phishing, ransomware) </statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="9.3">
+		<npc>
+			<statement>Politically motivated involves cyber sabotage and subversion to promote an agenda </statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="9.4">
+		<npc>
+			<statement> "White Hat" organizations and individuals seeking to defeat "Black Hats"&#xA;Examples: X-Force, ethical hackers, anti-malware vendors, penetration testing, invasive vulnerability scanners</statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="9.5">
+		<npc>
+			<statement> Amateur looking to make a name for themselves &#xA;Examples: website defacement, the discovery of previously unknown vulnerabilities</statement> 
+		</npc>
+		<player>
+			<response nextnode="9" isShown="false">Go back.</response>
+		</player>
+	</node>
+
+	<node id="10">
+		<npc>
+			<statement font="1" isBold="true" >What is the impact on businesses? </statement> 
+			<statement>The cost to businesses from cyber attacks and their consequences, such as data breaches, are devastating. According to the latest Cost of a Data Breach Study by Ponemon Institute, the average total cost of a data breach is close to $4 million USD.</statement>
+		</npc>
+		<player>
+			<response nextnode="11" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="11">
+		<npc>
+			<statement>Additionally, companies attacks can have the following impact:</statement>
+			<statement>· Damage brands and reputations&#xA;· Erode and even decimate customer loyalty&#xA;· Result in loss of intellectual property&#xA;· Put companies out of business&#xA;· Invite regulatory penalties&#xA;· Impair security for governments and states&#xA;· Increase potential for future attacks</statement>
+		</npc>
+		<player>
+			<response nextnode="12" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="12">
+		<npc>
+			<statement font="2" isBold="true" >How can companies defend themselves? </statement>
+			<statement>Year-by-year shifts in the cybercrime arena do not necessarily mean that much is changing in the way online fraud works or the tools cybercrime gangs are using to work it. </statement>
+		</npc>
+		<player>
+			<response nextnode="13" isShown="false">Continue</response>
+		</player>
+	</node>
+
+	<node id="13">
+		<npc>
+			<statement font="1" isBold="true" >The real change has to come from the defenders’ side </statement>
+			<statement>The cybercriminal lifecycle has to be shortened to render it less and less lucrative over time. The faster we react to cybercrime findings and share them across the entire community, the less time each malware variant will realize successful fraud attacks.</statement>
+			<statement>With increased vigilance, stronger detection, and quicker reaction times, criminal operations can become much less financially viable for attackers.</statement>
+			<statement>Fraudsters will be forced to abandon the field for lack of profit. </statement>
+		</npc>
+		<player>
+			<response nextnode="end">Thank you.</response>
+		</player>
+	</node>
+
+</dialogue>

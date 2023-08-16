@@ -19,8 +19,8 @@ namespace ETLG
         private Dictionary<string, string> uploadJsonStrDic;
         private void OnEnable()
         {
-            connectType = Constant.Type.BACK_LOCAL;
-            //connectType = Constant.Type.BACK_REOMTE;
+            //connectType = Constant.Type.BACK_LOCAL;
+            connectType = Constant.Type.BACK_REOMTE;
         }
         public void GetRankData(int type, int current, int pageSize)
         {
@@ -73,7 +73,6 @@ namespace ETLG
                 else
                 {
                     HandleErrorMessages(www);
-                    GameEntry.Event.Fire(this, ErrorMessagePopPUpEventArgs.Create());
                 }
                 www.Dispose();
 
@@ -478,7 +477,7 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-                           
+                           Dictionary<string,string> download = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseData.data);
                             GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
@@ -513,7 +512,7 @@ namespace ETLG
         {
             using (UnityWebRequest www = UnityWebRequest.Get(GameEntry.Data.GetData<DataBackend>().GetGetProfileByIdUrl() + id))
             {
-                //www.SetRequestHeader("Authorization", GameEntry.Data.GetData<DataBackend>().authorization);
+                
                 yield return www.SendWebRequest();
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
@@ -525,6 +524,7 @@ namespace ETLG
                         if (responseData.data!=null && !string.IsNullOrEmpty( responseData.data.achievement))
                         {
                             GameEntry.Data.GetData<DataBackend>().userProfile.achievement = responseData.data.achievement;
+                            Debug.Log("responseData.data.learningProgress :" + responseData.data.learningProgress);
                             GameEntry.Data.GetData<DataBackend>().userProfile.learningProgress = responseData.data.learningProgress;
                             GameEntry.Data.GetData<DataBackend>().userProfile.nickName = responseData.data.nickName;
                             GameEntry.Data.GetData<DataBackend>().userProfile.playerScore = responseData.data.playerScore;
@@ -595,6 +595,20 @@ namespace ETLG
                     callback(false);
                 }
             }
+        }
+        public void HandleTrade()
+        {
+            IsLoginDetection((isLoggedIn) =>
+            {
+                if (isLoggedIn)
+                {
+                    GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_LOGED_IN));
+                }
+                else
+                {
+                    GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_NOT_LOG_IN));
+                }
+            });
         }
         private void HandleErrorMessages(UnityWebRequest www)
         {
@@ -695,7 +709,7 @@ namespace ETLG
             public string nickName;
             public string playerScore;
             public string achievement;
-            public string learningProgress;
+            public float learningProgress;
             public float boss1;
             public float boss2;
             public float boss3;
