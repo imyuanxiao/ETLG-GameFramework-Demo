@@ -22,7 +22,6 @@ namespace ETLG
             rb.velocity = flyingDirection * flyingSpeed * Time.deltaTime;
             if (IsOffScreen())
             {
-                Debug.Log("Off Screen!!!!");
                 ObjectPoolManager.ReturnObjectToPool(gameObject);
             }
         }

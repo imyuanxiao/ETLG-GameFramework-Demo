@@ -44,6 +44,9 @@ namespace ETLG
 
             Dictionary<string, string> battleData = (Dictionary<string, string>) userData;
 
+            if (battleData == null)
+                return;
+                
             this.battleType = battleData["BattleType"];
             this.bossType = battleData["BossType"];
 
