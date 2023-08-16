@@ -19,8 +19,8 @@ namespace ETLG
         private Dictionary<string, string> uploadJsonStrDic;
         private void OnEnable()
         {
-            connectType = Constant.Type.BACK_LOCAL;
-            //connectType = Constant.Type.BACK_REOMTE;
+            //connectType = Constant.Type.BACK_LOCAL;
+            connectType = Constant.Type.BACK_REOMTE;
         }
         public void GetRankData(int type, int current, int pageSize)
         {
