@@ -12,7 +12,7 @@ namespace ETLG
     public class SaveManager : Singleton<SaveManager>
     {
         public SavedGamesInfo savedGamesInfo;
-        public int difficulty;  // 0 - easy, 1 - normal, 2 - hard, 3 - challenge
+        [HideInInspector] public int difficulty;  // 0 - easy, 1 - normal, 2 - hard, 3 - challenge
         private void OnEnable() 
         {
             savedGamesInfo = new SavedGamesInfo();

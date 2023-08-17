@@ -20,7 +20,6 @@ namespace ETLG
             this.difficulty = SaveManager.Instance.difficulty;
             InitBossEnemy();
             StartCoroutine(CheckDeath()); 
-            Debug.Log("Difficulty: " + this.difficulty);
         }
 
         private void InitBossEnemy()

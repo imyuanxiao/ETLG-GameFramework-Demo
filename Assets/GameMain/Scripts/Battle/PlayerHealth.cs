@@ -28,7 +28,6 @@ namespace ETLG
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
             PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
-            Debug.Log("Player Health: Player Dead");
         }
 
         private void OnPlayerHealthChange(object sender, GameEventArgs e)

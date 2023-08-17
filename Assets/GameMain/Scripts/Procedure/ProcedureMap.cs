@@ -101,36 +101,6 @@ namespace ETLG
             {
                 ChangeState<ProcedurePlanet>(procedureOwner);
             }
-
-            // Switch to battle scene and battle procedure (for test purpose only)
-            //   1. switch to basic battle
-            // if (Input.GetKeyDown(KeyCode.C))
-            // {
-            //     procedureOwner.SetData<VarString>("BattleType", "BasicBattle");
-            //     procedureOwner.SetData<VarString>("BossType", "");
-            //     procedureOwner.SetData<VarInt32>("Accuracy", 0);
-            //     GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
-            // }
-            // //  2. switch to intermidate battle (mini boss battle)
-            // else if (Input.GetKeyDown(KeyCode.V))
-            // {
-            //     procedureOwner.SetData<VarString>("BattleType", "IntermidateBattle");
-            //     // procedureOwner.SetData<VarString>("BossType", "CloudComputing");
-            //     // procedureOwner.SetData<VarString>("BossType", "Cybersecurity");
-            //     procedureOwner.SetData<VarString>("BossType", "AI");
-            //     // procedureOwner.SetData<VarString>("BossType", "DataScience");
-            //     // procedureOwner.SetData<VarString>("BossType", "Blockchain");
-            //     // procedureOwner.SetData<VarString>("BossType", "IoT");
-            //     GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
-            // }
-            //  3. switch to final boss battle
-            // else if (Input.GetKeyDown(KeyCode.B))
-            // {
-            //     procedureOwner.SetData<VarString>("BattleType", "FinalBattle");
-            //     procedureOwner.SetData<VarString>("BossType", "FinalBoss");
-            //     procedureOwner.SetData<VarInt32>("Accuracy", 0);
-            //     GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Battle")));
-            // }
         }
 
         private void MouseControl() {
