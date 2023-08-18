@@ -62,6 +62,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_NPC_QUIZ);
             GameEntry.Sound.StopMusic();
 
             UIQuizManager = null;

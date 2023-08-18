@@ -23,6 +23,10 @@
             public const int TUTORIAL_ACHIEVEMENT = 5;
             public const int TUTORIAL_RANK = 6;
             public const int TUTORIAL_PROFILE = 7;
+            public const int TUTORIAL_NPC_TRADE = 10;
+            public const int TUTORIAL_NPC_DIALOG = 11;
+            public const int TUTORIAL_NPC_QUIZ = 12;
+            public const int TUTORIAL_LANDINGPOINT_PLANET = 8;
 
             // player menu title
             /*            public const int PLAYERMENU_SPACESHIP = 1011;

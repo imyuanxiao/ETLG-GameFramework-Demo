@@ -20,11 +20,7 @@ namespace ETLG
         public Button PlayButton;
         public Button FullScreenButton;
 
-        private bool isPause;
-        private Sprite playIcon;
-        private Sprite pauseIcon;
         private DataVideo dataVideo;
-
 
         private void Start()
         {
@@ -49,16 +45,14 @@ namespace ETLG
 
         private void OnPlayButtonClick()
         {
-            if (isPause)
+            if (!videoPlayer.isPlaying)
             {
                 videoPlayer.Play();
-                isPause = false;
                 //PlayPauseIcon.sprite = pauseIcon;
             }
             else
             {
                 videoPlayer.Pause();
-                isPause = true;
                 //PlayPauseIcon.sprite = playIcon;
             }
         }

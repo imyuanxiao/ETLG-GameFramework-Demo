@@ -1428,7 +1428,6 @@ namespace ETLG.Data
             {
                 if (finishedDialog >= count && !isAchievementAchieved(achievementId, finishedDialog))
                 {
-                    Debug.Log("完成的对话数" + finishedDialog);
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }

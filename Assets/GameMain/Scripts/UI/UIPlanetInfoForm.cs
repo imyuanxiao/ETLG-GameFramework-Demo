@@ -40,7 +40,7 @@ namespace ETLG
 
            // ShowContent();
            refresh = true;
-
+           GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_LANDINGPOINT_PLANET);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

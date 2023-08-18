@@ -829,6 +829,8 @@ GameObject:
   - component: {fileID: 1237082153444079037}
   - component: {fileID: 9033533592352384628}
   - component: {fileID: 11688524145206403}
+  - component: {fileID: 7695664641173313214}
+  - component: {fileID: 3735040717232240736}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -891,6 +893,35 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7695664641173313214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520514269403060614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c086ca0bf7daaf45bf6f65b41c5f3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 5183411429242303369}
+  TutorialID: 11001
+--- !u!114 &3735040717232240736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520514269403060614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d35e027812c8449845fc199b723d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipTitle: Help
+  tipContent: Click to open tutorial.
+  position: 0
 --- !u!1 &2544065538865277231
 GameObject:
   m_ObjectHideFlags: 0

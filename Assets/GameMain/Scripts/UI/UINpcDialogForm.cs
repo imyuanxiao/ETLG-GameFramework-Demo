@@ -75,6 +75,7 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+            GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_NPC_DIALOG);
             GameEntry.Sound.StopMusic();
             dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             npcData = GameEntry.Data.GetData<DataNPC>().GetCurrentNPCData();
@@ -610,8 +611,14 @@ namespace ETLG
             RenderTexture renderTexture = Resources.Load<RenderTexture>(UI_NPCDialogManager.UI_NPCDialogNPCStatment.videoTexture);
             rawImage.texture = renderTexture;
             videoPlayer.targetTexture = renderTexture;
-            videoPlayer.Play();
-            
+            if (GameEntry.UI.HasUIForm(EnumUIForm.UITutorialForm))
+            {
+                videoPlayer.Pause();
+            }
+            else
+            {
+                videoPlayer.Play();
+            }
             return videoModule;
         }
 
