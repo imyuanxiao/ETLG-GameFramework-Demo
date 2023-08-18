@@ -1439,6 +1439,18 @@ namespace ETLG.Data
             return totalProgress;
         }
 
+        private bool testPassAllQuiz()
+        {
+            foreach(UIQuizManager quizManager in playerQuizes.Values)
+            {
+                if (!quizManager.award)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         //private void addAchievementLearn(int achievementId, int standardCount)
         //{
         //    if (!AchiLearnRecord.ContainsKey(achievementId))
