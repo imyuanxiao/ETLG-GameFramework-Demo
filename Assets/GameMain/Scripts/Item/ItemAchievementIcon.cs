@@ -13,7 +13,6 @@ namespace ETLG
 {
     public class ItemAchievementIcon : ItemLogicEx, IPointerEnterHandler, IPointerExitHandler
     {
-        private DataPlayer dataPlayer;
         private DataAchievement dataAchievement;
         private AchievementData achievementData;
         public Image image;
@@ -30,7 +29,6 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             dataAchievement = GameEntry.Data.GetData<DataAchievement>();
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -57,11 +55,12 @@ namespace ETLG
         }
         private void SetData()
         {
-            level = dataPlayer.GetPlayerData().GetNextLevel(achievementData.Id);
+            level = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetNextLevel(achievementData.Id);
             int type = achievementData.TypeId;
             int conditionId = achievementData.ConditionId;
-            playerTotalArtifact = dataPlayer.GetPlayerData().playerTotalArtifacts;
-            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id) && dataAchievement.isMaxLevel(id, dataPlayer.GetPlayerData().GetPlayerAchievement()[id]))
+            playerTotalArtifact = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerTotalArtifacts;
+            if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement().ContainsKey(id) 
+                && dataAchievement.isMaxLevel(id, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement()[id]))
             {
                 image.sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon("unlocked_treasure_chest"));
             }
@@ -70,8 +69,8 @@ namespace ETLG
                 image.sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon("locked_treasure_chest"));
             }
             this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
-            dataPlayer.GetPlayerData().getPassQuizAndFinishDialog();
-            dataPlayer.GetPlayerData().getCorrectWrongQuiz();
+            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getPassQuizAndFinishDialog();
+            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getCorrectWrongQuiz();
             switch (type)
             {
                 case Constant.Type.ACHV_LEARN:
@@ -81,19 +80,19 @@ namespace ETLG
                     {
                         //正确作答题目
                         case 1001:
-                            this.progress.text = dataPlayer.GetPlayerData().totalQuizResults[0].ToString(); 
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().totalQuizResults[0].ToString(); 
                             break;
                         //错误作答题目
                         case 1002:
-                            this.progress.text = dataPlayer.GetPlayerData().totalQuizResults[1].ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().totalQuizResults[1].ToString();
                             break;
                         //通过考试数目
                         case 1003:
-                            this.progress.text = dataPlayer.GetPlayerData().passedQuiz.ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().passedQuiz.ToString();
                             break;
                         //完整对话NPC个数
                         case 1008:
-                            this.progress.text =dataPlayer.GetPlayerData().finishedDialog.ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().finishedDialog.ToString();
                             break;
                     }
                     break;
@@ -147,14 +146,33 @@ namespace ETLG
                     }
                     break;
                 case Constant.Type.ACHV_INTERSTELLAR:
-                    //level
-                    if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                    Dictionary<int, float> DomiansSaveData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().DomiansSaveData;
+                    switch (conditionId)
                     {
-                        this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id]+1).ToString();
-                    }
-                    else
-                    {
-                        this.progress.text = "0";
+                        //planet101
+                        case 3002:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[101]);
+                            break;
+                        //planet102
+                        case 3003:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[102]);
+                            break;
+                        //planet105
+                        case 3004:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[105]);
+                            break;
+                        //planet103
+                        case 3005:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[103]);
+                            break;
+                        //planet104
+                        case 3006:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[104]);
+                            break;
+                        //planet106
+                        case 3007:
+                            this.progress.text = UIFloatString.FloatToString(DomiansSaveData[106]);
+                            break;
                     }
                     break;
                 case Constant.Type.ACHV_BATTLE:
@@ -162,12 +180,12 @@ namespace ETLG
                     switch(conditionId)
                     {
                         case 6001:
-                            this.progress.text = dataPlayer.GetPlayerData().battleVictoryCount.ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount.ToString();
                             break;
                         default:
-                            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                            if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                             {
-                                this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
+                                this.progress.text = (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
                             }
                             else
                             {
@@ -182,27 +200,27 @@ namespace ETLG
                     switch(conditionId)
                     {
                         case 4001:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Energy).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Energy).ToString();
                             break;
                         case 4002:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Durability).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Durability).ToString();
                             break;
                         case 4003:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Shields).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Shields).ToString();
                             break;
                         case 4004:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firepower).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firepower).ToString();
                             break;
                         case 4005:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Agility).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Agility).ToString();
                             break;
                         case 4006:
-                            this.progress.text = dataPlayer.GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firerate).ToString();
+                            this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetSpaceshipAttribute(Constant.Type.ATTR_Firerate).ToString();
                             break;
                         default:
-                            if (dataPlayer.GetPlayerData().GetPlayerAchievement().ContainsKey(id))
+                            if (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement().ContainsKey(id))
                             {
-                                this.progress.text = (dataPlayer.GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
+                                this.progress.text = (GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetPlayerAchievement()[id] + 1).ToString();
                             }
                             else
                             {
@@ -214,10 +232,14 @@ namespace ETLG
             }
 
             this.next_level.text = GetNextLevel();
+            if(type == Constant.Type.ACHV_INTERSTELLAR)
+            {
+                this.next_level.text ="100 %";
+            }
         }
         private string GetNextLevel()
         {
-            PlayerData playerData = dataPlayer.GetPlayerData();
+            PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             Dictionary<int, int> playerAchievement = playerData.GetPlayerAchievement();
 
             if (!playerAchievement.ContainsKey(achievementData.Id))
