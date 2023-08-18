@@ -129,7 +129,7 @@ namespace ETLG
 
         private bool CanEnterFinalBattle()
         {
-            return false;
+            return GameEntry.Data.GetData<DataPlayer>().GetPlayerData().testPassAllQuiz();
         }
 
         private void setDefaultLearningPath()
