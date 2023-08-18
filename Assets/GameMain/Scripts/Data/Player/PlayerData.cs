@@ -1439,11 +1439,11 @@ namespace ETLG.Data
             return totalProgress;
         }
 
-        private bool testPassAllQuiz()
+        public bool testPassAllQuiz()
         {
-            foreach(UIQuizManager quizManager in playerQuizes.Values)
+            foreach(int chapter in ChaptersSaveData.Keys)
             {
-                if (!quizManager.award)
+                if (dataNPC.GetNPCData(chapter).Type==Constant.Type.NPC_TYPE_EXAMINER&& !ChaptersSaveData[chapter])
                 {
                     return false;
                 }
