@@ -262,7 +262,7 @@ namespace ETLG
         public void OnPointerEnter(PointerEventData eventData)
         {
             Vector3 itemPosition = RectTransformUtility.WorldToScreenPoint(null, transform.position);
-            Vector3 newPosition = itemPosition + new Vector3(-200f, 50f, 0f);
+            Vector3 newPosition = itemPosition + new Vector3(-220f, 50f, 0f);
             GameEntry.Data.GetData<DataAchievement>().descriptionId = id;
             GameEntry.Data.GetData<DataAchievement>().descriptionLevel= level;
             if (GameEntry.UI.HasUIForm(EnumUIForm.UITipForm))
