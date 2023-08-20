@@ -313,6 +313,16 @@ namespace ETLG
                 resolution[0] = PlayerPrefs.GetInt("Resolution_Width");
                 resolution[1] = PlayerPrefs.GetInt("Resolution_Height");
             }
+            if ((resolution[0] == 1920 && resolution[1] == 1080) ||
+                (resolution[0] == 1600 && resolution[1] == 900) ||
+                (resolution[0] == 1280 && resolution[1] == 720))
+            {
+                Screen.SetResolution(resolution[0], resolution[1], true);
+            }
+            else
+            {
+                Screen.SetResolution(1920, 1080, true);
+            }
             return resolution;
         }
 
