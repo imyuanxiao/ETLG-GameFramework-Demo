@@ -190,6 +190,7 @@ namespace ETLG
         protected override void OnClose(bool isShutdown, object userData)
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
+            GameEntry.Sound.PlayMusic(EnumSound.GameBGM);
             if (dataLearningProgress.open)
             {
                 ModifyPositionX(Constant.Type.POSITION_X_LEFT);

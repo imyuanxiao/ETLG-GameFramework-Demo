@@ -16,7 +16,6 @@ namespace ETLG.Data
         public bool isCorrect { get; set; }
         public bool haveSubmitted { get; set; }
         public bool haveShown { get; set; }
-        public string hint { get; }
         public string analysis { get; }
         public bool analysisShown = false;
         public string statement { get; }
