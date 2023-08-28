@@ -145,11 +145,11 @@ namespace ETLG
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_ACHIEVEMENT);
             }
-            if (ne.UIFormID == (int)EnumUIForm.UILeaderBoardForm)
+            if (ne.UIFormID == (int)EnumUIForm.UILeaderboardForm)
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_RANK);
             }
-            if (ne.UIFormID == (int)EnumUIForm.UIpProfileForm)
+            if (ne.UIFormID == (int)EnumUIForm.UIProfileForm)
             {
                 GameEntry.Data.GetData<DataTutorial>().OpenGroupTutorials(Constant.Type.TUTORIAL_PROFILE);
             }
@@ -347,10 +347,8 @@ namespace ETLG
                 {
                     AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
                     dataAchievement.cuurrentPopUpId = popupArgs.achievementId;
-                    // 更新UI
                     GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
                 }
-
             }
         }
         public void OnPlayerZoneUIChange(object sender, GameEventArgs e)

@@ -9,12 +9,7 @@ namespace ETLG.Data
         public int Id { get; set; }
         public int Rank { get; set; }
         public float data { get; set; }
-        public int ExploredChapter { get; set; }
 
-        public LeaderboardData()
-        {
-
-        }
         public LeaderboardData(int Id,string name,float data)
         {
             this.Id = Id;

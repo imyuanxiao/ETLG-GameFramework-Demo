@@ -1,5 +1,5 @@
 ﻿// 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2023-08-18 00:11:23.676
+// 生成时间：2023-08-28 02:29:42.232
 //------------------------------------------------------------
 
 namespace ETLG
@@ -159,7 +159,7 @@ namespace ETLG
         /// <summary>
         /// 排行榜界面
         /// </summary>
-        UILeaderBoardForm = 1032,
+        UILeaderboardForm = 1032,
 
         /// <summary>
         /// 道具交易界面
@@ -234,7 +234,7 @@ namespace ETLG
         /// <summary>
         /// 玩家个人中心
         /// </summary>
-        UIpProfileForm = 1049,
+        UIProfileForm = 1049,
 
         /// <summary>
         /// 视频全屏播放器
