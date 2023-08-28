@@ -32,11 +32,11 @@ namespace ETLG
         public Button returnButton;
         public Button learningButton;
         private List<LeaderboardData> rankList;
-
+        private int rankNumber = 10;
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // 获取玩家数据管理器
+          
             achievementButton.onClick.AddListener(OnachievementButtonClick);
             learningButton.onClick.AddListener(OnLearningButtonClick);
             spaceshipButton.onClick.AddListener(OnspaceshipButtonClick);
@@ -68,7 +68,7 @@ namespace ETLG
             
             if(isRefresh)
             {
-                //error
+                // if error
                 if (fetchedType == Constant.Type.BACK_RANK_FAILED)
                 {
                     SetItemsStatus(false);
@@ -102,7 +102,7 @@ namespace ETLG
             s_name.text = "Achievement Leaderboard";
             type = Constant.Type.LB_ACHIVEMENT;
            
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_ACHIVEMENT, 1,10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_ACHIVEMENT, 1, rankNumber);
             
         }
         private void OnLearningButtonClick()
@@ -111,7 +111,7 @@ namespace ETLG
             s_name.text = "Learning Progress Leaderboard";
             type = Constant.Type.LB_LEARNING_PROGRESS;
 
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_LEARNING_PROGRESS, 1, 10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_LEARNING_PROGRESS, 1, rankNumber);
 
         }
         private void OnspaceshipButtonClick()
@@ -119,7 +119,7 @@ namespace ETLG
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_forward);
             s_name.text = "Spaceship Leaderboard";
             type = Constant.Type.LB_SPACESHIP;
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_SPACESHIP,1,10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_SPACESHIP,1, rankNumber);
         }
         private void OnBossButtonClick()
         {
@@ -132,8 +132,7 @@ namespace ETLG
                 GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             }
             isPanelVisible = !isPanelVisible;
-            //箭头垂直翻转180度
-            
+            //rotate arrow
             Vector3 currentRotation = arrow.transform.rotation.eulerAngles;
             currentRotation.x += 180f;
             arrow.transform.rotation = Quaternion.Euler(currentRotation);
@@ -145,7 +144,7 @@ namespace ETLG
             s_name.text = "AI Boss Leaderboard";
             type = Constant.Type.LB_BOSS_AI;
             
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_AI,1, 10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_AI,1, rankNumber);
         }
         private void OnBossButtonCloudComputingClick()
         {
@@ -153,7 +152,7 @@ namespace ETLG
             s_name.text = "Cloud Computing Boss Leaderboard";
             type = Constant.Type.LB_BOSS_CLOUDCOMPUTING;
             
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_CLOUDCOMPUTING,1, 10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_CLOUDCOMPUTING,1, rankNumber);
         }
         private void OnBossButtonBlockchainClick()
         {
@@ -162,7 +161,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_BLOCKCHAIN;
 
 
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_BLOCKCHAIN, 1, 10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_BLOCKCHAIN, 1, rankNumber);
             
         }
         private void OnBossButtonCybersecurityClick()
@@ -172,7 +171,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_CYBERSECURITY;
             
             
-         BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_CYBERSECURITY, 1, 10);
+         BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_CYBERSECURITY, 1, rankNumber);
         }
         private void OnBossButtonDataScienceClick()
         {
@@ -181,7 +180,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_DATASCIENCE;
             
            
-        BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_DATASCIENCE, 1, 10);
+        BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_DATASCIENCE, 1, rankNumber);
 
         }
         private void OnBossButtonIoTClick()
@@ -190,7 +189,7 @@ namespace ETLG
             s_name.text = "IoT Boss Leaderboard";
             type = Constant.Type.LB_BOSS_IOT;
             
-            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_IOT, 1, 10);
+            BackendDataManager.Instance.GetRankData(Constant.Type.LB_BOSS_IOT, 1, rankNumber);
 
         }
         private void OnBossButtonFinalClick()
@@ -200,7 +199,7 @@ namespace ETLG
             type = Constant.Type.LB_BOSS_FINAL;
             
             
-          BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_FINAL, 1, 10);
+          BackendDataManager.Instance.GetRankData( Constant.Type.LB_BOSS_FINAL, 1, rankNumber);
 
         }
 
@@ -248,7 +247,7 @@ namespace ETLG
                 }
             }
 
-            // 如果要隐藏多余的
+            // hide extra item
             else if (targetItemCount < currentItemCount)
             {
                 for (int i = targetItemCount; i < currentItemCount; i++)
@@ -257,7 +256,7 @@ namespace ETLG
                 }
             }
 
-            // 更新已显示的数据
+            // update data
             int dataIndex = 0;
             addRank();
             foreach (ItemLeaderboardInfo subItem in items)
@@ -270,7 +269,7 @@ namespace ETLG
                 }
                 else
                 {
-                    // 隐藏多余的
+                    // hide extra item
                     subItem.gameObject.SetActive(false);
                 }
             }

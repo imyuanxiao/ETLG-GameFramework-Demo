@@ -11,7 +11,7 @@ namespace ETLG
 {
     public class BackendDataManager : Singleton<BackendDataManager>
     {
-        //用于回调函数
+        //for callback
         public delegate void IsLoginDetectionCallback(bool isLoggedIn);
 
         public int connectType;
@@ -19,8 +19,8 @@ namespace ETLG
         private Dictionary<string, string> uploadJsonStrDic;
         private void OnEnable()
         {
-            //connectType = Constant.Type.BACK_LOCAL;
-            connectType = Constant.Type.BACK_REOMTE;
+            connectType = Constant.Type.BACK_LOCAL;
+            //connectType = Constant.Type.BACK_REOMTE;
         }
         public void GetRankData(int type, int current, int pageSize)
         {
@@ -212,7 +212,7 @@ namespace ETLG
                 }
                 else
                 {
-                    // HandleErrorMessages(request);
+                    HandleErrorMessages(request);
                     Debug.LogError("PUT Request Failed: " + request.error);
                 }
                 
@@ -255,7 +255,6 @@ namespace ETLG
             using (UnityWebRequest request = UnityWebRequest.Put(GameEntry.Data.GetData<DataBackend>().GeProfilePasswordUrl(), jsonData))
             {
                 byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-                //
                 request.uploadHandler.Dispose();
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler.Dispose();
@@ -349,8 +348,8 @@ namespace ETLG
         }
         public void HandleLoad()
         {
-            //先判断是否登录
-            //如果没登陆就开登录UI
+            //login detect
+            //open loginUI if not logged in
             GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_SAVE_DOWNLOAD;
             IsLoginDetection((isLoggedIn) =>
             {
@@ -369,7 +368,6 @@ namespace ETLG
         public void HandleProfile()
         {
             GameEntry.Data.GetData<DataBackend>().loginType = Constant.Type.BACK_PROFILE;
-            //登录之后再查userprofile
             IsLoginDetection((isLoggedIn) =>
             {
                 if (isLoggedIn)
@@ -477,7 +475,6 @@ namespace ETLG
                     {
                         if(!string.IsNullOrEmpty(responseData.data))
                         {
-                           Dictionary<string,string> download = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseData.data);
                             GameEntry.Data.GetData<DataBackend>().downLoadjsonStrDic = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseData.data);
                             GameEntry.Event.Fire(this, BackendFetchedEventArgs.Create(Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS));
                         }
@@ -571,7 +568,6 @@ namespace ETLG
                 Debug.Log(www.result);
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    // 获取API响应数据
                     string responseJson = www.downloadHandler.text;
                     ResponseData data = JsonUtility.FromJson<ResponseData>(responseJson);
                     if(data.data.Equals("Please log in"))

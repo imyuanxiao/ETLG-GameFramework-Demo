@@ -103,7 +103,7 @@ namespace ETLG
                     {
                         continue;
                     }
-                    showAchievementByType(data);
+                    ShowAchievementByType(data);
                 }
                 //show unlocked achievements
                 foreach (KeyValuePair<int, int> achievement in playerAchievement)
@@ -112,35 +112,34 @@ namespace ETLG
                     {
                         continue;
                     }
-                    showAchievementByType(dataAchievement.GetDataById(achievement.Key));
+                    ShowAchievementByType(dataAchievement.GetDataById(achievement.Key));
                 }
             }
         }
-        private void showAchievementByType(AchievementData data)
+        private void ShowAchievementByType(AchievementData data)
         {
             switch (data.TypeId)
             {
                 case Constant.Type.ACHV_LEARN:
-                    showAchievements(content_1, data.Id);
+                    ShowAchievements(content_1, data.Id);
                     break;
                 case Constant.Type.ACHV_RESOURCE:
-                    showAchievements(content_2, data.Id);
+                    ShowAchievements(content_2, data.Id);
                     break;
                 case Constant.Type.ACHV_INTERSTELLAR:
-                    showAchievements(content_4, data.Id);
+                    ShowAchievements(content_4, data.Id);
                     break;
                 case Constant.Type.ACHV_BATTLE:
-                    showAchievements(content_5, data.Id);
+                    ShowAchievements(content_5, data.Id);
                     break;
                 case Constant.Type.ACHV_SPACESHIP:
-                    showAchievements(content_6, data.Id);
+                    ShowAchievements(content_6, data.Id);
                     break;
                 default:
                     break;
             }
-
         }
-        private void showAchievements(Transform container,int id)
+        private void ShowAchievements(Transform container,int id)
         {
             if (!refresh)
             {
@@ -152,6 +151,7 @@ namespace ETLG
               });
               }
         }
+
         private void OnAchievementPoPUp(object sender, GameEventArgs e)
         {
             AchievementPopUpEventArgs ne = (AchievementPopUpEventArgs)e;

@@ -33,8 +33,8 @@ namespace ETLG
             spaceshipButton.onClick.AddListener(() => OnButtonClick(spaceshipButton, (int)EnumUIForm.UISpaceshipCheckForm));
             skillButton.onClick.AddListener(() => OnButtonClick(skillButton, (int)EnumUIForm.UISkillTreeForm));
             achievementButton.onClick.AddListener(() => OnButtonClick(achievementButton, (int)EnumUIForm.UIAchievementForm));
-            leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UILeaderBoardForm));
-            profileButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UIpProfileForm));
+            leaderboardButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UILeaderboardForm));
+            profileButton.onClick.AddListener(() => OnButtonClick(leaderboardButton, (int)EnumUIForm.UIProfileForm));
         }
 
         protected override void OnOpen(object userData)
@@ -77,12 +77,12 @@ namespace ETLG
                 index = 2;
             }
 
-            if (selectedButton == (int)EnumUIForm.UILeaderBoardForm)
+            if (selectedButton == (int)EnumUIForm.UILeaderboardForm)
             {
                 index = 3;
             }
 
-            if(selectedButton == (int)EnumUIForm.UIpProfileForm)
+            if(selectedButton == (int)EnumUIForm.UIProfileForm)
             {
                 index = 4;
             }

@@ -1060,12 +1060,6 @@ namespace ETLG.Data
 
         public int GetNextLevel(int Id)
         {
-            AchievementData achievementData = dataAchievement.GetDataById(Id);
-            if (achievementData == null)
-            {
-                return 0;
-            }
-
             if (!playerAchievement.ContainsKey(Id))
             {
                 return 0;

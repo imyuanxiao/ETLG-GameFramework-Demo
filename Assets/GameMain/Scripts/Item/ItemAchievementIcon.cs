@@ -69,12 +69,9 @@ namespace ETLG
                 image.sprite = Resources.Load<Sprite>(AssetUtility.GetUnLockAchievementIcon("locked_treasure_chest"));
             }
             this.acheivementName.text = GameEntry.Localization.GetString(Constant.Key.PRE_ACHIEVE + id.ToString() + Constant.Key.POST_TITLE);
-            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getPassQuizAndFinishDialog();
-            GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getCorrectWrongQuiz();
             switch (type)
             {
                 case Constant.Type.ACHV_LEARN:
-                    //player data
                     this.progress.text = "0";
                     switch(conditionId)
                     {
