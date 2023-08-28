@@ -275,7 +275,7 @@ namespace ETLG
             else
             {
                 instantiateShownChoices();
-                if (currentQuiz.analysisShown)
+                if (!currentQuiz.analysisShown)
                 {
                     setAnalysisPrefab();
                 }
@@ -396,6 +396,7 @@ namespace ETLG
 
         private void OnSubmitButtonClick()
         {
+            destroyAnalysisContainer();
             setAnalysisPrefab();
             if (SubmitButton.GetComponentInChildren<TextMeshProUGUI>().text != "REPORT")
             {
