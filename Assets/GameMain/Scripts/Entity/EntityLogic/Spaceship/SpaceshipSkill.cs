@@ -44,9 +44,7 @@ namespace ETLG
             skills.Add(new SkillInfo(EnumSkill.EnergyBoost, KeyCode.Alpha4));  // FireWall
             skills.Add(new SkillInfo(EnumSkill.AdaptiveIntelligentDefense, KeyCode.Alpha5));  // AIAssist
 
-            // TODO : change its value accroding to skill data
             this.canRespawn = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills().ContainsKey((int) EnumSkill.BlockchainResurgence);
-            // PrintSkillsInfo();
         }
 
         public bool IsSkillReady(EnumSkill id) 
@@ -75,14 +73,6 @@ namespace ETLG
         public void ReduceUsageCount(EnumSkill id) 
         {
             GetSkillInfoById(id).usageCount--;
-        }
-
-        private void PrintSkillsInfo()
-        {
-            foreach (var skillInfo in this.skills)
-            {
-                Debug.Log(skillInfo.skillName + " [" + skillInfo.skillId + "]" + " | Is Unlocked ? " + skillInfo.isUnlocked);
-            }
         }
         
         private void OnDisable() 
@@ -113,34 +103,6 @@ namespace ETLG
             this.skillEnumId = skillEnumId;
             this.usageCount = GameEntry.Data.GetData<DataSkill>().GetSkillData((int) skillEnumId).UsageCount;
             this.isUnlocked = skills.ContainsKey((int) skillEnumId);
-
-            // To be deleted
-            // ForTestSkillOnly();
-        }
-
-        // To be deleted
-        private void ForTestSkillOnly()
-        {
-            switch (this.skillEnumId)
-            {
-                case EnumSkill.EdgeComputing:
-                    this.isUnlocked = true;
-                    break;
-                case EnumSkill.ElectronicWarfare:
-                    this.isUnlocked = true;
-                    break;
-                case EnumSkill.MedicalSupport:
-                    this.isUnlocked = true;
-                    break;
-                case EnumSkill.EnergyBoost:
-                    this.isUnlocked = true;
-                    break;
-                case EnumSkill.AdaptiveIntelligentDefense:
-                    this.isUnlocked = true;
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

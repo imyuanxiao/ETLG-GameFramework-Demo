@@ -52,7 +52,6 @@ namespace ETLG
         {
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             Close();
-           // GameEntry.UI.OpenUIForm(EnumUIForm.UIMainMenuForm);
         }
 
         private void OnOkButtonClick()
@@ -66,7 +65,6 @@ namespace ETLG
 
             GameEntry.Sound.PlaySound(EnumSound.ui_sound_back);
             Close();
-            //GameEntry.UI.OpenUIForm(EnumUIForm.UIMainMenuForm);
         }
 
         private void DropdownValueChanged(TMP_Dropdown change)

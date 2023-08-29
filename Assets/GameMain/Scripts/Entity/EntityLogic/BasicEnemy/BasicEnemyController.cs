@@ -14,7 +14,6 @@ namespace ETLG
         private void OnEnable() 
         {
             GameEntry.Event.Subscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
-            GameEntry.Event.Subscribe(GamePauseEventArgs.EventId, OnGamePause);
             GameEntry.Event.Subscribe(BattleWinEventArgs.EventId, OnBattleWin);
             if (GetComponent<BasicEnemyAttack>() != null)
             {
@@ -27,10 +26,6 @@ namespace ETLG
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 
-        private void OnGamePause(object sender, GameEventArgs e)
-        {
-            // GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
 
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
@@ -40,7 +35,6 @@ namespace ETLG
         private void OnDisable() 
         {
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
-            GameEntry.Event.Unsubscribe(GamePauseEventArgs.EventId, OnGamePause);
             GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
         }
 

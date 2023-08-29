@@ -21,22 +21,9 @@ namespace ETLG
 
         private void OnEnable() 
         {
-            // GameEntry.Event.Subscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
             respawnCnt = 0;
         }
 
-        // private void OnEnemyRespawn(object sender, GameEventArgs e)
-        // {
-        //     EnemyRespawnEventArgs ne = (EnemyRespawnEventArgs) e;
-        //     if (ne == null)
-        //     {
-        //         Log.Error("Invalid Event : EnemyRespawnEventArgs");
-        //     }
-        //     BossEnemyHealth bossEnemyHealth = ne.bossEnemyHealth;
-        //     bossEnemyHealth.CurrentHealth = bossEnemyHealth.MaxHealth;
-        //     bossEnemyHealth.StopAllCoroutines();
-        //     bossEnemyHealth.StartCoroutine(bossEnemyHealth.CheckDeath());
-        // }
 
         private void Update() 
         {
@@ -49,11 +36,6 @@ namespace ETLG
             {
                 GameEntry.Event.Fire(this, BattleWinEventArgs.Create(GetComponent<BossEnemyController>().bossEnemyType));
             }
-        }
-
-        private void OnDisable() 
-        {
-            // GameEntry.Event.Unsubscribe(EnemyRespawnEventArgs.EventId, OnEnemyRespawn);
         }
     }
 }

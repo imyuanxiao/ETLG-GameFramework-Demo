@@ -51,8 +51,6 @@ namespace ETLG
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
 
-            // GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
-
             BattleManager.Instance.SpawnBasicEnemies();
 
             GameEntry.Sound.PlayMusic(EnumSound.MenuBGM);
@@ -61,7 +59,7 @@ namespace ETLG
         private void OnBasicBattleWin(object sender, GameEventArgs e)
         {
             float timeUsed = Time.time - this.startTime;
-            Debug.Log("Used Time: " + timeUsed);
+            
             Dictionary<string, int> result = new Dictionary<string, int>();
             BasicBattleWinEventArgs ne = (BasicBattleWinEventArgs) e;
 
@@ -70,14 +68,12 @@ namespace ETLG
             result.Add("Killed", ne.BasicEnemyKilled);
             result.Add("Passed", ne.BasicEnemyPassed);
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin, result);
-            Debug.Log("Enemy Killed: " + ne.BasicEnemyKilled + " | Enemy Passed: " + ne.BasicEnemyPassed);
         }
 
         private void OnGamePause(object sender, GameEventArgs e)
         {
             GamePauseEventArgs ne = (GamePauseEventArgs) e;
             GameEntry.UI.OpenUIForm(ne.UIPauseId);
-            // Time.timeScale = 0;
         }
 
         private void OnChangeScene(object sender, GameEventArgs e)
@@ -93,7 +89,7 @@ namespace ETLG
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
             PlayerDeadEventArgs ne = (PlayerDeadEventArgs) e;
-            Debug.Log("ProcedureBasicBattle: Player Dead");
+
             BattleManager.Instance.StopSpawnBasicEnemies();
             GameEntry.UI.OpenUIForm(EnumUIForm.UIBasicBattleLost);
             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6003, 1));
@@ -187,7 +183,7 @@ namespace ETLG
                 {
                     AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
                     GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = popupArgs.achievementId;
-                    // ¸üÐÂUI
+                    // ï¿½ï¿½ï¿½ï¿½UI
                     GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
                 }
 
@@ -239,13 +235,6 @@ namespace ETLG
                     data.Durability *= boostScale;
                     break;
             }
-
-            // data.Agility *= boostScale;
-            // data.Durability *= boostScale;
-            // data.Energy *= boostScale;
-            // data.Firepower *= boostScale;
-            // data.FireRate *= boostScale;
-            // data.Shields *= boostScale;
         }
 
         private void ResetSpaceshipAttribute()

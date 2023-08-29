@@ -61,8 +61,6 @@ namespace ETLG
             }
 
             Save("SavedGamesInfo", savedGamesInfo);
-
-            // GameEntry.Event.Fire(this, SaveGameEventArgs.Create(SaveId));
         }
 
         // int SaveId represent the idx of one of the five save slots
@@ -180,7 +178,6 @@ namespace ETLG
 
         public Dictionary<string, string> UploadSave(int SaveId)
         {
-            // this.savedGamesInfo.cloudSaveId = SaveId;
             Save("SavedGamesInfo", savedGamesInfo);
 
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -213,7 +210,6 @@ namespace ETLG
 
         public int DownloadSave(Dictionary<string, string> jsonDataStr)
         {
-            // int saveId = this.savedGamesInfo.cloudSaveId;
             int saveId = int.Parse(jsonDataStr["SaveId"]);
             this.savedGamesInfo.cloudSaveId = saveId;
             foreach (var item in jsonDataStr)
@@ -245,7 +241,6 @@ namespace ETLG
             }
             string saveIdStr = "_" + SaveId.ToString();
 
-            // Delete("PlayerSpaceshipData" + saveIdStr);
             Delete("Difficulty" + saveIdStr);
             Delete("PlayerSkillData" + saveIdStr);
             Delete("PlayerArtifacts" + saveIdStr);
@@ -270,10 +265,6 @@ namespace ETLG
             {
                 savedGamesInfo.savedGamesDic.Remove(SaveId);
             }
-            // if (savedGamesInfo.cloudSaveId == SaveId)
-            // {
-            //     savedGamesInfo.cloudSaveId = -1;
-            // }
 
             Save("SavedGamesInfo", savedGamesInfo);
         }
@@ -380,57 +371,6 @@ namespace ETLG
                 case 2: return "Hard";
                 case 3: return "Challenge";
                 default: return "Unknown";
-            }
-        }
-
-        public void PrintSavedData(string key)
-        {
-            Debug.Log(key + " : " + PlayerPrefs.GetString(key));
-        }
-
-
-        // For Testing Purpose Only !
-        private void Update() 
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                // Save("PlayerSpaceshipData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
-                // Save("PlayerSkillData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
-                // SaveGame();
-            }
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                // Load("PlayerSpaceshipData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData);
-                // Load("PlayerSkillData", GameEntry.Data.GetData<DataPlayer>().GetPlayerData().GetAllSkills());
-                // LoadGame();
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower += 10;
-                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddSkill((int)EnumSkill.ElectronicWarfare, 0);
-                // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().AddArtifact(3010, 1);
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                // PrintSavedData("Difficulty_0");
-                // PrintSavedData("InitialSpaceshipIdx_0");
-                // PrintSavedData("PlayerSkillData_0");
-                PrintSavedData("PlayerArtifacts_0");
-                PrintSavedData("PlayerTotalArtifacts_0");
-                // PrintSavedData("PlayerModules_0");
-                // PrintSavedData("EquippedModules_0");
-                // PrintSavedData("PlayerAchievement_0");
-                // PrintSavedData("SavedGamesInfo");
-                // PrintSavedData("PlayerNPCs_0");
-                // PrintSavedData("BattleVictoryCount_0");
-                // PrintSavedData("BossDefeatTime_0");
-                // PrintSavedData("PlayedTutorialGroup_0");
-                // PrintSavedData("ChaptersSaveData_0");
-                // PrintSavedData("CoursesSaveData_0");
-                // PrintSavedData("DomiansSaveData_0");
-                // PrintSavedData("QuizesSaveData_0");
-                // PrintSavedData("PlayerScore_0");
-                // PrintSavedData("AchievementScore_0");
             }
         }
     }

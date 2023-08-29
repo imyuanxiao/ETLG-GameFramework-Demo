@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace ETLG
 {
-    // TODO : need to be fixed
     public class Missile : Projectile
     {
         [HideInInspector] public Transform target;

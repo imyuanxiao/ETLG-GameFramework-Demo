@@ -41,8 +41,6 @@ namespace ETLG
 
         private void OnUploadButtonClicked(int saveId)
         {
-            Debug.Log("Upload Button Clicked : " + saveId);
-            // UpdateUploadButton(saveId);
             tempCloudSaveId = saveId;
             Dictionary<string, string> jsonStrDic = SaveManager.Instance.UploadSave(saveId);
           
@@ -53,8 +51,6 @@ namespace ETLG
 
         private void OnDownloadButtonClicked()
         {
-            Debug.Log("Download Button CLicked");
-
             BackendDataManager.Instance.HandleLoad();
         }
 
@@ -62,7 +58,6 @@ namespace ETLG
         {
             BackendFetchedEventArgs ne = (BackendFetchedEventArgs) e;
             if (ne == null) { return; }
-            Debug.Log("OnBackendFetched");
 
             if (ne.Type == Constant.Type.BACK_SAVE_DOWNLOAD_SUCCESS)
             {
@@ -253,14 +248,11 @@ namespace ETLG
 
         private void OnLoadButtonClicked(int id)
         {
-            Debug.Log("SaveId = " + id);
             SaveManager.Instance.LoadGame(id);
-
         }
 
         private void OnOverwriteClicked(int id) 
         {
-            Debug.Log("Overwirte Id = " + id);
             SaveManager.Instance.SaveGame(id);
 
             SavedGamesInfo savedData = SaveManager.Instance.LoadObject<SavedGamesInfo>("SavedGamesInfo");

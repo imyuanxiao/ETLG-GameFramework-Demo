@@ -40,8 +40,8 @@ namespace ETLG
         private void OnEnable() 
         {
             m_Fsm = GameEntry.Fsm.CreateFsm("BossEnemyAttackFsm", this, 
-                new VerticalFire(GetComponent<BossEnemyAttack>()),  //(verticalFireRate, verticalFireRound, bulletPrefab, bulletSpawnPositions), 
-                new FanFire(GetComponent<BossEnemyAttack>()), // (fanFireRate, fanFireRound, fanBulletNum, fanBulletAngle, bulletPrefab, middleBulletSpawnPosition), 
+                new VerticalFire(GetComponent<BossEnemyAttack>()), 
+                new FanFire(GetComponent<BossEnemyAttack>()), 
                 new SpiralFire(GetComponent<BossEnemyAttack>()),
                 new CriticalHit(GetComponent<BossEnemyAttack>()),
                 new EnemyRespawn(GetComponent<BossEnemyHealth>()),
@@ -52,7 +52,7 @@ namespace ETLG
 
         public void InitBossEnemyBullet(Bullet bullet, Vector3 direction)
         {
-            bullet.damage = 20 + 5 * this.difficulty; // (int) GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.CloudComputingBoss).Firepower;
+            bullet.damage = 20 + 5 * this.difficulty;
             bullet.flyingDirection = direction;
             bullet.flyingSpeed = 1000;
         }

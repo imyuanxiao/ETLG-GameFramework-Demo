@@ -31,7 +31,6 @@ namespace ETLG
             else
             {
                 elapsedTime = 0f;
-                Debug.Log("Fire CriticalHit Event!!!");
                 GameEntry.Event.Fire(this, EnemyCriticalHitEventArgs.Create(bossEnemyController.bossEnemyType));
             }
         }

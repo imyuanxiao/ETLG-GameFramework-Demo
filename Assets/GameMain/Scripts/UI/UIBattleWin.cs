@@ -123,35 +123,23 @@ namespace ETLG
             switch (BattleManager.Instance.bossType)
             {
                 case "CloudComputing":
-                    // this.rewardsId.Add((int) EnumSkill.EdgeComputing);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.EdgeComputing;
-                    return GameEntry.Localization.GetString("Skill_EdgeComputing"); //+ " : " + GameEntry.Localization.GetString("Skill_EdgeComputing_Level_1");
+                    return GameEntry.Localization.GetString("Skill_EdgeComputing");
                 case "CyberSecurity":
-                    // this.rewardsId.Add((int) EnumSkill.ElectronicWarfare);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.ElectronicWarfare;
-                    return GameEntry.Localization.GetString("Skill_ElectronicWarfare"); // + " : " + GameEntry.Localization.GetString("Skill_ElectronicWarfare_Level_1");
+                    return GameEntry.Localization.GetString("Skill_ElectronicWarfare");
                 case "AI":
-                    // this.rewardsId.Add((int) EnumSkill.AdaptiveIntelligentDefense);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.AdaptiveIntelligentDefense;
-                    return GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense"); // + " : " + GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense_Level_1");
+                    return GameEntry.Localization.GetString("Skill_AdaptiveIntelligentDefense");
                 case "DataScience":
-                    // this.rewardsId.Add((int) EnumSkill.EnergyBoost);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.EnergyBoost;
-                    return GameEntry.Localization.GetString("Skill_EnergyBoost"); // + " : " + GameEntry.Localization.GetString("Skill_EnergyBoost_Level_1");
+                    return GameEntry.Localization.GetString("Skill_EnergyBoost");
                 case "Blockchain":
-                    // this.rewardsId.Add((int) EnumSkill.BlockchainResurgence);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.BlockchainResurgence;
-                    return GameEntry.Localization.GetString("Skill_BlockchainResurgence"); // + " : " + GameEntry.Localization.GetString("Skill_BlockchainResurgence_Level_1");
+                    return GameEntry.Localization.GetString("Skill_BlockchainResurgence");
                 case "IoT":
-                    // this.rewardsId.Add((int) EnumSkill.MedicalSupport);
-                    // this.rewardsId.Add(1);
                     this.awardedSkillId = (int) EnumSkill.MedicalSupport;
-                    return GameEntry.Localization.GetString("Skill_MedicalSupport"); // + " : " + GameEntry.Localization.GetString("Skill_MedicalSupport_Level_1");
+                    return GameEntry.Localization.GetString("Skill_MedicalSupport");
                 default:
                     return "";
             }

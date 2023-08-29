@@ -43,16 +43,12 @@ namespace ETLG
             Debug.Log("Accuracy = " + procedureOwner.GetData<VarInt32>("Accuracy"));
             SetSpaceshipAttribute(procedureOwner.GetData<VarInt32>("Accuracy"));
 
-            // Debug.Log(BattleManager.Instance.bossType);
-
             entityLoader = EntityLoader.Create(this);
 
             // get player data
             PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowPlayerSuccess, EntityDataSpaceship.Create(playerData));
-
-            // GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
 
             LoadBossEnemy();
 
@@ -108,10 +104,8 @@ namespace ETLG
             BattleWinEventArgs ne = (BattleWinEventArgs) e;
 
             float timeUsed = Time.time - this.startTime;
-            Debug.Log("Time Used: " + timeUsed);
-
-            // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
+            
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin);
             entityLoader.HideEntity(bossEnemyEntity);
 
             // Unlock battle skills, award Knowledge Fragments
@@ -150,7 +144,7 @@ namespace ETLG
                 default:
                     break;
             }
-            //GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6001, 1));
+            
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount++;
             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6002, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount));
         }
@@ -193,7 +187,6 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
-            // entityLoader.HideEntity(bossEnemyEntity);
 
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
@@ -260,7 +253,6 @@ namespace ETLG
         private void SetSpaceshipAttribute(int accuracy)
         {
             float boostScale = Mathf.Max(1, 1 + (float)(accuracy - 50) / 100f);
-            Debug.Log("Boost Scale = " + boostScale);
 
             PlayerCalculatedSpaceshipData data = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData;
 
@@ -292,13 +284,6 @@ namespace ETLG
                     data.Durability *= boostScale;
                     break;
             }
-
-            // data.Agility *= boostScale;
-            // data.Durability *= boostScale;
-            // data.Energy *= boostScale;
-            // data.Firepower *= boostScale;
-            // data.FireRate *= boostScale;
-            // data.Shields *= boostScale;
         }
 
         private void ResetSpaceshipAttribute()

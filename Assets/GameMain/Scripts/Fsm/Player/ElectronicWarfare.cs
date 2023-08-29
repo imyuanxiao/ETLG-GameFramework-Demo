@@ -32,14 +32,7 @@ namespace ETLG
             {
                 BattleManager.Instance.bossEnemyEntity.GetComponent<BossEnemyAttack>().enabled = false;
             }
-            // if (GameEntry.Procedure.CurrentProcedure is ProcedureBasicBattle)
-            // {
-            //     BasicEnemyController[] targets = GameObject.FindObjectsByType<BasicEnemyController>(FindObjectsSortMode.None);
-            //     foreach (var item in targets)
-            //     {
-            //         item.gameObject.GetComponent<BasicEnemyAttack>().enabled = false;
-            //     }
-            // }
+            
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
             GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipSkill>().electronicWarfareFX.SetActive(true);
         }

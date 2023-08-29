@@ -27,8 +27,8 @@ namespace ETLG
 
         [HideInInspector] public string bossType;
         [HideInInspector] public Entity bossEnemyEntity;
-        [HideInInspector] public int basicEnemyAttackBase; // = (int) ((int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Durability * 0.1);
-        [HideInInspector] public int basicEnemyHealthBase; // = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
+        [HideInInspector] public int basicEnemyAttackBase;
+        [HideInInspector] public int basicEnemyHealthBase;
 
         [Header("Enemy AI Spaceships")]
         public Transform[] AISpaceshipSpawnPoints;

@@ -26,10 +26,11 @@ namespace ETLG
         protected override void OnEnter(IFsm<BossEnemyAttack> fsm)
         {
             base.OnEnter(fsm);
-            Debug.Log("Enter Critical Hit State");
+
             this.laserPrefab = bossEnemyAttack.laserPrefab;
             this.laserSpawnPos = bossEnemyAttack.middleBulletSpawnPosition;
             this.target = GameObject.FindWithTag("Player");
+            
             if (target == null)
             {
                 Log.Error("No Player Found");

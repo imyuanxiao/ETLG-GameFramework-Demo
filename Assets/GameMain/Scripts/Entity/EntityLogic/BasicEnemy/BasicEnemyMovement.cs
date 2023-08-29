@@ -20,7 +20,6 @@ namespace ETLG
         private void Start() 
         {
             horizontalDirection = 1;
-            // rb.velocity = -Vector3.forward * speed;
             rb.velocity = new Vector3(horizontalDirection * 0.5f, -Vector3.forward.y, -Vector3.forward.z) * speed;
         }
 

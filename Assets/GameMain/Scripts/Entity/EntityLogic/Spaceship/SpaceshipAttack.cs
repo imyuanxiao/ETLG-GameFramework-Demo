@@ -65,7 +65,7 @@ namespace ETLG
         private void Update() 
         {
             CheckFire();
-            if (Input.GetButton("Fire1") && readyToFire)// (controller.FireInput)
+            if (Input.GetButton("Fire1") && readyToFire)
             {
                 GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                 InitPlayerBullet(bullet.GetComponent<Bullet>());

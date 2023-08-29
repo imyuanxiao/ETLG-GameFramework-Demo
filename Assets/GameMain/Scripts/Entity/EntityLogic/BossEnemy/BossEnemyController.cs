@@ -9,7 +9,6 @@ namespace ETLG
     public enum BossEnemyType { AI, IoT, CloudComputing, Blockchain, DataScience, Cybersecurity}
     public class BossEnemyController : MonoBehaviour
     {
-        // public BossEnemyType bossEnemyType;
         public EnumEntity bossEnemyType;
 
         private void OnEnable() 
@@ -20,13 +19,11 @@ namespace ETLG
 
         private void OnBattleWin(object sender, GameEventArgs e)
         {
-            Debug.Log("BossEnemyController: Battle Win");
             GetComponent<BossEnemyAttack>().StopAllCoroutines();
         }
 
         private void OnPlayerDead(object sender, GameEventArgs e)
         {
-            Debug.Log("BossEnemyController: Player dead");
             GetComponent<BossEnemyAttack>().StopAllCoroutines();
         }
 

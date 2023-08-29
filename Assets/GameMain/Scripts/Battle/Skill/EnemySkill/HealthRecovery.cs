@@ -19,7 +19,6 @@ namespace ETLG
 
         private void OnEnable() 
         {
-            // StartCoroutine(RecoverHealth());
             maxHealth = health.MaxHealth;
             currentHealth = health.CurrentHealth;
             StartCoroutine(RecoverHealth());

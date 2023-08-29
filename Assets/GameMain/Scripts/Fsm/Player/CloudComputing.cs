@@ -42,7 +42,6 @@ namespace ETLG
             originalAttack = (int) GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower;
             skillAttack = (int) (originalAttack * boostScale);
             lastingTime = 5f;
-            // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().getSkillsByType("combat");
 
             this.uiBattleInfoForm = (UIBattleInfo) GameEntry.UI.GetUIForm(EnumUIForm.UIBattleInfo);
 
@@ -77,7 +76,6 @@ namespace ETLG
             else 
             {
                 GameEntry.Data.GetData<DataPlayer>().GetPlayerData().playerCalculatedSpaceshipData.Firepower = originalAttack;
-                Debug.Log("Skill Finished");
                 ChangeState<DefaultSkill>(fsm);
             }
         }

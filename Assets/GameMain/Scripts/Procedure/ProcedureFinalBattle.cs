@@ -50,8 +50,6 @@ namespace ETLG
             // show player spaceship entity
             entityLoader.ShowEntity<EntitySpaceship>(playerData.initialSpaceship.EntityId, onShowSuccess, EntityDataSpaceship.Create(playerData));
 
-            // GameEntry.Event.Fire(this, ActiveBattleComponentEventArgs.Create());
-
             bossEnemyData = GameEntry.Data.GetData<DataBossEnemy>().GetBossEnemyData((int) EnumEntity.FinalBoss);
             entityLoader.ShowEntity<EntityBossEnemy>(bossEnemyData.EntityId, onBossEnemyShowSuccess, EntityDataBossEnemy.Create(bossEnemyData));
         
@@ -80,13 +78,11 @@ namespace ETLG
             BattleWinEventArgs ne = (BattleWinEventArgs) e;
 
             float timeUsed = Time.time - this.startTime;
-            Debug.Log("Time Used: " + timeUsed);
 
-            // PlayerData playerData = GameEntry.Data.GetData<DataPlayer>().GetPlayerData();
-            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); //, playerData);
+            GameEntry.UI.OpenUIForm(EnumUIForm.UIBattleWin); 
             entityLoader.HideEntity(bossEnemyEntity);
             GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount++;
-            // GameEntry.Data.GetData<DataPlayer>().GetPlayerData().bossDefeatTime[6] = timeUsed;
+            
             SetBossDefeatTime(6, timeUsed);
             GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(6002, GameEntry.Data.GetData<DataPlayer>().GetPlayerData().battleVictoryCount));
         }
@@ -122,7 +118,6 @@ namespace ETLG
 
             GameEntry.Event.Fire(this, DeactiveBattleComponentEventArgs.Create());
             entityLoader.HideEntity(spaceShipEntity);
-            // entityLoader.HideEntity(bossEnemyEntity);
 
             GameEntry.Event.Unsubscribe(PlayerDeadEventArgs.EventId, OnPlayerDead);
             GameEntry.Event.Unsubscribe(BattleWinEventArgs.EventId, OnBattleWin);
@@ -181,7 +176,7 @@ namespace ETLG
                 {
                     AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
                     GameEntry.Data.GetData<DataAchievement>().cuurrentPopUpId = popupArgs.achievementId;
-                    // ¸üÐÂUI
+                    // ï¿½ï¿½ï¿½ï¿½UI
                     GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
                 }
 
@@ -209,7 +204,6 @@ namespace ETLG
             data.Durability *= boostScale;
             data.Energy *= boostScale;
             data.Firepower *= boostScale;
-            // data.FireRate *= boostScale;
             data.Shields *= boostScale;
         }
 
