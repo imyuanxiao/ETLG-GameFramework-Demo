@@ -275,7 +275,7 @@ namespace ETLG
             else
             {
                 instantiateShownChoices();
-                if (!currentQuiz.analysisShown)
+                if (currentQuiz.analysisShown)
                 {
                     setAnalysisPrefab();
                 }
