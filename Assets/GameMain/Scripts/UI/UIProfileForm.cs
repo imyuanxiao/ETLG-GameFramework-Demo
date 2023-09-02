@@ -62,7 +62,7 @@ namespace ETLG
         private bool isRefresh;
         private bool isEditInfo;
         private int fetchedType;
-        private DataPlayer dataPlayer;
+  
         //playerInfo
         [SerializeField]
         private TMP_InputField nickName;
@@ -77,7 +77,6 @@ namespace ETLG
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // 获取玩家数据管理器
 
             returnButton.onClick.AddListener(OnReturnButtonClick);
             editPlayerInfoButton.onClick.AddListener(OnEditPlayerInfoButtonClick);
@@ -90,7 +89,6 @@ namespace ETLG
             avatar4.onClick.AddListener(OnAvatar4ButtonClick);
             avatar5.onClick.AddListener(OnAvatar5ButtonClick);
             avatar6.onClick.AddListener(OnAvatar6ButtonClick);
-            dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
         }
 

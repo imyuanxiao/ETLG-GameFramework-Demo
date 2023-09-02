@@ -75,19 +75,19 @@ namespace ETLG
                     this.progress.text = "0";
                     switch(conditionId)
                     {
-                        //正确作答题目
+                        //right quize numbers
                         case 1001:
                             this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().totalQuizResults[0].ToString(); 
                             break;
-                        //错误作答题目
+                        ////wrong quize numbers
                         case 1002:
                             this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().totalQuizResults[1].ToString();
                             break;
-                        //通过考试数目
+                        //passed quize numbers
                         case 1003:
                             this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().passedQuiz.ToString();
                             break;
-                        //完整对话NPC个数
+                        //finished talk npc numbers
                         case 1008:
                             this.progress.text = GameEntry.Data.GetData<DataPlayer>().GetPlayerData().finishedDialog.ToString();
                             break;
