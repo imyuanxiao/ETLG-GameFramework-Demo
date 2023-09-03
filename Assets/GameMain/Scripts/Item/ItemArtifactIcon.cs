@@ -87,7 +87,6 @@ namespace ETLG
             }
             else
             {
-                //if pointerexit from other icon, but should not close current tradeinfo UI
                 if (!dataTrade.clickItemIcon)
                 {
                     GameEntry.Event.Fire(this, ArtifactInfoTradeUIChangeEventArgs.Create(Constant.Type.UI_CLOSE));

@@ -30,8 +30,6 @@ namespace ETLG
             FullScreenButton.onClick.AddListener(OnFullScreen);
             dataVideo = GameEntry.Data.GetData<DataVideo>();
             dataVideo.isFullScreen = false;
-            //Sprite playIcon = Resources.Load<Sprite>(AssetUtility.GetVideoPlayerIcon(false));
-            //Sprite pauseIcon = Resources.Load<Sprite>(AssetUtility.GetVideoPlayerIcon(true));
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -48,21 +46,17 @@ namespace ETLG
             if (!videoPlayer.isPlaying)
             {
                 videoPlayer.Play();
-                //PlayPauseIcon.sprite = pauseIcon;
             }
             else
             {
                 videoPlayer.Pause();
-                //PlayPauseIcon.sprite = playIcon;
             }
         }
 
         private void OnFullScreen()
         {
             videoPlayer.Pause();
-            //dataVideo.clip = videoPlayer.clip;
             dataVideo.renderTexture = videoPlayer.targetTexture;
-            //dataVideo.playbackTime= videoPlayer.time;
             dataVideo.videoPlayerBase = videoPlayer;
             dataVideo.isFullScreen = true;
             if (GameEntry.UI.HasUIForm(EnumUIForm.UIVideoFullScreenForm))

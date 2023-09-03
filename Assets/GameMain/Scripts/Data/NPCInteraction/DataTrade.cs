@@ -6,7 +6,7 @@ namespace ETLG.Data
     public class DataTrade : DataBase
     {
         public int artifactID;
-        //¿ÉÂôÊıÁ¿
+        //total owned amount
         public int artifactNum;
 
         public int tradeType;

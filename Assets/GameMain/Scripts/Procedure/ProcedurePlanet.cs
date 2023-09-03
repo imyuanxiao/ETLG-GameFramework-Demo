@@ -366,7 +366,7 @@ namespace ETLG
                 {
                     AchievementPopUpEventArgs popupArgs = popupQueue.Dequeue();
                     dataAchievement.cuurrentPopUpId = popupArgs.achievementId;
-                    // 更新UI
+                    // update UI
                     GameEntry.Event.Fire(this, AchievementMultiplesPopUpEventArgs.Create());
                 }
                 

@@ -70,7 +70,7 @@ namespace ETLG
         }
         private void showContent()
         {
-            //加载成就名称
+            //load achievement name
             s_name_1.text = "Learning";
             s_name_2.text = "Resource";
             s_name_4.text = "Interstellar";

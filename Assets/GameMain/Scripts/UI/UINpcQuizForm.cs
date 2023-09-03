@@ -424,8 +424,6 @@ namespace ETLG
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCQuizRewardForm));
                 }
                 GameEntry.UI.OpenUIForm(EnumUIForm.UINPCQuizRewardForm);
-
-                //½±Àø
                 dataQuizReport.report = true;
             }
         }
@@ -487,20 +485,6 @@ namespace ETLG
         private void destroyAllOptions()
         {
             removeAllOptions();
-            //for (int i = UIQuizManager.quizArray.Count - 1; i >= 0; i--)
-            //{
-            //    //Destroy(UIQuizManager.quizArray[i].OptionsCanvas.);
-            //}
-            // UIQuizManager.quizArray = new List<UIQuiz>();
-            //for (int i = 0; i < ChoicesContainer.childCount; i++)
-            //{
-            //    Canvas canvasComponent = ChoicesContainer.GetChild(i).GetComponentInChildren<Canvas>();
-            //    if (canvasComponent != null)
-            //    {
-            //        Transform option = ChoicesContainer.GetChild(i);
-            //        Destroy(option.gameObject);
-            //    }
-            //}
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ChoicesContainerverticalLayoutGroup.transform);
         }
 

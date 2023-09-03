@@ -116,14 +116,8 @@ namespace ETLG
 
         private void showTextModules()
         {
-            //dialogScrollContentTransform = dialogScrollContentCanvas.GetComponentInChildren<Transform>();
-            //foreach (Image textModule in UI_NPCDialogManager.textModules)
-            //{
-            //    textModule.transform.SetParent(dialogScrollContentTransform, false);
-            //}
             foreach (Image textModule in UI_NPCDialogManager.textModules)
             {
-                //textModule.gameObject.SetActive(true);
                 Transform textModuleTransform = textModule.GetComponent<Transform>();
                 textModuleTransform.SetParent(dialogScrollContent);
             }
@@ -190,7 +184,7 @@ namespace ETLG
             base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
-        //读取头像数据
+       //load avatar image
         private void loadAvatar()
         {
             Texture2D NPCTexture = Resources.Load<Texture2D>(npcAvatarPath);
@@ -303,7 +297,7 @@ namespace ETLG
             }
         }
 
-        //页面最大化
+        //page maximize
         private void OnMaxButtonClick()
         {
             setPositionX(false);
@@ -366,7 +360,7 @@ namespace ETLG
             }
         }
 
-        //修改聊天记录宽度
+        //resize dialogue container width
         private void resizeDialog(float prefabWidth, float textWidth)
         {
             foreach (Transform dialogModule in dialogScrollContent)
@@ -408,7 +402,6 @@ namespace ETLG
             }
         }
 
-        //根据当前页面大小，统一聊天记录大小
         private void resizeDialog(float currentWidth)
         {
             float correct_prefabWidth;
@@ -439,8 +432,6 @@ namespace ETLG
                 getCurrentNode();
                 showText();
             });
-
-            //选项文本加载
             Text buttonText = playerButton.GetComponentInChildren<Text>();
             buttonText.text = "Start Again";
         }
@@ -470,13 +461,11 @@ namespace ETLG
                     }
                 });
 
-                //选项文本加载
                 Text buttonText = playerButton.GetComponentInChildren<Text>();
                 buttonText.text = button.buttonText;
             }
         }
 
-        //清除玩家输入框所有按钮
         private void removePlayerResponseInput()
         {
             for (int i = buttonScrollContent.childCount - 1; i >= 0; i--)
@@ -489,32 +478,20 @@ namespace ETLG
         private void removeConversationsAgain()
         {
             removeALLConversations();
-
-            //foreach (Image textModule in UI_NPCDialogManager.textModules)
-            //{
-            //    Destroy(textModule.gameObject);
-            //}
             UI_NPCDialogManager.textModules = new List<Image>();
         }
 
-        // 清除所有聊天记录
+       //clear all conversation history
         private void removeALLConversations()
         {
-            //for (int i = dialogScrollContentRectTransform.childCount - 1; i >= 0; i--)
-            //{
-            //    //dialogScrollContentRectTransform.GetChild(i).gameObject.SetActive(false);
-            //}
-            //共享池
+            //shared pool
             for (int i = dialogScrollContent.childCount - 1; i >= 0; i--)
             {
-                //dialogScrollContent.GetChild(i).gameObject.SetActive(false);
                 Transform textModuleTransform = dialogScrollContent.GetChild(i).GetComponent<Transform>();
                 textModuleTransform.SetParent(Pool);
             }
-            //dialogScrollContentRectTransform.sizeDelta = new Vector2(dialogScrollContentRectTransform.sizeDelta.x, dialogScrollContentOriginalHeight);
         }
 
-        //分别实例化NPC和玩家的聊天记录prefab,并加载文本
         private Image instantiatePrefab(string text, string type)
         {
             Image textModule;
@@ -527,7 +504,6 @@ namespace ETLG
                 textModule = playerModuleSet(text);
             }
             UI_NPCDialogManager.textModules.Add(textModule);
-            //加载文本,设置对齐方式
             return textModule;
         }
 
@@ -623,7 +599,7 @@ namespace ETLG
             return videoModule;
         }
 
-        //加载对话模块对应头像
+        //set avatar
         private void setColorAlpha(RectTransform textModuleRectTransform, string type)
         {
             Image NPCImage = textModuleRectTransform.Find("LeftAvatar").GetComponent<Image>();

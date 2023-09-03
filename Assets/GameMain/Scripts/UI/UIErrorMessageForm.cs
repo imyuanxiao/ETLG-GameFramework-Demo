@@ -98,7 +98,7 @@ namespace ETLG
 
         private void OnYesButtonClick()
         {
-            //如果点击Yes，当前提示框和对话页面一起关闭
+            //Prompt and Dialogue UI close together if click EXIT
             if (alertType == Constant.Type.ALERT_DIALOG_QUIT|| alertType == Constant.Type.ALERT_DIALOG_QUIT_GOTTENAWARD)
             {
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UINPCDialogForm)); 
@@ -112,7 +112,6 @@ namespace ETLG
         {
             if (alertType == Constant.Type.ALERT_DIALOG_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT || alertType == Constant.Type.ALERT_QUIZ_QUIT_GOTTENAWARD || alertType == Constant.Type.ALERT_DIALOG_QUIT_GOTTENAWARD)
             {
-                //Cancel仅仅起到对比Yes的作用，与直接close当前提示框作用相同
                 OnReturnButtonClick();
             }
         }

@@ -25,7 +25,6 @@ namespace ETLG
 
         public bool refresh;
 
-        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);

@@ -40,18 +40,18 @@ namespace ETLG
         private bool backendRefresh;
         private int fetchedType;
 
-        //可买卖数量
+        //total amount can be traded
         private int totalNum;
-        //输入的数量
+        //input number
         private int tradeNum;
         private int npcMoney;
         private int playerMoney;
-        //总消费金额
+        //total consumed price
         private int totalPrice;
-        //道具数量上限
+        //max traded amount
         private int limitNum;
         private int receivedArtifactID;
-        //交易买卖方类型
+        //type of trading
         private int receivedType;
 
         protected override void OnInit(object userData)
@@ -155,7 +155,7 @@ namespace ETLG
             base.OnUpdate(elapseSeconds, realElapseSeconds);
         }
 
-        //触发trade按钮后交易，刷新item和money
+        //after clicking TRADE, update item data
         private void HandleTradeData()
         {
             tradeNum = dataTrade.inputNum;
@@ -183,7 +183,7 @@ namespace ETLG
 
         private void updateArtifactData()
         {
-            //更新玩家数据
+            //uddate player data
             dataPlayer.GetPlayerData().updateArtifact(playerArtifacts);
             dataPlayer.GetPlayerData().SetArtifactNumById((int)EnumArtifact.Money, playerMoney);
 
@@ -224,27 +224,6 @@ namespace ETLG
                 });
             }
         }
-
-        //private void tradeArtifact()
-        //{
-        //    if (receivedType == Constant.Type.TRADE_NPC_PLAYER)
-        //    {
-        //        dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum);
-        //        dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice * (-1));
-        //        npcMoney += totalPrice;
-        //        testArtifactExist(npcArtifacts, receivedArtifactID, Constant.Type.SUB);
-        //    }
-        //    else
-        //    {
-        //        dataPlayer.GetPlayerData().AddArtifact(receivedArtifactID, tradeNum * (-1));
-        //        dataPlayer.GetPlayerData().AddArtifact((int)EnumArtifact.Money, totalPrice);
-        //        npcMoney -= totalPrice;
-        //        if (!testArtifactExist(npcArtifacts, receivedArtifactID, Constant.Type.ADD))
-        //        {
-        //            npcArtifacts.Add(receivedArtifactID, tradeNum);
-        //        }
-        //    }
-        //}
 
         private void tradeArtifact()
         {

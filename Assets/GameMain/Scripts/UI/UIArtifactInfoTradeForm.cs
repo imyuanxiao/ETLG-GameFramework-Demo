@@ -46,10 +46,6 @@ namespace ETLG
 
         private bool needClose = false;
 
-        //public delegate void TradeDataEventHandler(int tradeNum, int totalPrice);
-        //public static event TradeDataEventHandler OnTradeDataSent;
-
-        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
@@ -81,8 +77,6 @@ namespace ETLG
             ArtifactTradeable.text = artifactDataBase.Tradeable ? "Tradeable" : "Untradeable";
             singleValue = artifactDataBase.Value;
             ArtifactValue.text = singleValue.ToString();
-
-            //limitNum = artifactDataBase.MaxNumber;
 
             ArtifactNumber.text = dataPlayer.GetPlayerData().GetArtifactNumById(artifactDataBase.Id).ToString();
             ArtifactDescription.text = artifactDataBase.Description;
@@ -139,7 +133,7 @@ namespace ETLG
         private void testTradeNum()
         {
             maxNum = dataTrade.artifactNum;
-            //输入数量不能大于可买数量
+            //input number can not exceed max owned count
             if (inputNum > maxNum)
             {
                 inputNum = maxNum;
@@ -152,7 +146,7 @@ namespace ETLG
 
         }
 
-        //只对数字输入有反应，输错是否提示？
+        //only accept number input
         private char ValidateNumericInput(string text, int charIndex, char addedChar)
         {
             if (char.IsDigit(addedChar))
@@ -165,16 +159,16 @@ namespace ETLG
         private void tradeClick()
         {
             bool enoughPlayerMoney = dataPlayer.GetPlayerData().GetArtifactNumById((int)EnumArtifact.Money) >= totalPrice;
-            //如果买家余额充足，则购买并关闭此UI
+            //if funds sufficient
             if (dataTrade.tradeType == Constant.Type.TRADE_PLAYER_NPC || (dataTrade.tradeType == Constant.Type.TRADE_NPC_PLAYER && enoughPlayerMoney))
             {
-                //输入量和总金额
+                //amount and total price
                 dataTrade.setTradeData(inputNum, totalPrice);
                 needClose = true;
             } 
             else
             {
-                //钱不够点击trade无反应，跳出提示余额不足
+                //funds insufficient
                 if (GameEntry.UI.HasUIForm(EnumUIForm.UIErrorMessageForm))
                 {
                     GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIErrorMessageForm));
@@ -193,7 +187,6 @@ namespace ETLG
 
         private void minusNumClick()
         {
-            //加减数量为10
             inputNum -= 10;
             testTradeNum();
         }
@@ -207,9 +200,9 @@ namespace ETLG
         private void updateInputNumAndTotalPrice()
         {
             totalPrice = singleValue * inputNum;
-            //显示修改后数量
+            //total amount
             InputField.text = inputNum.ToString();
-            //显示总价
+            //show total price
             TotalPrice.text = (singleValue * inputNum).ToString();
         }
 

@@ -44,11 +44,8 @@ namespace ETLG
         protected override void OnOpen(object userData)
         {
             base.OnOpen(userData);
-            //videoPlayer.clip = dataVideo.clip;
-            //videoPlayer.targetTexture = dataVideo.renderTexture;
             videoPlayer = dataVideo.videoPlayerBase;
             rawImage.texture = dataVideo.renderTexture;
-            //videoPlayer.time = dataVideo.playbackTime;
             videoPlayer.Play();
         }
 
@@ -56,31 +53,6 @@ namespace ETLG
         {
             base.OnClose(isShutdown, userData);
         }
-
-        //private IEnumerator HideCoversAfterDelay(float delay)
-        //{
-        //    yield return new WaitForSeconds(delay);
-        //    if (!isCoverHover)
-        //    {
-        //        TopCover.gameObject.SetActive(false);
-        //        ButtomCover.gameObject.SetActive(false);
-        //    }
-        //}
-
-        //public void OnPointerEnter(PointerEventData eventData)
-        //{
-        //    isCoverHover = true;
-        //    TopCover.gameObject.SetActive(true);
-        //    ButtomCover.gameObject.SetActive(true);
-
-        //    StartCoroutine(HideCoversAfterDelay(3f));
-        //}
-
-        //public void OnPointerExit(PointerEventData eventData)
-        //{
-        //    TopCover.gameObject.SetActive(false);
-        //    ButtomCover.gameObject.SetActive(false);
-        //}
 
         private void OnPlayButtonClick()
         {
@@ -105,13 +77,5 @@ namespace ETLG
                 GameEntry.UI.CloseUIForm(GameEntry.UI.GetUIForm(EnumUIForm.UIVideoFullScreenForm));
             }
         }
-        //private void HideTopCover()
-        //{
-        //    if (!isCoverHover)
-        //    {
-        //        TopCover.gameObject.SetActive(false);
-        //        ButtomCover.gameObject.SetActive(false);
-        //    }
-        //}
     }
 }

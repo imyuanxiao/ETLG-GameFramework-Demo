@@ -25,12 +25,9 @@ namespace ETLG
         public VerticalLayoutGroup scrollVerticalLayoutGroup;
 
         private DataLearningProgress dataLearningProgress;
-        // 初始化菜单数据
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-
-            // 绑定按钮点击事件
             closeButton.onClick.AddListener(OnCloseButtonClick);
             dataLearningProgress= GameEntry.Data.GetData<DataLearningProgress>();
         }

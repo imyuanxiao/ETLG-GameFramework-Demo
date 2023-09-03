@@ -510,23 +510,14 @@ namespace ETLG.Data
             }
 
             Dictionary<int, int> targetList = new Dictionary<int, int>();
-
-            if (dataArtifact == null || playerArtifacts == null)
-            {
-                Debug.Log("不应该为空428");
-            }
             foreach (var playerArtifact in playerArtifacts)
             {
-
-                Debug.Log("key" + playerArtifact.Key);
-                Debug.Log("value" + playerArtifact.Value);
                 if (dataArtifact.GetArtifactData(playerArtifact.Key).Type == Type)
                 {
 
                     targetList.Add(playerArtifact.Key, playerArtifact.Value);
                 }
             }
-            Debug.Log("走到这里437");
             return targetList;
         }
 
@@ -1362,7 +1353,6 @@ namespace ETLG.Data
                 if (totalQuizResults[0] >= count && !isAchievementAchieved(achievementId, totalQuizResults[0]))
                 {
                     Debug.Log("count"+count+"correct"+ totalQuizResults[0]);
-                    //addAchievementLearn(achievementId, count);
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }
@@ -1377,7 +1367,6 @@ namespace ETLG.Data
             {
                 if (totalQuizResults[1] >= count && !isAchievementAchieved(achievementId, totalQuizResults[1]))
                 {
-                    //addAchievementLearn(achievementId,count);
                     GameEntry.Event.Fire(this, AchievementPopUpEventArgs.Create(achievementId, count));
                 }
             }
@@ -1444,35 +1433,6 @@ namespace ETLG.Data
             }
             return true;
         }
-
-        //private void addAchievementLearn(int achievementId, int standardCount)
-        //{
-        //    if (!AchiLearnRecord.ContainsKey(achievementId))
-        //    {
-        //        AchiLearnRecord.Add(achievementId, standardCount);
-        //    }
-        //    else
-        //    {
-        //        AchiLearnRecord[achievementId] = standardCount;
-        //    }
-        //}
-
-        //private bool testAchievement(int achievementId, int count)
-        //{
-        //    if (!AchiLearnRecord.ContainsKey(achievementId))
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        int currentStandardCount = AchiLearnRecord[achievementId];
-        //        if (currentStandardCount>= count)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
     }
 }
 
