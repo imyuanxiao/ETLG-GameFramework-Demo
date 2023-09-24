@@ -1,6 +1,7 @@
 # ETLG-GameFramework-Demo
 "Emerging Technology Learning Game" is a 3D sci-fi adventure game in which players explore six planets, each representing a distinct field of knowledge. Players aim to acquire knowledge and enhance their spaceship's capabilities. These six planets represent artificial intelligence, cybersecurity, cloud computing, blockchain, the Internet of Things, and data science, with all content sourced from IBM Skills Build courses. Players interact with non-player characters (NPCs) on each planet, answering questions to help them gain practical skills. This game combines education and entertainment, designed to spark players' interest in learning and enable them to acquire practical knowledge while having fun.
-Demo Video: <https://github.com/imyuanxiao/ETLG-GameFramework-Demo>
+
+Demo Video: <https://drive.google.com/file/d/1hlWrH5WulHioKo0fZ35drJo9H1XNzJns/view>
 ## Packaging Project Precess
 Here's how to package our frontend project in Unity:
 Backend Project Repository: <https://github.com/xw22087/rbac-backend-etlg.git>
